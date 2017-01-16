@@ -263,8 +263,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/07/It-s-blocks-all-the-way-down/" itemprop="url">
-                  It's blocks all the way down
+                <a class="post-title-link" href="/2016/07/07/Perl6中的梳子/" itemprop="url">
+                  Perl 6 中的梳子!
                 </a>
               
             
@@ -307,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/07/It-s-blocks-all-the-way-down/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/07/It-s-blocks-all-the-way-down/" itemprop="commentsCount"></span>
+                <a href="/2016/07/07/Perl6中的梳子/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/07/Perl6中的梳子/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -332,12 +332,12 @@
 
       
         
-          <p><a href="https://gfldex.wordpress.com/2016/07/19/its-blocks-all-the-way-down/">It’s blocks all the way down</a></p>
-<p>当我在 <a href="https://glot.io/new/perl6">glot.io</a> 上玩 Perl 6 的时候我知道它们真的很像带有简单程序的 docker：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dir(&apos;/&apos;)&gt;&gt;.Str.say;</div></pre></td></tr></table></figure>
-<p>我想知道递归到目录里面是否还有更好的方法。 IO::Path.dir 会返回一个 IO::Path 对象的 Seq 序列。那就是为什么 <code>&gt;&gt;.</code> 超运算符会有效。它当然不会递归因为没有用来进行递归的子例程, 经过一段时间的冥思苦想我找到了我找了很久的东西。</p>
+          <h1 id="Perl-6-中的梳子"><a href="#Perl-6-中的梳子" class="headerlink" title="Perl 6 中的梳子!"></a>Perl 6 中的梳子!</h1><p>在 Perl 5 中, 我很感激有这样两个便利的结构:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @things = $text =~ <span class="regexp">/thing/g</span>;</div><div class="line"><span class="keyword">my</span> %things = $text =~ <span class="regexp">/(key)...(value)/g</span>;</div></pre></td></tr></table></figure>
+<p>你拿出一小段可以预见的文本，并给它一个正则表达式，吼吼, 你得到了一个列表和散列，像变魔术一般！我们也可以在 Perl  6 中使用正则表达式，但是 <strong><a href="http://docs.perl6.org/routine/comb">comb</a></strong> 更适合做这个工作。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-29a3966bbb8e437f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/07/It-s-blocks-all-the-way-down/#more" rel="contents">
+            <a class="btn" href="/2016/07/07/Perl6中的梳子/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1423,8 +1423,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/11/输入Unicode字符/" itemprop="url">
-                  输入Unicode字符
+                <a class="post-title-link" href="/2016/05/11/列表解析/" itemprop="url">
+                  列表解析
                 </a>
               
             
@@ -1467,8 +1467,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/11/输入Unicode字符/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/11/输入Unicode字符/" itemprop="commentsCount"></span>
+                <a href="/2016/05/11/列表解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/11/列表解析/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1492,9 +1492,13 @@
 
       
         
-          <h1 id="输入-Unicode-字符"><a href="#输入-Unicode-字符" class="headerlink" title="输入 Unicode 字符"></a>输入 Unicode 字符</h1><p>Perl 6 允许把 unicode 字符用作变量名. 很多操作符使用 unicode 符号(特别是在 set/bag 操作符中)还有一些引号结构. 因此, 知道如何把这些符号输入编辑器, Perl 6 shell 和 命令行中是极好的, 特别是现实键盘中不存在那个符号的时候.</p>
+          <h2 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h2><p>列表解析即 List Comprehensions。</p>
+<p>生成 <code>1x1, 2x2, 3x3, ..., 10x10</code> 的列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">($_**2 for 1..10);</div></pre></td></tr></table></figure>
+<p><code>for</code> 语句前面还可以添加 if 修饰符，这样我们就可以仅筛选出偶数的平方：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">($_**2 if !($_ % 2) for 1..10)</div><div class="line">($_**2 if $_ % 2 == 1 for 1..10) # 同上</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/11/输入Unicode字符/#more" rel="contents">
+            <a class="btn" href="/2016/05/11/列表解析/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1618,6 +1622,24 @@
                     <i class="fa fa-fw fa-globe"></i>
                   
                   weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/9b20c7d63b77" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-location-arrow"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://perl6.org/" target="_blank" title="Perl 6">
+                  
+                    <i class="fa fa-fw fa-paper-plane"></i>
+                  
+                  Perl 6
                 </a>
               </span>
             

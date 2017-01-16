@@ -518,135 +518,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/01/04/使用Perl6的subsets和multiple辨别年龄/" itemprop="url">
-                  使用Perl6的subsets和multiple辨别年龄
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-04T00:00:00+08:00" content="2016-01-04">
-              2016-01-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/04/使用Perl6的subsets和multiple辨别年龄/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/使用Perl6的subsets和multiple辨别年龄/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>举个例子, 假设 person 有一个 age 属性. 我能写一个 <code>multimethod</code>, 让它接收一个 person 作为参数, 并返回这样的结果吗:</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> <span class="string">"child"</span>  <span class="keyword">if</span> age &lt; <span class="number">16</span>;</div><div class="line"><span class="keyword">return</span> <span class="string">"adult"</span>  <span class="keyword">if</span> <span class="number">16</span> &lt;= age &lt; <span class="number">66</span>;</div><div class="line"><span class="keyword">return</span> <span class="string">"senior"</span> <span class="keyword">if</span> age &gt;= <span class="number">66</span>;</div></pre></td></tr></table></figure>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">    has Int $.age;</div><div class="line">    has Str $.name;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这仅仅定义了一个拥有两个属性, 叫做 Person 的类. age 必须是 Int 型, name 必须是 Str 型. <code>.</code> 语法会生成一个只读访问器, 以使我们能从类的外部访问 getter 方法.</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/04/使用Perl6的subsets和multiple辨别年龄/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/01/04/从正则表达式到Grammars-Part-2/" itemprop="url">
                   从正则表达式到Grammars - Part 2
                 </a>
@@ -723,6 +594,135 @@
 <p> /literal string here/ 匹配一个字母数字序列。任何不是字母数字(顺便说一下, 这里的字母数字不一定严格地限制为 USe ASCII, 任何带有 ‘Letter’ 或 ‘Number’  Unicode 属性的字符都符合要求)的东西都需要用引号引起来或者以某种形式转义。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/01/04/从正则表达式到Grammars-Part-2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/04/使用Perl6的subsets和multiple辨别年龄/" itemprop="url">
+                  使用Perl6的subsets和multiple辨别年龄
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-04T00:00:00+08:00" content="2016-01-04">
+              2016-01-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/04/使用Perl6的subsets和multiple辨别年龄/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/使用Perl6的subsets和multiple辨别年龄/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>举个例子, 假设 person 有一个 age 属性. 我能写一个 <code>multimethod</code>, 让它接收一个 person 作为参数, 并返回这样的结果吗:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> <span class="string">"child"</span>  <span class="keyword">if</span> age &lt; <span class="number">16</span>;</div><div class="line"><span class="keyword">return</span> <span class="string">"adult"</span>  <span class="keyword">if</span> <span class="number">16</span> &lt;= age &lt; <span class="number">66</span>;</div><div class="line"><span class="keyword">return</span> <span class="string">"senior"</span> <span class="keyword">if</span> age &gt;= <span class="number">66</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">    has Int $.age;</div><div class="line">    has Str $.name;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这仅仅定义了一个拥有两个属性, 叫做 Person 的类. age 必须是 Int 型, name 必须是 Str 型. <code>.</code> 语法会生成一个只读访问器, 以使我们能从类的外部访问 getter 方法.</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/04/使用Perl6的subsets和multiple辨别年龄/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1617,6 +1617,24 @@
                     <i class="fa fa-fw fa-globe"></i>
                   
                   weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/9b20c7d63b77" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-location-arrow"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://perl6.org/" target="_blank" title="Perl 6">
+                  
+                    <i class="fa fa-fw fa-paper-plane"></i>
+                  
+                  Perl 6
                 </a>
               </span>
             
