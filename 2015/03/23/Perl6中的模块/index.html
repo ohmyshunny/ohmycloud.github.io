@@ -1,0 +1,773 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="模块,Modules," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Modules
+Exporting and Selective Importing
+is export
+packages(包), subroutines(子例程), variables(变量), constants(常量) 和 enums(枚举) , 通过在它们的名字后面添加 is export 特性来导出。
+123456789101112unit module MyModule;our $var">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的模块">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/03/23/Perl6中的模块/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Modules
+Exporting and Selective Importing
+is export
+packages(包), subroutines(子例程), variables(变量), constants(常量) 和 enums(枚举) , 通过在它们的名字后面添加 is export 特性来导出。
+123456789101112unit module MyModule;our $var">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.725Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的模块">
+<meta name="twitter:description" content="Modules
+Exporting and Selective Importing
+is export
+packages(包), subroutines(子例程), variables(变量), constants(常量) 和 enums(枚举) , 通过在它们的名字后面添加 is export 特性来导出。
+123456789101112unit module MyModule;our $var">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/03/23/Perl6中的模块/"/>
+
+  <title> Perl 6 中的模块 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的模块
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-23T00:00:00+08:00" content="2015-03-23">
+              2015-03-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/23/Perl6中的模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/23/Perl6中的模块/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h1><hr>
+<h2 id="Exporting-and-Selective-Importing"><a href="#Exporting-and-Selective-Importing" class="headerlink" title="Exporting and Selective Importing"></a>Exporting and Selective Importing</h2><hr>
+<h3 id="is-export"><a href="#is-export" class="headerlink" title="is export"></a>is export</h3><hr>
+<p>packages(包), subroutines(子例程), variables(变量), constants(常量) 和 enums(枚举) , 通过在它们的名字后面添加 <code>is export</code> 特性来导出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">unit module MyModule;</div><div class="line">our $var is export = 3;</div><div class="line">sub foo is export &#123; ... &#125;;</div><div class="line">constant $FOO is export = &quot;foobar&quot;;</div><div class="line">enum FooBar is export &lt;one two three&gt;;</div><div class="line"></div><div class="line"># Packages like classes can be exported too</div><div class="line">class MyClass is export &#123;&#125;;</div><div class="line"></div><div class="line"># If a subpackage is in the namespace of the current package</div><div class="line"># it doesn&apos;t need to be explicitly exported</div><div class="line">class MyModule::MyClass &#123;&#125;;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>就像所有的 traits 一样, 如果应用到子例程(routine)上, “is export” 应该出现在参数列表的后面:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub foo (Str $string) is export &#123;...&#125;</div></pre></td></tr></table></figure>
+<p>你可以给 <code>is export</code> 传递命名参数以组织要导出的符号, 然后导入程序 (importer) 可以剔除和选择导入哪一个。有 3 个预先定义好的标签： <code>ALL</code>, <code>DEFAULT</code>, <code>MANDATORY</code>（强制的）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># lib/MyModule.pm</div><div class="line">unit module MyModule;</div><div class="line">sub bag        is export              &#123; ... &#125;</div><div class="line">sub pants      is export(:MANDATORY)  &#123; ... &#125;</div><div class="line">sub sunglasses is export(:day)        &#123; ... &#125;</div><div class="line">sub torch      is export(:night)      &#123; ... &#125;</div><div class="line">sub underpants is export(:ALL)        &#123; ... &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># main.pl</div><div class="line">use lib &apos;lib&apos;;</div><div class="line">use MyModule;           #bag, pants</div><div class="line">use MyModule :DEFAULT;  #the same</div><div class="line">use MyModule :day;      #pants, sunglasses</div><div class="line">use MyModule :night;    #pants, torch</div><div class="line">use MyModule :ALL;      #bag, pants, sunglasses, torch, underpants</div></pre></td></tr></table></figure>
+<h3 id="UNIT-EXPORT"><a href="#UNIT-EXPORT" class="headerlink" title="UNIT::EXPORT::*"></a>UNIT::EXPORT::*</h3><hr>
+<p>表象之下, 其实 <code>is export</code> 是把符号添加到 <code>EXPORT</code> 命名空间中的 <code>UNIT</code> 作用域包中。例如, <code>is export(:FOO)</code> 会把目标添加到 <code>UNIT::EXPORT::FOO</code> 包中。这正是 Perl 6 决定导入什么所做的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">unit module MyModule;</div><div class="line"></div><div class="line">sub foo is export         &#123; ... &#125;</div><div class="line">sub bar is export(:other) &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>等价于:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">unit module MyModule;</div><div class="line"></div><div class="line">my package EXPORT::DEFAULT &#123;</div><div class="line">  our sub foo &#123; ... &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my package EXPORT::other &#123;</div><div class="line">  our sub bar &#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>多数时候, <code>is export</code> 足够用了, 但是当你想动态生成要导出的符号时, <code>EXPORT</code> 包就很有用了。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># lib/MyModule.pm</div><div class="line">unit module MuModule;</div><div class="line"></div><div class="line">my package EXPORT::DEFAULT &#123;</div><div class="line">  for &lt;zero one two three four&gt;.kv -&gt; $number, $name &#123;</div><div class="line">      for &lt;sqrt log&gt; -&gt; $func &#123;</div><div class="line">          OUR::&#123;&apos;&amp;&apos; ~ $func ~ &apos;-of-&apos; ~ $name &#125; := sub &#123; $number.&quot;$func()&quot; &#125;;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># main.pl</div><div class="line">use MyModule;</div><div class="line">say sqrt-of-four; #-&gt; 2</div><div class="line">say log-of-zero;  #-&gt; -Inf</div></pre></td></tr></table></figure>
+<h3 id="EXPORT"><a href="#EXPORT" class="headerlink" title="EXPORT"></a>EXPORT</h3><hr>
+<p>你可以用一个 <code>EXPORT</code> 子例程导出任意符号。 <code>EXPORT</code> 必须返回一个 <code>Map</code>, 在 map 里面键是符号名, 键值是想要的值。符号名应该包含(如果有的话)关联类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class MyModule::Class &#123; ... &#125;</div><div class="line"></div><div class="line">sub EXPORT &#123;</div><div class="line">  &#123;</div><div class="line">      &apos;$var&apos;      =&gt; &apos;one&apos;,</div><div class="line">      &apos;@array&apos;    =&gt; &lt;one two three&gt;,</div><div class="line">      &apos;%hash&apos;     =&gt; &#123; one =&gt; &apos;two&apos;, three =&gt; &apos;four&apos;&#125;,</div><div class="line">      &apos;&amp;doit&apos;     =&gt; sub &#123; ... &#125;,</div><div class="line">      &apos;ShortName&apos; =&gt; MyModule::class</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># main.pl</div><div class="line">use lib &apos;lib&apos;;</div><div class="line">use MyModule;</div><div class="line">say $var;</div><div class="line">say @array;</div><div class="line">say %hash;</div><div class="line">doit();</div><div class="line">say ShortName.new;  #-&gt; MyModule::Class.new</div></pre></td></tr></table></figure>
+<p>注意, <code>EXPORT</code> 不能声明在包内, 因为目前的 rakudo(2015.09) 好像把 EXPORT 当作 compunit 的一部分而非包的一部分。</p>
+<p>虽然 <code>UNIT::EXPORT</code> 包处理传递给 <code>use</code> 的命名参数, 而 <code>EXPORT</code> sub 处理位置参数。如果你把位置参数传递给 <code>use</code>, 那么这些参数会被传递给 <code>EXPORT</code>. 如果传递了位置参数, 那么 module 就不再需要导出默认符号了。你仍然可以伴随着你的位置参数, 通过显式地给 use 传递 <code>:DEFAULT</code> 参数来导入它们。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># lib/MyModule</div><div class="line"></div><div class="line">class MyModule::Class &#123;&#125;</div><div class="line"></div><div class="line">sub EXPORT($short_name?) &#123;</div><div class="line">    &#123;</div><div class="line">      do $short_name =&gt; MyModule::Class if $short_name</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub always is export(:MANDATORY) &#123; say &quot;works&quot; &#125;</div><div class="line"></div><div class="line">#import with :ALL or :DEFAULT to get</div><div class="line">sub shy is export &#123; say &quot;you found me!&quot; &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># main.pl</div><div class="line">use lib &apos;lib&apos;;</div><div class="line">use MyModule &apos;foo&apos;;</div><div class="line">say foo.new(); #MyModule::Class.new</div><div class="line">always();      #OK   - is imported</div><div class="line">shy();         #FAIL - won&apos;t be imported</div></pre></td></tr></table></figure>
+<h2 id="发布模块"><a href="#发布模块" class="headerlink" title="发布模块"></a>发布模块</h2><hr>
+<p>如果你已经写了一个 Perl 6模块, 你想把它分享到社区, 我们会很高兴地把它放到 Perl 6 模块文件夹清单中。<a href="http://modules.perl6.org/" target="_blank" rel="external">Perl 6 modules directory</a></p>
+<p>现在, 你需要使用 git 对你的模块进行版本控制。</p>
+<p>这需要你有一个 Github 帐号, 以使你的模块能被从它的 Github 仓库中分享出去。</p>
+<p>要分享你的模块, 按照下面说的做：</p>
+<ul>
+<li><p>创建一个以你的模块命名的工程文件夹。 例如, 如果你的模块是 <code>Vortex::TotalPerspective</code> , 那么就创建一个叫做 <code>Vortex::TotalPerspective</code> 的工程文件夹。这个工程目录的名字也会被用作 Github 仓库的名字。</p>
+</li>
+<li><p>让你的工程目录看起来像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Vortex-TotalPerspective/</div><div class="line">|-- lib</div><div class="line">|   `-- Vortex</div><div class="line">|       `-- TotalPerspective.pm</div><div class="line">|-- LICENSE</div><div class="line">|-- META.info</div><div class="line">|-- README.md</div><div class="line">`-- t</div><div class="line">    `-- basic.t</div></pre></td></tr></table></figure>
+<p>如果你的工程包含能帮助主模块完成工作的其它模块, 它们应该被放到你的 lib 目录中像这样组织：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">lib</div><div class="line">`-- Vortex</div><div class="line">    |-- TotalPerspective.pm</div><div class="line">    `-- TotalPerspective</div><div class="line">        |-- FairyCake.pm</div><div class="line">        `-- Gargravarr.pm</div></pre></td></tr></table></figure>
+<ul>
+<li><p><code>README.md</code> 文件是一个 markdown 格式的文件, 它稍后会被 Github 自动渲染成 HTML</p>
+</li>
+<li><p>关于 LICENSE 文件, 如果你没有其它选择, 就是用和 Rakudo Perl 6 一样的 LICENSE 把。仅仅把它的原始 <a href="https://github.com/rakudo/rakudo/blob/nom/LICENSE" target="_blank" rel="external">license</a> 复制/粘贴进你自己的 LICENSE 文件中。</p>
+</li>
+<li><p>如果你还没有任何测试, 现在你可以忽略 <code>t</code> 目录 和 <code>basic.t</code> 文件。关于如何写测试, 你可以看看其它模块是怎么使用 <code>Test</code> 的。它和 Perl’5 的 <code>Test::More</code> 很类似。</p>
+</li>
+<li><p>如果要文档化你的模块, 在你的模块中使用 <a href="http://design.perl6.org/S26.html" target="_blank" rel="external">Perl 6 Pod</a> 标记。欢迎给模块写文档, 并且为了浏览的方便, 一旦 Perl 6 module directory(或其它网站) 开始把 Pod 文档渲染成 HTML, 写文档尤为重要。</p>
+</li>
+<li><p>让你的 <code>META.info</code> 文件看起来像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">       &quot;name&quot;        : &quot;Vortex::TotalPerspective&quot;,</div><div class="line">       &quot;version&quot;     : &quot;0.1.0&quot;,</div><div class="line">       &quot;description&quot; : &quot;Wonderful simulation to get some perspective.&quot;,</div><div class="line">       &quot;author&quot;      : &quot;Your Name&quot;,</div><div class="line">       &quot;provides&quot;    : &#123;</div><div class="line">           &quot;Vortex::TotalPerspective&quot; : &quot;lib/Vortex/TotalPerspective.pm&quot;</div><div class="line">       &#125;,</div><div class="line">       &quot;depends&quot;     : [ ],</div><div class="line">       &quot;source-url&quot;  : &quot;git://github.com/you/Vortex-TotalPerspective.git&quot;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>关于选择版本号的方案, 或许使用 “major.minor.patch” （查看  the spec on versioning 获取详细信息 ）。如果版本号现在对你或你的用户来说不重要, 你可以给版本那儿放上一颗星(*)。</p>
+<p>在 <code>provides</code> 一节, 包含进你的发布中提供的所有命名空间。</p>
+<ul>
+<li>把你的工程放在 git 版本控制之下, 如果你还未这样做。</li>
+<li>一旦你对你的工程满意了, 在 Github 上为它创建一个仓库。必要的话,  查看 <a href="https://help.github.com/" target="_blank" rel="external">Github’s help docs</a>。 你的 Github 仓库的名字应该和你工程目录的名字一样。创建完 Githhub 仓库后, Github 会为你展示怎么配置你的本地仓库以获悉你的 Github 仓库。</li>
+<li>把你的工程推送到 Github</li>
+<li>在 IRC 频道找个人帮你展示怎么把你的模块添加到<a href="https://github.com/perl6/ecosystem" target="_blank" rel="external">ecosystem</a>, 或者让他们是否能替你添加。</li>
+<li>pull 请求被接收之后, 等个把小时。如果你的模块没有出现在  <a href="http://modules.perl6.org/" target="_blank" rel="external">http://modules.perl6.org/</a> , 请到 <a href="http://modules.perl6.org/log/update.log" target="_blank" rel="external">http://modules.perl6.org/log/update.log</a> 翻看log 日志文件, 以查找是否有错误。</li>
+</ul>
+</li>
+</ul>
+<p>就是这样啦！ 感谢为 Perl 6 社区做贡献！</p>
+<p>如果你想尝试安装你的模块, 使用熊猫 panda 安装工具, 这已经包含在 Rakudo Perl 6 中了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">panda install Vortex::TotalPerspective</div></pre></td></tr></table></figure>
+<p>这会下载你的模块到它自己的工作目录(~/.panda), 在那儿创建 build, 并把模块安装到 <code>~/.perl6</code></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/模块/" rel="tag">#模块</a>
+          
+            <a href="/tags/Modules/" rel="tag">#Modules</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/23/Sneaking-into-a-loop/" rel="next" title="Sneaking into a loop">
+                <i class="fa fa-chevron-left"></i> Sneaking into a loop
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/04/01/Capture/" rel="prev" title="Capture">
+                Capture <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/03/23/Perl6中的模块/"
+     data-title="Perl 6 中的模块"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/03/23/Perl6中的模块/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/03/23/Perl6中的模块/"
+           data-title="Perl 6 中的模块" data-url="https://ohmycloud.github.io/2015/03/23/Perl6中的模块/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Modules"><span class="nav-number">1.</span> <span class="nav-text">Modules</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exporting-and-Selective-Importing"><span class="nav-number">1.1.</span> <span class="nav-text">Exporting and Selective Importing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#is-export"><span class="nav-number">1.1.1.</span> <span class="nav-text">is export</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNIT-EXPORT"><span class="nav-number">1.1.2.</span> <span class="nav-text">UNIT::EXPORT::*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXPORT"><span class="nav-number">1.1.3.</span> <span class="nav-text">EXPORT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布模块"><span class="nav-number">1.2.</span> <span class="nav-text">发布模块</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="对象哈希," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="第三天　－　对象哈希
+Perl 6 添加对象散列, 其键并不仅仅是字符串。这些键是值和类型的结合。这意味着对象可以被字符串化为同样的东西但是它们可以是不同的键。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对象哈希">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/09/18/Perl-6-Calendar-2016-第三天-对象哈希/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="第三天　－　对象哈希
+Perl 6 添加对象散列, 其键并不仅仅是字符串。这些键是值和类型的结合。这意味着对象可以被字符串化为同样的东西但是它们可以是不同的键。">
+<meta property="og:updated_time" content="2017-01-16T04:57:27.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对象哈希">
+<meta name="twitter:description" content="第三天　－　对象哈希
+Perl 6 添加对象散列, 其键并不仅仅是字符串。这些键是值和类型的结合。这意味着对象可以被字符串化为同样的东西但是它们可以是不同的键。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/09/18/Perl-6-Calendar-2016-第三天-对象哈希/"/>
+
+  <title> 对象哈希 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                对象哈希
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-18T22:56:16+08:00" content="2016-09-18">
+              2016-09-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/18/Perl-6-Calendar-2016-第三天-对象哈希/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/18/Perl-6-Calendar-2016-第三天-对象哈希/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://perl6advent.wordpress.com/2016/12/03/day-3-object-hashes/" target="_blank" rel="external">第三天　－　对象哈希</a></p>
+<p>Perl 6 添加对象散列, 其键并不仅仅是字符串。这些键是值和类型的结合。这意味着对象可以被字符串化为同样的东西但是它们可以是不同的键。</p>
+<a id="more"></a>
+<p>普通的哈希构造：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my Int    $int     = 4;</div><div class="line">my Str    $str     = &quot;4&quot;;</div><div class="line">my IntStr $int_str = &lt;4&gt;;  # Allomorph</div><div class="line"></div><div class="line">my %hash;</div><div class="line">%hash&#123;$int&#125;     = &apos;Plain old number&apos;;</div><div class="line">%hash&#123;$str&#125;     = &apos;String of digits&apos;;</div><div class="line">%hash&#123;$int_str&#125; = &apos;Dualvar&apos;;</div><div class="line"></div><div class="line">say &quot;There are &quot;, %hash.elems, &quot; elements in the hash&quot;;</div><div class="line"></div><div class="line"># this calls the .gist method, sorta like a dumper routine</div><div class="line">%hash.say;</div></pre></td></tr></table></figure>
+<p>结果显示该哈希中只有一个元素并且这个元素是我最后添加的那个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">There are 1 elements in the hash</div><div class="line">&#123;4 =&gt; Dualvar&#125;</div></pre></td></tr></table></figure>
+<p>但是我也可以通过告诉哈希我想要它接受的对象来声明一个对象哈希（Object hash）。我可以使用　<code>Any</code> 对象来允许哈希接受任何东西：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my %hash&#123;Any&#125;; # accept any sort of object</div></pre></td></tr></table></figure>
+<p>下面的程序几乎和上面的一样，但是表现的很不同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my Int    $int     = 4;</div><div class="line">my Str    $str     = &quot;4&quot;;</div><div class="line">my IntStr $int_str = &lt;4&gt;;  # Allomorph</div><div class="line"></div><div class="line">my %hash&#123;Any&#125;;</div><div class="line">%hash&#123;$int&#125;     = &apos;Plain old number&apos;;</div><div class="line">%hash&#123;$str&#125;     = &apos;String of digits&apos;;</div><div class="line">%hash&#123;$int_str&#125; = &apos;Dualvar&apos;;</div><div class="line"></div><div class="line">say &quot;There are &quot;, %hash.elems, &quot; elements in the hash&quot;;</div><div class="line"></div><div class="line"># this calls the .gist method, sorta like a dumper routine</div><div class="line">%hash.say;</div></pre></td></tr></table></figure>
+<p>现在我能在该哈希中看到 3 个元素了。这个哈希以 <code>.gist</code> 形式打印出来后看起来有点奇怪，因为它有 4 个键都是 4:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">There are 3 elements in the hash</div><div class="line">&#123;4 =&gt; Dualvar, 4 =&gt; Plain old number, 4 =&gt; String of digits&#125;</div></pre></td></tr></table></figure>
+<p>使用 <code>.perl</code> 方法能看到背后的真相：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%hash.perl.say;</div></pre></td></tr></table></figure>
+<p>现在我能看到该哈希中有 3 种不同的对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">There are 3 elements in the hash</div><div class="line">(my Any %&#123;Any&#125; = IntStr.new(4, &quot;4&quot;) =&gt; &quot;Dualvar&quot;, 4 =&gt; &quot;Plain old number&quot;, &quot;4&quot; =&gt; &quot;String of digits&quot;)</div></pre></td></tr></table></figure>
+<p>用上对象哈希后，测试存在性就有点不同了。它使用 <code>.WHICH</code> 方法，使用对象相等操作符 <code>===</code> 来比较键。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my Int    $int     = 4;</div><div class="line">my IntStr $int_str = &lt;4&gt;;  # Allomorph</div><div class="line"></div><div class="line">my %hash&#123;Any&#125;;</div><div class="line">%hash&#123;$int&#125;     = &apos;Plain old number&apos;;</div><div class="line">%hash&#123;$int_str&#125; = &apos;Dualvar&apos;;</div><div class="line"></div><div class="line">my $other_int = 4;</div><div class="line"></div><div class="line"># what are these things?</div><div class="line">say &quot;int: &quot; ~ $int.WHICH;</div><div class="line">say &quot;other: &quot; ~ $other_int.WHICH;</div><div class="line"></div><div class="line"># are they the same?</div><div class="line">say $int === $other_int ?? &apos;Same object&apos; !! &apos;Different object&apos;;</div><div class="line"></div><div class="line"># is it in the hash?</div><div class="line">say %hash&#123;$other_int&#125;:exists ?? &apos;Other int exists in hash&apos; !! &apos;Other int not there&apos;;</div><div class="line"></div><div class="line">say %hash&#123;&quot;4&quot;&#125;:exists ?? &apos;&quot;4&quot; exists in hash&apos; !! &apos;&quot;4&quot; not there&apos;;</div></pre></td></tr></table></figure>
+<p>我可以看到 <code>$int</code> 和 <code>$other_int</code> 看起来像同一个对象。然而，键 “4” 不在该哈希中即使它拥有同样的字符串 “4”:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int: Int|4</div><div class="line">other: Int|4</div><div class="line">Same object</div><div class="line">Other int exists in hash</div><div class="line">&quot;4&quot; not there</div></pre></td></tr></table></figure>
+<p>如果它和我的期望不一样这看起来就可能有点奇怪。</p>
+<p>我们来看尖括号版本的引号单词操作符，<code>&lt;...&gt;</code>。这种形式的引号单词创建了 <em>allomorphs</em>(字素变体)。当它看见像数字那样的东西时，它创建继承自数字和字符串两边的诸如 <code>IntStr</code> 的东西。这意味着，尽管它作为一个对象哈希，但是它拥有一个很特殊的形式。在下面这个哈希对象中，我使用 <code>&lt;&gt;</code> 引号在键 4 的周围创建了一个元素。然后我测试字符串 “4” 是否在该哈希中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my %hash&#123;Any&#125;;</div><div class="line"></div><div class="line">%hash = 1;</div><div class="line"></div><div class="line">say %hash&#123;&quot;4&quot;&#125;:exists ?? &apos;Exists in hash&apos; !! &apos;Not there&apos;;</div></pre></td></tr></table></figure>
+<p>我看到它并没有在该哈希中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Not there</div></pre></td></tr></table></figure>
+<p>这个语素变体版本是一个　IntStr, 其中 “4” 是一个　Str。它们不是同一个对象，所以后者不是该哈希中的键。</p>
+<p>如果这正是你所期待的，这不是一个大问题。但是，考虑一个更有用的只允许某种类型的对象的对象哈希。也许我想让它们都是 <code>Date</code> 类型的对象。下面这种方式不能工作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my %hash&#123;Date&#125;;</div><div class="line">%hash&#123;Date.new(now)&#125; =  ( event =&gt; &apos;Something cool&apos;, rating =&gt; &apos;6 stars&apos; );</div><div class="line"></div><div class="line">my $too_cool_for_your_api = &apos;12-03-2016&apos;;</div><div class="line">say %hash&#123; $too_cool_for_your_api &#125;;</div></pre></td></tr></table></figure>
+<p>当我试图绕过约束的时候，我得到一个异常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Type check failed in binding to key; expected Date but got Str (&quot;12-03-2016&quot;)</div></pre></td></tr></table></figure>
+<p>Perl 6 让我强迫其他程序员按照我需要的方式构造哈希键。</p>
+<p>最后 Zoffix Znet 补充了一句：</p>
+<p>你还可以约束值的类型。申明变量的时候把类型放在变量名前面就好了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my Date %hash&#123;Int&#125;; # use Int keys and accept only Date values</div><div class="line"></div><div class="line">%hash&#123;42&#125; = 72; # Type check failed in binding to assignval; expected Date but got Int (72)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/对象哈希/" rel="tag">#对象哈希</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/10/Data-Dump/" rel="next" title="Data Dump">
+                <i class="fa fa-chevron-left"></i> Data Dump
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/18/feed操作符/" rel="prev" title="feed 操作符">
+                feed 操作符 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/18/Perl-6-Calendar-2016-第三天-对象哈希/"
+     data-title="对象哈希"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/09/18/Perl-6-Calendar-2016-第三天-对象哈希/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/18/Perl-6-Calendar-2016-第三天-对象哈希/"
+           data-title="对象哈希" data-url="https://ohmycloud.github.io/2016/09/18/Perl-6-Calendar-2016-第三天-对象哈希/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Junctions," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="薛定谔欧文应该是喜欢 Perl 6 的, 因为他的著名的薛定谔的猫可以用 Perl 6 的 Junction表达:
+12345my $cat = &amp;apos;dead&amp;apos; | &amp;apos;alive&amp;apos;;say &amp;quot;cat is both dead and alive&amp;quot; if $cat eq &amp;apos;dead&amp;apos; and $cat eq &amp;apos;a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 的薛定谔的猫--Junctions">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/03/22/Perl-6-的薛定谔的猫-Junctions/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="薛定谔欧文应该是喜欢 Perl 6 的, 因为他的著名的薛定谔的猫可以用 Perl 6 的 Junction表达:
+12345my $cat = &amp;apos;dead&amp;apos; | &amp;apos;alive&amp;apos;;say &amp;quot;cat is both dead and alive&amp;quot; if $cat eq &amp;apos;dead&amp;apos; and $cat eq &amp;apos;a">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 的薛定谔的猫--Junctions">
+<meta name="twitter:description" content="薛定谔欧文应该是喜欢 Perl 6 的, 因为他的著名的薛定谔的猫可以用 Perl 6 的 Junction表达:
+12345my $cat = &amp;apos;dead&amp;apos; | &amp;apos;alive&amp;apos;;say &amp;quot;cat is both dead and alive&amp;quot; if $cat eq &amp;apos;dead&amp;apos; and $cat eq &amp;apos;a">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/03/22/Perl-6-的薛定谔的猫-Junctions/"/>
+
+  <title> Perl 6 的薛定谔的猫--Junctions | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 的薛定谔的猫--Junctions
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-22T00:00:00+08:00" content="2015-03-22">
+              2015-03-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/22/Perl-6-的薛定谔的猫-Junctions/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/22/Perl-6-的薛定谔的猫-Junctions/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger" target="_blank" rel="external">薛定谔欧文</a>应该是喜欢 Perl 6 的, 因为他的著名的<a href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger%27s_cat" target="_blank" rel="external">薛定谔的猫</a>可以用 Perl 6 的 <a href="https://docs.perl6.org/type/Junction" target="_blank" rel="external">Junction</a>表达:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $cat = &apos;dead&apos; | &apos;alive&apos;;</div><div class="line">say &quot;cat is both dead and alive&quot; if $cat eq &apos;dead&apos; and $cat eq &apos;alive&apos;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># cat is both dead and alive</div></pre></td></tr></table></figure>
+<p>这里面发生了什么事情? 我会告诉你全部的!</p>
+<a id="more"></a>
+<h2 id="Anyone-游戏"><a href="#Anyone-游戏" class="headerlink" title="Anyone 游戏?"></a>Anyone 游戏?</h2><p>拿最简单的来说, Junctions 允许你把一堆值当作单个值。例如, 你可以使用 <code>any</code> Junction 来测试一个变量是否等于所给定值中的任意一个:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">say &apos;it matches!&apos; if &apos;foo&apos; eq &apos;foo&apos; | &apos;bar&apos; | &apos;ber&apos;;</div><div class="line">say &apos;single-digit prime&apos; if 5 == any ^9.grep: *.is-prime;</div><div class="line"></div><div class="line">my @values = ^100;</div><div class="line">say &quot;it&apos;s in there!&quot; if 42 == @values.any;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># it matches!</div><div class="line"># single-digit prime</div><div class="line"># it&apos;s in there!</div></pre></td></tr></table></figure>
+<p>要从一堆值中创建一个 <code>any</code> Junction, 你可以使用 <code>|</code> 中缀操作符、调用 <code>any</code> 函数或者使用 <code>.any</code> 方法。上面的条件会返回 True 如果 Junction 中的任意一个(<code>any</code>) 值匹配所给定的值的话。事实上, 没有人能阻止你在两端都使用 Junction:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my @one = 1..10;</div><div class="line">my @two = 5..15;</div><div class="line">say &quot;There&apos;s overlap!&quot; if @one.any == @two.any;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># there&apos;s overlap!</div></pre></td></tr></table></figure>
+<p>运算符会返回 True 如果 <code>@one</code> 中的任意一个值(<code>any</code>) 在数值上等于 <code>@two</code> 中的任意一个值(<code>any</code>)的话。这个语法糖很甜, 但是我们还可以做的更多。</p>
+<h2 id="All-for-One-and-Any-for-None"><a href="#All-for-One-and-Any-for-None" class="headerlink" title="All for One and Any for None"></a>All for One and Any for None</h2><p><code>any</code> Junction 唯一一个你能获得的 Junction。你还可以选择 <code>all</code>、<code>any</code>、<code>one</code> 和 <code>none</code>。当在布尔上下文中时, 它们的意思就像下面这样; 构建 Junction 的函数/方法名和 Junction 自身的名字一样并且下面还列出了构建 Junction 的中缀操作符:</p>
+<ul>
+<li><code>all</code> — 所有的值都被计算为 True(使用中缀 <code>&amp;</code>)</li>
+<li><code>any</code> — 至少其中的一个值被计算为 True(使用中缀 <code>|</code>)</li>
+<li><code>one</code> — 正好其中有一个值被计算为 True(使用中缀 <code>^</code>)</li>
+<li><code>none</code> — 没有一个值被计算为 True(没有可用的中缀)</li>
+</ul>
+<p>使用 <code>all</code> JUnction 时要特别注意:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my @values = 2, 3, 5;</div><div class="line">say &apos;all primes&apos; if @values.all ~~ *.is-prime;</div><div class="line"></div><div class="line">my @moar-values;</div><div class="line">say &apos;also all primes&apos; if @moar-values.all ~~ *.is-prime;</div></pre></td></tr></table></figure>
+<p>即使它没有值的时候也会返回 True, 这可能不是你想要的。在那些情况下, 你可以使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my @moar-values;</div><div class="line">say &apos;also all primes&apos; if @moar-values and @moar-values.all ~~ *.is-prime;</div></pre></td></tr></table></figure>
+<h2 id="Call-Me-Baby"><a href="#Call-Me-Baby" class="headerlink" title="Call Me, Baby"></a>Call Me, Baby</h2><p> 你可以把 Junctions 用作并不期望 Junction 的子例程的参数。那么会发生什么呢? 对于每一个 Junctioned 的值, 那个子例程都会被调用一次, 并且返回值会是一个 Junction：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"> sub caculate-things($n) &#123;</div><div class="line">     say &quot;$n is prime&quot;          if $n.is-prime;</div><div class="line">     say &quot;$n is an even number&quot; if $n %% 2;</div><div class="line">     say &quot;$n is pretty big&quot;     if $n &gt; 1e6;</div><div class="line">     $n²;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">my @values = 1, 5, 42, 1e10.Int;</div><div class="line">say &apos;EXACTLY ONE square is larger than 1e10&apos;</div><div class="line">    if 1e10 &lt; calculate-things @values.one;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 5 is a prime</div><div class="line"># 42 is an even number</div><div class="line"># 10000000000 is an even number</div><div class="line"># 10000000000 is pretty big</div><div class="line"># EXACTLY ONE square is larger than 1e10</div></pre></td></tr></table></figure>
+<p>暴露的副作用可能有点太过神奇并且你可能不想在生产代码中看到它, 但是使用一个子例程来修改原来的 Junctioned 化的值是相当能接受的。执行一个数据库查询来获取”实际的”值并且在之后计算那个条件怎么样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">use DBIish;</div><div class="line"></div><div class="line">my $dbh = DBIish.connect: &apos;SQLite&apos;, :database&lt;test.db&gt;;</div><div class="line"></div><div class="line">sub lookup ($id) &#123;</div><div class="line">    given $dbh.prepare: &apos;SELECT id, text FROM stuff WHERE id = ?&apos; &#123;</div><div class="line">        .execute: $id;</div><div class="line">        .allrows[0][1] // &apos;&apos;;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my @ids = 3, 5, 10;</div><div class="line">say &apos;yeah, it got it, bruh&apos; if &apos;meow&apos; eq lookup @ids.any;</div><div class="line"></div><div class="line"># OUTPUT (the database has a row with id = 5 and text = &apos;meow&apos;):</div><div class="line"># yeah, it got it, bruh</div></pre></td></tr></table></figure>
+<h2 id="我们一直在期盼你-请坐。"><a href="#我们一直在期盼你-请坐。" class="headerlink" title="我们一直在期盼你, 请坐。"></a>我们一直在期盼你, 请坐。</h2><p>那个游戏变化了当你的子例程正好期望一个 Junction 作为参数的时候。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">sub do-stuff (Junction $n) &#123;</div><div class="line">    say &apos;value is even&apos;  if $n %% 2;</div><div class="line">    say &apos;value is prime&apos; if $n.is-prime;</div><div class="line">    say &apos;value is large&apos; if $n &gt; 1e10;</div><div class="line">&#125;</div><div class="line"></div><div class="line">do-stuff (2, 3, 1e11.Int).one;</div><div class="line">say &apos;---&apos;;</div><div class="line">do-stuff (2, 3, 1e11.Int).any;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># value is large</div><div class="line"># ---</div><div class="line"># value is even</div><div class="line"># value is prime</div><div class="line"># value is large</div></pre></td></tr></table></figure>
+<p>当我们提供了一个 <code>one</code> Junction 时, 只有正好满足给定值中的其中一个条件才会被触发。当我们提供一个 <code>any</code> Junction 时, 满足条件的任何一个给定值都会触发。</p>
+<p>但是! 你没有必要非等着世界为你分发 Junctions。你自己制造一个怎么样呢, 还能在测试条件时节省代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sub do-stuff (*@v) &#123;</div><div class="line">    my $n = @v.one;</div><div class="line">    say &quot;$n is even&quot;  if $n %% 2;</div><div class="line">    say &quot;$n is prime&quot; if $n.is-prime;</div><div class="line">    say &quot;$n is large&quot; if $n &gt; 1e10;</div><div class="line">&#125;</div><div class="line"></div><div class="line">do-stuff 2, 3, 1e11.Int;</div><div class="line">say &apos;---&apos;;</div><div class="line">do-stuff 42;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># one(2, 3, 100000000000) is large</div><div class="line"># ---</div><div class="line"># one(42) is even</div></pre></td></tr></table></figure>
+<h2 id="没有人想过将来吗"><a href="#没有人想过将来吗" class="headerlink" title="没有人想过将来吗?"></a>没有人想过将来吗?</h2><p>还有一个小秘密: Junctions 被设计为时<a href="https://en.wikipedia.org/wiki/Automatic_parallelization" target="_blank" rel="external">自动线程化</a>的(即 auto-threaded)。尽管在写这篇文章的时候它们只会使用仅仅一个线程, 你不应该依赖它们能以任何可预测的顺序被执行。自动线程化会在 2018 年的某个时间被实现, 所以保持关注… 你不必做任何事情, 你的值得自动线程化的复杂 Junctioned 化的操作可能会在几年之内变得更快。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>Perl 6 的 Junctions 是值的叠加态, 它允许你测试多个值就像它们是一个值一样。除了提供非常短并且易读的语法, Junctions 还允许你使用子例程变换叠加值或者使用副作用。</p>
+<p>你还可以生成显式操作 Junctions 的子例程或者把提供的多个值转换成 Junctions 以简化代码。</p>
+<p>最后, Junctions 被设计为能使用所有你计算机所提供的可用能力并且在不久的将来会做成自动线程化。</p>
+<p>Junctions 很精彩, 使用它们, 玩的开心!</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Junctions/" rel="tag">#Junctions</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/19/Subset/" rel="next" title="Subset">
+                <i class="fa fa-chevron-left"></i> Subset
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/23/Sneaking-into-a-loop/" rel="prev" title="Sneaking into a loop">
+                Sneaking into a loop <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/03/22/Perl-6-的薛定谔的猫-Junctions/"
+     data-title="Perl 6 的薛定谔的猫--Junctions"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/03/22/Perl-6-的薛定谔的猫-Junctions/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/03/22/Perl-6-的薛定谔的猫-Junctions/"
+           data-title="Perl 6 的薛定谔的猫--Junctions" data-url="https://ohmycloud.github.io/2015/03/22/Perl-6-的薛定谔的猫-Junctions/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Anyone-游戏"><span class="nav-number">1.</span> <span class="nav-text">Anyone 游戏?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#All-for-One-and-Any-for-None"><span class="nav-number">2.</span> <span class="nav-text">All for One and Any for None</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Call-Me-Baby"><span class="nav-number">3.</span> <span class="nav-text">Call Me, Baby</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们一直在期盼你-请坐。"><span class="nav-number">4.</span> <span class="nav-text">我们一直在期盼你, 请坐。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没有人想过将来吗"><span class="nav-number">5.</span> <span class="nav-text">没有人想过将来吗?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

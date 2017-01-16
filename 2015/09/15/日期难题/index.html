@@ -1,0 +1,760 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Grammar,Match objects," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="reddit 上使用 Perl 6 处理日期
+描述下面的日期, 有些使用了  M D Y 格式, 有些使用了 Y M D 格式, 还使用了任意分隔符! 请把这些散乱的文本解析成合适的 ISO 8601  (YYYY-MM-DD) 格式化日期。
+假设只有以 4  个数字开头的日期使用 Y M D 格式, 其它的使用 M D Y 格式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日期难题">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/09/15/日期难题/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="reddit 上使用 Perl 6 处理日期
+描述下面的日期, 有些使用了  M D Y 格式, 有些使用了 Y M D 格式, 还使用了任意分隔符! 请把这些散乱的文本解析成合适的 ISO 8601  (YYYY-MM-DD) 格式化日期。
+假设只有以 4  个数字开头的日期使用 Y M D 格式, 其它的使用 M D Y 格式。">
+<meta property="og:updated_time" content="2016-10-23T16:13:34.663Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="日期难题">
+<meta name="twitter:description" content="reddit 上使用 Perl 6 处理日期
+描述下面的日期, 有些使用了  M D Y 格式, 有些使用了 Y M D 格式, 还使用了任意分隔符! 请把这些散乱的文本解析成合适的 ISO 8601  (YYYY-MM-DD) 格式化日期。
+假设只有以 4  个数字开头的日期使用 Y M D 格式, 其它的使用 M D Y 格式。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/09/15/日期难题/"/>
+
+  <title> 日期难题 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                日期难题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-15T00:00:00+08:00" content="2015-09-15">
+              2015-09-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/15/日期难题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/15/日期难题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.reddit.com/r/dailyprogrammer/comments/3wshp7/20151214_challenge_245_easy_date_dilemma/" target="_blank" rel="external"> reddit 上使用 Perl 6 处理日期</a></p>
+<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>下面的日期, 有些使用了  M D Y 格式, 有些使用了 Y M D 格式, 还使用了任意分隔符! 请把这些散乱的文本解析成合适的 ISO 8601  (YYYY-MM-DD) 格式化日期。</p>
+<p>假设只有以 4  个数字开头的日期使用 Y M D 格式, 其它的使用 M D Y 格式。</p>
+<a id="more"></a>
+<h3 id="输入样本"><a href="#输入样本" class="headerlink" title="输入样本"></a>输入样本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">2/13/15</div><div class="line">1-31-10</div><div class="line">5 10 2015</div><div class="line">2012 3 17</div><div class="line">2001-01-01</div><div class="line">2008/01/07</div></pre></td></tr></table></figure>
+<h3 id="输出样本"><a href="#输出样本" class="headerlink" title="输出样本"></a>输出样本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">2015-02-13</div><div class="line">2010-01-31</div><div class="line">2015-05-10</div><div class="line">2012-03-17</div><div class="line">2001-01-01</div><div class="line">2008-01-07</div></pre></td></tr></table></figure>
+<h3 id="扩展挑战-中级"><a href="#扩展挑战-中级" class="headerlink" title="扩展挑战 [中级]"></a>扩展挑战 [中级]</h3><p>使用 2014-12-24 作为相对日期的基准。</p>
+<p>当添加 days(天数) 时, 要考虑到每月会有不同的天数, 忽略闰年。</p>
+<p>当添加月和年时, 使用整个 units, 以至于:</p>
+<p>one month before october 10 is september 10</p>
+<p>one year after 2001-04-02 is 2002-04-02</p>
+<p>one month after january 30 is february 28 (not march 1)</p>
+<h3 id="Sally’s-inputs"><a href="#Sally’s-inputs" class="headerlink" title="Sally’s inputs:"></a>Sally’s inputs:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">tomorrow</div><div class="line">2010-dec-7</div><div class="line">OCT 23</div><div class="line">1 week ago</div><div class="line">next Monday</div><div class="line">last sunDAY</div><div class="line">1 year ago</div><div class="line">1 month ago</div><div class="line">last week</div><div class="line">LAST MONTH</div><div class="line">10 October 2010</div><div class="line">an year ago</div><div class="line">2 years from tomoRRow</div><div class="line">1 month from 2016-01-31</div><div class="line">4 DAYS FROM today</div><div class="line">9 weeks from yesterday</div></pre></td></tr></table></figure>
+<h3 id="Sally’s-expected-outputs"><a href="#Sally’s-expected-outputs" class="headerlink" title="Sally’s expected outputs:"></a>Sally’s expected outputs:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">2014-12-25</div><div class="line">2010-12-01</div><div class="line">2014-10-23</div><div class="line">2014-12-17</div><div class="line">2014-12-29</div><div class="line">2014-12-21</div><div class="line">2013-12-24</div><div class="line">2014-11-24</div><div class="line">2014-12-15</div><div class="line">2014-11-24</div><div class="line">2010-10-10</div><div class="line">2013-12-24</div><div class="line">2016-12-25</div><div class="line">2016-02-28</div><div class="line">2014-12-28</div><div class="line">2015-02-25</div></pre></td></tr></table></figure>
+<p>smls 大神给出了完整的 grammar：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">my $today = Date.new(2014, 12, 24);</div><div class="line"></div><div class="line">grammar MessyDate &#123;</div><div class="line">    rule TOP &#123;</div><div class="line">        |    &lt;date&gt;                 &#123; make $&lt;date&gt;.made &#125; # 跟在 regex 后面的花括号是闭包</div><div class="line">        | :i &lt;duration&gt; ago         &#123; make $today.earlier: |$&lt;duration&gt;.made     &#125;</div><div class="line">        | :i &lt;duration&gt; from &lt;date&gt; &#123; make $&lt;date&gt;.made.later: |$&lt;duration&gt;.made &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    rule date &#123;</div><div class="line">        | [ || &lt;month&gt; (&lt;sep&gt;?) &lt;day&gt;   [$0 &lt;year&gt;]?</div><div class="line">            || &lt;day&gt;   (&lt;sep&gt;?) &lt;month&gt; [$0 &lt;year&gt;]?</div><div class="line">            || &lt;year&gt;  (&lt;sep&gt;?) &lt;month&gt;  $0 &lt;day&gt;    ]</div><div class="line">          &#123; make Date.new: $&lt;year&gt;.made//$today.year, |$&lt;month day&gt;».made &#125;</div><div class="line"></div><div class="line">        | :i today          &#123; make $today     &#125;</div><div class="line">        | :i yesterday      &#123; make $today - 1 &#125;</div><div class="line">        | :i tomorrow       &#123; make $today + 1 &#125;</div><div class="line">        | :i last &lt;weekday&gt; &#123; make $today - ($today.day-of-week - $&lt;weekday&gt;.made) % 7 || 7 &#125;</div><div class="line">        | :i next &lt;weekday&gt; &#123; make $today + ($&lt;weekday&gt;.made - $today.day-of-week) % 7 || 7 &#125;</div><div class="line">        | :i last &lt;unit&gt;    &#123; make $today.earlier: |($&lt;unit&gt;.made =&gt; 1) &#125;</div><div class="line">        | :i next &lt;unit&gt;    &#123; make $today.later:   |($&lt;unit&gt;.made =&gt; 1) &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    rule duration &#123;</div><div class="line">        &lt;count&gt; &lt;unit&gt; &#123; make $&lt;unit&gt;.made =&gt; $&lt;count&gt;.made &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    token year &#123;</div><div class="line">        | &lt;number(4)&gt;        &#123; make +$&lt;number&gt;       &#125; # &lt;number(4)&gt; 是扩展的 &lt;...&gt; 语法, 实际是方法调用</div><div class="line">        | &lt;number(2, 0..49)&gt; &#123; make 2000 + $&lt;number&gt; &#125;</div><div class="line">        | &lt;number(2, 50..*)&gt; &#123; make 1900 + $&lt;number&gt; &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    token month &#123;</div><div class="line">        | &lt;number(1..2, 1..12)&gt; &#123; make +$&lt;number&gt; &#125;</div><div class="line">        | :i Jan[uary]?   &#123; make  1 &#125; # [...] 是非捕获分组</div><div class="line">        | :i Feb[ruary]?  &#123; make  2 &#125;</div><div class="line">        | :i Mar[ch]?     &#123; make  3 &#125;</div><div class="line">        | :i Apr[il]?     &#123; make  4 &#125;</div><div class="line">        | :i May          &#123; make  5 &#125;</div><div class="line">        | :i Jun[e]?      &#123; make  6 &#125;</div><div class="line">        | :i Jul[y]?      &#123; make  7 &#125;</div><div class="line">        | :i Aug[ust]?    &#123; make  8 &#125;</div><div class="line">        | :i Sep[tember]? &#123; make  9 &#125;</div><div class="line">        | :i Oct[ober]?   &#123; make 10 &#125;</div><div class="line">        | :i Nov[ember]?  &#123; make 11 &#125;</div><div class="line">        | :i Dec[ember]?  &#123; make 12 &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    token day &#123; &lt;number(1..2, 1..31)&gt; &#123; make +$&lt;number&gt; &#125; &#125;</div><div class="line"></div><div class="line">    token weekday &#123;</div><div class="line">        | :i Mon[day]?    &#123; make 1 &#125;</div><div class="line">        | :i Tue[sday]?   &#123; make 2 &#125;</div><div class="line">        | :i Wed[nesday]? &#123; make 3 &#125;</div><div class="line">        | :i Thu[rsday]?  &#123; make 4 &#125;</div><div class="line">        | :i Fri[day]?    &#123; make 5 &#125;</div><div class="line">        | :i Sat[urday]?  &#123; make 6 &#125;</div><div class="line">        | :i Sun[day]?    &#123; make 7 &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    token sep   &#123; &lt;[-/.\h]&gt; &#125; # &lt;[...]&gt; 是 Perl 6 中的字符类</div><div class="line">    token count &#123; (&lt;[0..9]&gt;+) &#123; make +$0 &#125;  |  an? &#123; make 1 &#125; &#125;</div><div class="line">    token unit  &#123; :i (day|week|month|year) s? &#123; make $0.lc &#125; &#125;</div><div class="line"></div><div class="line">    multi token number ($digits)        &#123;  &lt;[0..9]&gt; ** &#123;$digits&#125; &#125;</div><div class="line">    multi token number ($digits, $test) &#123; (&lt;[0..9]&gt; ** &#123;$digits&#125;) &lt;?&#123; +$0 ~~ $test &#125;&gt; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">for lines() &#123;</div><div class="line">    say MessyDate.parse($_).made // &quot;failed to parse &apos;$_&apos;&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在 grammar 中, 有两个 regex 的变体, <code>rule</code> 和 <code>token</code>。rule 默认不会回溯.  rule 与 token 的一个重要区别是, <code>rule</code> 这样的正则采取了 <code>:sigspace</code> 修饰符。 <code>rule</code> 实际上是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">regex :ratchet :sigspace &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>的简写.  ratchet 这个单词的意思是: (防倒转的)棘齿, 意思它是不能回溯的!  而 <code>:sigspace</code> 表明正则中的空白是有意义的, 而 <code>token</code> 实际上是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">regex :ratchet &#123; ... &#125;</div></pre></td></tr></table></figure></p>
+<p>的简写。 所以在 token 中, 若不是显式的写上 <code>\s</code>、<code>\h</code>、<code>\n</code> 等空白符号, 其它情况下就好像空白隐身了一样, 虽然你写了, 但是编译器却视而不见。</p>
+<p><code>//</code> 在左侧匹配失败时会在右侧提供一个默认值。</p>
+<p><code>&lt;number(4)&gt;</code>  和 <code>&lt;number(2, 0..49)&gt;</code> 中使用了扩展了的 <code>&lt;...&gt;</code> 元语法。 标识符(例如左面的 number)后面的第一个字符决定了闭合尖括号之前剩余文本的处理。它的底层语义是函数或方法调用, 所以, 如果标识符后面的第一个字符是左圆括号, 那么它要么是方法调用, 要么是函数调用:</p>
+<p><code>&lt;number(4)&gt;</code> 等价于 <code>&lt;number=&amp;number(4)&gt;</code></p>
+<p><code>&lt;number(2, 0..49)&gt;</code> 等价于 <code>&lt;number=&amp;number(2, 0..49)&gt;</code></p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi token number ($digits)        &#123;  &lt;[<span class="number">0</span>..<span class="number">9</span>]&gt; ** &#123;$digits&#125; &#125;</div><div class="line">multi token number ($digits, $test) &#123; (&lt;[<span class="number">0</span>..<span class="number">9</span>]&gt; ** &#123;$digits&#125;) &lt;?&#123; +$0 ~~ $test &#125;&gt; &#125;</div></pre></td></tr></table></figure>
+<p>在扩展的 <code>&lt;...&gt;</code> 语法中, 一个前置的 <code>?{</code> 或 <code>!{</code> 标示着代码断言:<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(&lt;[<span class="number">0</span>..<span class="number">9</span>]&gt; ** &#123;$digits&#125;) &lt;?&#123; +$0 ~~ $test &#125;&gt;</div></pre></td></tr></table></figure></p>
+<p>等价于：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(&lt;[<span class="number">0</span>..<span class="number">9</span>]&gt; ** &#123;$digits&#125;) &#123; +$0 ~~ $test <span class="keyword">or</span> fail &#125;  <span class="comment"># + 强制后面的$0为数值上下文, 以匹配 $test 中的数字</span></div></pre></td></tr></table></figure></p>
+<p>上面的两句代码, 具名 <code>regex</code>, <code>token</code>, 或 <code>rule</code> 是一个子例程, 所以可以传递 参数给具名 token。</p>
+<p>这从标准输入里读取散乱的日期并把对应的 ISO 日期写到标准输出。</p>
+<p>它能解析任务描述中的所有日期（包含扩展）, 还有 - 然而, 在它们中我得到 4 个人不同结果。请弄清它们是否是错误的, 并且为什么是错的:</p>
+<hr>
+<p>2010-dec-7 –&gt; 我得到  2010-12-07 而不是 2010-12-01</p>
+<p>last week –&gt; 我得到 2014-12-17 而不是 2014-12-15</p>
+<p>1 month from 2016-01-31 –&gt; 我得到  2016-02-29 而不是 2016-02-28</p>
+<p>9 weeks from yesterday –&gt; 我得到  2015-02-24 而不是 2015-02-25</p>
+<p>有人在评论中问他 <code>make/made</code> 是类中的方法吗？</p>
+<p>是的, 它们是 Match 类的方法。</p>
+<h3 id="Match-objects-注意-object-是复数"><a href="#Match-objects-注意-object-是复数" class="headerlink" title="Match objects(注意 object 是复数)"></a>Match objects(注意 object 是复数)</h3><p>每个 regex match(并且通过扩展, 每个 grammar token match)的结果被表示为一个 Match 对象。</p>
+<p>通过这个对象你能访问各种信息片段:</p>
+<ul>
+<li><p>匹配到的字符串</p>
+</li>
+<li><p>关于输入字符串匹配的开始和结束位置</p>
+</li>
+<li><p>每个位置捕获和具名捕获的sub-matches</p>
+</li>
+<li><p>与这个匹配有关的 AST 片段, 如果有的话</p>
+<h3 id="AST-片段"><a href="#AST-片段" class="headerlink" title="AST 片段"></a>AST 片段</h3></li>
+</ul>
+<p>Calling make inside a token/rule, sets the “AST fragment” that will be associated with the current match. Then later, you can get at that associated data by calling .made on the resulting Match object.</p>
+<p>在 <code>token/rule</code> 里面调用 <code>make</code>, 设置将会与当前匹配关联的 “AST  片段”。然后, 你可以通过在当前结果 Match 对象身上调用 <code>.made</code> 方法来获取那个关联数据。</p>
+<p>This is really just a free-form slot that allows you to store anything you want with the Match object and retrieve it later, though of course it is meant for building an AST like I do here.</p>
+<p>这正是自由形式的插槽, 允许你使用 Match 对象存储任何你想要的东西并在以后检索它, 尽管显而易见这意味着像我那样创建一个 AST。</p>
+<h3 id="在-grammar-中创建-“AST”"><a href="#在-grammar-中创建-“AST”" class="headerlink" title="在 grammar 中创建 “AST”"></a>在 grammar 中创建 “AST”</h3><p>Each token/rule in my grammar uses .made to retrieve the pieces of data that its sub-rule matches have made, combines them into a larger piece of data, and make’s it for its own parent rule to retrieve. And so on.</p>
+<p>在我的 grammar 中每个 <code>token/rule</code> 使用 <code>.made</code> 来取得它的 sub-rule 匹配构建的数据片段, 把它们组合成一个更大的数据片段, 这是为了让它的 parent rule 能检索。等等。</p>
+<p>我在每个 token/rule 里面使用这些语法简写来引用 sub-matches 的 Match 对象:</p>
+<ul>
+<li>$0 引用 sub-match（由一个 () 捕获组引起） 的第一个位置处的 Match 对象。refers to the Match object of the first positional sub-match (caused by a ( ) capture group).</li>
+<li>$<date> 引用一个名字为 “date” 的具名 sub-match 的 Match 对象() refers to the Match object of the named sub-match “date” (通过 <code>&lt;date&gt;</code> 递归引用 名为 date 的 token 引起).</date></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grammar/" rel="tag">#Grammar</a>
+          
+            <a href="/tags/Match-objects/" rel="tag">#Match objects</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/11/Perl6中的正则表达式-四/" rel="next" title="Perl 6 中的正则表达式(四)">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的正则表达式(四)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/17/Perl6中的polymod方法/" rel="prev" title="Perl 6 中的 polymod 方法">
+                Perl 6 中的 polymod 方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/09/15/日期难题/"
+     data-title="日期难题"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/09/15/日期难题/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/09/15/日期难题/"
+           data-title="日期难题" data-url="https://ohmycloud.github.io/2015/09/15/日期难题/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#描述"><span class="nav-number">1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入样本"><span class="nav-number">2.</span> <span class="nav-text">输入样本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出样本"><span class="nav-number">3.</span> <span class="nav-text">输出样本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展挑战-中级"><span class="nav-number">4.</span> <span class="nav-text">扩展挑战 [中级]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sally’s-inputs"><span class="nav-number">5.</span> <span class="nav-text">Sally’s inputs:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sally’s-expected-outputs"><span class="nav-number">6.</span> <span class="nav-text">Sally’s expected outputs:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Match-objects-注意-object-是复数"><span class="nav-number">7.</span> <span class="nav-text">Match objects(注意 object 是复数)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AST-片段"><span class="nav-number">8.</span> <span class="nav-text">AST 片段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-grammar-中创建-“AST”"><span class="nav-number">9.</span> <span class="nav-text">在 grammar 中创建 “AST”</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

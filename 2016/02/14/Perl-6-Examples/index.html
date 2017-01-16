@@ -1,0 +1,908 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Examples," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="斐波拉契数列（Fibonacci Sequence）
+
+analytic
+
+1234567891011use v6;sub fibonacci (Int $n where 0..*  --&amp;gt; Int) &amp;#123;    constant phi = (1 + sqrt 5) / 2;    return round( phi**($n+1) / sqrt 5);&amp;#125;for 0..1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 Examples">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/02/14/Perl-6-Examples/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="斐波拉契数列（Fibonacci Sequence）
+
+analytic
+
+1234567891011use v6;sub fibonacci (Int $n where 0..*  --&amp;gt; Int) &amp;#123;    constant phi = (1 + sqrt 5) / 2;    return round( phi**($n+1) / sqrt 5);&amp;#125;for 0..1">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.652Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 Examples">
+<meta name="twitter:description" content="斐波拉契数列（Fibonacci Sequence）
+
+analytic
+
+1234567891011use v6;sub fibonacci (Int $n where 0..*  --&amp;gt; Int) &amp;#123;    constant phi = (1 + sqrt 5) / 2;    return round( phi**($n+1) / sqrt 5);&amp;#125;for 0..1">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/02/14/Perl-6-Examples/"/>
+
+  <title> Perl 6 Examples | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 Examples
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-14T00:00:00+08:00" content="2016-02-14">
+              2016-02-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/14/Perl-6-Examples/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/14/Perl-6-Examples/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="斐波拉契数列（Fibonacci-Sequence）"><a href="#斐波拉契数列（Fibonacci-Sequence）" class="headerlink" title="斐波拉契数列（Fibonacci Sequence）"></a>斐波拉契数列（Fibonacci Sequence）</h2><hr>
+<ul>
+<li>analytic</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">fibonacci</span> (<span class="title">Int</span> $<span class="title">n</span> <span class="title">where</span> 0..*  --&gt; <span class="title">Int</span>) </span>&#123;</div><div class="line">    constant phi = (<span class="number">1</span> + <span class="keyword">sqrt</span> <span class="number">5</span>) / <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> round( phi**($n+<span class="number">1</span>) / <span class="keyword">sqrt</span> <span class="number">5</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种方法计算前1000个斐波拉契数大约为0.746s（2015.7.Rakudo, 以下都是）。</p>
+<a id="more"></a>
+<ul>
+<li>迭代</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">fibonacci</span> (<span class="title">Int</span> $<span class="title">n</span>) </span>&#123;</div><div class="line">    <span class="keyword">state</span> @sequence = <span class="number">1</span>,<span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> @sequence.elems &lt;= $n &#123;</div><div class="line">        @sequence.push( @sequence[*-<span class="number">2</span>] + @sequence[*-<span class="number">1</span>] );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> @sequence[$n];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种遍历法大概需要 1 秒多。</p>
+<ul>
+<li>递归</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">fibonacci</span> (<span class="title">Int</span> $<span class="title">n</span> <span class="title">where</span> 0..*) </span>&#123;</div><div class="line">    <span class="keyword">if</span> $n == <span class="number">0</span> | <span class="number">1</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> fibonacci($n-<span class="number">1</span>) + fibonacci($n-<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>比较慢。第 20 个之后越来越慢。</p>
+<ul>
+<li>递归 - 超运算符</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">fibonacci</span> (<span class="title">Int</span> $<span class="title">n</span> <span class="title">where</span> 0..*) </span>&#123;</div><div class="line">    <span class="keyword">if</span> $n == <span class="number">0</span> | <span class="number">1</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> [+] ($n-<span class="number">1</span>, $n-<span class="number">2</span>)».&amp;fibonacci;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>和上面差不多。</p>
+<ul>
+<li>递归 - map</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">fibonacci</span> (<span class="title">Int</span> $<span class="title">n</span> <span class="title">where</span> 0..*) </span>&#123;</div><div class="line">    <span class="keyword">if</span> $n == <span class="number">0</span> | <span class="number">1</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> [+] <span class="keyword">map</span> &amp;fibonacci, ($n-<span class="number">1</span>, $n-<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同上。</p>
+<ul>
+<li>递归 - multi</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">multi fibonacci (<span class="number">0</span>)  &#123; <span class="number">1</span> &#125;</div><div class="line"></div><div class="line">multi fibonacci (<span class="number">1</span>)  &#123; <span class="number">1</span> &#125;</div><div class="line"></div><div class="line">multi fibonacci (Int $n --&gt; Int) &#123;</div><div class="line">    <span class="keyword">return</span> fibonacci($n-<span class="number">1</span>) + fibonacci($n-<span class="number">2</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>比上一个稍快。</p>
+<ul>
+<li>递归 - multi_cached</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">multi fibonacci (<span class="number">0</span>)  &#123; <span class="number">1</span> &#125;</div><div class="line"></div><div class="line">multi fibonacci (<span class="number">1</span>)  &#123; <span class="number">1</span> &#125;</div><div class="line"></div><div class="line"><span class="keyword">my</span> %cached;</div><div class="line">multi fibonacci (Int $n --&gt; Int) &#123;</div><div class="line">    <span class="keyword">return</span> %cached&#123;$n&#125; //= fibonacci($n-<span class="number">1</span>) + fibonacci($n-<span class="number">2</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>0.849s 执行完毕。</p>
+<ul>
+<li>递归 - multi_cached_state</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">multi fibonacci (<span class="number">0</span>)  &#123; <span class="number">1</span> &#125;</div><div class="line"></div><div class="line">multi fibonacci (<span class="number">1</span>)  &#123; <span class="number">1</span> &#125;</div><div class="line"></div><div class="line">multi fibonacci (Int $n --&gt; Int) &#123;</div><div class="line">    <span class="keyword">state</span> %cached;</div><div class="line">    <span class="keyword">return</span> %cached&#123;$n&#125; //= fibonacci($n-<span class="number">1</span>) + fibonacci($n-<span class="number">2</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>0.885s</p>
+<ul>
+<li>递归 - multi_cached_trait</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">multi fibonacci (<span class="number">0</span>)  &#123; <span class="number">1</span> &#125;</div><div class="line"></div><div class="line">multi fibonacci (<span class="number">1</span>)  &#123; <span class="number">1</span> &#125;</div><div class="line"></div><div class="line">multi fibonacci (Int $n --&gt; Int) is cached &#123;</div><div class="line">    fibonacci($n-<span class="number">1</span>) + fibonacci($n-<span class="number">2</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>目前报错。</p>
+<ul>
+<li>序列</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">fibonacci</span> (<span class="title">Int</span> $<span class="title">n</span>) </span>&#123;</div><div class="line">    constant @sequence :=  <span class="number">1</span>, <span class="number">1</span>, *+* ... *;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> @sequence[$n];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>1.6s多。 其中 <code>:=</code> 是惰性赋值。按需求值。</p>
+<ul>
+<li>序列 - inline</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">fibonacci</span> (<span class="title">Int</span> $<span class="title">n</span>) </span>&#123;</div><div class="line">    (<span class="number">1</span>, <span class="number">1</span>, *+* ... *)[$n];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">0</span>..<span class="number">1000</span> -&gt; $i &#123;</div><div class="line">    <span class="keyword">say</span> $i.fmt(<span class="string">'%3d'</span>), <span class="string">': '</span>, fibonacci($i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Finished in 133.808s.</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><hr>
+<ul>
+<li>bogosort</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">bogosort</span> ( *@<span class="title">list</span> ) </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">until</span> [!after] @list &#123;</div><div class="line">        @list .= pick(*);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> @list;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">#my @data = 6, 7, 2, 1, 8, 9, 2;</span></div><div class="line"><span class="keyword">my</span> @data =  &lt; p e r l <span class="keyword">s</span> i <span class="keyword">x</span> &gt;;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'input  = '</span> ~          @data;</div><div class="line"><span class="keyword">say</span> <span class="string">'output = '</span> ~ bogosort @data;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">input  = p e r l s i x</div><div class="line">output = e i l p r s x</div><div class="line">[Finished in 1.326s]</div></pre></td></tr></table></figure>
+<ul>
+<li>mergesort</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">merge</span> (@<span class="title">a</span>, @<span class="title">b</span>) </span>&#123;</div><div class="line">    gather <span class="keyword">while</span> @a &amp;&amp; @b &#123;</div><div class="line">        <span class="keyword">if</span> @a[<span class="number">0</span>] before @b[<span class="number">0</span>] &#123; take @a.shift &#125;</div><div class="line">        <span class="keyword">else</span>                  &#123; take @b.shift &#125;</div><div class="line">    &#125;,</div><div class="line">    @a,</div><div class="line">    @b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mergesort</span> ( *@<span class="title">list</span> ) </span>&#123;</div><div class="line">    <span class="keyword">return</span> @list <span class="keyword">if</span> @list.elems &lt;= <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">my</span> $middle = @list.elems div <span class="number">2</span>;</div><div class="line">    <span class="keyword">my</span> @left   = mergesort @list[ <span class="number">0</span> ..^ $middle ];</div><div class="line">    <span class="keyword">my</span> @right  = mergesort @list[ $middle .. *  ];</div><div class="line"></div><div class="line">    <span class="keyword">return</span> merge(@left, @right);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># my @data = 6, 7, 2, 1, 8, 9, 5, 3, 4;</span></div><div class="line"><span class="keyword">my</span> @data = &lt; p e r l <span class="keyword">s</span> i <span class="keyword">x</span> &gt;;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">"input  = &#123;           @data  &#125;"</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">"output = &#123; mergesort(@data) &#125;"</span>;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">input  = p e r l s i x</div><div class="line">output = e i l p r s x</div><div class="line">[Finished in 0.337s]</div></pre></td></tr></table></figure>
+<ul>
+<li>mergesort_functional</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">multi merge ([], @ys) &#123; @ys &#125;</div><div class="line"></div><div class="line">multi merge (@xs, []) &#123; @xs &#125;</div><div class="line"></div><div class="line">multi merge ([$x, *@xs], [$y, *@ys]) &#123;</div><div class="line">    $x before $y ?? ($x, merge @xs, [$y, @ys])</div><div class="line">                 !! ($y, merge [$x, @xs], @ys)</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">multi mergesort ( [] ) &#123;  []  &#125;</div><div class="line"></div><div class="line">multi mergesort ([$x]) &#123; [$x] &#125;</div><div class="line"></div><div class="line">multi mergesort (@xs)  &#123;</div><div class="line">    merge</div><div class="line">        mergesort( @xs[<span class="number">0</span> ..^ @xs.elems div <span class="number">2</span>] ),</div><div class="line">        mergesort( @xs[@xs.elems div <span class="number">2</span> .. * ] )</div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="keyword">my</span> @data = <span class="number">6</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>;</div><div class="line"><span class="comment">#my @data = &lt; p e r l s i x &gt;;</span></div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">"input  = &#123;           @data  &#125;"</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">"output = &#123; mergesort(@data) &#125;"</span>;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">input  = 6 7 2 1 8 9 5 3 4</div><div class="line">output = 1 2 3 4 5 6 7 8 9</div><div class="line">[Finished in 0.373s]</div></pre></td></tr></table></figure>
+<ul>
+<li>mergesort_functional_given</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">multi merge ([], @ys) &#123; @ys &#125;</div><div class="line"></div><div class="line">multi merge (@xs, []) &#123; @xs &#125;</div><div class="line"></div><div class="line">multi merge ([$x, *@xs], [$y, *@ys]) &#123;</div><div class="line">    $x before $y ?? ($x, merge @xs, [$y, @ys])</div><div class="line">                 !! ($y, merge [$x, @xs], @ys)</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">multi mergesort ( [] ) &#123;  []  &#125;</div><div class="line"></div><div class="line">multi mergesort ([$x]) &#123; [$x] &#125;</div><div class="line"></div><div class="line">multi mergesort (@xs)  &#123;</div><div class="line">    <span class="keyword">given</span> @xs.elems div <span class="number">2</span> -&gt; $middle &#123;</div><div class="line">        merge</div><div class="line">            mergesort( @xs[ <span class="number">0</span> ..^ $middle ] ),</div><div class="line">            mergesort( @xs[ $middle .. *  ] )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"> <span class="keyword">my</span> @data = <span class="number">6</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>;</div><div class="line"><span class="comment">#my @data = &lt; p e r l s i x &gt;;</span></div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">"input  = &#123;           @data  &#125;"</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">"output = &#123; mergesort(@data) &#125;"</span>;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">input  = 6 7 2 1 8 9 5 3 4</div><div class="line">output = 1 2 3 4 5 6 7 8 9</div><div class="line">[Finished in 0.375s]</div></pre></td></tr></table></figure>
+<ul>
+<li>mergesort_functional_interleaved</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">multi merge ([], @ys) &#123; @ys &#125;</div><div class="line"></div><div class="line">multi merge (@xs, []) &#123; @xs &#125;</div><div class="line"></div><div class="line">multi merge ([$x, *@xs], [$y, *@ys]) &#123;</div><div class="line">    $x before $y ?? ($x, merge @xs, [$y, @ys])</div><div class="line">                 !! ($y, merge [$x, @xs], @ys)</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">multi mergesort ( [] ) &#123;  []  &#125;</div><div class="line"></div><div class="line">multi mergesort ([$x]) &#123; [$x] &#125;</div><div class="line"></div><div class="line">multi mergesort (@xs)  &#123;</div><div class="line">    merge</div><div class="line">        mergesort( @xs[<span class="number">0</span>,<span class="number">2</span>...*] ),</div><div class="line">        mergesort( @xs[<span class="number">1</span>,<span class="number">3</span>...*] )</div><div class="line">&#125;</div><div class="line"></div><div class="line"> <span class="keyword">my</span> @data = <span class="number">6</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>;</div><div class="line"><span class="comment">#my @data = &lt; p e r l s i x &gt;;</span></div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">"input  = &#123;           @data  &#125;"</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">"output = &#123; mergesort(@data) &#125;"</span>;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">input  = 6 7 2 1 8 9 5 3 4</div><div class="line">output = 1 2 3 4 5 6 7 8 9</div><div class="line">[Finished in 0.34s]</div></pre></td></tr></table></figure>
+<ul>
+<li>quicksort</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">quicksort</span>( *@<span class="title">list</span> ) </span>&#123;</div><div class="line">    <span class="keyword">return</span> @list <span class="keyword">if</span> @list.elems &lt; <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="keyword">my</span> $pivot = @list.shift;</div><div class="line"><span class="comment">#     my $pivot = @list.=pick(*).shift;</span></div><div class="line"></div><div class="line">    <span class="keyword">my</span> (@before, @after);</div><div class="line">    <span class="keyword">for</span> @list -&gt; $elem &#123;</div><div class="line">        <span class="keyword">if</span> $elem before $pivot &#123; @before.push($elem); &#125;</div><div class="line">        <span class="keyword">else</span>                   &#123; @after.push($elem);  &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> quicksort(@before),</div><div class="line">           $pivot,</div><div class="line">           quicksort(@after);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">#my @data = 6, 7, 2, 1, 8, 9, 5, 3, 4;</span></div><div class="line"><span class="keyword">my</span> @data = &lt; p e r l <span class="keyword">s</span> i <span class="keyword">x</span> &gt;;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">"input  = &#123;           @data  &#125;"</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">"output = &#123; quicksort(@data) &#125;"</span>;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">input  = p e r l s i x</div><div class="line">output = e i l p r s x</div><div class="line">[Finished in 0.246s]</div></pre></td></tr></table></figure>
+<ul>
+<li>quicksort_classify</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">multi quicksort(  []  ) &#123;    &#125;;</div><div class="line">multi quicksort(  Mu  ) &#123;    &#125;;</div><div class="line"></div><div class="line">multi quicksort( [$x] ) &#123; $x &#125;;</div><div class="line"></div><div class="line">multi quicksort( [$pivot, *@xs] ) &#123;</div><div class="line">    <span class="keyword">given</span> @xs.classify:&#123; $^elem before $pivot ?? <span class="string">'pre'</span> !! <span class="string">'post'</span>&#125; &#123;</div><div class="line">        quicksort( .&lt;pre&gt;  ),</div><div class="line">        $pivot,</div><div class="line">        quicksort( .&lt;post&gt; );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">#my @data = 6, 7, 2, 1, 8, 9, 5, 3, 4;</span></div><div class="line"><span class="keyword">my</span> @data = &lt; p e r l <span class="keyword">s</span> i <span class="keyword">x</span> &gt;;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">"input  = &#123;           @data  &#125;"</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">"output = &#123; quicksort(@data) &#125;"</span>;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">input  = p e r l s i x</div><div class="line">output =  e i  l p  r  s x</div><div class="line">[Finished in 0.303s]</div></pre></td></tr></table></figure>
+<ul>
+<li>quicksort_functional</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">multi quicksort(  []  ) &#123;    &#125;;</div><div class="line"></div><div class="line">multi quicksort( [$x] ) &#123; $x &#125;;</div><div class="line"></div><div class="line">multi quicksort( [$pivot, *@xs] ) &#123;</div><div class="line">    quicksort(@xs.<span class="keyword">grep</span>: * before $pivot),</div><div class="line">    $pivot,</div><div class="line">    quicksort(@xs.<span class="keyword">grep</span>: * !before $pivot);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">#my @data = 6, 7, 2, 1, 8, 9, 5, 3, 4;</span></div><div class="line"><span class="keyword">my</span> @data = &lt; p e r l <span class="keyword">s</span> i <span class="keyword">x</span> &gt;;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">"input  = &#123;           @data  &#125;"</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">"output = &#123; quicksort(@data) &#125;"</span>;</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">input  = p e r l s i x</div><div class="line">output =  e i l  p  r  s x</div><div class="line">[Finished in 0.27s]</div></pre></td></tr></table></figure>
+<h2 id="pm-模块"><a href="#pm-模块" class="headerlink" title="pm 模块"></a>pm 模块</h2><hr>
+<p>首先把自定义的 Bank.pm 模块复制到 Perl 6 的 lib 目录下：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp Bank.pm /Users/chenyf/.rakudobrew/moar-nom/install/share/perl6/site/lib</div></pre></td></tr></table></figure>
+<p>Bank.pm</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">class Ident &#123;</div><div class="line">    subset Pattern of Str where / \d**<span class="number">3</span> <span class="string">'-'</span> \d**<span class="number">3</span> <span class="string">'-'</span> \d**<span class="number">3</span> /;</div><div class="line"></div><div class="line">    has Str $.name              = <span class="string">'????'</span>;</div><div class="line">    has Str $.ID  where Pattern = <span class="string">'000-000-000'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">role Taxable [:$THRESHOLD = <span class="number">100_000</span>] &#123;</div><div class="line">    constant GENERAL_TAX_RATE = <span class="number">0</span>.<span class="number">01</span>;</div><div class="line"></div><div class="line">    has %.tax_record;</div><div class="line"></div><div class="line">    method tax_credits &#123;...&#125;</div><div class="line"></div><div class="line">    method calculate_tax () &#123;</div><div class="line">        <span class="keyword">my</span> $tax_payable = ($.balance min $THRESHOLD) * GENERAL_TAX_RATE</div><div class="line">                          - $.tax_credits;</div><div class="line"></div><div class="line">        %!tax_record<span class="string">&#123;now&#125;</span> = $tax_payable;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $tax_payable;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Account</div><div class="line">    does Taxable</div><div class="line">&#123;</div><div class="line">    subset ID of Str where / &lt;alpha&gt;**<span class="number">4</span> &lt;digit&gt;**<span class="number">5</span> /;</div><div class="line"></div><div class="line">    <span class="keyword">state</span> ID $next_account_ID = <span class="string">'AAAA00001'</span>;</div><div class="line"></div><div class="line">    has Str     $.name        = <span class="keyword">die</span> <span class="string">'Must provide account name'</span>;</div><div class="line">    has Numeric $.balance     = <span class="number">0</span>;</div><div class="line">    has ID      $.ID          = $next_account_ID++;</div><div class="line"></div><div class="line">    method deposit(Numeric $amount where *&gt;<span class="number">0</span>) &#123;</div><div class="line">        $!balance += $amount;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method withdraw(Numeric $amount where *&gt;<span class="number">0</span>) &#123;</div><div class="line">        fail <span class="string">"Insufficient funds to withdraw $amount"</span></div><div class="line">            <span class="keyword">if</span> $.balance &lt; $amount;</div><div class="line">        $!balance -= $amount;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method description () &#123;</div><div class="line">        <span class="string">"$.ID ($.name): balance=$.balance"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method tax_credits &#123; <span class="number">0</span> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Bank &#123;</div><div class="line">    has Ident   $!ident     handles&lt; name ID &gt;;</div><div class="line">    has Account %!accounts;</div><div class="line"></div><div class="line">    submethod BUILD (|args) &#123;</div><div class="line">        $!ident .= new(|args);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method add_account(Account $account) &#123;</div><div class="line">        %!accounts&#123;$account.ID&#125; = $account;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method close_account(Str $ID) &#123;</div><div class="line">        <span class="keyword">return</span> %!accounts&#123;$ID&#125; :<span class="keyword">delete</span></div><div class="line">            // fail <span class="string">"No such account"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    multi method get_account(Account::ID $ID) &#123;</div><div class="line">        <span class="keyword">return</span> %!accounts&#123;$ID&#125; // fail <span class="string">"No such account"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    multi method get_account(Any $name) &#123;</div><div class="line"><span class="comment">#        return %!accounts.values.grep(&#123;.name ~~ $name&#125;);</span></div><div class="line">        self.for_each_account(&#123;.take <span class="keyword">if</span> .name ~~ $name&#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method for_each_account (&amp;action_on) &#123;</div><div class="line">        gather <span class="keyword">for</span> %!accounts.values -&gt; $account is rw &#123;</div><div class="line">            action_on($account);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method collect_taxes () &#123;</div><div class="line">        self.for_each_account: &#123;</div><div class="line">            <span class="keyword">my</span> $tax = .calculate_tax();</div><div class="line">            .withdraw($tax);</div><div class="line">            take .<span class="string">ID =&gt;</span> $tax;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method report () &#123;</div><div class="line">        <span class="keyword">say</span> <span class="string">"[ &#123;self.ID&#125; [&#123;self.name&#125;] ]"</span>;         <span class="comment"># Or: say "[ $.ID [$.name] ]";</span></div><div class="line">        self.for_each_account(*.description.say);</div><div class="line">        <span class="keyword">say</span> <span class="string">''</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">class Account::Corporate</div><div class="line">    is Account</div><div class="line">    does Taxable[<span class="string">THRESHOLD =&gt;</span> <span class="number">1_000_000</span>]</div><div class="line">&#123;</div><div class="line">    has Str $.company_ID;</div><div class="line"></div><div class="line">    method tax_credits &#123; <span class="number">5_000</span> &#125;</div><div class="line"></div><div class="line">    method description () &#123;</div><div class="line">        callsame() ~ <span class="string">"  [$.company_ID]"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该模块的功能是计算银行存款汇率等。下面使用这个模块：</p>
+<ul>
+<li>demo</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">use</span> Bank;</div><div class="line"></div><div class="line"><span class="keyword">my</span> Bank $bank .= new(:ID(<span class="string">'123-456-789'</span>));</div><div class="line"></div><div class="line">$bank.add_account: Account.new(:name(<span class="string">'Leslie Grace'</span>)                  );</div><div class="line">$bank.add_account: Account.new(:name(<span class="string">'Dana McKenna'</span>), :balance(<span class="number">10_000</span>));</div><div class="line">$bank.add_account: Account.new(:name(<span class="string">'AstroDynamic'</span>), :balance(   <span class="number">2</span>e7));</div><div class="line">$bank.add_account: Account.new(:name(<span class="string">'Jan van Quod'</span>), :balance( <span class="number">9_999</span>));</div><div class="line">$bank.add_account: Account.new(:name(<span class="string">'OmniCorp LLC'</span>), :balance(   <span class="number">1</span>e6));</div><div class="line">$bank.report;</div><div class="line"></div><div class="line">$bank.get_account(<span class="string">'AAAA00003'</span>).deposit(<span class="number">100</span>);</div><div class="line">$bank.get_account(<span class="string">'Jan van Quod'</span>)».deposit(<span class="number">2</span>);</div><div class="line">$bank.get_account(<span class="regexp">/D.na/</span>)».deposit(<span class="number">2</span>);</div><div class="line"><span class="comment">#$bank.get_account(*)».deposit(99);</span></div><div class="line">$bank.report;</div><div class="line"></div><div class="line"><span class="keyword">given</span> $bank.close_account(<span class="string">'AAAA00005'</span>) &#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"Closed $^account.perl()\n"</span>;</div><div class="line">    $bank.report;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$bank.close_account(<span class="string">'ZZZZ99999'</span>);</div><div class="line"></div><div class="line">$bank.get_account(<span class="string">'AAAA00001'</span>).withdraw(<span class="number">1001</span>);</div><div class="line">$bank.report;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">[ <span class="number">123</span>-<span class="number">456</span>-<span class="number">789</span> [????] ]</div><div class="line">AAAA00004 (Jan van Quod): balance=<span class="number">9999</span></div><div class="line">AAAA00001 (Leslie Grace): balance=<span class="number">0</span></div><div class="line">AAAA00005 (OmniCorp LLC): balance=<span class="number">1000000</span></div><div class="line">AAAA00002 (Dana McKenna): balance=<span class="number">10000</span></div><div class="line">AAAA00003 (AstroDynamic): balance=<span class="number">20000000</span></div><div class="line"></div><div class="line">[ <span class="number">123</span>-<span class="number">456</span>-<span class="number">789</span> [????] ]</div><div class="line">AAAA00004 (Jan van Quod): balance=<span class="number">10001</span></div><div class="line">AAAA00001 (Leslie Grace): balance=<span class="number">0</span></div><div class="line">AAAA00005 (OmniCorp LLC): balance=<span class="number">1000000</span></div><div class="line">AAAA00002 (Dana McKenna): balance=<span class="number">10002</span></div><div class="line">AAAA00003 (AstroDynamic): balance=<span class="number">20000102</span></div><div class="line"></div><div class="line">Closed Account.new(<span class="string">name =&gt;</span> <span class="string">"OmniCorp LLC"</span>, <span class="string">balance =&gt;</span> <span class="number">1000000</span>e<span class="number">0</span>, <span class="string">ID =&gt;</span> <span class="string">"AAAA00005"</span>, <span class="string">tax_record =&gt;</span> &#123;&#125;&lt;&gt;)</div><div class="line"></div><div class="line">[ <span class="number">123</span>-<span class="number">456</span>-<span class="number">789</span> [????] ]</div><div class="line">AAAA00004 (Jan van Quod): balance=<span class="number">10001</span></div><div class="line">AAAA00001 (Leslie Grace): balance=<span class="number">0</span></div><div class="line">AAAA00002 (Dana McKenna): balance=<span class="number">10002</span></div><div class="line">AAAA00003 (AstroDynamic): balance=<span class="number">20000102</span></div><div class="line"></div><div class="line">No such account</div><div class="line">  in method close_account at /Users/chenyf/.rakudobrew/moar-nom/install/share/perl6/site/lib/Bank.pm:<span class="number">67</span></div><div class="line">  in block &lt;unit&gt; at /Users/chenyf/Downloads/Perl6_Transparadigm_examples/<span class="number">04</span>.bank_demo.pl:<span class="number">26</span></div><div class="line"></div><div class="line">Actually thrown at:</div><div class="line">  in block &lt;unit&gt; at /Users/chenyf/Downloads/Perl6_Transparadigm_examples/<span class="number">04</span>.bank_demo.pl:<span class="number">26</span></div><div class="line"></div><div class="line">[Finished in <span class="number">0</span>.<span class="number">768</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>demo_inheritance</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">show</span> ($<span class="title">text</span>) </span>&#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">''</span>;</div><div class="line">    <span class="keyword">say</span> (<span class="string">'____/ '</span> ~ $text ~ <span class="string">' \_________________________________________________'</span>).substr(<span class="number">0</span>,<span class="number">50</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">use</span> Bank;</div><div class="line"></div><div class="line"><span class="keyword">my</span> Bank $bank .= new(:ID(<span class="string">'123-456-789'</span>), :name(<span class="string">'Bank of Evil'</span>));</div><div class="line"></div><div class="line">$bank.add_account: Account.new(:name(<span class="string">'Leslie Grace'</span>), :balance( <span class="number">1_000</span>));</div><div class="line">$bank.add_account: Account.new(:name(<span class="string">'Dana McKenna'</span>), :balance(<span class="number">10_000</span>));</div><div class="line">$bank.add_account: Account.new(:name(<span class="string">'Jan van Quod'</span>), :balance( <span class="number">9_999</span>));</div><div class="line"></div><div class="line">$bank.add_account: Account::Corporate.new(:name(<span class="string">'AstroDynamic'</span>), :balance(<span class="number">2</span>e7) :company_ID(<span class="string">'ASDY'</span>));</div><div class="line">$bank.add_account: Account::Corporate.new(:name(<span class="string">'OmniCorp LLC'</span>), :balance(<span class="number">1</span>e6) :company_ID(<span class="string">'OMNI'</span>));</div><div class="line"></div><div class="line">show <span class="string">'Status'</span>;</div><div class="line">$bank.report;</div><div class="line"></div><div class="line">show <span class="string">'Taxes collected'</span>;</div><div class="line">.say <span class="keyword">for</span> $bank.collect_taxes();</div><div class="line"></div><div class="line">show <span class="string">'Status'</span>;</div><div class="line">$bank.report;</div><div class="line"></div><div class="line">$bank.collect_taxes();</div><div class="line"></div><div class="line">show <span class="string">'Tax records'</span>;</div><div class="line">$bank.for_each_account(&#123; <span class="keyword">say</span> .name, <span class="string">': '</span>, .tax_record &#125;);</div><div class="line"></div><div class="line">show <span class="string">'Culling acounts'</span>;</div><div class="line"><span class="keyword">given</span> $bank &#123;</div><div class="line">    .for_each_account: &#123;</div><div class="line">        .close_account($^account.ID).say</div><div class="line">            <span class="keyword">if</span> $^account.balance &lt; <span class="number">10_000</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">show <span class="string">'Status'</span>;</div><div class="line">$bank.report;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">___<span class="number">_</span>/ Status \___________________________________<span class="number">_</span></div><div class="line">[ <span class="number">123</span>-<span class="number">456</span>-<span class="number">789</span> [Bank of Evil] ]</div><div class="line">AAAA00004 (AstroDynamic): balance=<span class="number">20000000</span>  [ASDY]</div><div class="line">AAAA00001 (Leslie Grace): balance=<span class="number">1000</span></div><div class="line">AAAA00005 (OmniCorp LLC): balance=<span class="number">1000000</span>  [OMNI]</div><div class="line">AAAA00002 (Dana McKenna): balance=<span class="number">10000</span></div><div class="line">AAAA00003 (Jan van Quod): balance=<span class="number">9999</span></div><div class="line"></div><div class="line"></div><div class="line">___<span class="number">_</span>/ Taxes collected \__________________________<span class="number">_</span></div><div class="line"><span class="string">AAAA00004 =&gt;</span> <span class="number">5000</span></div><div class="line"><span class="string">AAAA00001 =&gt;</span> <span class="number">10</span></div><div class="line"><span class="string">AAAA00005 =&gt;</span> <span class="number">5000</span></div><div class="line"><span class="string">AAAA00002 =&gt;</span> <span class="number">100</span></div><div class="line"><span class="string">AAAA00003 =&gt;</span> <span class="number">99.99</span></div><div class="line"></div><div class="line">___<span class="number">_</span>/ Status \___________________________________<span class="number">_</span></div><div class="line">[ <span class="number">123</span>-<span class="number">456</span>-<span class="number">789</span> [Bank of Evil] ]</div><div class="line">AAAA00004 (AstroDynamic): balance=<span class="number">19995000</span>  [ASDY]</div><div class="line">AAAA00001 (Leslie Grace): balance=<span class="number">990</span></div><div class="line">AAAA00005 (OmniCorp LLC): balance=<span class="number">995000</span>  [OMNI]</div><div class="line">AAAA00002 (Dana McKenna): balance=<span class="number">9900</span></div><div class="line">AAAA00003 (Jan van Quod): balance=<span class="number">9899.01</span></div><div class="line"></div><div class="line">___<span class="number">_</span>/ Tax records \______________________________<span class="number">_</span></div><div class="line">AstroDynamic: Instant:<span class="number">1440413601.447466</span> =&gt; <span class="number">5000</span>, Instant:<span class="number">1440413601.463112</span> =&gt; <span class="number">5000</span></div><div class="line">Leslie Grace: Instant:<span class="number">1440413601.450753</span> =&gt; <span class="number">10</span>, Instant:<span class="number">1440413601.465823</span> =&gt; <span class="number">9.9</span></div><div class="line">OmniCorp LLC: Instant:<span class="number">1440413601.452933</span> =&gt; <span class="number">5000</span>, Instant:<span class="number">1440413601.468346</span> =&gt; <span class="number">4950</span></div><div class="line">Dana McKenna: Instant:<span class="number">1440413601.454860</span> =&gt; <span class="number">100</span>, Instant:<span class="number">1440413601.470238</span> =&gt; <span class="number">99</span></div><div class="line">Jan van Quod: Instant:<span class="number">1440413601.457399</span> =&gt; <span class="number">99.99</span>, Instant:<span class="number">1440413601.471551</span> =&gt; <span class="number">98.9901</span></div><div class="line">___<span class="number">_</span>/ Culling acounts \__________________________<span class="number">_</span></div><div class="line">Account.new(<span class="string">name =&gt;</span> <span class="string">"Leslie Grace"</span>, <span class="string">balance =&gt;</span> <span class="number">980.1</span>, <span class="string">ID =&gt;</span> <span class="string">"AAAA00001"</span>, <span class="string">tax_record =&gt;</span> &#123;<span class="string">"Instant:1440413601.450753"</span> =&gt; <span class="number">10.0</span>, <span class="string">"Instant:1440413601.465823"</span> =&gt; <span class="number">9.9</span>&#125;&lt;&gt;)</div><div class="line">Account.new(<span class="string">name =&gt;</span> <span class="string">"Dana McKenna"</span>, <span class="string">balance =&gt;</span> <span class="number">9801.0</span>, <span class="string">ID =&gt;</span> <span class="string">"AAAA00002"</span>, <span class="string">tax_record =&gt;</span> &#123;<span class="string">"Instant:1440413601.454860"</span> =&gt; <span class="number">100.0</span>, <span class="string">"Instant:1440413601.470238"</span> =&gt; <span class="number">99.0</span>&#125;&lt;&gt;)</div><div class="line">Account.new(<span class="string">name =&gt;</span> <span class="string">"Jan van Quod"</span>, <span class="string">balance =&gt;</span> <span class="number">9800.0199</span>, <span class="string">ID =&gt;</span> <span class="string">"AAAA00003"</span>, <span class="string">tax_record =&gt;</span> &#123;<span class="string">"Instant:1440413601.457399"</span> =&gt; <span class="number">99.99</span>, <span class="string">"Instant:1440413601.471551"</span> =&gt; <span class="number">98.9901</span>&#125;&lt;&gt;)</div><div class="line"></div><div class="line">___<span class="number">_</span>/ Status \___________________________________<span class="number">_</span></div><div class="line">[ <span class="number">123</span>-<span class="number">456</span>-<span class="number">789</span> [Bank of Evil] ]</div><div class="line">AAAA00004 (AstroDynamic): balance=<span class="number">19990000</span>  [ASDY]</div><div class="line">AAAA00005 (OmniCorp LLC): balance=<span class="number">990050</span>  [OMNI]</div><div class="line"></div><div class="line">[Finished in <span class="number">0</span>.<span class="number">817</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>demo_unary_dot</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">use</span> Bank;</div><div class="line"></div><div class="line"><span class="keyword">my</span> Bank $bank .= new(:ID(<span class="string">'123-456-789'</span>));</div><div class="line"></div><div class="line"><span class="keyword">given</span> $bank &#123;</div><div class="line">    .add_account: Account.new(:name(<span class="string">'Leslie Grace'</span>), :balance( <span class="number">1_000</span>));</div><div class="line">    .add_account: Account.new(:name(<span class="string">'Dana McKenna'</span>), :balance(<span class="number">10_000</span>));</div><div class="line">    .add_account: Account.new(:name(<span class="string">'AstroDynamic'</span>), :balance(   <span class="number">2</span>e7));</div><div class="line">    .add_account: Account.new(:name(<span class="string">'Jan van Quod'</span>), :balance( <span class="number">9_999</span>));</div><div class="line">    .add_account: Account.new(:name(<span class="string">'OmniCorp LLC'</span>), :balance(   <span class="number">1</span>e6));</div><div class="line">    .report;</div><div class="line"></div><div class="line">    .get_account(<span class="string">'AAAA00003'</span>).deposit(<span class="number">100</span>);</div><div class="line">    .report;</div><div class="line"></div><div class="line">    <span class="keyword">say</span> .close_account(<span class="string">'AAAA00005'</span>);</div><div class="line">    .report;</div><div class="line"></div><div class="line">    .get_account(<span class="string">'AAAA00001'</span>).withdraw(<span class="number">1001</span>);</div><div class="line">    .report;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">[ <span class="number">123</span>-<span class="number">456</span>-<span class="number">789</span> [????] ]</div><div class="line">AAAA00004 (Jan van Quod): balance=<span class="number">9999</span></div><div class="line">AAAA00001 (Leslie Grace): balance=<span class="number">1000</span></div><div class="line">AAAA00005 (OmniCorp LLC): balance=<span class="number">1000000</span></div><div class="line">AAAA00002 (Dana McKenna): balance=<span class="number">10000</span></div><div class="line">AAAA00003 (AstroDynamic): balance=<span class="number">20000000</span></div><div class="line"></div><div class="line">[ <span class="number">123</span>-<span class="number">456</span>-<span class="number">789</span> [????] ]</div><div class="line">AAAA00004 (Jan van Quod): balance=<span class="number">9999</span></div><div class="line">AAAA00001 (Leslie Grace): balance=<span class="number">1000</span></div><div class="line">AAAA00005 (OmniCorp LLC): balance=<span class="number">1000000</span></div><div class="line">AAAA00002 (Dana McKenna): balance=<span class="number">10000</span></div><div class="line">AAAA00003 (AstroDynamic): balance=<span class="number">20000100</span></div><div class="line"></div><div class="line">Account.new(<span class="string">name =&gt;</span> <span class="string">"OmniCorp LLC"</span>, <span class="string">balance =&gt;</span> <span class="number">1000000</span>e<span class="number">0</span>, <span class="string">ID =&gt;</span> <span class="string">"AAAA00005"</span>, <span class="string">tax_record =&gt;</span> &#123;&#125;&lt;&gt;)</div><div class="line">[ <span class="number">123</span>-<span class="number">456</span>-<span class="number">789</span> [????] ]</div><div class="line">AAAA00004 (Jan van Quod): balance=<span class="number">9999</span></div><div class="line">AAAA00001 (Leslie Grace): balance=<span class="number">1000</span></div><div class="line">AAAA00002 (Dana McKenna): balance=<span class="number">10000</span></div><div class="line">AAAA00003 (AstroDynamic): balance=<span class="number">20000100</span></div><div class="line"></div><div class="line">Insufficient funds to withdraw <span class="number">1001</span></div><div class="line">  in method withdraw at /Users/chenyf/.rakudobrew/moar-nom/install/share/perl6/site/lib/Bank.pm:<span class="number">43</span></div><div class="line">  in block &lt;unit&gt; at /Users/chenyf/Downloads/Perl6_Transparadigm_examples/<span class="number">04</span>.bank_demo_unary_dot.pl:<span class="number">22</span></div><div class="line"></div><div class="line">Actually thrown at:</div><div class="line">  in block &lt;unit&gt; at /Users/chenyf/Downloads/Perl6_Transparadigm_examples/<span class="number">04</span>.bank_demo_unary_dot.pl:<span class="number">22</span></div><div class="line"></div><div class="line">[Finished in <span class="number">0</span>.<span class="number">738</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<h2 id="LZW"><a href="#LZW" class="headerlink" title="LZW"></a>LZW</h2><hr>
+<p><a href="http://baike.baidu.com/view/401141.htm" target="_blank" rel="external">LZW算法</a></p>
+<ul>
+<li>demo</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">compress</span>(<span class="title">Str</span> $<span class="title">uncompressed</span> --&gt; <span class="title">List</span>)  </span>&#123;</div><div class="line">    <span class="comment"># Build a look-up table of encoded representations</span></div><div class="line">    <span class="comment"># (each ASCII char represented by its equivalent codepoint)</span></div><div class="line">    <span class="keyword">my</span> %code_for = <span class="keyword">map</span> &#123; $^ASCII.<span class="string">chr =&gt;</span> $^ASCII &#125;, ^<span class="number">256</span>;</div><div class="line"></div><div class="line">    <span class="comment"># Loop and collect each encoding...</span></div><div class="line">    gather &#123;</div><div class="line">        <span class="comment"># Track which characters we've seen but not yet encoded</span></div><div class="line">        <span class="keyword">my</span> $already_seen = <span class="string">""</span>;</div><div class="line"></div><div class="line">        <span class="comment"># Walk through each single character...</span></div><div class="line">        <span class="keyword">for</span> $uncompressed.comb -&gt; $next_char &#123;</div><div class="line">            <span class="comment"># Now we've seen that next character as well</span></div><div class="line">            <span class="keyword">my</span> $now_seen = $already_seen ~ $next_char;</div><div class="line"></div><div class="line">            <span class="comment"># If new char sequence is known, keep looking</span></div><div class="line">            <span class="keyword">if</span> %code_for&#123;$now_seen&#125;:<span class="keyword">exists</span> &#123;</div><div class="line">                $already_seen = $now_seen;</div><div class="line">            &#125;</div><div class="line">            <span class="comment"># Otherwise, we have an unknown sequence of chars</span></div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                <span class="comment"># Emit encoding for what we've previously seen</span></div><div class="line">                take %code_for&#123;$already_seen&#125;;</div><div class="line">                <span class="comment"># Add encoding for new unknown sequence to table</span></div><div class="line">                %code_for&#123;$now_seen&#125; = %code_for.elems;</div><div class="line">                <span class="comment"># Restart the current sequence from this char</span></div><div class="line">                $already_seen = $next_char;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment"># Emit the encoding for the final sequence (if any)</span></div><div class="line">        take %code_for&#123;$already_seen&#125; <span class="keyword">if</span> $already_seen <span class="keyword">ne</span> <span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># Convert to codepoints...</span></div><div class="line"><span class="keyword">my</span> @codes = compress(<span class="string">'To be or not to be. That be the question, matey!'</span>);</div><div class="line"><span class="keyword">say</span> @codes;</div><div class="line">separator;</div><div class="line"></div><div class="line"><span class="comment"># Emit as characters...</span></div><div class="line"><span class="keyword">say</span> @codes&gt;&gt;.chr;</div><div class="line">separator;</div><div class="line"></div><div class="line"><span class="comment"># Convert to a binary sequence...</span></div><div class="line"><span class="keyword">my</span> $bits_per_code = @codes.max.log(<span class="number">2</span>).ceiling();</div><div class="line"><span class="keyword">my</span> $format = <span class="string">'%0'</span> ~ $bits_per_code ~ <span class="string">'b'</span>;</div><div class="line"><span class="keyword">my</span> $bits = @codes&gt;&gt;.fmt($format).join;</div><div class="line"><span class="keyword">say</span> $bits;</div><div class="line">separator;</div><div class="line"></div><div class="line"><span class="keyword">say</span> $bits.comb(<span class="regexp">/.**1..7/</span>).map(&#123;:<span class="number">2</span>($^bitpattern).chr&#125;).join;</div><div class="line">separator;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">separator</span> </span>&#123; <span class="keyword">say</span> <span class="string">'_'</span> <span class="keyword">x</span> <span class="number">50</span> &#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="number">84</span> <span class="number">111</span> <span class="number">32</span> <span class="number">98</span> <span class="number">101</span> <span class="number">32</span> <span class="number">111</span> <span class="number">114</span> <span class="number">32</span> <span class="number">110</span> <span class="number">111</span> <span class="number">116</span> <span class="number">32</span> <span class="number">116</span> <span class="number">257</span> <span class="number">259</span> <span class="number">46</span> <span class="number">32</span> <span class="number">84</span> <span class="number">104</span> <span class="number">97</span> <span class="number">267</span> <span class="number">259</span> <span class="number">268</span> <span class="number">104</span> <span class="number">260</span> <span class="number">113</span> <span class="number">117</span> <span class="number">101</span> <span class="number">115</span> <span class="number">116</span> <span class="number">105</span> <span class="number">111</span> <span class="number">110</span> <span class="number">44</span> <span class="number">32</span> <span class="number">109</span> <span class="number">276</span> <span class="number">101</span> <span class="number">121</span> <span class="number">33</span></div><div class="line">_________________________________________________<span class="number">_</span></div><div class="line">T o   b e   o r   n o t   t ā ă .   T h a ċ ă Č h Ą <span class="keyword">q</span> u e <span class="keyword">s</span> t i o n ,   <span class="keyword">m</span> Ĕ e <span class="keyword">y</span> !</div><div class="line">_________________________________________________<span class="number">_</span></div><div class="line"><span class="number">001010100001101111000100000001100010001100101000100000001101111001110010000100000001101110001101111001110100000100000001110100100000001100000011000101110000100000001010100001101000001100001100001011100000011100001100001101000100000100001110001001110101001100101001110011001110100001101001001101111001101110000101100000100000001101101100010100001100101001111001000100001</span></div><div class="line">_________________________________________________<span class="number">_</span></div><div class="line"><span class="keyword">x</span>@1QoB\<span class="number">7</span>NAt@0\</div><div class="line">C aBp<span class="number">4</span> CDu<span class="string">'h4Ms8,l(2O</span></div><div class="line">__________________________________________________</div><div class="line">[Finished in 0.429s]</div></pre></td></tr></table></figure>
+<ul>
+<li>LZW_functional</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="comment"># To compress a string...</span></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">compress</span>(<span class="title">Str</span> $<span class="title">uncompressed</span>) </span>&#123;</div><div class="line">    <span class="comment"># Encode the character list via a dictionary, from the start</span></div><div class="line">    encode( $uncompressed.comb, <span class="string">code =&gt;</span> hash(<span class="keyword">map</span> &#123;$^ASCII.<span class="string">chr =&gt;</span> $^ASCII&#125;, ^<span class="number">256</span>), <span class="string">seen =&gt;</span> <span class="string">""</span> )</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># Encode an empty list where nothing already seen as nothing</span></div><div class="line">multi encode([], :%code, :$seen where <span class="string">""</span>) &#123;&#125;</div><div class="line"></div><div class="line"><span class="comment"># Encode an empty list where something already seen by look-up</span></div><div class="line">multi encode([], :%code, :$seen)          &#123; %code&#123;$seen&#125; &#125;</div><div class="line"></div><div class="line"><span class="comment"># Encode an list of one or more uncompressed characters...</span></div><div class="line">multi encode([$next, *@uncompressed], :%code, :$seen)  &#123;</div><div class="line">    <span class="comment"># If [already-seen plus next char] is a known sequence...</span></div><div class="line">    %code&#123; $seen~$next &#125;:<span class="keyword">exists</span></div><div class="line">         <span class="comment"># Then encode all of that together</span></div><div class="line">        ?? encode(@uncompressed, :%code, <span class="string">seen =&gt;</span> $seen~$next)</div><div class="line"></div><div class="line">         <span class="comment"># Else emit encoding for the already-seen sequence</span></div><div class="line">        !! ( %code&#123;$seen&#125;,</div><div class="line">             <span class="comment"># Plus the encoding for the rest of the string...</span></div><div class="line">             encode( @uncompressed,</div><div class="line">                     <span class="comment"># Add encoding for new sequence to table</span></div><div class="line">                     <span class="string">code =&gt;</span> %( %code, $seen~$next =&gt; %code.elems ),</div><div class="line">                     <span class="comment"># Continue encoding from next character</span></div><div class="line">                     <span class="string">seen =&gt;</span> $next</div><div class="line">             )</div><div class="line">           )</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># Convert to codepoints...</span></div><div class="line"><span class="keyword">my</span> @codes = compress(<span class="string">'To be or not to be. That be the question, matey!'</span>);</div><div class="line"><span class="keyword">say</span> @codes;</div><div class="line">separator;</div><div class="line"></div><div class="line"><span class="comment"># Emit as characters...</span></div><div class="line"><span class="keyword">say</span> @codes&gt;&gt;.chr;</div><div class="line">separator;</div><div class="line"></div><div class="line"><span class="comment"># Convert to a binary sequence...</span></div><div class="line"><span class="keyword">my</span> $bits_per_code = @codes.max.log(<span class="number">2</span>).ceiling();</div><div class="line"><span class="keyword">my</span> $format = <span class="string">'%0'</span> ~ $bits_per_code ~ <span class="string">'b'</span>;</div><div class="line"><span class="keyword">my</span> $bits = @codes&gt;&gt;.fmt($format).join;</div><div class="line"><span class="keyword">say</span> $bits;</div><div class="line">separator;</div><div class="line"></div><div class="line"><span class="keyword">say</span> $bits.comb(<span class="regexp">/.**1..7/</span>).map(&#123;:<span class="number">2</span>($^bitpattern).chr&#125;).join;</div><div class="line">separator;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">separator</span> </span>&#123; <span class="keyword">say</span> <span class="string">'_'</span> <span class="keyword">x</span> <span class="number">50</span> &#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="number">84</span> <span class="number">111</span> <span class="number">32</span> <span class="number">98</span> <span class="number">101</span> <span class="number">32</span> <span class="number">111</span> <span class="number">114</span> <span class="number">32</span> <span class="number">110</span> <span class="number">111</span> <span class="number">116</span> <span class="number">32</span> <span class="number">116</span> <span class="number">257</span> <span class="number">259</span> <span class="number">46</span> <span class="number">32</span> <span class="number">84</span> <span class="number">104</span> <span class="number">97</span> <span class="number">267</span> <span class="number">259</span> <span class="number">268</span> <span class="number">104</span> <span class="number">260</span> <span class="number">113</span> <span class="number">117</span> <span class="number">101</span> <span class="number">115</span> <span class="number">116</span> <span class="number">105</span> <span class="number">111</span> <span class="number">110</span> <span class="number">44</span> <span class="number">32</span> <span class="number">109</span> <span class="number">276</span> <span class="number">101</span> <span class="number">121</span> <span class="number">33</span></div><div class="line">_________________________________________________<span class="number">_</span></div><div class="line">T o   b e   o r   n o t   t ā ă .   T h a ċ ă Č h Ą <span class="keyword">q</span> u e <span class="keyword">s</span> t i o n ,   <span class="keyword">m</span> Ĕ e <span class="keyword">y</span> !</div><div class="line">_________________________________________________<span class="number">_</span></div><div class="line"><span class="number">001010100001101111000100000001100010001100101000100000001101111001110010000100000001101110001101111001110100000100000001110100100000001100000011000101110000100000001010100001101000001100001100001011100000011100001100001101000100000100001110001001110101001100101001110011001110100001101001001101111001101110000101100000100000001101101100010100001100101001111001000100001</span></div><div class="line">_________________________________________________<span class="number">_</span></div><div class="line"><span class="keyword">x</span>@1QoB\<span class="number">7</span>NAt@0\</div><div class="line">C aBp<span class="number">4</span> CDu<span class="string">'h4Ms8,l(2O</span></div><div class="line">__________________________________________________</div><div class="line">[Finished in 0.658s]</div></pre></td></tr></table></figure>
+<ul>
+<li>validation_concurrent</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">my</span> @records = (</div><div class="line">    &#123; :Name&lt;Damian Conway&gt;, :Age(<span class="number">42</span>), :ID(<span class="string">'00012345'</span>)  &#125;,</div><div class="line">    &#123; :Name&lt;Leslie Duvall&gt;, :Age(<span class="number">29</span>), :ID(<span class="string">'668'</span>)       &#125;,</div><div class="line">    &#123; :Name&lt;Sam Georgious&gt;, :Age(-<span class="number">2</span>), :ID(<span class="string">'00000007'</span>)  &#125;,</div><div class="line">);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">normalize_data</span> (<span class="title">Hash</span> $<span class="title">record</span>) </span>&#123;</div><div class="line">    $record&lt;Name&gt;  .= subst(<span class="regexp">/&lt;lower&gt;/</span>,&#123;$&lt;lower&gt;.uc&#125;, :g);</div><div class="line">    $record&lt;Age&gt; max= <span class="number">18</span>;</div><div class="line">    $record&lt;ID&gt;    .= fmt(<span class="string">'%08d'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">report</span> ($<span class="title">outcome</span>) </span>&#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"\tInvalid record ($outcome)"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">invalid_name</span> ($<span class="title">rec</span>) </span>&#123; <span class="string">"Bad name: $rec"</span> <span class="keyword">if</span> $rec&lt;Name&gt; !~~ <span class="regexp">/\S/</span>;        &#125;</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">invalid_age</span>  ($<span class="title">rec</span>) </span>&#123; <span class="string">"Bad age:  $rec"</span> <span class="keyword">if</span> $rec&lt;Age&gt;  &lt; <span class="number">18</span>;            &#125;</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">invalid_ID</span>   ($<span class="title">rec</span>) </span>&#123; <span class="string">"Bad ID:   $rec"</span> <span class="keyword">if</span> $rec&lt;ID&gt;   !~~ <span class="regexp">/^\d ** 8$/</span>; &#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'Validating...'</span>;</div><div class="line"><span class="keyword">my</span> @invalidations = (</div><div class="line">    @records».&amp;invalid_name,</div><div class="line">    @records».&amp;invalid_age,</div><div class="line">    @records».&amp;invalid_ID,</div><div class="line">);</div><div class="line"></div><div class="line">@invalidations».&amp;report;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'Normalizing...'</span>;</div><div class="line">@records».&amp;normalize_data;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'Revalidating...'</span>;</div><div class="line"></div><div class="line">@invalidations = (</div><div class="line">    @records».&amp;invalid_name,</div><div class="line">    @records».&amp;invalid_age,</div><div class="line">    @records».&amp;invalid_ID,</div><div class="line">);</div><div class="line"></div><div class="line">@invalidations».&amp;report;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Validating...</div><div class="line">postcircumfix:&lt;&#123; &#125;&gt; <span class="keyword">not</span> <span class="keyword">defined</span> <span class="keyword">for</span> type Str</div><div class="line">  in <span class="function"><span class="keyword">sub</span> <span class="title">invalid_name</span> <span class="title">at</span> -<span class="title">e</span>:67</span></div><div class="line">  <span class="title">in</span> <span class="title">block</span> &lt;<span class="title">unit</span>&gt; <span class="title">at</span> -<span class="title">e</span>:73</div><div class="line"></div><div class="line"><span class="title">Actually</span> <span class="title">thrown</span> <span class="title">at</span>:</div><div class="line">  <span class="title">in</span> <span class="title">sub</span> <span class="title">invalid_name</span> <span class="title">at</span> -<span class="title">e</span>:67</div><div class="line">  <span class="title">in</span> <span class="title">block</span> &lt;<span class="title">unit</span>&gt; <span class="title">at</span> -<span class="title">e</span>:73</div><div class="line"></div><div class="line">[<span class="title">Finished</span> <span class="title">in</span> 0.374<span class="title">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>validation_imperative</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">my</span> @records = (</div><div class="line">    &#123; :Name&lt;Damian Conway&gt;, :Age(<span class="number">42</span>), :ID(<span class="string">'00012345'</span>)  &#125;,</div><div class="line">    &#123; :Name&lt;Leslie Duvall&gt;, :Age(<span class="number">29</span>), :ID(<span class="string">'668'</span>)       &#125;,</div><div class="line">    &#123; :Name&lt;Sam Georgious&gt;, :Age(-<span class="number">2</span>), :ID(<span class="string">'00000007'</span>)  &#125;,</div><div class="line">);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">normalize_data</span> (<span class="title">Hash</span> $<span class="title">record</span>) </span>&#123;</div><div class="line">    $record&lt;Name&gt;  .= subst(<span class="regexp">/&lt;lower&gt;/</span>,&#123;$&lt;lower&gt;.uc&#125;, :g);</div><div class="line">    $record&lt;Age&gt; max= <span class="number">18</span>;</div><div class="line">    $record&lt;ID&gt;    .= fmt(<span class="string">'%08d'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">report</span> ($<span class="title">outcome</span>) </span>&#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"\tInvalid record ($outcome)"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">invalid_name</span> ($<span class="title">rec</span>) </span>&#123; <span class="string">"Bad name: $rec"</span> <span class="keyword">if</span> $rec&lt;Name&gt; !~~ <span class="regexp">/\S/</span>;        &#125;</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">invalid_age</span>  ($<span class="title">rec</span>) </span>&#123; <span class="string">"Bad age:  $rec"</span> <span class="keyword">if</span> $rec&lt;Age&gt;  &lt; <span class="number">18</span>;            &#125;</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">invalid_ID</span>   ($<span class="title">rec</span>) </span>&#123; <span class="string">"Bad ID:   $rec"</span> <span class="keyword">if</span> $rec&lt;ID&gt;   !~~ <span class="regexp">/^\d ** 8$/</span>; &#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'Validating...'</span>;</div><div class="line"><span class="keyword">my</span> @invalidations = gather <span class="keyword">for</span> @records -&gt; $record &#123;</div><div class="line">    take invalid_name($record);</div><div class="line">    take invalid_age($record);</div><div class="line">    take invalid_ID($record);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> @invalidations -&gt; $errmsg &#123;</div><div class="line">    report( $errmsg );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'Normalizing...'</span>;</div><div class="line"><span class="keyword">for</span> @records -&gt; $record &#123;</div><div class="line">    normalize_data($record);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'Revalidating...'</span>;</div><div class="line"></div><div class="line">@invalidations = gather <span class="keyword">for</span> @records -&gt; $record &#123;</div><div class="line">    take invalid_name($record);</div><div class="line">    take invalid_age($record);</div><div class="line">    take invalid_ID($record);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> @invalidations -&gt; $errmsg &#123;</div><div class="line">    report( $errmsg );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Validating...</div><div class="line">	Invalid record (Bad ID:   Name	Leslie Duvall Age	<span class="number">29</span> ID	<span class="number">668</span>)</div><div class="line">	Invalid record (Bad age:  Name	Sam Georgious Age	-<span class="number">2</span> ID	<span class="number">00000007</span>)</div><div class="line">Normalizing...</div><div class="line">Revalidating...</div><div class="line">[Finished in <span class="number">0</span>.<span class="number">399</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>validation_junctions</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">my</span> @records = (</div><div class="line">    &#123; :Name&lt;Damian Conway&gt;, :Age(<span class="number">42</span>), :ID(<span class="string">'00012345'</span>)  &#125;,</div><div class="line">    &#123; :Name&lt;Leslie Duvall&gt;, :Age(<span class="number">29</span>), :ID(<span class="string">'668'</span>)       &#125;,</div><div class="line">    &#123; :Name&lt;Sam Georgious&gt;, :Age(-<span class="number">2</span>), :ID(<span class="string">'00000007'</span>)  &#125;,</div><div class="line">);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">normalize_data</span> (<span class="title">Hash</span> $<span class="title">record</span>) </span>&#123;</div><div class="line">    $record&lt;Name&gt;  .= subst(<span class="regexp">/&lt;lower&gt;/</span>,&#123;$&lt;lower&gt;.uc&#125;, :g);</div><div class="line">    $record&lt;Age&gt; max= <span class="number">18</span>;</div><div class="line">    $record&lt;ID&gt;    .= fmt(<span class="string">'%08d'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">report</span> ($<span class="title">outcome</span>) </span>&#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"\tInvalid record ($outcome)"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">invalid_name</span> ($<span class="title">rec</span>) </span>&#123; <span class="string">"Bad name: $rec"</span> <span class="keyword">if</span> $rec&lt;Name&gt; !~~ <span class="regexp">/\S/</span>;        &#125;</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">invalid_age</span>  ($<span class="title">rec</span>) </span>&#123; <span class="string">"Bad age:  $rec"</span> <span class="keyword">if</span> $rec&lt;Age&gt;  &lt; <span class="number">18</span>;            &#125;</div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">invalid_ID</span>   ($<span class="title">rec</span>) </span>&#123; <span class="string">"Bad ID:   $rec"</span> <span class="keyword">if</span> $rec&lt;ID&gt;   !~~ <span class="regexp">/^\d ** 8$/</span>; &#125;</div><div class="line"></div><div class="line"><span class="keyword">my</span> $invalid_record = &amp;invalid_name | &amp;invalid_age | &amp;invalid_ID;</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'Validating...'</span>;</div><div class="line">report( $invalid_record(all @records) );</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'Normalizing...'</span>;</div><div class="line">normalize_data(all @records);</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'Revalidating...'</span>;</div><div class="line">report( $invalid_record(all @records) );</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Validating...</div><div class="line">	Invalid record (Bad ID:   Name	Leslie Duvall Age	<span class="number">29</span> ID	<span class="number">668</span>)</div><div class="line">	Invalid record (Bad age:  Name	Sam Georgious Age	-<span class="number">2</span> ID	<span class="number">00000007</span>)</div><div class="line">Normalizing...</div><div class="line">Revalidating...</div><div class="line">[Finished in <span class="number">0</span>.<span class="number">399</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li><p>prime_demo</p>
+<p>​</p>
+</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">is_prime</span>(<span class="title">Int</span> $<span class="title">n</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> $n % all(<span class="number">2</span>..$n.sqrt+<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">for</span> <span class="number">1</span>..<span class="number">1001</span> -&gt; $n &#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"$n is prime"</span> <span class="keyword">if</span> is_prime($n);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span> is prime</div><div class="line"><span class="number">3</span> is prime</div><div class="line"><span class="number">5</span> is prime</div><div class="line"><span class="number">7</span> is prime</div><div class="line"><span class="number">11</span> is prime</div><div class="line">...</div><div class="line"><span class="number">991</span> is prime</div><div class="line"><span class="number">997</span> is prime</div><div class="line">[Finished in <span class="number">1.478</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>统计</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">my</span> @values = (<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">99</span>);</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'mean (a) = '</span>, mean_a(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'mean (g) = '</span>, mean_g(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'    mode = '</span>,   mode(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'  median = '</span>, median(@values);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mean_a</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    ([+] @list) / @list.elems;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mean_g</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    ([*] @list) ** (<span class="number">1</span>/@list.elems);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mode</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="keyword">given</span> @list.Bag &#123;</div><div class="line">        .pairs.<span class="keyword">grep</span>(&#123;$^elem.value == .values.max&#125;)».key;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">median</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="keyword">given</span> @list.sort &#123;</div><div class="line">        .elems %% <span class="number">2</span></div><div class="line">            ?? mean_a( .[*<span class="regexp">/2-1, */</span><span class="number">2</span>] )</div><div class="line">            !!         .[*<span class="regexp">/2];</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mean (a) = <span class="number">10.444444</span></div><div class="line">mean (g) = <span class="number">4.95872541158849</span></div><div class="line">    mode = <span class="number">7</span> <span class="number">4</span></div><div class="line">  median = <span class="number">5</span></div><div class="line">[Finished in <span class="number">0</span>.<span class="number">319</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>stats_hybird</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">my</span> @values = (<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">99</span>);</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'mean (a) = '</span>, mean_a(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'mean (g) = '</span>, mean_g(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'    mode = '</span>,   mode(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'  median = '</span>, median(@values);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mean_a</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="keyword">my</span> $sum = [+] @list;</div><div class="line">    <span class="keyword">return</span> $sum / @list.elems;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mean_g</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="keyword">my</span> $product = [*] @list;</div><div class="line">    <span class="keyword">return</span> $product ** (<span class="number">1</span>/@list.elems)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mode</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="keyword">my</span> $frequencies = @list.Bag;</div><div class="line">    <span class="keyword">my</span> $list_elems  = $frequencies.pairs;</div><div class="line">    <span class="keyword">my</span> $max_freq    = $frequencies.values.max;</div><div class="line">    <span class="keyword">my</span> @max_vals    = $list_elems.<span class="keyword">grep</span>(&#123;.value == $max_freq&#125;);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> @max_vals».key;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">median</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="keyword">my</span> @sorted = @list.sort;</div><div class="line">    <span class="keyword">return</span> @sorted.elems %% <span class="number">2</span> ?? mean_a(@sorted.[*<span class="regexp">/2, */</span><span class="number">2</span>-<span class="number">1</span>])</div><div class="line">                              !!        @sorted.[*<span class="regexp">/2]</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mean (a) = <span class="number">10.444444</span></div><div class="line">mean (g) = <span class="number">4.95872541158849</span></div><div class="line">    mode = <span class="number">7</span> <span class="number">4</span></div><div class="line">  median = <span class="number">5</span></div><div class="line">[Finished in <span class="number">0</span>.<span class="number">319</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>stats_imperative</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">my</span> @values = (<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">99</span>);</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'mean (a) = '</span>, mean_a(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'mean (g) = '</span>, mean_g(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'    mode = '</span>,   mode(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'  median = '</span>, median(@values);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mean_a</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="keyword">my</span> $sum;</div><div class="line">    <span class="keyword">for</span> @list -&gt; $elem &#123;</div><div class="line">        $sum += $elem;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> $sum / @list.elems;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mean_g</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="keyword">my</span> $product;</div><div class="line">    <span class="keyword">for</span> @list -&gt; $elem &#123;</div><div class="line">        $product *= $elem;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> $product ** (<span class="number">1</span>/@list.elems);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mode</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="keyword">my</span> %counts;</div><div class="line">    %counts&#123;$_&#125;++ <span class="keyword">for</span> @list;</div><div class="line">    <span class="keyword">my</span> $max = %counts.values.max;</div><div class="line">    <span class="keyword">return</span> %counts.<span class="keyword">grep</span>(&#123; .value == $max &#125;)».key;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">median</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    @list.=<span class="keyword">sort</span>();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> @list.elems %% <span class="number">2</span></div><div class="line">            ?? mean_a( @list[*<span class="regexp">/2, */</span><span class="number">2</span>-<span class="number">1</span>] )</div><div class="line">            !!         @list[*<span class="regexp">/2];</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mean (a) = <span class="number">10.444444</span></div><div class="line">mean (g) = <span class="number">4.95872541158849</span></div><div class="line">    mode = <span class="number">4</span> <span class="number">7</span></div><div class="line">  median = <span class="number">5</span></div><div class="line">[Finished in <span class="number">0</span>.<span class="number">316</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>stats_mode_func</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">my</span> @values = (<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">99</span>);</div><div class="line"></div><div class="line"><span class="keyword">say</span> <span class="string">'mean (a) = '</span>, mean_a(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'mean (g) = '</span>, mean_g(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'    mode = '</span>,   mode(@values);</div><div class="line"><span class="keyword">say</span> <span class="string">'  median = '</span>, median(@values);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mean_a</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">sub</span> <span class="title">sum</span> </span>&#123; [+] @list &#125;</div><div class="line">    <span class="keyword">return</span> sum() / @list.elems;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mean_g</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">sub</span> <span class="title">product</span> </span>&#123; [*] @list &#125;</div><div class="line">    <span class="keyword">return</span> product() ** (<span class="number">1</span>/@list.elems)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">mode</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">sub</span> <span class="title">frequencies</span> </span>&#123; @list.Bag                             &#125;</div><div class="line">    <span class="function"><span class="keyword">sub</span> <span class="title">list_elems</span>  </span>&#123; frequencies.pairs                     &#125;</div><div class="line">    <span class="function"><span class="keyword">sub</span> <span class="title">max_freq</span>    </span>&#123; frequencies.values.max                &#125;</div><div class="line">    <span class="function"><span class="keyword">sub</span> <span class="title">max_vals</span>    </span>&#123; list_elems.<span class="keyword">grep</span>: &#123;.value == max_freq&#125; &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> max_vals».keys;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">median</span> (*@<span class="title">list</span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">sub</span> <span class="title">sorted</span> </span>&#123; @list.sort &#125;</div><div class="line">    <span class="keyword">return</span> sorted.elems %% <span class="number">2</span></div><div class="line">                ?? mean_a(sorted.[*<span class="regexp">/2, */</span><span class="number">2</span>-<span class="number">1</span>])</div><div class="line">                !!        sorted.[*<span class="regexp">/2]</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mean (a) = <span class="number">10.444444</span></div><div class="line">mean (g) = <span class="number">4.95872541158849</span></div><div class="line">    mode = <span class="number">7</span> <span class="number">4</span></div><div class="line">  median = <span class="number">5</span></div><div class="line">[Finished in <span class="number">0</span>.<span class="number">357</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li>stats_OO</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env perl6</span></div><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">class StatList is List &#123;</div><div class="line">    method mean_a () &#123;</div><div class="line">        <span class="function"><span class="keyword">sub</span> <span class="title">sum</span> </span>&#123; [+] self &#125;</div><div class="line">        <span class="keyword">return</span> sum() / self.elems;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method mean_g () &#123;</div><div class="line">        <span class="function"><span class="keyword">sub</span> <span class="title">product</span> </span>&#123; [*] self &#125;</div><div class="line">        <span class="keyword">return</span> product() ** (<span class="number">1</span>/self.elems)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method median () &#123;</div><div class="line">        <span class="function"><span class="keyword">sub</span> <span class="title">sorted</span> </span>&#123; self.sort &#125;</div><div class="line">        <span class="keyword">return</span> sorted.elems %% <span class="number">2</span></div><div class="line">                    ?? StatList.new(sorted.[*<span class="regexp">/2, */</span><span class="number">2</span>-<span class="number">1</span>]).mean_a()</div><div class="line">                    !!              sorted.[*<span class="regexp">/2];</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method mode () &#123;</div><div class="line">        sub frequencies &#123; self.Bag                              &#125;</div><div class="line">        sub list_elems  &#123; frequencies.pairs                     &#125;</div><div class="line">        sub max_freq    &#123; frequencies.values.max                &#125;</div><div class="line">        sub max_vals    &#123; list_elems.grep: &#123;.value == max_freq&#125; &#125;</div><div class="line"></div><div class="line">        return  max_vals».keys;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $list = StatList.new(1,3,5,8,8,11);</div><div class="line"></div><div class="line">say $list.mean_a;</div><div class="line">say $list.mean_g;</div><div class="line">say $list.median;</div><div class="line">say $list.mode;</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">6</span></div><div class="line"><span class="number">4.68393277169202</span></div><div class="line"><span class="number">13</span></div><div class="line"><span class="number">8</span></div><div class="line">[Finished in <span class="number">0</span>.<span class="number">335</span><span class="keyword">s</span>]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>以上所有文件都可以在<a href="http://www.bit.do/P6TP" target="_blank" rel="external">这儿</a> 下载到 - a Perl 6 introductory tutorial by Damian Conway</p>
+</blockquote>
+<p>说明：以上脚本的结果都在 Atom 编辑器下运行得到，然而， 需要在终端中打开 Atom，并安装了 script 插件才行。快捷键 <code>command + i</code></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Examples/" rel="tag">#Examples</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/12/S07-Lists/" rel="next" title="S07-Lists">
+                <i class="fa fa-chevron-left"></i> S07-Lists
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/15/Perl-6圣诞月历-2013/" rel="prev" title="Perl 6 圣诞月历-(2013)">
+                Perl 6 圣诞月历-(2013) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/02/14/Perl-6-Examples/"
+     data-title="Perl 6 Examples"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/02/14/Perl-6-Examples/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/14/Perl-6-Examples/"
+           data-title="Perl 6 Examples" data-url="https://ohmycloud.github.io/2016/02/14/Perl-6-Examples/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#斐波拉契数列（Fibonacci-Sequence）"><span class="nav-number">1.</span> <span class="nav-text">斐波拉契数列（Fibonacci Sequence）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">2.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pm-模块"><span class="nav-number">3.</span> <span class="nav-text">pm 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LZW"><span class="nav-number">4.</span> <span class="nav-text">LZW</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

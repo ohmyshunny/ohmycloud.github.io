@@ -1,0 +1,748 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="S///,given," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6: S/// 操作符By Zoffix Znet
+来自 Perl 5 背景的我， 第一次使用 Perl 6 的非破坏性替换操作符 S/// 的经历就像下面这样:
+
+进展会更好的。我不但会改善错误信息，而且会解释当前的所有事情。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的 S/// 操作符">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/01/28/Perl6中的S操作符/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6: S/// 操作符By Zoffix Znet
+来自 Perl 5 背景的我， 第一次使用 Perl 6 的非破坏性替换操作符 S/// 的经历就像下面这样:
+
+进展会更好的。我不但会改善错误信息，而且会解释当前的所有事情。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-3a07abee4665adaf.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.803Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的 S/// 操作符">
+<meta name="twitter:description" content="Perl 6: S/// 操作符By Zoffix Znet
+来自 Perl 5 背景的我， 第一次使用 Perl 6 的非破坏性替换操作符 S/// 的经历就像下面这样:
+
+进展会更好的。我不但会改善错误信息，而且会解释当前的所有事情。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/326727-3a07abee4665adaf.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/01/28/Perl6中的S操作符/"/>
+
+  <title> Perl 6 中的 S/// 操作符 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的 S/// 操作符
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-28T00:00:00+08:00" content="2016-01-28">
+              2016-01-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/28/Perl6中的S操作符/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/28/Perl6中的S操作符/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Perl-6-S-操作符"><a href="#Perl-6-S-操作符" class="headerlink" title="Perl 6: S/// 操作符"></a><a href="http://blogs.perl.org/users/zoffix_znet/2016/04/perl-6-the-s-operator.html" target="_blank" rel="external">Perl 6: S/// 操作符</a></h1><p>By <a href="http://blogs.perl.org/users/zoffix_znet/" target="_blank" rel="external">Zoffix Znet</a></p>
+<p>来自 Perl 5 背景的我， 第一次使用 Perl 6 的非破坏性替换操作符 <code>S///</code> 的经历就像下面这样:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-3a07abee4665adaf.gif?imageMogr2/auto-orient/strip" alt="img"></p>
+<p>进展会更好的。我不但会改善错误信息，而且会解释当前的所有事情。</p>
+<a id="more"></a>
+<h2 id="智能匹配"><a href="#智能匹配" class="headerlink" title="智能匹配"></a>智能匹配</h2><p>我有问题的原因是因为，看到外形相似的操作符，我就简单地把 Perl 5 中的绑定操作符(<code>=~</code>)转换为 Perl 6 中的智能匹配操作符(<code>~~</code>) 还期望它能正常工作。事实上我是异想天开。<code>S///</code> 操作符没有文档，并且结合令人困惑的(那个时候)警告信息，这就是我痛苦的根源：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my $orig = &apos;meowmix&apos;;</div><div class="line">my $new  = $orig ~~ S/me/c/;</div><div class="line">say $new;</div><div class="line"></div><div class="line"># OUTPUT warning:</div><div class="line"># Smartmatch with S/// can never succeed</div></pre></td></tr></table></figure>
+<p>这个丑陋的警告说这儿的 <code>~~</code> 操作符是个错误的选择并且确实如此。<code>~~</code> 操作符不是 Perl 5 的 <code>=~</code> 操作符的等价物。<code>~~</code> 智能操作符把它左边的东西起了个叫做 <code>$_</code> 的别名，然后 <code>~~</code> 计算它右侧的东西，然后在右侧这个东西身上调用 <code>.ACCEPTS($_)</code> 方法。这就是所有的魔法。</p>
+<p>所以上面的例子实际上发生了:</p>
+<ul>
+<li>我们到达 <code>S///</code> 的时候， <code>$orig</code> 被起了个叫做 <code>$_</code> 的别名。</li>
+<li><code>S///</code> 非破坏性地在 <code>$_</code> 身上执行了替换并返回那个结果字符串。这是智能匹配将要操作的东西。</li>
+<li>智能匹配，按照 Str 与 Str 相匹配的规则，会根据替换是否发生来给出 True 或 False（令人困惑的是，True 意味着没发生）</li>
+</ul>
+<p>结果一路下来，我们并没有得到我们想要的：替换过的字符串。</p>
+<h2 id="使用-Given"><a href="#使用-Given" class="headerlink" title="使用 Given"></a>使用 Given</h2><p>既然我们知道了 <code>S///</code> 总是作用在 <code>$_</code> 上并且返回替换后的结果，很容易就想到几种方法把 <code>$_</code> 设置为我们原来的字符串并把 <code>S///</code> 的返回值收集回来，我们来看几个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">my $orig = &apos;meowmix&apos;;</div><div class="line">my $new  = S/me/c/ given $orig;</div><div class="line">say $orig;</div><div class="line">say $new;</div><div class="line"></div><div class="line">my @orig = &lt;meow cow sow vow&gt;;</div><div class="line">my @new  = do for @orig &#123; S/\w+ &lt;?before &apos;ow&apos;&gt;/w/ &#125;;</div><div class="line">say @orig;</div><div class="line">say @new;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># meowmix</div><div class="line"># cowmix</div><div class="line"># [meow cow sow vow]</div><div class="line"># [wow wow wow wow]</div></pre></td></tr></table></figure>
+<p>第一个作用在单个值上。我们使用后置形式的 <em>given</em> 块儿，这让我们避免了花括号（你可以使用 <em>with</em> 代替 <em>given</em> 得到同样的结果）。<code>given $orig</code> 会给 <code>$orig</code> 起个叫做 <code>$_</code> 的别名。从输出来看，原字符串没有被更改。</p>
+<p>第二个例子作用在数组中的一堆字符串身上并且我们使用 <em>do</em> 关键字来执行常规的 <em>for</em> 循环(那种情况下，它把循环变量别名给 <code>$_</code> 了)并把结果赋值给 <code>@new</code> 数组。再次，输出显示原来的数组并没有发生改变。</p>
+<h2 id="副词"><a href="#副词" class="headerlink" title="副词"></a>副词</h2><p><code>S///</code> 操作符 – 就像 <code>s///</code> 操作符和某些方法一样 – 允许你使用正则表达式副词：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">given &apos;Lörem Ipsum Dolor Sit Amet&apos; &#123;</div><div class="line">    say S:g      /m/g/;  # Löreg Ipsug Dolor Sit Aget</div><div class="line">    say S:i      /l/b/;  # börem Ipsum Dolor Sit Amet</div><div class="line">    say S:ii     /l/b/;  # Börem Ipsum Dolor Sit Amet</div><div class="line">    say S:mm     /o/u/;  # Lürem Ipsum Dolor Sit Amet</div><div class="line">    say S:nth(2) /m /g/; # Lörem Ipsug Dolor Sit Amet</div><div class="line">    say S:x(2)   /m /g/; # Löreg Ipsug Dolor Sit Amet</div><div class="line">    say S:ss/Ipsum Dolor/Gipsum\nColor/; # Lörem Gipsum Color Sit Amet</div><div class="line">    say S:g:ii:nth(2) /m/g/;             # Lörem Ipsug Dolor Sit Amet</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如你所见，它们以 <em>:foo</em> 的形式添加在操作符 <strong>S</strong> 这个部件的后面。你可以大大方方地使用空白符号并且几个副词可以同时使用。下面是它们的意义：</p>
+<ul>
+<li>:g —(长形式：<code>:global</code>)全局匹配：替换掉所有的出现</li>
+<li>:i —不区分大小写的匹配</li>
+<li>:ii —(长形式： <code>:samecase</code>) 保留大小写：不管用作替换字母的大小写，使用原来被替换的字母的大小写</li>
+<li>:mm —(长形式：<code>:samemark</code>) 保留重音符号：在上面的例子中，字母 o 上的分音符号被保留并被应用到替换字母 u 上</li>
+<li>:nth(n) —只替换第 n 次出现的</li>
+<li>:x(n) —至多替换 n 次（助记符: ‘x’ 作为及时）</li>
+<li>:ss —(长形式：<code>samespace</code>)保留空白类型：空白字符的类型被保留，而不管替换字符串中使用的是什么空白字符。在上面的例子中，我们使用换行作为替换，但是原来的空白被保留了。</li>
+</ul>
+<h2 id="方法形式"><a href="#方法形式" class="headerlink" title="方法形式"></a>方法形式</h2><p><code>S///</code> 操作符很好，但是有时候有点笨拙。不要害怕， Perl 6 提供了 <code>.subst</code> 方法能满足你所有的替换需求并且消除你对 <code>.subst/.substr</code> 的困惑。下面来看例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">say &apos;meowmix&apos;.subst: &apos;me&apos;, &apos;c&apos;;</div><div class="line">say &apos;meowmix&apos;.subst: /m./, &apos;c&apos;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># cowmix</div><div class="line"># cowmix</div></pre></td></tr></table></figure>
+<p>这个方法要么接收一个正则表达式要么接收一个普通的字符串作为它的第一个位置参数，它是要在调用者里面(“meowmix”)查找的东西。第二个参数是替换字符串。</p>
+<p>通过简单地把它们列为具名 Bool 参数，你也可以使用副词。在 <code>S///</code> 形式中， 副词 <code>:ss</code> 和 <code>:ii</code> 分别表明 <code>:s</code>(使空白有意义) 的出现和  <code>:i</code>(不区分大小写的匹配) 的出现。在方法形式中，你必须把这些副词应用到正则表达式自身身上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">given &apos;Lorem Ipsum Dolor Sit Amet&apos; &#123;</div><div class="line">    say .subst: /:i l/, &apos;b&apos;, :ii;</div><div class="line">    say .subst: /:s Ipsum Dolor/, &quot;Gipsum\nColor&quot;, :ss;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Borem Ipsum Dolor Sit Amet</div><div class="line"># Lorem Gipsum Color Sit Amet</div></pre></td></tr></table></figure>
+<h2 id="方法形式的捕获"><a href="#方法形式的捕获" class="headerlink" title="方法形式的捕获"></a>方法形式的捕获</h2><p>捕获对于替换操作来说不陌生，所以我们来尝试捕获下方法调用形式的替换：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">say &apos;meowmix&apos;.subst: /me (.+)/, &quot;c$0&quot;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Use of Nil in string context  in block &lt;unit&gt; at test.p6 line 1</div><div class="line"># c</div></pre></td></tr></table></figure>
+<p>不是我们要找的。我们的替换字符串构建在达到 <code>.subst</code> 方法之前，并且里面的 <code>$0</code> 变量实际上指向任何这个方法调用之前的东西，而不是 <code>.subst</code> 正则表达式中的捕获。所以我们怎么来修正它呢？</p>
+<p><code>.subst</code> 方法的第二个参数也可以接受一个 <a href="http://docs.perl6.org/type/Callable" target="_blank" rel="external">Callable</a>。在它里面，你可以使用 <code>$0, $1, ... $n</code> 变量，直到你想要的编号，并从捕获中得到正确的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say &apos;meowmix&apos;.subst: /me (.+)/, -&gt; &#123; &quot;c$0&quot; &#125;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># cowmix</div></pre></td></tr></table></figure>
+<p>这里，我们为我们的 <strong>Callable</strong> 使用了尖号块儿，但是 <strong>WhateverCode</strong> 和子例程也有效。每次替换都会调用这个 Callable，并且把 <a href="http://docs.perl6.org/type/Match" target="_blank" rel="external">Match</a> 对象作为第一个位置参数传递给 Callable， 如果你需要访问它的话。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><code>S///</code> 操作符在 Perl 6 中是 <code>s///</code> 操作符的战友，它不是修改原来的字符串，而是拷贝原来的字符串，修改，然后返回修改过的版本。这个操作符的使用方式跟 Perl 5 中的非破坏性替换操作符的使用方式不同。作为备选， 方法版本的 <code>.subst</code> 也能使用。 方法形式和操作符形式的替换都能接收一组副词以修改它们的行为，来满足你的需求。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/S/" rel="tag">#S///</a>
+          
+            <a href="/tags/given/" rel="tag">#given</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/21/Roles/" rel="next" title="Roles">
+                <i class="fa fa-chevron-left"></i> Roles
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/03/comb-操作字符串的利器/" rel="prev" title="comb - 操作字符串的利器">
+                comb - 操作字符串的利器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/01/28/Perl6中的S操作符/"
+     data-title="Perl 6 中的 S/// 操作符"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/01/28/Perl6中的S操作符/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/28/Perl6中的S操作符/"
+           data-title="Perl 6 中的 S/// 操作符" data-url="https://ohmycloud.github.io/2016/01/28/Perl6中的S操作符/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Perl-6-S-操作符"><span class="nav-number">1.</span> <span class="nav-text">Perl 6: S/// 操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#智能匹配"><span class="nav-number">1.1.</span> <span class="nav-text">智能匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Given"><span class="nav-number">1.2.</span> <span class="nav-text">使用 Given</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#副词"><span class="nav-number">1.3.</span> <span class="nav-text">副词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法形式"><span class="nav-number">1.4.</span> <span class="nav-text">方法形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法形式的捕获"><span class="nav-number">1.5.</span> <span class="nav-text">方法形式的捕获</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">1.6.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

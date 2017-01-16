@@ -1,0 +1,862 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Block,Junction,Smartmatch,递归," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="并行查找文件如果你没有使用 panda 或 zef 安装该模块, 你可以下载到本地：
+1234use v6;use lib &amp;quot;C:\\Users\\Administrator\\perl6-concurrent-file-find\\lib&amp;quot;;use Concurrent::File::Find;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl6 模块分析 - 并行查找文件">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/10/19/Perl6模块分析-并行查找文件/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="并行查找文件如果你没有使用 panda 或 zef 安装该模块, 你可以下载到本地：
+1234use v6;use lib &amp;quot;C:\\Users\\Administrator\\perl6-concurrent-file-find\\lib&amp;quot;;use Concurrent::File::Find;">
+<meta property="og:updated_time" content="2016-10-23T16:07:53.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl6 模块分析 - 并行查找文件">
+<meta name="twitter:description" content="并行查找文件如果你没有使用 panda 或 zef 安装该模块, 你可以下载到本地：
+1234use v6;use lib &amp;quot;C:\\Users\\Administrator\\perl6-concurrent-file-find\\lib&amp;quot;;use Concurrent::File::Find;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/10/19/Perl6模块分析-并行查找文件/"/>
+
+  <title> Perl6 模块分析 - 并行查找文件 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl6 模块分析 - 并行查找文件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-19T19:12:22+08:00" content="2016-10-19">
+              2016-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/19/Perl6模块分析-并行查找文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/Perl6模块分析-并行查找文件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="并行查找文件"><a href="#并行查找文件" class="headerlink" title="并行查找文件"></a>并行查找文件</h2><p>如果你没有使用 panda 或 zef 安装该模块, 你可以下载到本地：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">use lib &quot;C:\\Users\\Administrator\\perl6-concurrent-file-find\\lib&quot;;</div><div class="line">use Concurrent::File::Find;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>下面来看具体代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class X::IO::NotADirectory does X::IO is export &#123;</div><div class="line">    has $.path;</div><div class="line">    method message &#123;</div><div class="line">        &quot;«$.path» is not a directory&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class X::IO::CanNotAccess does X::IO is export &#123;</div><div class="line">    has $.path;</div><div class="line">    method message &#123;</div><div class="line">        &quot;Cannot access «$.path»: permission denied&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class X::IO::StaleSymlink does X::IO is export &#123;</div><div class="line">    has $.path;</div><div class="line">    method message &#123;</div><div class="line">        &quot;Stale symlink «$.path»&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码自定义了 3 个与 <code>IO</code> 错误相关的类并导出, 每个类中有一个 <code>$.path</code> 属性和 <code>message</code> 方法。如果在查找文件/目录时出现异常则会打印出相关的信息, 每个信息中会包含该文件/目录的绝对路径。</p>
+<p>自定义的类都遵守了 <a href="https://docs.perl6.org/type/X$COLON$COLONIO" target="_blank" rel="external">X::IO</a> 这个角色(Role), 角色 <code>X::IO</code> 是一个用于 IO 错误相关的通用角色, <code>X::IO</code> 没有提供任何额外的方法, 它遵守 <a href="https://docs.perl6.org/type/X$COLON$COLONOS" target="_blank" rel="external">X::OS</a> 角色,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">role X::IO does X::OS &#123;&#125;</div></pre></td></tr></table></figure>
+<p>而 X::OS 角色的定义为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">role X:OS &#123; has $.os-error &#125;</div></pre></td></tr></table></figure>
+<p>它是由操作系统报告的一些错误触发的所有异常的通用角色（失败的 IO，系统调用，fork，内存分配）。</p>
+<p>定义一个参数互斥类并导出。如果传递给 <code>find</code> 方法的参数之间有相互排斥, 则抛出这个异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class X::Paramenter::Exclusive is Exception is export &#123;</div><div class="line">    has $.type;</div><div class="line">    method message &#123;</div><div class="line">        &quot;Parameters &#123;$.type&#125; are mutual exclusive&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面来看 <code>find</code> 方法的签名。第一个参数 <code>$dir</code> 是需要用户指定的文件查找的<strong>起始路径</strong>, <code>$dir</code> 是一个 <strong>Str</strong> 类型的参数, 在 <code>find</code> 方法中被强制为 IO 类型。<code>$dir</code> 前面的 <code>IO(Str)</code>, 表示它既可以是一个字符串, 也可以是一个 <code>IO</code> 路径, 如果传入的是字符串, 那么在该 find 方法中就会被强制为 <code>IO</code> 类型。<code>$dir</code> 后面的 <code>where</code> 从句(从句的内容是一个 Block, 直接执行)是对该参数的约束：该路径必须真实存在(否则抛出异常)、必须是一个目录(否则抛出异常)、路径必须可访问(否则抛出异常)。</p>
+<p>where 从句的 <code>Block</code> 中使用了<code>点语法</code>, 即调用了 IO 方法, 调用者是 <code>$_</code>, 这里就是 <code>$dir</code> 了。下面还会见到这种 <code>Block</code> 和点语法的用法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">sub find (</div><div class="line">    IO(Str) $dir where &#123;</div><div class="line">           ( .IO.e || fail X::IO::DoesNotExist.new(path =&gt; .Str ) )</div><div class="line">        &amp;&amp; ( .IO.d || fail X::IO::NotADirectory.new(path =&gt; .Str) )</div><div class="line">        &amp;&amp; ( .IO.r || fail X::IO::CanNotAccess.new(path =&gt; .Str ) )</div><div class="line">    &#125;,</div><div class="line">    :$name, :$exclude, :$exclude-dir, :$include, :$include-dir, :$extension,</div><div class="line">    :&amp;return-type = &#123; .IO.Str &#125;,</div><div class="line">    :$no-thread = False,</div><div class="line">    :$file = True, :$directory, :$symlink,</div><div class="line">    :$max-depth where &#123; $^a ~~ Int || $^a ~~ ∞ &amp;&amp; $^a &gt; 0 &#125; = ∞,</div><div class="line">    :$recursive = True, :$follow-symlink = False,</div><div class="line">    :$keep-going = True, :$quiet = False</div><div class="line">) is export &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p><code>find</code> 方法的其余参数都是一个一个的 <code>Pair</code> 了, 它们就像袜子一样, 都是一对儿一对儿的:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">副词</th>
+<th style="text-align:center">等价于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:$name</td>
+<td style="text-align:center">name           =&gt; $name</td>
+</tr>
+<tr>
+<td style="text-align:center">:$exclude</td>
+<td style="text-align:center">exclude        =&gt; $exclude</td>
+</tr>
+<tr>
+<td style="text-align:center">:$exclude-dir</td>
+<td style="text-align:center">exclude-dir    =&gt; $exclude-dir</td>
+</tr>
+<tr>
+<td style="text-align:center">:$include</td>
+<td style="text-align:center">include        =&gt; $include</td>
+</tr>
+<tr>
+<td style="text-align:center">:$include-dir</td>
+<td style="text-align:center">include-dir    =&gt; $include-dir</td>
+</tr>
+<tr>
+<td style="text-align:center">:$extension</td>
+<td style="text-align:center">extension      =&gt; $extension</td>
+</tr>
+<tr>
+<td style="text-align:center">:&amp;return-type</td>
+<td style="text-align:center">return-type    =&gt; &amp;return-type</td>
+</tr>
+<tr>
+<td style="text-align:center">:$no-thread = False</td>
+<td style="text-align:center">no-thread      =&gt; False</td>
+</tr>
+<tr>
+<td style="text-align:center">:$file = True</td>
+<td style="text-align:center">file           =&gt; True</td>
+</tr>
+<tr>
+<td style="text-align:center">:$directory</td>
+<td style="text-align:center">directory      =&gt; $directory</td>
+</tr>
+<tr>
+<td style="text-align:center">:$symlink</td>
+<td style="text-align:center">symlink        =&gt; $symlink</td>
+</tr>
+<tr>
+<td style="text-align:center">:$max-depth</td>
+<td style="text-align:center">max-depth      =&gt; $max-depth</td>
+</tr>
+<tr>
+<td style="text-align:center">:$recursive = True</td>
+<td style="text-align:center">recursive      =&gt; True</td>
+</tr>
+<tr>
+<td style="text-align:center">:$follow-symlink = False</td>
+<td style="text-align:center">follow-symlink =&gt; False</td>
+</tr>
+<tr>
+<td style="text-align:center">:$keep-going = True</td>
+<td style="text-align:center">keep-going     =&gt; True</td>
+</tr>
+<tr>
+<td style="text-align:center">:$quiet = Flase</td>
+<td style="text-align:center">quiet          =&gt; False</td>
+</tr>
+</tbody>
+</table>
+<p><code>:$no-thread = False</code> 表示默认开启多线程, <code>:$file = True</code> 表示默认查找文件, <code>:$recursive = True</code> 表示默认开启递归查找, <code>:$keep-going = True</code> 表示遇到异常也会继续查找而不退出, <code>:$quiet = Flase</code> 表示默认静默查找。</p>
+<p>有一个参数很奇怪, 它后面还有一个 where 从句, 用以约束最大深度, <code>$max-depth</code> 必须为整型或者它的值无穷大并且为正值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:$max-depth where &#123; $^a ~~ Int || $^a ~~ ∞ &amp;&amp; $^a &gt; 0 &#125; = ∞</div></pre></td></tr></table></figure>
+<p>下面是 <code>find</code> 方法的函数主体:</p>
+<p><code>$*SPEC.dir-sep</code> 为路径分割符, Windows 下为 <code>\</code>, Linux 下为 <code>/</code>。使用 <code>constant</code> 声明了一个常量来保存路径分割符。<br><code>&amp;max-depth</code> 是一个可调用的 <code>Block</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">constant dir-sep = $*SPEC.dir-sep;</div><div class="line">my &amp;max-depth = $max-depth &lt; ∞ ?? &#123; .IO.path.split(dir-sep).elems &lt;= $max-depth &#125; !! &#123; True &#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my @tests; # 保存文件查找所用的条件测试</div><div class="line">my @types; #</div></pre></td></tr></table></figure>
+<p>下面的代码再次用到了 <code>Block</code> 和主题化变量 <code>$_</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@types.append(&#123;.f&#125;) if $file;</div><div class="line">@types.append(&#123;.d&#125;) if $directory;</div><div class="line">@types.append(&#123;.l&#125;) if $symlink;</div><div class="line"></div><div class="line">@tests.append(@types.any);</div><div class="line">@tests.append(&#123;.basename.Str ~~ $name&#125;) with $name;</div></pre></td></tr></table></figure>
+<p>我们往 <code>@types</code> 数组里面追加了一个 <code>Block</code>, 这个数组中的元素不是普通值, 它是一个带有占位符参数(<code>$_</code>)的花括号块儿。 <code>{.f}</code> 等价于 <code>{$_.f}</code>。那么这里的 <code>$_</code> 代表着什么呢? 从这句代码所在的上下文可以知道, find 方法的函数主体中并没有显式的声明 <code>$_</code> 主题变量, 也没有 <code>for</code>、 <code>given</code>、<code>where</code> 等能主题化的关键字, 所以, <code>{.f}</code>、<code>{.d}</code>、<code>{.l}</code> 中的 <code>$_</code> 来自别的地方。怎么知道它来自哪个地方呢？ 我们知道只有当有文件、有目录、有 sysmlink  的时候才把相关的 Block 追加到 <code>@types</code> 数组中。既然数组中每个元素都是 <code>Block</code>, 那么对每个 Block 可以进行调用。我们现在先知道这些。</p>
+<p><code>@types.any</code> 是一个 any <code>Junction</code>, 意思为查找时遇到文件、目录或 symlink 中的任意一种类型都可以保留下来。<br><code>with</code> 修饰符的意思是如果定义了具体的文件名, 则在 <code>@tests</code> 数组中追加一个 <code>Block</code>, 这个 <code>Block</code> 检查找到的文件名和要查找的文件名是否匹配, 如果匹配的话这个 Block 的值就为 True, 否则为 Flase。</p>
+<p>下面的代码是查找文件时用到的一些测试, <code>exclude-tests</code> 是要排除在外的文件名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my @exclude-tests;</div><div class="line">for $exclude.list -&gt; $exclude &#123;</div><div class="line">    @exclude-tests.push(&#123; .Str ~~ $exclude &#125;)        if $exclude ~~ Regex;</div><div class="line">    @exclude-tests.push(&#123; $exclude.(.IO) &#125;)          if $exclude ~~ Callable ^ Regex;</div><div class="line">    @exclude-tests.push(&#123; .Str.contains($exclude) &#125;) if $exclude ~~ Str;</div><div class="line">&#125;</div><div class="line">@tests.append(@exclude-tests.none);</div></pre></td></tr></table></figure>
+<p><code>$exclude</code> 来自于传递进来的 Pair 参数, 它可以包含单个值, 也可以包含多个值, 所以使用 <code>.list</code> 用来遍历所有的可能。<code>$exclude</code> 可以是正则表达式、<code>Callable</code> 和普通字符串。</p>
+<p>与上面的类似, 下面是要包含在内的文件名。 <code>@include-tests</code> 数组中保存的是要包含在查询结果中的文件, 数组中每一个元素都是一个 <code>Block</code><br>每个 <code>Block</code> 接收一个参数作为 <code>$_</code> 的值, 每个 <code>.</code> 号前面是有一个参数的, 这个会在调用 <code>Block</code> 时传入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my @include-tests;</div><div class="line">for $include.list -&gt; $include &#123;</div><div class="line"></div><div class="line">    @include-tests.push(&#123; .Str ~~ $include &#125;)        if $include ~~ Regex;</div><div class="line">    @include-tests.push(&#123; $include.(.IO) &#125;)          if $include ~~ Callable ^ Regex;</div><div class="line">    @include-tests.push(&#123; .Str.contains($include) &#125;) if $include ~~ Str;</div><div class="line">&#125;</div><div class="line">@tests.append(@include-tests.any) if @include-tests;</div></pre></td></tr></table></figure>
+<p>文件名后缀与之类似, 可以是正则表达式、<code>Callable ^ Regex</code> 和普通字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my @extension-tests;</div><div class="line">for $extension.list -&gt; $test &#123;</div><div class="line">    @extension-tests.push(&#123; .extension ~~ $test if .extension &#125;) if $test ~~ Regex;</div><div class="line">    @extension-tests.push(&#123; $test.(.extension) &#125;)  if $test ~~ Callable ^ Regex;</div><div class="line">    @extension-tests.push(&#123; $test eq .extension &#125;) if $test ~~ Str;</div><div class="line">&#125;</div><div class="line">@tests.append(@extension-tests.any) if @extension-tests;</div></pre></td></tr></table></figure>
+<p>目录测试, 如果 <code>$follow-symlink</code> 为真则在该路径是目录 &amp;&amp; sysmlink &amp;&amp; （路径不存在就直接抛出 fail 异常）, 然后返回这个目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @dir-tests = $follow-symlink</div><div class="line">    ?? &#123; .d &amp;&amp; .l &amp;&amp; ( !.e &amp;&amp; fail X::IO::StaleSymlink.new(:path(.Str)) ); .d &#125;</div><div class="line">    !! &#123; .d &amp;&amp; ! .l &#125;;</div></pre></td></tr></table></figure>
+<p>排除目录的测试:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my @exclude-dir-tests;</div><div class="line">for $exclude-dir.list -&gt; $exclude &#123;</div><div class="line">    @exclude-dir-tests.push(&#123; .Str ~~ $exclude &#125;)        if $exclude ~~ Regex;</div><div class="line">    @exclude-dir-tests.push(&#123; $exclude.(.IO) &#125;)          if $exclude ~~ Callable &amp; !Regex;</div><div class="line">    @exclude-dir-tests.push(&#123; .Str.contains($exclude) &#125;) if $exclude ~~ Str;</div><div class="line">&#125;</div><div class="line">@dir-tests.append(@exclude-dir-tests.none);</div></pre></td></tr></table></figure>
+<p>包含目录的测试:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my @include-dir-tests;</div><div class="line">for $include-dir.list -&gt; $include &#123;</div><div class="line">    @include-dir-tests.push(&#123; .Str ~~ $include &#125;)        if $include ~~ Regex;</div><div class="line">    @include-dir-tests.push(&#123; $include.(.IO) &#125;)          if $include ~~ Callable &amp; !Regex;</div><div class="line">    @include-dir-tests.push(&#123; .Str.contains($include) &#125;) if $include ~~ Str;</div><div class="line">&#125;</div><div class="line">@dir-tests.append(@include-dir-tests.any) if @include-dir-tests;</div></pre></td></tr></table></figure>
+<p>下面是并发查找部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $channel = Channel.new;</div><div class="line">my &amp;start = -&gt; ( &amp;c ) &#123; c &#125; if $no-thread;</div><div class="line">my $promise = start &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>在 <code>for</code> 这个块中, <code>$_</code> 代表当前找到的文件/文件夹。如果有错误发生(例如禁止访问)并且非安静模式下会打印出有异常的文件/目录的路径并继续，否则重新抛出<a href="https://docs.perl6.org/routine/rethrow" target="_blank" rel="external">rethrow</a>这个异常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">for dir($dir) &#123;</div><div class="line">    CATCH &#123; default &#123; if $keep-going &#123; warn .Str unless $quiet &#125; else &#123; .rethrow &#125; &#125; &#125;</div><div class="line"></div><div class="line">    # 如果这个文件/目录是link的并且不存在,就抛出异常</div><div class="line">    if .IO.l &amp;&amp; !.IO.e &#123;</div><div class="line">        X::IO::StaleSymlink.new(path=&gt;.Str).throw;</div><div class="line">    &#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>调用一个关闭了的 channel 会导致 <a href="https://docs.perl6.org/type/X$COLON$COLONChannel$COLON$COLONSendOnClosed" target="_blank" rel="external">X::Channel::SendOnClosed</a>.<br><code>last</code> 不仅会退出当前块, 还会退出当前 for 循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CATCH &#123; when X::Channel::SendOnClosed &#123; last &#125; &#125;</div></pre></td></tr></table></figure>
+<p><code>@tests».(.IO)</code> 意为对 <code>@tests</code> 中的每一个 <code>Block</code> 元素都执行一次 <code>.(.IO)</code> 调用，参数为 <code>.IO</code>， 即 <code>$_.IO</code>, 语法为 <code>$someBlock.(paramter)</code>。<br><code>all</code> 代表所有测试条件都通过, 即每一个 <code>Block</code> <strong>调用</strong>都返回真:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$channel.send(.&amp;return-type) if all @tests».(.IO);</div></pre></td></tr></table></figure>
+<p><code>&amp;return-type</code> 是一个 <code>Block</code>, 所以可以用点语法调用, 这个 <code>Block</code> 为 <code>{ .IO.Str }</code>, 所以调用后得到的是路径的字符串表示。</p>
+<p>如果所有的目录测试条件通过并且最大深度为真并且递归查找开启, 则对该目录中的每一个元素（文件/目录）<br>按照存在和文件名排序后再对每一项执行一次当前块(<code>&amp;?BLOCK</code>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.IO.dir().sort(&#123;.e &amp;&amp; .f&#125;).map(&amp;?BLOCK) if $recursive &amp;&amp; .&amp;max-depth &amp;&amp; all @dir-tests».(.IO)</div></pre></td></tr></table></figure>
+<p>离开的时候关闭 Channel</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LEAVE $channel.close;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return $channel.list but role :: &#123; method channel &#123; $channel &#125; &#125;;</div></pre></td></tr></table></figure>
+<p>该模块还提供了一个简单的查找方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">sub find-simple ( IO(Str) $dir,</div><div class="line">    :$keep-going = True,</div><div class="line">    :$no-thread = False</div><div class="line">) is export &#123;</div><div class="line">    my $channel = Channel.new;</div><div class="line"></div><div class="line">    my &amp;start = -&gt; ( &amp;c ) &#123; c &#125; if $no-thread;</div><div class="line"></div><div class="line">    my $promise = start &#123;</div><div class="line">        for dir($dir) &#123;</div><div class="line">            CATCH &#123; default &#123; if $keep-going &#123; note .Str &#125; else &#123; .rethrow &#125; &#125; &#125;</div><div class="line"></div><div class="line">            if .IO.l &amp;&amp; !.IO.e &#123;</div><div class="line">                X::IO::StaleSymlink.new(path=&gt;.Str).throw;</div><div class="line">            &#125;</div><div class="line">            &#123;</div><div class="line">                CATCH &#123; when X::Channel::SendOnClosed &#123; last &#125; &#125;</div><div class="line">                $channel.send(.IO) if .IO.f; # 这里的 $_ 代表当前查找到的文件</div><div class="line">                $channel.send(.IO) if .IO.d; # 这里的 $_ 代表当前查找到的目录</div><div class="line">            &#125;</div><div class="line">            # 如果目录存在, 默认对该目录执行递归查找</div><div class="line">            .IO.dir()».&amp;?BLOCK if .IO.e &amp;&amp; .IO.d;</div><div class="line">        &#125;</div><div class="line">        LEAVE $channel.close unless $channel.closed;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return $channel.list but role :: &#123; method channel &#123; $channel &#125; &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">use Concurrent::File::Find;</div><div class="line"></div><div class="line">find(%*ENV&lt;HOME&gt;</div><div class="line">    , :extension(&apos;txt&apos;, &#123;.contains(&apos;~&apos;)&#125;) # ends in .txt or ends in something that contains a ~</div><div class="line">    , :exclude(&apos;covers&apos;) # exclude any path that contains covers, both for files and directories</div><div class="line">    , :exclude-dir(&apos;.&apos;) # exclude any directory-path that contains a .</div><div class="line">    , :file # return file paths</div><div class="line">    , :!directory # don&apos;t return directory paths</div><div class="line">    , :symlink # return symlink paths</div><div class="line">    , :max-depth(5) # but not deeper then 5 directories deep</div><div class="line">    , :follow-symlink # follow symlinks (no loop detection yet)</div><div class="line">    , :keep-going # on error (no access, stale symlink, etc.), keep going</div><div class="line">    , :quiet # don&apos;t report errors on STDERR</div><div class="line">).elems.say; # count how many files and symlinks we got</div><div class="line"></div><div class="line">sleep 10;</div><div class="line"></div><div class="line">my @l := find-simple(%*ENV&lt;HOME&gt;, :keep-going, :!no-thread); # binding to avoid eagerness</div><div class="line"></div><div class="line">for @l &#123;</div><div class="line">    @l.channel.close if $++ &gt; 5000; # hard-close the channel after 5000 found files</div><div class="line">    .say if $++ %% 100 # print every 100th file</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><h2 id="例程"><a href="#例程" class="headerlink" title="例程"></a>例程</h2><h3 id="sub-find"><a href="#sub-find" class="headerlink" title="sub find"></a>sub find</h3><p>将由后台线程获取到的文件、目录和符号链接作为 <code>Str</code> 的<code>列表</code>返回。 该列表得到了一个混合到唯一方 <code>channel</code> 中的角色，它能可用于关闭 <code>List</code> 后面的 channel，以中止任何仍在进行的获取。 这是有点靠不住，当底层的 <code>Promise</code>被 <code>DESTROY</code> 时可能会产生警告。 有如下所述的各种包括和排他的过滤器选项。 对于任何目录, 在返回的列表中文件被排在目录之前。只有在返回项目后，才可能递归到子目录中。</p>
+<h4 id="Matcher"><a href="#Matcher" class="headerlink" title="Matcher"></a>Matcher</h4><p>一些参数采用匹配器或一组匹配器。 给定列表时使用的“Junction”类型取决于参数。 因为匹配器 <code>Str</code>，<code>Regex</code> 和 <code>Callable</code> 被接受。 除非另有说明，否则 <code>Str</code> 匹配文件名的某一部分并且区分大小写或匹配整个路径。 <code>Regexp</code> 智能匹配 <code>IO::Path.Str</code> 并且 <code>Callable</code> 用 <code>IO::Path</code> 调用。</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p><code>IO(Str) $dir</code> - 从哪个目录开始, 要么是 <code>IO::Path</code>, 要么是 <code>Str</code>.</p>
+<p><code>:$file = True</code> - 也返回文件</p>
+<p><code>:$directory</code> - 也返回目录</p>
+<p><code>:$symlink</code> - 也返回符号链接</p>
+<p><code>:&amp;return-type = { .IO.Str }</code> - 默认把匹配到的项目转换为 <code>Str</code>。该 block 被馈以 <code>IO::Path</code> 对象.结果原样返回, 而不是由 <code>find</code> 本身使用，你可以在这里疯狂。</p>
+<p><code>:$name</code> - 返回匹配所提供的匹配器的任意目录的任意文件。使用 <code>Str</code> 作为匹配器需要确切的, 区分大小写的匹配。</p>
+<p><code>:$include</code> - 返回任何 <code>IO::Path.basename</code> 匹配所提供的匹配器的文件。使用 <code>Str</code> 作为匹配器需要部分匹配。</p>
+<p><code>:$exclude</code> - 不返回任何匹配了所提供的匹配器的文件。使用 <code>Str</code> 作为匹配器需要部分匹配。</p>
+<p><code>:$include-dir</code> - 返回或下降到匹配了所提供的匹配器的目录。使用 <code>Str</code> 作为匹配器需要部分匹配。</p>
+<p><code>:$exclude-dir</code> - 不返回或下降到匹配了所提供的匹配器的目录。使用 <code>Str</code> 作为匹配器需要部分匹配。.</p>
+<p><code>:$extension</code> - 返回任何匹配 <code>IO::Path.extension</code> 的项目.使用 <code>Str</code> 作为匹配器需要确切的, 区分大小写的匹配。</p>
+<p><code>:$recursive = True</code> - 下降到子目录。</p>
+<p><code>Int :$max-depth = ∞</code> - 尽可能深地下降到子目录中。</p>
+<p><code>:$follow-symlink = False</code> - 跟随符号链接. 还没有循环检测.</p>
+<p><code>:$keep-going = True</code> - 发生错误时 (拒绝访问, 陈旧的符号链接, 等等.) 继续但是在标准错误 $*ERR 上输出警告。</p>
+<p><code>:$quiet = False</code> - 配合 $keep-going, 不输出警告.</p>
+<p><code>:$no-thread = False</code> - 禁止创建 <code>Promise</code>. 用于调试.</p>
+<h3 id="sub-find-simple"><a href="#sub-find-simple" class="headerlink" title="sub find-simple"></a>sub find-simple</h3><p>和 <code>find</code> 一样, 但是没有了过滤器选项, 并且永远是递归的, 跟随现有的符号链接(尚没有循环检测)也没有排序。速度快可能包含少量 bug。它可能抛出 <code>X::IO::StaleSymlink</code>.</p>
+<h4 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h4><p><code>IO(Str) $dir</code> - <code>Path</code> as <code>IO::Path</code> or Str at where to start looking for files</p>
+<p><code>:$keep-going = True</code> - 出现错误不停止</p>
+<p><code>:$no-thread = False</code> - 不创建 <code>Promise</code>, 调试时有用</p>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><h3 id="X-IO-NotADirectory-does-X-IO"><a href="#X-IO-NotADirectory-does-X-IO" class="headerlink" title="X::IO::NotADirectory does X::IO"></a><code>X::IO::NotADirectory does X::IO</code></h3><p>尝试获取不是目录的路径的内容</p>
+<h3 id="X-IO-CanNotAccess-does-X-IO"><a href="#X-IO-CanNotAccess-does-X-IO" class="headerlink" title="X::IO::CanNotAccess does X::IO"></a><code>X::IO::CanNotAccess does X::IO</code></h3><p>访问文件夹(目录)被操作系统拒绝。</p>
+<h3 id="X-IO-StaleSymlink-does-X-IO"><a href="#X-IO-StaleSymlink-does-X-IO" class="headerlink" title="X::IO::StaleSymlink does X::IO"></a><code>X::IO::StaleSymlink does X::IO</code></h3><p>我们的意图是返回或跟随一个确实存在，但没有目标的符号链接，</p>
+<h3 id="X-Paramenter-Exclusive-is-Exception"><a href="#X-Paramenter-Exclusive-is-Exception" class="headerlink" title="X::Paramenter::Exclusive is Exception"></a><code>X::Paramenter::Exclusive is Exception</code></h3><p>命名参数一起使用是互斥的。</p>
+<h1 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h1><p>尚不支持循环检测。 只要有 readlink 和/或 stat 的便携版本，就会添加循环检测。 到那时避免 <code>:follow-symlink</code> 或使用 <code>:max-depth</code>。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Block/" rel="tag">#Block</a>
+          
+            <a href="/tags/Junction/" rel="tag">#Junction</a>
+          
+            <a href="/tags/Smartmatch/" rel="tag">#Smartmatch</a>
+          
+            <a href="/tags/递归/" rel="tag">#递归</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/Perl6中的Block/" rel="next" title="Perl 6 中的 Block">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的 Block
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/19/Perl6中的with/" rel="prev" title="Perl 6 中的 with">
+                Perl 6 中的 with <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/19/Perl6模块分析-并行查找文件/"
+     data-title="Perl6 模块分析 - 并行查找文件"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/10/19/Perl6模块分析-并行查找文件/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/19/Perl6模块分析-并行查找文件/"
+           data-title="Perl6 模块分析 - 并行查找文件" data-url="https://ohmycloud.github.io/2016/10/19/Perl6模块分析-并行查找文件/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并行查找文件"><span class="nav-number">1.</span> <span class="nav-text">并行查找文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概要"><span class="nav-number"></span> <span class="nav-text">概要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#描述"><span class="nav-number"></span> <span class="nav-text">描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例程"><span class="nav-number">1.</span> <span class="nav-text">例程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sub-find"><span class="nav-number">1.1.</span> <span class="nav-text">sub find</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Matcher"><span class="nav-number">1.1.1.</span> <span class="nav-text">Matcher</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">1.1.2.</span> <span class="nav-text">参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sub-find-simple"><span class="nav-number">1.2.</span> <span class="nav-text">sub find-simple</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">2.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#X-IO-NotADirectory-does-X-IO"><span class="nav-number">2.1.</span> <span class="nav-text">X::IO::NotADirectory does X::IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#X-IO-CanNotAccess-does-X-IO"><span class="nav-number">2.2.</span> <span class="nav-text">X::IO::CanNotAccess does X::IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#X-IO-StaleSymlink-does-X-IO"><span class="nav-number">2.3.</span> <span class="nav-text">X::IO::StaleSymlink does X::IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#X-Paramenter-Exclusive-is-Exception"><span class="nav-number">2.4.</span> <span class="nav-text">X::Paramenter::Exclusive is Exception</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#警告"><span class="nav-number"></span> <span class="nav-text">警告</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

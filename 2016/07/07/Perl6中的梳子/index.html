@@ -1,0 +1,728 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="comb," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6 中的梳子!在 Perl 5 中, 我很感激有这样两个便利的结构:
+12my @things = $text =~ /thing/g;my %things = $text =~ /(key)...(value)/g;
+你拿出一小段可以预见的文本，并给它一个正则表达式，吼吼, 你得到了一个列表和散列，像变魔术一般！我们也可以在 Perl  6 中使用正则表达式，但是 comb 更适合做这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的梳子!">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/07/07/Perl6中的梳子/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6 中的梳子!在 Perl 5 中, 我很感激有这样两个便利的结构:
+12my @things = $text =~ /thing/g;my %things = $text =~ /(key)...(value)/g;
+你拿出一小段可以预见的文本，并给它一个正则表达式，吼吼, 你得到了一个列表和散列，像变魔术一般！我们也可以在 Perl  6 中使用正则表达式，但是 comb 更适合做这">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-29a3966bbb8e437f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.736Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的梳子!">
+<meta name="twitter:description" content="Perl 6 中的梳子!在 Perl 5 中, 我很感激有这样两个便利的结构:
+12my @things = $text =~ /thing/g;my %things = $text =~ /(key)...(value)/g;
+你拿出一小段可以预见的文本，并给它一个正则表达式，吼吼, 你得到了一个列表和散列，像变魔术一般！我们也可以在 Perl  6 中使用正则表达式，但是 comb 更适合做这">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/326727-29a3966bbb8e437f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/07/07/Perl6中的梳子/"/>
+
+  <title> Perl 6 中的梳子! | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的梳子!
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-07T00:00:00+08:00" content="2016-07-07">
+              2016-07-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/07/Perl6中的梳子/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/07/Perl6中的梳子/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Perl-6-中的梳子"><a href="#Perl-6-中的梳子" class="headerlink" title="Perl 6 中的梳子!"></a>Perl 6 中的梳子!</h1><p>在 Perl 5 中, 我很感激有这样两个便利的结构:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @things = $text =~ <span class="regexp">/thing/g</span>;</div><div class="line"><span class="keyword">my</span> %things = $text =~ <span class="regexp">/(key)...(value)/g</span>;</div></pre></td></tr></table></figure>
+<p>你拿出一小段可以预见的文本，并给它一个正则表达式，吼吼, 你得到了一个列表和散列，像变魔术一般！我们也可以在 Perl  6 中使用正则表达式，但是 <strong><a href="http://docs.perl6.org/routine/comb" target="_blank" rel="external">comb</a></strong> 更适合做这个工作。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-29a3966bbb8e437f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<a id="more"></a>
+<h2 id="Plain-‘Ol-Characters"><a href="#Plain-‘Ol-Characters" class="headerlink" title="Plain ‘Ol Characters"></a>Plain ‘Ol Characters</h2><p>你可以把 <em>comb</em> 用作子例程或方法。在它的最基本的形式中， <em>comb</em> 会把字符串分解为字符:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&apos;foobar moobar 駱駝道bar&apos;.comb.join(&apos;|&apos;).say;</div><div class="line">&apos;foobar moobar 駱駝道bar&apos;.comb(6).join(&apos;|&apos;).say;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># f|o|o|b|a|r| |m|o|o|b|a|r| |駱|駝|道|b|a|r</div><div class="line"># foobar| mooba|r 駱駝道b|ar</div></pre></td></tr></table></figure>
+<p>不适用任何参数的 <em>comb</em> 你会得到各个单独的字符。给 <em>comb</em> 提供一个整数 <code>$n</code>, 那么你会得到长度至多为 <code>$n</code> 个字符的一个列表，并且如果没有剩下的字符不够的话，这个列表会接收较短的这个字符串。这个方法比使用正则表快了 30 倍。</p>
+<h2 id="Limits"><a href="#Limits" class="headerlink" title="Limits"></a>Limits</h2><p>你也可以为 <em>comb</em> 提供第二个整数参数，即 <em>limit</em>，来标示每个列表中最多含有 limit 个元素:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&apos;foobar moobar 駱駝道bar&apos;.comb(1, 5).join(&apos;|&apos;).say;</div><div class="line">&apos;foobar moobar 駱駝道bar&apos;.comb(6, 2).join(&apos;|&apos;).say;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># f|o|o|b|a</div><div class="line"># foobar| mooba</div></pre></td></tr></table></figure>
+<p>这适用于使用 <em>comb</em> 方法/函数的所有形式，而不仅仅是上面展示的那样。</p>
+<h2 id="计数"><a href="#计数" class="headerlink" title="计数"></a>计数</h2><p><em>comb</em> 也接收普通的 <a href="http://docs.perl6.org/type/Str" target="_blank" rel="external">Str</a> 作为参数，返回一个包含那个字符串的匹配的列表。所以这在计算子字符串在字符串中出现的次数时很有用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&apos;The 🐈 ran after a 🐁, but the 🐁 ran away&apos;.comb(&apos;🐈&apos;).Int.say;</div><div class="line">&apos;The 🐈 ran after a 🐁, but the 🐁 ran away&apos;.comb(&apos;ran&apos;).Int.say;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 1</div><div class="line"># 2</div></pre></td></tr></table></figure>
+<h2 id="简单的匹配"><a href="#简单的匹配" class="headerlink" title="简单的匹配"></a>简单的匹配</h2><p><em>comb</em> 的参数也可以是一个正则表达式，整个匹配会作为一个标量被返回：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">foobar moobar 駱駝道bar&apos;.comb(/&lt;[a..z]&gt;+ &apos;bar&apos;/).join(&apos;|&apos;).say;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># foobar|moobar</div></pre></td></tr></table></figure>
+<h2 id="限制所匹配的东西"><a href="#限制所匹配的东西" class="headerlink" title="限制所匹配的东西"></a>限制所匹配的东西</h2><p>你可以使用<a href="http://docs.perl6.org/language/regexes#Look-around_assertions" target="_blank" rel="external">环视断言</a>或者更简单的 <code>&lt;(</code> 和 <code>)&gt;</code> 正则表达式捕获记号:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&apos;moo=meow ping=pong&apos;.comb(/\w+    &apos;=&apos; &lt;( \w**4/).join(&apos;|&apos;).say; # values</div><div class="line">&apos;moo=meow ping=pong&apos;.comb(/\w+ )&gt; &apos;=&apos;    \w**4/).join(&apos;|&apos;).say; # keys</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># meow|pong</div><div class="line"># moo|ping</div></pre></td></tr></table></figure>
+<p>你可以使用  <code>&lt;(</code> 和 <code>)&gt;</code> 两者之一或两者都使用。 <code>&lt;(</code> 从匹配中排除任何它之前的东西而 <code>)&gt;</code> 会排序之后的任何东西。即 <code>/&#39;foo&#39; &lt;(&#39;bar&#39;)&gt; &#39;ber&#39;/</code>  会匹配包含 <em>foobarber</em> 的东西，但是从 <em>comb</em> 中返回的东西只会有 <em>bar</em>。</p>
+<h2 id="多个捕获"><a href="#多个捕获" class="headerlink" title="多个捕获"></a>多个捕获</h2><p>怎么样得出 Perl 5 那样的 键/值对儿呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my %things = &apos;moo=meow ping=pong&apos;.comb(/(\w+) &apos;=&apos; (\w+)/, :match)».Slip».Str;</div><div class="line">say %things;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># moo =&gt; meow, ping =&gt; pong</div></pre></td></tr></table></figure>
+<p>圆括号用于捕获。<code>:match</code> 参数使 <em>comb</em> 返回一个 <strong>Match</strong> 对象的列表，而非返回一个字符串列表。下一步，我们使用两个 hyper 运算符把 <strong>Matches</strong> 转换为 <a href="http://docs.perl6.org/type/Slip" target="_blank" rel="external">Slips</a>，这会给我们一个捕获的列表，但是它们仍旧是 <strong>Match</strong> 对象，这就是为什么我们还要把它们转换为 <strong>Str</strong> 的原因。</p>
+<p>我们还可以使用具名捕获使代码更清晰：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my %things = &apos;moo=meow ping=pong&apos;</div><div class="line">    .comb(/$&lt;key&gt;=\w+ &apos;=&apos; $&lt;value&gt;=\w+/, :match)</div><div class="line">    .map(&#123; .&lt;key&gt; =&gt; .&lt;value&gt;.Str &#125;);</div><div class="line">say %things;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># moo =&gt; meow, ping =&gt; pong</div></pre></td></tr></table></figure>
+<p>你还可以把上面的代码写成这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my %things = (&apos;moo=meow ping=pong&apos; ~~ m:g/(\w+) &apos;=&apos; (\w+)/)».Slip».Str;</div><div class="line">say %things;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># moo =&gt; meow, ping =&gt; pong</div></pre></td></tr></table></figure>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>把 <em>comb</em> 和 <em><a href="http://blogs.perl.org/users/zoffix_znet/2016/01/perl-6-rotor-the-king-of-list-manipulation.html" target="_blank" rel="external">rotor</a></em> 结合起来用会很强大。</p>
+<h2 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h2><p>代替使用带有 <code>:match</code> 参数的 <code>.comb</code> , 你最好就使用 <code>.match</code> 方法好了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;moo=meow ping=pong&apos;.match(/(\w+) &apos;=&apos; (\w+)/, :g)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/comb/" rel="tag">#comb</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/07/It-s-blocks-all-the-way-down/" rel="next" title="It's blocks all the way down">
+                <i class="fa fa-chevron-left"></i> It's blocks all the way down
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/09/given-when/" rel="prev" title="given when">
+                given when <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/07/07/Perl6中的梳子/"
+     data-title="Perl 6 中的梳子!"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/07/07/Perl6中的梳子/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/07/Perl6中的梳子/"
+           data-title="Perl 6 中的梳子!" data-url="https://ohmycloud.github.io/2016/07/07/Perl6中的梳子/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Perl-6-中的梳子"><span class="nav-number">1.</span> <span class="nav-text">Perl 6 中的梳子!</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plain-‘Ol-Characters"><span class="nav-number">1.1.</span> <span class="nav-text">Plain ‘Ol Characters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Limits"><span class="nav-number">1.2.</span> <span class="nav-text">Limits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计数"><span class="nav-number">1.3.</span> <span class="nav-text">计数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的匹配"><span class="nav-number">1.4.</span> <span class="nav-text">简单的匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#限制所匹配的东西"><span class="nav-number">1.5.</span> <span class="nav-text">限制所匹配的东西</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个捕获"><span class="nav-number">1.6.</span> <span class="nav-text">多个捕获</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">1.7.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评论"><span class="nav-number">1.8.</span> <span class="nav-text">评论</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

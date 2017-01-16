@@ -1,0 +1,795 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Grammar," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6 核心骇客: 词法的胡言乱语
+喜欢修复 Perl 6 编译器中的 bug? 这儿有一个great grammar bugglet: 当 „” 引号用在引起的用空白分割的单词列表构造器中时看起来好像不能工作:
+123456789say „hello world”;.say for qww&amp;lt;„hello world”&amp;gt;;.say for qww&amp;lt;&amp;quot;hello w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 核心骇客--词法的胡言乱语">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/01/01/Perl-6-核心骇客-词法的胡言乱语/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6 核心骇客: 词法的胡言乱语
+喜欢修复 Perl 6 编译器中的 bug? 这儿有一个great grammar bugglet: 当 „” 引号用在引起的用空白分割的单词列表构造器中时看起来好像不能工作:
+123456789say „hello world”;.say for qww&amp;lt;„hello world”&amp;gt;;.say for qww&amp;lt;&amp;quot;hello w">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 核心骇客--词法的胡言乱语">
+<meta name="twitter:description" content="Perl 6 核心骇客: 词法的胡言乱语
+喜欢修复 Perl 6 编译器中的 bug? 这儿有一个great grammar bugglet: 当 „” 引号用在引起的用空白分割的单词列表构造器中时看起来好像不能工作:
+123456789say „hello world”;.say for qww&amp;lt;„hello world”&amp;gt;;.say for qww&amp;lt;&amp;quot;hello w">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/01/01/Perl-6-核心骇客-词法的胡言乱语/"/>
+
+  <title> Perl 6 核心骇客--词法的胡言乱语 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 核心骇客--词法的胡言乱语
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-01T00:00:00+08:00" content="2016-01-01">
+              2016-01-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/01/Perl-6-核心骇客-词法的胡言乱语/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/01/Perl-6-核心骇客-词法的胡言乱语/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://perl6.party/post/Perl-6-Core-Hacking-Grammatical-Babble" target="_blank" rel="external">Perl 6 核心骇客: 词法的胡言乱语</a></p>
+<p>喜欢修复 Perl 6 编译器中的 bug? 这儿有一个<a href="https://rt.perl.org/Ticket/Display.html?id=128304" target="_blank" rel="external">great grammar bugglet</a>: 当 <code>„”</code> 引号用在引起的用空白分割的单词列表构造器中时看起来好像不能工作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">say „hello world”;</div><div class="line">.say for qww&lt;„hello world”&gt;;</div><div class="line">.say for qww&lt;&quot;hello world&quot;&gt;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># hello world</div><div class="line"># „hello</div><div class="line"># world”</div><div class="line"># hello world</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><code>”</code> 引号不应该出现在输出中并且在输出中我们应该只有 3 行输出; 这 3 行输出都是 <code>hello world</code>。看起来像是一个待修复的有趣的 bug! 我们进去看看。</p>
+<h2 id="你怎样拼写它"><a href="#你怎样拼写它" class="headerlink" title="你怎样拼写它?"></a>你怎样拼写它?</h2><p>事实上这段代码没能正确解析表明这是一个 grammar bug。大部分的 grammar 住在 <a href="https://github.com/rakudo/rakudo/blob/83b8b1a/src/Perl6/Grammar.nqp" target="_blank" rel="external">src/Perl6/Grammar.nqp</a>中, 但是在我们的手变脏之前, 让我们来解决我们应该查看什么。</p>
+<p>二进制 <code>perl6</code> 有一个 <code>--target</code> 命令行参数来接收其中之一的编译步骤并且会导致那个步骤的输出被产生出来。那儿有哪些步骤? 根据你正使用的后端它们也会有所不同, 但是你可以仅仅运行 <code>perl6 --stagestats -e &#39;&#39;</code> 把它们都打印出来:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">zoffix@leliana:~$ perl6 --stagestats -e &apos;&apos;</div><div class="line">Stage start      :   0.000</div><div class="line">Stage parse      :   0.077</div><div class="line">Stage syntaxcheck:   0.000</div><div class="line">Stage ast        :   0.000</div><div class="line">Stage optimize   :   0.001</div><div class="line">Stage mast       :   0.004</div><div class="line">Stage mbc        :   0.000</div><div class="line">Stage moar       :   0.000</div></pre></td></tr></table></figure>
+<p>Grammars 是关于解析的, 所以我们会查询 <code>parse</code> 目标(target)。至于要执行的代码, 我们会仅仅给它有问题的那块; 即 <code>qww&lt;&gt;</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">zoffix@leliana:~$ perl6 --target=parse -e &apos;qww&lt;„hello world”&gt;&apos;</div><div class="line">- statementlist: qww&lt;„hello world”&gt;</div><div class="line">  - statement: 1 matches</div><div class="line">    - EXPR: qww&lt;„hello world”&gt;</div><div class="line">      - value: qww&lt;„hello world”&gt;</div><div class="line">        - quote: qww&lt;„hello world”&gt;</div><div class="line">          - quibble: &lt;„hello world”&gt;</div><div class="line">            - babble:</div><div class="line">              - B:</div><div class="line">            - nibble: „hello world”</div><div class="line">          - quote_mod: ww</div><div class="line">            - sym: ww</div></pre></td></tr></table></figure>
+<p>那很棒! 每一行前面都有能在 grammar 中找到的 token 的名字, 所以现在我们知道了在哪里查找问题。</p>
+<p>我们还知道基本的引号能正确地工作, 所以我们也倾倒出它们的解析步骤, 来看看这两个输出之间是否有什么不同:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">zoffix@leliana:~$ perl6 --target=parse -e &apos;qww&lt;&quot;hello world&quot;&gt;&apos;</div><div class="line">- statementlist: qww&lt;&quot;hello world&quot;&gt;</div><div class="line">  - statement: 1 matches</div><div class="line">    - EXPR: qww&lt;&quot;hello world&quot;&gt;</div><div class="line">      - value: qww&lt;&quot;hello world&quot;&gt;</div><div class="line">        - quote: qww&lt;&quot;hello world&quot;&gt;</div><div class="line">          - quibble: &lt;&quot;hello world&quot;&gt;</div><div class="line">            - babble:</div><div class="line">              - B:</div><div class="line">            - nibble: &quot;hello world&quot;</div><div class="line">          - quote_mod: ww</div><div class="line">            - sym: ww</div></pre></td></tr></table></figure>
+<p>那么… 好吧, 除了引号不同, 解析数完全一样。所以它看起来好像所有涉及的 tokens 都是相同的, 但是那些 tokens 所做的事情不同。</p>
+<p>我们不必检查输出中我们看到的每个 tokens。<code>statementlist</code> 和 <code>statement</code> 是匹配普通语句的 tokens, <code>EXPR</code> 是占位符解析器, <code>value</code> 是它正操作的值中的一个。我们会忽略上面那些, 留给我们的是下面这样一个可疑的列表:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">- quote: qww&lt;„hello world”&gt;</div><div class="line">  - quibble: &lt;„hello world”&gt;</div><div class="line">    - babble:</div><div class="line">      - B:</div><div class="line">    - nibble: „hello world”</div><div class="line">  - quote_mod: ww</div><div class="line">    - sym: ww</div><div class="line">```  </div><div class="line"></div><div class="line">让我们开始质问它们。</div><div class="line"></div><div class="line">## 到兔子洞里去...</div><div class="line"></div><div class="line">你自己搞一份本地的 [Rakudo 仓库](https://github.com/rakudo/rakudo/), 如果你已经有了一份,那么打开 [src/Perl6/Grammar.nqp](https://github.com/rakudo/rakudo/blob/83b8b1a/src/Perl6/Grammar.nqp), 然后放松点。</div><div class="line"></div><div class="line">我们会从树的顶部到底部跟随我们的 tokens, 所以我们首先需要找到的是 `token quote`, `rule quote`, `regex quote` 或 `method quote`; 以那个顺序搜索, 因为第一项很可能就是正确的东西。</div><div class="line"></div><div class="line">这种情况下, 它是一个 [token quote](https://github.com/rakudo/rakudo/blob/83b8b1a/src/Perl6/Grammar.nqp#L3555), 它是一个 [proto regex](https://docs.perl6.org/language/grammars#Protoregexes)。我们的代码使用了它的 `q` 版本并且你还可以认出靠近它的 `qq` 和 `Q` 版本:</div><div class="line"></div><div class="line">```perl6</div><div class="line">token quote:sym&lt;q&gt; &#123;</div><div class="line">    :my $qm;</div><div class="line">    &apos;q&apos;</div><div class="line">    [</div><div class="line">    | &lt;quote_mod&gt; &#123;&#125; &lt;.qok($/)&gt; &#123; $qm := $&lt;quote_mod&gt;.Str &#125;</div><div class="line">        &lt;quibble(%*LANG&lt;Quote&gt;, &apos;q&apos;, $qm)&gt;</div><div class="line">    | &#123;&#125; &lt;.qok($/)&gt; &lt;quibble(%*LANG&lt;Quote&gt;, &apos;q&apos;)&gt;</div><div class="line">    ]</div><div class="line">&#125;</div><div class="line">token quote:sym&lt;qq&gt; &#123;</div><div class="line">    :my $qm;</div><div class="line">    &apos;qq&apos;</div><div class="line">    [</div><div class="line">    | &lt;quote_mod&gt; &#123; $qm := $&lt;quote_mod&gt;.Str &#125; &lt;.qok($/)&gt;</div><div class="line">        &lt;quibble(%*LANG&lt;Quote&gt;, &apos;qq&apos;, $qm)&gt;</div><div class="line">    | &#123;&#125; &lt;.qok($/)&gt; &lt;quibble(%*LANG&lt;Quote&gt;, &apos;qq&apos;)&gt;</div><div class="line">    ]</div><div class="line">&#125;</div><div class="line">token quote:sym&lt;Q&gt; &#123;</div><div class="line">    :my $qm;</div><div class="line">    &apos;Q&apos;</div><div class="line">    [</div><div class="line">    | &lt;quote_mod&gt; &#123; $qm := $&lt;quote_mod&gt;.Str &#125; &lt;.qok($/)&gt;</div><div class="line">        &lt;quibble(%*LANG&lt;Quote&gt;, $qm)&gt;</div><div class="line">    | &#123;&#125; &lt;.qok($/)&gt; &lt;quibble(%*LANG&lt;Quote&gt;)&gt;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到 <code>qq</code> 和 <code>Q</code> 的主体看起来像 <code>q</code>, 我们也来看看它们是否有我们要找的那个 bug:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">zoffix@leliana:~$ perl6 -e &apos;.say for qqww&lt;„hello world”&gt;&apos;</div><div class="line">„hello</div><div class="line">world”</div><div class="line">zoffix@leliana:~$ perl6 -e &apos;.say for Qww&lt;„hello world”&gt;&apos;</div><div class="line">„hello</div><div class="line">world</div></pre></td></tr></table></figure>
+<p>是的, 它们也存在, 所以 <code>token quote</code> 不可能是那个问题。我们来分解下  <code>token quote:sym&lt;q&gt;</code> 是做什么的, 来算出怎么进行到下一步; 它的备选之一没有被用在我们当前的代码中, 所以我会省略它:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">token quote:sym&lt;q&gt; &#123;</div><div class="line">    :my $qm;</div><div class="line">    &apos;q&apos;</div><div class="line">    [</div><div class="line">    | &lt;quote_mod&gt; &#123;&#125; &lt;.qok($/)&gt; &#123; $qm := $&lt;quote_mod&gt;.Str &#125;</div><div class="line">        &lt;quibble(%*LANG&lt;Quote&gt;, &apos;q&apos;, $qm)&gt;</div><div class="line">    | # (this branch omited)</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在第二行中, 我们创建了一个变量, 然后匹配字面值 <code>q</code> 然后是 <code>quote_mod</code> token。那个是我们的 <code>--target=parse</code> 输出中的一部分并且如果你像我们找出 <code>quote</code> token 那样找出它, 你会注意到它是一个 proto regex, 即, 在那种情况下, 匹配我们代码的 <code>ww</code> 块。后面跟着的空 <code>{}</code> 块我们可以忽略(那是一个 bug 的替代方法可能在你读到这儿时已经被修复了)。目前为止, 我们已经匹配了我们代码的 <code>qww</code> 块。</p>
+<p>再往前走, 我们遇见了对 <code>qok</code> token 的调用, 当前的 <a href="https://docs.perl6.org/type/Match" target="_blank" rel="external">Match</a> 对象作为其参数。<code>&lt;.qok&gt;</code> 中的点号表明这是一个非捕获 token 匹配, 这就是它为什么它没有在我们的 <code>--target=parse</code> 输出中出现的原因。我们定位到那个 token 并看看它是关于什么的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">token qok($x) &#123;</div><div class="line">    » &lt;![(]&gt;</div><div class="line">    [</div><div class="line">        &lt;?[:]&gt; || &lt;!&#123;</div><div class="line">            my $n := ~$x; $*W.is_name([$n]) || $*W.is_name([&apos;&amp;&apos; ~ $n])</div><div class="line">        &#125;&gt;</div><div class="line">    ]</div><div class="line">    [ \s* &apos;#&apos; &lt;.panic: &quot;# not allowed as delimiter&quot;&gt; ]?</div><div class="line">    &lt;.ws&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我的天呐! 这么多符号, 但是这个家伙很容易了: <code>»</code> 是一个<a href="https://docs.perl6.org/language/regexes#%3C%3C_and_%3E%3E_,_left_and_right_word_boundary" target="_blank" rel="external">右单词边界</a>后面不能跟着一个开圆括号(<code>&lt;![(]&gt;</code>), 再跟着一个备选分支(<code>[]</code>), 再跟着一个检查, 即我们不想尝试使用 <code>#</code> 号作为分割符(<code>[...]?</code>), 最后跟着一个 <a href="https://docs.perl6.org/language/grammars#ws" target="_blank" rel="external">&lt;.ws&gt;</a> token 吞噬各种各样的空白。</p>
+<p>在备选分支中, 我们使用了首个token匹配的 <code>||</code> 备选分支(和最长token匹配 <code>|</code> 相反), 并且首个 token 向前查看一个冒号 <code>&lt;?[:]&gt;</code>。 如果失败了, 我们就字符串化那个给定的参数(<code>~$x</code>)并且之后在 <a href="https://github.com/rakudo/rakudo/blob/83b8b1a/src/Perl6/World.nqp" target="_blank" rel="external">World对象</a> 身上调用 <code>is_name</code> 方法, 原样地传递带有前置 <code>&amp;</code> 符号的字符串化的参数。传递的 <code>~$x</code> 是目前为止我们的 <code>token quote:sym&lt;q&gt;</code> token 所匹配到的东西(并且那是字符串 <code>qww</code>)。<code>is_name</code> 方法仅仅检查那个给定的符号是否被定义还有根据那个返回值检查我们的 token 匹配会通过还是会失败。如果那个求值代码返回一个真值那么我们正在使用的  <code>&lt;!{ ... }&gt;</code> 结构就会失败。</p>
+<p>总而言之, 这个 token 所做的所有事情就是检查我们没有使用 <code>#</code> 作为分隔符并且没有尝试去调用一个方法或sub。房间的这个角落没有 bug 迹象。 让我们回到我们的 <code>token quote:sym&lt;q&gt;</code> 来查看下一步做什么:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">token quote:sym&lt;q&gt; &#123;</div><div class="line">    :my $qm;</div><div class="line">    &apos;q&apos;</div><div class="line">    [</div><div class="line">    | &lt;quote_mod&gt; &#123;&#125; &lt;.qok($/)&gt; &#123; $qm := $&lt;quote_mod&gt;.Str &#125;</div><div class="line">        &lt;quibble(%*LANG&lt;Quote&gt;, &apos;q&apos;, $qm)&gt;</div><div class="line">    | # (this branch omited)</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们已经完成了 <code>&lt;.qok&gt;</code> 的检查, 所以下一步是 <code>{ $qm := $&lt;quote_mod&gt;.Str }</code>, 那仅仅把匹配到 <code>quote_mod</code> token 的字符串值存到 <code>$qm</code> 变量中。在我们的例子中, 那个值就是字符串 <code>ww</code>。</p>
+<p>下面跟着的是另外一个 token, 它在我们的 <code>--target=parse</code> s输出中出现过:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;quibble(%*LANG&lt;Quote&gt;, &apos;q&apos;, $qm)&gt;</div></pre></td></tr></table></figure>
+<p>这里, 我们使用三个位置参数引用了那个 token: <a href="https://github.com/rakudo/rakudo/blob/04af57c3b3d32353e36614de53396d2b4a08b7be/src/Perl6/Grammar.nqp#L424" target="_blank" rel="external">Quote language braid</a>, 字符串 <code>q</code> 和 我们保存在变量 <code>$qm</code> 中的字符串 <code>ww</code>。我想知道它是做什么的。那是我们的下一站。全力以赴!</p>
+<h2 id="Nibble-Quibble-Babbling-Nibbler"><a href="#Nibble-Quibble-Babbling-Nibbler" class="headerlink" title="Nibble Quibble Babbling Nibbler"></a>Nibble Quibble Babbling Nibbler</h2><p>这里是完整的 <code>token quibble</code> 并且你马上可以发现我们不得不从开始往更深处挖掘, 因为第 5 行是另外一个 token 匹配:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">token quibble($l, *@base_tweaks) &#123;</div><div class="line">    :my $lang;</div><div class="line">    :my $start;</div><div class="line">    :my $stop;</div><div class="line">    &lt;babble($l, @base_tweaks)&gt;</div><div class="line">    &#123;</div><div class="line">        my $B  := $&lt;babble&gt;&lt;B&gt;.ast;</div><div class="line">        $lang  := $B[0];</div><div class="line">        $start := $B[1];</div><div class="line">        $stop  := $B[2];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    $start &lt;nibble($lang)&gt;</div><div class="line">    [</div><div class="line">        $stop</div><div class="line">        || &#123;</div><div class="line">            $/.CURSOR.typed_panic(</div><div class="line">                &apos;X::Comp::AdHoc&apos;,</div><div class="line">                payload =&gt; &quot;Couldn&apos;t find terminator $stop (corresponding $start was at line &#123;</div><div class="line">                    HLL::Compiler.lineof(</div><div class="line">                        $&lt;babble&gt;&lt;B&gt;.orig(), $&lt;babble&gt;&lt;B&gt;.from()</div><div class="line">                    )</div><div class="line">                &#125;)&quot;,</div><div class="line">                expected =&gt; [$stop],</div><div class="line">            )</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        nqp::can($lang, &apos;herelang&apos;)</div><div class="line">        &amp;&amp; self.queue_heredoc(</div><div class="line">            $*W.nibble_to_str(</div><div class="line">                $/,</div><div class="line">                $&lt;nibble&gt;.ast[1], -&gt; &#123;</div><div class="line">                    &quot;Stopper &apos;&quot; ~ $&lt;nibble&gt; ~ &quot;&apos; too complex for heredoc&quot;</div><div class="line">                &#125;</div><div class="line">            ),</div><div class="line">            $lang.herelang,</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们定义了 3 个变量然后引用了 <code>babble</code> token, 这个 babble 引用了和 <code>quibble</code> token 所引用的同样的参数。我们来以和查找所有之前的 tokens 同样的方式查找它并窥探它的内核。为了简洁, 我移除了大约一半<a href="https://github.com/rakudo/rakudo/blob/bc35922/src/Perl6/Grammar.nqp#L111-L125" target="_blank" rel="external">代码</a>:那部分是处理副词的, 目前我们不能在我们的代码中使用它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">token babble($l, @base_tweaks?) &#123;</div><div class="line">    :my @extra_tweaks;</div><div class="line"></div><div class="line">    # &lt;irrelevant portion redacted&gt;</div><div class="line"></div><div class="line">    $&lt;B&gt;=[&lt;?before .&gt;]</div><div class="line">    &#123;</div><div class="line">        # Work out the delimeters.</div><div class="line">        my $c := $/.CURSOR;</div><div class="line">        my @delims := $c.peek_delimiters($c.target, $c.pos);</div><div class="line">        my $start := @delims[0];</div><div class="line">        my $stop  := @delims[1];</div><div class="line"></div><div class="line">        # Get the language.</div><div class="line">        my $lang := self.quote_lang($l, $start, $stop, @base_tweaks, @extra_tweaks);</div><div class="line">        $&lt;B&gt;.&apos;!make&apos;([$lang, $start, $stop]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们通过把向前查看捕获到 <code>$&lt;B&gt;</code> 捕获中开始, 它用作更新当前的 Cursor 位置, 然后进入以执行那个代码块。我们把当前的 Cursor 存储在 <code>$c</code> 中, 然后在它身上调用 <code>.peek_delimiters</code> 方法。如果我们为了它在内置的 rakudo 目录中进行 <code>grep</code>, 我们会看到它被定义在 <a href="https://github.com/perl6/nqp/blob/4fd4b48afb45c8b25ccf7cfc5e39cb4bd658901d/src/HLL/Grammar.nqp#L200" target="_blank" rel="external">NQP</a>中, 在 <a href="https://github.com/perl6/nqp/blob/4fd4b48afb45c8b25ccf7cfc5e39cb4bd658901d/src/HLL/Grammar.nqp#L200" target="_blank" rel="external">nqp/src/HLL/Grammar.nqp</a>中, 但是在我们冲出去阅读它的代码之前, 注意它是怎样返回两个分隔符的。我们仅仅把它们打印出来好了?</p>
+<p><code>src/Perl6/Grammar.nqp</code> 的 <code>.nqp</code> 后缀名表明我们正处在 NQP 的地盘儿, 所以我们不要使用 <a href="https://github.com/perl6/nqp/blob/master/docs/ops.markdown" target="_blank" rel="external">NQP ops</a>仅仅并且不是完全的 Perl 6 代码。通过把下面这一行代码添加到 <code>@delim</code> 被赋值给 <code>$start</code> 和 <code>$stop</code> 的地方, 我们能找出 <code>.peek_delimiters</code> 给我们的东西:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nqp::say(&quot;$sart $stop&quot;);</div></pre></td></tr></table></figure>
+<p>编译!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ perl Configure.pl --gen-moar --gen-nqp --backends=moar &amp;&amp;</div><div class="line">  make &amp;&amp;</div><div class="line">  make test &amp;&amp;</div><div class="line">  make install</div></pre></td></tr></table></figure>
+<p>即使在编译期间, 通过吐出额外的东西, 我们的调试行已经给了我们所有那些分隔符是关于什么的启发。再次运行我们的有问题的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ./perl6 -e &apos;.say for qww&lt;„hello world”&gt;;&apos;</div><div class="line">&lt; &gt;</div><div class="line">hello world</div></pre></td></tr></table></figure>
+<p>打印出的分隔符是 <code>qww</code> 里的尖括号分隔符。我们对那些不感兴趣, 所以我们可以忽略 <code>.peek_delimiters</code> 并继续。再往上是 <code>.quote_lang</code> 方法。 它的名字里有一个”引号”而我们有一个关于引号的问题.. 听起来我们离真相越来越近了。我们来看看我们正传递给它的是什么参数:</p>
+<ul>
+<li><code>$1</code> — <a href="https://github.com/rakudo/rakudo/blob/04af57c3b3d32353e36614de53396d2b4a08b7be/src/Perl6/Grammar.nqp#L4752" target="_blank" rel="external">Quote language braid</a></li>
+<li><code>$start</code> / <code>$stop</code> — 尖括号分隔符</li>
+<li><code>@base_tweaks</code> — 包含一个元素: 字符串 <code>ww</code></li>
+<li><code>@extra_tweaks</code> — 额外的副词, 这里我们没有, 所以这个数组是空的</li>
+</ul>
+<p>定位到 <code>method quote_lang</code>; 它仍然在 <a href="https://github.com/rakudo/rakudo/blob/04af57c3b3d32353e36614de53396d2b4a08b7be/src/Perl6/Grammar.nqp#L65" target="_blank" rel="external">src/Perl6/Grammar.nqp</a>文件中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">method quote_lang($l, $start, $stop, @base_tweaks?, @extra_tweaks?) &#123;</div><div class="line">    sub lang_key() &#123;</div><div class="line">        # &lt;body redacted&gt;</div><div class="line">    &#125;</div><div class="line">    sub con_lang() &#123;</div><div class="line">        # &lt;body redacted&gt;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # Get language from cache or derive it.</div><div class="line">    my $key := lang_key();</div><div class="line">    nqp::existskey(%quote_lang_cache, $key) &amp;&amp; $key ne &apos;NOCACHE&apos;</div><div class="line">        ?? %quote_lang_cache&#123;$key&#125;</div><div class="line">        !! (%quote_lang_cache&#123;$key&#125; := con_lang());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们有两个词法子例程 <code>lang_key</code> 和 <code>con_lang</code>, 在它们下面我们把 <code>lang_key</code> 的输出存储到 <code>$key</code> 中, 在 <code>%quote_lang_cache</code> 中这个 <code>$key</code> 被用在整个缓存 dance 中, 所以我们可以忽略掉 <code>lang_key</code> sub 并直接进入 <code>con_lang</code>, 它被调用以生成我们的 <code>quote_lang</code> 方法的返回值:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">sub con_lang() &#123;</div><div class="line">    my $lang := $l.&apos;!cursor_init&apos;(self.orig(), :p(self.pos()), :shared(self.&apos;!shared&apos;()));</div><div class="line">    for @base_tweaks &#123;</div><div class="line">        $lang := $lang.&quot;tweak_$_&quot;(1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    for @extra_tweaks &#123;</div><div class="line">        my $t := $_[0];</div><div class="line">        if nqp::can($lang, &quot;tweak_$t&quot;) &#123;</div><div class="line">            $lang := $lang.&quot;tweak_$t&quot;($_[1]);</div><div class="line">        &#125;</div><div class="line">        else &#123;</div><div class="line">            self.sorry(&quot;Unrecognized adverb: :$t&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    nqp::istype($stop,VMArray) ||</div><div class="line">    $start ne $stop ?? $lang.balanced($start, $stop)</div><div class="line">                    !! $lang.unbalanced($stop);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在初始化 Cursor 位置之后, <code>$lang</code> 继续包含我们的 Quote 语言编织然后我们落进一个 <code>for</code> 循环来迭代 <code>@base_tweaks</code>, 对于里面的每一个元素, 我们都调用方法 <code>tweak_$_</code>, 给它传递一个真值 <code>1</code>。因为我们仅仅只有一个 base tweak, 这意味着我们正在Quote braid上调用方法 <code>tweak_ww</code>。我们来看看那个方法是关于什么的。</p>
+<p>因为 Quote braid 被定义在同一个文件中, 仅仅搜索 <code>method tweak_ww</code> 好了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">method tweak_ww($v) &#123;</div><div class="line">    $v ?? self.add-postproc(&quot;quotewords&quot;).apply_tweak(ww)</div><div class="line">       !! self</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>很好。我们给它的 <code>$v</code> 为真, 所以我们调用了 <code>.add-postproc</code> 然后调用 <code>.apply_tweak(ww)</code>。看一下那个方法的上面和下面, 我们看到 <code>.add-postproc</code> 也用在其它不含 bug 的引号中, 所以我们忽略它并直接跳到 <code>.apply_tweak</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">method apply_tweak($role) &#123;</div><div class="line">    my $target := nqp::can(self, &apos;herelang&apos;) ?? self.herelang !! self;</div><div class="line">    $target.HOW.mixin($target, $role);</div><div class="line">    self</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>啊哈! 它的参数是一个 role 并且它把该 role 混进来我们的 Quote braid 中。我们来看看那个 role 是关于什么的(再一次, 仅仅在文件中搜索 <a href="https://github.com/rakudo/rakudo/blob/94b09ab9280d39438f84cb467d4b3d3042b8f672/src/Perl6/Grammar.nqp#L4846" target="_blank" rel="external">role ww</a>, 或者仅仅向上滚动一点):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">role ww &#123;</div><div class="line">    token escape:sym&lt;&apos; &apos;&gt; &#123;</div><div class="line">        &lt;?[&apos;]&gt; &lt;quote=.LANG(&apos;MAIN&apos;,&apos;quote&apos;)&gt;</div><div class="line">    &#125;</div><div class="line">    token escape:sym&lt;‘ ’&gt; &#123;</div><div class="line">        &lt;?[‘]&gt; &lt;quote=.LANG(&apos;MAIN&apos;,&apos;quote&apos;)&gt;</div><div class="line">    &#125;</div><div class="line">    token escape:sym&lt;&quot; &quot;&gt; &#123;</div><div class="line">        &lt;?[&quot;]&gt; &lt;quote=.LANG(&apos;MAIN&apos;,&apos;quote&apos;)&gt;</div><div class="line">    &#125;</div><div class="line">    token escape:sym&lt;“ ”&gt; &#123;</div><div class="line">        &lt;?[“]&gt; &lt;quote=.LANG(&apos;MAIN&apos;,&apos;quote&apos;)&gt;</div><div class="line">    &#125;</div><div class="line">    token escape:sym&lt;colonpair&gt; &#123;</div><div class="line">        &lt;?[:]&gt; &lt;!RESTRICTED&gt; &lt;colonpair=.LANG(&apos;MAIN&apos;,&apos;colonpair&apos;)&gt;</div><div class="line">    &#125;</div><div class="line">    token escape:sym&lt;#&gt; &#123;</div><div class="line">        &lt;?[#]&gt; &lt;.LANG(&apos;MAIN&apos;, &apos;comment&apos;)&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>奥, 我的天呐!引号! 如果这个地方不是我们修复 bug 的地方, 那么我就是一个芭蕾舞女演员。 我们找到它了!</p>
+<p>我们定位到的 role 把进了某些 tokens 混合进了我们正使用的 Quote braid 中来解析 <code>qww</code> 的内容。我们带有 bug 的 <code>„”</code> 引号组合明显不在那个列表中。我们来把它添加进去!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">token escape:sym&lt;„ ”&gt; &#123;</div><div class="line">    &lt;?[„]&gt; &lt;quote=.LANG(&apos;MAIN&apos;,&apos;quote&apos;)&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译! 运行我们带有 bug 的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ./perl6 -e &apos;.say for qww&lt;foo „hello world” bar&gt;&apos;</div><div class="line">foo</div><div class="line">bar</div></pre></td></tr></table></figure>
+<p>悲催! 好吧, 我们确实为引号处理找到了正确的地方, 但是我们让问题变得更加糟糕了。发生了什么?</p>
+<h2 id="Quotastic-Inaction"><a href="#Quotastic-Inaction" class="headerlink" title="Quotastic Inaction"></a>Quotastic Inaction</h2><p>我们新的 token 肯定解析了那个引号, 但是我们绝对没有给它添加 Actions 动作… 好吧, 对它起作用。 Action 类和 Grammars 相邻, 在 <code>src/Perl6/Actions.nqp</code> 中。打开它并定位到匹配的方法那里; 比如 <a href="https://github.com/rakudo/rakudo/blob/94b09ab9280d39438f84cb467d4b3d3042b8f672/src/Perl6/Actions.nqp#L9243" target="_blank" rel="external">method escape:sym&lt;“ ”&gt;</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">method escape:sym&lt;&apos; &apos;&gt;($/) &#123; make mark_ww_atom($&lt;quote&gt;.ast); &#125;</div><div class="line">method escape:sym&lt;&quot; &quot;&gt;($/) &#123; make mark_ww_atom($&lt;quote&gt;.ast); &#125;</div><div class="line">method escape:sym&lt;‘ ’&gt;($/) &#123; make mark_ww_atom($&lt;quote&gt;.ast); &#125;</div><div class="line">method escape:sym&lt;“ ”&gt;($/) &#123; make mark_ww_atom($&lt;quote&gt;.ast); &#125;</div></pre></td></tr></table></figure>
+<p>并在列表中添加我们自己的版本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">method escape:sym&lt;„ ”&gt;($/) &#123; make mark_ww_atom($&lt;quote&gt;.ast); &#125;</div></pre></td></tr></table></figure>
+<p>编译! 运行我们带有 bug 的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ./perl6 -e &apos;.say for qww&lt;foo „hello world” bar&gt;&apos;</div><div class="line">foo</div><div class="line">hello world</div><div class="line">bar</div></pre></td></tr></table></figure>
+<p>呼! 成功了! 不再有 bug 了。我们修复了那个 bug!</p>
+<p>但是, 等一下…</p>
+<h2 id="遗漏了-但是没有忘记"><a href="#遗漏了-但是没有忘记" class="headerlink" title="遗漏了, 但是没有忘记"></a>遗漏了, 但是没有忘记</h2><p>看一下<a href="https://docs.perl6.org/language/unicode_texas#Other_acceptable_single_codepoints" target="_blank" rel="external">所有可能的奢华的引号的列表</a>。尽管我们的 bug 报告中仅仅提到了 <code>„”</code> 引号对儿, 但是 <code>‚‘</code> 和 <code>「」</code> 都不在我们的 <code>role ww</code> tokens 中。远远不止的是, 某些左/右引号, 当它们交换位置后, 在引起字符串的时候也刚好能工作, 所以它们也应该在 <code>qww</code> 中起效。然而, 添加一整串额外的 tokens 和一整串其它的 actions 方法是相当不精彩的。有没有更好的方法?</p>
+<p>我们仔细看看我们的 tokens:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">token escape:sym&lt;“ ”&gt; &#123;</div><div class="line">    &lt;?[“]&gt; &lt;quote=.LANG(&apos;MAIN&apos;,&apos;quote&apos;)&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>sym&lt;“ ”&gt;</code> 我们可以把它省略了 — 这里它的功能仅仅是作为一个名字。我们留下的是一个向前查看的 <code>“</code> 引号还有 <code>&lt;quote=.LANG(&#39;MAIN&#39;,&#39;quote&#39;)&gt;</code>。所以我们可以向前查看所有的我们关心的开口引号并让 MAIN braid 接管所有的细节。</p>
+<p>所以, 让我们用这个单个 token 替换掉所有的引号处理 tokens:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">token escape:sym&lt;&apos;&gt; &#123;</div><div class="line">    &lt;?[ &apos; &quot; ‘ ‚ ’ “ „ ” 「 ]&gt; &lt;quote=.LANG(&apos;MAIN&apos;,&apos;quote&apos;)&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>并且使用下面这个单个 action 替换掉所有的匹配 actions 方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">method escape:sym&lt;&apos;&gt;($/) &#123; make mark_ww_atom($&lt;quote&gt;.ast); &#125;</div></pre></td></tr></table></figure>
+<p>编译! 运行我们的带有某些引号变体的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ./perl6 -e &apos;.say for qww&lt;„looks like” ‚we fixed‘ ｢this thing｣&gt;&apos;</div><div class="line">looks like</div><div class="line">we fixed</div><div class="line">this thing</div></pre></td></tr></table></figure>
+<p>精彩! 我们不仅让所有的引号都能正常工作, 还设法清理的存在的 tokens 和 actions 方法。现在所有我们需要做的就是对我们的修复做测试并且我们已经准备提交了。</p>
+<h2 id="享用-bug-烤肉"><a href="#享用-bug-烤肉" class="headerlink" title="享用 bug 烤肉"></a>享用 bug 烤肉</h2><p><a href="https://github.com/perl6/roast" target="_blank" rel="external">Perl 6 官方测试套件 Roast</a> 是在 Rakudo 内建目录中的 <code>t/spec</code> 中，如果它不存在, 仅仅运行 <code>make spectest</code> 就好了并且在它把 roast 仓库克隆到 <code>t/spec</code> 中后就中止它。我们需要找到在哪里插入我们的测试而 <code>grep</code> 是干那件事的好朋友:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">zoffix@VirtualBox:~/CPANPRC/rakudo/t/spec$ grep -R &apos;qww&apos; .</div><div class="line">Binary file ./.git/objects/pack/pack-5bdee39f28283fef4b500859f5b288ea4eec20d7.pack matches</div><div class="line">./S02-literals/allomorphic.t:    my @wordlist = qqww[1 2/3 4.5 6e7 8+9i] Z (IntStr, RatStr, RatStr, NumStr, ComplexStr);</div><div class="line">./S02-literals/allomorphic.t:        isa-ok $val, Str, &quot;&apos;$val&apos; from qqww[] is a Str&quot;;</div><div class="line">./S02-literals/allomorphic.t:        nok $val.isa($wrong-type), &quot;&apos;$val&apos; from qqww[] is not a $wrong-type.perl()&quot;;</div><div class="line">./S02-literals/allomorphic.t:    my @wordlist  = qqww:v[1 2/3 4.5 6e7 8+9i];</div><div class="line">./S02-literals/allomorphic.t:    my @written = qqww:v[1 2/3 $num 6e7 8+9i ten];</div><div class="line">./S02-literals/allomorphic.t:    is-deeply @angled, @written, &quot;«...» is equivalent to qqww:v[...]&quot;;</div><div class="line">./S02-literals/quoting.t:    is(qqww[$alpha $beta], &lt;foo bar&gt;, &apos;qqww&apos;);</div><div class="line">./S02-literals/quoting.t:    for (&lt;&lt;$a b c&gt;&gt;, qqww&#123;$a b c&#125;, qqw&#123;$a b c&#125;).kv -&gt; $i, $_ &#123;</div><div class="line">./S02-literals/quoting.t:    is-deeply qww&lt;a a ‘b b’ ‚b b’ ’b b‘ ’b b‘ ’b b’ ‚b b‘ ‚b b’ “b b” „b b”</div><div class="line">./S02-literals/quoting.t:    &apos;fancy quotes in qww work just like regular quotes&apos;;</div><div class="line">./integration/advent2014-day16.t:    for flat qww/ foo bar &apos;first second&apos; / Z @a -&gt; $string, $result &#123;</div></pre></td></tr></table></figure>
+<p>看起来 <code>S02-literals/quoting.t</code> 是它的一个好地方。打开那个文件, 在它的顶部, 通过我们添加的测试的数量来增加 <code>plan</code> 的数量 — 在这个例子中仅仅增加一条就好了。然后滚动到底部并创建一个 block 块, 前面添加一个注释, 并为我们正修复的 <a href="https://rt.perl.org/Ticket/Display.html?id=128304" target="_blank" rel="external">bug 报告</a>引用那个 RT 标签数字。</p>
+<p>在文件里面, 我们使用 <a href="https://docs.perl6.org/language/testing#index-entry-is-deeply-is-deeply%28%24value%2C_%24expected%2C_%24description%3F%29" target="_blank" rel="external">is-deeply</a> 测试函数, 它使用 <a href="https://docs.perl6.org/routine/eqv" target="_blank" rel="external">eqv 操作符</a>语义来做测试。我们会给它一个带有完整引号串的 <code>qww&lt;&gt;</code> 行并告诉它我们所期望返回的项目列表。还要写下测试描述:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># RT #128304</div><div class="line">&#123;</div><div class="line">    is-deeply qww&lt;a a ‘b b’ ‚b b’ ’b b‘ ’b b‘ ’b b’ ‚b b‘ ‚b b’ “b b” „b b”</div><div class="line">            ”b b“ ”b b“ ”b b” „b b“ „b b” ｢b b｣ ｢b b｣&gt;,</div><div class="line">        (&apos;a&apos;, &apos;a&apos;, |(&apos;b b&apos; xx 16)),</div><div class="line">    &apos;fancy quotes in qww work just like regular quotes&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>返回到 Rakudo checkout, 运行修改后的测试并保证它通过:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ make t/spec/S02-literals/quoting.t</div><div class="line"># &lt;lots of output&gt;</div><div class="line">All tests successful.</div><div class="line">Files=1, Tests=185,  3 wallclock secs ( 0.03 usr  0.01 sys +  2.76 cusr  0.11 csys =  2.91 CPU)</div><div class="line">Result: PASS</div></pre></td></tr></table></figure>
+<p>漂亮。 提交测试 bug 修复好了并且把它们送走! 我们做到了!</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>当我们在修复 Perl 6 中的解析 bugs 的时候, 把程序减少到能重新产生那个 bug 的最小部分然后使用 <code>--target=parse</code> 命令行参数, 得到解析树的输出, 找到所匹配的那个 tokens。<code>statementlist</code></p>
+<p>然后, 在 <a href="https://github.com/rakudo/rakudo/blob/04af57c3b3d32353e36614de53396d2b4a08b7be/src/Perl6/Grammar.nqp" target="_blank" rel="external">src/Perl6/Grammar.nqp</a> 中跟随这些 tokens, 它也继承自 <a href="https://github.com/perl6/nqp/blob/4fd4b48afb45c8b25ccf7cfc5e39cb4bd658901d/src/HLL/Grammar.nqp" target="_blank" rel="external">NQP 的 src/HLL/Grammar.nqp</a> 。 与位于 <a href="https://github.com/rakudo/rakudo/blob/04af57c3b3d32353e36614de53396d2b4a08b7be/src/Perl6/Actions.nqp" target="_blank" rel="external">src/Perl6/Actions.nqp</a> 中的 actions 类协作, 跟随着代码找出正在做什么并期望找出问题出现在什么位置。</p>
+<p>修复它。测试它。发布它。</p>
+<p>充满了乐趣。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grammar/" rel="tag">#Grammar</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/21/perl6intro-翻译/" rel="next" title="perl6intro 翻译">
+                <i class="fa fa-chevron-left"></i> perl6intro 翻译
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/02/Perl-6-博文收集/" rel="prev" title="Perl 6 博文收集">
+                Perl 6 博文收集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/01/01/Perl-6-核心骇客-词法的胡言乱语/"
+     data-title="Perl 6 核心骇客--词法的胡言乱语"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/01/01/Perl-6-核心骇客-词法的胡言乱语/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/01/Perl-6-核心骇客-词法的胡言乱语/"
+           data-title="Perl 6 核心骇客--词法的胡言乱语" data-url="https://ohmycloud.github.io/2016/01/01/Perl-6-核心骇客-词法的胡言乱语/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#你怎样拼写它"><span class="nav-number">1.</span> <span class="nav-text">你怎样拼写它?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nibble-Quibble-Babbling-Nibbler"><span class="nav-number">2.</span> <span class="nav-text">Nibble Quibble Babbling Nibbler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quotastic-Inaction"><span class="nav-number">3.</span> <span class="nav-text">Quotastic Inaction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遗漏了-但是没有忘记"><span class="nav-number">4.</span> <span class="nav-text">遗漏了, 但是没有忘记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#享用-bug-烤肉"><span class="nav-number">5.</span> <span class="nav-text">享用 bug 烤肉</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

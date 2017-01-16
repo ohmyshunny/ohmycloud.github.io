@@ -1,0 +1,1238 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="正则表达式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="从匹配中返回值Match 对象
+成功的匹配总是返回一个 Match 对象, 这个对象通常也被放进 $/ 中, (具名 regex, token, 或 rule 是一个子例程, 因此会声明它们自己的本地 $/ 变量, 它通常指 rule 中最近一次的 submatch, 如果有的话)。当前的匹配状态被保存到 regex 的 $¢ 变量中, 当匹配结束时它最终会被绑定到用户的 $/变量中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的正则表达式(五)">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/04/28/Perl6中的正则表达式-五/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="从匹配中返回值Match 对象
+成功的匹配总是返回一个 Match 对象, 这个对象通常也被放进 $/ 中, (具名 regex, token, 或 rule 是一个子例程, 因此会声明它们自己的本地 $/ 变量, 它通常指 rule 中最近一次的 submatch, 如果有的话)。当前的匹配状态被保存到 regex 的 $¢ 变量中, 当匹配结束时它最终会被绑定到用户的 $/变量中">
+<meta property="og:updated_time" content="2016-11-01T08:24:28.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的正则表达式(五)">
+<meta name="twitter:description" content="从匹配中返回值Match 对象
+成功的匹配总是返回一个 Match 对象, 这个对象通常也被放进 $/ 中, (具名 regex, token, 或 rule 是一个子例程, 因此会声明它们自己的本地 $/ 变量, 它通常指 rule 中最近一次的 submatch, 如果有的话)。当前的匹配状态被保存到 regex 的 $¢ 变量中, 当匹配结束时它最终会被绑定到用户的 $/变量中">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/04/28/Perl6中的正则表达式-五/"/>
+
+  <title> Perl 6 中的正则表达式(五) | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的正则表达式(五)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-28T00:00:00+08:00" content="2015-04-28">
+              2015-04-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/28/Perl6中的正则表达式-五/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/28/Perl6中的正则表达式-五/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="从匹配中返回值"><a href="#从匹配中返回值" class="headerlink" title="从匹配中返回值"></a>从匹配中返回值</h1><h1 id="Match-对象"><a href="#Match-对象" class="headerlink" title="Match 对象"></a>Match 对象</h1><ul>
+<li>成功的匹配总是返回一个 <code>Match</code> 对象, 这个对象通常也被放进 <code>$/</code> 中, (具名 <code>regex</code>, <code>token</code>, 或 <code>rule</code> 是一个子例程, 因此会声明它们自己的<strong>本地</strong> <code>$/</code> 变量, 它通常指 rule 中最近一次的 <code>submatch</code>, 如果有的话)。当前的匹配状态被保存到 regex 的 <code>$¢</code> 变量中, 当匹配结束时它最终会被绑定到用户的 <code>$/</code>变量中</li>
+</ul>
+<a id="more"></a>
+<p>不成功的匹配会返回 Nil (并把 <code>$/</code> 设置为 Nil, 如果匹配已经设置了 <code>$/</code>的话)</p>
+<ul>
+<li><p>名义上, Match 对象包含一个布尔的成功值, 一个<strong>有序的</strong>子匹配对象(submatch objects)<strong>数组</strong>, 一个<strong>具名的</strong>子匹配对象(submatch objects)<strong>散列</strong>.(它也可选地包含一个用于创建抽象语法树(AST)的<strong>抽象对象</strong>) 为了提供访问这些各种各样值的便捷方法, Match 对象在不同上下文中求值也不同:</p>
+</li>
+<li><p>在布尔上下文中 Match 对象被求值为真或假</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if /pattern/ &#123;...&#125;</div><div class="line"># 或:</div><div class="line">/pattern/; if $/ &#123;...&#125;</div></pre></td></tr></table></figure>
+<p>如果模式使用 <code>:global</code> 或 <code>:overlap</code> 或 <code>:exhaustive</code> 修饰符, 会在<code>第一个匹配处</code>返回布尔真值.  如果在列表上下文中求值, <code>Match</code> 对象会根据需要(lazily)产生剩下的结果.</p>
+<ul>
+<li>在字符串上下文中, Match 对象会被求值为匹配(match)的字符串化的值,  这通常是整个匹配的字符串.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print %hash&#123; &quot;&#123;$text ~~ /&lt;.ident&gt;/&#125;&quot; &#125;;</div><div class="line"># 或等价的:</div><div class="line">$text ~~ /&lt;.ident&gt;/  &amp;&amp;  print %hash&#123;~$/&#125;;</div></pre></td></tr></table></figure>
+<p>但是通常你应该写成 <code>~$/</code>, 如果你想要字符串化匹配对象的话.</p>
+<ul>
+<li>在数字上下文中, Match 对象会被计算成它的匹配的数字值, 这通常是整个匹配的字符串:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$sum += /\d+/;</div><div class="line"># 或等价的:</div><div class="line">/\d+/; $sum = $sum + $/;</div></pre></td></tr></table></figure>
+<ul>
+<li>在标量上下文中, Match 对象求值结果为自身.</li>
+</ul>
+<p>然而, 有时你想要一个备用标量值伴随着匹配. Match 对象自身描述了一个具体的解析树, 这个额外的值叫做抽象对象;它作为 Match 对象的一个属性伴随着匹配. <code>.made</code> 方法默认返回一个未定义值. <code>$()</code> 是 <code>$($/.made // ~$/)</code> 的简写形式.</p>
+<p>因此, <code>$()</code> 通常就是整个匹配的字符串, 但是你能在 regex 内部调用 <code>make</code> 来重写它:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $moose = $(m[</div><div class="line">    &lt;antler&gt; &lt;body&gt;</div><div class="line">    &#123; make Moose.new( body =&gt; $&lt;body&gt;.attach($&lt;antler&gt;) ) &#125;</div><div class="line">    # 匹配成功 -- 忽略该 regex 的剩余部分</div><div class="line">]);</div></pre></td></tr></table></figure>
+<p>这把新的抽象节点放进 <code>$/.made</code>中. 抽象节点(AST)可以是任何类型. 使用 <code>make</code> / <code>.made</code> 构造, 创建任意节点类型的抽象语法树就很方便了.</p>
+<p>然而, <code>make</code> 函数不限于仅仅用作<strong>存储</strong> AST 节点并创建抽象语法树。 这就是特殊的 Perl 6 泛函性的内部使用.  <code>make</code>函数也不会把任何 item 或 列表上下文强加到它们的参数上, 所以, 你写了某些含糊不清的 listy, 像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">make ()</div><div class="line">make @array</div><div class="line">make foo()</div></pre></td></tr></table></figure>
+<p>那么从 <code>.made</code> 返回的值会被插值到列表中。 要抑制这, 使用下面这些:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">make ().item</div><div class="line">make []</div><div class="line">make $@array</div><div class="line">make [@array]</div><div class="line">make foo().item</div><div class="line">make $(foo())</div></pre></td></tr></table></figure>
+<p>或者在接收终端上使用 <code>.made.item</code> 或 <code>$</code>变量</p>
+<p><code>.ast</code> 方法就是 <code>.made</code> 的同义词, 它俩没什么不同. 它的存在一方面是因为历史原因, 另一方面也是为了给阅读你的代码的人标示一个更像 AST 用法的 <code>made/.make</code> </p>
+<ul>
+<li>你也能使用 <code>&lt;(...)&gt;</code> 构造捕获匹配的一个<strong>子集</strong>(subset):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;foo123bar&quot; ~~ / foo &lt;( \d+ )&gt; bar /</div><div class="line">say $();    # says 123</div></pre></td></tr></table></figure>
+<p>这时, 当做字符串匹配时, <code>$()</code> 总是一个字符串, 当做列表匹配时, <code>$()</code>总是一个或多个元素的列表.这个构造没有设置 <code>.made</code> 属性.</p>
+<ul>
+<li>当用作数组时, Match 对象伪装成一个<strong>数组</strong>, 数组里是 Match 对象的所有位置捕获.因此,</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">($key, $val) = ms/ (\S+) &apos;=&gt;&apos; (\S+)/;</div></pre></td></tr></table></figure>
+<p>也能被写作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$result = ms/ (\S+) &apos;=&gt;&apos; (\S+)/;</div><div class="line">($key, $val) = @$result;</div></pre></td></tr></table></figure>
+<p>要把单个捕获放到字符串中, 使用下标:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$mystring = &quot;&#123; ms/ (\S+) &apos;=&gt;&apos; (\S+)/[0] &#125;&quot;;</div></pre></td></tr></table></figure>
+<p>要把所有捕获都放到字符串中, 使用一个禅切:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$mystring = &quot;&#123; ms/ (\S+) &apos;=&gt;&apos; (\S+)/[] &#125;&quot;;</div></pre></td></tr></table></figure>
+<p>或把它扔到数组里:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$mystring = &quot;@( ms/ (\S+) &apos;=&gt;&apos; (\S+)/ )&quot;;</div></pre></td></tr></table></figure>
+<p>注意, 作为一个标量, <code>$/</code> 在列表上下文中不会自动展平(flatten). 在列表上下文中使用 <code>@()</code>作为 <code>@($/)</code> 的简写形式来展平位置捕获. 注意, Match 对象能在列表上下文中按需计算它的匹配.使用 <code>@()</code> 来强制进行迫切( eager)匹配.</p>
+<ul>
+<li>当作为散列时, Match 对象伪装成一个含有具名捕获的散列. 散列的键不包括任何符号, 所以如果你把变量捕获到变量 <code>@&lt;foo&gt;</code>, 它的真实名字为 <code>$/{&#39;foo&#39;}</code> 或 <code>$/&lt;foo&gt;</code>.然而, 在<code>$/</code> 可见的任何地方, 你仍旧能把它作为 <code>@&lt;foo&gt;</code> 引用. (但是, 对于两个不同的捕获数据类型,使用同一个名字是错误的.)<br><a href="https://github.com/perl6/roast/blob/master/S05-capture/subrule.t#L17-L119" target="_blank" rel="external"><code>S05-capture/subrule.t lines 17–119</code></a></li>
+</ul>
+<p><a href="https://github.com/perl6/roast/blob/master/S05-match/capturing-contexts.t#L35-L164" target="_blank" rel="external"><code>S05-match/capturing-contexts.t lines 35–164</code></a></p>
+<p>注意, 作为一个标量, <code>$/</code> 在列表上下文中不会自动展平(flatten). 在列表上下文中使用 <code>%()</code>作为 <code>%($/)</code> 的简写形式来作为一个散列来展平, 或把它绑定到一个合适类型的变量上. 就像 <code>@()</code>, <code>%()</code>能在列表上下文中按需产生它的 pair 对儿. </p>
+<ul>
+<li><p>编号过的捕获能被当作命名捕获那样, 所以 <code>$&lt;0 1 2&gt;</code>  等价于 <code>$/[0,1,2]</code>.  这允许你混写命名捕获和编号捕获.</p>
+</li>
+<li><p><code>.keys</code>, <code>.values</code> 和 <code>.kv</code> 方法对列表和散列都起作用, 列表部分首当其冲.` </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&apos;abcd&apos; ~~ /(.)(.)**2 &lt;alpha&gt;/;</div><div class="line">say ~$/.keys;           # 0 1 alpha</div></pre></td></tr></table></figure>
+<ul>
+<li><p>在普通代码中, 变量 <code>$0</code>,<code>$1</code>等等就是 <code>$/[0]</code> ,<code>$/[1]</code> 的别名, 等等, 因此, 如果最后的匹配失败, 它们都会变为未定义的. (除非它们被显式地绑定到一个闭包中, 而不使用 let 关键字)<br><a href="https://github.com/perl6/roast/blob/master/S32-scalar/undef.t#L220-L280" target="_blank" rel="external"><code>S32-scalar/undef.t lines 220–280</code></a></p>
+</li>
+<li><p>Match 对象有一些方法提供了关于匹配的额外信息, 例如:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if m/ def &lt;ident&gt; &lt;codeblock&gt; / &#123;</div><div class="line">   say &quot;Found sub def from index $/.from.bytes &quot;,</div><div class="line">       &quot;to index $/.to.bytes&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当前定义过的方法有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$/.from      # 初始匹配位置</div><div class="line">$/.to        # 最终匹配位置</div><div class="line">$/.chars     # $/.to - $/.from</div><div class="line">$/.orig      # 原匹配字符串</div><div class="line">$/.Str       # substr($/.orig, $/.from, $/.chars)</div><div class="line">$/.made      # 关于该节点(来自于 make)的抽象结果</div><div class="line">$/.ast       # 和 $/.made 相同</div><div class="line">$/.caps      # 相继的捕获</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/perl6/roast/blob/master/S05-capture/caps.t#L5-L94" target="_blank" rel="external"><code>S05-capture/caps.t lines 5–94</code></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$/.chunks    # sequential tokenization</div><div class="line">$/.prematch  # $/.orig.substr(0, $/.from)</div><div class="line">$/.postmatch # $/.orig.substr($/.to)</div></pre></td></tr></table></figure>
+<p>在 regex 内部, 当前匹配状态 <code>$¢</code> 也提供了这个:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.pos        # 当前匹配位置</div></pre></td></tr></table></figure>
+<p>最后那个值根据匹配是向前处理还是向后处理对应于 <code>$¢.from</code> 或 <code>$¢.to</code>.( 后一种情况出现在 <code>&lt;?after ...&gt;</code> 断言内部 ).</p>
+<ul>
+<li><p>就像上面描述的那样, 在列表上下文中, Match 对象返回它的位置捕获. 然而, 有时你更想以它们出现在文本中的顺序, 得到一个展平的 tokens 列表. <code>.caps</code> 方法按顺序返回一个所有捕获的列表, 而不管它是如何被绑定命名捕获或带编号捕获上的. (除了顺序, 这儿没有新的信息; 列表中的所有元素都是同样的 Match 对象,并被任意绑定.) 绑定实际上是作为 键/键值对儿返回, 而 键是名字或编号, 而值是 Match 对象自身.</p>
+<p>除了返回那些捕获的 Match 对象外, <code>.chunks</code> 方法也在两个捕获之间返回交错的噪音. 就像 <code>.caps</code> , 列表元素的顺序跟它们原来在文本中的顺序相同.交错的部分也返回一个 pairs, 而键是 <code>~</code>, 值为一个简单的只包含字符串的 Match 对象, 即使未绑定的诸如 <code>.ws</code> 的子规则首先遍历文本. 在这样一个 Match对象上调用 <code>.made</code> 方法总是返回 一个 <code>Str</code>.</p>
+</li>
+</ul>
+<p>如果 <code>.caps</code> 或 <code>.chunks</code> 发现它们有重叠绑定, 会出现一个警告. 没有这样的重叠, <code>.chunks</code> 保证将它匹配到的每一部分字符串映射为它返回的所有匹配的精确的一个元素, 所以, 覆盖范围是完整的.</p>
+<ul>
+<li>所有与任何 regex, subrule, or subpattern 匹配的尝试, 成功与否, 会返回一个能被求值为布尔值的对象.(这个对象要么是一个 Match, 要么是 Nil.)即:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$match_obj = $str ~~ /pattern/;</div><div class="line">say &quot;Matched&quot; if $match_obj;</div></pre></td></tr></table></figure>
+<ul>
+<li>不管成功与否,这个返回的对象也被自动的绑定到当前环境的词法变量 <code>$/</code> 上:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$str ~~ /pattern/;</div><div class="line">say &quot;Matched&quot; if $/;</div></pre></td></tr></table></figure>
+<ul>
+<li>在 regex 里面, 变量 <code>$¢</code> 保存着当前 regex 的未完成的 Match 对象, 这就是所谓的匹配状态(类型为 Cursor).通常, 这不应该被被修改, 除非你知道怎么创建并传递匹配状态.所有的 regexes 实际上返回匹配状态即使当你认为它们会返回其它东西时, 因为匹配状态为你追踪模式的成功和失败.</li>
+</ul>
+<p>幸运的是, 伴随着默认的具体的 Match 对象, 当你只想返回一个不同的抽象结果时, 你可以使用 <code>make</code> 函数把当前匹配状态和返回值关联起来, 这跟 return 有点像, 但是不会 clobber 匹配状态:<br><a href="https://github.com/perl6/roast/blob/master/S05-match/make.t#L9-L24" target="_blank" rel="external"><code>S05-match/make.t lines 9–24</code></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$str ~~ / foo                 # Match &apos;foo&apos;</div><div class="line">           &#123; make &apos;bar&apos; &#125;     # But pretend we matched &apos;bar&apos;</div><div class="line">         /;</div><div class="line">say $();                      # says &apos;bar&apos;</div></pre></td></tr></table></figure>
+<p>通过 <code>.made</code> 方法能访问到任何 Match 对象的值(例如一个抽象对象). 因此, 这些抽象对象能被独立的管理.</p>
+<p>当前指针对象总是由 Cursor 派生而来, 否则匹配不会起作用. 然而, 在那个约束之下, 当前指针的实际类型定义可当前正在解析的是哪一种语言. 当你进入一个 grammar 的顶部时, 这个指针通常开始于一个对象, 该对象的类型是你所在的 grammar 的名字, 但是当前语言可以通过各种方法修改, 当它们通过返回 blessed 为不同类型的指针对象来修改当前语言, 这可能也或许不是从当前 grammar 中派生出来的.</p>
+<h1 id="子模式捕获"><a href="#子模式捕获" class="headerlink" title="子模式捕获"></a>子模式捕获</h1><ul>
+<li>regex 中任何闭合在<code>捕获圆括号</code>中的那部分就是所谓的 <code>subpattern</code>, 例如:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">  #               subpattern</div><div class="line">  #  _________________/\___________________</div><div class="line">  # |                                      |</div><div class="line">  # |       subpattern  subpattern         |</div><div class="line">  # |          __/\__    __/\__            |</div><div class="line">  # |         |      |  |      |           |</div><div class="line">ms/ (I am the (walrus), ( khoo )**2  kachoo) /;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>如果匹配成功,  regex 中的每个 subpattern 都会产生一个 Match 对象</p>
+</li>
+<li><p>每个 subpattern 要么显式地赋值给一个具名目标,要么隐式地被添加到含有很多匹配的<code>数组</code>中去.</p>
+</li>
+</ul>
+<p>对于每一个没有显式地给定名字的 subpattern, 该 subpattern 的 Match 对象被推入到外部的属于周围作用域的 <code>Match</code> 对象里面的<strong>数组</strong>中(即它的父 Match 对象). 周围作用域要么是最内部的周围作用域(如果 subpattern 是嵌套的) 要么是整个 regex 自身.</p>
+<ul>
+<li><p>像捕获一样, 这些对数组的赋值是假设的, 如果  subpattern 回溯, 这些赋值会被撤销.</p>
+</li>
+<li><p>举个例子, 如果下面这个模式匹配成功:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">  #                subpat-A</div><div class="line">  #  _________________/\__________________</div><div class="line">  # |                                     |</div><div class="line">  # |         subpat-B  subpat-C          |</div><div class="line">  # |          __/\__    __/\__           |</div><div class="line">  # |         |      |  |      |          |</div><div class="line">ms/ (I am the (walrus), ( khoo )**2 kachoo) /;</div></pre></td></tr></table></figure>
+<p>则由 <em>subpat-B</em>  和 <em>subpat-C</em> 产生的 Match 对象会被成功地推入到 <em>subpat-A</em>  的 Match 对象里面的数组中.  然后 <em>subpat-A</em>  的  <code>Match</code> 对象自身会被推入到整个 regex 的 Match 对象里面的数组中.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my $str = &quot;I am the walrus, khoo khoo kachoo&quot;;</div><div class="line">$str ~~ ms/ (I am the (walrus)\, ( khoo )**2 kachoo) /;</div><div class="line">say ~$/[0];       # I am the walrus, khoo khoo kachoo</div><div class="line">say ~$/[0][0];    # walrus</div><div class="line">say ~$/[0][1];    # khoo  khoo</div><div class="line">say ~$/[0][1][0]; # khoo</div><div class="line">say ~$/[0][1][1]; # khoo</div></pre></td></tr></table></figure>
+<p>可以看出, subpat-A 的 Match 对象是 <code>$/</code> 数组的<strong>一个元素</strong>, subpat-A 和 subpat-B 的 Match 对象在同一个数组 <code>$/[0]</code> 中。</p>
+<ul>
+<li>因为这些语义, Perl 6 中的捕获括号是分等级的, 而非线性的. (参见 “Nested subpattern captures”)</li>
+</ul>
+<h1 id="访问捕获的子模式"><a href="#访问捕获的子模式" class="headerlink" title="访问捕获的子模式"></a>访问捕获的子模式</h1><ul>
+<li><code>Match</code> 对象的<strong><code>数组元素</code></strong>要么使用标准的数组访问记法(例如  <code>$/[0]</code>, <code>$/[1]</code>, <code>$/[2]</code> 等.) 要么通过对应的词法作用域<strong><code>数字别名</code></strong>(例如: <code>$0</code>, <code>$1</code>, <code>$2</code>), 所以:</li>
+</ul>
+<p><a href="https://github.com/perl6/roast/blob/master/S05-match/capturing-contexts.t#L25-L34" target="_blank" rel="external"><code>S05-match/capturing-contexts.t lines 25–34</code></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say &quot;$/[1] was found between $/[0] and $/[2]&quot;;</div></pre></td></tr></table></figure>
+<p>和下面这个相同:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say &quot;$1 was found between $0 and $2&quot;;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>注意, 在 Perl 6 中, 数字捕获变量从 <code>$0</code> 开始, 而非 <code>$1</code>, 使用 <code>$/</code> 中对应元素的索引中的数字.</p>
+</li>
+<li><p>regex 的 Match 对象(例如 <code>$/</code>)中的<strong><code>数组元素</code></strong>分别存储着<strong>单独的</strong> Match 对象, 这些 Match 对象就是匹配到的<strong><code>子字符串</code></strong>, 并被第一个, 第二个, 第三个, 直到最外面的 subpattern 捕获(非嵌套). 所以这些元素能被看成完全合格的匹配结果. 例如:<br><a href="https://github.com/perl6/roast/blob/master/S05-capture/dot.t#L13-L55" target="_blank" rel="external">S05-capture/dot.t lines 13–55</a></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if m/ (\d\d\d\d)-(\d\d)-(\d\d) (BCE?|AD|CE)?/ &#123;</div><div class="line">     ($yr, $mon, $day) = $/[0..2];</div><div class="line">     $era = &quot;$3&quot; if $3;                    # stringify/boolify</div><div class="line">     @datepos = ( $0.from() .. $2.to() );  # Call Match methods</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="嵌套的子模式捕获"><a href="#嵌套的子模式捕获" class="headerlink" title="嵌套的子模式捕获"></a>嵌套的子模式捕获</h1><p><a href="https://github.com/perl6/roast/blob/master/S05-capture/named.t#L16-L25" target="_blank" rel="external"><code>S05-capture/named.t lines 16–25</code></a></p>
+<ul>
+<li><p>通过嵌套的 subpattern 匹配到的子字符串被赋值给嵌套的 subpattern 的 <strong><code>父 Match 对象</code></strong>里面的<strong><code>数组</code></strong>中, 而不是 <code>$/</code> 的数组中.</p>
+</li>
+<li><p>这种行为和 Perl 5 的语义完全不同:</p>
+</li>
+</ul>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> <span class="comment"># Perl 5...</span></div><div class="line"> <span class="comment">#</span></div><div class="line"> <span class="comment"># $1---------------------  $4---------  $5------------------</span></div><div class="line"> <span class="comment"># |   $2---------------  | |          | | $6----  $7------  |</span></div><div class="line"> <span class="comment"># |   |         $3--   | | |          | | |     | |       | |</span></div><div class="line"> <span class="comment"># |   |         |   |  | | |          | | |     | |       | |</span></div><div class="line"><span class="keyword">m</span>/ ( A (guy|gal|g(\S+)  ) ) (sees|calls) ( (the|a) (gal|guy) ) /<span class="keyword">x</span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>在 Perl 6 中, 嵌套的圆括号产生可能的<strong>嵌套的捕获</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> # Perl 6...</div><div class="line"> #</div><div class="line"> # $0---------------------  $1---------  $2------------------</div><div class="line"> # |   $0[0]------------  | |          | | $2[0]-  $2[1]---  |</div><div class="line"> # |   |       $0[0][0] | | |          | | |     | |       | |</div><div class="line"> # |   |         |   |  | | |          | | |     | |       | |</div><div class="line">m/ ( A (guy|gal|g(\S+)  ) ) (sees|calls) ( (the|a) (gal|guy) ) /;</div></pre></td></tr></table></figure>
+<p>如上, 在匹配嵌套的 subpattern 时, <code>$0</code>, <code>$1</code>, <code>$2</code> 是<strong>平级的</strong>, 它们都是父 Match 对象 <code>$/</code> 数组中的子元素, 即 <code>$/[0]</code>、<code>$/[1]</code>、<code>$/[2]</code>（数字记法分别为 <code>$0</code>, <code>$1</code>, <code>$2</code>）。而 <code>$0</code> 和 <code>$2</code> 中有嵌套的 subpattern, 所以 <code>$0</code> 和 <code>$2</code> 也成为父 subpattern, 以此类推。</p>
+<h1 id="量词化的子模式捕获"><a href="#量词化的子模式捕获" class="headerlink" title="量词化的子模式捕获"></a>量词化的子模式捕获</h1><ul>
+<li>如果 subpattern 后面直接使用 <code>?</code> 量词, 它要么产生单个 Match 对象, 要么产生 Nil.(?表示匹配0次或1次。) 如果 subpattern 后直接使用任何其它量词, 它绝不会产生单个 Match 对象. 相反, 它产生一个 Match 对象的<strong>列表</strong>, 列表中的元素对应于由重复的 subpattern 产生的各自匹配的序列. 如果想区分这两种类别, <code>?</code> 是一个 item 量词, 而 <code>*</code>, <code>+</code> 和 <code>**</code> 叫做<strong>列表量词</strong>.</li>
+</ul>
+<p>如果匹配到 0 个值, 则捕获到的值取决于用的是哪个量词. 如果量词是 <code>?</code>, 并且匹配次数为 0, 则捕获到 Nil. 如果量词是 <code>*</code>, 则是<code>空列表</code>, 即 <code>()</code>. (如果匹配次数为 0, <code>+</code> 量词什么也不会捕获, 因为它会引发回溯, 但是如果在一个不成功的匹配之后, 又尝试使用它, 则捕获变量会返回 Nil ) . 如果它的最小范围是 0,  <code>**</code> 量词会像 <code>*</code> 那样返回 <code>()</code>, 否则就会回溯.</p>
+<p>注意,  不像 <code>?</code>,  <code>** 0..1</code> 总是被认为是一个列表量词.</p>
+<p>把 <code>?</code> 看作 item 量词的理由是为了使它符合 <code>$object.?meth</code> 定义的方式, 并减少不必要的 <code>.[0]</code> 下标, 这会使大部分人惊讶.既然 Nil 被认为是未定义的而非 <code>()</code> 的同义词, 使用 <code>$0 // &quot;default&quot;</code> 或诸如此类的来安全地解引用捕获就很容易了.</p>
+<ul>
+<li>因为列表量词化的 subpattern 返回一个 Match 对象的列表, 对应的量词化的捕获数组元素会存储一个(嵌套的)<strong>数组</strong>而不是单个 Match 对象.例如:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if m/ (\w+) \: (\w+ \s+)* / &#123;</div><div class="line">   say &quot;Key:    $0&quot;;         # Unquantified --&gt; single Match</div><div class="line">   say &quot;Values: @($1)&quot;;      # Quantified   --&gt; array of Match</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="间接量词化的子模式捕获"><a href="#间接量词化的子模式捕获" class="headerlink" title="间接量词化的子模式捕获"></a>间接量词化的子模式捕获</h1><ul>
+<li>subpattern 有时会嵌套在一个量词化的非捕获结构中:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> #       non-capturing       quantifier</div><div class="line"> #  __________/\____________  __/\__</div><div class="line"> # |                        ||      |</div><div class="line"> # |   $0         $1        ||      |</div><div class="line"> # |  _^_      ___^___      ||      |</div><div class="line"> # | |   |    |       |     ||      |</div><div class="line">m/ [ (\w+) \: (\w+ \h*)* \n ] ** 2..* /</div></pre></td></tr></table></figure>
+<p>非捕获括号不会创建单独的嵌套词法作用域, 所以那两个 subpattern 实际上仍然在 regex 的<strong>顶层</strong>作用域中, 因此, 它们的顶层名字是 <code>$0</code> 和 <code>$1</code>.</p>
+<ul>
+<li>然而, 因为这两个 subpattern 在量词化结构里面, <code>$0</code> 和 <code>$1</code> 每个都会包含一个数组.  每次迭代非捕获分组, 数组的元素会是对应 subpattern 返回的 submatch.例如:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my $text = &quot;foo:food fool\nbar:bard barb&quot;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">          #   $0--     $1------</div><div class="line">          #   |   |    |       |</div><div class="line">$text ~~ m/ [ (\w+) \: (\w+ \h*)* \n? ] ** 2..* /;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 因为它们在一个量词化的非捕获 block 中...</div><div class="line"># say $/[0].perl;</div><div class="line"># $0 包含着下面的等同物:</div><div class="line">#</div><div class="line">#       [ Match.new(str=&gt;&apos;foo&apos;), Match.new(str=&gt;&apos;bar&apos;) ]</div><div class="line">#</div><div class="line"># 并且 $1 包含下面的等同物:</div><div class="line">#</div><div class="line">#       [ Match.new(str=&gt;&apos;food &apos;),</div><div class="line">#         Match.new(str=&gt;&apos;fool&apos; ),</div><div class="line">#         Match.new(str=&gt;&apos;bard &apos;),</div><div class="line">#         Match.new(str=&gt;&apos;barb&apos; ),</div><div class="line">#       ]</div></pre></td></tr></table></figure>
+<ul>
+<li>与此相反, 如果外部的量词化结构是一个<em>捕获</em>结构(例如. 一个 subpattern), 那么它会引入一个<strong>嵌套的词法作用域</strong>. 外部的量词化结构会返回一个 Match 对象的数组, 代表对每个迭代的内部括号的捕获。即:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my $text = &quot;foo:food fool\nbar:bard barb&quot;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">          # $0-----------------------</div><div class="line">          # |                        |</div><div class="line">          # | $0[0]    $0[1]---      |</div><div class="line">          # | |   |    |       |     |</div><div class="line">$text ~~ m/ ( (\w+) \: (\w+ \h*)* \n ) ** 2..* /;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># 因为它是一个量词化的捕获 block,</div><div class="line"># $0 包含如下等价物:</div><div class="line">#</div><div class="line">#       [ Match.new( str=&gt;&quot;foo:food fool\n&quot;,</div><div class="line">#                    arr=&gt;[ Match.new(str=&gt;&apos;foo&apos;),</div><div class="line">#                           [</div><div class="line">#                               Match.new(str=&gt;&apos;food &apos;),</div><div class="line">#                               Match.new(str=&gt;&apos;fool&apos;),</div><div class="line">#                           ]</div><div class="line">#                         ],</div><div class="line">#                  ),</div><div class="line">#         Match.new( str=&gt;&apos;bar:bard barb&apos;,</div><div class="line">#                    arr=&gt;[ Match.new(str=&gt;&apos;bar&apos;),</div><div class="line">#                           [</div><div class="line">#                               Match.new(str=&gt;&apos;bard &apos;),</div><div class="line">#                               Match.new(str=&gt;&apos;barb&apos;),</div><div class="line">#                           ]</div><div class="line">#                         ],</div><div class="line">#                  ),</div><div class="line">#       ]</div><div class="line">#</div><div class="line"># 并且没有 $1</div></pre></td></tr></table></figure>
+<ul>
+<li>换句话说, 量词化的非捕获括号把它们的组件聚集到就近展平的列表中, 而量词化的捕获括号把它们的部件聚集到就近的分等级的结构中.</li>
+</ul>
+<p>此外,  sublist 彼此间是被同步保存的,作为每个空匹配, 在我们例子中的 <code>$0[1]</code>情形下, 如果冒号后面跟着一个换行符, 那么将会在给定的列表中有一个对应的 Nil值。</p>
+<h1 id="子模式编号"><a href="#子模式编号" class="headerlink" title="子模式编号"></a>子模式编号</h1><ul>
+<li><p>给定 subpattern 的索引总是能被静态地决定, 但不是唯一也不是无变化的. subpattern 的编号从每个词法作用域重新开始.( regex, subpattern, 或备选分支中的任意一个)</p>
+</li>
+<li><p>特别地, 在每个 <code>|</code> 或 <code>||</code> 之后, 捕获括号的索引重新开始.(但是不是在每个 &amp; 或 &amp;&amp; 之后)</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">             # $0        $1    $2   $3    $4           $5</div><div class="line">$tune_up = rx/ (&quot;don&apos;t&quot;) (ray) (me) (for) (solar tea), (&quot;d&apos;oh!&quot;)</div><div class="line">             # $0      $1      $2    $3        $4</div><div class="line">             | (every) (green) (BEM) (devours) (faces)</div><div class="line">             /;</div></pre></td></tr></table></figure>
+<p>这意味着, 如果第二个备选分支匹配, 匹配的列表中将会包含 <code>(&#39;every&#39;, &#39;green&#39;, &#39;BEM&#39;, &#39;devours&#39;, &#39;faces&#39;)</code> 而非 Perl 5 的 <code>(undef, undef, undef, undef, undef, undef, &#39;every&#39;, &#39;green&#39;, &#39;BEM&#39;, &#39;devours&#39;, &#39;faces&#39;)</code>.</p>
+<ul>
+<li>注意, 仍旧能模仿无变化的 Perl 5 捕获索引语义.查看下面的 “Numbered scalar aliasing”</li>
+</ul>
+<h1 id="Subrule-捕获"><a href="#Subrule-捕获" class="headerlink" title="Subrule 捕获"></a>Subrule 捕获</h1><p><a href="https://github.com/perl6/roast/blob/master/S05-capture/named.t#L36-L74" target="_blank" rel="external"><code>S05-capture/named.t lines 36–74</code></a></p>
+<ul>
+<li><p>在模式中调用任何一个命名的 <code>&lt;regex&gt;</code> 被称为 <code>subrule</code>, 不管那个正则表达式实际上被定义为一个 <code>regex</code>, 或者 <code>token</code>, 或者甚至普通的方法或 <code>multi</code>.</p>
+</li>
+<li><p>任何别名为具名变量的括号结构也是一个 <code>subrule</code></p>
+</li>
+<li><p>例如, 下面这个正则表达式包含 3 个 subrules:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> # subrule       subrule     subrule</div><div class="line"> #  __^__    _______^_____    __^__</div><div class="line"> # |     |  |             |  |     |</div><div class="line">m/ &lt;ident&gt;  $&lt;spaces&gt;=(\s*)  &lt;digit&gt;+ /</div></pre></td></tr></table></figure>
+<ul>
+<li>就像 subpatterns 那样, 在正则表达式中每个成功匹配的 subrule 都产生一个 Match 对象. 但是, 跟 subpatterns 不同的是, 那个 Match 对象没有赋值给它的父 Match 对象里面的数组. 相反, 它被赋值给它的父 Match 对象里面的<strong>散列中的一个条目(键值对儿)</strong>. 例如:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#  .... $/ .....................................</div><div class="line"># :                                             :</div><div class="line"># :              .... $/[0] ..................  :</div><div class="line"># :             :                             : :</div><div class="line"># : $/&lt;ident&gt;   :        $/[0]&lt;ident&gt;         : :</div><div class="line"># :   __^__     :           __^__             : :</div><div class="line"># :  |     |    :          |     |            : :</div><div class="line">ms/  &lt;ident&gt; \: ( known as &lt;ident&gt; previously ) /</div></pre></td></tr></table></figure>
+<h1 id="访问捕获的-subrules"><a href="#访问捕获的-subrules" class="headerlink" title="访问捕获的 subrules"></a>访问捕获的 subrules</h1><ul>
+<li>Match 对象的散列条目可以使用任何一个标准的散列访问记法(<code>$/{&#39;foo&#39;}</code>, <code>$/</code>, <code>$/«baz»</code>, 等等.) 查阅, 或通过对应的词法作用域别名 (<strong><code>$&lt;foo&gt;</code></strong>, <code>$«bar»</code>, <strong><code>$&lt;baz&gt;</code></strong>, 等等.)访问. 所以前面的例子也意味着:<br><a href="https://github.com/perl6/roast/blob/master/S05-capture/dot.t#L62-L87" target="_blank" rel="external"><code>S05-capture/dot.t lines 62–87</code></a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#    $&lt;ident&gt;             $0&lt;ident&gt;</div><div class="line">#     __^__                 __^__</div><div class="line">#    |     |               |     |</div><div class="line">ms/  &lt;ident&gt; \: ( known as &lt;ident&gt; previously ) /</div></pre></td></tr></table></figure>
+<ul>
+<li>注意, subrule 是使用尖括号(<em><code>&lt;ident&gt;</code></em>) 或者使用内部别名(<em><code>&lt;ident=.name&gt;</code></em>)还是使用外部别名( <strong><code>$&lt;ident&gt;=(&lt;.alpha&gt;\w*)</code></strong> )是没有分别的.</li>
+</ul>
+<h1 id="同一个-subrule-的重复捕获"><a href="#同一个-subrule-的重复捕获" class="headerlink" title="同一个 subrule 的重复捕获"></a>同一个 subrule 的重复捕获</h1><ul>
+<li><p>如果在词法作用域的任何一个分支中出现 2次(或更多) subrules (例如,在同一个 subpattern 和备选中出现2次), 或者, 如果在给定作用域的任何地方, subrule 是列表量词化的(那就是, 使用除了 <code>?</code> 之外的任何其它量词), 那么, 它的对应<strong>散列条目</strong>总是被赋值给 Match 对象的<strong>数组</strong>中, 而不是赋值给单个 Match 对象.</p>
+</li>
+<li><p>同一个 subrule 的成功匹配( 无论是来自于单独的调用还是来自于单个量词化重复)把单独的 Match 对象追加到这个<strong>数组</strong>中, 例如:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if ms/ mv &lt;file&gt; &lt;file&gt; / &#123;</div><div class="line">    $from = $&lt;file&gt;[0];</div><div class="line">    $to   = $&lt;file&gt;[1];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>(注意, 为了代码清晰, 我们这里忽略了空白的细微之处 – 普通的 sigspace rules 只会在字母数字字符之间要求有空白, 这是错误的. 假设我们的 <code>&lt;file&gt;</code> subrule 自己处理空白.)</p>
+<p>同样地, 使用量词化的 subrule:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if ms/ mv &lt;file&gt; ** 2 / &#123;</div><div class="line">    $from = $&lt;file&gt;[0];</div><div class="line">    $to   = $&lt;file&gt;[1];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有使用它们两者的混合:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if ms/ mv &lt;file&gt;+ &lt;file&gt; / &#123;</div><div class="line">    $to   = pop @($&lt;file&gt;);</div><div class="line">    @from = @($&lt;file&gt;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>为了避免名字冲突, 可以使用一个<strong>前置的点</strong>来抑制原来的名字, 然后使用<strong>别名</strong>给捕获一个不同的名字:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if ms/ mv &lt;file&gt; &lt;dir=.file&gt; / &#123;</div><div class="line">    $from = $&lt;file&gt;;  # 只有一个 subrule 叫做 &lt;file&gt;, 所以是标量</div><div class="line">    $to   = $&lt;dir&gt;;   # 这个捕获之前叫做 &lt;file&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同样地, 下面的结构都不会让 <code>&lt;file&gt;</code> 产生一个 Match 对象的数组, 因为<strong>在同一个词法作用域中</strong>, 它们都没有两个或更多的 <code>&lt;file&gt;</code> subrules.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if ms/ (keep) &lt;file&gt; | (toss) &lt;file&gt; / &#123;</div><div class="line">    # 每个 &lt;file&gt; 都是单独的备选分支,</div><div class="line">    # 因此 &lt;file&gt; 在任何一个作用域中都没有被重复, 因此, $&lt;file&gt; 不是数组对象.</div><div class="line">    $action = $0;</div><div class="line">    $target = $&lt;file&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if ms/ &lt;file&gt; \: (&lt;file&gt;|none) / &#123;</div><div class="line">    # 第二个 &lt;file&gt; 嵌套在不同作用域中的 subpattern 中</div><div class="line">    $actual  = $/&lt;file&gt;;</div><div class="line">    $virtual = $/[0]&lt;file&gt; if $/[0]&lt;file&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>另一方面, <strong>未别名化的方括号</strong>没有被授予<strong>单独的作用域</strong>(因为它们没有关联的 Match 对象).所以:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if ms/ &lt;file&gt; \: [&lt;file&gt;|none] / &#123; # 这两个 &lt;file&gt; 在同一个作用域中</div><div class="line">    $actual  = $/&lt;file&gt;[0];</div><div class="line">    $virtual = $/&lt;file&gt;[1] if $/&lt;file&gt;[1];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h1><p>别名可以被命名或编号. 它们可以是 <em>scalar-</em>, <em>array-</em>, 或 <em>hash-like</em>. 并且它们能被应用到捕获或非捕获结构中.  下面的章节会突出那些组合语义的特殊功能.</p>
+<h1 id="让具名标量成为subpatterns的别名"><a href="#让具名标量成为subpatterns的别名" class="headerlink" title="让具名标量成为subpatterns的别名"></a>让具名标量成为subpatterns的别名</h1><p><a href="https://github.com/perl6/roast/blob/master/S05-capture/named.t#L26-L35" target="_blank" rel="external"><code>S05-capture/named.t lines 26–35</code></a></p>
+<ul>
+<li>如果一个具名标量别名被应用了一组<strong>捕获</strong>圆括号:<br><a href="https://github.com/perl6/roast/blob/master/S05-capture/alias.t#L17-L26" target="_blank" rel="external"><code>S05-capture/alias.t lines 17–26</code></a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  #         _____/capturing parens\_____</div><div class="line">  #        |                            |</div><div class="line">  #        |                            |</div><div class="line">ms/ $&lt;key&gt;=( (&lt;[A..E]&gt;) (\d**3..6) (X?) ) /;</div></pre></td></tr></table></figure>
+<p>那么远离外部的圆括号不再像非别名括号那样捕获到 <code>$/</code> 数组中。相反, 别名化的圆括号捕获到了 <code>$/</code> 散列中; 特别是捕获到键名是别名名字的散列元素中。</p>
+<ul>
+<li><p>所以, 在上面的例子中, 一个成功的匹配设置了 <code>$&lt;key&gt;</code>(例如 <code>$/&lt;key&gt;</code>), 而非 <code>$0</code>(例如 不是 <code>$/[0]</code>)。</p>
+</li>
+<li><p>更确切地说:</p>
+<ul>
+<li><code>$/</code> 会包含之间已经放进 <code>$/[0]</code> 中的 <code>Match</code> 对象。</li>
+<li><code>$/[0]</code> 会包含 A-E 字母,</li>
+<li><code>$/[1]</code> 会包含数字,</li>
+<li><code>$/[2]</code> 会包含可选的 X.</li>
+</ul>
+</li>
+<li><p>了解这种行为的另外一种方法是别名化的括号创建了一种本地作用域的具名 subrule; 圆括号的内容被当作就像它们是单独的 subrule 的一部分, 它的名字就是别名。</p>
+</li>
+</ul>
+<h1 id="让具名标量成为非捕获分组的别名"><a href="#让具名标量成为非捕获分组的别名" class="headerlink" title="让具名标量成为非捕获分组的别名"></a>让具名标量成为非捕获分组的别名</h1><ul>
+<li>如果一个具名标量别名被应用到一组非捕获括号:<br><a href="https://github.com/perl6/roast/blob/master/S05-capture/alias.t#L33-L68" target="_blank" rel="external"><code>S05-capture/alias.t lines 33–68</code></a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  #         __/non-capturing brackets\__</div><div class="line">  #        |                            |</div><div class="line">  #        |                            |</div><div class="line">ms/ $&lt;key&gt;=[ (&lt;[A..E]&gt;) (\d**3..6) (X?) ] /;</div></pre></td></tr></table></figure>
+<p>则对应的 <code>$/</code> <code>Match</code> 对象只会包含非捕获括号匹配到的字符串.</p>
+<ul>
+<li><p>特别地,  <code>$/</code> 数组中的条目是空的. 那是因为方括号不会创建嵌套的词法作用域. 所以 subpatterns 是非嵌套的, 并且因此对应于<code>$0</code>, <code>$1</code>, 和 <code>$2</code>, 而不是对应于  <code>$/[0]</code>, <code>$/[1]</code>, 和 <code>$/[2]</code>.</p>
+</li>
+<li><p>换句话说:</p>
+<ul>
+<li><code>$/</code> 会包含方括号匹配到的整个子字符串  (in a <code>Match</code> object, as described above),</li>
+<li><code>$0</code> 会包含字母 <code>A-E</code>,</li>
+<li><code>$1</code> 会包含数字,</li>
+<li><code>$2</code>会包含可选的 X.</li>
+</ul>
+</li>
+</ul>
+<h1 id="让具名标量成为-subrules-的别名"><a href="#让具名标量成为-subrules-的别名" class="headerlink" title="让具名标量成为 subrules 的别名"></a>让具名标量成为 subrules 的别名</h1><ul>
+<li>如果 subrule 被设置了别名, 它会把它的 Match 对象设置为散列的条目, 散列的键是别名的名字, 它和 subrule 原来的名字一样.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if m/ ID\: &lt;id=ident&gt; / &#123;</div><div class="line">    say &quot;Identified as $/&lt;id&gt; and $/&lt;ident&gt;&quot;;    # both names defined</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要抑制原来的名字, 使用带点形式的名字:<br>  ​<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if m/ ID\: &lt;id=.ident&gt; / &#123;</div><div class="line">    say &quot;Identified as $/&lt;id&gt;&quot;;    # $/&lt;ident&gt; is undefined</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>因此, 给一个带点的 subrule 起别名改变了 subrule 的 Match 对象的目标.在同一个作用域内, 这对于区分对同一个 subrule 的两次或多次调用.例如:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if ms/ mv &lt;file&gt;+ &lt;dir=.file&gt; / &#123;</div><div class="line">    @from = @($&lt;file&gt;);</div><div class="line">    $to   = $&lt;dir&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="给标量别名编号"><a href="#给标量别名编号" class="headerlink" title="给标量别名编号"></a>给标量别名编号</h1><ul>
+<li>如果使用编号别名而非使用具名别名:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">m/ $1=(&lt;-[:]&gt;*) \:  $0=&lt;ident&gt; /   # captures $&lt;ident&gt; too</div><div class="line">m/ $1=(&lt;-[:]&gt;*) \:  $0=&lt;.ident&gt; /  # doesn&apos;t capture $&lt;ident&gt;</div></pre></td></tr></table></figure>
+<p>编号别名的行为就和具名别名的一样(i.e. 上面描述过的各种情况), 除了结果 Match 对象被赋值给对应的合适数组元素, 而非散列元素.</p>
+<ul>
+<li>如果使用了编号别名, 后续同一作用域中未起别名的 subpatterns 的编号会从那个别名编号开始自动增长(跟枚举数值从最后一个显式值开始增长很像). 即:<br><a href="https://github.com/perl6/roast/blob/master/S05-capture/alias.t#L27-L32" target="_blank" rel="external"><code>S05-capture/alias.t lines 27–32</code></a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> #  --$1---    -$2-    --$6---    -$7-</div><div class="line"> # |       |  |    |  |       |  |    |</div><div class="line">m/ $1=(food)  (bard)  $6=(bazd)  (quxd) /;</div></pre></td></tr></table></figure>
+<ul>
+<li>这种后续的行为对于在备选分支中重新建立 Perl5语义中的连续 subpattern 编号特别有用:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$tune_up = rx/ (&quot;don&apos;t&quot;) (ray) (me) (for) (solar tea), (&quot;d&apos;oh!&quot;)</div><div class="line">             | $6 = (every) (green) (BEM) (devours) (faces)</div><div class="line">             #              $7      $8    $9        $10</div><div class="line">             /;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>这也在 Perl 6 中提供了一种简单的方式来重建嵌套的 Perl 5 subpatterns 的非嵌套编号语义:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> <span class="comment"># Perl 5...</span></div><div class="line"> <span class="comment">#               $1</span></div><div class="line"> <span class="comment">#  _____________/\___________</span></div><div class="line"> <span class="comment"># |    $2        $3      $4  |</span></div><div class="line"> <span class="comment"># |  __/\___   __/\___   /\  |</span></div><div class="line"> <span class="comment"># | |       | |       | |  | |</span></div><div class="line"><span class="keyword">m</span>/ ( ( [A-E] ) (\d&#123;<span class="number">3</span>,<span class="number">6</span>&#125;) (X?) ) /<span class="keyword">x</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> # Perl 6...</div><div class="line"> #                $0</div><div class="line"> #  ______________/\______________</div><div class="line"> # |   $0[0]       $0[1]    $0[2] |</div><div class="line"> # |  ___/\___   ____/\____   /\  |</div><div class="line"> # | |        | |          | |  | |</div><div class="line">m/ ( (&lt;[A..E]&gt;) (\d ** 3..6) (X?) ) /;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> # Perl 6 simulating Perl 5...</div><div class="line"> #                 $1</div><div class="line"> #  _______________/\________________</div><div class="line"> # |        $2          $3       $4  |</div><div class="line"> # |     ___/\___   ____/\____   /\  |</div><div class="line"> # |    |        | |          | |  | |</div><div class="line">m/ $1=[ (&lt;[A..E]&gt;) (\d ** 3..6) (X?) ] /;</div></pre></td></tr></table></figure>
+<p>非捕获括号没有引入作用域, 所以非捕获括号中的 subpatterns 处于 regex 作用域, 并因此在括号顶层开始编号. 给方括号起别名为 <code>$1</code>意味着同一级别的下一个 subpattern(例如 <code>(&lt;[A..E]&gt;)</code>)的编号继续(i.e. <code>$2</code>). 等等.<br>  ​</p>
+<h1 id="给量词化结构应用标量别名"><a href="#给量词化结构应用标量别名" class="headerlink" title="给量词化结构应用标量别名"></a>给量词化结构应用标量别名</h1><ul>
+<li><p>上面所有的语义可以同等地应用到绑定了量词化结构的别名身上.</p>
+</li>
+<li><p>唯一不同的是, 如果别名化的结构是一个 subrule 或 subpattern, 那么量词化的 subrule 或 subpattern 必然会返回一个 Match 对象的列表. (像 “Quantified subpattern captures”) 和 “Repeated captures of the same subrule”) 中描述的那样). 所以, 别名所对应的数组元素或散列条目会包含一个数组, 而不是单个 Match 对象.</p>
+</li>
+<li><p>换句话说, 别名和量词化是完全正交的,例如:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">if ms/ mv $0=&lt;.file&gt;+ / &#123;</div><div class="line">    # &lt;file&gt;+ 返回一个 Match objects 的列表,</div><div class="line">    # 所以 $0 包含一个 Match objects 的数组,</div><div class="line">    # one for each successful call to &lt;file&gt;</div><div class="line">    # $/&lt;file&gt; 不存在 (因为它被点号抑制了)</div><div class="line">&#125;</div><div class="line"></div><div class="line">if m/ mv \s+ $&lt;from&gt;=(\S+ \s+)* / &#123;</div><div class="line">    # 量词化的子模式返回一个 Match objects 的列表,</div><div class="line">    # 所以 $/&lt;from&gt; 包含了一个 Match objects 的数组,</div><div class="line">    # one for each successful match of the subpattern</div><div class="line">    # $0 不存在 ($0 被别名预先清空了)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>注意, 一组量词化的非捕获括号总是返回单个 Match 对象,  该 Match 对象只包含通过全组重复括号匹配到的整个子字符串.(就像 “具名标量别名应用到非捕获括号”) 中描述的那样). 例如:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;coffee fifo fumble&quot; ~~ m/ $&lt;effs&gt;=[f &lt;-[f]&gt; ** 1..2 \s*]+ /;</div><div class="line">say $&lt;effs&gt;;    # 打印 &quot;fee fifo fum&quot;</div></pre></td></tr></table></figure>
+<h1 id="数组别名"><a href="#数组别名" class="headerlink" title="数组别名"></a>数组别名</h1><ul>
+<li>别名也能使用一个数组而非标量作为别名。例如:</li>
+</ul>
+<p><a href="https://github.com/perl6/roast/blob/master/S05-capture/array-alias.t#L13-L92" target="_blank" rel="external"><code>S05-capture/array-alias.t lines 13–92</code></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">m/ mv \s+ @&lt;from&gt;=[(\S+) \s+]* &lt;dir&gt; /;</div><div class="line"></div><div class="line">&quot;    a b\tc&quot; ~~ m/@&lt;chars&gt;=( \s+ \S+)+/;</div><div class="line">join(&quot;|&quot;, @&lt;chars&gt;) #     a| b|	c</div></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>@alias=</code> 记法而非 <code>$alias=</code>  迫使对应散列条目或数组元素总是接收一个 Match 对象的数组, 即使正被起别名的结构通常返回的是单个 Match 对象。 这对于根据结构不同的备选分支创建一致的捕获语义很有用。(通过在所有分支中强制数组捕获):</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ms/ Mr?s? @&lt;names&gt;=&lt;ident&gt; W\. @&lt;names&gt;=&lt;ident&gt;</div><div class="line">   | Mr?s? @&lt;names&gt;=&lt;ident&gt;</div><div class="line">   /;</div><div class="line"># 别名起为 @names 意味着 $/&lt;names&gt; 总是一个 Array 对象, 所以...</div><div class="line">say @($/&lt;names&gt;);</div></pre></td></tr></table></figure>
+<ul>
+<li>为了方便和一致性,  <code>@</code> 也能用在 regex 外面. 作为<code>@( $/ )</code> 的简写形式。 即:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$_ = &quot;Mrs camelia W. rakudo&quot;</div><div class="line">ms/ Mr?s? @&lt;names&gt;=&lt;ident&gt; W\. @&lt;names&gt;=&lt;ident&gt;</div><div class="line">   | Mr?s? @&lt;names&gt;=&lt;ident&gt;</div><div class="line">   /;</div><div class="line">say @&lt;names&gt;; # [｢camelia｣ ｢rakudo｣]</div></pre></td></tr></table></figure>
+<p>其中 <code>ms</code> 中的 <strong>s</strong> 使 regex 中的空格有意义。<br>  ​</p>
+<ul>
+<li>如果把数组别名应用到量词化的非捕获括号上, 它会捕获由每次括号的重复匹配到的子字符串, 捕获到对应数组的单独的元素中.即:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ms/ mv $&lt;files&gt;=[ f.. \s* ]* /; # $/&lt;files&gt; assigned a single</div><div class="line">                                # Match object containing the</div><div class="line">                                # complete substring matched by</div><div class="line">                                # the full set of repetitions</div><div class="line">                                # of the non-capturing brackets</div></pre></td></tr></table></figure>
+<p><code>$/&lt;files&gt;</code> 被赋值了单个包含由全套重复的非捕获括号所匹配到的完整子字符串的Match 对象。<br>  ​<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ms/ mv @&lt;files&gt;=[ f.. \s* ]* /; # $/&lt;files&gt; assigned an array,</div><div class="line">                                # each element of which is a</div><div class="line">                                # Match object containing</div><div class="line">                                # the substring matched by Nth</div><div class="line">                                # repetition of the non-</div><div class="line">                                # capturing bracket match</div></pre></td></tr></table></figure></p>
+<p><code>$/&lt;files&gt;</code> 被赋值给了一个数组, 数组中的每个元素是含有通过第 N 个 重复的非捕获括号匹配所匹配到的子字符串的 Match 对象。</p>
+<ul>
+<li>如果数组别名应用到捕获的括号（即一个子模式）的量词化对儿上，那么相应的散列或数组元素被分配通过连接由子模式的一个重复返回的每个<code>Match</code>对象的数组值构成的列表。也就是说，一个子模式阵列别名变平，并收集混叠子模式中的所有嵌套子模式拍摄。例如：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if ms/ $&lt;pairs&gt;=( (\w+) \: (\N+) )+ / &#123;</div><div class="line">    # Scalar alias, so $/&lt;pairs&gt; is assigned an array</div><div class="line">    # of Match objects, each of which has its own array</div><div class="line">    # of two subcaptures...</div><div class="line">    for @($&lt;pairs&gt;) -&gt; $pair &#123;</div><div class="line">        say &quot;Key: $pair[0]&quot;;</div><div class="line">        say &quot;Val: $pair[1]&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">if ms/ @&lt;pairs&gt;=( (\w+) \: (\N+) )+ / &#123;</div><div class="line">    # Array alias, so $/&lt;pairs&gt; is assigned an array</div><div class="line">    # of Match objects, each of which is flattened out of</div><div class="line">    # the two subcaptures within the subpattern</div><div class="line"></div><div class="line">    for @($&lt;pairs&gt;) -&gt; $key, $val &#123;</div><div class="line">        say &quot;Key: $key&quot;;</div><div class="line">        say &quot;Val: $val&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>同样地, 如果数组别名(array alias)被应用到量词化的 subrule 上, 那么对应于别名的散列元素或数组元素被赋值了一个列表, 这个列表包含了从每次 subrule 重复返回的每个 <code>Match</code> 对象的数组值, 它们都被展开到单个数组中:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">rule pair &#123; (\w+) \: (\N+) \n &#125;</div><div class="line"></div><div class="line">if ms/ $&lt;pairs&gt;=&lt;pair&gt;+ / &#123;</div><div class="line">    # 标量别名, 所以 $/&lt;pairs&gt; 包含了一个 Match 对象的数组</div><div class="line">    # 数组中的每个值都是 &lt;pair&gt; subrule 调用的结果...</div><div class="line"></div><div class="line"> for @($&lt;pairs&gt;) -&gt; $pair &#123;</div><div class="line">        say &quot;Key: $pair[0]&quot;;</div><div class="line">        say &quot;Val: $pair[1]&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">rule pair &#123; (\w+) \: (\N+) \n &#125;</div><div class="line"></div><div class="line">if ms/ mv @&lt;pairs&gt;=&lt;pair&gt;+ / &#123;</div><div class="line">    # 数组别名, 所以 $/&lt;pairs&gt; 包含了一个 Match objects 的数组</div><div class="line">    # all flattened down from the</div><div class="line">    # nested arrays inside the Match objects returned</div><div class="line">    # by each match of the &lt;pair&gt; subrule...</div><div class="line">    # 从 &lt;pair&gt; subrule 的每次匹配返回的 Match objects 里面嵌套的数组都向下展开</div><div class="line"></div><div class="line">   for @($&lt;pairs&gt;) -&gt; $key, $val &#123;</div><div class="line">        say &quot;Key: $key&quot;;</div><div class="line">        say &quot;Val: $val&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>换句话说, 数组别名在把任何可能出现在量词化 subpattern 或 subrule 中的嵌套的捕获展开到单个数组中时很有用。而标量别名对保存每次重复的顶级数组内部结构很有用。</p>
+</li>
+<li><p>把数字编号变量用作数组别名也是可行的。语义和上面描述的相同。唯一不同的是 <code>Match</code> objects 的结果数组被赋值给了该 regex 的匹配数组的合适元素中而不是它的匹配散列的键中。例如:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">if m/ mv  \s+  @0=((\w+) \s+)+  $1=((\W+) (\s*))* / &#123;</div><div class="line">    #          |                |</div><div class="line">    #          |                |</div><div class="line">    #          |                 \_ 标量别名, 所以 $1 得到一个数组</div><div class="line">    #          |                    数组中的每个元素都是一个 Match 对象</div><div class="line">    #          |                    每个 Match 对象都包含了两个嵌套的捕获</div><div class="line">    #          |</div><div class="line">    #          |</div><div class="line">    #           \___ 数组别名, 所以 $0 得到了一个展开的数组</div><div class="line">    #                数组中的每个元素都是从每次重复所得到的 (\w+) 捕获</div><div class="line"></div><div class="line">    @from     = @($0);      # 展开的列表</div><div class="line">    $to_str   = $1[0][0];   # Nested elems of</div><div class="line">    $to_gap   = $1[0][1];   #    unflattened list</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>再次注意, 在 regex 外面, <code>@0</code> 就是 <code>@($0)</code> 的简写形式, 所以上面代码中的第一次赋值也能写作这样:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@from = @0;</div></pre></td></tr></table></figure>
+<h1 id="散列别名"><a href="#散列别名" class="headerlink" title="散列别名"></a>散列别名</h1><ul>
+<li>除了使用标量或数组, 使用散列作为别名变量也能指定别名, 例如:<br><a href="https://github.com/perl6/roast/blob/master/S05-capture/hash.t#L13-L159" target="_blank" rel="external">S05-capture/hash.t lines 13–159</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">m/ mv %&lt;location&gt;=( (&lt;ident&gt;) \: (\N+) )+ /;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>散列别名让当前作用域中 <code>Match</code> 对象对应的散列或数组元素被赋值了一个(嵌套的) Hash 对象(而不是一个 <code>Array</code> 对象或单个 <code>Match</code> 对象)。</p>
+</li>
+<li><p>如果散列别名被应用到 subrule 或 subpattern 上, 那么第一个嵌套的数字捕获变成每个散列条目的键, 剩下的数字捕获成为键值(如果不止一个则在数组中)。</p>
+</li>
+<li><p>就像数组别名那样, 把编号变量用作散列别名也是可行的, 唯一不同的是 <code>Match</code> 对象的结果的存储位置:<br>​</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">rule one_to_many &#123;  (\w+) \: (\S+) (\S+) (\S+) &#125;</div><div class="line"></div><div class="line">   if ms/ %0=&lt;one_to_many&gt;+ / &#123;</div><div class="line">     # $/[0] 含有一个散列, 其中每个键由 &lt;one_to_many&gt; 中的第一个 subcapture 提供</div><div class="line">     # 每个键值是一个包含了 subrule 的第二个、第三个、第四个等 subcaptures 的数组...</div><div class="line"></div><div class="line">     for %($/[0]) -&gt; $pair &#123;</div><div class="line">           say &quot;One:  $pair.key()&quot;;</div><div class="line">           say &quot;Many: &#123; @($pair.value) &#125;&quot;;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在 regex 外部, <code>%0</code> 是  <code>%($0)</code>的简写:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for %0 -&gt; $pair &#123;</div><div class="line">    say &quot;One:  $pair.key()&quot;;</div><div class="line">    say &quot;Many: @($pair.value)&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="外部别名"><a href="#外部别名" class="headerlink" title="外部别名"></a>外部别名</h1><p><a href="https://github.com/perl6/roast/blob/master/S05-capture/external-aliasing.t#L6-L38" target="_blank" rel="external">S05-capture/external-aliasing.t lines 6–38</a></p>
+<ul>
+<li>代替像这样在内部使用别名:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">m/ mv  @&lt;files&gt;=&lt;ident&gt;+  $&lt;dir&gt;=&lt;ident&gt; /</div></pre></td></tr></table></figure>
+<p> 普通变量名能用作外部别名, 像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">m/ mv  @OUTER::files=&lt;ident&gt;+  $OUTER::dir=&lt;ident&gt; /</div></pre></td></tr></table></figure>
+<ul>
+<li>这时, 每个别名的表现和之前章节所描述的相同。不同的是结果捕获被直接(但仍旧是假设)绑定给指定名字的变量, 而该变量必须已经存在于声明该 regex 的作用域中。</li>
+</ul>
+<h1 id="从重复匹配中捕获"><a href="#从重复匹配中捕获" class="headerlink" title="从重复匹配中捕获"></a>从重复匹配中捕获</h1><ul>
+<li><p>当整个正则表达式使用重复(由 <code>:x</code> 或 <code>:g</code> 标记指定)或重叠(通过 <code>:ov</code> 或 <code>:ex</code> 标记指定)匹配成功时, 它会产生一个不同匹配的序列。</p>
+</li>
+<li><p>在任何这些标记之下, 成功的匹配仍旧在 <code>$/</code> 中返回单个 <code>Match</code> 对象。然而, 该对象可能代表着该 regex 的部分求值。还有, 这个匹配对象的值和通过非重复匹配提供的那些值有些许不同:</p>
+<p>例如:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if $text ~~ ms:g/ (\S+:) &lt;rocks&gt; / &#123;</div><div class="line">   say &quot;Full match context is: [$/]&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是对应于每个单独的匹配的单独匹配对象的列表也是可得到的:<br>  ​<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if $text ~~ ms:g/ (\S+:) &lt;rocks&gt; / &#123;</div><div class="line">    say &quot;Matched &#123; +lol() &#125; times&quot;;    # Note: forced eager here by +</div><div class="line"></div><div class="line">    for lol() -&gt; $m &#123;</div><div class="line">        say &quot;Match between $m.from() and $m.to()&quot;;</div><div class="line">        say &apos;Right on, dude!&apos; if $m[0] eq &apos;Perl&apos;;</div><div class="line">        say &quot;Rocks like $m&lt;rocks&gt;&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>这样的匹配之后 <code>$/</code> 的布尔值要么是 true, 要么是 false, 取决于模式是否匹配。</li>
+<li>字符串值是从第一次匹配开始到最后一次匹配结束的子字符串(包括任何 regex 跳过的发生于其间的部分字符串, 为了找到后来的匹配。)</li>
+<li>Subcaptures 被作为多维列表返回, 用户可以选择两种方法之一来处理。如果你引用 <code>@().flat</code>(或仅仅在展开的列表上下文中使用 <code>@()</code>), 那么多维性被忽略而且所有的匹配被展开后(但是仍旧是懒惰的)返回。如果你引用了 <code>lol()</code>, 则你可以得到每个单独的 sublist 作为一个 <code>Parcel</code> 对象。就像任何多维列表那样, 每个 sublist 各自都可以是懒惰的。</li>
+</ul>
+<h1 id="Grammars"><a href="#Grammars" class="headerlink" title="Grammars"></a>Grammars</h1><ul>
+<li>你私有的  <code>ident</code> rule 不能重写其它人的 <code>ident</code> rule. 所以需要某种机制将 rules 限制到一个名称空间中.</li>
+<li>如果 subs 是 rules 的模型, 那么 <code>modules/classes</code> 明显就是用于凝聚它们的模型. 这种 rules 的集合就是所谓的 <em>grammars</em>​</li>
+<li>就像一个类能把具名的 actions 收集在一起,  grammar 也能把一组具名的 <code>rules</code> 收集在一起:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Identity &#123;</div><div class="line">    method name &#123; &quot;Name = $!name&quot; &#125;</div><div class="line">    method age  &#123; &quot;Age  = $!age&quot;  &#125;</div><div class="line">    method addr &#123; &quot;Addr = $!addr&quot; &#125;</div><div class="line"></div><div class="line">    method desc &#123;</div><div class="line">        print &amp;.name(), &quot;\n&quot;,</div><div class="line">              &amp;.age(),  &quot;\n&quot;,</div><div class="line">              &amp;.addr(), &quot;\n&quot;;</div><div class="line">    &#125;</div><div class="line">    # etc.</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">grammar Identity &#123;</div><div class="line">    rule name &#123; Name &apos;=&apos; (\N+) &#125;</div><div class="line">    rule age  &#123; Age  &apos;=&apos; (\d+) &#125;</div><div class="line">    rule addr &#123; Addr &apos;=&apos; (\N+) &#125;</div><div class="line">    rule desc &#123;</div><div class="line">        &lt;name&gt; \n</div><div class="line">        &lt;age&gt;  \n</div><div class="line">        &lt;addr&gt; \n</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # etc.</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>像类那样, grammars 也能继承:<br><a href="https://github.com/perl6/roast/blob/master/S05-grammar/inheritance.t#L6-L80" target="_blank" rel="external"><code>S05-grammar/inheritance.t lines 6–80</code></a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">grammar Letter &#123;</div><div class="line">    rule text     &#123; &lt;greet&gt; $&lt;body&gt;=&lt;line&gt;+? &lt;close&gt; &#125;</div><div class="line">    rule greet    &#123; [Hi|Hey|Yo] $&lt;to&gt;=\S+? &apos;,&apos;       &#125;</div><div class="line">    rule close    &#123; Later dude &apos;,&apos; $&lt;from&gt;=.+        &#125;</div><div class="line">    token line    &#123; \N* \n                           &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">grammar FormalLetter is Letter &#123;</div><div class="line">    rule greet &#123; Dear $&lt;to&gt;=\S+? &apos;,&apos;            &#125;</div><div class="line">    rule greet &#123; Dear $&lt;to&gt;=\S+? &apos;,&apos;            &#125;</div><div class="line">    rule close &#123; Yours sincerely &apos;,&apos; $&lt;from&gt;=.+ &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>就像类中的方法,  grammar 中 rule 定义也是继承的(并且是多态的!). 所以没有必要重新指定文本, 行等等.<br><a href="https://github.com/perl6/roast/blob/master/S05-capture/dot.t#L88-L122" target="_blank" rel="external">S05-capture/dot.t lines 88–122</a></p>
+</li>
+<li><p>Perl 6 会携带至少一个预定义好的 grammar:</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">grammar STD &#123;    # Perl 自己的标准 grammar</div><div class="line">     rule prog &#123; &lt;statement&gt;* &#125;</div><div class="line">     rule statement &#123;</div><div class="line">              | &lt;decl&gt;</div><div class="line">              | &lt;loop&gt;</div><div class="line">              | &lt;label&gt; [&lt;cond&gt;|&lt;sideff&gt;|&apos;;&apos;]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    rule decl &#123; &lt;sub&gt; | &lt;class&gt; | &lt;use&gt; &#125;</div><div class="line">    # etc. etc. etc.</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>因此:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$parsetree = STD.parse($source_code)</div></pre></td></tr></table></figure>
+<ul>
+<li>你可以使用 <code>:lang</code> 副词在 regex 的中间切换到不同的 grammar. 例如, 要匹配一个嵌在花括号中来自于 <code>$funnylang</code> 的表达式  <code>&lt;expr&gt;</code>, 要说:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">token funnylang &#123; &apos;&#123;&apos; [ :lang($funnylang.unbalanced(&apos;&#125;&apos;)) &lt;expr&gt; ] &apos;&#125;&apos; &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>通过在 grammar 身上调用  <code>.parse</code> 或 <code>.parsefile</code> 方法, 字符串就能与 grammar 匹配, 并且可以传递一个可选的 actions 对象给 grammar:</li>
+</ul>
+<p><a href="https://github.com/perl6/roast/blob/master/S05-grammar/action-stubs.t#L7-L36" target="_blank" rel="external">S05-grammar/action-stubs.t lines 7–36</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">MyGrammar.parse($string, :actions($action-object))</div><div class="line">MyGrammar.parsefile($filename, :actions($action-object))</div></pre></td></tr></table></figure>
+<p>​这创建了一个  <code>Grammar</code> 对象,  它的类型指示了当前被解析的语言, 还有派生自哪个用于扩展语言的 grammars. 所有的 grammars 对象派生自 <code>Cursor</code>, 所以每个 grammar 对象的值包含了当前匹配的当前状态.  这个新的 grammar 对象然后被作为 <code>MyGrammar</code> 的<code>TOP</code> 方法(<code>regex</code>, <code>token</code>, 或 <code>rule</code> )的调用者传递. 这个调用的默认 rule 的名字可以使用 <code>parse</code> 方法的  <code>:rule</code>  具名参数进行重写.  这对于  grammar rules 的单元测试很有用.  作为参数, rules 可以拥有参数, 所以如果必要的话, <code>:args</code> 具名参数可以用于传递这样的参数作为 parcel.</p>
+<p>Grammar 对象是不可变的, 所以每个匹配返回不同的匹配状态, 并且多个匹配状态可同时存在.  每个这样的匹配状态被认为是 模式怎样会最终匹配的假设. 在模式匹配中, 一个能回溯的选择能在 Perl 6中作为一个匹配状态指针的惰性列表被轻易描绘. 回溯由只抛弃列表前面的值并继续匹配下一个值组成. 因此, 这些匹配指针的管理控制着回溯是怎样工作的, 并且从惰性列表的词形变化表中自然地往下落</p>
+<p><code>.parse</code> 和 <code>.parsefile</code> 方法锚定到文本的开头和结尾,  并且如果没有到达文本的结尾会失败.(<code>TOP</code> rule 能自己检查 <code>$</code>, 如果它想产生它自己的错误信息.)</p>
+<p>如果你想解析一部分文本, 那么使用 <code>subparse</code> 代替. 你可能传递一个 <code>:pos</code> 参数从某个不是 0 的位置开始解析. 你可能传递一个 <code>:rule</code> 参数来指定你想调用哪个 <code>subrule</code>. 通过检查返回的 Match 对象决定最终的位置.</p>
+<h1 id="Action-对象"><a href="#Action-对象" class="headerlink" title="Action 对象"></a>Action 对象</h1><p>Action 对象(由 <code>Grammar.parse</code> 中的 <code>:actions</code> 具名参数提供)的方法对应于 grammar 中的 rules. 当 grammar 中的 rule 匹配时, action 对象中与 grammar 中的同名方法( 如果有的话) 就会用于 grammar 正在构建的 Match 的 AST 中.  </p>
+<p>Action 方法只有一个参数(为了方法, <code>$/</code>), 它包含了 rule 的 Match 对象. 只要对应的 rule 成功匹配, Action 方法就会被调用, 不管匹配是一个零宽匹配还是一个最终失败的回溯分支, 所以 要通过 AST 来跟踪状态, 并且副作用可能导致意想不到的行为.</p>
+<p>Action 方法是在 rule 的调用帧中被调用的, rule 中的动态变量设置被传递给了 action 方法.</p>
+<h1 id="句法分类"><a href="#句法分类" class="headerlink" title="句法分类"></a>句法分类</h1><p><a href="https://github.com/perl6/roast/blob/master/S05-syntactic-categories/new-symbols.t#L7-L33" target="_blank" rel="external"><code>S05-syntactic-categories/new-symbols.t lines 7–33</code></a></p>
+<p>要写你自己的反引号和断言 subrules,  你可以使用下面的句法分类来扩展(你的拷贝) Regex sublanguage:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">augment slang Regex &#123;</div><div class="line">    token backslash:sym&lt;y&gt;   &#123; ... &#125;   # 定义你自己的 \y 和 \Y</div><div class="line">    token assertion:sym&lt;&gt;    &#123; ... &#125;   # 定义你自己的 &lt;stuff&gt;</div><div class="line">    token metachar:sym&lt;,&gt;    &#123; ... &#125;   # 定义一个新的元字符</div><div class="line">    multi method tweak (:$x) &#123; ... &#125;   # 定义你自己的 :x 修饰符</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="编译指令"><a href="#编译指令" class="headerlink" title="编译指令"></a>编译指令</h1><p>各种编译指令能用于控制 regex 编译的各个方面和未提供的用法. 这些被捆绑到特殊声明符 ? 上:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use s :foo;         # control s defaults</div><div class="line">use m :foo;         # control m defaults</div><div class="line">use rx :foo;        # control rx defaults</div><div class="line">use regex :foo;     # control regex defaults</div><div class="line">use token :foo;     # control token defaults</div><div class="line">use rule :foo;      # control rule defaults</div></pre></td></tr></table></figure>
+<h1 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h1><p><a href="https://github.com/perl6/roast/blob/master/S05-transliteration/trans.t#L11-L270" target="_blank" rel="external"><code>S05-transliteration/trans.t lines 11–270</code></a></p>
+<ul>
+<li><code>tr///</code> quote-like 操作符现在有一个叫做 <code>trans()</code>的方法. 它的参数是一个 pairs 的列表. 你可以使用任何能产生 pair 列表的东西:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$str.trans( %mapping.pairs );</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>使用 <code>.=</code> 形式做就地转换:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$str.=trans( %mapping.pairs );</div></pre></td></tr></table></figure>
+<p>(Perl 6 不支持 <code>y///</code> 形式, 这种形式只存在于 sed 中, 因为它们用光了单个字母.)</p>
+<ul>
+<li>pair 的两边可以像 <code>tr///</code> 那样解释字符串:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$str.=trans( &apos;A..C&apos; =&gt; &apos;a..c&apos;, &apos;XYZ&apos; =&gt; &apos;xyz&apos; );</div></pre></td></tr></table></figure>
+<p>作为一种退化了的情况, pair 的每一边都可以是单个字符:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$str.=trans( &apos;A&apos;=&gt;&apos;a&apos;, &apos;B&apos;=&gt;&apos;b&apos;, &apos;C&apos;=&gt;&apos;c&apos; );</div></pre></td></tr></table></figure>
+<p>空白字符作为字面字符, 作为转换的来源或目标.  <code>..</code> 范围序列是在字符串中唯一能被识别的元语法, 尽管你可以理所当然的在双引号中使用反斜线插值. 如果右侧的字符太短,   最后的字符会被重复直到和左侧字符的长度相等. 如果没有最后的字符, 是因为右侧的字符是一个空字符, 代替的是, 匹配的结果被删除.</p>
+<ul>
+<li>pair 的一边或两边也可以是一个数组对象:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$str.=trans( [&apos;A&apos;..&apos;C&apos;] =&gt; [&apos;a&apos;..&apos;c&apos;], &lt;X Y Z&gt; =&gt; &lt;x y z&gt; );</div></pre></td></tr></table></figure>
+<p>数组版本是基础原始的形式: 字符串形式的语义正等价于这种形式, 首先展开 <code>..</code>, 然后再把字符串分割为单个字符, 然后将它们用作数组.</p>
+<ul>
+<li>数组版本的转换能将一个或多个字符映射为一个或多个字符:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$str.=trans( [&apos; &apos;,      &apos;&lt;&apos;,    &apos;&gt;&apos;,    &apos;&amp;&apos;    ] =&gt;</div><div class="line">             [&apos; &apos;, &apos;&lt;&apos;, &apos;&gt;&apos;, &apos;&amp;&apos; ]);</div></pre></td></tr></table></figure>
+<p>在多于一个输入字符序列匹配的情况下, 最长的那个匹配胜出.在两个相同序列匹配的情况下, 排在第一的那个匹配胜出。<br>与字符串形式一样, 缺失的右侧元素重复最后的那个元素,  而一个空的数组会导致删除.</p>
+<ul>
+<li>字符串和数组形式的识别是基础的. 要实现更强大的功能, 左侧的识别元素可以通过构建字符类, 向前查看等 regex 来指定.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$str.=trans( [/ \h /,   &apos;&lt;&apos;,    &apos;&gt;&apos;,    &apos;&amp;&apos;    ] =&gt;</div><div class="line">             [&apos; &apos;, &apos;&lt;&apos;, &apos;&gt;&apos;, &apos;&amp;&apos; ]);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$str.=trans( / \s+ / =&gt; &apos; &apos; );      # 将所有空白挤压为单个空格</div><div class="line">$str.=trans( / &lt;-alpha&gt; / =&gt; &apos;&apos; );  # 删除所有的非字母字符</div></pre></td></tr></table></figure>
+<ul>
+<li>如果箭头右侧是一个闭包, 它会被计算为要替换的值. 如果箭头左侧被一个 regex 匹配, 则在闭包中可以访问到结果匹配对象.</li>
+</ul>
+<p><a href="https://github.com/perl6/roast/blob/master/S05-transliteration/with-closure.t#L5-L63" target="_blank" rel="external"><code>S05-transliteration/with-closure.t lines 5–63</code></a></p>
+<h1 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h1><p><a href="https://github.com/perl6/roast/blob/master/S05-substitution/subst.t#L7-L211" target="_blank" rel="external"><code>S05-substitution/subst.t lines 7–211</code></a><br><a href="https://github.com/perl6/roast/blob/master/S05-substitution/match.t#L7-L33" target="_blank" rel="external"><code>S05-substitution/match.t lines 7–33</code></a></p>
+<p>也有 <code>m//</code> 和 <code>s///</code>形式的方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$str.match(/pat/);</div><div class="line">$str.subst(/pat/, &quot;replacement&quot;);</div><div class="line">$str.subst(/pat/, &#123;&quot;replacement&quot;&#125;);</div><div class="line">$str.=subst(/pat/, &quot;replacement&quot;);</div><div class="line">$str.=subst(/pat/, &#123;&quot;replacement&quot;&#125;);</div></pre></td></tr></table></figure>
+<p><code>.match</code> 和 <code>.subst</code> 方法支持 <code>m//</code> 和 <code>s///</code> 的副词作为具名参数, 所以你可以写成:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$str.match(/pat/, :g)</div></pre></td></tr></table></figure>
+<p>这等价于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$str.comb(/pat/, :match)</div></pre></td></tr></table></figure>
+<p>这儿没有语法糖, 所以为了获得 replacement 延时计算, 你必须把它放到一个闭包中. 只有在 quotelike 形式才提供有语法糖. 首先, 有一个标准的 “triple quote” 形式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s/pattern/replacement/</div></pre></td></tr></table></figure>
+<p>只有非括号字符才能被用于”triple quote”中.  右侧总是被当作在双引号中求值, 不管所选的引号是什么.</p>
+<p>就像 Perl 5, 也支持括号形式, 但是不像 Perl 5, Perl 6 只在模式周围使用括号. replacement 被指定为就像普通的 item 赋值一样, 使用普通的引号 rules.  要在右侧选择你自己的引号, 只使用其中的一种 q 形式就好.  上面的替换等价于:<br><a href="https://github.com/perl6/roast/blob/master/S05-substitution/subst.t#L223-L323" target="_blank" rel="external"><code>S05-substitution/subst.t lines 223–323</code></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s[pattern] = &quot;replacement&quot;</div></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s[pattern] = qq[replacement]</div></pre></td></tr></table></figure>
+<p>这不是普通的赋值, 因为每次替换一匹配,右侧就会被求值一次. 这因此被称为形式转换. 它会被作为一段创建了动态作用域而非词法作用域的代码被调用. (你也可以把 thunk 看作一个使用当前词法作用域的闭包).实际上, 使用下面这个也没有影响:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s[pattern] = &#123; doit &#125;</div></pre></td></tr></table></figure>
+<p>因为那会把闭包替换成字符串.</p>
+<p>任何标量赋值操作符都能被使用; 那个替换宏知道怎么转换<br><a href="https://github.com/perl6/roast/blob/master/S05-substitution/subst.t#L324-L480" target="_blank" rel="external"><code>S05-substitution/subst.t lines 324–480</code></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$target ~~ s:g[pattern] op= expr</div></pre></td></tr></table></figure>
+<p>为如下这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$target.=subst(rx[pattern], &#123; $() op expr &#125;, :g)</div></pre></td></tr></table></figure>
+<p><code>s///</code> 的实际实现必须返回一个 Match 对象以使智能匹配能正确工作.  上面的重写只返回了改变了的字符串.</p>
+<p>所以, 举个例子, 你可以把每个美元符号的数量乘以 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s:g[$ &lt;( \d+ )&gt;] *= 2</div></pre></td></tr></table></figure>
+<p>(当然, 优化比实际调用要快)</p>
+<p>你会注意到上面一个例子, 由于匹配的结果, 替换只发生在”正式的”字符串上, 即,  <code>$/.from</code> 和 <code>$/.to</code> 位置之间的那部分字符串.( 这里我们使用   <code>&lt;(…)&gt;</code> pair  显式地设置了那些, 否则,我们可能必须使用向前查看来匹配 <code>$</code>)</p>
+<p>请注意,  <code>:ii</code>/<code>:samecase</code> 和 <code>:mm</code>/<code>:samemark</code>  开关实际上是一根绳子上的两个蚂蚱, 当编译器给 quote-like 形式的开关脱去语法糖时, 它会把语义分配给模式和替换部分.  即, 作用于替换上的 <code>:ii</code>  隐含了模式上的  <code>:i</code>,    <code>:mm</code> 隐含了 <code>:m</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">s:ii/foo/bar/</div><div class="line">s:mm/boo/far/</div></pre></td></tr></table></figure>
+<p>不是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.subst(/foo/, &apos;bar&apos;, :ii)   # WRONG</div><div class="line">.subst(/boo/, &apos;far&apos;, :mm)   # WRONG</div></pre></td></tr></table></figure>
+<p>而是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.subst(rx:i/foo/, &apos;bar&apos;, :ii)   # okay</div><div class="line">.subst(rx:m/boo/, &apos;far&apos;, :mm)   # okay</div></pre></td></tr></table></figure>
+<p>它专门不要求实现把正则表达式作为关于大小写和标记的通用实现。追溯重新编译是有害的。如果一个实现确实执行懒惰的一般的大小写和标记语义，它对于依赖于它的程序来说是错误的和不可移植的。 (天了噜, 这究竟怎么翻译?!)</p>
+<p><code>s///</code> 和 <code>.subst</code> 形式的不同之处在于, <code>.subst</code> 返回修改过的字符串(因此不能用作智能匹配器), <code>s///</code> 形式要么返回一个  <code>Match</code> 对象, 来标示智能匹配成功了, 要么返回一个 <code>Nil</code> 值标示没有成功.  </p>
+<p>同样地, 对于 <code>m:g</code> 匹配和 <code>s:g</code> 替换, 可能会找到多个匹配. 这些结构必须在智能匹配时仍旧能继续工作然后返回一个匹配列表. 幸运的是, <code>List</code> 是一个知名的类型, 匹配器能返回这个类型来标示匹配成功或失败. 所以这些结只是返回一个成功匹配的列表, 如果没有出现匹配则它会是一个空的列表(因此匹配失败).</p>
+<h1 id="位置匹配-固定宽度类型"><a href="#位置匹配-固定宽度类型" class="headerlink" title="位置匹配, 固定宽度类型"></a>位置匹配, 固定宽度类型</h1><ul>
+<li>在通常情况下, 要锚定到一个特定的位置你可以使用  <code>&lt;at($pos)&gt;</code> 断言, 来说当前位置和你提供的位置对象是相同的. 你可以通过 <code>:c</code> 和 <code>:p</code> 修饰符设置当前的匹配位置.</li>
+</ul>
+<p>然而, 请记住在 Perl 6 中, 字符串位置通常不是整数, 而是指向字符串中特定位置的对象, 不管你使用字节或代码点还是字形来计数. 如果使用的是整数, <code>at</code> 断言就会假设你意指当前词法作用域的 Unicode 级别, 假设这个整数是以某种方式在同一个这样的词法作用域中生成的. 如果这在当前字符串允许的 Unicode 抽象级别之外,会抛出异常. 查看 <code>$02</code> 获取字符串位置的更多讨论.</p>
+<ul>
+<li><code>Buf</code> 类型基于固定宽度的单元格, 因此处理整数位置刚刚好, 并把它们当作数组切片. 特别地, <code>buf8</code> (也是熟知的 <code>buf</code>) 就是老式的字节字符串. 在没有显式修饰符询问数组的值将被看作某种诸如 UTF-32的特殊编码时,  匹配 <code>Buf</code> 类型被约束为 ASCII 语义.(这对于那些跟 <code>Buf</code> 同构的紧致数组也适用). <code>Buf</code> 类型中的位置总是整数, 基本数组的的每个单元格计数 1. 注意 <code>from</code> 和 <code>to</code> 位置是在元素之间的. 如果匹配一个紧致的数组 <code>@foo</code>, 最后的位置 42 标示 <code>@foo[42]</code> 是未被包含的首个元素. (<em>翻译的真辛苦, 还不知所云, 坚持把!</em>)</li>
+</ul>
+<h1 id="匹配非字符串"><a href="#匹配非字符串" class="headerlink" title="匹配非字符串"></a>匹配非字符串</h1><p><a href="https://github.com/perl6/roast/blob/master/S05-nonstrings/basic.t#L7-L46" target="_blank" rel="external"><code>S05-nonstrings/basic.t lines 7–46</code></a></p>
+<ul>
+<li>任何可以绑到字符串上的东西都可以用  regex 匹配. 这个特性对输入流特别有用:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $stream := cat $fh.lines;       # tie scalar to filehandle</div><div class="line"># and later...</div><div class="line">$stream ~~ m/pattern/;             # match from stream</div></pre></td></tr></table></figure>
+<ul>
+<li>任何混合了字符串或对象的非紧致数组能匹配一个 regex, 只要你使用 <code>Str</code> 接口把它们呈现为对象, 这不妨碍其它对象含有诸如 <code>Array</code> 之类的其它接口. 正常地, 你会使用 <code>cat</code> 来生成这样的对象:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@array.cat ~~ / foo &lt;,&gt; bar &lt;elem&gt;* /;</div></pre></td></tr></table></figure>
+<p>那个特殊的 <code>&lt;,&gt;</code> subrule 匹配元素之间的边界.   <code>&lt;elem&gt;</code> 断言匹配任何单独的数组元素.  整个 <code>&lt;elem&gt;</code> 元素就是点元字符的等价物.</p>
+<p>如果数组元素是字符串, 事实上它们被连接成单个逻辑字符串. 如果数组元素是  tokens 或 其它这样的对象, 那么对象必须为这样的 subrules 提供合适的方法来匹配. 将字符串匹配断言和未提供字符串化查看的对象进行匹配会导致断言失败. 然而, 纯对象列表可以被解析, 只要匹配(包括任何 subrules)把自身约束为这样的断言:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;.isa(Dog)&gt;</div><div class="line">&lt;.does(Bark)&gt;</div><div class="line">&lt;.can(&apos;scratch&apos;)&gt;</div></pre></td></tr></table></figure>
+<p>把对象和字符混合在数组中也是可以的, 只要它们在不同的元素中. 然而你不能在字符串中嵌入对象. 当然, 任何对象都可以假装它是一个字符串元素, 所以, <code>Cat</code> 对象可以用作子字符串, 使用与主字符串中同样的约束.</p>
+<p>请注意,匹配数组时,  <code>.from</code> 和 <code>.to</code> 都会返回不透明对象的警告, 在一个特殊的位置, 这个位置既反映在数组中的位置, 又在数组的字符串中的位置. 不要期望使用这样的值来做匹配,  你也不要期望能跨越元素边界来提取子字符串[猜测:难道不是吗?] :PS  简直无法翻译!</p>
+<ul>
+<li>要匹配数组中的每一个元素, 使用 hyper 操作符:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@array».match($regex);</div></pre></td></tr></table></figure>
+<ul>
+<li>要匹配数组中的任意元素, 使用普通的智能匹配就足够了:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@array ~~ $regex;</div></pre></td></tr></table></figure>
+<h1 id="在什么时候是有效的"><a href="#在什么时候是有效的" class="headerlink" title="$/ 在什么时候是有效的"></a><code>$/</code> 在什么时候是有效的</h1><p>为了提供实施自由, <code>$/</code> 变量并不能保证被定义, 直到模式到达需要它的序列点.(例如, 完成了匹配, 或者调用了嵌入的闭包, 或者计算一个 Perl 表达式作为它的参数的 submatch.)  在 regex 代码里面,  <code>$/</code> 未被正式定义, 引用 <code>$0</code> 或其它变量可能被编译产生当前值, 而不用引用 <code>$/</code>.  同样地,  引用 <code>$&lt;foo&gt;</code> 并不意味着 regex 中就有 <code>$/&lt;foo&gt;</code> . 在执行匹配期间, 当前匹配状态实际上存储在词法作用域到匹配部分的 <code>$¢</code> 变量中, 但是它不保证和 <code>$/</code> 对象的表现一样, 因为 <code>$/</code> 是 <code>Match</code> 类型, 而匹配状态的类型是从 <code>Cursor</code> 派生出来的.</p>
+<p>在任何情况下, 这对于用户的简单匹配都是透明的; 在 regex 代码之外(还有 regex 的闭包中) <code>$/</code> 变量保证代表那个点的匹配状态. 即,  一般的 Perl 代码总是依靠 <code>$&lt;foo&gt;</code> 表示 <code>$/&lt;foo&gt;</code>,  依靠 <code>$0</code> 表示 <code>$/[0]</code> , 不论代码是嵌入在 regex 的闭包中还是在 regex 的外面, 在整匹配之后.</p>
+<h1 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Damian Conway &lt;damian@conway.org&gt;</div><div class="line">Allison Randal &lt;al@shadowed.net&gt;</div><div class="line">Patrick Michaud &lt;pmichaud@pobox.com&gt;</div><div class="line">Larry Wall &lt;larry@wall.org&gt;</div><div class="line">Moritz Lenz &lt;moritz@faui2k3.org&gt;</div><div class="line">Tobias Leich &lt;email@froggs.de&gt;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/正则表达式/" rel="tag">#正则表达式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/04/27/从正则表达式到Grammars-Part-1/" rel="next" title="从正则表达式到Grammars - Part 1">
+                <i class="fa fa-chevron-left"></i> 从正则表达式到Grammars - Part 1
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/01/Sneaky-methods/" rel="prev" title="Sneaky methods">
+                Sneaky methods <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/04/28/Perl6中的正则表达式-五/"
+     data-title="Perl 6 中的正则表达式(五)"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/04/28/Perl6中的正则表达式-五/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/04/28/Perl6中的正则表达式-五/"
+           data-title="Perl 6 中的正则表达式(五)" data-url="https://ohmycloud.github.io/2015/04/28/Perl6中的正则表达式-五/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从匹配中返回值"><span class="nav-number">1.</span> <span class="nav-text">从匹配中返回值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Match-对象"><span class="nav-number">2.</span> <span class="nav-text">Match 对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子模式捕获"><span class="nav-number">3.</span> <span class="nav-text">子模式捕获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问捕获的子模式"><span class="nav-number">4.</span> <span class="nav-text">访问捕获的子模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌套的子模式捕获"><span class="nav-number">5.</span> <span class="nav-text">嵌套的子模式捕获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#量词化的子模式捕获"><span class="nav-number">6.</span> <span class="nav-text">量词化的子模式捕获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#间接量词化的子模式捕获"><span class="nav-number">7.</span> <span class="nav-text">间接量词化的子模式捕获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子模式编号"><span class="nav-number">8.</span> <span class="nav-text">子模式编号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Subrule-捕获"><span class="nav-number">9.</span> <span class="nav-text">Subrule 捕获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问捕获的-subrules"><span class="nav-number">10.</span> <span class="nav-text">访问捕获的 subrules</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同一个-subrule-的重复捕获"><span class="nav-number">11.</span> <span class="nav-text">同一个 subrule 的重复捕获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#别名"><span class="nav-number">12.</span> <span class="nav-text">别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让具名标量成为subpatterns的别名"><span class="nav-number">13.</span> <span class="nav-text">让具名标量成为subpatterns的别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让具名标量成为非捕获分组的别名"><span class="nav-number">14.</span> <span class="nav-text">让具名标量成为非捕获分组的别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让具名标量成为-subrules-的别名"><span class="nav-number">15.</span> <span class="nav-text">让具名标量成为 subrules 的别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#给标量别名编号"><span class="nav-number">16.</span> <span class="nav-text">给标量别名编号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#给量词化结构应用标量别名"><span class="nav-number">17.</span> <span class="nav-text">给量词化结构应用标量别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组别名"><span class="nav-number">18.</span> <span class="nav-text">数组别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#散列别名"><span class="nav-number">19.</span> <span class="nav-text">散列别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#外部别名"><span class="nav-number">20.</span> <span class="nav-text">外部别名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从重复匹配中捕获"><span class="nav-number">21.</span> <span class="nav-text">从重复匹配中捕获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Grammars"><span class="nav-number">22.</span> <span class="nav-text">Grammars</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Action-对象"><span class="nav-number">23.</span> <span class="nav-text">Action 对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#句法分类"><span class="nav-number">24.</span> <span class="nav-text">句法分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译指令"><span class="nav-number">25.</span> <span class="nav-text">编译指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换"><span class="nav-number">26.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#替换"><span class="nav-number">27.</span> <span class="nav-text">替换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位置匹配-固定宽度类型"><span class="nav-number">28.</span> <span class="nav-text">位置匹配, 固定宽度类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匹配非字符串"><span class="nav-number">29.</span> <span class="nav-text">匹配非字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在什么时候是有效的"><span class="nav-number">30.</span> <span class="nav-text">$/ 在什么时候是有效的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作者"><span class="nav-number">31.</span> <span class="nav-text">作者</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

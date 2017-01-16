@@ -1,0 +1,827 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="并发,Channel," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Concurrency
+与大多数现代编程语言一样，Perl 6 被设计为支持并发（允许多个事件同时发生）和异步编程（有时称为事件驱动或反应式编程 - 即程序某些部分的事件或变化可能会导致程序流异步地改变程序的其它部分）。
+Perl的并发设计的目的是提供一个高级的，可组合的，一致的接口，而不管如下所述的虚拟机通过工具层怎样为特定操作的系统来实现它。
+此外，某些Perl的特性可以隐式地以异步的方式操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的并发">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/10/03/Perl6中的并发/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Concurrency
+与大多数现代编程语言一样，Perl 6 被设计为支持并发（允许多个事件同时发生）和异步编程（有时称为事件驱动或反应式编程 - 即程序某些部分的事件或变化可能会导致程序流异步地改变程序的其它部分）。
+Perl的并发设计的目的是提供一个高级的，可组合的，一致的接口，而不管如下所述的虚拟机通过工具层怎样为特定操作的系统来实现它。
+此外，某些Perl的特性可以隐式地以异步的方式操作">
+<meta property="og:updated_time" content="2016-10-23T16:03:44.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的并发">
+<meta name="twitter:description" content="Concurrency
+与大多数现代编程语言一样，Perl 6 被设计为支持并发（允许多个事件同时发生）和异步编程（有时称为事件驱动或反应式编程 - 即程序某些部分的事件或变化可能会导致程序流异步地改变程序的其它部分）。
+Perl的并发设计的目的是提供一个高级的，可组合的，一致的接口，而不管如下所述的虚拟机通过工具层怎样为特定操作的系统来实现它。
+此外，某些Perl的特性可以隐式地以异步的方式操作">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/10/03/Perl6中的并发/"/>
+
+  <title> Perl 6 中的并发 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的并发
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-03T20:43:15+08:00" content="2016-10-03">
+              2016-10-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/03/Perl6中的并发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/03/Perl6中的并发/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://docs.perl6.org/language/concurrency" target="_blank" rel="external">Concurrency</a></p>
+<p>与大多数现代编程语言一样，Perl 6 被设计为<a href="https://en.wikipedia.org/wiki/Concurrent_computing" target="_blank" rel="external">支持并发</a>（允许多个事件同时发生）和异步编程（有时称为事件驱动或反应式编程 - 即程序某些部分的事件或变化可能会导致程序流异步地改变程序的其它部分）。</p>
+<p>Perl的并发设计的目的是提供一个高级的，可组合的，一致的接口，而不管如下所述的虚拟机通过工具层怎样为特定操作的系统来实现它。</p>
+<p>此外，某些Perl的特性可以隐式地以异步的方式操作，所以为了确保这些特性可预测的互通，用户代码应在可能情况下，避免较低层级的并发的 API（即<a href="https://docs.perl6.org/type/Thread" target="_blank" rel="external">线程</a>和<a href="https://docs.perl6.org/type/Scheduler" target="_blank" rel="external">调度器</a>），并使用高级接口。</p>
+<a id="more"></a>
+<h2 id="High-level-APIs"><a href="#High-level-APIs" class="headerlink" title="High-level APIs"></a>High-level APIs</h2><h3 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h3><p>一个 <a href="https://docs.perl6.org/type/Promise" target="_blank" rel="external">Promise</a>（在其他编程环境中也叫做 <em>future</em>）封装了可能<strong>尚未完成</strong>的计算, 或者甚至在获得 promise 时开始的计算。<code>Promise</code> 从 <code>Planned</code> 状态开始, 要么导致一个 <code>Kept</code> 状态, 意为该 promise 已经成功完成, 要么导致一个 <code>Broken</code> 状态, 意为该 promise 已经失败。 通常这就是用户代码需要以并发或异步方式操作的使用最多的功能。Planned, 计划; Kept, 保持, Broken, 中断。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">my $p1 = Promise.new;</div><div class="line">say $p1.status;       # Planned</div><div class="line">$p1.keep(&apos;result&apos;);</div><div class="line">say $p1.status;       # Kept</div><div class="line">say $p1.result;       # result</div><div class="line">                      # (since it has been kept, a result is available!)</div><div class="line"></div><div class="line">my $p2 = Promise.new;</div><div class="line">$p2.break(&apos;oh no&apos;);</div><div class="line">say $p2.status;       # Broken</div><div class="line">say $p2.result;       # dies with &quot;oh no&quot;, because the promise has been broken</div></pre></td></tr></table></figure>
+<p><code>Promise</code> 通过组合获取更强大的力量, 例如通过链接, 通常通过 <a href="https://docs.perl6.org/type/Promise#method_then" target="_blank" rel="external">then</a> 方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my $promise1 = Promise.new();</div><div class="line">my $promise2 = $promise1.then(</div><div class="line">    -&gt; $v &#123; say $v.result; &quot;Second Result&quot;&#125;</div><div class="line">);</div><div class="line">$promise1.keep(&quot;First Result&quot;);</div><div class="line">say $promise2.result;   # First Result \n Second Result</div></pre></td></tr></table></figure>
+<p>这里 <a href="https://docs.perl6.org/type/Promise#method_then" target="_blank" rel="external">then</a> 方法安排代码(即圆括号中的闭包)在第一个 <a href="https://docs.perl6.org/type/Promise" target="_blank" rel="external">Promise</a> 为 kept 或 broken 时执行, 它自身返回一个新的 Promise, 这个新的 Promise 会在执行代码时与结果一块保存。 (如果代码执行失败则 broken ) <code>keep</code> 更改 promise 的状态为 <strong>Kept</strong>, 并设置结果为位置参数。<code>result</code> 阻塞当前执行的线程直到那个 promise 变为 kept 或 broken, 如果它是 kept, 那么它会返回那个结果(那是传递给 <code>keep</code> 的值, ) 否则它会根据传递给 <code>break</code> 的值抛出一个异常。后者的行为使用如下代码进行阐述:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $promise1 = Promise.new();</div><div class="line">my $promise2 = $promise1.then(-&gt; $v &#123; say &quot;Handled but : &quot;; say $v.result&#125;);</div><div class="line">$promise1.break(&quot;First Result&quot;);</div><div class="line">try $promise2.result;</div><div class="line">say $promise2.cause;        # Handled but : \n First Result</div></pre></td></tr></table></figure>
+<p>当它在原来的作为参数传递的 promise 上调用 <code>result</code> 方法时, 这里的 <code>break</code> 会导致 <code>then</code> 代码块抛出一个异常, 这随后会导致第二个 promise 变为 broken, 在它的结果被接收时反过来引发一个异常。然后能从 <code>cause</code> 中访问那个实际的 <a href="https://docs.perl6.org/type/Exception" target="_blank" rel="external">Exception</a> 对象。如果那个 promise 还没有变为 broken, 那么 <code>cause</code> 会引发一个 <a href="https://docs.perl6.org/type/X$COLON$COLONPromise$COLON$COLONCauseOnlyValidOnBroken" target="_blank" rel="external">X::Promise::CauseOnlyValidOnBroken</a> 异常。</p>
+<p><a href="https://docs.perl6.org/type/Promise" target="_blank" rel="external">Promise</a> 也能按计划在将来某个时间自动保留(kept):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $promise1 = Promise.in(5);</div><div class="line">my $promise2 = $promise1.then(-&gt; $v &#123; say $v.status; &apos;Second Result&apos; &#125;);</div><div class="line">say $promise2.result; # 5 秒后打印出: Kept\n Second Result</div></pre></td></tr></table></figure>
+<p><a href="https://docs.perl6.org/type/Promise#method_in" target="_blank" rel="external">in</a> 方法创建了一个新的 promise 并安排一个新的任务在不早于所提供的秒数时间内在它身上调用 <code>keep</code>, 返回一个新的 <a href="https://docs.perl6.org/type/Promise" target="_blank" rel="external">Promise</a> 对象。</p>
+<p>promises 的一个非常频繁的用法是运行一块代码, 并且一旦它成功地返回就 keep 那个 promise, 或者当那块代码死掉时中断(break)那个 promise。<a href="https://docs.perl6.org/type/Promise#method_start" target="_blank" rel="external">start</a> 方法为此提供了一种快捷方式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $promise = Promise.start(</div><div class="line">    &#123; my $i = 0; for 1 .. 10 &#123; $i += $_ &#125;; $i&#125;</div><div class="line">);</div><div class="line">say $promise.status;    # Kept</div><div class="line">say $promise.result;    # 55</div></pre></td></tr></table></figure>
+<p>这里返回的 promise 的结果(<code>result</code>)是从代码返回的值。类似地, 如果那段代码失败了(那个 promise 也因此被中断), 那么 <code>cause</code> 会成为抛出的那个 <a href="https://docs.perl6.org/type/Exception" target="_blank" rel="external">Exception</a> 对象:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my $promise = Promise.start(&#123; die &quot;Broken Promise&quot; &#125;);</div><div class="line">try $promise.result; # Nil</div><div class="line">say $promise.cause;  # Broken Promise</div><div class="line">                     #  in block &lt;unit&gt; at &lt;unknown file&gt; line 1</div></pre></td></tr></table></figure>
+<p>这被认为是通常需要的模式以至于它还提供了子例程形式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">my $promise = start &#123;</div><div class="line">    my $i = 0;</div><div class="line">    for 1 .. 10 &#123;</div><div class="line">        $i += $_</div><div class="line">    &#125;</div><div class="line">    $i</div><div class="line">&#125;</div><div class="line">my $result = await $promise;</div><div class="line">say $result;</div></pre></td></tr></table></figure>
+<p><code>await</code> 几乎等价于在由 <code>start</code> 返回的 promise 对象身上调用 <code>result</code> 但是它也会接受一组 promises 并返回每个 promise 的结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">my $p1 = start &#123;</div><div class="line">    my $i = 0;</div><div class="line">    for 1 .. 10 &#123;</div><div class="line">        $i += $_</div><div class="line">    &#125;</div><div class="line">    $i</div><div class="line">&#125;;</div><div class="line">my $p2 = start &#123;</div><div class="line">    my $i = 0;</div><div class="line">    for 1 .. 10 &#123;</div><div class="line">        $i -= $_</div><div class="line">    &#125;</div><div class="line">    $i</div><div class="line">&#125;;</div><div class="line">my @result = await $p1, $p2;</div><div class="line">say @result;            # 55 -55</div></pre></td></tr></table></figure>
+<p>除了 <code>await</code> 之外, 两个类方法把几个 <a href="https://docs.perl6.org/type/Promise" target="_blank" rel="external">Promise</a> 对象合并到一个新的 promise 对象中: 当所有原来的 promises 是 kept 或 broken 时, <code>allof</code> 返回一个 kept 状态的 promise:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my $promise = Promise.allof(</div><div class="line">    Promise.in(2),</div><div class="line">    Promise.in(3)</div><div class="line">);</div><div class="line"></div><div class="line">await $promise;</div><div class="line">say &quot;All done&quot;; # Should be not much more than three seconds later</div></pre></td></tr></table></figure>
+<p>并且当原 promises 中的任何一个的状态变为 kept 或 broken 时, <code>anyof</code> 返回将为 kept 的新 promise:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my $promise = Promise.anyof(</div><div class="line">    Promise.in(3),</div><div class="line">    Promise.in(8600)</div><div class="line">);</div><div class="line"></div><div class="line">await $promise;</div><div class="line">say &quot;All done&quot;; # Should be about 3 seconds later</div></pre></td></tr></table></figure>
+<p>不同于 <code>await</code>，然而如果不引用原来的 promise, 那么就访问不了原来状态为 kept 的 promise 的结果，因此当任务的完成或其他方面对于消费者来说比实际结果更重要时，或者当通过其它方式收集结果时。 你可能，例如，您可以创建一个依赖的Promise，它会检查每个原始的 promise：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my @promises;</div><div class="line">for 1..5 -&gt; $t &#123;</div><div class="line">    push @promises, start &#123;</div><div class="line">        sleep $t;</div><div class="line">        Bool.pick;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line">say await Promise.allof(@promises).then(&#123; so all(@promises&gt;&gt;.result) &#125;);</div></pre></td></tr></table></figure>
+<p>如果所有的 promise 都保持为 True, 那么它会打印 True, 否则会打印 False。</p>
+<p>如果你正在创建一个 promise，你打算保持或中断自己，那么在你做之前, 你可能不想要任何可能会收到 promise 以无意（或否则）保持或中断该 promise 的代码。 为了这个目的，就有了方法 <a href="https://docs.perl6.org/type/Promise#method_vow" target="_blank" rel="external">vow</a>，它返回一个 <a href="https://docs.perl6.org/type/Vow" target="_blank" rel="external">Vow</a> 对象，它成为 promise 能被保留或中断的唯一机制。 如果试图直接保持或断开这个 Promise ，则会抛出 <a href="https://docs.perl6.org/type/X$COLON$COLONPromise$COLON$COLONVowed" target="_blank" rel="external">X::Promise::Vowed</a> 异常，只要 <code>vow</code> 对象保持私有，那么 promise 的状态就是安全的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sub get_promise &#123;</div><div class="line">    my $promise = Promise.new;</div><div class="line">    my $vow = $promise.vow;</div><div class="line">    Promise.in(10).then(&#123;$vow.keep&#125;);</div><div class="line">    $promise;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $promise = get_promise();</div><div class="line"></div><div class="line"># Will throw an exception</div><div class="line"># &quot;Access denied to keep/break this Promise; already vowed&quot;</div><div class="line">$promise.keep;</div></pre></td></tr></table></figure>
+<p>返回一个将被自动保存或断开的 promise 的方法，如 <code>in</code> 或 <code>start</code> 将会做到这一点，所以没有必要这样做。</p>
+<h3 id="Supplies"><a href="#Supplies" class="headerlink" title="Supplies"></a>Supplies</h3><p><a href="https://docs.perl6.org/type/Supply" target="_blank" rel="external">Supply</a> 是异步数据流传输机制，其可以以类似于其他编程语言中的”事件”的方式同时由一个或多个消费者消费，并且可以被视为开启”事件驱动”或反应式设计。</p>
+<p>最简单的是，Supply 是一个消息流，可以有多个通过方法 <code>tap</code> 创建的订阅者，其数据项可以使用 <code>emit</code> 放置。</p>
+<p>Supply 可以是现场的(<code>live</code>)或按需的(<code>on-demand</code>)。 现场(<code>live</code>)供应就像电视广播：那些调入(收听/收看)的人不会得到先前发出的值。 点播(<code>on-demand</code>)广播就像 Netflix：每个开始流式传输电影（点击电源）的人，总是从头开始（获取所有的值），不管有多少人正在观看它。 请注意，没有为<code>按需</code>供应保留历史记录，而是为供应的每次点击运行 <code>supply</code> 块。</p>
+<blockquote>
+<p>Netflix: 在线观看电影的网站</p>
+</blockquote>
+<p>实时供应(<code>live Supply</code>)由 <a href="https://docs.perl6.org/type/Supplier" target="_blank" rel="external">Supplier</a> 工厂创建，每个发出的值在添加时传递给所有活动的 tappers：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my $supplier = Supplier.new;</div><div class="line">my $supply   = $supplier.Supply;</div><div class="line"></div><div class="line">$supply.tap( -&gt; $v &#123; say $v &#125;);</div><div class="line"></div><div class="line">for 1 .. 10 &#123;</div><div class="line">    $supplier.emit($_); # 1\n2\n3\n4\n5\n6\n7\n8\n9\n10</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请注意，<code>tap</code> 在供应商<a href="https://docs.perl6.org/type/Supplier" target="_blank" rel="external">Supplier</a>创建的 Supply 对象上调用，并且新值在供应商<a href="https://docs.perl6.org/type/Supplier" target="_blank" rel="external">Supplier</a>上发出。</p>
+<p>或者作为由 <code>supply</code> 关键字创建的按需供应 <a href="https://docs.perl6.org/type/Supply" target="_blank" rel="external">Supply</a>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my $supply = supply &#123;</div><div class="line">    for 1 .. 10 &#123;</div><div class="line">        emit($_);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">$supply.tap( -&gt; $v &#123; say $v &#125;);</div><div class="line"># 1\n2\n3\n4\n5\n6\n7\n8\n9\n10</div></pre></td></tr></table></figure>
+<p>在这种情况下，供应块中的代码在每次供应返回的供应被窃取时执行，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my $supply = supply &#123;</div><div class="line">    for 1 .. 10 &#123;</div><div class="line">        emit($_);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">$supply.tap( -&gt; $v &#123; say &quot;First : $v&quot; &#125;);</div><div class="line">$supply.tap( -&gt; $v &#123; say &quot;Second : $v&quot; &#125;);</div></pre></td></tr></table></figure>
+<p><code>tap</code> 方法返回一个 <a href="https://docs.perl6.org/type/Tap" target="_blank" rel="external">Tap</a> 对象，它可以用来获取关于 tap 的信息，并且当我们不再对事件感兴趣时关闭它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my $supplier = Supplier.new;</div><div class="line">my $supply   = $supplier.Supply;</div><div class="line"></div><div class="line">my $tap = $supply.tap( -&gt; $v &#123; say $v &#125;);</div><div class="line"></div><div class="line">$supplier.emit(&quot;OK&quot;);</div><div class="line">$tap.close;</div><div class="line">$supplier.emit(&quot;Won&apos;t trigger the tap&quot;);</div></pre></td></tr></table></figure>
+<p>在供应对象(supply object)上调用 <code>done</code> 调用可以为任何 tap 指定的 <code>done</code> 回调，但不会阻止任何其他事件被发送到流，或者接收它们。</p>
+<p>方法 <code>interval</code> 返回一个新的按需供应，它会以指定的间隔定期发出一个新事件。 发出的数据是从0开始的整数，对于每个事件递增。 以下代码输出 0 .. 5：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $supply = Supply.interval(2);</div><div class="line">$supply.tap(-&gt; $v &#123; say $v &#125;);</div><div class="line">sleep 10;</div></pre></td></tr></table></figure>
+<p>这也可以使用 <code>react</code> 关键字书写(输出0..4)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">react &#123;</div><div class="line">    whenever Supply.interval(2) -&gt; $v &#123;</div><div class="line">        say $v;</div><div class="line">        done() if $v == 4;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里，<a href="https://docs.perl6.org/language/concurrency#index-entry-whenever" target="_blank" rel="external">whenever</a> 关键字使用 <a href="https://docs.perl6.org/type/Supply#method_act" target="_blank" rel="external">.act</a> 从提供的块在 Supply 上创建一个 tap。 当在其中一个 tap 中调用 <code>done()</code> 时，退出 <code>react</code> 块。</p>
+<p>第二个参数可以提供给 <code>interval</code>，它指定第一个事件触发之前的延迟（以秒为单位）。 通过 <code>interval</code> 创建的 supply 的每个 tap 都有自0开始的自身序列，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $supply = Supply.interval(2);</div><div class="line">$supply.tap(-&gt; $v &#123; say &quot;First $v&quot; &#125;);</div><div class="line">sleep 6;</div><div class="line">$supply.tap(-&gt; $v &#123; say &quot;Second $v&quot;&#125;);</div><div class="line">sleep 10;</div></pre></td></tr></table></figure>
+<p>也可以从将要依次发出的值的列表中按需创建 Supply(供给)，因此第一个按需示例（打印1到10）可以写作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">react &#123;</div><div class="line">    whenever Supply.from-list(1..10) -&gt; $v &#123;</div><div class="line">        say $v;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以使用方法 <code>grep</code> 和 <code>map</code> 分别过滤或转换现有的供应对象(supply object)，以类似具名列表方法的方式创建新供应(supply)：<code>grep</code> 返回这样一个供应(supply)，以至于只有在源流上发出的那些事件的 <code>grep</code> 条件为真时才在第二个 supply 上发出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">my $supplier = Supplier.new;</div><div class="line">my $supply = $supplier.Supply;</div><div class="line">$supply.tap(-&gt; $v &#123; say &quot;Original : $v&quot; &#125;);</div><div class="line">my $odd_supply = $supply.grep(&#123; $_ % 2 &#125;);</div><div class="line">$odd_supply.tap(-&gt; $v &#123; say &quot;Odd : $v&quot; &#125;);</div><div class="line">my $even_supply = $supply.grep(&#123; not $_ % 2 &#125;);</div><div class="line">$even_supply.tap(-&gt; $v &#123; say &quot;Even : $v&quot; &#125;);</div><div class="line">for 0 .. 10 &#123;</div><div class="line">    $supplier.emit($_);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>map</code> 返回一个新的 supply(供应)，使得对于发送到原始供应的每个项目，发出作为传递给 <code>map</code> 表达式的结果的新项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my $supplier = Supplier.new;</div><div class="line">my $supply = $supplier.Supply;</div><div class="line">$supply.tap(-&gt; $v &#123; say &quot;Original : $v&quot; &#125;);</div><div class="line">my $half_supply = $supply.map(&#123; $_ / 2 &#125;);</div><div class="line">$half_supply.tap(-&gt; $v &#123; say &quot;Half : $v&quot; &#125;);</div><div class="line">for 0 .. 10 &#123;</div><div class="line">    $supplier.emit($_);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果您需要在 supply(供应)完成时运行一个操作，您可以通过在对 <code>tap</code> 的调用中设置 <code>done</code> 和 <code>quit</code> 选项来完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$supply.tap: &#123; ... &#125;,</div><div class="line">    done =&gt; &#123; say &apos;Job is done.&apos; &#125;,</div><div class="line">    quit =&gt; &#123;</div><div class="line">        when X::MyApp::Error &#123; say &quot;App Error: &quot;, $_.message &#125;</div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
+<p><code>quit</code> 块的工作方式非常类似于 <code>CATCH</code>。 如果异常被标记为由 <code>when</code> 或 <code>default</code> 块看到，那么异常会被捕获并处理。 否则，异常继续沿调用树向上（即，与没有设置 <code>quit</code> 时行为相同）。</p>
+<p>如果你伴随着 <code>whenever</code> 使用 <code>react</code> 或者 <code>supply</code> block 语法，你可以在你的 <code>whenever</code> 块中添加 phasers 来处理来自 tapped supply 的 <code>done</code> 和 <code>quit</code> 消息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">react &#123;</div><div class="line">    whenever $supply &#123;</div><div class="line">        ...; # your usual supply tap code here</div><div class="line">        LAST &#123; say &apos;Job is done.&apos; &#125;</div><div class="line">        QUIT &#123; when X::MyApp::Error &#123; say &quot;App Error: &quot;, $_.message &#125; &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的行为与在 <code>tap</code> 上设置 <code>done</code> 和 <code>quit</code> 相同。</p>
+<h3 id="Channels"><a href="#Channels" class="headerlink" title="Channels"></a>Channels</h3><p>通道(<a href="https://docs.perl6.org/type/Channel" target="_blank" rel="external">Channel</a>)是线程安全的队列，可以具有多个读取器和写入器，可以被认为在操作上与“fifo”(先进先出)或命名管道相似，除了它不启用进程间通信之外。 应该注意的是，作为真正的队列，发送到通道的每个值将仅在先读，先服务的基础上对于单个读取器可用：如果想要多个读取器能够接收可能想要发送的每个项目那么请考虑<a href="https://docs.perl6.org/type/Supply" target="_blank" rel="external">Supply</a>。</p>
+<p>项目(item)通过方法 <a href="https://docs.perl6.org/type/Channel#method_send" target="_blank" rel="external">send</a> 排队到通道上，方法 <a href="https://docs.perl6.org/type/Channel#method_receive" target="_blank" rel="external">receive</a> 从队列中删除一个项目并返回，如果队列为空，则阻塞它直到发送新项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $channel = Channel.new;</div><div class="line">$channel.send(&apos;Channel One&apos;);</div><div class="line">say $channel.receive;  # &apos;Channel One&apos;</div></pre></td></tr></table></figure>
+<p>如果使用 <a href="https://docs.perl6.org/type/Channel#method_close" target="_blank" rel="external">close</a> 方法关闭了通道，那么任何发送(<code>send</code>)都将导致抛出异常 <a href="https://docs.perl6.org/type/X$COLON$COLONChannel$COLON$COLONSendOnClosed" target="_blank" rel="external">X::Channel::SendOnClosed</a>，并且如果队列中没有更多的项目，接收(<code>receive</code>) 将抛出一个 <a href="https://docs.perl6.org/type/X$COLON$COLONChannel$COLON$COLONReceiveOnClosed" target="_blank" rel="external">X::Channel::ReceiveOnClosed</a> 异常。</p>
+<p>方法<a href="https://docs.perl6.org/type/Channel#method_list" target="_blank" rel="external">list</a>返回通道上的所有项目，并将阻塞，直到其他项目被排队，除非通道关闭：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">my $channel = Channel.new;</div><div class="line">await (^10).map: -&gt; $r &#123;</div><div class="line">    start &#123;</div><div class="line">        sleep $r;</div><div class="line">        $channel.send($r);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">$channel.close;</div><div class="line">for $channel.list -&gt; $r &#123;</div><div class="line">    say $r;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有从通道返回可用项目的非阻塞方法<a href="https://docs.perl6.org/type/Channel#method_poll" target="_blank" rel="external">poll</a>, 或者, 如果没有项目或通道被关闭则返回 <a href="https://docs.perl6.org/type/Nil" target="_blank" rel="external">Nil</a>，这当然意味着必须检查通道以确定其是否关闭：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">my $c = Channel.new;</div><div class="line"></div><div class="line"># Start three Promises that sleep for 1..3 seconds, and then</div><div class="line"># send a value to our Channel</div><div class="line">^3 .map: -&gt; $v &#123;</div><div class="line">    start &#123;</div><div class="line">        sleep 3 - $v;</div><div class="line">        $c.send: &quot;$v from thread &#123;$*THREAD.id&#125;&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># Wait 3 seconds before closing the channel</div><div class="line">Promise.in(3).then: &#123; $c.close &#125;</div><div class="line"></div><div class="line"># Continuously loop and poll the channel, until it&apos;s closed</div><div class="line">my $is-closed = $c.closed;</div><div class="line">loop &#123;</div><div class="line">    if $c.poll -&gt; $item &#123;</div><div class="line">        say &quot;$item received after &#123;now - INIT now&#125; seconds&quot;;</div><div class="line">    &#125;</div><div class="line">    elsif $is-closed &#123;</div><div class="line">        last;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    say &apos;Doing some unrelated things...&apos;;</div><div class="line">    sleep .6;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># Doing some unrelated things...</div><div class="line"># Doing some unrelated things...</div><div class="line"># 2 from thread 5 received after 1.2063182 seconds</div><div class="line"># Doing some unrelated things...</div><div class="line"># Doing some unrelated things...</div><div class="line"># 1 from thread 4 received after 2.41117376 seconds</div><div class="line"># Doing some unrelated things...</div><div class="line"># 0 from thread 3 received after 3.01364461 seconds</div><div class="line"># Doing some unrelated things...</div></pre></td></tr></table></figure>
+<p>方法 <a href="https://docs.perl6.org/type/Channel#method_closed" target="_blank" rel="external">closed</a> 返回一个 Promise，当通道关闭时，它将被保存(kept)（因此在布尔上下文中将被计算为 True）。</p>
+<p><code>.poll</code> 方法可以与 <code>.receive</code> 方法结合使用，作为一种缓存机制，其中 <code>.poll</code> 返回的值不足是需要获取更多值并加载到通道的信号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sub get-value &#123;</div><div class="line">    return $c.poll // do &#123; start replenish-cache; $c.receive &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub replenish-cache &#123;</div><div class="line">    for ^20 &#123;</div><div class="line">        $c.send: $_ for slowly-fetch-a-thing();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以使用通道代替前面描述的 <code>whenever</code> 和 <code>react</code> 块中的 <a href="https://docs.perl6.org/type/Supply" target="_blank" rel="external">Supply</a>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">my $channel = Channel.new;</div><div class="line">my $p = start &#123;</div><div class="line">    react &#123;</div><div class="line">        whenever $channel &#123;</div><div class="line">            say $_;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">await (^10).map: -&gt; $r &#123;</div><div class="line">    start &#123;</div><div class="line">        sleep $r;</div><div class="line">        $channel.send($r);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$channel.close;</div><div class="line">await $p;</div></pre></td></tr></table></figure>
+<p>还可以使用<a href="https://docs.perl6.org/type/Supply#method_Channel" target="_blank" rel="external">通道方法</a>从<a href="https://docs.perl6.org/type/Supply" target="_blank" rel="external">Supply</a>获得<a href="https://docs.perl6.org/type/Channel" target="_blank" rel="external">通道</a>，该通道方法返回通过 <a href="https://docs.perl6.org/type/Supply" target="_blank" rel="external">Supply</a> 上的 <code>tap</code> 馈送的通道：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">my $supplier = Supplier.new;</div><div class="line">my $supply   = $supplier.Supply;</div><div class="line">my $channel = $supply.Channel;</div><div class="line"></div><div class="line">my $p = start &#123;</div><div class="line">    react  &#123;</div><div class="line">        whenever $channel -&gt; $item &#123;</div><div class="line">            say &quot;via Channel: $item&quot;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">await (^10).map: -&gt; $r &#123;</div><div class="line">    start &#123;</div><div class="line">        sleep $r;</div><div class="line">        $supplier.emit($r);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$supplier.done;</div><div class="line">await $p;</div></pre></td></tr></table></figure>
+<p><code>Channel</code> 将返回一个不同的通道，每次调用时都会使用相同的数据。 这可以用于例如将 <a href="https://docs.perl6.org/type/Supply" target="_blank" rel="external">Supply</a> 输出到一个或多个通道以在程序中提供的不同接口。</p>
+<h3 id="Proc-Async"><a href="#Proc-Async" class="headerlink" title="Proc::Async"></a>Proc::Async</h3><p><a href="https://docs.perl6.org/type/Proc$COLON$COLONAsync" target="_blank" rel="external">Proc::Async</a> 构建在所描述的设施上以异步方式运行并与外部程序交互：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">my $proc = Proc::Async.new(&apos;echo&apos;, &apos;foo&apos;, &apos;bar&apos;);</div><div class="line"></div><div class="line">$proc.stdout.tap(-&gt; $v &#123; print &quot;Output: $v&quot; &#125;);</div><div class="line">$proc.stderr.tap(-&gt; $v &#123; print &quot;Error:  $v&quot; &#125;);</div><div class="line"></div><div class="line">say &quot;Starting...&quot;;</div><div class="line">my $promise = $proc.start;</div><div class="line"></div><div class="line">await $promise;</div><div class="line">say &quot;Done.&quot;;</div><div class="line"></div><div class="line"># Output:</div><div class="line"># Starting...</div><div class="line"># Output: foo bar</div><div class="line"># Done.</div></pre></td></tr></table></figure>
+<p>命令的路径以及命令的任何参数都提供给该构造函数。 该命令将不被执行，直到调用 <a href="https://docs.perl6.org/type/Proc$COLON$COLONAsync#method_start" target="_blank" rel="external">start</a>，它将返回一个 Promise，当程序退出时该 Promise 变为 kept 状态。 程序的标准输出和标准错误分别从 <a href="https://docs.perl6.org/type/Proc$COLON$COLONAsync#method_stdout" target="_blank" rel="external">stdout</a> 和 <a href="https://docs.perl6.org/type/Proc$COLON$COLONAsync#method_stderr" target="_blank" rel="external">stderr</a> 方法中作为 Supply 对象提供，可以根据需要进行分接。</p>
+<p>如果要写入程序的标准输入，您可以给构造函数提供 <code>:w</code> 副词，并使用方法 <a href="https://docs.perl6.org/type/Proc$COLON$COLONAsync#method_write" target="_blank" rel="external">write</a>，<a href="https://docs.perl6.org/type/Proc$COLON$COLONAsync#method_print" target="_blank" rel="external">print</a> 或 <a href="https://docs.perl6.org/type/Proc$COLON$COLONAsync#method_say" target="_blank" rel="external">say</a> 在程序启动后写入打开的管道：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">my $proc = Proc::Async.new(:w, &apos;grep&apos;, &apos;foo&apos;);</div><div class="line"></div><div class="line">$proc.stdout.tap(-&gt; $v &#123; print &quot;Output: $v&quot; &#125;);</div><div class="line"></div><div class="line">say &quot;Starting...&quot;;</div><div class="line">my $promise = $proc.start;</div><div class="line"></div><div class="line">$proc.say(&quot;this line has foo&quot;);</div><div class="line">$proc.say(&quot;this one doesn&apos;t&quot;);</div><div class="line"></div><div class="line">$proc.close-stdin;</div><div class="line">await $promise;</div><div class="line">say &quot;Done.&quot;;</div><div class="line"></div><div class="line"># Output:</div><div class="line"># Starting...</div><div class="line"># Output: this line has foo</div><div class="line"># Done.</div></pre></td></tr></table></figure>
+<p>一些程序（例如本例中没有文件参数的 <code>grep</code>）在关闭标准输入之前不会退出，因此在完成写入后可以调用 <a href="https://docs.perl6.org/type/Proc$COLON$COLONAsync#method_close-stdin" target="_blank" rel="external">close-stdin</a>，以允许由 <code>start</code> 返回的 Promise 的状态变为 kept。</p>
+<h2 id="Low-level-APIs"><a href="#Low-level-APIs" class="headerlink" title="Low-level APIs"></a>Low-level APIs</h2><h3 id="Threads"><a href="#Threads" class="headerlink" title="Threads"></a>Threads</h3><p>最低级别的并发接口由 <a href="https://docs.perl6.org/type/Thread" target="_blank" rel="external">Thread</a> 提供。 线程可以被认为是可以最终在处理器上运行的一段代码，其布置几乎完全由虚拟机和/或操作系统完成。 线程应该被考虑，对于所有意图，很大程度上是不受管理的，应避免在用户代码中直接使用它们。</p>
+<p>线程可以被创建，然后随后实际运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $thread = Thread.new(code =&gt; &#123; for  1 .. 10  -&gt; $v &#123; say $v &#125;&#125;);</div><div class="line"># ...</div><div class="line">$thread.run;</div></pre></td></tr></table></figure>
+<p>或者可以在单个调用中创建和运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my $thread = Thread.start(&#123; for  1 .. 10  -&gt; $v &#123; say $v &#125;&#125;);</div></pre></td></tr></table></figure>
+<p>在这两种情况下，由 <a href="https://docs.perl6.org/type/Thread" target="_blank" rel="external">Thread</a> 对象封装的代码的完成可以用 <code>finish</code> 方法来等待，该方法将阻塞直到线程完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$thread.finish;</div></pre></td></tr></table></figure>
+<p>除此之外，没有用于同步或资源共享的其他设施，这主要是为什么应当强调线程不可能直接用于用户代码。</p>
+<h3 id="Schedulers"><a href="#Schedulers" class="headerlink" title="Schedulers"></a>Schedulers</h3><p>并发 API 的下一级由实现角色<a href="https://docs.perl6.org/type/Scheduler" target="_blank" rel="external">Scheduler</a>定义的接口的类提供。 调度程序接口的目的是提供一种机制来确定使用哪些资源来运行特定任务以及何时运行它。 大多数较高级别的并发 API 是基于调度器构建的，并且用户代码根本不需要使用它们，尽管一些方法，例如在 <a href="https://docs.perl6.org/type/Proc$COLON$COLONAsync" target="_blank" rel="external">Proc::Async</a>，<a href="https://docs.perl6.org/type/Promise" target="_blank" rel="external">Promise</a> 和 <a href="https://docs.perl6.org/type/Supply" target="_blank" rel="external">Supply</a> 中找到的方法允许您明确地提供调度器。</p>
+<p>当前缺省全局调度程序在变量 <code>$*SCHEDULER</code> 中可用。</p>
+<p>调度程序的主接口（确实是<a href="https://docs.perl6.org/type/Scheduler" target="_blank" rel="external">Scheduler</a>接口所需的唯一方法）是 <code>cue</code> 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">method cue(:&amp;code, Instant :$at, :$in, :$every, :$times = 1; :&amp;catch)</div></pre></td></tr></table></figure>
+<p>这将按照由副词（如在<a href="https://docs.perl6.org/type/Scheduler" target="_blank" rel="external">Scheduler</a>中记录的）所确定的方式使用由调度器实现的执行方案来调度 <code>&amp;code</code> 中的 <code>Callable</code> 以执行。 例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $i = 0;</div><div class="line">my $cancellation = $*SCHEDULER.cue(&#123; say $i++&#125;, every =&gt; 2 );</div><div class="line">sleep 20;</div></pre></td></tr></table></figure>
+<p>假设 <code>$*SCHEDULER</code> 没有从默认值改变，将以大约每两秒打印数字0到10（即使用操作系统调度容差）。 在这种情况下，代码将被调度运行，直到程序正常结束，但是该方法返回一个 <a href="https://docs.perl6.org/type/Cancellation" target="_blank" rel="external">Cancellation</a> 对象，它可以用来在正常完成之前取消调度执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $i = 0;</div><div class="line">my $cancellation = $*SCHEDULER.cue(&#123; say $i++&#125;, every =&gt; 2 );</div><div class="line">sleep 10;</div><div class="line">$cancellation.cancel;</div><div class="line">sleep 10;</div></pre></td></tr></table></figure>
+<p>应该只输出 0 到 5，</p>
+<p>尽管 <a href="https://docs.perl6.org/type/Scheduler" target="_blank" rel="external">Scheduler</a> 接口提供的所有功能明显优于 <a href="https://docs.perl6.org/type/Thread" target="_blank" rel="external">Thread</a> 提供的，但是通过更高级别的接口可以获得所有的功能，并且不应该有必要直接使用调度器，除非在上述情况下，调度器可以被明确地提供给某些方法。</p>
+<p>如果库具有特殊要求，例如 UI 库可能希望所有代码在单个 UI 线程中运行，或者可能需要一些定制的优先级机制，则库可能希望提供备选的调度器实现，然而，被作为标准的实现和下面的描述应该足以满足大多数用户代码。</p>
+<h3 id="ThreadPoolScheduler"><a href="#ThreadPoolScheduler" class="headerlink" title="ThreadPoolScheduler"></a>ThreadPoolScheduler</h3><p><a href="https://docs.perl6.org/type/ThreadPoolScheduler" target="_blank" rel="external">ThreadPoolScheduler</a> 是默认调度程序，它维护一个根据需要分配的线程池，根据需要创建新的线程，直到创建调度程序对象时作为参数给出的最大数目（默认值为16）。如果超过最大值 那么 <code>cue</code> 可以对代码进行排队，直到线程变得可用为止。</p>
+<p>Rakudo 允许在程序启动时由环境变量 <code>RAKUDO_MAX_THREADS</code> 在默认调度程序中设置允许的最大线程数。</p>
+<h3 id="CurrentThreadScheduler"><a href="#CurrentThreadScheduler" class="headerlink" title="CurrentThreadScheduler"></a>CurrentThreadScheduler</h3><p><a href="https://docs.perl6.org/type/CurrentThreadScheduler" target="_blank" rel="external">CurrentThreadScheduler</a> 是一个非常简单的调度程序，它将始终调度代码在当前线程上立即运行。 暗示这个调度器的 <code>cue</code> 将阻塞，直到代码完成执行，把它的效用限制在某些特殊情况，如测试。</p>
+<h3 id="Locks"><a href="#Locks" class="headerlink" title="Locks"></a>Locks</h3><p>类 <a href="https://docs.perl6.org/type/Lock" target="_blank" rel="external">Lock</a> 在并发环境中提供了保护共享数据的低级机制，并因此是高级 API 中支持线程安全性的关键，这在其他编程语言中有时称为 “Mutex”。 因为较高级别的类（<a href="https://docs.perl6.org/type/Promise" target="_blank" rel="external">Promise</a>，<a href="https://docs.perl6.org/type/Supply" target="_blank" rel="external">Supply</a> 和 <a href="https://docs.perl6.org/type/Channel" target="_blank" rel="external">Channel</a>）在需要时使用 <a href="https://docs.perl6.org/type/Lock" target="_blank" rel="external">Lock</a>，所以用户代码不可能直接使用 Lock。</p>
+<p><a href="https://docs.perl6.org/type/Lock" target="_blank" rel="external">Lock</a> 的主接口是方法 <a href="https://docs.perl6.org/type/Lock#method_protect" target="_blank" rel="external">protect</a>，它确保一个代码块（通常称为“临界区”）只能在一个线程中同时执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">my $lock = Lock.new;</div><div class="line"></div><div class="line">my $a = 0;</div><div class="line"></div><div class="line">await (^10).map: &#123;</div><div class="line">    start &#123;</div><div class="line">            $lock.protect(&#123;</div><div class="line">                my $r = rand;</div><div class="line">                sleep $r;</div><div class="line">                $a++;</div><div class="line">            &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say $a; # 10</div></pre></td></tr></table></figure>
+<p><code>protect</code> 返回代码块返回任何东西。</p>
+<p>因为 <code>protect</code> 将阻止任何等着要执行临界区的线程，所以代码应该尽可能快。</p>
+<h2 id="Safety-Concerns"><a href="#Safety-Concerns" class="headerlink" title="Safety Concerns"></a>Safety Concerns</h2><p>一些共享数据并发问题相比其他问题并不明显。 关于这个问题的好文章请看这个<a href="https://6guts.wordpress.com/2014/04/17/racing-to-writeness-to-wrongness-leads/" target="_blank" rel="external">博客</a>。</p>
+<p>要注意的一个特别的问题是当容器自动更新或发生扩展时。 当<a href="https://docs.perl6.org/type/Array" target="_blank" rel="external">数组</a>或<a href="https://docs.perl6.org/type/Hash" target="_blank" rel="external">哈希</a>条目被赋初始值时，底层结构被更改，并且那个操作不是异步安全的。 例如，在这段代码中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @array;</div><div class="line">my $slot := @array[20];</div><div class="line">$slot = &apos;foo&apos;;</div></pre></td></tr></table></figure>
+<p>第三行是临界区，因为那就是数组被扩展之时。 最简单的解决方法是使用 <code>&lt;Lock&gt;</code> 来保护临界区。 一个可能更好的解决方案是重构代码，以使共享容器不是必需的。</p>
+<blockquote>
+<p>翻译的不够流畅, 大西瓜。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发/" rel="tag">#并发</a>
+          
+            <a href="/tags/Channel/" rel="tag">#Channel</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/28/gather-take/" rel="next" title="gather-take">
+                <i class="fa fa-chevron-left"></i> gather-take
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/05/Perl6中的subst/" rel="prev" title="Perl 6 中的 subst">
+                Perl 6 中的 subst <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/03/Perl6中的并发/"
+     data-title="Perl 6 中的并发"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/10/03/Perl6中的并发/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/03/Perl6中的并发/"
+           data-title="Perl 6 中的并发" data-url="https://ohmycloud.github.io/2016/10/03/Perl6中的并发/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#High-level-APIs"><span class="nav-number">1.</span> <span class="nav-text">High-level APIs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Promises"><span class="nav-number">1.1.</span> <span class="nav-text">Promises</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Supplies"><span class="nav-number">1.2.</span> <span class="nav-text">Supplies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channels"><span class="nav-number">1.3.</span> <span class="nav-text">Channels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proc-Async"><span class="nav-number">1.4.</span> <span class="nav-text">Proc::Async</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Low-level-APIs"><span class="nav-number">2.</span> <span class="nav-text">Low-level APIs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Threads"><span class="nav-number">2.1.</span> <span class="nav-text">Threads</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Schedulers"><span class="nav-number">2.2.</span> <span class="nav-text">Schedulers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadPoolScheduler"><span class="nav-number">2.3.</span> <span class="nav-text">ThreadPoolScheduler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CurrentThreadScheduler"><span class="nav-number">2.4.</span> <span class="nav-text">CurrentThreadScheduler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Locks"><span class="nav-number">2.5.</span> <span class="nav-text">Locks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Safety-Concerns"><span class="nav-number">3.</span> <span class="nav-text">Safety Concerns</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

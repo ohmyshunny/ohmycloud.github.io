@@ -1,0 +1,759 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="subst," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="(Str) 方法 substsubst 取的是单词 substitution(替换)的前5个字符, 意为替换之意。
+1multi method subst(Str:D: $matcher, $replacement, *%opts)
+返回被调用的那个字符串, 其中 $matcher 被 $replacement 给替换掉了(或者返回原来的字符串, 如果没有找到匹配的话)。
+subst 有一个「就地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的 subst">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/10/05/Perl6中的subst/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="(Str) 方法 substsubst 取的是单词 substitution(替换)的前5个字符, 意为替换之意。
+1multi method subst(Str:D: $matcher, $replacement, *%opts)
+返回被调用的那个字符串, 其中 $matcher 被 $replacement 给替换掉了(或者返回原来的字符串, 如果没有找到匹配的话)。
+subst 有一个「就地">
+<meta property="og:updated_time" content="2016-10-23T16:03:44.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的 subst">
+<meta name="twitter:description" content="(Str) 方法 substsubst 取的是单词 substitution(替换)的前5个字符, 意为替换之意。
+1multi method subst(Str:D: $matcher, $replacement, *%opts)
+返回被调用的那个字符串, 其中 $matcher 被 $replacement 给替换掉了(或者返回原来的字符串, 如果没有找到匹配的话)。
+subst 有一个「就地">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/10/05/Perl6中的subst/"/>
+
+  <title> Perl 6 中的 subst | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的 subst
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-05T23:32:51+08:00" content="2016-10-05">
+              2016-10-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/05/Perl6中的subst/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/05/Perl6中的subst/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Str-方法-subst"><a href="#Str-方法-subst" class="headerlink" title="(Str) 方法 subst"></a>(Str) 方法 subst</h2><p><a href="https://docs.perl6.org/routine/subst" target="_blank" rel="external">subst</a> 取的是单词 substitution(替换)的前5个字符, 意为替换之意。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method subst(Str:D: $matcher, $replacement, *%opts)</div></pre></td></tr></table></figure>
+<p>返回被调用的那个字符串, 其中 <code>$matcher</code> 被 <code>$replacement</code> 给替换掉了(或者返回原来的字符串, 如果没有找到匹配的话)。</p>
+<p><code>subst</code> 有一个「就地」替换的句法变体, 它被拼写为 <code>s/matcher/replacement/</code>。</p>
+<p><code>$matcher</code> 可以是一个正则表达式, 或者一个字符串字面值。 <code>Cool</code> 类型的非字符串 matcher 会被强转为字符串以用于字面上的匹配。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $some-string = &quot;Some foo&quot;;</div><div class="line">my $another-string = $some-string.subst(/foo/, &quot;string&quot;); # gives &apos;Some string&apos;</div><div class="line">$some-string.=subst(/foo/, &quot;string&quot;); # in-place substitution. $some-string is now &apos;Some string&apos;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><code>replacement</code> 可以是一个闭包:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $i = 41;</div><div class="line">my $str = &quot;The answer is secret.&quot;;</div><div class="line">my $real-answer = $str.subst(/secret/, &#123;++$i&#125;); # The answer to everything</div></pre></td></tr></table></figure>
+<p>下面是 subst 其它用法的例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my $str = &quot;Hey foo foo foo&quot;;</div><div class="line">$str.subst(/foo/, &quot;bar&quot;, :g);         # 全局替换 - 返回 Hey bar bar bar</div><div class="line"></div><div class="line">$str.subst(/foo/, &quot;no subst&quot;, :x(0)); # 有针对性的替换。要替换的次数. 返回未修改过的字符串.</div><div class="line">$str.subst(/foo/, &quot;bar&quot;, :x(1));      # 只替换第一次出现。</div><div class="line"></div><div class="line">$str.subst(/foo/, &quot;bar&quot;, :nth(3));    # 单独替换第 n 个匹配. 替换第三个 foo. 返回 Hey foo foo bar</div></pre></td></tr></table></figure>
+<p>第三个参数传递给散列, 例如 <code>:g</code> 被吞噬参数 <code>*%opts</code> 接收, 意为 <code>g =&gt; True</code>。<br>其中的 <code>:nth</code> 副词拥有可读的长得像英语那样的变体:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say &apos;ooooo&apos;.subst: &apos;o&apos;, &apos;x&apos;, :1st; # xoooo</div><div class="line">say &apos;ooooo&apos;.subst: &apos;o&apos;, &apos;x&apos;, :2nd; # oxooo</div><div class="line">say &apos;ooooo&apos;.subst: &apos;o&apos;, &apos;x&apos;, :3rd; # ooxoo</div><div class="line">say &apos;ooooo&apos;.subst: &apos;o&apos;, &apos;x&apos;, :4th; # oooxo</div></pre></td></tr></table></figure>
+<p>subst 还支持下面的副词:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">short</th>
+<th style="text-align:center">long</th>
+<th style="text-align:left">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:g</td>
+<td style="text-align:center">:global</td>
+<td style="text-align:left">尽可能多次地替换</td>
+</tr>
+<tr>
+<td style="text-align:center">:nth(Int&#124;Callable)</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">只替换第n次匹配; 别名: :st, :nd, :rd, 和 :th</td>
+</tr>
+<tr>
+<td style="text-align:center">:ss</td>
+<td style="text-align:center">:samespace</td>
+<td style="text-align:left">preserves whitespace on substitution</td>
+</tr>
+<tr>
+<td style="text-align:center">:ii</td>
+<td style="text-align:center">:samecase</td>
+<td style="text-align:left">替换时保留大小写</td>
+</tr>
+<tr>
+<td style="text-align:center">:mm</td>
+<td style="text-align:center">:samemark</td>
+<td style="text-align:left">保留字符标记(e.g. ‘ü’ replaced with ‘o’ will result in ‘ö’)</td>
+</tr>
+<tr>
+<td style="text-align:center">:x(Int&#124;Callable)</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">substitute exactly $x matches</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意, 只有在 <code>s///</code> 形式中 <code>:ii</code> 暗指 <code>:i</code> 而 <code>:ss</code> 暗指 <code>:s</code>. 在方法的形式中 <code>:s</code> 和 <code>:i</code> 修饰符必须添加到正则表达式中, 而非添加到 subst 方法调用中。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/subst/" rel="tag">#subst</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/03/Perl6中的并发/" rel="next" title="Perl 6 中的并发">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的并发
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/14/在手机中运行Perl6/" rel="prev" title="在手机中运行 Perl 6">
+                在手机中运行 Perl 6 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/05/Perl6中的subst/"
+     data-title="Perl 6 中的 subst"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/10/05/Perl6中的subst/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/05/Perl6中的subst/"
+           data-title="Perl 6 中的 subst" data-url="https://ohmycloud.github.io/2016/10/05/Perl6中的subst/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Str-方法-subst"><span class="nav-number">1.</span> <span class="nav-text">(Str) 方法 subst</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

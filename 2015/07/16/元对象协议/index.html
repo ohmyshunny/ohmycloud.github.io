@@ -1,0 +1,749 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MetaObjects," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="自省和 Perl 6 的对象系统Perl 6 是构建在元对象层上面的。那意味着有些对象(元对象)控制着各种面向对象结构(例如类、roles、方法、属性、枚举,…)怎样去表现。
+要感受类的元对象, 这儿有一个同样的例子出现2次: 一次一种 Perl 6中的普通声明, 一次通过元模型来表达:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="元对象协议">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/07/16/元对象协议/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="自省和 Perl 6 的对象系统Perl 6 是构建在元对象层上面的。那意味着有些对象(元对象)控制着各种面向对象结构(例如类、roles、方法、属性、枚举,…)怎样去表现。
+要感受类的元对象, 这儿有一个同样的例子出现2次: 一次一种 Perl 6中的普通声明, 一次通过元模型来表达:">
+<meta property="og:updated_time" content="2016-10-23T16:32:15.913Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="元对象协议">
+<meta name="twitter:description" content="自省和 Perl 6 的对象系统Perl 6 是构建在元对象层上面的。那意味着有些对象(元对象)控制着各种面向对象结构(例如类、roles、方法、属性、枚举,…)怎样去表现。
+要感受类的元对象, 这儿有一个同样的例子出现2次: 一次一种 Perl 6中的普通声明, 一次通过元模型来表达:">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/07/16/元对象协议/"/>
+
+  <title> 元对象协议 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                元对象协议
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-16T00:00:00+08:00" content="2015-07-16">
+              2015-07-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/16/元对象协议/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/16/元对象协议/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="自省和-Perl-6-的对象系统"><a href="#自省和-Perl-6-的对象系统" class="headerlink" title="自省和 Perl 6 的对象系统"></a>自省和 Perl 6 的对象系统</h1><p>Perl 6 是构建在元对象层上面的。那意味着有些对象(元对象)控制着各种面向对象结构(例如类、roles、方法、属性、枚举,…)怎样去表现。</p>
+<p>要感受类的元对象, 这儿有一个同样的例子出现2次: 一次一种 Perl 6中的普通声明, 一次通过元模型来表达:</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class A &#123;</div><div class="line">    method x() &#123; say 42 &#125;</div><div class="line">&#125;</div><div class="line">A.x(); # 42</div></pre></td></tr></table></figure>
+<p>对应于:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">constant A := Metamodel::ClassHOW.new_type( name =&gt; &apos;A&apos; );  # class A &#123;</div><div class="line">A.^add_method(&apos;x&apos;, my method x(A:) &#123; say 42 &#125;);             # method x() .. .</div><div class="line">A.^compose;                                                 # &#125;</div><div class="line"></div><div class="line">A.x(); # 42</div></pre></td></tr></table></figure>
+<p>(除了声明形式的运行在编译时, 后面这种形式不是)</p>
+<p>对象后面的元对象能使用 <code>$obj.HOW</code>获取, 这儿的 HOW 代表着 <strong>Higher Order Workings</strong>(或者 HOW the *%@$ does this work?)。</p>
+<p>这儿, 带有 <code>.^</code>的调用是元对象的调用, 所以 <code>A.^compose</code>是 <code>A.HOW.compose(A)</code>的简写。调用者也被传递到参数列表中, 以使它能够支持原型类型风格的类型系统, 那儿只有一个元对象。</p>
+<p>就像上面的例子展示的那样, 所有的面向对象特性对使用者都是可获得的, 而不仅仅是编译器。实际上编译器就是使用元对象的这样的调用的。</p>
+<h2 id="元对象-MetaObjects"><a href="#元对象-MetaObjects" class="headerlink" title="元对象(MetaObjects)"></a>元对象(MetaObjects)</h2><hr>
+<p>这些是内省的宏, 类似于方法调用。</p>
+<p>元对象通常以 ALLCAPS(全大写)命名, 并且避免使用你自己的带有全大写名字的方法被认为是一个好的风格。这会避免和可能出现在未来版本中的任何元对象发生冲突。注意, 如果你必须使用带有全大写名字的方法的话, 把你的这个方法名字用引号引起来来间接安全地调用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#| THIS IS A CLASS FOR SHOUTING THINGS</div><div class="line">class MY-CLASSES-ARE-ALL-CAPS &#123;</div><div class="line">    method WHY &#123; &quot;I DON&apos;T KNOW&quot; &#125;</div><div class="line">&#125;</div><div class="line">my $c = MY-CLASSES-ARE-ALL-CAPS.new;</div><div class="line">say $c.WHY      # &quot;THIS IS A CLASS FOR SHOUTING THINGS&quot;? 显示这？你在逗我!</div><div class="line">say $c.&quot;WHY&quot;()  # &quot;I DON&apos;T KNOW&quot;</div></pre></td></tr></table></figure>
+<h2 id="WHAT"><a href="#WHAT" class="headerlink" title="WHAT"></a>WHAT</h2><hr>
+<p>类型的类型对象。例如 <code>42.WHAT</code> 返回 <code>Int</code>类型对象。</p>
+<h2 id="WHICH"><a href="#WHICH" class="headerlink" title="WHICH"></a>WHICH</h2><hr>
+<p>对象的同一值。这能用于哈希和同一比较, 并且这是 <code>===</code>中缀操作符的实现方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; &quot;a&quot;.WHICH</div><div class="line">Str|a</div></pre></td></tr></table></figure>
+<h2 id="WHO"><a href="#WHO" class="headerlink" title="WHO"></a>WHO</h2><hr>
+<p>支持对象的包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; &quot;a&quot;.WHO</div><div class="line">Str</div></pre></td></tr></table></figure>
+<h2 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h2><hr>
+<p>对象的内存地址。注意这在移动的/紧凑的垃圾回收实现中是不稳定的。 在稳定的同一指示器中使用 <code>WHERE</code>。</p>
+<h2 id="HOW"><a href="#HOW" class="headerlink" title="HOW"></a>HOW</h2><hr>
+<p>元类对象(the metaclass object)：“Higher Order Workings”。</p>
+<h2 id="WHY"><a href="#WHY" class="headerlink" title="WHY"></a>WHY</h2><hr>
+<p>附加的 Pod 值。</p>
+<h2 id="DEFINITE"><a href="#DEFINITE" class="headerlink" title="DEFINITE"></a>DEFINITE</h2><hr>
+<p>对象有一个有效的强制表现。</p>
+<p>对于实例返回 <code>True</code>, 对于类型对象返回 <code>False</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; 42.DEFINITE</div><div class="line">True</div><div class="line">&gt; Int.DEFINITE</div><div class="line">False</div></pre></td></tr></table></figure>
+<h2 id="VAR"><a href="#VAR" class="headerlink" title="VAR"></a>VAR</h2><hr>
+<p>返回底层的 Scalar 对象, 如果有的话。</p>
+<h2 id="元对象系统的结构"><a href="#元对象系统的结构" class="headerlink" title="元对象系统的结构"></a>元对象系统的结构</h2><hr>
+<p>对于每个类型声明符关键字, 例如 <code>class</code>、<code>role</code> 、<code>enum</code>、<code>module</code>、<code>package</code>、<code>grammar</code> 或<code>subset</code>, 就有一个独立的元类在 <code>Matamodel::</code>命名空间中。(Rakudo 在 <code>Perl6::Metamodel::</code>命名空间中实现了它们, 然后把 <code>Perl6::Metamodel</code>映射到 <code>Metamodel</code>)。</p>
+<p>这些元类(meta classes)中的很多都共享公共的功能。例如 roles、grammars和 classes(类)都能包括方法和属性, 还能遵守 roles。这个共享的功能是在 roles 中实现的, 它被组合进合适的元类中。例如 <a href="http://doc.perl6.org/type/Metamodel::RoleContainer" target="_blank" rel="external">role Metamodel::RoleContainer</a>实现了类型能处理 roles 和 <code>Metamodel::ClassHOW</code>的功能, 它是在 <code>class</code>关键字后面的元类, 遵守了这个 role。</p>
+<h2 id="Bootstrapping-concerns"><a href="#Bootstrapping-concerns" class="headerlink" title="Bootstrapping concerns"></a><a href="http://doc.perl6.org/language/mop#___top" target="_blank" rel="external">Bootstrapping concerns</a></h2><hr>
+<p>你可能想知道为什么 <code>Metamodel::ClassHOW</code>可以是一个类, 当按照<code>Metamodel::ClassHOW</code>作为一个类被定义时, 或者 roles 负责 role 处理的怎么能是 roles。答案是通过魔法。</p>
+<p>开玩笑啦。自举是特别实现的。Rakudo 使用语言的对象系统来实现自举, 它恰好(几乎)就是 Perl 6 的一个子集: NQP, Not Quite Perl。 NQP 有原始的, class-like 叫做 <code>konwhow</code> 的性质, 它用于自举它自己的类和 roles 实现。<code>konwhow</code>建立在NQP 提供的虚拟机的原始基础上。</p>
+<p>因为元对象是根据低级(low-level)类型引导的, 自省有时能返回低级(low-level)类型而非你期望的那个类型, 例如返回一个 NQP-level 的子例程而非普通的 <code>Routine</code>对象, 或返回一个引导的属性而非<a href="http://doc.perl6.org/type/Attribute" target="_blank" rel="external">Attribute</a>。</p>
+<h2 id="组合和静态推理"><a href="#组合和静态推理" class="headerlink" title="组合和静态推理"></a>组合和静态推理</h2><hr>
+<p>在 Perl 6中, 类型是在解析时被构造的, 所以在开始, 它必须是可变的。然而, 如果所有类型一直是可变的, 那么关于类型的所有推断会在任何类型的修改时变得无效。例如父类的列表因此类型检测的结果能在那个时候改变。</p>
+<p>所以为了获得这两个世界中最好的东西, 当类型从可变转为不可变时是好时机。这就叫做组合, 并且对于从句法构成上声明的类型, 它发生在类型声明被完全解析时(所以总是在闭合花括号被解析时)。</p>
+<p>如果你通过元对象系统直接创建类型, 你必须要在它们身上调用 <code>.^compose</code>, 在它们变得完全起作用之前。</p>
+<p>很多元类也使用组合时来计算一些诸如方法解析顺序这样的属性, 发布一个方法缓存, 和其它清扫任务。在它们被组合之后干预类型有时是可能的, 但通常是造成灾难的因素。 不要那样做。</p>
+<h2 id="能力和责任"><a href="#能力和责任" class="headerlink" title="能力和责任"></a>能力和责任</h2><hr>
+<p>元对象协议提供了很多常规 Perl 6 代码故意限制了的能力, 例如调用类中不信任你的私有方法, 窥探私有属性, 和其它通常不能完成的东西。</p>
+<p>常规的 Perl 6 代码有很多就地的安全检测; 元模型中不是这样，它靠近底层的虚拟机, 违反和虚拟机的约定可以导致所有奇怪的行为, 而在正常代码中, 显而易见的会是 bugs。</p>
+<p>所以, 在写元类型的时候要格外小心和思考。</p>
+<h2 id="能力、便利和陷阱"><a href="#能力、便利和陷阱" class="headerlink" title="能力、便利和陷阱"></a>能力、便利和陷阱</h2><hr>
+<p>元对象协议被设计的强大到实现 Perl 6 的对象系统。这种能力间或花费了便利的代价。</p>
+<p>例如, 当你写了 <code>my $x = 42</code>并在 <code>$x</code>上调用方法时, 大部分方法会在整数 42 上起作用, 而不是在存储 42 的标量容器上。这是 Perl 6中设立的一块便利。元对象协议中的大部分不能提供自动忽略标量容器的便利性, 因为它们也用于实现那些标量容器。 所以, 如果你写了 <code>my $t = MyType; ... $t.^compose</code>, 那么你正组合那个<code>$</code>变量表明的标量, 而不是 <code>MyType</code>。</p>
+<p>结果就是你需要很详尽的理解 Perl 6 的底层以避免陷阱, 当使用 MOP 时, 并且不能期望得到和普通 Perl 6 代码提供的 “do what I mean” 的便利。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MetaObjects/" rel="tag">#MetaObjects</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/15/Perl6中的Role/" rel="next" title="Perl 6 中的 Role">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的 Role
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/25/Introspection/" rel="prev" title="Introspection">
+                Introspection <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/07/16/元对象协议/"
+     data-title="元对象协议"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/07/16/元对象协议/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/16/元对象协议/"
+           data-title="元对象协议" data-url="https://ohmycloud.github.io/2015/07/16/元对象协议/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自省和-Perl-6-的对象系统"><span class="nav-number">1.</span> <span class="nav-text">自省和 Perl 6 的对象系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#元对象-MetaObjects"><span class="nav-number">1.1.</span> <span class="nav-text">元对象(MetaObjects)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHAT"><span class="nav-number">1.2.</span> <span class="nav-text">WHAT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHICH"><span class="nav-number">1.3.</span> <span class="nav-text">WHICH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHO"><span class="nav-number">1.4.</span> <span class="nav-text">WHO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHERE"><span class="nav-number">1.5.</span> <span class="nav-text">WHERE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HOW"><span class="nav-number">1.6.</span> <span class="nav-text">HOW</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHY"><span class="nav-number">1.7.</span> <span class="nav-text">WHY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEFINITE"><span class="nav-number">1.8.</span> <span class="nav-text">DEFINITE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VAR"><span class="nav-number">1.9.</span> <span class="nav-text">VAR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元对象系统的结构"><span class="nav-number">1.10.</span> <span class="nav-text">元对象系统的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bootstrapping-concerns"><span class="nav-number">1.11.</span> <span class="nav-text">Bootstrapping concerns</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合和静态推理"><span class="nav-number">1.12.</span> <span class="nav-text">组合和静态推理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#能力和责任"><span class="nav-number">1.13.</span> <span class="nav-text">能力和责任</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#能力、便利和陷阱"><span class="nav-number">1.14.</span> <span class="nav-text">能力、便利和陷阱</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

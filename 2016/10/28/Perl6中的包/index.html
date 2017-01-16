@@ -1,0 +1,735 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="包," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Packages - Organizing and referencing namespaced program elements
+
+包是指定程序元素的嵌套命名空间。 模块，类，Grammar是包类型。 像目录中的文件一样，通常可以使用其短名称（如果它们是本地的）或使用较长的名称来消除歧义的引用具名元素。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的包">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/10/28/Perl6中的包/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Packages - Organizing and referencing namespaced program elements
+
+包是指定程序元素的嵌套命名空间。 模块，类，Grammar是包类型。 像目录中的文件一样，通常可以使用其短名称（如果它们是本地的）或使用较长的名称来消除歧义的引用具名元素。">
+<meta property="og:updated_time" content="2016-10-28T17:38:10.337Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的包">
+<meta name="twitter:description" content="Packages - Organizing and referencing namespaced program elements
+
+包是指定程序元素的嵌套命名空间。 模块，类，Grammar是包类型。 像目录中的文件一样，通常可以使用其短名称（如果它们是本地的）或使用较长的名称来消除歧义的引用具名元素。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/10/28/Perl6中的包/"/>
+
+  <title> Perl 6 中的包 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-28T23:17:11+08:00" content="2016-10-28">
+              2016-10-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/28/Perl6中的包/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/28/Perl6中的包/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Packages - Organizing and referencing namespaced program elements</p>
+</blockquote>
+<p>包是指定程序元素的嵌套命名空间。 模块，类，Grammar是包类型。 像目录中的文件一样，通常可以使用其短名称（如果它们是本地的）或使用较长的名称来消除歧义的引用具名元素。</p>
+<a id="more"></a>
+<h2 id="Names"><a href="#Names" class="headerlink" title="Names"></a>Names</h2><p>名称是作为变量名称的合法部分的任何东西（不包括sigil符号）。 这包括：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$foo                # 简单标识符</div><div class="line">$Foo::Bar::baz      # 通过 :: 分割的组合标识符</div><div class="line">$Foo::($bar)::baz   # 执行插值的组合标识符</div><div class="line">$42                 # numeric names</div><div class="line">$!                  # 某些标点符号变量</div></pre></td></tr></table></figure>
+<p><code>::</code> 用于分割嵌套的包名。</p>
+<h3 id="包限定名"><a href="#包限定名" class="headerlink" title="包限定名"></a>包限定名</h3><p>普通的包限定名像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$Foo::Bar::baz  # 包 Foo::Bar 中的 $baz 变量</div></pre></td></tr></table></figure>
+<p>有时保持sigil与变量名很清晰，所以来写这个的一个替代方式是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Foo::Bar::&lt;$baz&gt;</div></pre></td></tr></table></figure>
+<p>这在编译时解决，因为变量名是一个常量。</p>
+<p>如果 <code>::</code> 之前的名称部分为 null，则意味着包未指定并且必须搜索。 一般来说，这意味着跟在主sigil后面的初始 <code>::</code> 是对编译时已知的名字的无操作(no-op)，但 <code>::()</code> 也可以用来引入插值。 另外，在没有另一个sigil的情况下，<code>::</code> 可以作为它自己的sigil，表明有意使用一个尚未声明的包名。</p>
+<h2 id="伪包"><a href="#伪包" class="headerlink" title="伪包"></a>伪包</h2><p>在名称前面保留以下伪包名称：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MY          # 当前词法作用域中的符号 (aka $?SCOPE)</div><div class="line">OUR         # 当前包中的符号 (aka $?PACKAGE)</div><div class="line">CORE        # 最外层词法作用域, 定义标准 Perl</div><div class="line">GLOBAL      # Interpreter-wide package symbols, really UNIT::GLOBAL</div><div class="line">PROCESS     # 进程相关的全局变量 (superglobals)</div><div class="line">COMPILING   # 正在编译的作用域中的词法符号</div></pre></td></tr></table></figure>
+<p>以下相对名称也保留，但可以在名称中的任何位置使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">CALLER      # Contextual symbols in the immediate caller&apos;s lexical scope</div><div class="line">CALLERS     # Contextual symbols in any caller&apos;s lexical scope</div><div class="line">DYNAMIC     # Contextual symbols in my or any caller&apos;s lexical scope</div><div class="line">OUTER       # Symbols in the next outer lexical scope</div><div class="line">OUTERS      # Symbols in any outer lexical scope</div><div class="line">LEXICAL     # Contextual symbols in my or any outer&apos;s lexical scope</div><div class="line">UNIT        # Symbols in the outermost lexical scope of compilation unit</div><div class="line">SETTING     # Lexical symbols in the unit&apos;s DSL (usually CORE)</div><div class="line">PARENT      # Symbols in this package&apos;s parent package (or lexical scope)</div><div class="line">CLIENT      # The nearest CALLER that comes from a different package</div></pre></td></tr></table></figure>
+<p>文件的作用域称为 <code>UNIT</code>，但在对应于语言设置的外面有一个或多个词法作用域（其他文化中通常称为序幕）。 因此，<code>SETTING</code> 作用域等价于 <code>UNIT::OUTERS</code>。 对于标准的Perl程序，<code>SETTING</code> 与 <code>CORE</code> 相同，但是各种启动选项（如 <code>-n</code> 或 <code>-p</code>）可以使您进入特定领域语言，在这种情况下，<code>CORE</code> 仍然是标准语言的作用域，而 <code>SETTING</code> 表示定义用作当前文件的设置的DSL的作用域。 当作为名称中间的搜索项使用时，SETTING包括其所有外部作用域，直到 <code>CORE</code>。 要仅获取设置的最外层作用域，请改用 <code>UNIT::OUTER</code>。</p>
+<h2 id="查找名字"><a href="#查找名字" class="headerlink" title="查找名字"></a>查找名字</h2><h3 id="插值到名字中"><a href="#插值到名字中" class="headerlink" title="插值到名字中"></a>插值到名字中</h3><p>您可以使用 <code>::($expr)</code> 将字符串插入到包或变量名中，<code>$expr</code> 表达式中通常放置包或变量名。 该字符串允许包含额外的 <code>::</code> 实例，这将被解释为包嵌套。 您只能内插整个名称，因为结构以 <code>::</code> 开头，并且立即结束或用括号之外的另一个 <code>::</code> 继续。 大多数符号引用使用这种记法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$foo = &quot;Bar&quot;;</div><div class="line">$foobar = &quot;Foo::Bar&quot;;</div><div class="line">$::($foo)           # lexically-scoped $Bar</div><div class="line">$::(&quot;MY::$foo&quot;)     # lexically-scoped $Bar</div><div class="line">$::(&quot;OUR::$foo&quot;)    # package-scoped $Bar</div><div class="line">$::(&quot;GLOBAL::$foo&quot;) # global $Bar</div><div class="line">$::(&quot;PROCESS::$foo&quot;)# process $Bar</div><div class="line">$::(&quot;PARENT::$foo&quot;) # current package&apos;s parent&apos;s $Bar</div><div class="line">$::($foobar)        # $Foo::Bar</div><div class="line">$::($foobar)::baz   # $Foo::Bar::baz</div><div class="line">$::($foo)::Bar::baz # $Bar::Bar::baz</div><div class="line">$::($foobar)baz     # ILLEGAL at compile time (no operator baz)</div></pre></td></tr></table></figure>
+<p>初始 <code>::</code> 不表明全局。 这里作为插值语法的一部分，它甚至不暗示包。 <code>::()</code> 组件插值之后，间接名称被查找，就像它在原始源代码中一样，优先级首先指定为前导伪包名称，然后指向词法作用域中的名称（搜索 向外扩展，以<code>CORE</code>结束）。 最后搜索当前包。</p>
+<p>使用 <code>MY</code> 伪包将查找限制为当前词法作用域，<code>OUR</code> 将作用域限制为当前包作用域。</p>
+<h3 id="直接查找"><a href="#直接查找" class="headerlink" title="直接查找"></a>直接查找</h3><p>要在包的符号表中直接查找而不进行扫描，请将包名视为哈希：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Foo::Bar::&#123;&apos;&amp;baz&apos;&#125;  # same as &amp;Foo::Bar::baz</div><div class="line">PROCESS::&lt;$IN&gt;      # Same as $*IN</div><div class="line">Foo::&lt;::Bar&gt;&lt;::Baz&gt; # same as Foo::Bar::Baz</div></pre></td></tr></table></figure>
+<p>不像 <code>::()</code> 符号引用，这不解析<code>::</code>的参数，也不从该初始点启动命名空间扫描。 此外，对于常量下标，保证在编译时解析符号。</p>
+<p>空伪包是与普通名称搜索有相同的搜索列表。 也就是说，以下各项在意义上是相同的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$foo</div><div class="line">$::&#123;&apos;foo&apos;&#125;</div><div class="line">::&#123;&apos;$foo&apos;&#125;</div><div class="line">$::&lt;foo&gt;</div><div class="line">::&lt;$foo&gt;</div></pre></td></tr></table></figure>
+<p>它们中的每一个都向外扫描词法作用域，然后扫描当前的包作用域（虽然当“strict”有效时包作用域被禁止，）。</p>
+<p>作为这些规则的结果，您可以把变量名写的很随意：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$::&#123;&apos;!@#$#@&apos;&#125;</div><div class="line">::&#123;&apos;$!@#$#@&apos;&#125;</div></pre></td></tr></table></figure>
+<p>只要名字中没有空格, 您也可以使用 <code>::&lt;&gt;</code> 形式。</p>
+<h3 id="包查找"><a href="#包查找" class="headerlink" title="包查找"></a>包查找</h3><p>将包对象本身下标为哈希对象，其键是变量名，包括任何sigil。 包对象可以通过使用 <code>::</code> 后缀从类型名中派生：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MyType::&lt;$foo&gt;</div></pre></td></tr></table></figure>
+<h2 id="全局"><a href="#全局" class="headerlink" title="全局"></a>全局</h2><p>解释器全局变量存在于 <code>GLOBAL</code> 包中。 用户程序在 <code>GLOBAL</code> 包中启动，因此默认情况下，主线代码中的“our”声明会进入该包。 进程范围的变量存在于 <code>PROCESS</code>包中。 大多数预定义的全局变量，例如 <code>$*UID</code> 和 <code>$*PID</code> 实际上是进程全局变量。</p>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>任何包都可以有一个 <a href="https://docs.perl6.org/type/Version" target="_blank" rel="external">Version</a> 对象。 这个对象可以通过 <code>$PACKAGE.^ver</code> 或从包 <code>Fully::Qualified::Name.^ver</code> 外部访问。</p>
+<p><a href="https://docs.perl6.org/language/packages" target="_blank" rel="external">Packages</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/包/" rel="tag">#包</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/27/Perl6中列表、序列和数组/" rel="next" title="Perl 6 中列表、序列和数组">
+                <i class="fa fa-chevron-left"></i> Perl 6 中列表、序列和数组
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/01/Perl6-Grammar之分割结构化文本/" rel="prev" title="Perl 6 Grammar 之分割结构化文本">
+                Perl 6 Grammar 之分割结构化文本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/28/Perl6中的包/"
+     data-title="Perl 6 中的包"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/10/28/Perl6中的包/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/28/Perl6中的包/"
+           data-title="Perl 6 中的包" data-url="https://ohmycloud.github.io/2016/10/28/Perl6中的包/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Names"><span class="nav-number">1.</span> <span class="nav-text">Names</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#包限定名"><span class="nav-number">1.1.</span> <span class="nav-text">包限定名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪包"><span class="nav-number">2.</span> <span class="nav-text">伪包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找名字"><span class="nav-number">3.</span> <span class="nav-text">查找名字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插值到名字中"><span class="nav-number">3.1.</span> <span class="nav-text">插值到名字中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接查找"><span class="nav-number">3.2.</span> <span class="nav-text">直接查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包查找"><span class="nav-number">3.3.</span> <span class="nav-text">包查找</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局"><span class="nav-number">4.</span> <span class="nav-text">全局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本"><span class="nav-number">5.</span> <span class="nav-text">版本</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

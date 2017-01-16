@@ -1,0 +1,738 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Introspection,自省," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6 支持”泛型, roles 和 多重分发”, 它们都是很好的特点, 并且已经在其它 advent calendar 中发布过了。
+但是今天我们要看的是 MOP。 “MOP”代表着元对象协议(“Meta-Object Protocol”)。那意味着, 它们实际上是你能从用户那边改变的一部分, 而不是对象、类等定义语言的东西。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introspection">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/07/25/Introspection/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6 支持”泛型, roles 和 多重分发”, 它们都是很好的特点, 并且已经在其它 advent calendar 中发布过了。
+但是今天我们要看的是 MOP。 “MOP”代表着元对象协议(“Meta-Object Protocol”)。那意味着, 它们实际上是你能从用户那边改变的一部分, 而不是对象、类等定义语言的东西。">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Introspection">
+<meta name="twitter:description" content="Perl 6 支持”泛型, roles 和 多重分发”, 它们都是很好的特点, 并且已经在其它 advent calendar 中发布过了。
+但是今天我们要看的是 MOP。 “MOP”代表着元对象协议(“Meta-Object Protocol”)。那意味着, 它们实际上是你能从用户那边改变的一部分, 而不是对象、类等定义语言的东西。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/07/25/Introspection/"/>
+
+  <title> Introspection | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Introspection
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-25T00:00:00+08:00" content="2015-07-25">
+              2015-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/25/Introspection/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/25/Introspection/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Perl 6 支持”泛型, roles 和 多重分发”, 它们都是很好的特点, 并且已经在其它 advent calendar 中发布过了。</p>
+<p>但是今天我们要看的是 <strong>MOP</strong>。 “MOP”代表着元对象协议(“Meta-Object Protocol”)。那意味着, 它们实际上是你能从用户那边改变的一部分, 而不是对象、类等定义语言的东西。</p>
+<a id="more"></a>
+<p>实际上, 在 Perl 6中, 你可以为类型添加方法, 移除某个方法, 包裹方法, 使用更多能力增强类(<a href="https://github.com/jnthn/oo-actors" target="_blank" rel="external">OO::Actors</a>  和 <a href="https://github.com/jnthn/oo-monitors" target="_blank" rel="external">OO::Monitors</a> 就是两个这样的例子), 或者你可以完全重定义它(并且, 例如, 使用 Ruby-like 的对象系统。<a href="https://github.com/edumentab/rakudo-and-nqp-internals-course" target="_blank" rel="external">这儿有个例子</a>)。</p>
+<p>但是今天, 我们首先看一下第一部分: 自省。在类型创建完之后查看它的类型, 了解它, 并使用这些信息。</p>
+<p>我们将要创建的模块是基于 <a href="https://github.com/vendethiel/sixcheck" target="_blank" rel="external">Sixcheck</a> 模块(一个 <a href="https://en.wikipedia.org/wiki/QuickCheck" target="_blank" rel="external">QuickCheck-like</a> 模块)的需求: 为某个类型生成一些随机数据, 然后把数据喂给我们正测试的函数, 并检查某些后置条件(post-condition)。</p>
+<p>所以, 我们先写出第一个版本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">my %special-cases&#123;Mu&#125; =</div><div class="line">  (Int) =&gt; -&gt; &#123; (1..50).pick &#125;,</div><div class="line">  (Str) =&gt; -&gt; &#123; (&apos;a&apos;..&apos;z&apos;).pick(50).join(&apos;&apos;) &#125;,</div><div class="line">;</div><div class="line"></div><div class="line">sub generate-data(Mu:U \t) &#123;</div><div class="line">    %special-cases&#123;t&#125; ?? %special-cases&#123;t&#125;() !! t.new;</div><div class="line">&#125;</div><div class="line"></div><div class="line">generate-data(Int);</div></pre></td></tr></table></figure>
+<p>注意以下几点:</p>
+<ul>
+<li>我们给 %special-cases 指定了键的类型。那是因为默认地, 键的类型为 <strong>Str</strong>。显然地, 我们不想让我们的类型字符串化。我们实际上做的是指定它们为”Mu”的子类(这在类型”食物链”的顶端)。</li>
+<li>我们在 <strong>Int</strong> 和 <strong>Str</strong> 周围放上圆括号, 以避免字符串化。</li>
+<li>我们在函数参数类型中使用了 <code>:U</code>。那意味着那个值必须是未定义的(undefined)。类型对象(就像 Int、Str 等等)是未定义的, 所以它能满足我们(你可能见过一个叫 Nil 的不同的未知值)。</li>
+<li>类型对象实际上是对象, 就像其它任何对象一样。这就是为什么我们在类型对象上调用 <code>.new</code>方法, 例如, 它和直接调用 <code>Int.new</code>相同(那对一致性和 <a href="https://design.perl6.org/S09.html#Autovivification" target="_blank" rel="external">autovivification</a> 很有用)。</li>
+<li>我们为 <em>Int</em> 和 <em>Str</em> 提供了fallback, 因为调用 <em>Int.new</em> 和 <em>Str.new</em> ( 0 和 “” )不会在我们创建的数据中给我们任何随机化。</li>
+<li>Perl 6 在函数中自动返回最后一个表达式。所以不需要在那儿放上一个 <em>return</em>。</li>
+</ul>
+<p>我们用代码生成数据, 公平且公正。但是我们需要生成更多那样简单的数据。</p>
+<p>我们至少需要支持带有属性的类: 我们想查看属性列表, 为它们的类型生成数据, 并把它们喂给构造器。</p>
+<p>我们要能够看到类的内部。用 Perl 6 的术语来说, 我们将要到达的是元对象协议(<a href="https://perl6advent.wordpress.com/2010/12/22/day-22-the-meta-object-protocol/" target="_blank" rel="external">Meta-Object Protocol</a>)。首先我们定义一个类:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class Article &#123;</div><div class="line">    has Str $.title;</div><div class="line">    has Str $.content;</div><div class="line">    has Int $.view-count;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 我们可以这样手动创建一个实例</div><div class="line">Article.new(title      =&gt; &quot;Perl 6 Advent, 第 19 天&quot;,</div><div class="line">            content    =&gt; &quot;Magic!&quot;,</div><div class="line">            view-count =&gt; 0</div><div class="line">            );</div></pre></td></tr></table></figure>
+<p>但是我们不想亲手创建那个文章 (article)。我们想把那个 <strong>class</strong> Article 传递给我们的 <em>generate-data</em> 函数, 并返回一个 Article(里面带有随机数据)。让我们回到我们的 <em>REPL</em>…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say Article.^attributes;         # (Str $!title Str $!content Int $!view-count)</div><div class="line">say Article.^attributes[0].WHAT; # (Attribute)</div></pre></td></tr></table></figure>
+<p>如果你点击了 MOP 链接, 你不会对我们得到一个含有 3 个元素的数组感到惊讶。如果你仍旧对该语法感到惊讶, 那么 <code>.^</code>是元方法调用。意思是 <code>a.^b</code>会被转换为 <code>a.HOW.b(a)</code>。</p>
+<p>如果我们想知道我们可以访问到什么, 我们问它就是了(移除了匿名的那些):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Attribute.^methods.grep(*.name ne &apos;&lt;anon&gt;&apos;);</div><div class="line"># (compose apply_handles get_value set_value</div><div class="line">#      container readonly package inlined WHY set_why Str gist)</div><div class="line"></div><div class="line">Attribute.^attributes # Method &apos;gist&apos; not found for invocant of class &apos;BOOTSTRAPATTR&apos;</div></pre></td></tr></table></figure>
+<p>哎吆… 看起来这有点太 meta 了。幸好, 我们能使用 Rakudo 的一个非常好的属性: 它的大部分都是用 Perl 6写的! 要查看我们可以得到什么, 我们查看<a href="https://github.com/rakudo/rakudo/blob/nom/src/core/Attribute.pm" target="_blank" rel="external">源代码</a>就好了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># has Str $!name;</div><div class="line">...</div><div class="line"># has Mu $!type;</div></pre></td></tr></table></figure>
+<p>我们得到了键的名字, 还有去生成值的类型。让我们看看…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; say Article.^attributes.map(*.name)</div><div class="line">($!title $!content $!view-count)</div><div class="line">&gt; say Article.^attributes.map(*.type)</div><div class="line">((Str) (Str) (Int))</div></pre></td></tr></table></figure>
+<p>天才! 看起来是正确的。(如果你想知道为什么我们得到 <code>$!</code>（私有的） twigils, 那是因为 <code>$.</code>只意味着将会生成的一个 getter 方法)。属性本身仍然是私有的, 并且在类中是可访问的。</p>
+<p>现在, 我们唯一要做的事情就是创建一个循环…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my %args;</div><div class="line"></div><div class="line">for Article.^attributes -&gt; $attr &#123;</div><div class="line">    %args&#123;$attr.name.substr(2)&#125; = generate-data($attr.type);</div><div class="line">&#125;</div><div class="line">say %args.perl;</div></pre></td></tr></table></figure>
+<p>这是一个将会打印什么的例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;:content(&quot;muenglhaxrvykfdjzopqbtwisc&quot;), :title(&quot;rfpjndgohmasuwkyzebixqtvcl&quot;), :view-count(45)&#125;</div></pre></td></tr></table></figure>
+<p>每次你运行你的代码你都会得到不同的结果(然而我不认为它会创建一篇值得阅读的文章…)。剩下唯一要做的就是把它们传递给 Article 的构造函数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say Article.new(|%args);</div></pre></td></tr></table></figure>
+<p>(前缀 <code>|</code>允许我们把 <em>%args</em> 作为具名参数传递, 而不是单个位置参数)。再次, 你应该会打印这些东西:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Article.new(title =&gt; &quot;kyvphxqmejtuicrbsnfoldgzaw&quot;, content =&gt; &quot;jqbtcyovxlngpwikdszfmeuahr&quot;, view-count =&gt; 26)</div></pre></td></tr></table></figure>
+<p>呀! 我们设法在不了解 Article 的情况下胡乱地(blindly)创建了一个 Article 实例。 我们的代码能够用于为任何期望传递它的类属性的构造函数生成数据。好了!</p>
+<p>PS: 留个作业! 移动到 generate-data 函数, 以至于我们能给 Article 添加一个 User $.author 属性, 并且构建好这个函数。祝你好运!</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Introspection/" rel="tag">#Introspection</a>
+          
+            <a href="/tags/自省/" rel="tag">#自省</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/16/元对象协议/" rel="next" title="元对象协议">
+                <i class="fa fa-chevron-left"></i> 元对象协议
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/05/Perl-6圣诞月历-2015/" rel="prev" title="Perl 6 圣诞月历-(2015)">
+                Perl 6 圣诞月历-(2015) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/07/25/Introspection/"
+     data-title="Introspection"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/07/25/Introspection/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/25/Introspection/"
+           data-title="Introspection" data-url="https://ohmycloud.github.io/2015/07/25/Introspection/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

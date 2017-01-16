@@ -1,0 +1,901 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Subscripts," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="TITLE
+下标
+SUBTITLE
+通过索引或键访问数据结构中的元素。
+通常，人们需要引用集合或数据结构中的一个特定的元素（或特定的元素切片）。从数学标记法中偷学到的，向量 v 的组成部分用 v₁, v₂, v₃ 来引用，在 Perl 6 中这个概念叫做 “下标” （或“索引”）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的 Subscripts">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/06/01/Perl6中的Subscripts/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="TITLE
+下标
+SUBTITLE
+通过索引或键访问数据结构中的元素。
+通常，人们需要引用集合或数据结构中的一个特定的元素（或特定的元素切片）。从数学标记法中偷学到的，向量 v 的组成部分用 v₁, v₂, v₃ 来引用，在 Perl 6 中这个概念叫做 “下标” （或“索引”）。">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的 Subscripts">
+<meta name="twitter:description" content="TITLE
+下标
+SUBTITLE
+通过索引或键访问数据结构中的元素。
+通常，人们需要引用集合或数据结构中的一个特定的元素（或特定的元素切片）。从数学标记法中偷学到的，向量 v 的组成部分用 v₁, v₂, v₃ 来引用，在 Perl 6 中这个概念叫做 “下标” （或“索引”）。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/06/01/Perl6中的Subscripts/"/>
+
+  <title> Perl 6 中的 Subscripts | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的 Subscripts
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-01T00:00:00+08:00" content="2016-06-01">
+              2016-06-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/01/Perl6中的Subscripts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/01/Perl6中的Subscripts/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="TITLE"><a href="#TITLE" class="headerlink" title="TITLE"></a>TITLE</h1><hr>
+<p>下标</p>
+<h1 id="SUBTITLE"><a href="#SUBTITLE" class="headerlink" title="SUBTITLE"></a>SUBTITLE</h1><hr>
+<p>通过索引或键访问数据结构中的元素。</p>
+<p>通常，人们需要引用集合或数据结构中的一个特定的元素（或特定的元素切片）。从数学标记法中偷学到的，向量 <code>v</code> 的组成部分用 <em>v₁, v₂, v₃</em> 来引用，在 Perl 6 中这个概念叫做 “下标” （或“索引”）。</p>
+<a id="more"></a>
+<h1 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h1><hr>
+<p>Perl 6 提供了两个通用的下标接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">	   elements are identified by     interface name    supported by</div><div class="line">[ ]	 zero-based indices	              Positional        Array, List, Buf, Match, ...</div><div class="line">&#123; &#125;	 string or object keys            Associative       Hash, Bag, Mix, Match, ...</div></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Positional</strong> 下标 (通过 <a href="http://doc.perl6.org/language/operators#postcircumfix_[_]" target="_blank" rel="external">postcircumfix [ ]</a> 通过元素在有序集合中的位置来寻址元素。)索引 0 引用第一个元素， 索引 1 引用第二个元素， 以此类推：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my @chores = &quot;buy groceries&quot;, &quot;feed dog&quot;, &quot;wash car&quot;;</div><div class="line">say @chores[0];  #-&gt; buy groceries</div><div class="line">say @chores[1];  #-&gt; feed dog</div><div class="line">say @chores[2];  #-&gt; wash car</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Associative</strong> 下标 (通过 <a href="http://doc.perl6.org/language/operators#postcircumfix_{_}" target="_blank" rel="external">postcircumfix { }</a>), 不要求集合以任何特定的顺序保存元素 - 相反，它使用一个唯一的键来寻址每个值。键的种类取决于使用的集合： 举个例子， 一个标准的<a href="http://doc.perl6.org/type/Hash" target="_blank" rel="external">散列</a> 使用字符串作为键， 而一个 <a href="http://doc.perl6.org/type/Mix" target="_blank" rel="external">Mix</a> 能使用任意的对象作为键， 等等:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my %grade = Zoe =&gt; &quot;C&quot;, Ben =&gt; &quot;B+&quot;;</div><div class="line">say %grade&#123;&quot;Zoe&quot;&#125;;  #-&gt; C</div><div class="line">say %grade&#123;&quot;Ben&quot;&#125;;  #-&gt; B+</div><div class="line"></div><div class="line">my $stats = ( Date.today =&gt; 4.18, Date.new(2015,  4,  5) =&gt; 17.253 ).Mix;</div><div class="line">say $stats&#123; Date.new(2015, 4, 5) &#125;;  #-&gt; 17.253</div></pre></td></tr></table></figure>
+<p>相对于传递单个-单词字符串键给 <code>{ }</code> , 你也可以使用<a href="http://doc.perl6.org/language/quoting#Word_quoting:_qw" target="_blank" rel="external">以尖括号引起单词的结构</a> ，就像它们是后缀操作符一样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say %grade&lt;Zoe&gt;;    #-&gt; C</div><div class="line">say %grade&lt;Ben&gt;;    #-&gt; B+</div></pre></td></tr></table></figure>
+<p>这实际上仅仅是在编译时被转换为对应 <code>{ }</code> 形式的语法糖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">%hash&lt;foo bar&gt;;     # same as %hash&#123; &lt;foo bar&gt; &#125;</div><div class="line">%hash«foo $var»;    # same as %hash&#123; «foo $var» &#125;</div><div class="line">%hash&lt;&lt;foo $var&gt;&gt;;  # same as %hash&#123; &lt;&lt;foo $var&gt;&gt; &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>下标能应用到能返回可下标化对象的任何表达式上， 而不仅仅应用到变量上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say &quot;__Hello__&quot;.match(/__(.*)__/)[0];   #-&gt; ｢Hello｣</div><div class="line">say &quot;__Hello__&quot;.match(/__(.*)__/).[0];  # same, in method notation</div></pre></td></tr></table></figure>
+<p>Positional 和 associative  下标并不互相排斥 - 举个例子， <code>Match</code> 对象两个都支持（每个访问不同的数据集）。还有， 为了让列表处理更方便， 类 <code>Any</code> 为<code>位置下标</code>提供了备用的实现，这会把调用者看作含有<code>一个</code>元素的列表。(但是对于关系下标，没有这样的备用实现， 所以会抛出一个异常，当下标被应用到没有实现支持的对象上时。)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say 42[0];    #-&gt; 42</div><div class="line">say 42&lt;foo&gt;;  # ERROR: postcircumfix &#123; &#125; not defined for type Int</div></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title="#"></a>#</h2><p>当通过下标寻址一个不存在的元素所发生的事情取决于正在使用的集合类型。标准的 Array 和 Hash 集合返回它们的<a href="http://doc.perl6.org/routine/of" target="_blank" rel="external">value type constraint</a>  的类型对象（这默认是 <code>Any</code>）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my @array1;     say @array1[10];  #-&gt; (Any)</div><div class="line">my Int @array2; say @array2[10];  #-&gt; (Int)</div><div class="line"></div><div class="line">my %hash1;      say %hash1&lt;foo&gt;;  #-&gt; (Any)</div><div class="line">my Int %hash2;  say %hash2&lt;foo&gt;;  #-&gt; (Int)</div></pre></td></tr></table></figure>
+<p>然而， 其它类型的集合可能在寻址不存在的元素的下标时反应也不用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say (0, 10, 20)[3];       #-&gt; Nil</div><div class="line">say bag(&lt;a a b b b&gt;)&lt;c&gt;;  #-&gt; 0</div></pre></td></tr></table></figure>
+<p>为了在下标操作中默默地跳过不存在的元素， 查看 <a href="http://doc.perl6.org/language/subscripts#Truncating_slices" target="_blank" rel="external">#Truncating slices</a>  和 <a href="http://doc.perl6.org/language/subscripts#%3Av" target="_blank" rel="external"><code>#:v</code></a> 副词。</p>
+<h1 id="From-the-end"><a href="#From-the-end" class="headerlink" title="From the end"></a>From the end</h1><hr>
+<p>Positional  索引是从集合的开头计数的， 但是也有一种标记法用于，通过相对于末尾的位置来寻址元素：<code>*-1</code> 引用最后一个元素， <code>*-2</code> 引用倒数第二个元素， 以此类推。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my @alphabet = &apos;A&apos; .. &apos;Z&apos;;</div><div class="line">say @alphabet[*-1];  #-&gt; Z</div><div class="line">say @alphabet[*-2];  #-&gt; Y</div><div class="line">say @alphabet[*-3];  #-&gt; X</div></pre></td></tr></table></figure>
+<p>注意：星号很重要。在 Perl 6中，如果像在很多其它编程语言中那样传递一个裸的负整数（例如 <code>@alphabet[-1]</code>）， 会抛出错误。</p>
+<p>这里实际发生的是， <code>*-1</code> 那样的表达式通过 <a href="http://doc.perl6.org/type/Whatever" target="_blank" rel="external">Whatever</a> 柯里化声明了一个代码对象 - <code>[ ]</code>会把代码对象作为索引， 通过集合的长度作为参数来调用它并使用结果值作为实际的索引。 换句话说，<code>@alphabet[*-1]</code> 变成了 <code>@alphabet[@alphabet.elems - 1]</code>。</p>
+<p>这意味着你可以使用任何依赖于集合尺寸的表达式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">say @array[* div 2];  # 选择最中间的那个元素</div><div class="line">say @array[$i % *];   # wrap around a given index (&quot;模运算&quot;)</div><div class="line">say @array[ -&gt; $size &#123; $i % $size &#125; ];  # same as previous</div></pre></td></tr></table></figure>
+<h1 id="Slices"><a href="#Slices" class="headerlink" title="Slices"></a>Slices</h1><hr>
+<p>当需要访问集合中的多个元素时，有一个快捷方式用于处理多个单独的下标操作：仅仅在下标中指定一个<code>索引/键</code>的列表，来取回一个元素的列表 - 也被叫做”切片” - 以相同的顺序。</p>
+<p>对于 positional  切片， 你可以混合普通切片和  <a href="http://doc.perl6.org/language/subscripts#From_the_end" target="_blank" rel="external">from-the-end</a> 切片：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my @alphabet = &apos;a&apos; .. &apos;z&apos;;</div><div class="line">dd @alphabet[15, 4, *-9, 11];  #-&gt; (&quot;p&quot;, &quot;e&quot;, &quot;r&quot;, &quot;l&quot;)</div></pre></td></tr></table></figure>
+<p>对于 associative  切片，尖括号形式的切片通常会很方便：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my %color = kiwi =&gt; &quot;green&quot;, banana =&gt; &quot;yellow&quot;, cherry =&gt; &quot;red&quot;;</div><div class="line">dd %color&#123;&quot;cherry&quot;, &quot;kiwi&quot;&#125;;  #-&gt; (&quot;red&quot;, &quot;green&quot;)</div><div class="line">dd %color&lt;cherry kiwi&gt;;       #-&gt; (&quot;red&quot;, &quot;green&quot;)</div><div class="line">dd %color&#123;*&#125;;                 #-&gt; (&quot;green&quot;, &quot;red&quot;, &quot;yellow&quot;)</div></pre></td></tr></table></figure>
+<p>要知道切片是由传入 (<a href="http://doc.perl6.org/language/subscripts#Multiple_dimensions" target="_blank" rel="external">one dimension of</a>)下标的类型控制的，而非它的长度：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">subscript	                               result</div><div class="line">any Positional object not covered below	   normal slice</div><div class="line">a Range or infinite sequence	           truncating slice (only for positional subscripts)</div><div class="line">* (Whatever-star)	                       full slice (as if all keys/indices were specified)</div><div class="line">any other object	                       single-element access rather than a slice</div><div class="line">empty	                                   Zen slice</div></pre></td></tr></table></figure>
+<p>所以，即使一个单个元素的列表也会返回一个切片， 而一个裸的标量值不会：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dd @alphabet[2,];  #-&gt; (&quot;c&quot;,)</div><div class="line">dd @alphabet[2];   #-&gt; &quot;c&quot;</div></pre></td></tr></table></figure>
+<p>(尖括号形式的 associative 下标也没有问题，因为 <a href="http://doc.perl6.org/language/quoting#Word_quoting:_qw" target="_blank" rel="external">word quoting</a>  在单个单词的情况下很方便的返回一个 Str, 但是在多个单词的情况下返回一个 <a href="http://doc.perl6.org/type/Parcel" target="_blank" rel="external">Parcel</a>)。</p>
+<p>对于普通的切片，下标的内容 (<a href="http://doc.perl6.org/language/subscripts#Multiple_dimensions" target="_blank" rel="external">the current dimension of</a>) 在它的元素被解释为 <code>索引/键</code> 之前会被展平(flattened)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dd @alphabet[0, (1..2, (3,)))];  #-&gt; (&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;)</div></pre></td></tr></table></figure>
+<h2 id="Truncating-slices"><a href="#Truncating-slices" class="headerlink" title="Truncating slices"></a>Truncating slices</h2><hr>
+<p>通常, 在切片下标中引用不存在的元素会让输出列表包含未定义的值。然而， 如果传递给位置下标的对象是一个 Range 或使用序列操作符构建的无限序列， 它会被自动截断到集合的实际尺寸：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @letters = &lt;a b c d e f&gt;;</div><div class="line">dd @letters[3, 4, 5, 6, 7];  #-&gt; (&quot;d&quot;, &quot;e&quot;, &quot;f&quot;, Any, Any)</div><div class="line">dd @letters[3 .. 7];         #-&gt; (&quot;d&quot;, &quot;e&quot;, &quot;f&quot;)</div></pre></td></tr></table></figure>
+<p><a href="http://doc.perl6.org/language/subscripts#From_the_end" target="_blank" rel="external">From-the-end</a>  索引被允许作为范围的端点，代表无限的范围和序列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say @array[*-3 .. *];       # select the last three elements</div><div class="line">say @array[0, 2, 4 ... *];  # select all elements with even indices</div></pre></td></tr></table></figure>
+<p>如果你不想把你的切片指定为 <code>range/sequence</code> 但仍旧想默默地跳过不存在的元素， 你可以使用 <a href="http://doc.perl6.org/language/subscripts#%3Av" target="_blank" rel="external">#:v</a> 副词。</p>
+<h2 id="Zen-slices"><a href="#Zen-slices" class="headerlink" title="Zen slices"></a>Zen slices</h2><hr>
+<p>如果你写的下标没有指定任何 <code>索引/键</code> ，那它就会返回被脚注的对象自身。因为它是空的但是返回了全部东西， 这就是所谓的 “Zen slice”。</p>
+<p>这和传递一个  Whatever-star （这，像普通的切片， 总是返回一个元素的 Parcel，不管原对象的类型）还有传递一个空的列表都不同（它返回一个空的切片）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my %bag := (&quot;orange&quot; =&gt; 1, &quot;apple&quot; =&gt; 3).Bag;</div><div class="line">dd %bag&lt;&gt;;    #-&gt; (&quot;orange&quot;=&gt;1,&quot;apple&quot;=&gt;3).Bag</div><div class="line">dd %bag&#123;&#125;;    #-&gt; (&quot;orange&quot;=&gt;1,&quot;apple&quot;=&gt;3).Bag</div><div class="line">dd %bag&#123;*&#125;;   #-&gt; (1, 3)</div><div class="line">dd %bag&#123;()&#125;;  #-&gt; ()</div></pre></td></tr></table></figure>
+<p>这通常被用于把整个 <code>数组/散列</code> 插值到字符串中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my @words = &quot;cruel&quot;, &quot;world&quot;;</div><div class="line">say &quot;Hello, @words[]!&quot;  #-&gt; Hello, cruel world!</div></pre></td></tr></table></figure>
+<h1 id="Multiple-dimensions"><a href="#Multiple-dimensions" class="headerlink" title="Multiple dimensions"></a>Multiple dimensions</h1><hr>
+<p>尚未实现！等到 9 月份？</p>
+<h1 id="Modifying-elements"><a href="#Modifying-elements" class="headerlink" title="Modifying elements"></a>Modifying elements</h1><hr>
+<h1 id="Autovivification"><a href="#Autovivification" class="headerlink" title="Autovivification"></a>Autovivification</h1><hr>
+<p>下标参与 “autovivification”（自动复活），i.e. 这是一种数组和散列在需要时会自动存在的处理， 以至于你没有必要在每一层级预声明集合的类型来构建嵌套的数据结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $beatles;</div><div class="line">$beatles&#123;&quot;White Album&quot;&#125;[0] = &quot;Back in the U.S.S.R.&quot;;  # autovivification!</div><div class="line">say $beatles.perl;  #-&gt; &#123;&quot;White Album&quot; =&gt; [&quot;Back in the U.S.S.R.&quot;]&#125;</div></pre></td></tr></table></figure>
+<p><code>$beatles</code>  从未定义开始， 但是它变成了一个 Hash 对象， 因为它在赋值时用 <code>{ }</code> 标注了。 类似地，  <code>$beatles{&quot;White Album”}</code> 变成一个 Array 对象， 因为它在赋值时用 <code>[ ]</code> 标注了。</p>
+<p>注意下标本身不会引起 autovivification（自动复活）：它只发生在下标链的结果被赋值时（或变化时）。</p>
+<h1 id="Binding"><a href="#Binding" class="headerlink" title="Binding"></a>Binding</h1><hr>
+<p>下标表达式也可以用在绑定语句的左侧。如果被标注的集合的类型支持， 这会使用指定的容器替换集合里的插槽的值：（给跪了！）</p>
+<p>内置的 Array 和 Hash 类型支持这种绑定， 为了允许构建复杂的联动的数据结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">my @a = 10, 11, 12, 13;</div><div class="line">my $x = 1;</div><div class="line"></div><div class="line">@a[2] := $x;  # binding! (@a[2] and $x refer to the same container now.)</div><div class="line"></div><div class="line">$x++; @a[2]++;</div><div class="line"></div><div class="line">dd @a;  #-&gt; [10, 11, 3, 13]&lt;&gt;</div><div class="line">dd $x;  #-&gt; 3</div></pre></td></tr></table></figure>
+<p>查看 <a href="http://doc.perl6.org/language/subscripts#method_BIND-POS" target="_blank" rel="external">#method BIND-POS</a> 和 <a href="http://doc.perl6.org/language/subscripts#method_BIND-KEY" target="_blank" rel="external">#method BIND-KEY</a> 了解底层机制.</p>
+<h1 id="Adverbs"><a href="#Adverbs" class="headerlink" title="Adverbs"></a>Adverbs</h1><hr>
+<p>下标操作的返回值和可能存在的副作用能够使用副词来控制。</p>
+<p>要知道副词操作符的优先级相对宽松，这可能需要你在合成表达式中添加括号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if $foo || %hash&lt;key&gt;:exists &#123; ... &#125;    # WRONG, tries to adverb the || op</div><div class="line">if $foo || (%hash&lt;key&gt;:exists) &#123; ... &#125;  # correct</div></pre></td></tr></table></figure>
+<p>支持的副词有:</p>
+<h2 id="exists"><a href="#exists" class="headerlink" title=":exists"></a>:exists</h2><hr>
+<p>返回请求的元素是否存在，而不是返回元素实际的值。这能够用于区别未定义值的元素和一点儿也不属于集合部分的元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">my @foo = Any, 10;</div><div class="line">dd @foo[0].defined;    #-&gt; False</div><div class="line">dd @foo[0]:exists;     #-&gt; True</div><div class="line">dd @foo[2]:exists;     #-&gt; False</div><div class="line">dd @foo[0, 2]:exists;  #-&gt; (True, False)</div><div class="line"></div><div class="line">my %fruit = apple =&gt; Any, orange =&gt; 10;</div><div class="line">dd %fruit&lt;apple&gt;.defined;       #-&gt; False</div><div class="line">dd %fruit&lt;apple&gt;:exists;        #-&gt; True</div><div class="line">dd %fruit&lt;banana&gt;:exists;       #-&gt; False</div><div class="line">dd %fruit&lt;apple banana&gt;:exists; #-&gt; (True, False)</div></pre></td></tr></table></figure>
+<p>也可以对副词取反来测试不存在：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dd %fruit&lt;apple banana&gt;:!exists; #-&gt; (False, True)</div></pre></td></tr></table></figure>
+<p>要检查切片的所有元素是否存在， 使用 <a href="http://doc.perl6.org/routine/all" target="_blank" rel="external">all</a> junction:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if all %fruit&lt;apple orange banana&gt;:exists &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p><code>:exists</code>  可以和  <a href="http://doc.perl6.org/language/subscripts#%3Adelete" target="_blank" rel="external">:delete</a> 还有 <code>:p/:kv</code> 副词组合 - 这时表达式的行为就由那些副词决定，除了使用表明元素存在的对应 Bool 值替换返回的元素值之外。</p>
+<p>查看 <a href="http://doc.perl6.org/language/subscripts#method_EXISTS-POS" target="_blank" rel="external">method EXISTS-POS</a>  和 <a href="http://doc.perl6.org/language/subscripts#method_EXISTS-KEY" target="_blank" rel="external">method EXISTS-KEY</a> 了解底层机制.</p>
+<h2 id="delete"><a href="#delete" class="headerlink" title=":delete"></a>:delete</h2><hr>
+<p>从集合中删除元素， 除了返回它们的值以外。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my @tens = 0, 10, 20, 30;</div><div class="line">dd @tens[3]:delete;     #-&gt; 30</div><div class="line">dd @tens;               #-&gt; [0, 10, 20]&lt;&gt;</div><div class="line"></div><div class="line">my %fruit = apple =&gt; 5, orange =&gt; 10, banana =&gt; 4, peach =&gt; 17;</div><div class="line">dd %fruit&lt;apple&gt;:delete;         #-&gt; 5</div><div class="line">dd %fruit&lt;peach orange&gt;:delete;  #-&gt; (17, 10)</div><div class="line">dd %fruit;                       #-&gt; &#123;banana =&gt; 4&#125;&lt;&gt;</div></pre></td></tr></table></figure>
+<p>使用否定形式的副词，元素实际上不会被删除。这意味着你可以传递一个标记，让它变成有条件的删除：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dd %fruit&lt;apple&gt; :delete($flag);  # deletes the element only if $flag is</div><div class="line">                                  # true, but always returns the value.</div></pre></td></tr></table></figure>
+<p>能和 <code>:exists</code> 还有 <code>:p/:kv/:k/:v</code> 副词组合 - 这时返回值由那些副词决定， 但是同时元素也会被删除。</p>
+<p>查看 <a href="http://doc.perl6.org/language/subscripts#method_DELETE-POS" target="_blank" rel="external">method DELETE-POS</a> and <a href="http://doc.perl6.org/language/subscripts#method_DELETE-KEY" target="_blank" rel="external">method DELETE-KEY</a> 了解底层机制.</p>
+<h2 id="p"><a href="#p" class="headerlink" title=":p"></a>:p</h2><hr>
+<p>以 Pair 的形式，返回元素的<code>索引/键</code> 和元素值， 并默默跳过不存在的元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my @tens = 0, 10, 20, 30;</div><div class="line">dd @tens[1]:p;        #-&gt; 1 =&gt; 10</div><div class="line">dd @tens[0, 4, 2]:p;  #-&gt; (0 =&gt; 0, 2 =&gt; 20)</div><div class="line"></div><div class="line">my %month = Jan =&gt; 1, Feb =&gt; 2, Mar =&gt; 3;</div><div class="line">dd %month&lt;Feb&gt;:p;          #-&gt; &quot;Feb&quot; =&gt; 2</div><div class="line">dd %month&lt;Jan Foo Mar&gt;:p;  #-&gt; (&quot;Jan&quot; =&gt; 1, &quot;Mar&quot; =&gt; 3)</div></pre></td></tr></table></figure>
+<p>如果你不想跳过不存在的元素， 使用否定形式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dd %month&lt;Jan Foo Mar&gt;:!p;  #-&gt; (&quot;Jan&quot; =&gt; 1, &quot;Foo&quot; =&gt; Any, &quot;Mar&quot; =&gt; 3)</div></pre></td></tr></table></figure>
+<p>能和 <code>:exists</code> 还有 <code>:delete</code> 组合。</p>
+<p>也可以查看  <a href="http://doc.perl6.org/routine/pairs" target="_blank" rel="external">pairs</a> 子例程.</p>
+<h2 id="kv"><a href="#kv" class="headerlink" title=":kv"></a>:kv</h2><hr>
+<p>以列表的形式返回元素的<code>索引/键</code>和<code>值</code> , 并默默地跳过不存在的元素。 当作用在切片上时，返回值是一个展平的键和值交叉着的单个列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my @tens = 0, 10, 20, 30;</div><div class="line">dd @tens[1]:kv;        #-&gt; (1, 10)</div><div class="line">dd @tens[0, 4, 2]:kv;  #-&gt; (0, 0, 2, 20)</div><div class="line"></div><div class="line">my %month = Jan =&gt; 1, Feb =&gt; 2, Mar =&gt; 3;</div><div class="line">dd %month&lt;Feb&gt;:kv;          #-&gt; (&quot;Feb&quot;, 2)</div><div class="line">dd %month&lt;Jan Foo Mar&gt;:kv;  #-&gt; (&quot;Jan&quot;, 1, &quot;Mar&quot;, 3)</div></pre></td></tr></table></figure>
+<p>如果你不想跳过不存在的元素， 使用否定形式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dd %month&lt;Jan Foo Mar&gt;:!kv;  #-&gt; (&quot;Jan&quot;, 1, &quot;Foo&quot;, Any, &quot;Mar&quot;, 3)</div></pre></td></tr></table></figure>
+<p>这个副词一般用于遍历切片：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for %month&lt;Feb Mar&gt;:kv -&gt; $month, $i &#123;</div><div class="line">    say &quot;$month had &#123;Date.new(2015, $i, 1).days-in-month&#125; days in 2015&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>能和 <code>:exists</code> 还有 <code>:delete</code> 组合。</p>
+<p>也可以查看  <a href="http://doc.perl6.org/routine/kv" target="_blank" rel="external">kv</a> 子例程.</p>
+<h2 id="k"><a href="#k" class="headerlink" title=":k"></a>:k</h2><hr>
+<p>只返回元素的<code>索引/键</code> , 而不是它们的值, 并默默地跳过不存在的元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my @tens = 0, 10, 20, 30;</div><div class="line">dd @tens[1]:k;        #-&gt; 1</div><div class="line">dd @tens[0, 4, 2]:k;  #-&gt; (0, 2)</div><div class="line"></div><div class="line">my %month = Jan =&gt; 1, Feb =&gt; 2, Mar =&gt; 3;</div><div class="line">dd %month&lt;Feb&gt;:k;          #-&gt; &quot;Feb&quot;</div><div class="line">dd %month&lt;Jan Foo Mar&gt;:k;  #-&gt; (&quot;Jan&quot;, &quot;Mar&quot;)</div></pre></td></tr></table></figure>
+<p>如果你不想跳过不存在的元素， 使用否定形式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dd %month&lt;Jan Foo Mar&gt;:!k;  #-&gt; (&quot;Jan&quot;, &quot;Foo&quot;, &quot;Mar&quot;)</div></pre></td></tr></table></figure>
+<p>还可以查看  <a href="http://doc.perl6.org/routine/keys" target="_blank" rel="external">keys</a> 子例程.</p>
+<h2 id="v"><a href="#v" class="headerlink" title=":v"></a>:v</h2><hr>
+<p>返回元素的裸值（不是有可能返回一个可变值容器），并默默跳过不存在的元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">my @tens = 0, 10, 20, 30;</div><div class="line">dd @tens[1]:v;        #-&gt; 10</div><div class="line">dd @tens[0, 4, 2]:v;  #-&gt; (0, 20)</div><div class="line">@tens[3] = 31;        # OK</div><div class="line">@tens[3]:v = 31;      # ERROR, cannot assign to immutable integer value</div><div class="line"></div><div class="line">my %month = Jan =&gt; 1, Feb =&gt; 2, Mar =&gt; 3;</div><div class="line">dd %month&lt;Feb&gt;:v;          #-&gt; 2</div><div class="line">dd %month&lt;Jan Foo Mar&gt;:v;  #-&gt; (1, 3)</div></pre></td></tr></table></figure>
+<p>如果你不想跳过不存在的元素， 使用否定形式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dd %month&lt;Jan Foo Mar&gt;:!v;  #-&gt; (1, Any, 3)</div></pre></td></tr></table></figure>
+<p>还可以查看  <a href="http://doc.perl6.org/routine/values" target="_blank" rel="external">values</a> 子例程.</p>
+<h1 id="Custom-types"><a href="#Custom-types" class="headerlink" title="Custom types"></a>Custom types</h1><hr>
+<p>这页描述的下标接口并不意味着和 Perl 6 的内置集合类型相排斥 - 你可以（并且应该）为任何想通过索引或键提供数据访问的自定义类型重用它们。</p>
+<p>你不必手动重载  <a href="http://doc.perl6.org/routine/[%20]#postcircumfix_[_]" target="_blank" rel="external">postcircumfix [ ]</a> 和  <a href="http://doc.perl6.org/" target="_blank" rel="external">postcircumfix { }</a>  操作符并重新实现它们所有的戏法， 为了实现它， 相反，你可以依赖这个事实， 在幕后，它们的标准实现分派给了一个定义良好的底层方法集。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">当你这样写:	         这会在幕后调用如下底层方法:</div><div class="line">%foo&lt;aa&gt;	        %foo.AT-KEY(&quot;aa&quot;)</div><div class="line">%foo&lt;aa&gt;:delete	    %foo.DELETE-KEY(&quot;aa&quot;)</div><div class="line">@foo[3,4,5]	        @foo.AT-POS(3), @foo.AT-POS(4), @foo.AT-POS(5)</div><div class="line">@foo[*-1]	        @foo.AT-POS(@foo.elems - 1)</div></pre></td></tr></table></figure>
+<p>所以， 为了让你的下标工作， 你只需要为你的自定义类型实现或委托那些底层方法（<a href="http://doc.perl6.org/language/subscripts#Methods_to_implement_for_positional_subscripting" target="_blank" rel="external">下面描述详情</a>）。</p>
+<p>如果你这样做了， 你还应该让你的类型各自遵守 <a href="http://doc.perl6.org/type/Positional" target="_blank" rel="external">Positional</a> 或 <a href="http://doc.perl6.org/type/Associative" target="_blank" rel="external">Associative</a> role</p>
+<h2 id="Custom-type-example"><a href="#Custom-type-example" class="headerlink" title="Custom type example"></a>Custom type example</h2><hr>
+<p>设想一下 HTTP::Header 类型，尽管它作为一个有特定行为的自定义类，却能像散列那样索引：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">my $request = HTTP::Request.new(GET =&gt; &quot;perl6.org&quot;);</div><div class="line">say $request.header.WHAT;  #-&gt; (HTTP::Header)</div><div class="line"></div><div class="line">$request.header&lt;Accept&gt; = &quot;text/plain&quot;;</div><div class="line">$request.header&#123;&apos;Accept-&apos; X~ &lt;Charset Encoding Language&gt;&#125; = &lt;utf-8 gzip en&gt;;</div><div class="line">$request.header.push(&apos;Accept-Language&apos; =&gt; &quot;fr&quot;);  # like .push on a Hash</div><div class="line"></div><div class="line">say $request.header&lt;Accept-Language&gt;.perl;  #-&gt; [&quot;en&quot;, &quot;fr&quot;]</div><div class="line"></div><div class="line">my $rawheader = $request.header.Str;  # stringify according to HTTP spec</div></pre></td></tr></table></figure>
+<p>实现这个类的最简单的方法是，给它一个 Hash 类型的属性，并把所有的下标和迭代相关功能性委托给那个属性。（使用一个自定义类型约束来确保使用者不会在里面插入任何不合法的值）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class HTTP::Header does Associative is Iterable &#123;</div><div class="line">    subset StrOrArrayOfStr where Str | ( Array &amp; &#123;.all ~~ Str&#125; );</div><div class="line"></div><div class="line">    has %!fields of StrOrArrayOfStr</div><div class="line">                 handles &lt;AT-KEY EXISTS-KEY DELETE-KEY push</div><div class="line">                          iterator list kv keys values&gt;;</div><div class="line"></div><div class="line">    method Str &#123; #`[not shown, for brevity] &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然而， HTTP header 字段名被认为是大小写无关的（更偏好驼峰法）。我们可以通过把 <code>*-key</code> 和 <code>push</code> 方法拿到 <code>handles</code> 列表的外面来容纳它， 并像这样各自实现它们：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">method AT-KEY     ($key) is rw &#123; %!fields&#123;normalize-key $key&#125;        &#125;</div><div class="line">method EXISTS-KEY ($key)       &#123; %!fields&#123;normalize-key $key&#125;:exists &#125;</div><div class="line">method DELETE-KEY ($key)       &#123; %!fields&#123;normalize-key $key&#125;:delete &#125;</div><div class="line">method push (*@_) &#123; #`[not shown, for brevity] &#125;</div><div class="line"></div><div class="line">sub normalize-key ($key) &#123; $key.subst(/\w+/, *.tc, :g) &#125;</div></pre></td></tr></table></figure>
+<p>注意下标  <code>%!fields</code> 返回一个适当的 rw 容器， 而我们的 <code>AT-KEY</code> 能够简单地传递。</p>
+<p>然而， 我们可能倾向于少一点对用户输入的限制， 相反我们自己关心字段值的消毒。那种情况下，我们可以移除 <code>%!fields</code> 上的 <code>StrOrArrayOfStr</code>  类型约束， 并在赋值时使用返回自定义的关心消毒值的 Proxy 容器来替换我们的 <code>AT-KEY</code> 实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">multi method AT-KEY (::?CLASS:D: $key) is rw &#123;</div><div class="line">    my $element := %!fields&#123;normalize-key $key&#125;;</div><div class="line"></div><div class="line">    Proxy.new(</div><div class="line">        FETCH =&gt; method () &#123; $element &#125;,</div><div class="line"></div><div class="line">        STORE =&gt; method ($value) &#123;</div><div class="line">            $element = do given $value».split(/&apos;,&apos; \s+/).flat &#123;</div><div class="line">                when 1  &#123; .[0] &#125;    # a single value is stored as a string</div><div class="line">                default &#123; .Array &#125;  # multiple values are stored as an array</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意把方法声明为 <code>multi</code> 并把它限制为 <code>:D</code> (defined invocants) 确保未定义情况被传递给由 Any（这在自动复活中被调用） 提供的默认实现。（我去，翻译不来哦！）</p>
+<h2 id="Methods-to-implement-for-positional-subscripting"><a href="#Methods-to-implement-for-positional-subscripting" class="headerlink" title="Methods to implement for positional subscripting"></a>Methods to implement for positional subscripting</h2><hr>
+<p>为了通过  <a href="http://doc.perl6.org/routine/[%20]#postcircumfix_[_]" target="_blank" rel="external">postcircumfix [ ]</a>  让基于索引的下标在你的自定义类型中工作，你应该至少实现下面的  <code>elems</code>, <code>AT-POS</code> 和 <code>EXISTS-POS-</code> 还有其它可选项。</p>
+<h3 id="elems-方法"><a href="#elems-方法" class="headerlink" title="elems 方法"></a>elems 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method elems (::?CLASS:D:)</div></pre></td></tr></table></figure>
+<p>预期返回一个数字，用于表明对象中有多少个可标注的元素。 可能被用户直接调用， 并且当从末尾索引元素的时候， 还会被  <code>postcircumfix [ ]</code> 调用， 就像 <code>@foo[*-1]</code> 中那样。</p>
+<p>如果没有实现这个方法， 你的类型会从 Any 继承默认的实现， 对定义过的调用者这总是返回 1 - 这最不可能是你想要的。 所以， 如果不能从你的位置类型知晓元素的个数， 那就添加一个 fails 或 dies 实现， 以避免沉默地做了错事。</p>
+<h3 id="AT-POS-方法"><a href="#AT-POS-方法" class="headerlink" title="AT-POS 方法"></a>AT-POS 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method AT-POS (::?CLASS:D: $index)</div></pre></td></tr></table></figure>
+<p>期望返回 <code>$index</code> 位置处的元素。这就是 <code>postcircumfix [ ]</code> 通常调用的方法。<br>如果你想让元素可变(像它们用于 Array 类型那样), 你就必须确保以 item 容器的形式返回它, 并在被赋值时更新它。(记得使用 <code>return-rw</code> 或 <code>rw</code> 子例程 trait 以使它工作; 查看例子。)</p>
+<h3 id="EXISTS-POS-方法"><a href="#EXISTS-POS-方法" class="headerlink" title="EXISTS-POS 方法"></a>EXISTS-POS 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method EXISTS-POS (::?CLASS:D: $index)</div></pre></td></tr></table></figure>
+<p>返回一个布尔值以表明在 <code>$index</code> 位置处是否有元素。这就是引用 <code>@foo[42]:exists</code> 时, <code>postcircumfix [ ]</code> 所调用的方法。</p>
+<p>元素”存在”意味着什么, 取决于你的类型。</p>
+<p>如果你没有实现它, 你的类型会从 <code>Any</code> 那儿继承默认的实现, 对于索引 0 它会返回 True, 对于 其它索引它会返回 <code>false</code> – 这可能不是你想要的。所以如果你的类型不能做元素存在检测, 那就添加一个 fails 或 die 实现, 以避免静默地做错事情。</p>
+<h3 id="DELETE-POS-方法"><a href="#DELETE-POS-方法" class="headerlink" title="DELETE-POS 方法"></a>DELETE-POS 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method DELETE-POS (::?CLASS:D: $index)</div></pre></td></tr></table></figure>
+<p>删除 <code>$index</code> 处的元素, 并返回它所删除的这个元素。这就是引用 <code>@foo[42]:delete</code> 时, <code>postcircumfix [ ]</code> 所调用的方法。</p>
+<p>“删除”元素的意思是什么, 取决于你的类型。</p>
+<p> 实现这个方法是可选的; 如果你没有实现它, 那么用户尝试从这种类型的对象中删除元素会得到一个合适的错误信息。</p>
+<h3 id="ASSIGN-POS-方法"><a href="#ASSIGN-POS-方法" class="headerlink" title="ASSIGN-POS 方法"></a>ASSIGN-POS 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method ASSIGN-POS (::?CLASS:D: $index, $new)</div></pre></td></tr></table></figure>
+<p>把 <code>$index</code> 位置处的元素设置为 <code>$new</code> 值。实现这个方法完全是可选的; 如果你没有实现这个方法, 那么会使用 <code>self.AT-POS($index) = $new</code>  代替, 如果你确实实现了该方法, 那么确保它拥有相同的效果。  </p>
+<p>这意味着 opt-in 性能优化, 以至于简单的诸如 <code>@numbers[5] = &quot;five&quot;</code> 的赋值能在不调用 <code>AT-POS</code>(这必须创建并返回一个潜在的昂贵的容器对象) 方法时操作。</p>
+<p>注意, 实现 <code>ASSIGN-POS</code> 不能解除让 <code>AT-POS</code> 变成一个 <code>rw</code> 方法, 因为诸如 <code>@numbers[5]++</code> 的不太重要的赋值/修改 仍旧会使用 <code>AT-POS</code>。</p>
+<h3 id="BIND-POS-方法"><a href="#BIND-POS-方法" class="headerlink" title="BIND-POS 方法"></a>BIND-POS 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method BIND-POS (::?CLASS:D: $index, \new)</div></pre></td></tr></table></figure>
+<p>把值或容器 <code>new</code> 绑定给位置 <code>$index</code> 处的插槽上, 替换那儿能找到的任何容器。这是当你这样写的时候所调用的东西:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $x = 10;</div><div class="line">@numbers[5] := $x;</div></pre></td></tr></table></figure>
+<p>一般的数组类支持这以允许创建复杂的链接数据结构,  但是对于更特定领域类型它可能没有意义, 所以不强求去实现它。如果你没有实现该方法, 用户会获得一个合适的错误信息, 当它们尝试绑定到这种类型的对象的一个位置插槽上时。</p>
+<h2 id="Methods-to-implement-for-associative-subscripting"><a href="#Methods-to-implement-for-associative-subscripting" class="headerlink" title="Methods to implement for associative subscripting"></a>Methods to implement for associative subscripting</h2><hr>
+<p>为了通过 <code>postcircumfix { }</code> 让基于键的下标能够工作于你的自定义类型中, 你应该至少实现 <code>AT-KEY</code> 和 <code>EXISTS-KEY</code> – 还有可选地实现下面的方法。</p>
+<h3 id="AT-KEY-方法"><a href="#AT-KEY-方法" class="headerlink" title="AT-KEY 方法"></a>AT-KEY 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method AT-KEY (::?CLASS:D: $key)</div></pre></td></tr></table></figure>
+<p>返回和 <code>$key</code> 相关联的元素。这正是 <code>postcircumfix { }</code> 通常所调用的方法。</p>
+<p>如果你想让元素可变(就像它们是为了内置的 Hash 类型), 你必须确保以 item 容器的形式返回它, 并在被赋值时更新它。(记得使用 <code>return-rw</code> 或 <code>is rw</code> 子例程 trait 以使其有效; 查看例子。)</p>
+<p>另一方面, 如果你想让你的集合只读, 请直接返回非容器值。</p>
+<h3 id="EXISTS-KEY-方法"><a href="#EXISTS-KEY-方法" class="headerlink" title="EXISTS-KEY 方法"></a>EXISTS-KEY 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method EXISTS-KEY (::?CLASS:D: $key)</div></pre></td></tr></table></figure>
+<p>返回一个布尔值以表明和 <code>$key</code> 相关联的元素是否存在。这就是引用 <code>%foo&lt;aa&gt;:exists</code> 时, <code>postcircumfix { }</code> 所调用的方法。</p>
+<p>元素”存在”意味着什么, 取决于你的类型。</p>
+<p>如果你没有实现它, 你的类型会从 <code>Any</code> 那儿继承默认的实现, 这通常返回 False – 这可能不是你想要的。所以如果你的类型不能做元素存在检测, 那就添加一个 fails 或 die 实现, 以避免静默地做错事情</p>
+<h3 id="DELETE-KEY-方法"><a href="#DELETE-KEY-方法" class="headerlink" title="DELETE-KEY 方法"></a>DELETE-KEY 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method DELETE-KEY (::?CLASS:D: $key)</div></pre></td></tr></table></figure>
+<p>删除和 <code>$key</code> 相关联的元素, 并返回它所删除的这个元素。这就是引用 <code>%foo&lt;aa&gt;:delete</code> 时, <code>postcircumfix { }</code> 所调用的方法。</p>
+<p>“删除”元素的意思是什么, 取决于你的类型 – 尽管它通常让 <code>EXISTS-KEY</code> 因为那个键变为 <code>False</code>。</p>
+<p> 实现这个方法是可选的; 如果你没有实现它, 那么用户尝试从这种类型的对象中删除元素会得到一个合适的错误信息。</p>
+<h3 id="ASSIGN-KEY-方法"><a href="#ASSIGN-KEY-方法" class="headerlink" title="ASSIGN-KEY 方法"></a>ASSIGN-KEY 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method ASSIGN-KEY (::?CLASS:D: $key, $new)</div></pre></td></tr></table></figure>
+<p>把和 <code>$key</code>  相关联的元素设置为 <code>$new</code> 值。实现这个方法完全是可选的; 如果你没有实现这个方法, 那么会使用 <code>self.AT-KEY($key) = $new</code> 代替, 如果你确实实现了该方法, 那么确保它拥有相同的效果。  </p>
+<p>这意味着 opt-in 性能优化, 以至于简单的诸如 <code>%age&lt;Claire&gt; = 29</code> 的赋值能在不调用 <code>AT-KEY</code>(这必须创建并返回一个潜在的昂贵的容器对象) 方法时操作。</p>
+<p>注意, 实现 <code>ASSIGN-KEY</code> 不能解除让 <code>AT-KEY</code> 变成一个 <code>rw</code> 方法, 因为诸如 <code>%age&lt;Claire&gt;++</code> 的不太重要的赋值/修改 仍旧会使用 <code>AT-KEY</code>。</p>
+<h3 id="BIND-KEY-方法"><a href="#BIND-KEY-方法" class="headerlink" title="BIND-KEY 方法"></a>BIND-KEY 方法</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method BIND-KEY (::?CLASS:D: $key, \new)</div></pre></td></tr></table></figure>
+<p>把值或容器 <code>new</code> 绑定给跟 <code>$key</code> 相关联的插槽上, 替换那儿能找到的任何容器。这是当你这样写的时候所调用的东西:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $x = 10;</div><div class="line">%age&lt;Claire&gt; := $x;</div></pre></td></tr></table></figure>
+<p>一般的散列类支持这以允许创建复杂的链接数据结构,  但是对于更特定领域类型它可能没有意义, 所以不强求去实现它。如果你没有实现该方法, 用户会获得一个合适的错误信息, 当它们尝试绑定到这种类型的对象的一个位置插槽上时。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Subscripts/" rel="tag">#Subscripts</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/14/如何在Perl6中创建Grammar/" rel="next" title="如何在Perl6中创建Grammar">
+                <i class="fa fa-chevron-left"></i> 如何在Perl6中创建Grammar
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/06/Perl-6-FAQ/" rel="prev" title="Perl 6 FAQ">
+                Perl 6 FAQ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/06/01/Perl6中的Subscripts/"
+     data-title="Perl 6 中的 Subscripts"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/06/01/Perl6中的Subscripts/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/01/Perl6中的Subscripts/"
+           data-title="Perl 6 中的 Subscripts" data-url="https://ohmycloud.github.io/2016/06/01/Perl6中的Subscripts/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TITLE"><span class="nav-number">1.</span> <span class="nav-text">TITLE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SUBTITLE"><span class="nav-number">2.</span> <span class="nav-text">SUBTITLE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basics"><span class="nav-number">3.</span> <span class="nav-text">Basics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">#</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#From-the-end"><span class="nav-number">4.</span> <span class="nav-text">From the end</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Slices"><span class="nav-number">5.</span> <span class="nav-text">Slices</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Truncating-slices"><span class="nav-number">5.1.</span> <span class="nav-text">Truncating slices</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zen-slices"><span class="nav-number">5.2.</span> <span class="nav-text">Zen slices</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multiple-dimensions"><span class="nav-number">6.</span> <span class="nav-text">Multiple dimensions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Modifying-elements"><span class="nav-number">7.</span> <span class="nav-text">Modifying elements</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autovivification"><span class="nav-number">8.</span> <span class="nav-text">Autovivification</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binding"><span class="nav-number">9.</span> <span class="nav-text">Binding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Adverbs"><span class="nav-number">10.</span> <span class="nav-text">Adverbs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#exists"><span class="nav-number">10.1.</span> <span class="nav-text">:exists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete"><span class="nav-number">10.2.</span> <span class="nav-text">:delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p"><span class="nav-number">10.3.</span> <span class="nav-text">:p</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kv"><span class="nav-number">10.4.</span> <span class="nav-text">:kv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k"><span class="nav-number">10.5.</span> <span class="nav-text">:k</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v"><span class="nav-number">10.6.</span> <span class="nav-text">:v</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Custom-types"><span class="nav-number">11.</span> <span class="nav-text">Custom types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Custom-type-example"><span class="nav-number">11.1.</span> <span class="nav-text">Custom type example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-to-implement-for-positional-subscripting"><span class="nav-number">11.2.</span> <span class="nav-text">Methods to implement for positional subscripting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#elems-方法"><span class="nav-number">11.2.1.</span> <span class="nav-text">elems 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AT-POS-方法"><span class="nav-number">11.2.2.</span> <span class="nav-text">AT-POS 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXISTS-POS-方法"><span class="nav-number">11.2.3.</span> <span class="nav-text">EXISTS-POS 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE-POS-方法"><span class="nav-number">11.2.4.</span> <span class="nav-text">DELETE-POS 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ASSIGN-POS-方法"><span class="nav-number">11.2.5.</span> <span class="nav-text">ASSIGN-POS 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIND-POS-方法"><span class="nav-number">11.2.6.</span> <span class="nav-text">BIND-POS 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-to-implement-for-associative-subscripting"><span class="nav-number">11.3.</span> <span class="nav-text">Methods to implement for associative subscripting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AT-KEY-方法"><span class="nav-number">11.3.1.</span> <span class="nav-text">AT-KEY 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXISTS-KEY-方法"><span class="nav-number">11.3.2.</span> <span class="nav-text">EXISTS-KEY 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE-KEY-方法"><span class="nav-number">11.3.3.</span> <span class="nav-text">DELETE-KEY 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ASSIGN-KEY-方法"><span class="nav-number">11.3.4.</span> <span class="nav-text">ASSIGN-KEY 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIND-KEY-方法"><span class="nav-number">11.3.5.</span> <span class="nav-text">BIND-KEY 方法</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1108 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="入门指南," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="exit，warn，die
+exit
+12345#!/usr/bin/env perl6use v6;say &amp;quot;hello&amp;quot;;exit;say &amp;quot;world&amp;quot;; # 这句不会执行了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 入门指南">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/05/08/Perl-6-入门指南/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="exit，warn，die
+exit
+12345#!/usr/bin/env perl6use v6;say &amp;quot;hello&amp;quot;;exit;say &amp;quot;world&amp;quot;; # 这句不会执行了">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.633Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 入门指南">
+<meta name="twitter:description" content="exit，warn，die
+exit
+12345#!/usr/bin/env perl6use v6;say &amp;quot;hello&amp;quot;;exit;say &amp;quot;world&amp;quot;; # 这句不会执行了">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/05/08/Perl-6-入门指南/"/>
+
+  <title> Perl 6 入门指南 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 入门指南
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-08T00:00:00+08:00" content="2015-05-08">
+              2015-05-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/08/Perl-6-入门指南/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/08/Perl-6-入门指南/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="exit，warn，die"><a href="#exit，warn，die" class="headerlink" title="exit，warn，die"></a>exit，warn，die</h2><hr>
+<p>exit</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">say &quot;hello&quot;;</div><div class="line">exit;</div><div class="line">say &quot;world&quot;; # 这句不会执行了</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">warn &quot;This is a warning&quot;; # 打印警告，带行号</div><div class="line">say &quot;Hello World&quot;;</div></pre></td></tr></table></figure>
+<p>die</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">say &quot;Before calling die&quot;;</div><div class="line">die &quot;This will kill the script&quot;;</div><div class="line">say &quot;This will not show up&quot;;</div></pre></td></tr></table></figure>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><hr>
+<p>Hello World</p>
+<p>使用关键字 say打印出字符串，并在字符串结尾自动添加一个换行符。字符串被双引号包裹住。Perl 6 中语句以分号结束。<br>examples/intro/hello_world.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">say &quot;Hello Perl 6 World&quot;;</div></pre></td></tr></table></figure>
+<p>同样地， OOP 风格:<br>examples/intro/hello_world_oop.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">&quot;Hello again Perl 6 World&quot;.say;</div></pre></td></tr></table></figure>
+<p>你可以键入  perl6 hello_world.p6   或  perl6 hello_world_oop.p6 中的任意一个.<br>实际上你甚至不需要所有3行，下面这个例子同样有效，如果你这样写  perl6 hello_world_bare.p6 .<br>examples/intro/hello_world_bare.p6<br>say “Hello Perl 6 World”;<br>sh-bang 行- 只在Unix/Linux下使用</p>
+<p>文件后缀</p>
+<p>尽管不是必须的，我使用文件后缀p6来表明这是个Perl 6 脚本。有些人只是使用常规的pl后缀，而实际上在UNIX 系统中这没有什么不可。只是在有些编辑器是基于它们的文件后缀名来高亮语法时才显得必要。<br><code>use v6;</code></p>
+<p>这一行告诉perl下面的代码需要Perl 6 或更高版本。如果你使用perl6来运行，这段代码也会正确运行。但在Perl5下运行会有迷惑。例如 perl hell_world_bare.p6   输出如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">examples/intro/hello_world_bare.err</div><div class="line">String found where operator expected at books/examples/intro/hello_world_bare.p6 line 1, near &quot;say &quot;Hello Perl 6 World&quot;&quot;</div><div class="line">        (Do you need to predeclare say?)</div><div class="line">syntax error at books/examples/intro/hello_world_bare.p6 line 1, near &quot;say &quot;Hello Perl 6 World&quot;&quot;</div><div class="line">Execution of books/examples/intro/hello_world_bare.p6 aborted due to compilation errors.</div></pre></td></tr></table></figure>
+<p>如果代码中使用了use v6,但是使用perl 5 来运行的话，会发生什么？</p>
+<p>perl hello_world.p6   输出如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">examples/intro/hello_world.err</div><div class="line">Perl v6.0.0 required--this is only v5.14.2, stopped at books/examples/intro/hello_world.p6 line 2.</div><div class="line">BEGIN failed--compilation aborted at books/examples/intro/hello_world.p6 line 2.</div><div class="line">现在问题更清晰了 (Though it would be nice if the error message printed by perl 5 was something like:  This code requires Perl v6.0.0. You ran it using v5.14.2.</div></pre></td></tr></table></figure>
+<h2 id="given-when-结构"><a href="#given-when-结构" class="headerlink" title="given-when 结构"></a>given-when 结构</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $a         = prompt &quot;Number:&quot;;</div><div class="line">my $operator  = prompt &quot;Operator: [+-*/]:&quot;;</div><div class="line">my $b         = prompt &quot;Number:&quot;;</div><div class="line"></div><div class="line">given $operator &#123;</div><div class="line">    when &quot;+&quot; &#123; say $a + $b; &#125;</div><div class="line">    when &quot;-&quot; &#123; say $a - $b; &#125;</div><div class="line">    when &quot;*&quot; &#123; say $a * $b; &#125;</div><div class="line">    when &quot;/&quot; &#123; say $a / $b; &#125;</div><div class="line">    default  &#123; say &quot;Invalid operator $operator&quot;; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="标量变量"><a href="#标量变量" class="headerlink" title="标量变量"></a>标量变量</h2><hr>
+<p>字符串可以存储在所谓的标量变量中。每个标量变量以符号 $ 开头，后面跟着字母数字、单词、下划线和破折号。在第一次使用这种标量之前，我们必须使用 my 关键字 声明它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $this_is_a_variable;</div><div class="line">my $ThisIsAnotherVariableBut WeDontLikeItSoMuch;</div><div class="line">my $this-is-a-variable;</div></pre></td></tr></table></figure>
+<p>变量是大小写敏感的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $h;</div><div class="line">my $H;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $greeting = &quot;Hello World&quot;;</div><div class="line">say $greeting;</div><div class="line"></div><div class="line">my $Gábor-was-born-in = &apos;Hungary&apos;;</div><div class="line">say $Gábor-was-born-in;</div></pre></td></tr></table></figure>
+<p>默认地，标量变量没有特定的类型，但是随后我们会看到，怎样限制一个标量让其能容纳一个数字或任何其它类型。</p>
+<p>声明一个变量时也可不用初始化它的值:  <code>my $x;</code><br>在这种情况下，该变量的值为<code>Any()</code>,也就是还没被定义。</p>
+<h2 id="if-语句"><a href="#if-语句" class="headerlink" title="if 语句"></a>if 语句</h2><hr>
+<p>你可以使用if 语句和其中之一的比较操作符来比较两个值或标量变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $age = 23;</div><div class="line">if $age &gt; 18 &#123;</div><div class="line">    say &quot;You can vote in most countries.&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其他类型的 if 语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">if COND &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if COND &#123;</div><div class="line">&#125; else &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">if COND &#123;</div><div class="line">&#125; elsif COND &#123;</div><div class="line">&#125; elsif COND &#123;</div><div class="line">&#125; else &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Perl-6-的散列"><a href="#Perl-6-的散列" class="headerlink" title="Perl 6 的散列"></a>Perl 6 的散列</h2><hr>
+<p>散列（也叫做关联数组）是一列键值对，其中，键是唯一的字符串，键值可以是任意值。<br>散列以 % 符号开始。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my %user_a = &quot;fname&quot;, &quot;Foo&quot;, &quot;lname&quot;, &quot;Bar&quot;;</div><div class="line">my %user_b =</div><div class="line">      &quot;fname&quot; =&gt; &quot;Foo&quot;,</div><div class="line">      &quot;lname&quot; =&gt; &quot;Bar&quot;,</div><div class="line">;</div><div class="line">say %user_a&#123;&quot;fname&quot;&#125;;</div><div class="line">%user_a&#123;&quot;email&quot;&#125; = &quot; foo@bar.com &quot;;</div><div class="line">say %user_a&#123;&quot;email&quot;&#125;;</div><div class="line">say %user_b;</div></pre></td></tr></table></figure>
+<p>输出:<br>Foo<br>foo@bar.com<br>Bar</p>
+<p>从散列中取回数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my %user =</div><div class="line">      &quot;fname&quot; =&gt; &quot;Foo&quot;,</div><div class="line">      &quot;lname&quot; =&gt; &quot;Bar&quot;,</div><div class="line">      &quot;email&quot; =&gt; &quot; foo@bar.com &quot;,</div><div class="line">;</div><div class="line">for %user.keys.sort -&gt; $key &#123;</div><div class="line">      say &quot;$key  %user&#123;$key&#125;&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出</p>
+<pre><code>email  foo@bar.com
+fname  Foo
+lname  Bar
+</code></pre><p>多维散列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my %xml;</div><div class="line">%xml[0] = &apos;Foo&apos;;</div><div class="line">%xml[1] = &apos;Bar&apos;;</div><div class="line">say %xml.perl;</div></pre></td></tr></table></figure>
+<p>输出:<br>(“person” =&gt; [“Foo”, “Bar”]).hash</p>
+<p>计算字数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my $filename = &apos;examples/words.txt&apos;;</div><div class="line">my %counter;</div><div class="line">my $fh = open $filename;</div><div class="line">for $fh.lines -&gt; $line &#123;</div><div class="line">      my @words = split /\s+/, $line;</div><div class="line">      for @words -&gt; $word &#123;</div><div class="line">              %counter&#123;$word&#125;++;</div><div class="line">      &#125;</div><div class="line">&#125;</div><div class="line">for %counter.keys.sort -&gt; $word &#123;</div><div class="line">      say &quot;$word &#123;%counter&#123;$word&#125;&#125;&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>回顾</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"># 创建散列</div><div class="line">my %h1 = first =&gt; &apos;1st&apos;, second =&gt; &apos;2nd&apos;;</div><div class="line">if %h1&#123;&apos;first&apos;&#125;.defined &#123;</div><div class="line">      say &quot;the value of &apos;first&apos; is defined&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if %h1.defined &#123;</div><div class="line">      say &quot;the value of &apos;second&apos; is defined&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if %h1.exists(&apos;first&apos;) &#123;</div><div class="line">      say &quot;the key &apos;first&apos; exists in h2&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say %h1.exists(&apos;third&apos;) ?? &quot;third exists&quot; !! &quot;third does not exist&quot;;</div><div class="line">say %h1;</div><div class="line">say %h1;</div><div class="line"></div><div class="line"># TODO hash with fixed keys not implemented yet</div><div class="line">#my %h2&#123;&apos;a&apos;, &apos;b&apos;&#125; = (&apos;A&apos;, &apos;B&apos;);</div><div class="line">#say %h2.delete(&apos;a&apos;);</div><div class="line">#say %h2.delete(&apos;a&apos;);</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<p>the value of ‘first’ is defined<br>the value of ‘second’ is defined<br>the key ‘first’ exists in h2<br>third does not exist<br>1st<br>2nd<br>slurp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my $filename = &apos;examples/phonebook.txt&apos;;</div><div class="line">my @lines = lines $filename.IO;</div><div class="line">for @lines -&gt; $line &#123;</div><div class="line">      say &quot;L: $line&quot;;</div><div class="line">&#125;</div><div class="line">#my %phonebook = map &#123;split &quot;,&quot;, $_&#125;, @lines;</div><div class="line">#my %phonebook = map &#123;$_.comb(/\w+/)&#125;, @lines;</div><div class="line">my %phonebook = slurp($filename).comb(/\w+/);</div><div class="line">my $name = prompt &quot;Name:&quot;;</div><div class="line">say %phonebook&#123;$name&#125;;</div></pre></td></tr></table></figure>
+<p>输出：<br>Foo,123<br>Bar,78<br>Baz,12321<br>kv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my %user =</div><div class="line">      &quot;fname&quot; =&gt; &quot;Foo&quot;,</div><div class="line">      &quot;lname&quot; =&gt; &quot;Bar&quot;,</div><div class="line">      &quot;email&quot; =&gt; &quot; foo@bar.com &quot;,</div><div class="line">;</div><div class="line">for %user.kv -&gt; $key, $value &#123;</div><div class="line">      say &quot;$key  $value&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出:<br>fname  Foo<br>lname  Bar<br>email  foo@bar.com</p>
+<p>遍历散列键<br>使用 “keys” 函数也可以遍历散列键.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my %phone =</div><div class="line">      &quot;Foo&quot; =&gt; 123,</div><div class="line">      &quot;Bar&quot; =&gt; 456,</div><div class="line">;</div><div class="line">for keys %phone -&gt; $name &#123;</div><div class="line">      say &quot;$name %phone&#123;$name&#125;&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出:<br>Bar 456<br>Foo 123</p>
+<h2 id="POD文档"><a href="#POD文档" class="headerlink" title="POD文档"></a>POD文档</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">print &quot;Hello&quot;;</div><div class="line">=begin pod</div><div class="line">=head1 Title</div><div class="line">text</div><div class="line">=end pod</div><div class="line">say &quot; World&quot;;</div></pre></td></tr></table></figure>
+<p>这会打印出Hello World</p>
+<h2 id="slurp"><a href="#slurp" class="headerlink" title="slurp"></a>slurp</h2><hr>
+<p>读取整个文件内容到标量变量中</p>
+<p>Perl 6 有一个内建模式来一次性吸入文件内容, 那就是把整个文件内容读到一个标量变量中.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $filename = $*PROGRAM_NAME;</div><div class="line">my $data = slurp $filename;</div><div class="line">say $data.bytes;</div></pre></td></tr></table></figure>
+<h2 id="Twigils-和特殊变量"><a href="#Twigils-和特殊变量" class="headerlink" title="Twigils 和特殊变量"></a>Twigils 和特殊变量</h2><hr>
+<p>Perl 6 有很多特殊变量.为了更容易地跟普通变量区分开，它们用一种叫做twigil的第二个前缀来标记。<br>通常,用户自定义的变量有一个魔符($ @ 或%)在变量名前。</p>
+<p>系统变量有额外的字符在魔符和变量名之间</p>
+<p>Examples:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$*PROGRAM_NAME 包含当前运行的Perl 6 脚本的路径.</div><div class="line">$*CWD          是当前工作目录的路径。</div><div class="line">$*IN           是标准输入(STDIN).你可以使用 $*IN.get 读入一行。</div></pre></td></tr></table></figure>
+<p>你可以阅读S28了解更多。</p>
+<h2 id="比较操作符"><a href="#比较操作符" class="headerlink" title="比较操作符"></a>比较操作符</h2><hr>
+<p>有两种相关的比较操作符. 一种是比较数字，一种是比较字符串,基于 ASCII表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">3 == 4               # false</div><div class="line">&apos;35&apos; eq 35.0         # false</div><div class="line">&apos;35&apos; == 35.0         # true</div><div class="line">13 &gt; 2               # true</div><div class="line">13 gt 2              # false !!!</div><div class="line">&quot;hello&quot; == &quot;world&quot;   # throws exception</div><div class="line">&quot;hello&quot; eq &quot;world&quot;   # false</div><div class="line">&quot;hello&quot; == &quot;&quot;        # throws exception</div><div class="line">&quot;hello&quot; eq &quot;&quot;        # false</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">say 4       == 4 ?? &quot;TRUE&quot; !! &quot;FALSE&quot;;     # TRUE</div><div class="line">say 3       == 4 ?? &quot;TRUE&quot; !! &quot;FALSE&quot;;     # FALSE</div><div class="line">say &quot;3.0&quot;   == 3 ?? &quot;TRUE&quot; !! &quot;FALSE&quot;;     # TRUE</div><div class="line">say &quot;3.0&quot;   eq 3 ?? &quot;TRUE&quot; !! &quot;FALSE&quot;;     # FALSE</div><div class="line">say 13     &gt;   2 ?? &quot;TRUE&quot; !! &quot;FALSE&quot;;     # TRUE</div><div class="line">say 13     gt 2 ?? &quot;TRUE&quot; !! &quot;FALSE&quot;;      # FALSE</div><div class="line">say &quot;foo&quot;   == &quot;&quot; ?? &quot;TRUE&quot; !! &quot;FALSE&quot;;    # TRUE</div><div class="line">say &quot;foo&quot;   eq &quot;&quot; ?? &quot;TRUE&quot; !! &quot;FALSE&quot;;    # FALSE</div><div class="line">say &quot;foo&quot;   == &quot;bar&quot; ?? &quot;TRUE&quot; !! &quot;FALSE&quot;; # TRUE</div><div class="line">say &quot;foo&quot;   eq &quot;bar&quot; ?? &quot;TRUE&quot; !! &quot;FALSE&quot;; # FALSE</div></pre></td></tr></table></figure>
+<p>  不能转换字符串为数字：十进制数字必须以合法数字或点开头</p>
+<h2 id="布尔表达式"><a href="#布尔表达式" class="headerlink" title="布尔表达式"></a>布尔表达式</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">布尔表达式 (逻辑操作符)</div><div class="line">  if COND and COND &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if COND or COND &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if not COND &#123;</div><div class="line">  &#125;</div><div class="line">examples/scalars/logical_operators.p6</div><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">say (2 and 1);   # 1</div><div class="line">say (1 and 2);   # 2</div><div class="line">say (1 and 0);   # 0</div><div class="line">say (0 and 1);   # 0</div><div class="line">say (0 and 0);   # 0</div><div class="line">say &quot;---&quot;;</div><div class="line"></div><div class="line">say (1 or 0);   # 1</div><div class="line">say (1 or 2);   # 1</div><div class="line">say (0 or 1);   # 1</div><div class="line">say (0 or 0);   # 0</div><div class="line">say &quot;---&quot;;</div><div class="line"></div><div class="line">say (1 // 0);     # 1</div><div class="line">say (0 // 1);     # 0</div><div class="line">say (0 // 0);     # 0</div><div class="line">say &quot;---&quot;;</div><div class="line"></div><div class="line">say (1 xor 0);     # 1</div><div class="line">say (0 xor 1);     # 1</div><div class="line">say (0 xor 0);     # 0</div><div class="line">say (1 xor 1);     # Nil</div><div class="line">say &quot;---&quot;;</div><div class="line"></div><div class="line">say (not 1);       # False</div><div class="line">say (not 0);       # True</div><div class="line">say &quot;---&quot;;</div></pre></td></tr></table></figure>
+<h2 id="超级or-多选分支"><a href="#超级or-多选分支" class="headerlink" title="超级or - 多选分支"></a>超级or - 多选分支</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">say &quot;Please select an option:&quot;;</div><div class="line">say &quot;1) one&quot;;</div><div class="line">say &quot;2) two&quot;;</div><div class="line">say &quot;3) three&quot;;</div><div class="line">my $c = prompt(&apos;&apos;);</div><div class="line"></div><div class="line">if $c == 1 or $c == 2 or $c == 3 &#123;</div><div class="line">    say &quot;correct choice: $c&quot;;</div><div class="line">&#125; else &#123;</div><div class="line">    say &quot;Incorrect choice: $c&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">这种新颖的语法</div><div class="line">if $c == 1|2|3 &#123;</div><div class="line">    say &quot;correct choice: $c&quot;;</div><div class="line">&#125; else &#123;</div><div class="line">    say &quot;Incorrect choice: $c&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="从键盘读入"><a href="#从键盘读入" class="headerlink" title="从键盘读入"></a>从键盘读入</h2><hr>
+<p>prompt读取用户输入内容知道用户按下 Enter键。但是它只传递第一个换行之前的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my $name = prompt(&quot;Please type in yourname: &quot;);</div><div class="line">say &quot;Hello $name&quot;; #还不能处理汉字，prompt是一个函数，其参数为提示信息</div></pre></td></tr></table></figure>
+<h2 id="读取文件内容到数组中"><a href="#读取文件内容到数组中" class="headerlink" title="读取文件内容到数组中"></a>读取文件内容到数组中</h2><hr>
+<p>当我们把调用slurp() 的结果放进数组中时，数组中将只有一个元素，该元素的值就是要读取的文件中的所有内容。如果你想读取所有行到数组中不同的元素中，你需要使用 <code>lines</code> 函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $filename = $*PROGRAM_NAME;</div><div class="line"></div><div class="line"># reads all the content of the file in the first element of the array!</div><div class="line">my @content = slurp $filename;</div><div class="line">say @content.elems;</div><div class="line"></div><div class="line"># reads all the content of the file, every line an element in the array</div><div class="line">my @rows = lines $filename.IO;</div><div class="line">say @rows.elems;</div></pre></td></tr></table></figure>
+<h2 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h2><hr>
+<p>numbers.txt:(另存为ansi编码)<br>3<br>8<br>19<br>-7<br>13</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $filename = &apos;numbers.txt&apos;;</div><div class="line"></div><div class="line">my $total;</div><div class="line">my $count;</div><div class="line">my $min;</div><div class="line">my $max;</div><div class="line"></div><div class="line">if (my $fh = open $filename, :r) &#123;</div><div class="line">    for $fh.lines -&gt; $line &#123;</div><div class="line">        if (not $count) &#123;</div><div class="line">            $min = $max = $line;</div><div class="line">        &#125;</div><div class="line">        $total += $line;</div><div class="line">        if ($min &gt; $line) &#123;</div><div class="line">            $min = $line;</div><div class="line">        &#125;</div><div class="line">        if ($max &lt; $line) &#123;</div><div class="line">            $max = $line;</div><div class="line">        &#125;</div><div class="line">        $count++;</div><div class="line">    &#125;</div><div class="line">    my $average = $total / $count;</div><div class="line">    say &quot;Total: $total, Count: $count Average: $average Min: $min Max: $max&quot;;</div><div class="line">&#125; else &#123;</div><div class="line">    say &quot;Could not open &apos;$filename&apos;&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># There is a minor issue in this solution, what if there are no values at all in the file?</div></pre></td></tr></table></figure>
+<h2 id="列表和数组"><a href="#列表和数组" class="headerlink" title="列表和数组"></a>列表和数组</h2><hr>
+<p>括号()中用逗号分隔的东西叫做列表。实际上你甚至不需要括号。 列表就是一组有序的标量值。例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">(1, 5.2, &quot;apple&quot;);           # 3 values</div><div class="line">(1,2,3,4,5,6,7,8,9,10);      # 很好但是我们很懒，所以我们这样写：:</div><div class="line">(1..10);                     # 与(1,2,3,4,5,6,7,8,9,10)一样</div><div class="line">(1..Inf);                    # represents the list of all the numbers</div><div class="line">(1..*);                      # this too</div><div class="line"></div><div class="line">(&quot;apple&quot;, &quot;banana&quot;, &quot;peach&quot;, &quot;blueberry&quot;);    # is the same as</div><div class="line">&lt;apple banana peach blueberry&gt;;               # quote word</div><div class="line"></div><div class="line">my ($x, $y, $z);             # 我们也能使用标量变量作为列表的元素</div></pre></td></tr></table></figure>
+<p>在大多数情况下，我们实际上甚至不需要括号.</p>
+<p>列表赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  my ($x, $y, $z);</div><div class="line">  ($x, $y, $z) = f();   # 如果 f() 返回 (2, 3, 7) 则它几乎与$x=2; $y=3; $z=7;相同</div><div class="line">  ($x, $y, $z) = f();   # 如果 f() 返回 (2, 3, 7, 9), 则忽略 9</div><div class="line">  ($x, $y, $z) = f();   # 如果 f() 返回 (2, 3); 则 $z 是 undef</div><div class="line">我们怎么交换两个变量的值，比如说 $x 和 $y?</div></pre></td></tr></table></figure>
+<p>交换两个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">say &quot;Type in two values:&quot;;</div><div class="line">my $a = $*IN.get;</div><div class="line">my $b = $*IN.get;</div><div class="line"></div><div class="line">($a, $b) = ($b, $a);</div><div class="line">say $a;</div><div class="line">say $b;</div></pre></td></tr></table></figure>
+<p>用for循环遍历列表的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">for &quot;Foo&quot;, &quot;Bar&quot;, &quot;Baz&quot; -&gt; $name &#123;</div><div class="line">    say $name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say &quot;---&quot;;</div><div class="line"></div><div class="line">for 1..5 -&gt; $i &#123;</div><div class="line">    say $i;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say &quot;---&quot;;</div><div class="line"></div><div class="line">for 1..Inf -&gt; $i &#123;</div><div class="line">    say $i;</div><div class="line">    last if $i &gt; 3;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say &quot;---&quot;;</div><div class="line"></div><div class="line">for 1..* -&gt; $i &#123;</div><div class="line">    say $i;</div><div class="line">    last if $i &gt; 3;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>创建数组, 遍历数组</p>
+<p>你可以给一列值赋值给数组。<br>在双引号中数组不会进行插值。这与Perl 5 不一样。<br>就像你看见的，列表周围的括号是可选的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my @colors = &quot;Blue&quot;, &quot;Yellow&quot;, &quot;Brown&quot;, &quot;White&quot;;  # 列表周围的括号是可选的</div><div class="line">say @colors;</div><div class="line"></div><div class="line">say &quot;--------------------------------&quot;;               # just for separation...</div><div class="line"></div><div class="line">say &quot;@colors&quot;;                                                   # 没有插值!</div><div class="line"></div><div class="line">say &quot;--------------------------------&quot;;               # just for separation...</div><div class="line"></div><div class="line">say &quot;&#123;@colors&#125;&quot;;</div><div class="line"></div><div class="line">say &quot;--------------------------------&quot;;               # just for separation...</div><div class="line"></div><div class="line">say &quot;@colors[]&quot;;</div><div class="line"></div><div class="line">say &quot;--------------------------------&quot;;               # just for separation...</div><div class="line"></div><div class="line">for @colors -&gt; $color &#123;</div><div class="line">    say $color;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Blue Yellow Brown White</div><div class="line">--------------------------------</div><div class="line">Blue Yellow Brown White</div><div class="line">--------------------------------</div><div class="line">Blue</div><div class="line">Yellow</div><div class="line">Brown</div><div class="line">White</div></pre></td></tr></table></figure>
+<p>  数组元素 (create menu)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my @colors = &lt;Blue Yellow Brown White&gt;;</div><div class="line"></div><div class="line">for 1..@colors.elems -&gt; $i &#123;</div><div class="line">    say &quot;$i) @colors[$i-1]&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $input = prompt(&quot;Please select a number: &quot;);</div><div class="line">say &quot;You selected @colors[$input-1]&quot;;</div></pre></td></tr></table></figure>
+<p>数组赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $owner = &quot;Moose&quot;;</div><div class="line">my @tenants = &quot;Foo&quot;, &quot;Bar&quot;;</div><div class="line">my @people = ($owner, &apos;Baz&apos;, @tenants);   # 数组被展开:</div><div class="line">say &quot;&#123;@people&#125;&quot;;                          # Moose Baz Foo Bar</div><div class="line"></div><div class="line"></div><div class="line">my ($x, @y)     = (1, 2, 3, 4);</div><div class="line">say $x;                               # $x = 1</div><div class="line">say &quot;&#123;@y&#125;&quot;;                           # @y = (2, 3, 4)</div></pre></td></tr></table></figure>
+<p>命令行选项<br>@*ARGS 数组由语言维护，它存储着命令行的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $color = @*ARGS[0];</div><div class="line"></div><div class="line">if not $color &#123;</div><div class="line">    my @colors = &lt;Blue Yellow Brown White&gt;;</div><div class="line"></div><div class="line">    for 1 .. @colors.elems -&gt; $i &#123;</div><div class="line">        say &quot;$i) @colors[$i-1]&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    my $input = prompt &quot;Please select a number: &quot;;</div><div class="line">    $color = @colors[$input-1];</div><div class="line">&#125;</div><div class="line"></div><div class="line">say &quot;You selected $color&quot;;</div></pre></td></tr></table></figure>
+<p>处理 CSV 文件<br>examples/arrays/sample_csv_file.csv</p>
+<p>Foo,Bar,10,home<br>Orgo,Morgo,7,away<br>Big,Shrek,100,US<br>Small,Fiona,9,tower</p>
+<p>examples/arrays/process_csv_file.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $file = &apos;examples/arrays/sample_csv_file.csv&apos;;</div><div class="line">if defined @*ARGS[0] &#123;</div><div class="line">    $file = @*ARGS[0];</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $sum = 0;</div><div class="line">my $data = open $file;</div><div class="line">for $data.lines -&gt; $line &#123;</div><div class="line">    my @columns = split &quot;,&quot;, $line;</div><div class="line">    $sum += @columns[2];</div><div class="line">&#125;</div><div class="line">say $sum;</div></pre></td></tr></table></figure>
+<p>join<br>examples/arrays/join.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my @fields = &lt;Foo Bar foo@bar.com&gt;;</div><div class="line">my $line = join &quot;;&quot;, @fields;</div><div class="line">say $line;     # Foo;Bar;foo@bar.com</div></pre></td></tr></table></figure>
+<p>  uniq 函数<br>examples/arrays/unique.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my @duplicates = 1, 1, 2, 5, 1, 4, 3, 2, 1;</div><div class="line">say @duplicates.perl;</div><div class="line"># prints Array.new(1, 1, 2, 5, 1, 4, 3, 2, 1)</div><div class="line"></div><div class="line"></div><div class="line">my @unique = uniq @duplicates;</div><div class="line">say @unique.perl;</div><div class="line"></div><div class="line"># prints Array.new(1, 2, 5, 4, 3)</div><div class="line"></div><div class="line"></div><div class="line">my @chars = &lt;b c a d b a a a b&gt;;</div><div class="line">say @chars.perl;</div><div class="line"></div><div class="line"># prints Array.new(&quot;b&quot;, &quot;c&quot;, &quot;a&quot;, &quot;d&quot;, &quot;b&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;b&quot;)</div><div class="line"></div><div class="line">my @singles = uniq @chars;</div><div class="line">say @singles.perl;</div><div class="line"></div><div class="line"># prints Array.new(&quot;b&quot;, &quot;c&quot;, &quot;a&quot;, &quot;d&quot;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">examples/arrays/loop_over_array.p6</div><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my @fellows = &lt;Foo Bar Baz&gt;;</div><div class="line">for @fellows -&gt; $name &#123;</div><div class="line">    say $name;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>examples/arrays/looping_over_many_elements.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my @scores = &lt;</div><div class="line">    Valencia         1 1     Recreativo_Huelva</div><div class="line">    Athletic_Bilbao  2 5     Real_Madrid</div><div class="line">    Malaga           2 2     Sevilla_FC</div><div class="line">    Sporting_Gijon   3 2     Deportivo_La_Coruna</div><div class="line">    Valladolid       1 0     Getafe</div><div class="line">    Real_Betis       0 0     Osasuna</div><div class="line">    Racing_Santander 5 0     Numancia</div><div class="line">    Espanyol         3 3     Mallorca</div><div class="line">    Atletico_Madrid  3 2     Villarreal</div><div class="line">    Almeria          0 2     Barcelona</div><div class="line">&gt;;</div><div class="line"></div><div class="line">for @scores -&gt; $home, $home_score, $guest_score, $guest &#123;</div><div class="line">    say &quot;$home $guest $home_score : $guest_score&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>缺失值</p>
+<p>examples/arrays/missing_values.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">for (1, 2, 3, 4, 5) -&gt; $x, $y &#123;</div><div class="line">    say &quot;$x $y&quot;;</div><div class="line">&#125;</div><div class="line">say &apos;done&apos;;</div></pre></td></tr></table></figure>
+<p>examples/arrays/missing_values.p6.output<br>1 2<br>3 4<br>Not enough positional parameters passed; got 1 but expected 2<br>  in block <anon> at examples/arrays/missing_values.p6:4</anon></p>
+<p>examples/arrays/missing_values_fixed.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">for (1, 2, 3, 4, 5) -&gt; $x, $y? &#123;</div><div class="line">    say &quot;$x $y&quot;;</div><div class="line">&#125;</div><div class="line">say &apos;done&apos;;</div></pre></td></tr></table></figure>
+<p>examples/arrays/missing_values_fixed.p6.output<br>1 2<br>3 4<br>use of uninitialized value of type Mu in string context<br>    in block <anon> at examples/arrays/missing_values_fixed.p6:5<br>5<br>done</anon></p>
+<p>examples/arrays/z.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my @chars   = &lt;a b c&gt;;</div><div class="line">my @numbers = &lt;1 2 3&gt;;</div><div class="line"></div><div class="line">for @chars Z @numbers -&gt; $letter, $number &#123;</div><div class="line">    say &quot;$letter $number&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Output:</p>
+<p>examples/arrays/z.p6.out<br>a 1<br>b 2<br>c 3</p>
+<p>examples/arrays/z_on_more.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my @operator   = &lt;+ - *&gt;;</div><div class="line">my @left       = &lt;1 2 3&gt;;</div><div class="line">my @right     = &lt;7 8 9&gt;;</div><div class="line"></div><div class="line">for @left Z @operator Z @right -&gt; $a, $o, $b &#123;</div><div class="line">    say &quot;$a $o $b&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Output:</p>
+<p>examples/arrays/z_on_more.p6.out<br>1 + 7<br>2 - 8<br>3 * 9</p>
+<p>xx - string multiplicator<br>examples/arrays/xx.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my @moose = &quot;moose&quot; xx 3;</div><div class="line">say &quot;&#123;@moose&#125;&quot;;</div></pre></td></tr></table></figure>
+<p>sort values<br>examples/arrays/sort.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt;foo bar moose bu&gt;;</div><div class="line">my @sorted_names = sort @names;</div><div class="line">say @sorted_names.perl;   # [&quot;bar&quot;, &quot;bu&quot;, &quot;foo&quot;, &quot;moose&quot;]</div><div class="line"></div><div class="line"></div><div class="line">my @numbers = 23, 17, 4;</div><div class="line">my @sorted_numbers = sort @numbers;</div><div class="line">say @sorted_numbers.perl;   # [4, 17, 23]</div><div class="line"></div><div class="line"></div><div class="line">my @sort_names_by_length = sort &#123; $^a.bytes &lt;=&gt; $^b.bytes &#125;, @names;</div><div class="line">say @sort_names_by_length.perl;   # [&quot;bu&quot;, &quot;bar&quot;, &quot;foo&quot;, &quot;moose&quot;]</div><div class="line"></div><div class="line"># the same result with one sub (Schwartizian transformation)</div><div class="line">my @sort_1 = sort &#123; $_.bytes &#125;, @names;</div><div class="line">say @sort_1.perl;     # [&quot;bu&quot;, &quot;bar&quot;, &quot;foo&quot;, &quot;moose&quot;]</div><div class="line"></div><div class="line">my @sort_2 = @names.sort(&#123; $_.bytes &#125;);</div><div class="line">say @sort_2.perl;     # [&quot;bu&quot;, &quot;bar&quot;, &quot;foo&quot;, &quot;moose&quot;]</div><div class="line"></div><div class="line">my @sort_3 = @names.sort: &#123; $_.bytes &#125;;</div><div class="line">say @sort_3.perl;     # [&quot;bu&quot;, &quot;bar&quot;, &quot;foo&quot;, &quot;moose&quot;]</div><div class="line"></div><div class="line"></div><div class="line">my @words = &lt;moo foo bar moose bu&gt;;</div><div class="line">say @words.sort(&#123; $^a.bytes &lt;=&gt; $^b.bytes&#125;).perl; # [&quot;bu&quot;, &quot;moo&quot;, &quot;foo&quot;, &quot;bar&quot;, &quot;moose&quot;];</div><div class="line"></div><div class="line">say @words.sort(&#123; $^a.bytes &lt;=&gt; $^b.bytes or $^a cmp $^b&#125;).perl; # [&quot;bu&quot;, &quot;bar&quot;, &quot;foo&quot;, &quot;moo&quot;, &quot;moose&quot;];</div><div class="line"></div><div class="line"># TODO: should be also:</div><div class="line"># say @words.sort(&#123; $^a.bytes &lt;=&gt; $^b.bytes &#125;, &#123;$^a cmp $^b&#125;).perl; # [&quot;bu&quot;, &quot;bar&quot;, &quot;foo&quot;, &quot;moo&quot;, &quot;moose&quot;];</div><div class="line"># say @words.sort(&#123; $_.bytes &#125;,   &#123;$^a cmp $^b&#125;).perl; # [&quot;bu&quot;, &quot;bar&quot;, &quot;foo&quot;, &quot;moo&quot;, &quot;moose&quot;];</div></pre></td></tr></table></figure>
+<p>创建数组, Data::Dumper, 调试打印</p>
+<p>在Perl6 中创建数组跟在Perl5 中一样，对于调试打印我们会使用Perl6 的<code>.perl</code>方法来代替Perl5中的<code>Data::Dumper</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @numbers = (&quot;one&quot;, &quot;two&quot;, &quot;three&quot;);</div><div class="line">say @numbers.perl;   # Array.new(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;)</div></pre></td></tr></table></figure>
+<p>在Perl6中，列表周围的<code>圆括号不再需要了</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @digits = 1, 3, 6;</div><div class="line">say @digits.perl;  # Array.new(1, 3, 6)</div></pre></td></tr></table></figure>
+<p>qw() 不再使用</p>
+<p>Perl 5 中的 <code>qw()</code> 操作符被<code>尖括号</code>取代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt;foo bar baz&gt; ;</div><div class="line">say @names.perl;  # Array.new(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;)</div></pre></td></tr></table></figure>
+<p>字符串中的数组插值</p>
+<p>在双引号字符串中，数组不再插值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &quot;red&quot;,&quot;yellow&quot;,&quot;green&quot;;</div><div class="line">say &quot;@names&quot;;  # @names</div></pre></td></tr></table></figure>
+<p>你可以放心地写下这样的句子而不转义 @ 符号:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt;Tom Cat&gt;;</div><div class="line">say &quot;joe@names.org&quot;;    # joe@names.org</div></pre></td></tr></table></figure>
+<p>如果你确实要内插数组的值，你必须将数组放在一对 <code>花括号</code> 中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt; foo bar baz &gt; ;</div><div class="line">say &quot;names: &#123;@names&#125;&quot;; # names: foo bar baz</div></pre></td></tr></table></figure>
+<p>取数组元素, 魔符不变</p>
+<p>当在Perl 6 中访问数组的元素时，元素前的符号不会改变！这对Perl 5 程序员来说会很奇怪，但是长期看来它有优势。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt; foo bar baz &gt; ;</div><div class="line">say @names[0];    # foo</div></pre></td></tr></table></figure>
+<p>内插一个数组元素</p>
+<p>  作为一个特殊情况，一个数组元素能被内插在双引号字符串中而不使用花括号。术语 <code>post-circumfix</code> 对于<code>方括号</code>或<code>花括号</code>来说是一个一般称谓. 一般地,带有前置符号的变量可以被内插.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt; foo bar baz &gt;;</div><div class="line">say &quot;name:@names[0]&quot;;   # name: foo</div></pre></td></tr></table></figure>
+<p>数组中元素的个数</p>
+<p>在  Perl 6 中,推荐使用<code>elems()</code>方法和相关的函数来得到数组的元素个数。实际上，我认为面向对象的写法更美观:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt; foo bar baz &gt;;</div><div class="line">say elems @names;    # 3</div><div class="line">say @names.elems;    # 3</div></pre></td></tr></table></figure>
+<p>范围</p>
+<p>范围在Perl 6 中跟Perl 5 很像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @d = 1..11;</div><div class="line">say @d.perl;    # Array.new(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)</div></pre></td></tr></table></figure>
+<p>The same works with scalar variables on either side:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my $start = 1;</div><div class="line">my $end = 11;</div><div class="line"></div><div class="line">my @d = $start .. $end;</div><div class="line">say @d.perl;  # Array.new(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)</div></pre></td></tr></table></figure>
+<p>ranges一个很有意思的方面可能是，你能对单个或两个范围的终点使用<code>^</code>符号告诉它们排除终点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my $start = 1;</div><div class="line">my $end = 11;</div><div class="line"></div><div class="line">my @d = $start ^..^ $end; # 1的终点是1，,11的终点是11，排除这两个值</div><div class="line">say @d.perl;  # Array.new(2, 3, 4, 5, 6, 7, 8, 9, 10)</div></pre></td></tr></table></figure>
+<p>范围操作符同样对<code>字符</code>有效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @chars = (&apos;a&apos; .. &apos;d&apos;);</div><div class="line">say @chars.perl;    # Array.new(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;)</div></pre></td></tr></table></figure>
+<p>for  和 foreach 循环</p>
+<p>  Perl 5 中C风格的for 循环现在叫做loop，但是我不会在这儿展示它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">for 1..3 -&gt; $i &#123;</div><div class="line">    say $i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出为<br>1<br>2<br>3<br>这同样对数组有效:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt; foo bar baz &gt;;</div><div class="line">for @names -&gt; $n &#123;</div><div class="line">    say $n;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出:<br>foo<br>bar<br>baz</p>
+<p>顺便提一下,这是你<code>不用使用my声明一个变量</code>的情况之一。循环变量自动被声明好了，并且作用到for循环块中。</p>
+<p>遍历数组的索引</p>
+<p>如果你想遍历数组的索引，你可以使用范围，从0一直到最大的索引值。最大索引值比数组元素的个数少1.你可以用 <code>@names.elems -1</code> 作为最优的范围 ,或者你可以使用 <code>^</code>  符号告诉范围排除最后一个值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt; foo bar baz &gt;;</div><div class="line">for 0 ..^@names.elems -&gt; $i &#123;</div><div class="line">    say &quot;$i &#123;@names[$i]&#125;&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出:<br>0 foo<br>1 bar<br>2 baz</p>
+<p>或者这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt; foo bar baz &gt;;</div><div class="line">for @names.keys -&gt; $i &#123;</div><div class="line">    say &quot;$i &#123;@names[$i]&#125;&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从散列中借来的<code>keys()</code>方法会返回数组所有的索引。即使你的数组含有‘空’值，即带有<code>undef</code>的元素，<code>keys()</code>仍旧会包含这样的元素的索引。</p>
+<p>split</p>
+<p>split() 表现的就像Perl 5 中split的<code>副本</code>一样，但是默认行为不再应用，无论如何，你应该查看文档：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">say &quot;a,b,c&quot;.split(&apos;,&apos;).perl;  # (&quot;a&quot;, &quot;b&quot;, &quot;c&quot;).list</div></pre></td></tr></table></figure>
+<h2 id="三元操作符"><a href="#三元操作符" class="headerlink" title="三元操作符"></a>三元操作符</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my $age = 42;</div><div class="line"></div><div class="line">if $age &gt; 18 &#123;</div><div class="line">    say &quot;Above 18&quot;;</div><div class="line">&#125; else &#123;</div><div class="line">    say &quot;Below 18&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say $age &gt; 18 ?? &quot;Above 18&quot; !! &quot;Below 18&quot;;</div></pre></td></tr></table></figure>
+<p>语法：   COND ?? VALUE_IF_TRUE !! VALUE_IF_FALSE</p>
+<h2 id="数字运算符"><a href="#数字运算符" class="headerlink" title="数字运算符"></a>数字运算符</h2><hr>
+<p>数字运算符可以用在标量值上面。</p>
+<p>examples/scalars/numerical_operators.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $x = 3;</div><div class="line">my $y = 11;</div><div class="line"></div><div class="line">my $z = $x + $y;</div><div class="line">say $z;             # 14</div><div class="line"></div><div class="line">$z = $x * $y;</div><div class="line">say $z;             # 33</div><div class="line">say $y / $x;        # 3.66666666666667</div><div class="line"></div><div class="line">$z = $y % $x;       # (模)</div><div class="line">say $z;             # 2</div><div class="line"></div><div class="line">$z += 14;           # is the same as   $z = $z + 14;</div><div class="line">say $z;             # 16</div><div class="line"></div><div class="line">$z++;               # is the same as   $z = $z + 1;</div><div class="line">$z--;               # is the same as   $z = $z - 1;</div><div class="line"></div><div class="line">$z = 23 ** 2;       # 幂</div><div class="line">say $z;             # 529</div></pre></td></tr></table></figure>
+<h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2><hr>
+<p>从文件中读取行<br>打开文件时的模式：</p>
+<pre><code>:r   - read
+:w   - write
+:a   - append
+</code></pre><p>open函数的两个参数：文件名和模式.为了打开一个文件读取，模式需为 :r . 此函数要么返回一个存在标量变量中的文件句柄，要么失败时返回 undef 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$fh = open $filename, :r</div></pre></td></tr></table></figure>
+<p>一旦我们打开了一个文件句柄，我们可以使用 get 方法 ($fh.get) 从给定的文件中读取一行。</p>
+<p>你也可以连续调用 get 方法 读取多行，但还有更好的方法。</p>
+<p>examples/files/read_one_line.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $filename = $*PROGRAM_NAME;</div><div class="line"></div><div class="line">my $fh = open $filename;</div><div class="line">my $line = $fh.get;</div><div class="line">say $line;</div></pre></td></tr></table></figure>
+<p>读取所有行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $filename = $*PROGRAM_NAME;</div><div class="line"></div><div class="line">my $fh = open $filename;</div><div class="line">while (defined my $line = $fh.get) &#123;</div><div class="line">    say $line;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>逐行读取文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $filename = $*PROGRAM_NAME;</div><div class="line"></div><div class="line">my $fh = open $filename;</div><div class="line">for $fh.lines -&gt; $line &#123;</div><div class="line">    say $line;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>lines 方法返回文件的所有行或部分行</p>
+<p>在Perl 6中对存在的数据结构进行操作是有趣的，但是如果没有输入与输出的话，就会限制在真实世界中的用途。<br>因此，读取文件内容是一个明智的操作.</p>
+<p><code>open</code><br><code>get</code><br><code>read</code><br><code>IO</code><br><code>lines</code></p>
+<p>一行行读取（Read line-by-line）<br>  open   函数会打开一个文件，默认情况下，你可以显示地传递一个 :r 作为open函数的第二个参数。 Open会返回一个文件句柄，即一个IO类的实例。<br>  get    方法会从文件读取并返回一行，末尾的新行会自动被移除。 (Perl 5  开发者也可以认为 get 方法自动调用了chomp操作.)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $fh = open $filename;</div><div class="line">my $line = $fh.get;</div></pre></td></tr></table></figure>
+<p>你也可以在一个while循环中读取文件的所有行。  与 Perl 5相反, 在这个while循环中，对是否定义没有隐式地检测.你必须在条件语句中显示地添加单词defined.否则，读取操作将在第一个空行处停止。<br><code>my $fh = open $filename;</code></p>
+<pre><code>while (defined my $line = $fh.get)
+  {
+    say $line;
+  }
+</code></pre><p>在for循环中使用    <code>lines</code>  方法可能更具有Perl-6风格。     lines   方法会依次读取文件的每一行，然后将读取到行赋值给变量 <code>$line</code> ,然后执行代码块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my $fh = open $filename;</div><div class="line">for $fh.lines -&gt; $line &#123;</div><div class="line">      say $line;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h2><hr>
+<p>为了写入内容到文件我们首先要开启 :w 模式.如果成功，我们得到一个文件句柄，在该文件句柄上我们可以使用普通的诸如print()、say()、或printf()等输出方法。<br>examples/files/write_file.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $filename = &quot;temp.txt&quot;;</div><div class="line"></div><div class="line">my $fh = open $filename, :w;</div><div class="line">$fh.say(&quot;hello world&quot;);</div><div class="line">$fh.close;</div></pre></td></tr></table></figure>
+<h2 id="元操作符"><a href="#元操作符" class="headerlink" title="元操作符"></a>元操作符</h2><hr>
+<p>元操作符<br>examples/arrays/assignment_shortcut.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $num = 23;</div><div class="line">say $num + 19;             # 42</div><div class="line">say $num;                  # 23</div><div class="line">$num += 19;</div><div class="line">say $num;                  # 42</div></pre></td></tr></table></figure>
+<p>赋值时的方法调用<br>在Perl 6 中它扩展了点操作符的功能，允许在对象上进行方法调用。想想下面的例子。subst方法能够用一个字符串替换另外一个，但是并不改变原来的字符串。默认地，它返回改变了的字符串.<br>如果你想改变原字符串，你可以写为 <code>$str = $str.subst(&#39;B&#39;, &#39;X&#39;);</code> 或者你可以写成它的 shortcut version.<br>examples/arrays/assignment_operators.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my $str = &apos;ABBA&apos;;</div><div class="line">say $str.subst(&apos;B&apos;, &apos;X&apos;);      # AXBA</div><div class="line">say $str;                      # ABBA</div><div class="line"></div><div class="line">say $str .= subst(&apos;B&apos;, &apos;X&apos;);   # AXBA</div><div class="line">say $str;                      # AXBA</div></pre></td></tr></table></figure>
+<p>赋值时调用函数<br>这也同样可以用于函数中，就如 <code>$lower = min($lower, $new_value);</code> 你可以写为 <code>$lower min= $new_value;</code></p>
+<p>examples/arrays/assignment_function_shortcuts.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $lower = 2;</div><div class="line">$lower min= 3;</div><div class="line">say $lower;                # 2</div><div class="line">$lower min= 1;</div><div class="line">say $lower;                # 1</div></pre></td></tr></table></figure>
+<p>这甚至可以有效地使用逗号操作符向数组中压入更多值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">  my @a = (1, 2, 3);</div><div class="line">  @a ,= 4;</div><div class="line">  @a.say;</div><div class="line">```  </div><div class="line">  反转关系操作符</div><div class="line">等号(==)操作符在Perl6 中用于比较数字，eq用于比较字符串。 The negated version are the same just with an exclamation mark ( ! ) in front of them. 所以它们看起来就是 !== 和 !eq.</div><div class="line">幸运的是，那些都有它们的快捷写法，可以写为!=和ne。</div><div class="line">其他操作符也有相应的反转版本，所以你可以写 !&gt;= ，它的意思是不大于 (对于数字) 并且你可以写!gt ，对于字符串来说是一样的. 我没有全部摊出我们为什么需要这个。</div><div class="line">一个我能明白的优点是如果你创建了一个叫做I的操作符，然后你会自动得到一个看起来像!I 的操作符，那是它的反转。</div><div class="line">examples/arrays/negated_operators.p6</div><div class="line"></div><div class="line"></div><div class="line">```perl6</div><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"># 相等</div><div class="line">say 1 ==  1       ?? &apos;y&apos; !! &apos;n&apos;; # y</div><div class="line">say 1 !== 1       ?? &apos;y&apos; !! &apos;n&apos;; # n</div><div class="line">say 1 !=  1       ?? &apos;y&apos; !! &apos;n&apos;; # n</div><div class="line">say &apos;ac&apos; eq  &apos;dc&apos; ?? &apos;y&apos; !! &apos;n&apos;; # n</div><div class="line">say &apos;ac&apos; !eq &apos;dc&apos; ?? &apos;y&apos; !! &apos;n&apos;; # y</div><div class="line">say 1 &lt;  2        ?? &apos;y&apos; !! &apos;n&apos;; # y</div><div class="line">####say 1 !&lt; 2    ?? &apos;y&apos; !! &apos;n&apos;; # n</div><div class="line">say 1 &lt;=  2       ?? &apos;y&apos; !! &apos;n&apos;; # y</div><div class="line">####say 1 !&lt;= 2   ?? &apos;y&apos; !! &apos;n&apos;; # n</div><div class="line">say 1 &gt;=  2       ?? &apos;y&apos; !! &apos;n&apos;; # n</div><div class="line">####say 1 !&gt;= 2   ?? &apos;y&apos; !! &apos;n&apos;; # y</div></pre></td></tr></table></figure>
+<p>反转操作符<br>反转操作符会反转两个操作数的意思. 所以就像交换 <code>$b cmp $a</code> 中参数的值，你可以写为 <code>$a Rcmp $b</code>.</p>
+<p>examples/arrays/reversed_operators.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"># 宇宙飞船操作符</div><div class="line">say 1 &lt;=&gt; 2;   # -1</div><div class="line">say 2 &lt;=&gt; 1;   # 1</div><div class="line">say 1 R&lt;=&gt; 2;  # 1</div><div class="line">say 2 R&lt;=&gt; 1;  # -1</div></pre></td></tr></table></figure>
+<p>输出：<br>examples/arrays/reversed_operators.p6.out<br>Increase<br>Decrease<br>Decrease<br>Increase</p>
+<p>Hyper 操作符</p>
+<p>examples/arrays/hyper.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my @x = (1, 2) &gt;&gt;+&lt;&lt; (3, 4);</div><div class="line">say @x.perl;  # [4, 6]</div><div class="line">#my @d = (1, 2) &gt;&gt;+&lt;&lt; (3);</div><div class="line">#say @d.perl;  # [4, 6]</div><div class="line"># Non-dwimmy hyperoperator cannot be used  on arrays of different sizes or dimensions.</div><div class="line">my @z = (1, 2, 3, 4) &gt;&gt;+&gt;&gt; (1, 2);</div><div class="line">say @z.perl;          # [2, 4, 5, 6]</div><div class="line"></div><div class="line">@z = (1, 2, 3, 4) &lt;&lt;+&gt;&gt; (1, 2);</div><div class="line">say @z.perl;          # [2, 4, 5, 6]</div><div class="line">@z = (4) &lt;&lt;+&gt;&gt; (1, 2);</div><div class="line">say @z.perl;          # [5, 6]</div><div class="line"></div><div class="line">my @y = (1, 2) &gt;&gt;+&gt;&gt; 1;</div><div class="line">say @y.perl;          # [2, 3]</div></pre></td></tr></table></figure>
+<p>examples/arrays/hyper.p6.out<br>Array.new(4, 6)<br>Array.new(2, 4, 4, 6)<br>Array.new(2, 4, 4, 6)<br>Array.new(5, 6)<br>Array.new(2, 3)</p>
+<p>Reduction 操作符<br>examples/arrays/reduction_operators.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">say [+] 1, 2;    # 3</div><div class="line">say [+] 1..10;   # 55</div><div class="line"># 阶乘</div><div class="line">say [*] 1..5;    # 120</div><div class="line">say [**] 2,2,2;  # 16      == 2**2**2</div><div class="line">my @numbers = (2, 4, 3);</div><div class="line"># 检查数字是否是递增顺序</div><div class="line">say [&lt;] @numbers;          # False</div><div class="line">say [&lt;] sort @numbers;     # True</div></pre></td></tr></table></figure>
+<p>输出<br>examples/arrays/reduction_operators.p6.out<br>3<br>55<br>120<br>16<br>False<br>True</p>
+<p>Reduction Triangle operators<br>The ~ in front of the operator is only needed for the stringification of the list to inject spaces between the values when printed.<br>examples/arrays/triangle_operators.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">say ~[\+] 1..5;  # 1 3 6 10 15 (1 1+2 1+2+3 ... 1+2+3+4+5)</div><div class="line">say ~[\*] 1..5;  # 1 2 6 24 120</div></pre></td></tr></table></figure>
+<p>输出：<br>examples/arrays/triangle_operators.p6.out<br>1 3 6 10 15<br>1 2 6 24 120</p>
+<p>交叉操作符 Cross operators<br>examples/arrays/cross_operators.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">my @x = (1, 2) X+ (4, 7);</div><div class="line">say @x.perl;                # [5, 8, 6, 9] 1+4,1+7,2+4,2+7</div><div class="line"></div><div class="line">my @y = 1, 2 X+ 4, 7;</div><div class="line">say @y.perl;                # [5, 8, 6, 9]</div><div class="line"></div><div class="line">my @str = 1, 2 X~ 4, 7;</div><div class="line">say @str.perl;              # [&quot;14&quot;, &quot;17&quot;, &quot;24&quot;, &quot;27&quot;]</div><div class="line"># without any special operator  (is the same with X, should be)</div><div class="line">my @z = 1, 2 X 4, 7;</div><div class="line">say @z.perl;                # [1, 4, 1, 7, 2, 4, 2, 7]</div></pre></td></tr></table></figure>
+<p>输出：<br>examples/arrays/cross_operators.p6.out<br>Array.new(5, 8, 6, 9)<br>Array.new(5, 8, 6, 9)<br>Array.new(“14”, “17”, “24”, “27”)<br>Array.new(1, 4, 1, 7, 2, 4, 2, 7)</p>
+<p> 积的交叉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my @y = 1, 2 X* 4, 7;</div></pre></td></tr></table></figure>
+<p>输出 4 7 8 14</p>
+<h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><hr>
+<p>自动将字符串转换为数字</p>
+<p>examples/scalars/add.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $a = prompt &quot;First number:&quot;;</div><div class="line">my $b = prompt &quot;Second number:&quot;;</div><div class="line"></div><div class="line">my $c = $a + $b;</div><div class="line"></div><div class="line">say &quot;\nResult: $c&quot;;</div></pre></td></tr></table></figure>
+<p>字符串操作<br>examples/scalars/string_operators.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $x = &quot;Hello&quot;;</div><div class="line">my $y = &quot;World&quot;;</div><div class="line"></div><div class="line"># ~ 是连接操作符,连接字符串</div><div class="line">my $z = $x ~ &quot; &quot; ~ $y;   # the same as &quot;$x $y&quot;</div><div class="line">say $z;                  # Hello World</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my $w = &quot;Take &quot; ~ (2 + 3);</div><div class="line">say $w;                         # Take 5</div><div class="line">say &quot;Take 2 + 3&quot;;               # Take 2 + 3</div><div class="line">say &quot;Take &#123;2 + 3&#125;&quot;;             # Take 5</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$z ~= &quot;! &quot;;             #   the same as   $z = $z ~ &quot;! &quot;;</div><div class="line">say &quot;&apos;$z&apos;&quot;;             # &apos;Hello World! &apos;</div></pre></td></tr></table></figure>
+<p>  ~ 连接2个字符串.<br>就像上面见到的那样，任何操作符都能使用花括号语法插入到字符串中。.</p>
+<p>字符串连接<br>examples/scalars/concat.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $a = prompt &quot;First string:&quot;;</div><div class="line">my $b = prompt &quot;Second string:&quot;;</div><div class="line"></div><div class="line">my $c = $a ~ $b;</div><div class="line"></div><div class="line">say &quot;\nResult: $c&quot;;</div></pre></td></tr></table></figure>
+<p>字符串重复操作<br>examples/scalars/string_repetition.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $z = &quot;Hello World! &quot;;</div><div class="line"></div><div class="line"># x is the string repetition operator</div><div class="line">my $q = $z x 3;</div><div class="line">say &quot; &apos; $q &apos; &quot;;         # &apos;Hello World! Hello World! Hello World! &apos;</div></pre></td></tr></table></figure>
+<h2 id="字符串函数-index"><a href="#字符串函数-index" class="headerlink" title="字符串函数 - index"></a>字符串函数 - index</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $s = &quot;The black cat jumped from the green tree&quot;;</div><div class="line"></div><div class="line">say index $s, &quot;e&quot;;                          # 2</div><div class="line">say index $s, &quot;e&quot;, 3;                       # 18</div><div class="line"></div><div class="line">say rindex $s, &quot;e&quot;;                         # 39</div><div class="line">say rindex $s, &quot;e&quot;, 38;                     # 38</div><div class="line">say rindex $s, &quot;e&quot;, 37;                     # 33</div></pre></td></tr></table></figure>
+<h2 id="字符串函数-substr"><a href="#字符串函数-substr" class="headerlink" title="字符串函数 - substr"></a>字符串函数 - substr</h2><hr>
+<p>字符串函数: substr<br>examples/scalars/string_functions_substr.p6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line"></div><div class="line">my $s = &quot;The black cat climbed the green tree&quot;;</div><div class="line">my $z;</div><div class="line">$z = substr $s, 4, 5;                     # $z = black</div><div class="line">say $z;</div><div class="line">$z = substr $s, 4, *-11;                  # $z = black cat climbed the   从索引4开始截取，不要最后的11个字符</div><div class="line">say $z;</div><div class="line">$z = substr $s, 14;                       # $z = climbed the green tree，从索引14开始知道结束</div><div class="line">say $z;</div><div class="line">$z = substr $s, *-4;                      # $z = tree</div><div class="line">say $z;</div><div class="line">$z = substr $s, *-4, 2;                   # $z = tr</div><div class="line">say $z;</div></pre></td></tr></table></figure>
+<h2 id="值在给定的列表中吗"><a href="#值在给定的列表中吗" class="headerlink" title="值在给定的列表中吗"></a>值在给定的列表中吗</h2><hr>
+<p>怎样找出一个给定的值是否在一些值的中间？这跟SQL中的IN操作符相似。</p>
+<p>在 Perl 6  中，有一个 any() 函数，其功能与SQL 中的IN 关键字相似。让我们看看它如何工作:<br>它是一个weekday吗?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @weekdays = &lt;Monday Sunday Tuesday Wednesday Thursday Friday  Saturday &gt;;</div><div class="line"></div><div class="line">my $day = &quot;Tuesday&quot;;</div><div class="line">say $day eq any(@weekdays)</div><div class="line"> ??</div><div class="line"> &quot;$day is a weekday&quot;</div><div class="line"> !!</div><div class="line"> &quot;$day is NOT a weekday&quot;;</div></pre></td></tr></table></figure>
+<p>上面的代码将打印出：<br>Tuesday is a weekday</p>
+<p>perl会尝试使用 eq 让@weekdays中的每一个元素都与$day标量的内容相比较，如果它们中的任意一个为真，表达式即为真。</p>
+<p>Perl 6 中的三元操作符</p>
+<p>旁注:  ?? !! 对Perl 6 的三元操作符。它语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">CONDITION</div><div class="line">??</div><div class="line">   VALUE_IF_TRUE</div><div class="line"></div><div class="line">!!</div><div class="line">    VALUE_IF_FALSE</div><div class="line">;</div></pre></td></tr></table></figure>
+<p>它仍然是weekday吗?</p>
+<p>更完整的例子让我们来看当所有这些值都不匹配时会发生什么:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @weekdays = &lt;Monday Sunday Tuesday Wednesday Thursday Friday  Saturday &gt;;</div><div class="line"></div><div class="line">my $other = &quot;Holiday&quot;;</div><div class="line">say $other eq any(@weekdays)</div><div class="line"></div><div class="line">??</div><div class="line">&quot;$other is a weekday&quot;</div><div class="line">!!</div><div class="line"> &quot;$other is NOT a weekday&quot;;</div></pre></td></tr></table></figure>
+<p>代码相同但是不会打印匹配值:<br>Holiday is  NOT  a weekday</p>
+<p>使用小于号比较数字</p>
+<p>下个例子我们将会看到any函数能用于其它诸如小于号操作符的比较运算符上:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @numbers = (6, -12, 20);</div><div class="line">say any(@numbers)&lt; 0</div><div class="line">    ?? &quot;There is a negative number&quot;</div><div class="line">    !! &quot;No negative number here&quot;;</div></pre></td></tr></table></figure>
+<p>结果为:<br>There is a negative number</p>
+<p>你也可以使用其它操作符.<br>假使没有负数它也有效:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @positive_numbers = (6, 12, 20);</div><div class="line">say any(@positive_numbers) &lt; 0</div><div class="line">    ?? &quot;There is a negative number&quot;</div><div class="line">    !! &quot;No negative number here&quot;;</div></pre></td></tr></table></figure>
+<p>输出:<br>No negative number here</p>
+<p>其它关键字: <code>none</code>, <code>all</code>, <code>one</code></p>
+<p>还有其它函数, 不仅仅是 <em>any</em> 函数: (all, one and none)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @positive_numbers = (6, 12, 20);</div><div class="line">say none(@positive_numbers) &lt; 0</div><div class="line">    ?? &quot;No negative number here&quot;</div><div class="line">    !! &quot;There is a negative number&quot;;</div></pre></td></tr></table></figure>
+<p>会打印:<br>No negative number here</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @positive_numbers = (6, 12, 20);</div><div class="line">say all(@positive_numbers) &gt; 0</div><div class="line">    ?? &quot;All are positive numbers&quot;</div><div class="line">    !! &quot;There is a NOT positive number&quot;;</div></pre></td></tr></table></figure>
+<p>会打印:<br>All are positive numbers</p>
+<p>使用最合适的那个函数。<br>更短的写法</p>
+<p>有时候你有一个值，你需要检测它是否等于一个所列值中的任意一个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my $n = 12;</div><div class="line">say ($n == 23 or $n == 42) ?? &quot;ok&quot; !! &quot;not ok&quot;;  # not ok</div></pre></td></tr></table></figure>
+<p>使用 any 函数你可以这样写:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my $n = 12;</div><div class="line">say $n == any(23, 42)</div><div class="line"> ?? &quot;ok&quot;</div><div class="line"> !! &quot;not ok&quot;;  # not ok</div></pre></td></tr></table></figure>
+<p>any 函数也有一个单管道线的中缀操作符版本，所以你也能这样写:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my  $n = 12;</div><div class="line">say $n == 23|42</div><div class="line"> ?? &quot;ok&quot;</div><div class="line"> !! &quot;not ok&quot;;  # not ok</div></pre></td></tr></table></figure>
+<p>交叉</p>
+<p>这些关键词和相关操作所做的实际上是创建了一种叫做<code>Junction</code>的数据类型。它是一个标量，以一种无序的方式存储着多个值。跟集合类似。<br>第一个例子也可以这样写:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $weekdays = any &lt;Monday Sunday Tuesday Wednesday Thursday Friday  Saturday &gt;;</div><div class="line"></div><div class="line">my $day = &quot;Tuesday&quot;;</div><div class="line"></div><div class="line">say $day eq $weekdays</div><div class="line">    ?? &quot;$day is a weekday&quot;</div><div class="line">    !! &quot;$day is NOT a weekday&quot;;</div></pre></td></tr></table></figure>
+<p>这里我们创建了一个junction而非数组，然后使用该junction进行比较。<br>Other operations on Junctions</p>
+<p>In addition to the comparison operations we saw earlier, we can do other operations on junctions. The operation will be executed on each one of the values in the junction and the result will be a new junction with the changed values:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my $numbers = any(23, 42);</div><div class="line">$numbers.perl.say;</div><div class="line"></div><div class="line">$numbers++;</div><div class="line">$numbers.perl.say;</div></pre></td></tr></table></figure>
+<p>这会打印该 junction的perl表现:<br>any(23, 42)<br>any(24, 43)<br>Functions on Junctions</p>
+<p>你也可以将 junctions 作为参数传递给函数。 The function will be executed on each value separately in an undefined order, and the result will be another junction. For example if we would like to create the 3 character version of the months we can use the following code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $months = any ;</div><div class="line"></div><div class="line">my $short_names = substr($months, 0, 3);</div><div class="line">$short_names.perl.say;</div></pre></td></tr></table></figure>
+<p>Which should print<br>any(“Jan”, “Feb”, “Mar”, “Apr”, “May”, “Jun”, “Jul”, “Aug”,  “Sep”, “Oct”, “Nov”, “Dec”);</p>
+<h2 id="Perl-6-的正则"><a href="#Perl-6-的正则" class="headerlink" title="Perl 6 的正则"></a>Perl 6 的正则</h2><hr>
+<p>正则操作符<br>在 Perl 6 中智能匹配 ~~ 操作符用于正则匹配。<br>对于相反的匹配，使用 !~~ 操作符。</p>
+<p>基本用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $str = &apos;abc123&apos;;</div><div class="line">if $str ~~ m/a/ &#123;</div><div class="line">      say &quot;Matching&quot;;</div><div class="line">&#125;</div><div class="line">if $str !~~ m/z/ &#123;</div><div class="line">      say &quot;No z in $str&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>两个条件都是真的，所以两组字符串 “Matching” 和”No z in abc123”都会被打印。<br>特殊符号<br>Perl6中有一个重要改变，那就是在Perl6 中，任何<code>非字母数字字符</code>需要被转义。<br>在下个例子中，我们需要转义 <code>-</code> 符号:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $str = &apos;abc - 123&apos;;</div><div class="line">if $str ~~ m/-/ &#123;</div><div class="line">      say &quot;Matching&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>生成:</p>
+<p>===SORRY!===<br>Unrecognized regex metacharacter - (must be quoted to match literally) at line 6, near “/) {\n      s”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $str = &apos;abc - 123&apos;;</div><div class="line">if $str ~~ m/\-/ &#123;</div><div class="line">      say &quot;Matching&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有效，打印匹配。</p>
+<p>新特殊字符<br><code>#</code>现在是一个特殊字符，代表注释,所以当我们真正需要一个<code>#</code>号时，需要转义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $str = &apos;abc # 123&apos;;</div><div class="line">if $str ~~ m/(#.)/ &#123;</div><div class="line">      say &quot;match &apos;$/&apos;&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>报错：</p>
+<p>===SORRY!===<br>Unrecognized regex metacharacter ( (must be quoted to match literally) at line 6, near “#.)/ {\n    “</p>
+<p>转义后正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $str = &apos;abc # 123&apos;;</div><div class="line">if $str ~~ m/(\#.)/ &#123;</div><div class="line">      say &quot;match &apos;$/&apos;&quot;;</div><div class="line">&#125;</div><div class="line">```  </div><div class="line">Perl 6 的匹配变量</div><div class="line">每次一有正则操作，一个叫做 `$/` 的本地化变量被设置成实际匹配到的值。</div><div class="line"></div><div class="line">```perl6</div><div class="line">use v6;</div><div class="line">my $str = &apos;abc123&apos;;</div><div class="line">if $str ~~ m/a/ &#123;</div><div class="line">      say &quot;Matching    &apos;$/&apos;&quot;;        # Matching  &apos;a&apos;</div><div class="line">&#125;</div><div class="line">if $str !~~ m/z/ &#123;</div><div class="line">      say &quot;No z in $str &apos;$/&apos;&quot;;       # No z in abc123  &apos;&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Perl 6 正则中的空格<br>在Perl 6 中，正则默认忽略空格。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $str = &apos;The black cat climbed to the green tree.&apos;;</div><div class="line">if $str ~~ m/black/ &#123;</div><div class="line">      say &quot;Matching &apos;$/&apos;&quot;;        # Matching &apos;black&apos;</div><div class="line">&#125;</div><div class="line">if $str ~~ m/black cat/ &#123;</div><div class="line">      say &quot;Matching &apos;$/&apos;&quot;;</div><div class="line">&#125; else &#123;</div><div class="line">      say &quot;No match as whitespaces are disregarded&quot;;  # prints this</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那怎样匹配空格呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $str = &apos;The black cat climbed to the green tree.&apos;;</div><div class="line">if $str ~~ m/black\scat/ &#123;</div><div class="line">      say &quot;Matching &apos;$/&apos; - Perl 5 style white-space meta character works&quot;;</div><div class="line">&#125;</div><div class="line">if $str ~~ m/black \s cat/ &#123;</div><div class="line">      say &quot;Matching &apos;$/&apos; - Meta white-space matched, real space is disregarded&quot;;</div><div class="line">&#125;</div><div class="line">if $str ~~ m/black  &apos; &apos;  cat/ &#123;</div><div class="line">      print &quot;Matching &apos;$/&apos; - &quot;;</div><div class="line">      say &quot;the real Perl 6 style would be to use strings embedded in regexes&quot;;</div><div class="line">&#125;</div><div class="line">if $str ~~ m/black cat/ &#123;</div><div class="line">      print &quot;Matching &apos;$/&apos; - &quot;;</div><div class="line">      say &quot;or maybe the Perl 6 style is using named character classes &quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>任何情况下，我们可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $str = &apos;The black cat climbed to the green tree.&apos;;</div><div class="line">if $str ~~ m/  b l a c k c a t/ &#123;</div><div class="line">      say &quot;Matching &apos;$/&apos; - a regex in Perl 6 is just a sequence of tokens&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你看，你可以使用<code>单引号</code>在正则中嵌入字面字符串，也有新类型的字符类，使用尖括号。</p>
+<p>匹配任何字符<br>点(.)匹配任何字符，包括<code>换行符</code>。<br>如果你想匹配除新行外的所有其他字符，你可以使用 <code>\N</code> 特殊字符类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $str = &apos;The black cat climbed to the green tree.&apos;;</div><div class="line">if $str ~~ m/c./ &#123;</div><div class="line">      say &quot;Matching &apos;$/&apos;&quot;;          # &apos;ck&apos;</div><div class="line">&#125;</div><div class="line">my $text = &quot;</div><div class="line">The black cat</div><div class="line">climbed the green tree&quot;;</div><div class="line">if $text ~~ m/t./ &#123;</div><div class="line">      say &quot;Matching &apos;$/&apos;&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>第一个正则匹配并打印’ck’,第二个打印：<br>‘t<br>‘</p>
+<p>使用 <code>\N</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">my $text = &quot;</div><div class="line">The black cat</div><div class="line">climbed the green tree&quot;;</div><div class="line">if $text ~~ m/t\N/ &#123;</div><div class="line">      say &quot;Matching &apos;$/&apos;&quot;;        # &apos;th&apos;      of the word &apos;the&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在最后一个例子中你看到 <code>\N</code> 能匹配字母 h，而非新行。</p>
+<h2 id="Perl6的一些特性"><a href="#Perl6的一些特性" class="headerlink" title="Perl6的一些特性"></a>Perl6的一些特性</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&gt; my $foo = &quot;bar&quot;;</div><div class="line">bar</div><div class="line">&gt; if $foo eq &quot;foo&quot; | &quot;bar&quot; | &quot;baz&quot; &#123; say &quot;ok&quot; &#125;</div><div class="line">ok</div><div class="line">&gt; my $num = 10;</div><div class="line">10</div><div class="line">&gt; if 5 &lt; $num &lt; 15 &#123; say &quot;ok&quot; &#125;</div><div class="line">ok</div><div class="line">&gt; say 1, 2, 4 ... 1024</div><div class="line">1 2 4 8 16 32 64 128 256 512 1024</div><div class="line">&gt; my @fib = 1, 1, *+* ... *;</div><div class="line">1 1 2 3 ...</div><div class="line">&gt; say @fib[0..9]</div><div class="line">1 1 2 3 5 8 13 21 34 55</div><div class="line">&gt; say @fib[^10]</div><div class="line">1 1 2 3 5 8 13 21 34 55</div><div class="line">&gt; say [+] 1..100</div><div class="line">5050</div><div class="line">&gt; say 1..6 Z~ &apos;A&apos;..&apos;F&apos;</div><div class="line">1A 2B 3C 4D 5E 6F</div><div class="line">&gt; say 1..3 X~ &apos;A&apos;..&apos;D&apos;</div><div class="line">1A 1B 1C 1D 2A 2B 2C 2D 3A 3B 3C 3D</div></pre></td></tr></table></figure>
+<h2 id="Perl-6-中一系列整数的操作"><a href="#Perl-6-中一系列整数的操作" class="headerlink" title="Perl 6 中一系列整数的操作"></a>Perl 6 中一系列整数的操作</h2><hr>
+<p>Perl 6 中一系列整数的操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $x = 23;</div><div class="line">my $z = 27;</div><div class="line">for $x .. $z -&gt; $i &#123;</div><div class="line">      say $i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>会打印出期望的数字 23, 24, 25, 26, 27 .</p>
+<p>C风格的循环<br>C风格, 有3部分的for循环在Perl 6 中也是可行的但不推荐。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $x = 23;</div><div class="line">my $z = 27;</div><div class="line">loop (my $i = $x; $i &lt;= $z; $i++) &#123;</div><div class="line">      say $i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>序列</p>
+<p>在Perl 6 中用 for 循环每隔2个数遍历也是可以的，我们使用3个 . 而非2个 . 这里我们谈论的是序列而非范围。<br>我们设置序列的前两个元素和序列的上限.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $x = 23;</div><div class="line">my $z = 27;</div><div class="line">for $x, $x+2 ... $z  -&gt; $i &#123;</div><div class="line">  say $i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这会打印 23, 25, 27<br>你必须保证上限的准确:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for 1, 3 ... 7  -&gt; $i &#123;</div><div class="line">  say $i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这会打印 1, 3, 5, 7<br>另一方面，这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for 1, 3 ... 8  -&gt; $i &#123;</div><div class="line">  say $i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>会报错。(现在已修正， 打印 1，3，5，7)</p>
+<h2 id="Perl-6-中的标量、数组、散列如何插值"><a href="#Perl-6-中的标量、数组、散列如何插值" class="headerlink" title="Perl 6 中的标量、数组、散列如何插值"></a>Perl 6 中的标量、数组、散列如何插值</h2><hr>
+<p>标量、数组和散列插值</p>
+<p>将标量放在双引号中会进行插值，就跟Perl 5 中一样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my $name = &quot;Foo&quot;;</div><div class="line">say &quot;Hello $name, how are you?&quot;;</div></pre></td></tr></table></figure>
+<p>这会打印:<br>Hello Foo, how are you?</p>
+<p>数组和散列不是这样进行插值的，在字符串中，任何放进<code>花括号</code>中的东西都会被插值，所以如果你有一个数组，您能这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt;Foo Bar Moo&gt;;</div><div class="line">say &quot;Hello &#123;@names&#125;, how are you?&quot;;</div></pre></td></tr></table></figure>
+<p>to get this output:<br>Hello Foo Bar Moo, how are you?</p>
+<p>这里的问题是基于输出结果你不知道数组是有3个元素还是2个：<br>“Foo Bar” 和 “Moo”, 或仅仅一个元素: “Foo Bar Moo”.</p>
+<p>内插表达式</p>
+<p>上面的就不是个问题！ 在用双引号引起来的字符串中，你可以将任何表达式放在<code>花括号</code>中。表达式会被计算，其结果会被插值：<br>你可以这样写:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @names = &lt;Foo Bar Moo&gt;;</div><div class="line">say &quot;Hello &#123; join(&apos;, &apos;, @names) &#125; how are you?&quot;;</div></pre></td></tr></table></figure>
+<p>输出如下:<br>Hello Foo, Bar, Moo how are you?</p>
+<p>然而这依然没有准确地显示有几个值，这显得稍微复杂了。<br>作为旁注，万一你更喜欢面向对象的代码，你也可以像下面这样写:<br><code>say &quot;Hello { @names.join(&#39;, &#39;) } how are you?&quot;;</code><br>结果一样.</p>
+<p>调试打印</p>
+<p>对于基本的调试目的，做好使用数组的 <code>.perl</code> 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say &quot;Names: &#123; @names.perl &#125;&quot;;</div></pre></td></tr></table></figure>
+<p>那会打印：</p>
+<pre><code>Names: Array.new(&quot;Foo&quot;, &quot;Bar&quot;, &quot;Moo&quot;)
+</code></pre><p>假使你想同时看到变量名呢？那你可以依赖数组在双引号字符串中不插值这点这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say &quot; @names = &#123; @names.perl &#125;&quot;;</div></pre></td></tr></table></figure>
+<p>那会打印：</p>
+<pre><code>@names = Array.new(&quot;Foo&quot;, &quot;Bar&quot;, &quot;Moo&quot;)
+</code></pre><p>仅仅是表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line">say &quot;Take 1+4&quot;;</div></pre></td></tr></table></figure>
+<p>会打印：</p>
+<pre><code>Take 1+4
+</code></pre><p>就像我所写的，你可以将任何表达式放进花括号中，你也可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">say &quot;Take &#123;1+4&#125;&quot;;</div></pre></td></tr></table></figure>
+<p>那会打印：</p>
+<pre><code>Take 5
+</code></pre><p>插值散列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my %phone = (</div><div class="line">      foo =&gt; 1,</div><div class="line">      bar =&gt; 2,</div><div class="line">);</div><div class="line"></div><div class="line">say &quot;%phone = &#123; %phone &#125; &quot;;</div></pre></td></tr></table></figure>
+<p>会打印：</p>
+<pre><code>%phone = foo    1 bar  2
+</code></pre><p>这分不清哪些是键，哪些是值. 对于调试目的，你最好用 <code>.perl</code> 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say &quot;%phone = &#123; %phone.perl &#125; &quot;;</div></pre></td></tr></table></figure>
+<p>会打印:</p>
+<pre><code>%phone = (&quot;foo&quot; =&gt; 1, &quot;bar&quot; =&gt; 2).hash
+</code></pre><p>插值多维数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @matrix = (</div><div class="line">    [1, 2],</div><div class="line">    [3, 4],</div><div class="line">);</div><div class="line"></div><div class="line">say &quot;@matrix = &#123; @matrix.perl &#125;&quot;;</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<pre><code>@matrix = Array.new([1, 2], [3, 4])
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/入门指南/" rel="tag">#入门指南</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/01/Sneaky-methods/" rel="next" title="Sneaky methods">
+                <i class="fa fa-chevron-left"></i> Sneaky methods
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/14/在Perl6中异步地执行外部程序/" rel="prev" title="在 Perl 6 中异步地执行外部程序">
+                在 Perl 6 中异步地执行外部程序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/05/08/Perl-6-入门指南/"
+     data-title="Perl 6 入门指南"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/05/08/Perl-6-入门指南/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/05/08/Perl-6-入门指南/"
+           data-title="Perl 6 入门指南" data-url="https://ohmycloud.github.io/2015/05/08/Perl-6-入门指南/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#exit，warn，die"><span class="nav-number">1.</span> <span class="nav-text">exit，warn，die</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">2.</span> <span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#given-when-结构"><span class="nav-number">3.</span> <span class="nav-text">given-when 结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标量变量"><span class="nav-number">4.</span> <span class="nav-text">标量变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if-语句"><span class="nav-number">5.</span> <span class="nav-text">if 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6-的散列"><span class="nav-number">6.</span> <span class="nav-text">Perl 6 的散列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POD文档"><span class="nav-number">7.</span> <span class="nav-text">POD文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slurp"><span class="nav-number">8.</span> <span class="nav-text">slurp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigils-和特殊变量"><span class="nav-number">9.</span> <span class="nav-text">Twigils 和特殊变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较操作符"><span class="nav-number">10.</span> <span class="nav-text">比较操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔表达式"><span class="nav-number">11.</span> <span class="nav-text">布尔表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超级or-多选分支"><span class="nav-number">12.</span> <span class="nav-text">超级or - 多选分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从键盘读入"><span class="nav-number">13.</span> <span class="nav-text">从键盘读入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取文件内容到数组中"><span class="nav-number">14.</span> <span class="nav-text">读取文件内容到数组中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求和"><span class="nav-number">15.</span> <span class="nav-text">求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表和数组"><span class="nav-number">16.</span> <span class="nav-text">列表和数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三元操作符"><span class="nav-number">17.</span> <span class="nav-text">三元操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字运算符"><span class="nav-number">18.</span> <span class="nav-text">数字运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件读取"><span class="nav-number">19.</span> <span class="nav-text">文件读取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写文件"><span class="nav-number">20.</span> <span class="nav-text">写文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元操作符"><span class="nav-number">21.</span> <span class="nav-text">元操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串操作"><span class="nav-number">22.</span> <span class="nav-text">字符串操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串函数-index"><span class="nav-number">23.</span> <span class="nav-text">字符串函数 - index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串函数-substr"><span class="nav-number">24.</span> <span class="nav-text">字符串函数 - substr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值在给定的列表中吗"><span class="nav-number">25.</span> <span class="nav-text">值在给定的列表中吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6-的正则"><span class="nav-number">26.</span> <span class="nav-text">Perl 6 的正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl6的一些特性"><span class="nav-number">27.</span> <span class="nav-text">Perl6的一些特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6-中一系列整数的操作"><span class="nav-number">28.</span> <span class="nav-text">Perl 6 中一系列整数的操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6-中的标量、数组、散列如何插值"><span class="nav-number">29.</span> <span class="nav-text">Perl 6 中的标量、数组、散列如何插值</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

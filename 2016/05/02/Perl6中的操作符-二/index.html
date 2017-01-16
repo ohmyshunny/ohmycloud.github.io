@@ -1,0 +1,852 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="操作符,优先级," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="infix:&amp;lt;…&amp;gt;, 序列操作符.
+
+作为一个中缀操作符， ... 操作符的左右两侧都有一个列表，并且为了产生想要的值的序列，序列操作符 ... 会尽可能地对序列进行惰性求值。列表被展平后求值。就像所有的中缀操作符一样， … 序列操作符比逗号的优先级要低，所以你没必要在逗号列表的两侧加上圆括号。
+序列操作符 ... 以右侧列表的第一个值开始。这只在右侧的列表中， … 序列操作符唯一感">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的操作符(二)">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/05/02/Perl6中的操作符-二/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="infix:&amp;lt;…&amp;gt;, 序列操作符.
+
+作为一个中缀操作符， ... 操作符的左右两侧都有一个列表，并且为了产生想要的值的序列，序列操作符 ... 会尽可能地对序列进行惰性求值。列表被展平后求值。就像所有的中缀操作符一样， … 序列操作符比逗号的优先级要低，所以你没必要在逗号列表的两侧加上圆括号。
+序列操作符 ... 以右侧列表的第一个值开始。这只在右侧的列表中， … 序列操作符唯一感">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.708Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的操作符(二)">
+<meta name="twitter:description" content="infix:&amp;lt;…&amp;gt;, 序列操作符.
+
+作为一个中缀操作符， ... 操作符的左右两侧都有一个列表，并且为了产生想要的值的序列，序列操作符 ... 会尽可能地对序列进行惰性求值。列表被展平后求值。就像所有的中缀操作符一样， … 序列操作符比逗号的优先级要低，所以你没必要在逗号列表的两侧加上圆括号。
+序列操作符 ... 以右侧列表的第一个值开始。这只在右侧的列表中， … 序列操作符唯一感">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/05/02/Perl6中的操作符-二/"/>
+
+  <title> Perl 6 中的操作符(二) | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的操作符(二)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-02T00:00:00+08:00" content="2016-05-02">
+              2016-05-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/02/Perl6中的操作符-二/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/02/Perl6中的操作符-二/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>infix:&lt;…&gt;, 序列操作符.</li>
+</ul>
+<p>作为一个中缀操作符， <code>...</code> 操作符的左右两侧都有一个列表，并且为了产生<code>想要的值</code>的序列，序列操作符 <code>...</code> 会尽可能地对序列进行惰性求值。列表被展平后求值。就像所有的中缀操作符一样， … 序列操作符比逗号的优先级要低，所以你没必要在逗号列表的两侧加上圆括号。</p>
+<p>序列操作符 <code>...</code> 以右侧列表的第一个值开始。这只在右侧的列表中， … 序列操作符唯一感兴趣的值；any additional list elements are treasured up lazily to be returned after the … is done.</p>
+<p> … 右侧的第一个值是序列的端点或界限，这是序列操作符 … 从左侧生成的。</p>
+<p>一旦我们知道了序列的边界，左侧的列表会一项一项地被求值，并且普通数字或字符串值被无差异地传递（在右侧边界允许的程度内）如果序列中的任何值匹配到边界值，序列会终止，包括那个最后的边界值在内。要排除边界值，使用  …^ 代替。</p>
+<a id="more"></a>
+<p>在内部，这两种形式用于检测匿名的循环是否会终止，而循环返回序列中的值。假设下一个候选的值存储在 $x 中，并且右侧序列中的第一个值存储在 $limit 中，这两个操作符各自实现为：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">...     <span class="keyword">last</span>($x) <span class="keyword">if</span> $x ~~ $limit;</div><div class="line">...^    <span class="keyword">last</span>     <span class="keyword">if</span> $x ~~ $limit;</div></pre></td></tr></table></figure>
+<p>如果边界是 * ,序列就没有界限。如果边界是一个闭包，它会在当前候选对象中进行布尔真值求值，并且序列会一直继续只要闭包返回false。如果边界是一个含有一个或无限参数的闭包，</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> $lim = <span class="number">0</span>;</div><div class="line"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> ...^ * &gt; $lim      <span class="comment"># returns (), since 1 &gt; 0</span></div></pre></td></tr></table></figure>
+<p>这个操作符如果只能把左边的值原样返回就太乏味了。它的强大来自于能从旧值生成新值。你可以，例如，使用一个存在的生成器产生一个无穷列表：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>..* ... * &gt;= $lim</div><div class="line">@fib ... * &gt;= $lim</div></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="number">1</span>..* ... * &gt;= <span class="number">10</span>  <span class="comment"># 1 2 3 4 5 6 7 8 9 10</span></div></pre></td></tr></table></figure>
+<p>更一般地，如果 … 操作符左侧列表中的下一项是一个闭包，它不会被返回。他会在已经存在的列表的末尾被调用以产生一个新值。闭包中变量的数目决定了要使用多少前置值作为输入来生成序列中的下一个值。例如，以2为步长计数只需要一个参数：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">2</span>, &#123; $^a + <span class="number">2</span> &#125; ... *           <span class="comment"># 2,4,6,8,10,12,14,16...</span></div></pre></td></tr></table></figure>
+<p>生成裴波纳契序列一次需要两个参数：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>, <span class="number">1</span>, &#123; $^a + $^b &#125; ... *      <span class="comment"># 1,1,2,3,5,8,13,21...</span></div></pre></td></tr></table></figure>
+<p>任何特定的函数也有效，只要你把它作为列表中的一个值而不是调用它：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>, <span class="number">1</span>, &amp;infix:&lt;+&gt; ... *         <span class="comment"># 1,1,2,3,5,8...</span></div><div class="line"><span class="number">1</span>, <span class="number">1</span>, &amp;[+] ... *               <span class="comment"># 同上</span></div><div class="line"><span class="number">1</span>, <span class="number">1</span>, *+* ... *                <span class="comment"># 同上</span></div></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function"><span class="keyword">sub</span> <span class="title">infix</span>:&lt;<span class="title">jia</span>&gt;</span>($a,$b)&#123; <span class="keyword">return</span> $a+$b &#125;</div><div class="line">&gt; <span class="number">1</span> jia <span class="number">5</span> <span class="comment"># 6</span></div><div class="line">&gt; <span class="number">1</span>,<span class="number">1</span>,&amp;[jia] ... * <span class="comment"># 1 1 2 3 5 8 13 21 34 55 89 144 233 377 ......</span></div></pre></td></tr></table></figure>
+<p>更一般地，函数是一元的，这种情况下左侧列表中任何额外的值会被构建为人类可读的文档：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>, &#123; $_ + <span class="number">2</span> &#125; ... <span class="number">42</span>        <span class="comment">#  0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42</span></div></pre></td></tr></table></figure>
+<p>使用闭包：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>,-&gt; $init &#123;$init+<span class="number">2</span>&#125; ... <span class="number">42</span>   <span class="comment"># 0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42</span></div></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>, *+<span class="number">2</span> ... <span class="number">42</span>           <span class="comment"># same thing</span></div><div class="line">&lt;a b c&gt;, &#123; .succ &#125; ... *    <span class="comment"># same as 'a'..*</span></div></pre></td></tr></table></figure>
+<p>函数也可以不是单调函数：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>, -* ... *                <span class="comment"># 1, -1, 1, -1, 1, -1...</span></div><div class="line">False, &amp;prefix:&lt;!&gt; ... *   <span class="comment"># False, True, False...</span></div></pre></td></tr></table></figure>
+<p>函数也可以是 0-ary 的， 这个时候让闭包成为第一个元素是 okay 的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; rand &#125; ... *             # 一组随机数</div></pre></td></tr></table></figure>
+<p>函数还可以是吞噬的（n-ary），在这种情况下，所有前面的值都被传递进来（这意味着它们必须都被操作符缓存下来，所以性能会经受考验， 你可能会发现自己空间泄露了）</p>
+<p>函数的数量不必与返回值的数量匹配， 但是如果确实匹配， 你可能会插入不相关的序列：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>,<span class="number">1</span>,&#123; $^a + <span class="number">1</span>, $^b * <span class="number">2</span> &#125; ... *   <span class="comment"># 1,1,2,2,3,4,4,8,5,16,6,32...</span></div><div class="line"><span class="number">1</span>,<span class="number">1</span>, -&gt;$a,$b &#123;$a+<span class="number">1</span>,$b*<span class="number">2</span>&#125; ... *  <span class="comment"># 同上</span></div></pre></td></tr></table></figure>
+<p>注意在这种情况下任何界限测试被应用到从函数返回的整个 parcel 上， 这个 parcel 包含两个值。</p>
+<p>除了那些函数签名所隐含的约束，序列操作符从一个没有对序列作类型约束的显式函数中生成。如果函数的签名和已存在的值不匹配，那么序列终止。</p>
+<p>S03-sequence/misc.t lines 5–12  </p>
+<p>如果没有提供生成闭包， 并且序列是数字的，而且序列明显还是等差的或等比的（通过检查它的最后 3 个值），那么序列操作符就会推断出合适的函数：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span> ... *    <span class="comment"># 奇数</span></div><div class="line"><span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span> ... *    <span class="comment"># 2的幂</span></div><div class="line"><span class="number">10</span>,<span class="number">9</span>, <span class="number">8</span> ... <span class="number">0</span>    <span class="comment"># 倒数</span></div></pre></td></tr></table></figure>
+<p>即， 假设我们调用了最后 3 个数字  <code>$a</code>, <code>$b</code>, 和 <code>$c</code>，然后定义：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ab = $b - $a;</div><div class="line">$bc = $c - $b;</div></pre></td></tr></table></figure>
+<p>如果 <code>$ab == $bc</code> 并且 <code>$ab</code> 不等于0， 那么我们通过函数 <code>*+$ab</code> 可以推断出等差数列。如果 <code>$ab</code> 为 0，并且那3个值看起来像数字，那么函数推断为 <code>*+0</code>。</p>
+<p>如果它们看起来不像数字，那么根据 <code>$b cmp $c</code> 的结果是 Increasing 还是 Decreasing 来决定选择的函数是 <code>*.succ</code> 还是 <code>*.pred</code>。</p>
+<p>如果 <code>cmp</code> 返回 <code>Same</code> 那么会假定函数是同一个。</p>
+<p>如果 <code>$ab != $bc</code> 并且 <code>none($a,$b,$c) == 0</code>， 那么会使用除法而非减法做类似的计算来决定是否需要一个等比数列。定义：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ab = $b / $a;</div><div class="line">$bc = $c / $b;</div></pre></td></tr></table></figure>
+<p>如果两者的商相等（并且是有限的），那么会推断出等比函数  <code>{$_ * $bc}</code>。</p>
+<p>如果目前为止只有 2 个值， $a 和 $b, 并且差值 $ab 不为 0, 那么我们就假定函数为 <code>*+$ab</code> 的等差数列。</p>
+<p>如果 <code>$ab</code> 是 0， 那么再次， 我们使用  <code>*+0</code> 还是 <code>*.succ/*.pred</code> 取决于那两个值看起来是不是数字。</p>
+<p>如果只有一个值，我们总是通过 <code>*.succ</code> 假定增量（这可能被强制为 .pred 通过检查界限，就像下面指定的那样）因此这些结果都是一样的：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span> .. *</div><div class="line"><span class="number">1</span> ... *</div><div class="line"><span class="number">1</span>,<span class="number">2</span> ... *</div><div class="line"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> ... *</div><div class="line">&lt;<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>&gt; ... *</div></pre></td></tr></table></figure>
+<p>同样地， 如果给定的值(s)不是数字， 就假定为 <code>.succ</code>, 所以这些结果是一样的：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">'a'</span> .. *</div><div class="line"><span class="string">'a'</span> ... *</div><div class="line"><span class="string">'a'</span>,<span class="string">'b'</span> ... *</div><div class="line"><span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span> ... *</div><div class="line">&lt;a b c&gt; ... *</div></pre></td></tr></table></figure>
+<p>如果序列操作符的左侧是 <code>()</code>, 那我们使用函数 <code>{()}</code> 来生成一个无限的空序列。</p>
+<p>如果给定了界限，那这个界限就必须被精确匹配。如果不能精确匹配，会产生无限列表。例如，因为”趋近”和“相等”不一样， 下面的两个序列都是无限列表，就像你把界限指定为了 * 而不是 0：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1,1/2,1/4 ... 0    # like 1,1/2,1/4 ... *</div><div class="line">1,-1/2,1/4 ... 0   # like 1,-1/2,1/4 ... *</div></pre></td></tr></table></figure>
+<p>同样地，这是所有的偶数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $end = 7;</div><div class="line">0,2,4 ... $end</div></pre></td></tr></table></figure>
+<p>为了捕捉这样一种情况， 建议写一个不等式代替：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0,2,4 ...^ &#123; $_ &gt; $end &#125;</div></pre></td></tr></table></figure>
+<p>当使用了显式的界限函数，他可能通过返回任意真值来终止它的列表。因为序列操作符是列表结合性的，内部函数后面可以跟着 … ，然后另外一个函数来继续列表，等等。因此：</p>
+<p>S03-sequence/misc.t lines 34–100  </p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>,   *+<span class="number">1</span>   ... &#123; $_ ==   <span class="number">9</span> &#125;,</div><div class="line"><span class="number">10</span>,  *+<span class="number">10</span>  ... &#123; $_ ==  <span class="number">90</span> &#125;,</div><div class="line"><span class="number">100</span>, *+<span class="number">100</span> ... &#123; $_ == <span class="number">900</span> &#125;</div></pre></td></tr></table></figure>
+<p>产生：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,</div><div class="line"><span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">50</span>,<span class="number">60</span>,<span class="number">70</span>,<span class="number">80</span>,<span class="number">90</span>,</div><div class="line"><span class="number">100</span>,<span class="number">200</span>,<span class="number">300</span>,<span class="number">400</span>,<span class="number">500</span>,<span class="number">600</span>,<span class="number">700</span>,<span class="number">800</span>,<span class="number">900</span></div></pre></td></tr></table></figure>
+<p>考虑到没有闭包的普通匹配规则，我们可以把上面的序列更简单地写为：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ... <span class="number">9</span>,</div><div class="line"><span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span> ... <span class="number">90</span>,</div><div class="line"><span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span> ... <span class="number">900</span></div></pre></td></tr></table></figure>
+<p>甚至仅仅是：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ...</div><div class="line"><span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span> ...</div><div class="line"><span class="number">100</span>, <span class="number">200</span>, <span class="number">300</span> ... <span class="number">900</span></div></pre></td></tr></table></figure>
+<p>因为一个精确的匹配界限会被作为序列的一部分返回，所以提供的那个精确值是一个合适类型的值， 而非一个闭包。</p>
+<p>对于左侧只有一个值的函数推断，最后的值被用于决定是 <code>*.succ</code> 还是 <code>*.pred</code> 更合适。 使用 cmp 来比较那两个值来决定前进的方向。</p>
+<p>因此, 序列操作符能自动反转, 而范围操作符不会自动反转.</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">'z'</span> .. <span class="string">'a'</span>   <span class="comment"># 表示一个空的范围</span></div><div class="line"><span class="string">'z'</span> ... <span class="string">'a'</span>  <span class="comment"># z y x ... a</span></div></pre></td></tr></table></figure>
+<p>你可以使用 <code>^...</code> 形式来排除第一个值:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">'z'</span> ^... <span class="string">'a'</span> <span class="comment"># y x ... a</span></div><div class="line"><span class="number">5</span> ^... <span class="number">1</span>     <span class="comment"># 4, 3, 2, 1</span></div></pre></td></tr></table></figure>
+<p>但是你要意识到, 如果列表的左侧很复杂, 特别是左侧是另一个序列时, 肯定会让你的读者困惑:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ^... *;                  <span class="comment"># 2, 3 ...  !</span></div><div class="line"><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ... <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span> ^... *;   <span class="comment"># 2, 3 ...  !?!?</span></div></pre></td></tr></table></figure>
+<p>是的, 对于极端喜欢对称性的那些人来说, 还有另外一种形式: <code>^...^</code></p>
+<p>就像数字数值一样, 字符串匹配必须是精确的, 否则会产生无限序列.</p>
+<p>注意下面这个序列:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.0</span>, *+<span class="number">0</span>.<span class="number">2</span> ... <span class="number">2.0</span></div></pre></td></tr></table></figure>
+<p>是使用 <code>Rat</code> 算术计算的, 而不是 <code>Num</code>, 所以 2.0 精确地匹配了并结束了序列.</p>
+<p>注意：只有在期望为一个 term 的地方，<code>...</code> 才会被识别为 yada 操作符。序列操作符只用于期望中缀操作符出现的地方。</p>
+<p>如果你在 <code>...</code> 前面放置了一个逗号，那么 <code>...</code>会被识别为 yada 列表操作符 - 表达当列表到达那点时会失败的要求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1..20, ... &quot;I only know up to 20 so far mister&quot;</div><div class="line">&gt; 1..20, fail &quot;I only know up to 20 so far mister&quot;  # I only know up to 20 so far mister</div></pre></td></tr></table></figure>
+<p>序列的末端是一个代表单个代码点的字符串时，会抛出一个特殊的异常， 因为典型地，用户会把这样一个字符串看作是字符而非字符串。如果你像这样说：</p>
+<p>S03-sequence/nonnumeric.t lines 36–101  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&apos;A&apos; ... &apos;z&apos;</div><div class="line">&quot;\xff&quot; ... &quot;\0&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;  &apos;A&apos; ... &apos;z&apos; # A B C D ... Y Z [ \ ] ^ _ ` a  b c ... y z</div></pre></td></tr></table></figure>
+<p>它会假定你对按字母顺序范围不感兴趣， 所以，代替对于字符串使用普通的 <code>.succ/.pred</code>， 它会像这样使用单调函数来增加或减少底层的代码点数字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&apos;A&apos;, &#123; $^prev.ord.succ.chr &#125; ... &apos;z&apos;;</div><div class="line">&quot;\xff&quot;, &#123; $^prev.ord.pred.chr &#125; ... &quot;\0&quot;;</div></pre></td></tr></table></figure>
+<p>… 操作符是 “yada, yada, yada” 列表操作符, 它在其它东西之间用作函数原型中得主体。如果它曾经被执行过的话会强烈地抱怨（通过调用 fail）。变体 ??? 调用 <code>warn</code>, 而 !!! 调用 <code>die</code>。参数是可选的，但是如果提供了参数的话，会被传递给 <code>fail</code>、<code>warn</code> 或 <code>die</code> 。 否则系统会基于上下文为你编造信息，以标示你尝试执行了某些已经创建过的东西。</p>
+<h2 id="Reduce-操作符"><a href="#Reduce-操作符" class="headerlink" title="Reduce 操作符"></a>Reduce 操作符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[+] [*] [&lt;] [\+] [\*] 等等.</div></pre></td></tr></table></figure>
+<p>Sigils as coercions to roles</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Sigil       Alpha variant</div><div class="line">-----       -------------</div><div class="line">$           Scalar</div><div class="line">@           Positional (or Iterable?)</div><div class="line">%           Associative</div><div class="line">&amp;           Callable</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(1,2 Z 3,4)      # Scalar((1,3),(2,4))</div><div class="line">@(1,2 Z 3,4)      # ((1,3),(2,4))</div><div class="line">%(1,2 Z 3,4)      # PairSeq(1 =&gt; 3, 2 =&gt; 4)</div><div class="line">$(1,2 X 3,4)      # Scalar((1,3),(1,4),(2,3),(2,4))</div><div class="line">@(1,2 X 3,4)      # ((1,3),(1,4),(2,3),(2,4))</div></pre></td></tr></table></figure>
+<p><strong>-&gt;</strong> 变成了 <strong>.</strong> , 就像世界其它地方使用的一样。有一个产生编译时错误的伪后缀 <code>postfix:[&#39;-&gt;&#39;]</code> 操作符以提醒 Perl 5 用户使用点代替。（”pointy block” 在 Perl 6 中使用 <code>-&gt;</code> 要求它前面有空格，当箭头可能会和后缀混淆时，即，当期望一个中缀时。在 item 位置上不要求有前置空格。）</p>
+<p>字符串连接由 <code>.</code> 变成 <code>~</code>。字符串追加同样变成 <code>~=</code>。</p>
+<p>文件测试操作符不见了。我们现在使用 <em>Pair</em> 作为调用对象的方法的模式;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if $filename.IO ~~ :e &#123; say &quot;exists&quot; &#125;</div></pre></td></tr></table></figure>
+<p>等价于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if so $filename.IO.e &#123; say &quot;exists&quot; &#125;</div></pre></td></tr></table></figure>
+<p>Likewise</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if $filename.IO ~~ :!e &#123; say &quot;doesn&apos;t exist&quot; &#125;</div></pre></td></tr></table></figure>
+<p>is the same as</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if not $filename.IO.e &#123; say &quot;doesn&apos;t exist&quot; &#125;</div></pre></td></tr></table></figure>
+<p>如果你不关心右侧某个位置上是什么元素，你可以把这个元素赋值给 <code>*</code> 记号。 最后的星号 <code>*</code> 丢弃掉列表的剩余部分:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">($a, *, $c) = 1, 2, 3;      # 丢弃数字 2</div><div class="line">($a, $b, $c, *) = 1..42;    # 丢弃 4..42</div></pre></td></tr></table></figure>
+<p>(在签字语法中，一个裸的 <code>$</code> 也能忽略单个参数，而一个裸的 <code>*@</code> 可以忽略剩下的参数。)</p>
+<p>列表赋值依次把右侧的列表提供给左侧的每个容器，而每个容器可以从右侧列表的前头接收一个或多个元素。如果左侧的元素有任何剩余，警告就会出现，除非左侧的列表以 <code>*</code> 字符结尾或者右侧的最后的迭代器是按照 <code>*</code> 定义的。因此下面没有一个会发出警告：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">($a, $b, $c, *) = 1..9999999;</div><div class="line">($a, $b, $c) = 1..*;</div><div class="line">($a, $b, $c) = 1 xx *;</div><div class="line">($a, $b, $c) = 1, 2, *;</div></pre></td></tr></table></figure>
+<p>然而，这个会警告你信息缺失：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">($a, $b, $c) = 1, 2, 3, 4;</div></pre></td></tr></table></figure>
+<p>把列表赋值给标量, 你可以这样写:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$a = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</div><div class="line">($a = <span class="number">1</span>), <span class="number">2</span>, <span class="number">3</span>; <span class="comment"># 2 和 3 的上下文为空</span></div></pre></td></tr></table></figure>
+<p>显式的禁用或破坏 item 赋值解释:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];             <span class="comment"># 强制构建 (或许是最佳实践)</span></div><div class="line">$a = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);             <span class="comment"># force grouping as syntactic item</span></div><div class="line">$a = list <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;          <span class="comment"># force grouping using listop precedence</span></div><div class="line">$a = @(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);            <span class="comment"># same thing</span></div><div class="line">@$a = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;              <span class="comment"># 强制列表赋值</span></div><div class="line">$a[] = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;             <span class="comment"># same thing</span></div></pre></td></tr></table></figure>
+<p>如果一个函数是上下文不敏感的并且你想返回一个标量值，如果你想为了下标或右边强制为 <em>item</em> 上下文，那么你必须使用 <code>item</code>（或 <code>$</code> 或 <code>+</code> 或 <code>~</code>）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@a[foo()] = bar();           # foo() 和 bar() 在列表上下文中调用</div><div class="line">@a[item foo()] = item bar(); # foo() 和 bar() 在标量上下文中调用</div><div class="line">@a[$(foo())] = $(bar());     # 同样的东西</div><div class="line">@a[+foo()] = +bar();         # foo() 和 bar() 在数值上下文中调用</div><div class="line">%a&#123;~foo()&#125; = ~bar();         # foo() 和 bar() 在字符串上下文中调用</div></pre></td></tr></table></figure>
+<h1 id="Junctive-操作符"><a href="#Junctive-操作符" class="headerlink" title="Junctive 操作符"></a><a href="https://desgin.perl6.org/S03.html#Junctive_operators" target="_blank" rel="external">Junctive 操作符</a></h1><p><a href="https://github.com/perl6/roast/blob/master/S03-junctions/misc.t#L23-L151" target="_blank" rel="external">S03-junctions/misc.t lines 23–151</a><br><a href="https://github.com/perl6/roast/blob/master/S03-junctions/misc.t#L152-L157" target="_blank" rel="external">S03-junctions/misc.t lines 152–157</a><br><a href="https://github.com/perl6/roast/blob/master/S03-junctions/associative.t#L16-L37" target="_blank" rel="external">S03-junctions/associative.t lines 16–37</a><br><a href="https://github.com/perl6/roast/blob/master/S03-junctions/boolean-context.t#L5-L150" target="_blank" rel="external">S03-junctions/boolean-context.t lines 5–150</a></p>
+<p><code>|</code>, <code>&amp;</code>, 和 <code>^</code> 不再是位操作符了(查看  <a href="https://desgin.perl6.org/S03.html#Changes_to_Perl_5_operators" target="_blank" rel="external">“Changes to Perl 5 operators”</a>)，而是担任更高的职务: 它们现在是 junction 构造器了。</p>
+<p>junction 是等价于多个值的单个值。它们进行线程化操作符， 返回另一个代表结果的 junction：</p>
+<p><a href="https://github.com/perl6/roast/blob/master/S03-operators/misc.t#L68-L89" target="_blank" rel="external">S03-operators/misc.t lines 68–89</a><br><a href="https://github.com/perl6/roast/blob/master/S03-junctions/misc.t#L158-L168" target="_blank" rel="external">S03-junctions/misc.t lines 158–168</a><br><a href="https://github.com/perl6/roast/blob/master/S03-junctions/misc.t#L233-L499" target="_blank" rel="external">S03-junctions/misc.t lines 233–499</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(1|2|3) + 4;                            # 5|6|7</div><div class="line">(1|2) + (3&amp;4);                          # (4|5) &amp; (5|6)</div></pre></td></tr></table></figure>
+<p>就像最后那个例子中解释的那样，当单个操作符应用到两个 junctions 中时，结果是一个代表左右可能值得组合的 junction。</p>
+<p>Junctions 还有 <code>any</code>， <code>all</code>，<code>one</code>， <code>none</code> 的函数变体。</p>
+<p>这为像这样的构造打开了大门。</p>
+<p><a href="https://github.com/perl6/roast/blob/master/S03-junctions/misc.t#L169-L191" target="_blank" rel="external">S03-junctions/misc.t lines 169–191</a>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if $roll == none(1..6) &#123; print &quot;Invalid roll&quot; &#125;</div><div class="line">if $roll == 1|2|3      &#123; print &quot;Low roll&quot;     &#125;</div></pre></td></tr></table></figure>
+<p>Junctions 在下标中的表现:</p>
+<p><a href="https://github.com/perl6/roast/blob/master/S03-junctions/misc.t#L192-L207" target="_blank" rel="external">S03-junctions/misc.t lines 192–207</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">doit() if @foo[any(1,2,3)]</div></pre></td></tr></table></figure>
+<p>Junctions 也是没有顺序的。 所以如果你这样写：</p>
+<p><a href="https://github.com/perl6/roast/blob/master/S03-junctions/misc.t#L208-L232" target="_blank" rel="external">S03-junctions/misc.t lines 208–232</a>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">foo() | bar() | baz() == 42</div></pre></td></tr></table></figure>
+<p>这向编译器表明 junctional 参数之间没有连接（coupling）。它们可以以任意顺序求值或并行地求值。它们也可以是短路的, 只要它们中的任何一个返回 42, 并且其它的不会被运行。或者, 如果并行地运行, 第一个成功的线程会突然终止其它的线程。一般地, 在 junctions 中, 你可能需要避免带有副作用的代码。</p>
+<p>把否定操作符和 junctions 用在一起可能会有问题如果原生地自动线程化的话。然而，就否定元操作符而言，通过定义 <code>!=</code> 和 <code>ne</code>，我们自动地得到了说英语的人所想要的 “not raising”。即：</p>
+<p><a href="https://github.com/perl6/roast/blob/master/S03-junctions/autothreading.t#L290-L367" target="_blank" rel="external">S03-junctions/autothreading.t lines 290–367</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if $a != 1 | 2 | 3 &#123;...&#125;</div></pre></td></tr></table></figure>
+<p>实际上意味着：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if $a ![==] 1 | 2 | 3 &#123;...&#125;</div></pre></td></tr></table></figure>
+<p>其中元操作符被重写为某些像高阶函数这样的东西：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">negate((* == *), $a, (1|2|3));</div></pre></td></tr></table></figure>
+<p>它最终等价于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if not $a == 1 | 2 | 3 &#123;...&#125;</div></pre></td></tr></table></figure>
+<p>它是说英语的人所期望的语义，你自己写出后面那种风格的形式可能会更好。</p>
+<p>作用在数组、列表和集合中得 Junctive 方法就像对应的列表操作符那样工作。然而，作用在散列身上的 junctive 方法，只会对散列的键进行连结(junction)。使用 listop 形式(或者一个显式的 <code>.pairs</code>) 来连结(junction) pairs。</p>
+<p>各种用于集合和 bags （交集、并集等）的操作符也拥有 junctive 优先级（除了那些返回布尔值得之外，它们实际上被归类为链式操作符）。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作符/" rel="tag">#操作符</a>
+          
+            <a href="/tags/优先级/" rel="tag">#优先级</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/26/Perl-6-From-Wikipedia/" rel="next" title="Perl 6 From Wikipedia">
+                <i class="fa fa-chevron-left"></i> Perl 6 From Wikipedia
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/11/列表解析/" rel="prev" title="列表解析">
+                列表解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/02/Perl6中的操作符-二/"
+     data-title="Perl 6 中的操作符(二)"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/05/02/Perl6中的操作符-二/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/02/Perl6中的操作符-二/"
+           data-title="Perl 6 中的操作符(二)" data-url="https://ohmycloud.github.io/2016/05/02/Perl6中的操作符-二/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduce-操作符"><span class="nav-number">1.</span> <span class="nav-text">Reduce 操作符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Junctive-操作符"><span class="nav-number"></span> <span class="nav-text">Junctive 操作符</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

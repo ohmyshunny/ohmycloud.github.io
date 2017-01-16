@@ -1,0 +1,883 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="FAQ," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="源文件可以在 github 或 perl6.org上找到.
+GeneralRakudo 和 Perl 6 的区别是什么？Rakudo 是 Perl 6 的一个实现。目前它是完成度最好的但是过去也有其它的实现, 将来也可能会有其它实现。Perl 6 是语言的定义。很多场合
+这两个名字可以宽松地使用并互相替换。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 FAQ">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/06/06/Perl-6-FAQ/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="源文件可以在 github 或 perl6.org上找到.
+GeneralRakudo 和 Perl 6 的区别是什么？Rakudo 是 Perl 6 的一个实现。目前它是完成度最好的但是过去也有其它的实现, 将来也可能会有其它实现。Perl 6 是语言的定义。很多场合
+这两个名字可以宽松地使用并互相替换。">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.657Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 FAQ">
+<meta name="twitter:description" content="源文件可以在 github 或 perl6.org上找到.
+GeneralRakudo 和 Perl 6 的区别是什么？Rakudo 是 Perl 6 的一个实现。目前它是完成度最好的但是过去也有其它的实现, 将来也可能会有其它实现。Perl 6 是语言的定义。很多场合
+这两个名字可以宽松地使用并互相替换。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/06/06/Perl-6-FAQ/"/>
+
+  <title> Perl 6 FAQ | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 FAQ
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-06T00:00:00+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/06/Perl-6-FAQ/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/06/Perl-6-FAQ/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>源文件可以在 <a href="https://github.com/perl6/faq" target="_blank" rel="external">github</a> 或 <a href="https://doc.perl6.org/language/faq" target="_blank" rel="external">perl6.org</a>上找到.</p>
+<h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><h3 id="Rakudo-和-Perl-6-的区别是什么？"><a href="#Rakudo-和-Perl-6-的区别是什么？" class="headerlink" title="Rakudo 和 Perl 6 的区别是什么？"></a>Rakudo 和 Perl 6 的区别是什么？</h3><p>Rakudo 是 Perl 6 的一个实现。目前它是完成度最好的但是过去也有其它的实现, 将来也可能会有其它实现。Perl 6 是语言的定义。很多场合</p>
+<p>这两个名字可以宽松地使用并互相替换。</p>
+<a id="more"></a>
+<h3 id="会有-Perl-6-版本-6-0-0-吗"><a href="#会有-Perl-6-版本-6-0-0-吗" class="headerlink" title="会有 Perl 6 版本 6.0.0 吗?"></a>会有 Perl 6 版本 6.0.0 吗?</h3><p>第一个稳定语言版本的版本称为 v6.c，而不是 6.0.0。 不同的命名方案使得不太可能发布具有精确版本 6.0.0 的语言。</p>
+<p>您可以使用下面的代码检查您的 Rakudo 编译器是当前至少是什么版本（注意这可能不是真正的供应商二进制文件）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -e &apos;say q[too old] if $*PERL.version before Version.new(q[6.c])&apos;</div></pre></td></tr></table></figure>
+<p>它首先由 Rakudo Perl 6 编译器版本的 2015.12 实现，并且可能通过使用 ‘use 6.c’ 指令在可预见的未来支持后续版本。 下一个语言版本（无发布日期）为 v6.d.</p>
+<h3 id="作为一个-Perl-6-初学者我应该安装什么？"><a href="#作为一个-Perl-6-初学者我应该安装什么？" class="headerlink" title="作为一个 Perl 6 初学者我应该安装什么？"></a>作为一个 Perl 6 初学者我应该安装什么？</h3><p>如果你是一个 Linux 或 Mac 用户, 你可能需要下载 <a href="http://rakudo.org/downloads/star/" target="_blank" rel="external">Rakudo Star</a> 并通过编译 MoarVM 版本安装（一个简单的处理）</p>
+<p>如果你是一个 Windows 32 或 64 位用户, 那么 Rakudo Star 二进制版本在 rakudo 网站也能获得。你需要 Windows Git 来使用 panda。</p>
+<p>Linux 和 Mac 二进制版本稍后也可能从供应商和第三方那儿获取到。尽管供应商版本可能过时了。</p>
+<p>或者有一个官方的 rakudo star Docker 镜像, 地址为 <a href="https://hub.docker.com/_/rakudo-star/" target="_blank" rel="external">https://hub.docker.com/_/rakudo-star/</a></p>
+<h3 id="作为一个中高级用户我想跟进-Rakudo-开发"><a href="#作为一个中高级用户我想跟进-Rakudo-开发" class="headerlink" title="作为一个中高级用户我想跟进 Rakudo 开发"></a>作为一个中高级用户我想跟进 Rakudo 开发</h3><p>安装类似于 Perl 5 的 perlbrew – <a href="https://github.com/tadzik/rakudobrew" target="_blank" rel="external">rakudobrew</a> , 同等的 Python 还有 Ruby 工具。</p>
+<h3 id="从哪里能找到关于-Perl-6-的好文档？"><a href="#从哪里能找到关于-Perl-6-的好文档？" class="headerlink" title="从哪里能找到关于 Perl 6 的好文档？"></a>从哪里能找到关于 Perl 6 的好文档？</h3><p>最令人信赖的信息能在 perl6.org 或那儿的直接链接。</p>
+<p>你也可以使用 <a href="https://www.google.co.uk/search?q=site:irclog.perlgeek.de+inurl:perl6" target="_blank" rel="external">Google</a> 搜索 Freenode #perl6 IRC 频道。</p>
+<p><a href="http://www.perl6.org/documentation/" target="_blank" rel="external">http://www.perl6.org/documentation/</a> 和 <a href="http://doc.perl6.org/" target="_blank" rel="external">http://doc.perl6.org/</a></p>
+<h3 id="什么是-Perl-6-spec？"><a href="#什么是-Perl-6-spec？" class="headerlink" title="什么是 Perl 6 spec？"></a>什么是 Perl 6 spec？</h3><p>“spec” 指的是 Perl 6的官方测试套件。它被称作 roast 并被托管在 <a href="https://github.com/perl6/roast" target="_blank" rel="external">github</a> 上.</p>
+<p>它被用来测量一个 Perl 6 的实现有多彻底。</p>
+<h3 id="有没有-Perl-6-的术语相关的项目？"><a href="#有没有-Perl-6-的术语相关的项目？" class="headerlink" title="有没有 Perl 6 的术语相关的项目？"></a>有没有 Perl 6 的术语相关的项目？</h3><p>查看 <a href="http://design.perl6.org/S99.html" target="_blank" rel="external">glossary</a></p>
+<h3 id="我是一个-Perl-5-程序员-Perl-5-和-Perl-6-的区别在哪儿？"><a href="#我是一个-Perl-5-程序员-Perl-5-和-Perl-6-的区别在哪儿？" class="headerlink" title="我是一个 Perl 5 程序员. Perl 5 和 Perl 6 的区别在哪儿？"></a>我是一个 Perl 5 程序员. Perl 5 和 Perl 6 的区别在哪儿？</h3><p>在 <a href="https://docs.perl6.org/language/5to6-nutshell" target="_blank" rel="external"> https://docs.perl6.org/language/5to6-nutshell</a> 下面查看 ‘5to6-nutshell’ pod 文档和相关页面。</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><h3 id="Perl-6-有-CPAN-吗-或者-Perl-6-会使用-Perl-5-的-CPAN-吗"><a href="#Perl-6-有-CPAN-吗-或者-Perl-6-会使用-Perl-5-的-CPAN-吗" class="headerlink" title="Perl 6 有 CPAN 吗? 或者 Perl 6 会使用 Perl 5 的 CPAN 吗?"></a>Perl 6 有 CPAN 吗? 或者 Perl 6 会使用 Perl 5 的 CPAN 吗?</h3><p>Perl 6 还没有像 CPAN 那样成熟的模块仓库. 但是 <a href="http://modules.perl6.org/" target="_blank" rel="external">modules.perl6.org</a> 有很多已知的 Perl 6 模块, <a href="https://github.com/tadzik/panda/" target="_blank" rel="external">panda</a> 能在 Rakudo 上安装这些模块.</p>
+<h3 id="我能在-Perl-6-中使用-Perl-5的模块吗？"><a href="#我能在-Perl-6-中使用-Perl-5的模块吗？" class="headerlink" title="我能在 Perl 6 中使用 Perl 5的模块吗？"></a>我能在 Perl 6 中使用 Perl 5的模块吗？</h3><p>使用 <a href="https://github.com/niner/Inline-Perl5/" target="_blank" rel="external">Inline::Perl5</a> 能让大部分 Perl 5 模块工作, 它甚至能很好地运行 Perl 5 的 Catalyst 和 DBI。</p>
+<h3 id="我能在-Perl-6-中使用-C-和-C-吗？"><a href="#我能在-Perl-6-中使用-C-和-C-吗？" class="headerlink" title="我能在 Perl 6 中使用 C 和 C++ 吗？"></a>我能在 Perl 6 中使用 C 和 C++ 吗？</h3><p><a href="http://docs.perl6.org/language/nativecall" target="_blank" rel="external">Nativecall</a> 让这个特别容易。</p>
+<h3 id="Nativecall-找不到-libfoo-so-并且我只有-libfoo-so-1-2"><a href="#Nativecall-找不到-libfoo-so-并且我只有-libfoo-so-1-2" class="headerlink" title="Nativecall 找不到 libfoo.so 并且我只有 libfoo.so.1.2!"></a>Nativecall 找不到 libfoo.so 并且我只有 libfoo.so.1.2!</h3><p>这在 Debian 那样的系统中很常见。 你需要安装 “libfoo-dev” 来为丢失的文件设置符号链接。</p>
+<h3 id="所有的传统-Unix-库函数去哪儿了？"><a href="#所有的传统-Unix-库函数去哪儿了？" class="headerlink" title="所有的传统 Unix 库函数去哪儿了？"></a>所有的传统 Unix 库函数去哪儿了？</h3><p>使用 Nativecall 访问它们很容易。<br><a href="https://github.com/cspencer/perl6-posix" target="_blank" rel="external">POSIX</a> 模块也可以。</p>
+<h3 id="Rakudo-有核心标准库吗"><a href="#Rakudo-有核心标准库吗" class="headerlink" title="Rakudo 有核心标准库吗?"></a>Rakudo 有核心标准库吗?</h3><p>Rakudo 是一个包含最小电量的编译器发布（Test 和 Nativecall等等），像 linux 内核一样。</p>
+<p>Rakudo Star 是一个带有一些有用模块的 rakudo, 并且更多的模块可以从生态系统里安装。</p>
+<h3 id="有像-B-Deparse-那样的东西吗-我怎么抓住-AST"><a href="#有像-B-Deparse-那样的东西吗-我怎么抓住-AST" class="headerlink" title="有像 B::Deparse 那样的东西吗?/我怎么抓住 AST?"></a>有像 B::Deparse 那样的东西吗?/我怎么抓住 AST?</h3><p>使用 <code>perl6 --target=ast -e &#39;very-short-example()&#39;</code> 来抓取编译单元的抽象语法树(AST)。</p>
+<h2 id="语言特性"><a href="#语言特性" class="headerlink" title="语言特性"></a>语言特性</h2><h3 id="我怎么-dump-Perl-6-的数据结构-就像-Perl-5-的-Data-Dumper-和类似的-？"><a href="#我怎么-dump-Perl-6-的数据结构-就像-Perl-5-的-Data-Dumper-和类似的-？" class="headerlink" title="我怎么 dump Perl 6 的数据结构(就像 Perl 5 的 Data::Dumper 和类似的)？"></a>我怎么 dump Perl 6 的数据结构(就像 Perl 5 的 Data::Dumper 和类似的)？</h3><p>examples:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">my $foo=&quot;bar&quot;</div><div class="line">dd $foo        # Str $foo = &quot;bar&quot;</div><div class="line">say :$foo.perl # :foo(&quot;bar&quot;)</div><div class="line">say :$foo.gist # foo =&gt; bar</div></pre></td></tr></table></figure>
+<p>生态系统中还有模块来做这个事情, 例如 <a href="https://github.com/tony-o/perl6-data-dump/" target="_blank" rel="external">Data::Dump</a> 使用颜色来 Dump。</p>
+<h3 id="我怎么在-Perl-6-提示符（REPL）中找到历史命令行？"><a href="#我怎么在-Perl-6-提示符（REPL）中找到历史命令行？" class="headerlink" title="我怎么在 Perl 6 提示符（REPL）中找到历史命令行？"></a>我怎么在 Perl 6 提示符（REPL）中找到历史命令行？</h3><p>从生态系统中安装 <a href="https://github.com/hoelzro/p6-linenoise/" target="_blank" rel="external">Linenoise</a>.</p>
+<p>作为一种选择, 在 UNIX 那样的系统中可以安装 rlwrap。这在类 Debian 系统中可以通过<code>apt-get install rlwrap</code> 安装。</p>
+<h3 id="为什么-Rakudo-编译器有时候报错更友好？"><a href="#为什么-Rakudo-编译器有时候报错更友好？" class="headerlink" title="为什么 Rakudo 编译器有时候报错更友好？"></a>为什么 Rakudo 编译器有时候报错更友好？</h3><p>如果在输出中出现 <code>SORRY!</code> , 则错误是编译时错误, 否则是运行时错误。</p>
+<p>Examples:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">say 1/0     # Attempt to divide 1 by zero using div</div><div class="line"></div><div class="line">sub foo ( Int $a, Int $b ) &#123;...&#125;</div><div class="line">foo(1)      # ===SORRY!=== Error while compiling ...</div></pre></td></tr></table></figure>
+<h3 id="什么是-Any"><a href="#什么是-Any" class="headerlink" title="什么是 (Any)?"></a>什么是 (Any)?</h3><p><a href="http://doc.perl6.org/routine/type%2FAny" target="_blank" rel="external">Any</a> 是一个用于新类的默认超类(superclass)的顶层类。<br>它经常在这样的上下文出现：变量被定义但没有被赋值， 这里它类似于其它语言中的 undef 或 null 值。</p>
+<p>examples:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $foo;</div><div class="line">say $foo;       # (Any) 注意圆括号表明的类型对象</div><div class="line">say $foo.^name  # Any</div></pre></td></tr></table></figure>
+<p>(Any) 不应该被用于检查 definedness。 在 Perl 6 中, definedness 可能是一个对象的属性。 通常实例是被定义的, 而类型对象是未定义的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say 1.defined       # True</div><div class="line">say (Any).defined   # False</div></pre></td></tr></table></figure>
+<h3 id="so-是什么"><a href="#so-是什么" class="headerlink" title="so 是什么?"></a>so 是什么?</h3><p><code>so</code> 是一个松散优先级的操作符, 它强制上下文为 <a href="https://docs.perl6.org/type/Bool" target="_blank" rel="external">Bool</a>.  </p>
+<p><code>so</code> 拥有和 <code>?</code> 前缀操作符同样的语义, 就像 <code>and</code> 是 <code>&amp;&amp;</code> 的低优先级版本一样.</p>
+<p>用法示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say so 1|2 == 2;    # Bool::True</div></pre></td></tr></table></figure>
+<p>在这个例子中, 比较的结果(结果是 <a href="https://docs.perl6.org/type/Junction" target="_blank" rel="external">Junction</a>)在打印之前被转换为 Bool 值了.</p>
+<h3 id="签名中的那些-D-和-U-是什么东东？"><a href="#签名中的那些-D-和-U-是什么东东？" class="headerlink" title="签名中的那些 :D 和 :U 是什么东东？"></a>签名中的那些 :D 和 :U 是什么东东？</h3><p>在 Perl 6 中, 类和其它类型是对象, 并且传递自身类型的类型检测。<br>例如如果你声明一个变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my Int $x = 42;</div></pre></td></tr></table></figure>
+<p>那么, 你不仅可以给它赋值整数（即， Int 类的实例）, 还能给它赋值 Int 类型对象自身：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$x = Int</div></pre></td></tr></table></figure>
+<p>如果你想排除类型对象, 你可以追加一个 <code>:D</code> 类型微笑符, 它代表”定义”（definite）:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my Int:D $x = 42;</div><div class="line">$x = Int;  # dies with:</div><div class="line">           # Type check failed in assignment to $x;</div><div class="line">           # expected Int:D but got Int</div></pre></td></tr></table></figure>
+<p>同样地, <code>:U</code> 约束为未定义的值, 即类型对象。<br>要显式地允许类型对象或实例, 你可以使用 <code>:_</code>。</p>
+<h3 id="签名中的-–-gt-是什么东东？"><a href="#签名中的-–-gt-是什么东东？" class="headerlink" title="签名中的 –&gt; 是什么东东？"></a>签名中的 –&gt; 是什么东东？</h3><p><code>--&gt;</code> 是一个返回值约束, 要么是类型要么是有定义的值。</p>
+<p>类型约束的例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sub divide-to-int( Int $a, Int $b --&gt; Int ) &#123;</div><div class="line">        return ($a / $b).narrow;</div><div class="line">&#125;</div><div class="line"></div><div class="line">divide-to-int(3, 2)</div><div class="line"># Type check failed for return value; expected Int but got Rat</div></pre></td></tr></table></figure>
+<p>有明确返回值的例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sub discard-random-number( --&gt; 42 ) &#123; rand &#125;</div><div class="line">say discard-random-number</div><div class="line"># 42</div></pre></td></tr></table></figure>
+<p>在这种情况下，最终值被抛弃，因为已经指定了返回值。</p>
+<h3 id="Any-和-Mu-的区别是什么"><a href="#Any-和-Mu-的区别是什么" class="headerlink" title="Any 和 Mu 的区别是什么?"></a>Any 和 Mu 的区别是什么?</h3><p><code>Mu</code> 是所派生出的所有其它类型的基类型. <code>Any</code> 是从  <code>Mu</code>派生来的, 代表着任何类型的 Perl 6 值. 主要区别是, <code>Any</code> 不包含 <code>Junction</code>.</p>
+<p>子例程参数的默认类型是 <code>Any</code>, 以至于当你声明 <code>sub foo ($a)</code> 时, 你真正表达的是 <code>sub foo (Any $a)</code> . 类似地, 类的声明被假定继承自 <code>Any</code>, 除非使用了像 <code>is Mu</code> 这样的 trait 特征.</p>
+<h3 id="怎么从-Junction-中提取值"><a href="#怎么从-Junction-中提取值" class="headerlink" title="怎么从 Junction 中提取值?"></a>怎么从 Junction 中提取值?</h3><p>如果你想从 <a href="https://docs.perl6.org/type/Junction" target="_blank" rel="external">Junction</a> 中提取值(特征态), 那你可能正误入歧途. 应该使用 <a href="https://docs.perl6.org/type/Set" target="_blank" rel="external">Set</a> 代替</p>
+<p>Junctions 作为匹配器, 而不是使用它们做代数.</p>
+<p>如果你还是想那样做, 你可以滥用自动线程(autothreading):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sub eigenstates(Mu $j) &#123;</div><div class="line">    my @states;</div><div class="line">    -&gt; Any $s &#123; @states.push: $s &#125;.($j);</div><div class="line">    @states;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say eigenstates(1|2|3).join(&apos;, &apos;);</div><div class="line"># prints 1, 2, 3 or a permutation thereof</div></pre></td></tr></table></figure>
+<h3 id="如果-Str-是不可变的-那么-s-是怎么工作的-如果-Int-是不可变的-i-是怎么工作的"><a href="#如果-Str-是不可变的-那么-s-是怎么工作的-如果-Int-是不可变的-i-是怎么工作的" class="headerlink" title="如果 Str 是不可变的, 那么 s/// 是怎么工作的? 如果 Int 是不可变的, $i++ 是怎么工作的?"></a>如果 Str 是不可变的, 那么 <code>s///</code> 是怎么工作的? 如果 Int 是不可变的, <code>$i++</code> 是怎么工作的?</h3><p>在 Perl 6 中, 很多基本类型是不可变的, 但是保存它们的变量不是. <code>s///</code> 作用于变量上, 在这个变量中放入一个新创建的字符串对象. 同样地, <code>$i++</code> 作用于 <code>$i</code> 变量上, 而不是作用在它里面的值身上.</p>
+<p>更多详情请查看:  <a href="http://doc.perl6.org/language/containers" target="_blank" rel="external">containers</a> 文档。</p>
+<h3 id="什么是数组引用和自动解引用-我仍然需要-符号吗"><a href="#什么是数组引用和自动解引用-我仍然需要-符号吗" class="headerlink" title="什么是数组引用和自动解引用? 我仍然需要 @ 符号吗?"></a>什么是数组引用和自动解引用? 我仍然需要 @ 符号吗?</h3><p>在 Perl 6 中, 几乎所有的东西都是引用. 所以谈论 taking references 没有多大意义. 不像 Perl 5 那样, Perl 6 的标量变量也能直接包含数组:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my @a = 1, 2, 3;</div><div class="line">say @a;                 # &quot;1 2 3\n&quot;</div><div class="line">say @a.WHAT;            # (Array)</div><div class="line"></div><div class="line">my $scalar = @a;</div><div class="line">say $scalar;            # &quot;1 2 3\n&quot;</div><div class="line">say $scalar.WHAT;       # (Array)</div></pre></td></tr></table></figure>
+<p>最大的区别是, 标量中的数组在列表上下文中是一个值, 然而数组会被愉快地迭代:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">my @a = 1, 2, 3;</div><div class="line">my $s = @a;</div><div class="line"></div><div class="line">for @a &#123; ... &#125;          # loop body executed 3 times</div><div class="line">for $s &#123; ... &#125;          # loop body executed only once</div><div class="line"></div><div class="line">my @flat = flat @a, @a;</div><div class="line">say @flat.elems;        # 6</div><div class="line"></div><div class="line">my @nested = flat $s, $s;</div><div class="line">say @nested.elems;      # 2</div></pre></td></tr></table></figure>
+<p>你可以使用 <code>@( ... )</code> 或通过在表达式身上调用 <code>.list</code> 方法来强制展平, 使用 <code>$( ... )</code> 或通过在表达式身上调用 <code>.item</code> 方法强制为 item  上下文(不展平).</p>
+<h3 id="为什么还要符号-你不能没有它们吗"><a href="#为什么还要符号-你不能没有它们吗" class="headerlink" title="为什么还要符号? 你不能没有它们吗?"></a>为什么还要符号? 你不能没有它们吗?</h3><p>有几个原因:</p>
+<ul>
+<li>它们使插值变量到字符串中变得更容易</li>
+<li>它们为不同的变量和 twigils 组成了微型命名空间, 因此避免了名字冲突</li>
+<li>它们允许简单的 单数/复数 区别</li>
+<li>它们像使用强制性名词标记的自然语言一样工作，所以我们的大脑为处理它而生</li>
+<li>它们不是强制性的，因为你可以声明无符号名字（如果你不介意含糊不清）</li>
+</ul>
+<h3 id="“类型-Str-不支持关联索引”"><a href="#“类型-Str-不支持关联索引”" class="headerlink" title="“类型 Str 不支持关联索引”"></a>“类型 Str 不支持关联索引”</h3><p>你可能会把字符串插值和 HTML 搞混。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $foo = &quot;abc&quot;;</div><div class="line">say &quot;$foo&lt;html-tag&gt;&quot;;</div></pre></td></tr></table></figure>
+<p>Perl 6 认为 <code>$foo</code> 是一个散列而 <code>&lt;html-tag&gt;</code> 是一个字符串字面量的散列键。使用闭包来帮助你理解吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $foo = &quot;abc&quot;;</div><div class="line">say &quot;&#123;$foo&#125;&lt;html-tag&gt;&quot;;</div></pre></td></tr></table></figure>
+<h3 id="Perl-6-有协程吗-什么是-yield"><a href="#Perl-6-有协程吗-什么是-yield" class="headerlink" title="Perl 6 有协程吗? 什么是 yield ?"></a>Perl 6 有协程吗? 什么是 yield ?</h3><p>Perl 6 没有 Python 那样的 <code>yield</code> 语句, 但是它通过惰性列表却能提供类似的功能. 有两种很潮的方式来写出能返回惰性列表的例程:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># first method, gather/take</div><div class="line">my @values := gather while have_data() &#123;</div><div class="line">    # do some computations</div><div class="line">    take some_data();</div><div class="line">    # do more computations</div><div class="line">&#125;</div><div class="line"></div><div class="line"># second method, use .map or similar method</div><div class="line"># on a lazy list</div><div class="line">my @squares := (1..*).map(-&gt; $x &#123; $x * $x &#125;);</div><div class="line"># or</div><div class="line">my @squares = (1..*).map(-&gt; \x &#123; x² &#125;);</div></pre></td></tr></table></figure>
+<h3 id="为什么我需要反斜线-unspace-在多行上分割方法调用"><a href="#为什么我需要反斜线-unspace-在多行上分割方法调用" class="headerlink" title="为什么我需要反斜线(unspace)在多行上分割方法调用?"></a>为什么我需要反斜线(unspace)在多行上分割方法调用?</h3><p>(请在这儿添加答案)</p>
+<h3 id="为什么我不能从-new-方法初始化私有属性-我怎么修复它"><a href="#为什么我不能从-new-方法初始化私有属性-我怎么修复它" class="headerlink" title="为什么我不能从 new 方法初始化私有属性, 我怎么修复它?"></a>为什么我不能从 new 方法初始化私有属性, 我怎么修复它?</h3><p>这样的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">class A &#123;</div><div class="line">    has $!x;</div><div class="line">    method show-x &#123;</div><div class="line">        say $!x;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">A.new(x =&gt; 5).show-x;</div></pre></td></tr></table></figure>
+<p>不会打印出 5. Private 属性是私有的, 这意味着私有属性在外面是不可见的. 如果默认的构造器能够初始化私有属性, 那么这些私有属性就会泄露到公共 API 中.</p>
+<p>如果你仍旧想让它工作, 你可以添加一个 <code>submethod BUILD</code> 来初始化它们:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class B &#123;</div><div class="line">    has $!x;</div><div class="line">    submethod BUILD(:$!x) &#123; &#125;</div><div class="line">    method show-x &#123;</div><div class="line">        say $!x;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">A.new(x =&gt; 5).show-x;</div></pre></td></tr></table></figure>
+<p><code>BUILD</code> 由默认的构造器使用用户传递给构造器的所有具名参数调用（间接地, 更多细节查看<a href="https://docs.perl6.org/language/objects#Object_Construction" target="_blank" rel="external">Object Construction</a>）。 <code>:$!x</code> 是名为 <code>x</code> 的具名参数, 当使用名为 <code>x</code> 的具名参数来调用时, 它的值被绑定到属性 <code>$!x</code> 上.</p>
+<p>但不要这样做。如果名字是 public 的，使用 <code>$.x</code> 以那样的方式声明没有什么不好，因为默认情况下外部视图是只读的(readonly)，你仍然可以使用 <code>$!x</code> 从内部访问它。</p>
+<h3 id="say-put-和-print-怎么不同-为什么不同"><a href="#say-put-和-print-怎么不同-为什么不同" class="headerlink" title="say, put 和 print 怎么不同, 为什么不同?"></a>say, put 和 print 怎么不同, 为什么不同?</h3><p>最明显的区别是, <code>say</code> 和 <code>put</code> 在输出后面添加了一个换行符, 而 <code>print</code> 没有.</p>
+<p>但是还有另外一个区别: <code>print</code> 和 <code>put</code> 通过对每一个传递来的 item 调用 <code>Str</code> 方法来把它的参数转换为字符串, 相反,  <code>say</code> 使用  <code>gist</code> 方法. 前者是为计算机设计的, 后者是为人类.</p>
+<p>或者它俩被解析的方式不同, <code>$obj.Str</code> 给出一个字符串表示, <code>$obj.gist</code> 是对象的一个简短总结, 适合编程人员的快速识别, <code>$obj.perl</code> 打印一个 Perlish 的表示.</p>
+<p>例如, 类型对象, 也是熟知的 “未定义值”, 字符串化为一个空的字符串和警告, 而 <code>gist</code> 方法返回由一对圆括号包裹的类型的名字.(用于表明除了类型之外什么也没有).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my Date $x;     # $x now contains the Date type object</div><div class="line">print $x;       # empty string plus warning</div><div class="line">say $x;         # (Date)\n</div></pre></td></tr></table></figure>
+<p>所以, <code>say</code> 优化的用于调试和向人们展示, <code>print</code> 和 <code>put</code> 更适合于产生用于其它程序的输出.</p>
+<p><code>put</code> 因此是 <code>print</code> 和 <code>say</code> 之间的一种混合; 像 <code>print</code>, 它的输出适合于其它程序, 也像 <code>say</code>, 它在输出的末尾添加了换行符。</p>
+<h3 id="token-和-rule-之间的区别是什么"><a href="#token-和-rule-之间的区别是什么" class="headerlink" title="token 和 rule 之间的区别是什么?"></a>token 和 rule 之间的区别是什么?</h3><p><code>regex</code> , <code>token</code> 和 <code>rule</code> 这三个都引入了正则表达式, 但是语义略微有一点不同.</p>
+<p><code>token</code> 隐含了 <code>:ratchet</code> 或 <code>:r</code> 修饰符, 这防止了 rule 的回溯.</p>
+<p><code>rule</code> 隐含了 <code>:ratchet</code> 和  <code>:sigspace</code> (缩写为 <code>:s</code>)修饰符, 这意味着规则(rule)不会回溯, 并且它把 regex 的文本中的空白当作 <code>&lt;.ws&gt;</code> 调用(例如匹配空白, 除了在两个单词字符之间之外, 它是可选的).  regex 开头的空白和备选分支中每个分支开头的空白会被忽略.</p>
+<p><code>regex</code> 声明一个简单的正则表达式，没有任何隐含的修饰符。</p>
+<h3 id="die-和-fail-之间的区别是什么"><a href="#die-和-fail-之间的区别是什么" class="headerlink" title="die 和 fail 之间的区别是什么?"></a>die 和 fail 之间的区别是什么?</h3><p><code>die</code> 抛出一个异常.</p>
+<p><code>fail</code> 返回一个 Failure 对象。 （如果调用者已经声明了 <code>use fatal;</code> 在调用作用域中, <code>fail</code> 会抛出一个异常而不返回）</p>
+<p><code>Failure</code> 是一个 “未知的” 或 “懒惰的” 异常.它是一个含有异常的对象, 当这个 Failure 被用作普通的对象或者在 sink 上下文中忽略它时, 则会抛出一个异常.</p>
+<p>Failure 从 <code>defined</code> 检查中返回 False, 并且你可以使用 <code>exception</code> 方法提取出异常.</p>
+<h3 id="为什么-wantarray-或-want-不见了-我能在不同的上下文中返回不同的东西吗"><a href="#为什么-wantarray-或-want-不见了-我能在不同的上下文中返回不同的东西吗" class="headerlink" title="为什么 wantarray 或 want 不见了? 我能在不同的上下文中返回不同的东西吗?"></a>为什么 wantarray 或 want 不见了? 我能在不同的上下文中返回不同的东西吗?</h3><p>Perl 拥有 <a href="https://docs.perl6.org/language/5to6-perlfunc#wantarray" target="_blank" rel="external">wantarray</a> 函数来告诉你这是在空上下文, 标量上下文,还是在列表上下文中调用的. Perl 6 没有与之等价的结构, 因为上下文不是向内流动的,  例如, 子例程不知道调用所在的上下文.</p>
+<p>一个愿意是因为 Perl 6 有多重分派, 在这样一个例子中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">multi w(Int $x) &#123; say &apos;Int&apos; &#125;</div><div class="line">multi w(Str $x) &#123; say &apos;Str&apos; &#125;</div><div class="line">w(f());</div></pre></td></tr></table></figure>
+<p>没办法决定子例程 <code>f</code> 的调用者想要一个字符串还是想要一个整数, 因为它还不知道调用者是什么. 通常这要求解决 halting 问题, 在这个问题上, 即使写 Perl 6编译器的人也会遇到麻烦.</p>
+<p>在 Perl 6 中达到上下文敏感的方式是返回一个知道怎样响应方法调用的对象.</p>
+<p>例如, regex 匹配返回 Match <a href="http://doc.perl6.org/type/Match" target="_blank" rel="external">对象</a>, 该对象知道怎样响应列表索引, 散列索引, 并能变成匹配的字符串.</p>
+<h3 id="Pointer-和-OpaquePointer-的区别是声明"><a href="#Pointer-和-OpaquePointer-的区别是声明" class="headerlink" title="Pointer 和 OpaquePointer 的区别是声明?"></a>Pointer 和 OpaquePointer 的区别是声明?</h3><p><code>OpaquePointer</code> 被废弃了并且已经用 <code>Pointer</code> 代替了。</p>
+<h2 id="Perl-6-实现"><a href="#Perl-6-实现" class="headerlink" title="Perl 6 实现"></a>Perl 6 实现</h2><h3 id="哪个-Perl-6-的实现是可用的"><a href="#哪个-Perl-6-的实现是可用的" class="headerlink" title="哪个 Perl 6 的实现是可用的?"></a>哪个 Perl 6 的实现是可用的?</h3><p>当前开发最好的是 Rakudo(使用多个虚拟机后端)。历史上的实现还包括 Niecza (.NET) 和 Pugs (Haskell). 其它的列出在 <a href="https://www.perl6.org/compilers/" target="_blank" rel="external">Perl 6 Compilers</a> 下面。</p>
+<h3 id="Rakudo-是用什么语言写的"><a href="#Rakudo-是用什么语言写的" class="headerlink" title="Rakudo 是用什么语言写的?"></a>Rakudo 是用什么语言写的?</h3><p>NQP 是（1）NQP 代码，（2）底层虚拟机使用的任何语言，（3）一些第三方 C 和 Java 库，以及（4）早期运行构建过程创建的一些引导文件的混合 。</p>
+<h3 id="为什么我不能把所有的数值都赋值给-Num-类型的变量"><a href="#为什么我不能把所有的数值都赋值给-Num-类型的变量" class="headerlink" title="为什么我不能把所有的数值都赋值给 Num 类型的变量?"></a>为什么我不能把所有的数值都赋值给 Num 类型的变量?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my Num $x = 42;</div><div class="line"># dies with</div><div class="line"># Type check failed in assignment to &apos;$x&apos;; expected &apos;Num&apos; but got &apos;Int&apos;</div></pre></td></tr></table></figure>
+<p><a href="http://doc.perl6.org/type/Num" target="_blank" rel="external">Num</a> 是浮点类型, 与 <a href="http://doc.perl6.org/type/Int" target="_blank" rel="external"> integers</a> 不兼容. 如果你想要一个允许任何数字值的类型约束, 使用 <a href="http://doc.perl6.org/type/Numeric" target="_blank" rel="external">Numeric</a> (它也允许<a href="http://doc.perl6.org/type/Complex" target="_blank" rel="external">复数</a>), 或 <a href="http://doc.perl6.org/type/Real" target="_blank" rel="external">Real</a>如果你想排除复数.</p>
+<h2 id="元问题和宣传"><a href="#元问题和宣传" class="headerlink" title="元问题和宣传"></a>元问题和宣传</h2><h3 id="Perl-6-什么时间会准备好-就是现在吗"><a href="#Perl-6-什么时间会准备好-就是现在吗" class="headerlink" title="Perl 6 什么时间会准备好? 就是现在吗?"></a>Perl 6 什么时间会准备好? 就是现在吗?</h3><p>编程语言和它们的编译器的准备就绪不是一个二元决策. 因为它们(语言和实现)能进化, 它们平稳地发展变得更可用. 根据你对编程语言的要求, 它可能适合也可能不适合你.</p>
+<p>请查看 <a href="http://perl6.org/compilers/features" target="_blank" rel="external">功能对比矩阵</a> 了解更详尽的实现了的功能.</p>
+<p>请注意, Larry Wall 已经在 FOSDEM 2015 会议上宣布, 一个产品级的 Rakudo Perl 6 将会在 2015 圣诞节发布.</p>
+<h3 id="为什么我要学习-Perl-6-它有什么了不起的吗"><a href="#为什么我要学习-Perl-6-它有什么了不起的吗" class="headerlink" title="为什么我要学习 Perl 6? 它有什么了不起的吗?"></a>为什么我要学习 Perl 6? 它有什么了不起的吗?</h3><p>Perl 6 统一了很多其它编程语言中不经常有的伟大想法. 虽然其中的几种语言提供了其中的某些功能, 但是没有提供全部.</p>
+<p>不像大部分语言那样, 它提供了：</p>
+<ul>
+<li>Perl 6 提供了过程式的, 面向对象的和函数式编程方法。</li>
+<li>易于使用的一致性语法, 数据结构中的符号不变性。</li>
+<li>完全基于字素的 Unicode 支持, 包括附件 #29</li>
+<li>足够清晰的正则表达式, 更易读, 更多功能。</li>
+<li>Junctions 允许多个可能性的简单检测, 例如 $a == 1|3|42（意思是 $a 等于 1 或 3 或 42）</li>
+<li>相对于全局变量, 动态作用域变量提供了词法作用域备选</li>
+<li>强调可组合性和本地作用域以阻止「超距作用」。例如, imports 总是本地作用域的。</li>
+<li>易于理解的一致性作用域规则和闭包</li>
+<li>强大的面向对象, 含有类和 roles(所有的东西都可以当做对象)。继承、子类型、代码复用。</li>
+<li>内省到对象和元对象中（叠罗汉）</li>
+<li>元对象协议允许元编程而不需要生成/解析代码。</li>
+<li>子例程和方法签名，便于解包位置参数和命名参数。</li>
+<li>根据元数,类型和可选的额外代码使用不同的签名对同一具名子例程/方法进行多重分派。</li>
+<li>未知子例程/不可能的分派在编译时给出错误报告。</li>
+<li>可选的渐进类型检查，无需额外的运行时成本。 还有可选类型注解。</li>
+<li>基于对编译器/运行时状态的内省的高级错误报告。这意味着更有用，更精确的错误信息。</li>
+<li>Phasers(如 BEGIN/END) 允许代码作用域 进入/退出, 首次循环/last/next 和其它更多上下文中执行。</li>
+<li>高级并发模型，用于隐式以及显式多进程处理，这超越了原始线程和锁。 Perl 6 的并发提供了一组丰富的（可组合的）工具。</li>
+<li>多核计算机越来越多地被使用，由于并行性使得 Perl 6 可以使用多核，包括隐式（例如使用&gt;&gt;.方法）和显式 (start {code}) 。这很重要，因为摩尔定律正在结束。</li>
+<li>提供结构化语言支持以实现异步执行代码的编程。</li>
+<li>Supplies 允许在发生某些事情时执行代码（如定时器，信号或文件系统事件）。</li>
+<li>react/whenever/supply 关键字允许容易地构建交互式，事件驱动的应用程序。</li>
+<li>懒惰求值，如果可能的话，急切求值当需要或必要时。这意味着，例如，惰性列表，甚至无限延迟列表，如斐波纳契序列或所有素数。</li>
+<li>原生数据类型用于更快的处理</li>
+<li>使用 NativeCall 连接到 C/C++ 中的外部库非常简单。</li>
+<li>使用 Inline::Perl5 和 Inline::Python 连接 Perl 5(CPAN)/Python 非常简单。</li>
+<li>可以同时安装和加载模块的多个版本。</li>
+<li>由于更简单的更新/升级策略，简化了系统管理。</li>
+<li>简单的数值计算没有损失精度，因为 Rats（有理数）。</li>
+<li>用于解析数据或代码的可扩展语法（Perl 6 用它解析自身）</li>
+<li>Perl 6 是一种非常易变的语言（定义自己的函数，运算符，traits 和数据类型，为您修改解析器）。</li>
+<li>很多的数据类型选择，加上创建自己的类型的可能性。</li>
+<li>具有适当边界检查的多维成型的和/或原生数组</li>
+<li>在某个匹配出现时, 词法解析期间随时执行代码</li>
+<li>添加自定义运算符或添加 trait 特征和编写子例程一样简单。</li>
+<li>在任何运算符（系统或自定义添加的）上自动生成超运算符。</li>
+<li>运行在各种后端上。目前 MoarVM 和 JVM，JavaScript在开发中，可能会有更多。</li>
+<li>执行期间（JIT）热代码路径的运行时优化。</li>
+<li>运行在小型（例如 Raspberry Pi）和大型多处理器硬件上。</li>
+<li>基于垃圾收集：没有及时销毁，所以引用计数没有必要。使用 phasers 用以及时的动作。</li>
+<li>方法可以在运行时混合到任何实例化的对象中，例如。以允许添加带外数据。</li>
+<li>通过使用具有多重分派和自动生成使用信息的 MAIN 子例程，使命令行接口易于访问。</li>
+<li>更少的代码行创建更紧凑的程序。名字的霍夫曼编码允许更好的可读性。</li>
+<li>使用简单的迭代器接口定义的惰性列表，任何类可以通过最小化的提供单个方法来提供。</li>
+<li>Perl  6 的座右铭与 Perl一直保持不变：Perl是不同的。简而言之，Perl旨在”使容易的工作变得容易，使困难的工作变得可能”。和”条条大路通罗马”。现在有更多 -Ofun 添加进来。</li>
+</ul>
+<p>请查看 <a href="http://perl6.org/compilers/features" target="_blank" rel="external">功能比较矩阵</a> 获取更多信息.</p>
+<h3 id="为什么不把它叫做除了-Perl-以外的其它东西"><a href="#为什么不把它叫做除了-Perl-以外的其它东西" class="headerlink" title="为什么不把它叫做除了 Perl 以外的其它东西?"></a>为什么不把它叫做除了 Perl 以外的其它东西?</h3><p>很多人建议, Perl 6 跟之前的 Perl 版本的区别太大了, 我们应该考虑给它改名, 或者考虑到 Perl 6 伤害了 Perl 5, 仅仅拥有同样的名字却有更高的版本号.</p>
+<p>Perl 6 仍然叫做 “Perl” 的主要原因是:</p>
+<ul>
+<li>Perl 6 仍然是一个 perlish 风格的语言, 和之前的版本遵守相同的底层思想(用于微型命名空间的符号, 条条大路通罗马, 吸收了很多自然语言的思想..)</li>
+<li>Perl 6 的代码很 perlish.</li>
+<li>Perl 仍然是一个强健的品牌名, 我们不想马上抛弃它</li>
+<li>找到一个替代的名字很困难. 而且, “camelia” 和 “rakudo” 不是合适的编程语言名</li>
+<li>即使 Perl 6 更改了它的名字, Perl 5 也不大可能增加它的版本号为 6.因为 Perl 6 已经根植于人们的头脑中了</li>
+</ul>
+<h3 id="Perl-6-对我来说足够快了吗"><a href="#Perl-6-对我来说足够快了吗" class="headerlink" title="Perl 6 对我来说足够快了吗?"></a>Perl 6 对我来说足够快了吗?</h3><p>那取决于你正在做什么。Perl 6 一直奉行“做对的事情然后做的更快”的哲学进行开发。对于某些东西来说它够快了, 但是需要做的更多。<br>Perl 6 大部分是由志愿者开发的, 但是 Perl 6 的性能在不久的将来有待提高, 因为 MoarVM 后端包含一个现代的即时（JIT）编译器。<br>Perl 5 程序员应该意识到 Perl 6 在面向对象方面有很多内建函数并且还有更多其它的。<br>简单的基准测试会误导除非你在你的 Perl 5脚本中包含了诸如 Moose, 类型检测模块等。</p>
+<p>下面这个粗超的基准测试, 使用了所有诸如此类的一般说明, 能展示 Perl 6 在某些类似任务上能和 Perl 5的速度接近。<br>在你的系统上尝试下, 你可能会感到很惊讶!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"># Perl 6 version</div><div class="line">use v6;</div><div class="line"></div><div class="line">class Foo &#123; has $.i is rw &#125;;</div><div class="line"></div><div class="line">for (1..1_000_000) -&gt; $i &#123;</div><div class="line">    my $obj = Foo.new;</div><div class="line">    $obj.i = $i;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># Perl 5 version</div><div class="line">package Foo;</div><div class="line">use Moose;</div><div class="line"></div><div class="line">has i =&gt; (is =&gt; &apos;rw&apos;);</div><div class="line"></div><div class="line">__PACKAGE__-&gt;meta-&gt;make_immutable;</div><div class="line"></div><div class="line">for my $i (1..1_000_000) &#123;</div><div class="line">    my $obj = Foo-&gt;new;</div><div class="line">    $obj-&gt;i($i);</div><div class="line">&#125;</div><div class="line"></div><div class="line">1;</div><div class="line"></div><div class="line"># Another Perl 5 version that offers bare-bones set of features</div><div class="line"># compared to Moose/Perl 6&apos;s version but those are not needed in this</div><div class="line"># specific, simple program anyway.</div><div class="line">package Foo;</div><div class="line">use Mojo::Base -base;</div><div class="line"></div><div class="line">has &apos;i&apos;;</div><div class="line"></div><div class="line">for my $i (1..1_000_000) &#123;</div><div class="line">    my $obj = Foo-&gt;new;</div><div class="line">    $obj-&gt;i($i);</div><div class="line">&#125;</div><div class="line"></div><div class="line">1;</div><div class="line"></div><div class="line"># A perl program which works under both perl5 (with perl -Mbigint)</div><div class="line"># and perl6</div><div class="line"></div><div class="line">my ($prev, $current) = (1, 0);</div><div class="line"></div><div class="line">for (0..100_000) &#123;</div><div class="line">    ($prev, $current) = ($current, $prev + $current);</div><div class="line">&#125;</div><div class="line">print $current;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FAQ/" rel="tag">#FAQ</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/01/Perl6中的Subscripts/" rel="next" title="Perl 6 中的 Subscripts">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的 Subscripts
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/19/给标题添加换行/" rel="prev" title="给标题添加换行">
+                给标题添加换行 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/06/06/Perl-6-FAQ/"
+     data-title="Perl 6 FAQ"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/06/06/Perl-6-FAQ/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/06/Perl-6-FAQ/"
+           data-title="Perl 6 FAQ" data-url="https://ohmycloud.github.io/2016/06/06/Perl-6-FAQ/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General"><span class="nav-number">1.</span> <span class="nav-text">General</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rakudo-和-Perl-6-的区别是什么？"><span class="nav-number">1.1.</span> <span class="nav-text">Rakudo 和 Perl 6 的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会有-Perl-6-版本-6-0-0-吗"><span class="nav-number">1.2.</span> <span class="nav-text">会有 Perl 6 版本 6.0.0 吗?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为一个-Perl-6-初学者我应该安装什么？"><span class="nav-number">1.3.</span> <span class="nav-text">作为一个 Perl 6 初学者我应该安装什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为一个中高级用户我想跟进-Rakudo-开发"><span class="nav-number">1.4.</span> <span class="nav-text">作为一个中高级用户我想跟进 Rakudo 开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从哪里能找到关于-Perl-6-的好文档？"><span class="nav-number">1.5.</span> <span class="nav-text">从哪里能找到关于 Perl 6 的好文档？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-Perl-6-spec？"><span class="nav-number">1.6.</span> <span class="nav-text">什么是 Perl 6 spec？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有没有-Perl-6-的术语相关的项目？"><span class="nav-number">1.7.</span> <span class="nav-text">有没有 Perl 6 的术语相关的项目？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我是一个-Perl-5-程序员-Perl-5-和-Perl-6-的区别在哪儿？"><span class="nav-number">1.8.</span> <span class="nav-text">我是一个 Perl 5 程序员. Perl 5 和 Perl 6 的区别在哪儿？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块"><span class="nav-number">2.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Perl-6-有-CPAN-吗-或者-Perl-6-会使用-Perl-5-的-CPAN-吗"><span class="nav-number">2.1.</span> <span class="nav-text">Perl 6 有 CPAN 吗? 或者 Perl 6 会使用 Perl 5 的 CPAN 吗?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我能在-Perl-6-中使用-Perl-5的模块吗？"><span class="nav-number">2.2.</span> <span class="nav-text">我能在 Perl 6 中使用 Perl 5的模块吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我能在-Perl-6-中使用-C-和-C-吗？"><span class="nav-number">2.3.</span> <span class="nav-text">我能在 Perl 6 中使用 C 和 C++ 吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nativecall-找不到-libfoo-so-并且我只有-libfoo-so-1-2"><span class="nav-number">2.4.</span> <span class="nav-text">Nativecall 找不到 libfoo.so 并且我只有 libfoo.so.1.2!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所有的传统-Unix-库函数去哪儿了？"><span class="nav-number">2.5.</span> <span class="nav-text">所有的传统 Unix 库函数去哪儿了？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rakudo-有核心标准库吗"><span class="nav-number">2.6.</span> <span class="nav-text">Rakudo 有核心标准库吗?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有像-B-Deparse-那样的东西吗-我怎么抓住-AST"><span class="nav-number">2.7.</span> <span class="nav-text">有像 B::Deparse 那样的东西吗?/我怎么抓住 AST?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语言特性"><span class="nav-number">3.</span> <span class="nav-text">语言特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我怎么-dump-Perl-6-的数据结构-就像-Perl-5-的-Data-Dumper-和类似的-？"><span class="nav-number">3.1.</span> <span class="nav-text">我怎么 dump Perl 6 的数据结构(就像 Perl 5 的 Data::Dumper 和类似的)？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我怎么在-Perl-6-提示符（REPL）中找到历史命令行？"><span class="nav-number">3.2.</span> <span class="nav-text">我怎么在 Perl 6 提示符（REPL）中找到历史命令行？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么-Rakudo-编译器有时候报错更友好？"><span class="nav-number">3.3.</span> <span class="nav-text">为什么 Rakudo 编译器有时候报错更友好？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-Any"><span class="nav-number">3.4.</span> <span class="nav-text">什么是 (Any)?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#so-是什么"><span class="nav-number">3.5.</span> <span class="nav-text">so 是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#签名中的那些-D-和-U-是什么东东？"><span class="nav-number">3.6.</span> <span class="nav-text">签名中的那些 :D 和 :U 是什么东东？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#签名中的-–-gt-是什么东东？"><span class="nav-number">3.7.</span> <span class="nav-text">签名中的 –> 是什么东东？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Any-和-Mu-的区别是什么"><span class="nav-number">3.8.</span> <span class="nav-text">Any 和 Mu 的区别是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么从-Junction-中提取值"><span class="nav-number">3.9.</span> <span class="nav-text">怎么从 Junction 中提取值?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果-Str-是不可变的-那么-s-是怎么工作的-如果-Int-是不可变的-i-是怎么工作的"><span class="nav-number">3.10.</span> <span class="nav-text">如果 Str 是不可变的, 那么 s/// 是怎么工作的? 如果 Int 是不可变的, $i++ 是怎么工作的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是数组引用和自动解引用-我仍然需要-符号吗"><span class="nav-number">3.11.</span> <span class="nav-text">什么是数组引用和自动解引用? 我仍然需要 @ 符号吗?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么还要符号-你不能没有它们吗"><span class="nav-number">3.12.</span> <span class="nav-text">为什么还要符号? 你不能没有它们吗?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“类型-Str-不支持关联索引”"><span class="nav-number">3.13.</span> <span class="nav-text">“类型 Str 不支持关联索引”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Perl-6-有协程吗-什么是-yield"><span class="nav-number">3.14.</span> <span class="nav-text">Perl 6 有协程吗? 什么是 yield ?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么我需要反斜线-unspace-在多行上分割方法调用"><span class="nav-number">3.15.</span> <span class="nav-text">为什么我需要反斜线(unspace)在多行上分割方法调用?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么我不能从-new-方法初始化私有属性-我怎么修复它"><span class="nav-number">3.16.</span> <span class="nav-text">为什么我不能从 new 方法初始化私有属性, 我怎么修复它?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#say-put-和-print-怎么不同-为什么不同"><span class="nav-number">3.17.</span> <span class="nav-text">say, put 和 print 怎么不同, 为什么不同?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#token-和-rule-之间的区别是什么"><span class="nav-number">3.18.</span> <span class="nav-text">token 和 rule 之间的区别是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#die-和-fail-之间的区别是什么"><span class="nav-number">3.19.</span> <span class="nav-text">die 和 fail 之间的区别是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么-wantarray-或-want-不见了-我能在不同的上下文中返回不同的东西吗"><span class="nav-number">3.20.</span> <span class="nav-text">为什么 wantarray 或 want 不见了? 我能在不同的上下文中返回不同的东西吗?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pointer-和-OpaquePointer-的区别是声明"><span class="nav-number">3.21.</span> <span class="nav-text">Pointer 和 OpaquePointer 的区别是声明?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6-实现"><span class="nav-number">4.</span> <span class="nav-text">Perl 6 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#哪个-Perl-6-的实现是可用的"><span class="nav-number">4.1.</span> <span class="nav-text">哪个 Perl 6 的实现是可用的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rakudo-是用什么语言写的"><span class="nav-number">4.2.</span> <span class="nav-text">Rakudo 是用什么语言写的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么我不能把所有的数值都赋值给-Num-类型的变量"><span class="nav-number">4.3.</span> <span class="nav-text">为什么我不能把所有的数值都赋值给 Num 类型的变量?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元问题和宣传"><span class="nav-number">5.</span> <span class="nav-text">元问题和宣传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Perl-6-什么时间会准备好-就是现在吗"><span class="nav-number">5.1.</span> <span class="nav-text">Perl 6 什么时间会准备好? 就是现在吗?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么我要学习-Perl-6-它有什么了不起的吗"><span class="nav-number">5.2.</span> <span class="nav-text">为什么我要学习 Perl 6? 它有什么了不起的吗?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么不把它叫做除了-Perl-以外的其它东西"><span class="nav-number">5.3.</span> <span class="nav-text">为什么不把它叫做除了 Perl 以外的其它东西?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Perl-6-对我来说足够快了吗"><span class="nav-number">5.4.</span> <span class="nav-text">Perl 6 对我来说足够快了吗?</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

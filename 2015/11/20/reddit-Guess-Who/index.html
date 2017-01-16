@@ -1,0 +1,734 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MAIN,do," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="你是一个刚成立的小公司里的一名软件工程师, 有天晚上你收到了一封来自CEO 的电子邮件:
+
+亲爱的工程师,
+​    好新闻！看起来我们的网站越来越受欢迎。我们要变的有钱了! 每秒钟有成千上万的人在同时访问我们的网站, 而且还在快速增长。
+我们必须立即识别出谁的通信量最大。幸运的是我的朋友给我发送了一份巨大的 IP 地址和名字的列表。很酷不是吗？你能写一段程序接收我们大量的访问者, 把它和地址/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Guess Who">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/11/20/reddit-Guess-Who/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="你是一个刚成立的小公司里的一名软件工程师, 有天晚上你收到了一封来自CEO 的电子邮件:
+
+亲爱的工程师,
+​    好新闻！看起来我们的网站越来越受欢迎。我们要变的有钱了! 每秒钟有成千上万的人在同时访问我们的网站, 而且还在快速增长。
+我们必须立即识别出谁的通信量最大。幸运的是我的朋友给我发送了一份巨大的 IP 地址和名字的列表。很酷不是吗？你能写一段程序接收我们大量的访问者, 把它和地址/">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Guess Who">
+<meta name="twitter:description" content="你是一个刚成立的小公司里的一名软件工程师, 有天晚上你收到了一封来自CEO 的电子邮件:
+
+亲爱的工程师,
+​    好新闻！看起来我们的网站越来越受欢迎。我们要变的有钱了! 每秒钟有成千上万的人在同时访问我们的网站, 而且还在快速增长。
+我们必须立即识别出谁的通信量最大。幸运的是我的朋友给我发送了一份巨大的 IP 地址和名字的列表。很酷不是吗？你能写一段程序接收我们大量的访问者, 把它和地址/">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/11/20/reddit-Guess-Who/"/>
+
+  <title> Guess Who | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Guess Who
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-20T00:00:00+08:00" content="2015-11-20">
+              2015-11-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/20/reddit-Guess-Who/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/20/reddit-Guess-Who/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>你是一个刚成立的小公司里的一名软件工程师, 有天晚上你收到了一封来自CEO 的电子邮件:</p>
+<blockquote>
+<p>亲爱的工程师,</p>
+<p>​    好新闻！看起来我们的网站越来越受欢迎。我们要变的有钱了! 每秒钟有成千上万的人在同时访问我们的网站, 而且还在快速增长。</p>
+<p>我们必须立即识别出谁的通信量最大。幸运的是我的朋友给我发送了一份巨大的 IP 地址和名字的列表。很酷不是吗？你能写一段程序接收我们大量的访问者, 把它和地址/ 名字列表相比, 并创建一些统计吗？我的意思是, 生成一个国家的名字列表, 每个</p>
+<p>做好了的话我给你们开个披萨聚会。</p>
+</blockquote>
+<p>邮件的附件文件包含了一个 IP 地址和名字的列表。写一个程序来统计下有多少 IP 访问了你的网站。</p>
+<a id="more"></a>
+<h4 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h4><hr>
+<p>输入来自两部分。第一个是一个文本文件, 包含 IP 地址范围。每行一项,使用两个空格分割 IP 和名字。</p>
+<p>第二个文件是一个 IP 地址的列表, 每行一个, 它们是必须被查询的IP。</p>
+<h4 id="IP-输入样本"><a href="#IP-输入样本" class="headerlink" title="IP 输入样本"></a>IP 输入样本</h4><hr>
+<p>输入是有包含两个 IP 地址和一个跟 IP 范围关联的名字的大量行组成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">123.45.17.8 123.45.123.45 University of Vestige</div><div class="line">123.50.1.1 123.50.10.1 National Center for Pointlessness</div><div class="line">188.0.0.3 200.0.0.250 Mayo Tarkington</div><div class="line">200.0.0.251 200.0.0.255 Daubs Haywire Committee</div><div class="line">200.0.1.1 200.255.255.255 Geopolitical Encyclopedia</div><div class="line">222.222.222.222 233.233.233.233 SAP Rostov</div><div class="line">250.1.2.3 250.4.5.6 Shavian Refillable Committee</div><div class="line">123.45.100.0 123.60.32.1 United Adverbs</div><div class="line">190.0.0.1 201.1.1.1 Shavian Refillable Committee</div><div class="line">238.0.0.1 254.1.2.3 National Center for Pointlessness</div></pre></td></tr></table></figure>
+<p>注意: 这些 IP 范围不能保证是 IPv4 “子网”。这意味着它们可能不能精确地由基于前缀的 CIDR 块来表示。</p>
+<p>范围可以重叠。可能多余2层深。</p>
+<p>可可有多个范围关联同一个名字。</p>
+<h4 id="查询输入样本"><a href="#查询输入样本" class="headerlink" title="查询输入样本"></a>查询输入样本</h4><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">250.1.3.4</div><div class="line">123.50.1.20</div><div class="line">189.133.73.57</div><div class="line">123.50.1.21</div><div class="line">250.1.2.4</div><div class="line">123.50.1.21</div><div class="line">250.1.3.100</div><div class="line">250.1.3.5</div><div class="line">188.0.0.5</div><div class="line">123.50.1.100</div><div class="line">123.50.2.34</div><div class="line">123.50.1.100</div><div class="line">123.51.100.52</div><div class="line">127.0.0.1</div><div class="line">123.50.1.22</div><div class="line">123.50.1.21</div><div class="line">188.0.0.5</div><div class="line">123.45.101.100</div><div class="line">123.45.31.52</div><div class="line">230.230.230.230</div></pre></td></tr></table></figure>
+<h4 id="输出格式化"><a href="#输出格式化" class="headerlink" title="输出格式化"></a>输出格式化</h4><hr>
+<p>倒序输出访问次数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">8 - National Center for Pointlessness</div><div class="line">4 - Shavian Refillable Committee</div><div class="line">3 - Mayo Tarkington</div><div class="line">2 - University of Vestige</div><div class="line">1 - SAP Rostov</div><div class="line">1 - United Adverbs</div><div class="line">1 - &lt;unknown&gt;</div></pre></td></tr></table></figure>
+<h4 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h4><hr>
+<p>这儿是一个输入 IP 和它的名字的映射:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">National Center for Pointlessness</div><div class="line">123.50.1.20</div><div class="line">123.50.1.21</div><div class="line">123.50.1.22</div><div class="line">123.50.1.21</div><div class="line">123.50.1.21</div><div class="line">123.50.1.100</div><div class="line">123.50.1.100</div><div class="line">123.50.2.34</div><div class="line"></div><div class="line">Shavian Refillable Committee</div><div class="line">250.1.2.4</div><div class="line">250.1.3.4</div><div class="line">250.1.3.5</div><div class="line">250.1.3.100</div><div class="line"></div><div class="line">Mayo Tarkington</div><div class="line">188.0.0.5</div><div class="line">188.0.0.5</div><div class="line">189.133.73.57</div><div class="line"></div><div class="line">University of Vestige</div><div class="line">123.45.101.100</div><div class="line">123.45.31.52</div><div class="line"></div><div class="line">SAP Rostov</div><div class="line">230.230.230.230</div><div class="line"></div><div class="line">United Adverbs</div><div class="line">123.51.100.52</div><div class="line"></div><div class="line">&lt;unknown&gt;</div><div class="line">127.0.0.1</div></pre></td></tr></table></figure>
+<p>smls的解决方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">sub ip-to-number ($ip) &#123;</div><div class="line">    do given $ip.split(&apos;.&apos;) &#123;</div><div class="line">        .[0] +&lt; 24 +</div><div class="line">        .[1] +&lt; 16 +</div><div class="line">        .[2] +&lt;  8 +</div><div class="line">        .[3] +&lt;  0</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">class IntervalTree &#123;</div><div class="line">    has $.min;</div><div class="line">    has $.max;</div><div class="line">    has $!center = ($!min + $!max) div 2;</div><div class="line">    has @!intervals;</div><div class="line">    has IntervalTree $!left;</div><div class="line">    has IntervalTree $!right;</div><div class="line">    method new ($min, $max) &#123; self.bless(:$min, :$max) &#125;</div><div class="line">    method insert (|c ($start, $end, $name)) &#123;</div><div class="line">        if $end &lt; $!center and $!min &lt; $!center - 1 &#123;</div><div class="line">            ($!left //= self.new($!min, $!center)).insert(|c)</div><div class="line">        &#125;</div><div class="line">        elsif $start &gt; $!center and $!max &gt; $!center &#123;</div><div class="line">            ($!right //= self.new($!center, $!max)).insert(|c)</div><div class="line">        &#125;</div><div class="line">        else &#123;</div><div class="line">            @!intervals.push: [$start, $end, $name, $end-$start]</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    method prepare &#123;</div><div class="line">        @!intervals.=sort(*[3]);</div><div class="line">        $!left .prepare if $!left;</div><div class="line">        $!right.prepare if $!right;</div><div class="line">    &#125;</div><div class="line">    method lookup ($n) &#123;</div><div class="line">        my $best = ($n &lt; $!center ?? ($!left .lookup($n) if $!left)</div><div class="line">                                  !! ($!right.lookup($n) if $!right));</div><div class="line">        $best ?? @!intervals.first(&#123; return $best if .[3] &gt; $best[3];</div><div class="line">                                     .[0] &lt;= $n &lt;= .[1] &#125;) // $best</div><div class="line">              !! @!intervals.first(&#123; .[0] &lt;= $n &lt;= .[1] &#125;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">sub MAIN ($ip-file, $query-file) &#123;</div><div class="line">    my $index = IntervalTree.new(0, ip-to-number &apos;255.255.255.255&apos;);</div><div class="line">    for $ip-file.IO.lines &#123;</div><div class="line">        my ($start, $end, $name) = .split(&apos; &apos;, 3);</div><div class="line">        $index.insert(ip-to-number($start), ip-to-number($end), $name);</div><div class="line">    &#125;</div><div class="line">    $index.prepare;</div><div class="line">    for $query-file.IO.lines -&gt; $ip &#123;</div><div class="line">        my $name = $index.lookup(ip-to-number $ip)[2];</div><div class="line">        say &quot;$ip &#123;$name // &apos;&lt;unknown&gt;&apos;&#125;&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MAIN/" rel="tag">#MAIN</a>
+          
+            <a href="/tags/do/" rel="tag">#do</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/16/Perl6中的可变Grammar/" rel="next" title="Perl6 中的可变 Grammar">
+                <i class="fa fa-chevron-left"></i> Perl6 中的可变 Grammar
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/21/项/" rel="prev" title="项">
+                项 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/11/20/reddit-Guess-Who/"
+     data-title="Guess Who"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/11/20/reddit-Guess-Who/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/11/20/reddit-Guess-Who/"
+           data-title="Guess Who" data-url="https://ohmycloud.github.io/2015/11/20/reddit-Guess-Who/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#输入描述"><span class="nav-number">1.</span> <span class="nav-text">输入描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP-输入样本"><span class="nav-number">2.</span> <span class="nav-text">IP 输入样本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询输入样本"><span class="nav-number">3.</span> <span class="nav-text">查询输入样本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出格式化"><span class="nav-number">4.</span> <span class="nav-text">输出格式化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解释"><span class="nav-number">5.</span> <span class="nav-text">解释</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

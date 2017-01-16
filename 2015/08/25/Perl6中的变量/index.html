@@ -1,0 +1,1355 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Variable,twigil,匿名状态变量," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="变量名以一个叫做魔符 sigil 的特殊字符开头, 后面跟着一个可选的第二个叫做 twigil 的特殊字符, 然后是一个标识符.
+Sigils
+
+
+符号
+类型约束
+默认类型
+Flattens
+Assignment
+
+
+
+
+$
+Mu (no type constraint)
+Any
+No
+item
+
+
+&amp;amp;
+Callable
+Callable
+No
+item
+
+
+@
+Positional
+Ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的变量">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/08/25/Perl6中的变量/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="变量名以一个叫做魔符 sigil 的特殊字符开头, 后面跟着一个可选的第二个叫做 twigil 的特殊字符, 然后是一个标识符.
+Sigils
+
+
+符号
+类型约束
+默认类型
+Flattens
+Assignment
+
+
+
+
+$
+Mu (no type constraint)
+Any
+No
+item
+
+
+&amp;amp;
+Callable
+Callable
+No
+item
+
+
+@
+Positional
+Ar">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.704Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的变量">
+<meta name="twitter:description" content="变量名以一个叫做魔符 sigil 的特殊字符开头, 后面跟着一个可选的第二个叫做 twigil 的特殊字符, 然后是一个标识符.
+Sigils
+
+
+符号
+类型约束
+默认类型
+Flattens
+Assignment
+
+
+
+
+$
+Mu (no type constraint)
+Any
+No
+item
+
+
+&amp;amp;
+Callable
+Callable
+No
+item
+
+
+@
+Positional
+Ar">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/08/25/Perl6中的变量/"/>
+
+  <title> Perl 6 中的变量 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的变量
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-25T00:00:00+08:00" content="2015-08-25">
+              2015-08-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/25/Perl6中的变量/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/25/Perl6中的变量/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>变量名以一个叫做魔符 sigil 的特殊字符开头, 后面跟着一个可选的第二个叫做 <code>twigil</code> 的特殊字符, 然后是一个标识符.</p>
+<h2 id="Sigils"><a href="#Sigils" class="headerlink" title="Sigils"></a>Sigils</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:left">类型约束</th>
+<th style="text-align:center">默认类型</th>
+<th style="text-align:center">Flattens</th>
+<th style="text-align:center">Assignment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:left">Mu (no type constraint)</td>
+<td style="text-align:center">Any</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">item</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:left">Callable</td>
+<td style="text-align:center">Callable</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">item</td>
+</tr>
+<tr>
+<td style="text-align:center">@</td>
+<td style="text-align:left">Positional</td>
+<td style="text-align:center">Array</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">list</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:left">Associative</td>
+<td style="text-align:center">Hash</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">list</td>
+</tr>
+</tbody>
+</table>
+<p>例子:</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $square = 9 ** 2;</div><div class="line">my @array  = 1, 2, 3;   # Array variable with three elements</div><div class="line">my %hash   = London =&gt; &apos;UK&apos;, Berlin =&gt; &apos;Germany&apos;;</div></pre></td></tr></table></figure>
+<p>默认类型可以使用 <code>is</code> 关键字设置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class FailHash is Hash &#123;</div><div class="line">    has Bool $!final = False;</div><div class="line">    multi method AT-KEY ( ::?CLASS:D: Str:D \key )&#123;</div><div class="line">        fail X::OutOfRange.new(:what(&quot;Hash key&quot;), :got(key), :range(self.keys)) if $!final &amp;&amp; !self.EXISTS-KEY(key);</div><div class="line">        callsame</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method finalize() &#123;</div><div class="line">        $!final = True</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my %h is FailHash = oranges =&gt; &quot;round&quot;, bananas =&gt; &quot;bendy&quot;;</div><div class="line">say %h&lt;oranges&gt;;</div><div class="line"># OUTPUT «round␤»</div><div class="line">%h.finalize;</div><div class="line">say %h&lt;cherry&gt;;</div><div class="line">CATCH &#123; default &#123; put .^name, &apos;: &apos;, .Str &#125; &#125;</div><div class="line"># OUTPUT «X::OutOfRange: Hash key out of range. Is: cherry, should be in (oranges bananas)»</div></pre></td></tr></table></figure>
+<p>不带符号的变量也是可行的, 查看 <a href="http://doc.perl6.org/language/variables#Sigilless_variables" target="_blank" rel="external">无符号变量</a>.</p>
+<h2 id="项和列表赋值"><a href="#项和列表赋值" class="headerlink" title="项和列表赋值"></a>项和列表赋值</h2><p>有两种类型的赋值, item 赋值和 list 赋值. 两者都使用 = 号操作符. 根据 = 号左边的语法来区别 = 是 item 赋值还是 list 赋值.</p>
+<p>Item 赋值把等号右侧的值放到左侧的变量(容器)中.</p>
+<p>例如, <a href="https://docs.perl6.org/type/Array" target="_blank" rel="external">数组</a>变量(@符号)在列表赋值时清空数组自身, 然后把等号右侧的值都放进数组自身中. 跟 Item 赋值相比, 这意味着等号左侧的变量类型始终是 Array, 不管右侧是什么类型.</p>
+<p>赋值类型(item 或 list)取决于当前表达式或声明符看到的第一个上下文:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">my $foo = 5;            # item assignment</div><div class="line">say $foo.perl;          # 5</div><div class="line"></div><div class="line">my @bar = 7, 9;         # list assignment</div><div class="line">say @bar.WHAT;          # Array</div><div class="line">say @bar.perl;          # [7, 9]</div><div class="line"></div><div class="line">(my $baz) = 11, 13;     # list assignment</div><div class="line">say $baz.WHAT;          # Parcel</div><div class="line">say $baz.perl;          # (11, 13)</div></pre></td></tr></table></figure>
+<p>因此, 包含在列表赋值中的赋值行为依赖于表达式或包含表达式的声明符。<br>例如, 如果内部赋值是一个声明符(例如 my), 就使用 item 赋值, 它比逗号和列表赋值的优先级更高:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my @array;</div><div class="line">@array = my $num = 42, &quot;str&quot;;   # item assignment: uses declarator</div><div class="line">say @array.perl;                # [42, &quot;str&quot;] (an Array)</div><div class="line">say $num.perl;                  # 42 (a Num)</div></pre></td></tr></table></figure>
+<p>类似地, 如果内部赋值是一个用于声明符初始化的表达式, 则内部表达式的上下文决定赋值的类型:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">my $num;</div><div class="line">my @array = $num = 42, &quot;str&quot;;    # item assignment: uses expression</div><div class="line">say @array.perl;                 # [42, &quot;str&quot;] (an Array)</div><div class="line">say $num.perl;                   # 42 (a Num)</div><div class="line"></div><div class="line">my ( @foo, $bar );</div><div class="line">@foo = ($bar) = 42, &quot;str&quot;;       # list assignment: uses parens</div><div class="line">say @foo.perl;                   # [42, &quot;str&quot;] (an Array)</div><div class="line">say $bar.perl;                   # $(42, &quot;str&quot;)  (a Parcel)</div></pre></td></tr></table></figure>
+<p>然而, 如果内部赋值既不是声明符又不是表达式, 而是更大的表达式的一部分, 更大的表达式的上下文决定赋值的类型:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my ( @array, $num );</div><div class="line">@array = $num = 42, &quot;str&quot;;    # list assignment</div><div class="line">say @array.perl;              # [42, &quot;str&quot;] (an Array)</div><div class="line">say $num.perl;                # [42, &quot;str&quot;] (an Array)</div></pre></td></tr></table></figure>
+<p>这是因为整个表达式是 <code>@array = $num = 42, &quot;str&quot;</code>, 而 <code>$num = 42</code> 不是单独的表达式.</p>
+<p>查看<a href="https://docs.perl6.org/language/operators" target="_blank" rel="external">操作符</a>获取关于优先级的更多详情。</p>
+<h2 id="无符号变量"><a href="#无符号变量" class="headerlink" title="无符号变量"></a>无符号变量</h2><p>在 Perl 6 中创建不带符号的变量也是可能的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my \degrees = pi / 180;</div><div class="line">my \θ       = 15 * degrees;</div></pre></td></tr></table></figure>
+<p>然而, 这些无符号变量并不创建<a href="https://docs.perl6.org/language/containers" target="_blank" rel="external">容器</a>. 那意味着上面的 <code>degrees</code> 和 <code>θ</code> 实际上直接代表 <code>Nums</code>. 为了说明, 我们定义一个无符号变量后再赋值:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">θ = 3; # Dies with the error &quot;Cannot modify an immutable Num&quot;</div></pre></td></tr></table></figure>
+<p>无符号变量不强制上下文, 所以它们可被用于原样地传递某些东西:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sub logged(&amp;f, |args) &#123;</div><div class="line">    say(&apos;Calling &apos; ~ &amp;f.name ~ &apos; with arguments &apos; ~ args.perl);</div><div class="line">    my \result = f(|args);</div><div class="line">    #  ^^^^^^^ not enforcing any context here</div><div class="line">    say(&amp;f.name ~ &apos; returned &apos; ~ result.perl);</div><div class="line">    return |result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Twigils"><a href="#Twigils" class="headerlink" title="Twigils"></a>Twigils</h2><p><code>Twigils</code> 影响变量的<code>作用域</code>。请记住 twigils 对基本的魔符插值没有影响，那就是，如果  <code>$a</code> 内插， <code>$^a</code>, <code>$*a</code>, <code>$=a</code>, <code>$?a</code>, <code>$.a</code>, 等等也会内插. 它仅仅取决于 <code>$</code>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Twigil</th>
+<th style="text-align:left">Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:left">动态的</td>
+</tr>
+<tr>
+<td style="text-align:center">!</td>
+<td style="text-align:left">属性(类成员)</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:left">编译时变量</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:left">方法(并非真正的变量)</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:left">匹配对象索引(并非真正的变量)</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:left">自我声明的形式位置参数</td>
+</tr>
+<tr>
+<td style="text-align:center">:</td>
+<td style="text-align:left">自我声明的形式命名参数</td>
+</tr>
+<tr>
+<td style="text-align:center">=</td>
+<td style="text-align:left">Pod 变量</td>
+</tr>
+<tr>
+<td style="text-align:center">~</td>
+<td style="text-align:left">子语言</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Twigil"><a href="#Twigil" class="headerlink" title="* Twigil"></a>* Twigil</h2><p>动态变量通过 caller 查找, 不是通过外部作用域。例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">my $lexical   = 1;</div><div class="line">my $*dynamic1 = 10;</div><div class="line">my $*dynamic2 = 100;</div><div class="line"></div><div class="line">sub say-all() &#123;</div><div class="line">    say &quot;$lexical, $*dynamic1, $*dynamic2&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># prints 1, 10, 100</div><div class="line">say-all();</div><div class="line"></div><div class="line">&#123;</div><div class="line">    my $lexical   = 2;</div><div class="line">    my $*dynamic1 = 11;</div><div class="line">    $*dynamic2    = 101; # 注意,这儿没有使用 my 来声明</div><div class="line"></div><div class="line">    # prints 1, 11, 101</div><div class="line">    say-all();</div><div class="line">&#125;</div><div class="line"></div><div class="line"># prints 1, 10, 101</div><div class="line">say-all();</div></pre></td></tr></table></figure>
+<p>第一次调用 <code>&amp;say-all</code> 时, 就像你期望的一样, 它打印 “1, 10, 100”。可是第二次它打印 “1, 11, 101”。 这是因为 <code>$lexical</code> 不是在调用者的作用域内被查找, 而是在 <code>&amp;say-all</code> 被定义的作用域里被查找的。这两个动态作用域变量在调用者的作用域内被查找, 所以值为 <code>11</code> 和 <code>101</code>。第三次调用 <code>&amp;say-all</code> 后,  <code>$*dynamic1</code> 不再是 11 了. 但是 <code>$*dynamic2</code> 仍然是 101。这源于我们在块中声明了一个新的动态变量 <code>$*dynamic1</code> 的事实并且没有像我们对待 <code>$*dynamic2</code> 那样把值赋值给旧的变量。</p>
+<p>动态变量与其他变量类型在引用一个未声明的动态变量上不同的是前者不是一个编译时错误，而是运行时 <a href="https://docs.perl6.org/type/Failure" target="_blank" rel="external">failure</a>，这样一个动态变量可以在未定义时使用只要在把它用作任何其它东西的时候检查它是否定义过:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sub foo() &#123;</div><div class="line">    $*FOO // &apos;foo&apos;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say foo; # -&gt; &apos;foo&apos;</div><div class="line"></div><div class="line">my $*FOO = &apos;bar&apos;;</div><div class="line"></div><div class="line">say foo; # -&gt; &apos;bar&apos;</div></pre></td></tr></table></figure>
+<h2 id="Twigil-1"><a href="#Twigil-1" class="headerlink" title="! Twigil"></a>! Twigil</h2><p>属性是变量, 存在于每个类的实例中. 通过 <code>!</code> 符号它们可以从类的里面直接被访问到:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Point &#123;</div><div class="line">    has $.x;</div><div class="line">    has $.y;</div><div class="line"></div><div class="line">    method Str() &#123;</div><div class="line">        &quot;($!x, $!y)&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意属性是怎样被声明为 <code>$.x</code> 和 <code>$.y</code> 的, 但是仍然能够通过 <code>$!x</code> 和 <code>$!y</code> 访问到属性. 这是因为 在 Perl 6 中, 所有的属性都是<code>私有的</code>, 并且在类中能使用 <code>$!attribute-name</code> 直接访问这些属性. Perl 6 能自动为你生成访问方法. 关于对象、类和它们的属性和方法的详情, 请查看<a href="https://docs.perl6.org/language/objects" target="_blank" rel="external">面向对象</a>.</p>
+<h2 id="Twigil-2"><a href="#Twigil-2" class="headerlink" title="? Twigil"></a>? Twigil</h2><p>编译时”常量”, 可通过 <code>?</code> twigil 访问. 编译器对它们很熟悉, 并且编译后不能被修改. 常用的一个例子如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say &quot;$?FILE: $?LINE&quot;; # prints &quot;hello.pl: 23&quot; if this is the 23 line of a</div><div class="line">                      # file named &quot;hello.pl&quot;.</div></pre></td></tr></table></figure>
+<p>关于这些特殊变量的列表请查看<a href="https://docs.perl6.org/language/variables#Compile-time_variables" target="_blank" rel="external">编译时变量</a>。</p>
+<p>尽管不能在运行时改变它们, 用户可以(重新)定义这种常量.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">constant $?TABSTOP = 4; # this causes leading tabs in a heredoc or in a POD</div><div class="line">                        # block&apos;s virtual margin to be counted as 4 spaces.</div></pre></td></tr></table></figure>
+<h2 id="Twigil-3"><a href="#Twigil-3" class="headerlink" title=". Twigil"></a>. Twigil</h2><p><code>.</code> twigil 真的不是用于变量的. 实际上, 看下面的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Point &#123;</div><div class="line">    has $.x;</div><div class="line">    has $.y;</div><div class="line"></div><div class="line">    method Str() &#123;</div><div class="line">        &quot;($.x, $.y)&quot; # 注意我们这次使用 . 而不是 !</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对 <code>self</code>(自身)调用了方法 <code>x</code> 和方法 <code>y</code>, 这是自动为你生成的, 因为在你声明你的属性的时候, 你使用的是 <code>.</code> twigil 。 注意,  子类可能会覆盖那些方法. 如果你不想这个发生, 请使用 <code>$!x</code> 和 <code>$!y</code> 代替。</p>
+<p><code>.</code> twigil 只是调用了一个方法也表明下面是可能的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class SaySomething &#123;</div><div class="line">    method a() &#123; say &quot;a&quot;; &#125;</div><div class="line">    method b() &#123; $.a; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">SaySomething.b; # prints &quot;a&quot;</div></pre></td></tr></table></figure>
+<p>关于对象、类和它们的属性和方法的详情, 请查看<a href="https://docs.perl6.org/language/objects" target="_blank" rel="external">面向对象</a>.</p>
+<h2 id="lt-Twigil"><a href="#lt-Twigil" class="headerlink" title="&lt; Twigil"></a>&lt; Twigil</h2><p> <code>&lt;</code> twigil 是 <code>$/&lt;...&gt;</code> 的别名, 其中,  <code>$/</code> 是匹配变量. 关于匹配变量的更多详情请查看 <a href="https://docs.perl6.org/language/variables#The_%24%2F_Variable" target="_blank" rel="external">$/变量</a>和<a href="https://docs.perl6.org/type/Match" target="_blank" rel="external">类型匹配</a></p>
+<h2 id="Twigil-4"><a href="#Twigil-4" class="headerlink" title="^ Twigil"></a>^ Twigil</h2><p><code>^</code> twigil 为 block 块 或 子例程 声明了一个形式位置参数.  形如 <code>$^variable</code> 的变量是一种占位变量. 它们可用在裸代码块中来声明代码块的形式参数. 看下面代码中的块:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for ^4 &#123;</div><div class="line">    say &quot;$^seconds follows $^first&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它打印出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1 follows 0</div><div class="line">3 follows 2</div></pre></td></tr></table></figure>
+<p>有两个形式参数，就是 <code>$first</code> 和 <code>$second</code>.  注意, 尽管 <code>$^second</code> 在代码中出现的比 <code>$^first</code> 早,  <code>$^first</code> 依然是代码块中的第一个形式参数. 这是因为占位符变量是以 Unicode 顺序排序的.</p>
+<p>子例程也能使用占位符变量, 但是只有在子例程没有显式的参数列表时才行. 这对普通的块也适用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sub say-it    &#123; say $^a; &#125; # valid</div><div class="line">sub say-it()  &#123; say $^a; &#125; # invalid</div><div class="line">              &#123; say $^a; &#125; # valid</div><div class="line">-&gt; $x, $y, $x &#123; say $^a; &#125; # 非法, 已经有参数列表 $x,$y,$x 了</div></pre></td></tr></table></figure>
+<p>占位符变量语法上不能有类型限制. 也注意, 也不能使用单个大写字母的占位符变量, 如 <code>$^A</code></p>
+<h2 id="Twigil-5"><a href="#Twigil-5" class="headerlink" title=": Twigil"></a>: Twigil</h2><p><code>:</code> twigil 为块或子例程声明了一个形式<strong>命名参数</strong>。使用这种形式声明的变量也是占位符变量的一种类型。因此适用于使用 <code>^</code> twigil 声明的变量的东西在这儿也适用(除了它们不是位置的以外, 因此没有使用 Unicode 顺序排序)。所以这个:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">say &#123; $:add ?? $^a + $^b !! $^a - $^b &#125;( 4, 5 ) :!add</div><div class="line"># OUTPUT:</div><div class="line"># -1</div></pre></td></tr></table></figure>
+<p>查看 <a href="https://docs.perl6.org/routine/%5E" target="_blank" rel="external">^</a>获取关于占位符变量的更多细节。</p>
+<h2 id="Twigil-6"><a href="#Twigil-6" class="headerlink" title="= Twigil"></a>= Twigil</h2><p><code>=</code> twigil 用于访问 Pod 变量。当前文件中的每个 Pod 块都能通过一个 Pod 对象访问到, 例如 <code>$=data</code>, <code>$=SYNOPSIS</code> 或 <code>=UserBlock</code>, 即：一个和想要的块同名的变量加上一个 <code>=</code> twigil。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">=begin Foo</div><div class="line">...</div><div class="line">=end Foo</div><div class="line"></div><div class="line">#after that, $=Foo gives you all Foo-Pod-blocks</div></pre></td></tr></table></figure>
+<p>您可以通过 <code>$=pod</code>访问 Pod 树，它包含所有作为分级数据结构的Pod结构。</p>
+<p>请注意，所有这些 <code>$=someBlockName</code> 都支持位置和关联角色。</p>
+<h2 id="Twigil-7"><a href="#Twigil-7" class="headerlink" title="~ Twigil"></a>~ Twigil</h2><p>注意: Slangs（俚语）在 Rakudo 中还没有被实现。 NYI = Not Yet Implemented.</p>
+<p><code>~</code> twigil 是指子语言（称为俚语）。下面是有用的：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">变量名</th>
+<th style="text-align:left">说 明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$~MAIN</td>
+<td style="text-align:left">the current main language (e.g. Perl statements)</td>
+</tr>
+<tr>
+<td style="text-align:center">$~Quote</td>
+<td style="text-align:left">the current root of quoting language</td>
+</tr>
+<tr>
+<td style="text-align:center">$~Quasi</td>
+<td style="text-align:left">the current root of quasiquoting language</td>
+</tr>
+<tr>
+<td style="text-align:center">$~Regex</td>
+<td style="text-align:left">the current root of regex language</td>
+</tr>
+<tr>
+<td style="text-align:center">$~Trans</td>
+<td style="text-align:left">the current root of transliteration language</td>
+</tr>
+<tr>
+<td style="text-align:center">$~P5Regex</td>
+<td style="text-align:left">the current root of the Perl 5 regex language</td>
+</tr>
+</tbody>
+</table>
+<p>你在你当前的词法作用域中扩充这些语言。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use MONKEY-TYPING;</div><div class="line">augment slang Regex &#123;  # derive from $~Regex and then modify $~Regex</div><div class="line">    token backslash:std&lt;\Y&gt; &#123; YY &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="变量声明符和作用域"><a href="#变量声明符和作用域" class="headerlink" title="变量声明符和作用域"></a>变量声明符和作用域</h2><p>通常, 使用 <code>my</code> 关键字创建一个新的变量就足够了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $amazing-variable = &quot;World&quot;;</div><div class="line">say &quot;Hello $amazing-variable!&quot;; # Hello World!</div></pre></td></tr></table></figure>
+<p>然而, 有很多声明符能在 <a href="https://docs.perl6.org/language/variables#Twigils" target="_blank" rel="external">Twigils</a> 的能力之外改变作用域的细节。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">声明符</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">my</td>
+<td style="text-align:left">作为词法作用域名字的开头</td>
+</tr>
+<tr>
+<td style="text-align:center">our</td>
+<td style="text-align:left">作为包作用域名字的开头</td>
+</tr>
+<tr>
+<td style="text-align:center">has</td>
+<td style="text-align:left">作为属性名的开头</td>
+</tr>
+<tr>
+<td style="text-align:center">anon</td>
+<td style="text-align:left">作为私有名字的开头</td>
+</tr>
+<tr>
+<td style="text-align:center">state</td>
+<td style="text-align:left">作为词法作用域但是持久名字的开头</td>
+</tr>
+<tr>
+<td style="text-align:center">augment</td>
+<td style="text-align:left">给已存在的名字添加定义</td>
+</tr>
+<tr>
+<td style="text-align:center">supersede</td>
+<td style="text-align:left">替换已存在名字的定义</td>
+</tr>
+</tbody>
+</table>
+<p>还有两个类似于声明符的前缀, 但是作用于预定义变量:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">前缀</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">temp</td>
+<td style="text-align:left">在作用域的最后恢复变量的值</td>
+</tr>
+<tr>
+<td style="text-align:center">let</td>
+<td style="text-align:left">如果 block 成功退出就恢复变量的值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="my-声明符"><a href="#my-声明符" class="headerlink" title="my 声明符"></a>my 声明符</h3><p>使用 <code>my</code> 声明一个变量给变量一个词法作用域. 这意味着变量只在当前块中存在.例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    my $foo = &quot;bar&quot;;</div><div class="line">    say $foo; # -&gt; &quot;bar&quot;</div><div class="line">&#125;</div><div class="line">say $foo; # !!! &quot;Variable &apos;$foo&apos; is not declared&quot;</div></pre></td></tr></table></figure>
+<p>它抛出异常,因为只要我们在同一个作用域内 <code>$foo</code> 才被定义. 此外, 词法作用域意味着变量能在新的作用域内被临时地重新定义:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">my $location = &quot;outside&quot;;</div><div class="line"></div><div class="line">sub outer-location &#123;</div><div class="line">    # Not redefined:</div><div class="line">    say $location;</div><div class="line">&#125;</div><div class="line"></div><div class="line">outer-location; # -&gt; &quot;outside&quot;</div><div class="line"></div><div class="line">sub in-building &#123;</div><div class="line">    my $location = &quot;inside&quot;;</div><div class="line">    say $location;</div><div class="line">&#125;</div><div class="line"></div><div class="line">in-building;    # -&gt; &quot;inside&quot;</div><div class="line">outer-location; # -&gt; &quot;outside&quot;</div></pre></td></tr></table></figure>
+<p>如果变量被重新定义了, 任何引用外部变量的代码会继续引用外部变量.<br>所以, 在这儿, <code>&amp;outer-location</code> 仍然打印外部的 <code>$location</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sub new-location &#123;</div><div class="line">    my $location = &quot;nowhere&quot;</div><div class="line">    outer-location;</div><div class="line">&#125;</div><div class="line"></div><div class="line">new-location; # -&gt; &quot;outside&quot;</div></pre></td></tr></table></figure>
+<p>为了让 <code>new-location()</code> 能打印 <code>nowwhere</code>, 需要使用 <code>*</code> <a href="https://docs.perl6.org/language/variables#The_%2A_Twigil" target="_blank" rel="external">twigil</a> 让 <code>$location</code> 变为动态变量.<br>对于子例程来说, <code>my</code> 是默认作用域, 所以 <code>my sub x( ) { }</code> 和 <code>sub x( ) { }</code> 是一样的.</p>
+<h3 id="our-声明符"><a href="#our-声明符" class="headerlink" title="our 声明符"></a>our 声明符</h3><p>our 跟 <code>my</code> 的作用类似, 除了把别名引入到符号表之外:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">module M &#123;</div><div class="line">    our $Var;</div><div class="line">    # $Var available here</div><div class="line">&#125;</div><div class="line"></div><div class="line"># Available as $M::Var here.</div></pre></td></tr></table></figure>
+<h3 id="声明一组变量"><a href="#声明一组变量" class="headerlink" title="声明一组变量"></a>声明一组变量</h3><p>声明符 <code>my</code> 和 <code>our</code> 接收一组扩在圆括号中的变量作为参数来一次性声明多个变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my (@a, $s, %h);</div></pre></td></tr></table></figure>
+<p>这可以和解构赋值结合使用。任何对这样一个列表的赋值会取得左侧列表中提供的元素数量并且从右侧列表中把对应的值赋值给它们。没有得到赋值的元素会根据变量的类型得到一个未定义值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my (Str $a, Str $b, Int $c) = &lt;a b&gt;;</div><div class="line">say [$a, $b, $c].perl;</div><div class="line"># OUTPUT«[&quot;a&quot;, &quot;b&quot;, Int]␤»</div></pre></td></tr></table></figure>
+<p>要把列表解构到一个单个的值中, 通过使用 <code>($var,)</code> 创建一个带有一个值的列表字面值。当使用了一个变量声明符时只在单个变量周围提供一个圆括号就足够了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sub f &#123; 1,2,3 &#125;;</div><div class="line">my ($a) = f;</div><div class="line">say $a.perl;</div><div class="line"># OUTPUT«1␤»</div></pre></td></tr></table></figure>
+<p>要跳过列表中的元素, 使用匿名状态变量 <code>$</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my ($,$a,$,%h) = (&apos;a&apos;, &apos;b&apos;, [1,2,3], &#123;:1th&#125;);</div><div class="line">say [$a, %h].perl;</div><div class="line"># OUTPUT«[&quot;b&quot;, &#123;:th(1)&#125;]␤»</div></pre></td></tr></table></figure>
+<h3 id="has-声明符"><a href="#has-声明符" class="headerlink" title="has 声明符"></a>has 声明符</h3><p><code>has</code> 作用在类的实例或 role 的属性上, 还有类或 roles 的方法上. has 隐式作用于方法上, 所以 <code>has method x() {}</code> 和 <code>method x() {}</code> 做得是相同的事情。</p>
+<p>查看<a href="https://docs.perl6.org/language/objects" target="_blank" rel="external">面向对象</a>获取更多文档和例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">has method x( ) &#123; &#125;</div></pre></td></tr></table></figure>
+<p>等价于:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">method x( ) &#123; &#125;</div></pre></td></tr></table></figure>
+<h3 id="anon-声明符"><a href="#anon-声明符" class="headerlink" title="anon 声明符"></a>anon 声明符</h3><p><code>anon</code> 声明符阻止符号本安装在词法作用域内, 还有方法表中, 和其它任何地方.<br>例如, 你可以使用 <code>anon</code> 声明一个知道自己名字的子例程, 但是仍然不会被安装到作用域内:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my %operations =</div><div class="line">    half   =&gt; anon sub half($x)   &#123; $x / 2  &#125;,</div><div class="line">    square =&gt; anon sub square($x) &#123; $x * $x &#125;,</div><div class="line">    ;</div><div class="line">say %operations&lt;square&gt;.name;       # square</div><div class="line">say %operations&lt;square&gt;(8);         # 64</div></pre></td></tr></table></figure>
+<h3 id="state-声明符"><a href="#state-声明符" class="headerlink" title="state 声明符"></a>state 声明符</h3><p><code>state</code> 声明词法作用域变量, 就像 my 那样。然而, <strong>初始化只发生一次</strong>, 就在正常执行流中第一次遇见初始化的时候。因此, state 变量会在闭合块或 程序的多次执行<strong>之间</strong>保留它们的值。</p>
+<p>因此, 下面这个子例程:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sub a &#123;</div><div class="line">    state @x;</div><div class="line">    state $l = &apos;A&apos;;</div><div class="line">    @x.push($l++);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">say a for 1..6;</div></pre></td></tr></table></figure>
+<p>会持续增加 <code>$l</code> 并在每次被调用时把它追加到 @x 中, 所以它会打印出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[A]</div><div class="line">[A B]</div><div class="line">[A B C]</div><div class="line">[A B C D]</div><div class="line">[A B C D E]</div><div class="line">[A B C D E F]</div></pre></td></tr></table></figure>
+<p>This works per “clone” of the containing code object, as in this example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(&#123; state $i = 1; $i++.say; &#125; xx 3).map: &#123;$_(), $_()&#125;; # says 1 then 2 thrice</div></pre></td></tr></table></figure>
+<p>注意，这不是一个线程安全的解构, 当同一个 block 的同一个克隆运行在多个线程中时。要知道方法只有每个类一个克隆，而不是每个对象。</p>
+<p>至于 <code>my</code>，声明多个状态变量必须放置在圆括号中, 而声明一个单一变量，圆括号可以省略。</p>
+<p>请注意，许多操作符都伴随着隐式绑定，什么会导致超距作用。使用 <code>.clone</code> 或强迫创建一个可以绑定的新容器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my @a;</div><div class="line">sub f() &#123;</div><div class="line">    state $i;</div><div class="line">    $i++;</div><div class="line">    @a.push: &quot;k$i&quot; =&gt; $i # &lt;-- .clone goes here</div><div class="line">&#125;;</div><div class="line">f for 1..3;</div><div class="line">dd @a; # «Array $var = $[:k1(3), :k2(3), :k3(3)]»</div></pre></td></tr></table></figure>
+<p>所有的状态变量都是线程间共享的。这个结果可能是你不希望得到的或危险的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sub code()&#123; state $i = 0; say ++$i; $i &#125;;</div><div class="line">await</div><div class="line">    start &#123; loop &#123; last if code() &gt;= 5 &#125; &#125;,</div><div class="line">    start &#123; loop &#123; last if code() &gt;= 5 &#125; &#125;;</div><div class="line"></div><div class="line"># OUTPUT«1␤2␤3␤4␤4␤3␤5␤»</div><div class="line"># OUTPUT«2␤1␤3␤4␤5␤»</div><div class="line"># many other more or less odd variations can be produced</div></pre></td></tr></table></figure>
+<h3 id="变量"><a href="#变量" class="headerlink" title="$ 变量"></a>$ 变量</h3><p>和显式地声明命名状态变量一样, <code>$</code> 能够用作不带显式状态声明的匿名状态变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say &quot;1-a 2-b 3-c&quot;.subst(:g, /\d/, &#123;&lt;one two three&gt;[$++]&#125;);</div><div class="line"># OUTPUT«one-a two-b three-c␤»</div></pre></td></tr></table></figure>
+<p>更进一步, 状态变量不需要存在于子例程中。你可以, 举个例子, 在单行程序中使用 <code>$</code> 在文件中编号行号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -ne &apos;say ++$ ~ &quot; $_&quot;&apos; example.txt</div></pre></td></tr></table></figure>
+<p>实际上词法范围内每个对 <code>$</code> 的引用都是是一个<strong>单独的</strong>变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 -e &apos;&#123; say ++$; say $++  &#125; for ^5&apos;</div><div class="line"># OUTPUT«1␤0␤2␤1␤3␤2␤4␤3␤5␤4␤»</div></pre></td></tr></table></figure>
+<p>如果在作用域内你需要多次引用 <code>$</code> 的值, 那么它应该被拷贝到一个新的变量中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">sub foo() &#123;</div><div class="line">    given ++$ &#123;</div><div class="line">        when 1 &#123;</div><div class="line">            say &quot;one&quot;;</div><div class="line">        &#125;</div><div class="line">        when 2 &#123;</div><div class="line">            say &quot;two&quot;;</div><div class="line">        &#125;</div><div class="line">        when 3 &#123;</div><div class="line">            say &quot;three&quot;;</div><div class="line">        &#125;</div><div class="line">        default &#123;</div><div class="line">            say &quot;many&quot;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo() for ^3;</div><div class="line"># OUTPUT«one␤two␤three␤»</div></pre></td></tr></table></figure>
+<h3 id="变量-1"><a href="#变量-1" class="headerlink" title="@ 变量"></a>@ 变量</h3><p>和 <code>$</code> 变量类似, 也有一个位置匿名状态变量 <code>@</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">sub foo($x) &#123;</div><div class="line">    say (@).push($x);</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo($_) for ^3;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># [0]</div><div class="line"># [0 1]</div><div class="line"># [0 1 2]</div></pre></td></tr></table></figure>
+<p>这里的 <code>@</code> 是用圆括号括起来了以和名为 <code>@.push</code> 的类成员变量消除歧义。索引访问并不需要这种歧义，但你需要拷贝这个值，以便用它做任何有用的事情。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sub foo($x) &#123;</div><div class="line">    my $v = @;</div><div class="line">    $v[$x] = $x;</div><div class="line">    say $v;</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo($_) for ^3;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># [0]</div><div class="line"># [0 1]</div><div class="line"># [0 1 2]</div></pre></td></tr></table></figure>
+<p>就和 <code>$</code> 一样, 作用域中的每次提及 <code>@</code> 就引入了一个新的匿名数组。</p>
+<h3 id="变量-2"><a href="#变量-2" class="headerlink" title="% 变量"></a>% 变量</h3><p>最后, 还有一个关联匿名状态变量 <code>%</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">sub foo($x) &#123;</div><div class="line">    say (%).push($x =&gt; $x);</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo($_) for ^3;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 0 =&gt; 0</div><div class="line"># 0 =&gt; 0, 1 =&gt; 1</div><div class="line"># 0 =&gt; 0, 1 =&gt; 1, 2 =&gt; 2</div></pre></td></tr></table></figure>
+<p>关于歧义的同样警告适用。正如你可能期望，索引访问也有可能（使用复制以使之有用）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sub foo($x) &#123;</div><div class="line">    my $v = %;</div><div class="line">    $v&#123;$x&#125; = $x;</div><div class="line">    say $v;</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo($_) for ^3;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 0 =&gt; 0</div><div class="line"># 0 =&gt; 0, 1 =&gt; 1</div><div class="line"># 0 =&gt; 0, 1 =&gt; 1, 2 =&gt; 2</div></pre></td></tr></table></figure>
+<p>就像其它的匿名状态变量一样, 在给定作用域中每次提及 <code>%</code> 最终都会引入一个单独的变量。</p>
+<h3 id="augment-声明符"><a href="#augment-声明符" class="headerlink" title="augment 声明符"></a>augment 声明符</h3><p>使用 <code>augment</code>, 你可以给已经存在的类或 grammars 增加属性和方法.</p>
+<p>因为类通常使用 our 作用域, 因此是全局的, 这意味着修改全局状态, 这是强烈不鼓励的, 对于大部分情况, 有更好的方法.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># don&apos;t do this</div><div class="line">use MONKEY-TYPING;</div><div class="line">augment class Int &#123;</div><div class="line">    method is-answer &#123; self == 42 &#125;</div><div class="line">&#125;</div><div class="line">say 42.is-answer;       # True</div></pre></td></tr></table></figure>
+<h3 id="temp-前缀"><a href="#temp-前缀" class="headerlink" title="temp 前缀"></a>temp 前缀</h3><p>像 my 一样, temp 在作用域的末尾恢复旧的变量值. 然而, temp 不创建新的变量.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">my $in = 0; # temp will &quot;entangle&quot; the global variable with the call stack</div><div class="line">            # that keeps the calls at the bottom in order.</div><div class="line">sub f(*@c) &#123;</div><div class="line">    (temp $in)++;</div><div class="line">     &quot;&lt;f&gt;\n&quot;</div><div class="line">     ~ @c&gt;&gt;.indent($in).join(&quot;\n&quot;)</div><div class="line">     ~ (+@c ?? &quot;\n&quot; !! &quot;&quot;)</div><div class="line">     ~ &apos;&lt;/f&gt;&apos;</div><div class="line">&#125;;</div><div class="line">sub g(*@c) &#123;</div><div class="line">    (temp $in)++;</div><div class="line">    &quot;&lt;g&gt;\n&quot;</div><div class="line">    ~ @c&gt;&gt;.indent($in).join(&quot;\n&quot;)</div><div class="line">    ~ (+@c ?? &quot;\n&quot; !! &quot;&quot;)</div><div class="line">    ~ &quot;&lt;/g&gt;&quot;</div><div class="line">&#125;;</div><div class="line">print g(g(f(g()), g(), f()));</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># &lt;g&gt;</div><div class="line">#  &lt;g&gt;</div><div class="line">#   &lt;f&gt;</div><div class="line">#    &lt;g&gt;</div><div class="line">#    &lt;/g&gt;</div><div class="line">#   &lt;/f&gt;</div><div class="line">#   &lt;g&gt;</div><div class="line">#   &lt;/g&gt;</div><div class="line">#   &lt;f&gt;</div><div class="line">#   &lt;/f&gt;</div><div class="line">#  &lt;/g&gt;</div><div class="line"># &lt;/g&gt;</div></pre></td></tr></table></figure>
+<h3 id="let-前缀"><a href="#let-前缀" class="headerlink" title="let 前缀"></a>let 前缀</h3><p>跟 temp 类似, 如果 block 没有成功退出则恢复之前的值。成功的退出意味着该 block 返回了一个定义过的值或一个列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">my $answer = 42;</div><div class="line"></div><div class="line">&#123;</div><div class="line">    let $answer = 84;</div><div class="line">    die if not Bool.pick;</div><div class="line">    CATCH &#123;</div><div class="line">        default &#123; say &quot;it&apos;s been reset :(&quot; &#125;</div><div class="line">    &#125;</div><div class="line">    say &quot;we made it 84 sticks!&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say $answer;</div></pre></td></tr></table></figure>
+<p>在上面的例子中, 如果 <code>Bool.pick</code> 返回 true, 那么答案会保持为 84, 因为那个 block 返回了一个定义了的值(say 返回 true)。<br>否则那个 <code>die</code> 语句会让那个 block 不成功地退出, 把答案重新设置为 42。</p>
+<h2 id="类型约束和初始化"><a href="#类型约束和初始化" class="headerlink" title="类型约束和初始化"></a>类型约束和初始化</h2><p>变量可以有类型约束, 约束在声明符和变量名之间:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my Int $x = 42;</div><div class="line">$x = &apos;a string&apos;; # throws an X::TypeCheck::Assignment error</div><div class="line">CATCH &#123; default &#123; put .^name, &apos;: &apos;, .Str &#125; &#125;</div><div class="line"># OUTPUT: X::TypeCheck::Assignment: Type check failed in assignment to $x; expected Int but got Str (&quot;a string&quot;)</div></pre></td></tr></table></figure>
+<p>如果一个标量有类型约束但是没有初始值, 它会使用类型约束的类型对象来初始化.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my Int $x;</div><div class="line">say $x.^name;    # Int</div><div class="line">say $x.defined;  # False</div></pre></td></tr></table></figure>
+<p>没有显式类型约束的标量的类型为 Mu, 但是默认会是 Any 类型的对象.</p>
+<p>带有 @ 符号的变量会被初始化为空的数组; 带有 % 符号的变量会被初始化为空的散列.</p>
+<p>变量的默认值可以使用 <code>is default</code> 特性设置, 通过把 Nil 赋值给变量来重新应用默认值:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my Real $product is default(1);</div><div class="line">say $product;                       # 1</div><div class="line">$produce *= 5;</div><div class="line">say $product;                       # 5</div><div class="line">$product = Nil;</div><div class="line">say $product;                       # 1</div></pre></td></tr></table></figure>
+<h2 id="默认的有定义的变量指令"><a href="#默认的有定义的变量指令" class="headerlink" title="默认的有定义的变量指令"></a>默认的有定义的变量指令</h2><p>为了强制所有的变量拥有一个有定义的约束, 使用 <code>use variables :D</code> 指令。这个指令是词法作用域的并且可以使用 <code>use variables :_</code> 指令进行切换。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">use variables :D;</div><div class="line">my Int $i;</div><div class="line"># OUTPUT«===SORRY!=== Error while compiling &lt;tmp&gt;␤Variable definition of type Int:D (implicit :D by pragma) requires an initializer ...</div><div class="line">my Int $i = 1; # that works</div><div class="line">&#123; use variables :_; my Int $i; &#125; # 在这个 block 中关掉它</div></pre></td></tr></table></figure>
+<p>请注意, 赋值 Nil 会把这个变量恢复为它的默认值。一个有定义的约束类型的默认值是类型名加上 <code>:D</code>(例如 <code>Int:D</code>)。That means a definedness contraint is no guarantee of definedness. 这只适用于变量初始化, 不适用于签名。</p>
+<h2 id="特殊变量"><a href="#特殊变量" class="headerlink" title="特殊变量"></a>特殊变量</h2><p><strong>Pre-defined lexical variables</strong></p>
+<p>每个代码块中都有3个特别的变量:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">变量</th>
+<th style="text-align:left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$_</td>
+<td style="text-align:left">特殊变量</td>
+</tr>
+<tr>
+<td style="text-align:center">$/</td>
+<td style="text-align:left">正则匹配</td>
+</tr>
+<tr>
+<td style="text-align:center">$!</td>
+<td style="text-align:left">异常</td>
+</tr>
+</tbody>
+</table>
+<h3 id=""><a href="#" class="headerlink" title="$_"></a>$_</h3><p><code>$_</code> 是特殊变量，在没有显式标识的代码块中，它是默认参数。所以诸如 <code>for @array { ... }</code> 和 <code>given $var { ... }</code> 之类的结构会将变量绑定给 <code>$_</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for &lt;a b c&gt; &#123; say $_ &#125;  # sets $_ to &apos;a&apos;, &apos;b&apos; and &apos;c&apos; in turn</div><div class="line">say $_ for &lt;a b c&gt;;     # same, even though it&apos;s not a block</div><div class="line">given &apos;a&apos;   &#123; say $_ &#125;  # sets $_ to &apos;a&apos;</div><div class="line">say $_ given &apos;a&apos;;       # same, 尽管这不是一个块</div></pre></td></tr></table></figure>
+<p>CATCH 块将 <code>$_</code> 设置为捕获到的异常。 <code>~~</code> 智能匹配操作符。<br>对 <code>$_</code> 调用一个方法可以省略特殊变量 <code>$_</code> 的名字，从而写的更短：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.say;                   # 与 $_.say 相同</div></pre></td></tr></table></figure>
+<p><code>m/regex/</code> 和 <code>/regex/</code> 正则匹配 和 <code>s/regex/subst/</code> 替换是作用于 <code>$_</code> 上的.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say &quot;Looking for strings with non-alphabetic characters...&quot;;</div><div class="line">for &lt;ab:c d$e fgh ij*&gt; &#123;</div><div class="line">    .say if m/&lt;!alpha&gt;/;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Looking for strings with non-alphabetic characters...</div><div class="line">ab:c</div><div class="line">d$e</div><div class="line">ij*</div></pre></td></tr></table></figure>
+<h3 id="-1"><a href="#-1" class="headerlink" title="$/"></a>$/</h3><p><code>$/</code> 是匹配变量。它存储着最近一次<a href="https://docs.perl6.org/language/regexes" target="_blank" rel="external">正则</a>匹配的结果，通常包含 <a href="https://docs.perl6.org/type/Match" target="_blank" rel="external">Match</a> 类型的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&apos;abc 12&apos; ~~ /\w+/;  # 设置 $/ 为一个Match 对象</div><div class="line">say $/.Str;         # abc</div></pre></td></tr></table></figure>
+<p><code>Grammar.parse</code> 方法会把调用者的 <code>$/</code> 设置为 <code>Match object</code> 的结果。看下面的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">use XML::Grammar; # panda install XML</div><div class="line">XML.Grammar.parse(&quot;&lt;p&gt;some text&lt;/p&gt;&quot;);</div><div class="line">say $/;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># ｢&lt;p&gt;some text&lt;/p&gt;｣</div><div class="line">#  root =&gt; ｢&lt;p&gt;some text&lt;/p&gt;｣</div><div class="line">#   name =&gt; ｢p｣</div><div class="line">#   child =&gt; ｢some text｣</div><div class="line">#    text =&gt; ｢some text｣</div><div class="line">#    textnode =&gt; ｢some text｣</div><div class="line">#  element =&gt; ｢&lt;p&gt;some text&lt;/p&gt;｣</div><div class="line">#   name =&gt; ｢p｣</div><div class="line">#   child =&gt; ｢some text｣</div><div class="line">#    text =&gt; ｢some text｣</div><div class="line">#    textnode =&gt; ｢some text｣</div></pre></td></tr></table></figure>
+<p>其他匹配变量是 <code>$/</code> 元素的别名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$0          # same as $/[0]</div><div class="line">$1          # same as $/[1]</div><div class="line">$&lt;named&gt;    # same as $/&lt;named&gt;</div></pre></td></tr></table></figure>
+<h3 id="位置属性"><a href="#位置属性" class="headerlink" title="位置属性"></a>位置属性</h3><p>如果正则中有捕获分组, <code>$/</code> 中会有位置属性. 它们由圆括号组成.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&apos;abbbbbcdddddeffg&apos; ~~ / a (b+) c (d+ef+) g /;</div><div class="line">say $/[0]; # ｢bbbbb｣</div><div class="line">say $/[1]; # ｢dddddeff｣</div></pre></td></tr></table></figure>
+<p>这些捕获分组也能使用 <code>$0</code>,<code>$1</code>,<code>$2</code> 等便捷形式取得:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say $0; # ｢bbbbb｣</div><div class="line">say $1; # ｢dddddeff｣</div></pre></td></tr></table></figure>
+<p>要获取所有的位置属性, 使用 <code>$/.list</code>, <code>@$/</code>,<code>@( )</code> 中的任意一个都可以:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say @().join; # bbbbbdddddeff</div></pre></td></tr></table></figure>
+<h3 id="命名属性"><a href="#命名属性" class="headerlink" title="命名属性"></a>命名属性</h3><p>如果正则中有命名捕获分组, <code>$/</code> 可以有命名属性, 或者正则调用了另一个正则:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&apos;I.... see?&apos; ~~ / \w+ $&lt;punctuation&gt;=[ &lt;-[\w\s]&gt;+ ] \s* $&lt;final-word&gt; = [ \w+ . ] /;</div><div class="line">say $/&lt;punctuation&gt;; # ｢....｣</div><div class="line">say $/&lt;final-word&gt;;  # ｢see?｣</div></pre></td></tr></table></figure>
+<p>这些命名捕获分组也能使用便捷形式的 <code>$&lt;named&gt;</code> 获取:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say $&lt;punctuation&gt;; # ｢....｣</div><div class="line">say $&lt;final-word&gt;;  # ｢see?｣</div></pre></td></tr></table></figure>
+<p>要获取所有的命名属性, 使用 <code>$/.hash</code>,  <code>%$/</code>, <code>%()</code>中的任何一个:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say %().join;  # &quot;punctuation     ....final-word  see?&quot;</div></pre></td></tr></table></figure>
+<h3 id="变量-3"><a href="#变量-3" class="headerlink" title="$! 变量"></a>$! 变量</h3><p><code>$!</code> 是错误变量. 如果 <code>try</code> block 或语句前缀捕获到异常, 那个异常就会被存储在 <code>$!</code> 中。如果没有捕获到异常, 那么 <code>$!</code> 会被设置为 Any 类型对象。<br>注意, <code>CATCH</code> 块不设置 <code>$!</code>。CATCH 在 block 中把 <code>$_</code> 设置为捕获到的异常。</p>
+<h2 id="编译时变量"><a href="#编译时变量" class="headerlink" title="编译时变量"></a>编译时变量</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Compile-time Variables</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$?FILE</td>
+<td style="text-align:left">所在文件</td>
+</tr>
+<tr>
+<td style="text-align:center">$?LINE</td>
+<td style="text-align:left">所在行</td>
+</tr>
+<tr>
+<td style="text-align:center">::?CLASS</td>
+<td style="text-align:left">所在类</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;?ROUTINE</td>
+<td style="text-align:left">所在子例程</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;?BLOCK</td>
+<td style="text-align:left">所在块</td>
+</tr>
+<tr>
+<td style="text-align:center">%?LANG</td>
+<td style="text-align:left">What is the current set of interwoven languages?</td>
+</tr>
+<tr>
+<td style="text-align:center">%?RESOURCES</td>
+<td style="text-align:left">The files associated with the “Distribution” of the current compilation unit.</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for &apos;.&apos; &#123;</div><div class="line">    .Str.say when !.IO.d;</div><div class="line">    .IO.dir()&gt;&gt;.&amp;?BLOCK when .IO.d # lets recurse a little!</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其它编译时变量：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Compile-time Variables</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$?PACKAGE</td>
+<td style="text-align:left">所在包</td>
+</tr>
+<tr>
+<td style="text-align:center">$?MODULE</td>
+<td style="text-align:left">所在模块</td>
+</tr>
+<tr>
+<td style="text-align:center">$?CLASS</td>
+<td style="text-align:left">所在类(as variable)</td>
+</tr>
+<tr>
+<td style="text-align:center">$?ROLE</td>
+<td style="text-align:left">所在角色(as variable)</td>
+</tr>
+<tr>
+<td style="text-align:center">$?GRAMMAR</td>
+<td style="text-align:left">所在 grammar</td>
+</tr>
+<tr>
+<td style="text-align:center">$?TABSTOP</td>
+<td style="text-align:left">在 heredoc 或 虚拟边距中 tab 有多少空格</td>
+</tr>
+<tr>
+<td style="text-align:center">$?USAGE</td>
+<td style="text-align:left">从 MAIN 程序的签名中生成的使用信息</td>
+</tr>
+<tr>
+<td style="text-align:center">$?ENC</td>
+<td style="text-align:left">Str.encode/Buf.decode/various IO 方法的默认编码.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="动态变量"><a href="#动态变量" class="headerlink" title="动态变量"></a>动态变量</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Dynamic Variable</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$*ARGFILES</td>
+<td style="text-align:left">神奇的命令行输入句柄</td>
+</tr>
+<tr>
+<td style="text-align:center">@*ARGS</td>
+<td style="text-align:left">来自命令行的参数</td>
+</tr>
+<tr>
+<td style="text-align:center">$*IN</td>
+<td style="text-align:left">标准输入文件句柄, AKA stdin</td>
+</tr>
+<tr>
+<td style="text-align:center">$*OUT</td>
+<td style="text-align:left">标准输出文件句柄, AKA stdout</td>
+</tr>
+<tr>
+<td style="text-align:center">$*ERR</td>
+<td style="text-align:left">标准错误文件句柄, AKA stderr</td>
+</tr>
+<tr>
+<td style="text-align:center">%*ENV</td>
+<td style="text-align:left">环境变量</td>
+</tr>
+<tr>
+<td style="text-align:center">$*REPO</td>
+<td style="text-align:left">存储安装过的/加载了的模块信息的变量</td>
+</tr>
+<tr>
+<td style="text-align:center">$*TZ</td>
+<td style="text-align:left">系统的本地时区.</td>
+</tr>
+<tr>
+<td style="text-align:center">$*CWD</td>
+<td style="text-align:left">当前工作目录.</td>
+</tr>
+<tr>
+<td style="text-align:center">$*KERNEL</td>
+<td style="text-align:left">在哪个内核下运行</td>
+</tr>
+<tr>
+<td style="text-align:center">$*DISTRO</td>
+<td style="text-align:left">在哪个操作系统分发下运行</td>
+</tr>
+<tr>
+<td style="text-align:center">$*VM</td>
+<td style="text-align:left">在哪个虚拟机下运行</td>
+</tr>
+<tr>
+<td style="text-align:center">$*PERL</td>
+<td style="text-align:left">在哪个 Perl 下运行</td>
+</tr>
+<tr>
+<td style="text-align:center">$*PID</td>
+<td style="text-align:left">当前进程的进程 ID</td>
+</tr>
+<tr>
+<td style="text-align:center">$*PROGRAM-NAME</td>
+<td style="text-align:left">当前可执行程序的路径就像它通过命令行键入一样, 或 -e 如果 perl 引用了 -e 标记</td>
+</tr>
+<tr>
+<td style="text-align:center">$*PROGRAM</td>
+<td style="text-align:left">正被执行的 Perl 程序的位置( 以 IO::Path 对象的形式)</td>
+</tr>
+<tr>
+<td style="text-align:center">$*EXECUTABLE</td>
+<td style="text-align:left">当前运行的可执行 perl 的绝对路径</td>
+</tr>
+<tr>
+<td style="text-align:center">$*EXECUTABLE-NAME</td>
+<td style="text-align:left">当前运行的可执行 perl 程序的名字。(e.g. perl6-p, perl6-m, Niecza.exe)</td>
+</tr>
+<tr>
+<td style="text-align:center">$*USER</td>
+<td style="text-align:left">正在运行该程序的用户. 它是一个被求值为 “username (uid)” 的对象. 它只有在被当作字符串时才被求值为用户名, 如果被当作数字则被求值为数值化的用户 id。</td>
+</tr>
+<tr>
+<td style="text-align:center">$*GROUP</td>
+<td style="text-align:left">运行程序的用户的主要组. 它是被计算为  “groupname (gid)” 的对象.它只有在被当作字符串时才被求值为组名, 如果被当作数字则被求值为数值化的组 id。</td>
+</tr>
+<tr>
+<td style="text-align:center">$*HOME</td>
+<td style="text-align:left">代表当前运行程序的用户家目录的 IO::Path 对象。如果家目录不确定则为 Nil。</td>
+</tr>
+<tr>
+<td style="text-align:center">$*SPEC</td>
+<td style="text-align:left">程序运行的平台的合适的 IO::Spec 子类, 对于特定操作系统代码,使用智能匹配: say “We are on Windows!” if $*SPEC ~~ IO::Spec::Win32</td>
+</tr>
+<tr>
+<td style="text-align:center">$*TMPDIR</td>
+<td style="text-align:left">代表着 “系统临时目录” 的 IO::Path 对象</td>
+</tr>
+<tr>
+<td style="text-align:center">$*TOLERANCE</td>
+<td style="text-align:left">由 &lt;=~=&gt; 操作符使用并且任何依赖它的操作, 来决定两个值是否近似地相等, 默认为 1e-15。</td>
+</tr>
+<tr>
+<td style="text-align:center">$*THREAD</td>
+<td style="text-align:left">代表当前执行线程的 Thread 对象。</td>
+</tr>
+<tr>
+<td style="text-align:center">$*SCHEDULER</td>
+<td style="text-align:left">代表当前默认调度程序的 ThreadPoolScheduler 对象。</td>
+</tr>
+</tbody>
+</table>
+<p>注意 <code>$*SCHEDULER</code> 的用法:</p>
+<p>对于当前的 Rakudo, 这个默认在方法 <code>.hyper</code> 和 <code>.race</code> 上采用最大 16 个线程。要更改线程的最大数量, 要么在运行 perl 之前设置环境变量  RAKUDO_MAX_THREADS 的值, 要么在使用 .hyper 或 .race 之前创建一个默认改变了的作用域的拷贝:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my $*SCHEDULER = ThreadPoolScheduler.new( max_threads =&gt; 64 );</div></pre></td></tr></table></figure>
+<p>这种行为在 spec 测试中没有被测试并且还会变化。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Variable/" rel="tag">#Variable</a>
+          
+            <a href="/tags/twigil/" rel="tag">#twigil</a>
+          
+            <a href="/tags/匿名状态变量/" rel="tag">#匿名状态变量</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/25/Perl-6-单行程序/" rel="next" title="Perl 6 单行程序">
+                <i class="fa fa-chevron-left"></i> Perl 6 单行程序
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/29/探索Perl6的Signatures-第二部分/" rel="prev" title="探索Perl6的Signatures,第二部分">
+                探索Perl6的Signatures,第二部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/08/25/Perl6中的变量/"
+     data-title="Perl 6 中的变量"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/08/25/Perl6中的变量/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/25/Perl6中的变量/"
+           data-title="Perl 6 中的变量" data-url="https://ohmycloud.github.io/2015/08/25/Perl6中的变量/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigils"><span class="nav-number">1.</span> <span class="nav-text">Sigils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项和列表赋值"><span class="nav-number">2.</span> <span class="nav-text">项和列表赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无符号变量"><span class="nav-number">3.</span> <span class="nav-text">无符号变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigils"><span class="nav-number">4.</span> <span class="nav-text">Twigils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigil"><span class="nav-number">5.</span> <span class="nav-text">* Twigil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigil-1"><span class="nav-number">6.</span> <span class="nav-text">! Twigil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigil-2"><span class="nav-number">7.</span> <span class="nav-text">? Twigil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigil-3"><span class="nav-number">8.</span> <span class="nav-text">. Twigil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-Twigil"><span class="nav-number">9.</span> <span class="nav-text">< Twigil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigil-4"><span class="nav-number">10.</span> <span class="nav-text">^ Twigil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigil-5"><span class="nav-number">11.</span> <span class="nav-text">: Twigil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigil-6"><span class="nav-number">12.</span> <span class="nav-text">= Twigil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Twigil-7"><span class="nav-number">13.</span> <span class="nav-text">~ Twigil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量声明符和作用域"><span class="nav-number">14.</span> <span class="nav-text">变量声明符和作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#my-声明符"><span class="nav-number">14.1.</span> <span class="nav-text">my 声明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#our-声明符"><span class="nav-number">14.2.</span> <span class="nav-text">our 声明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明一组变量"><span class="nav-number">14.3.</span> <span class="nav-text">声明一组变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#has-声明符"><span class="nav-number">14.4.</span> <span class="nav-text">has 声明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anon-声明符"><span class="nav-number">14.5.</span> <span class="nav-text">anon 声明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#state-声明符"><span class="nav-number">14.6.</span> <span class="nav-text">state 声明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">14.7.</span> <span class="nav-text">$ 变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量-1"><span class="nav-number">14.8.</span> <span class="nav-text">@ 变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量-2"><span class="nav-number">14.9.</span> <span class="nav-text">% 变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#augment-声明符"><span class="nav-number">14.10.</span> <span class="nav-text">augment 声明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#temp-前缀"><span class="nav-number">14.11.</span> <span class="nav-text">temp 前缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#let-前缀"><span class="nav-number">14.12.</span> <span class="nav-text">let 前缀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型约束和初始化"><span class="nav-number">15.</span> <span class="nav-text">类型约束和初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认的有定义的变量指令"><span class="nav-number">16.</span> <span class="nav-text">默认的有定义的变量指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊变量"><span class="nav-number">17.</span> <span class="nav-text">特殊变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">17.1.</span> <span class="nav-text">$_</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-1"><span class="nav-number">17.2.</span> <span class="nav-text">$/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位置属性"><span class="nav-number">17.3.</span> <span class="nav-text">位置属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名属性"><span class="nav-number">17.4.</span> <span class="nav-text">命名属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量-3"><span class="nav-number">17.5.</span> <span class="nav-text">$! 变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译时变量"><span class="nav-number">18.</span> <span class="nav-text">编译时变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态变量"><span class="nav-number">19.</span> <span class="nav-text">动态变量</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

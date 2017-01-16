@@ -1,0 +1,816 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="List," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1my class List is Iterable does Positional &amp;#123; .. &amp;#125;
+List 以序列化的方式存储 items并且潜在是惰性的。
+默认列表和数组的索引从 0 开始。
+你可以给列表中的元素赋值如果它们是容器的话。使用数组以使列表中的每个元素存储在容器中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="class-List">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/06/10/class-List/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="1my class List is Iterable does Positional &amp;#123; .. &amp;#125;
+List 以序列化的方式存储 items并且潜在是惰性的。
+默认列表和数组的索引从 0 开始。
+你可以给列表中的元素赋值如果它们是容器的话。使用数组以使列表中的每个元素存储在容器中。">
+<meta property="og:updated_time" content="2016-10-23T16:32:15.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="class-List">
+<meta name="twitter:description" content="1my class List is Iterable does Positional &amp;#123; .. &amp;#125;
+List 以序列化的方式存储 items并且潜在是惰性的。
+默认列表和数组的索引从 0 开始。
+你可以给列表中的元素赋值如果它们是容器的话。使用数组以使列表中的每个元素存储在容器中。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/06/10/class-List/"/>
+
+  <title> class-List | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                class-List
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-06-10T00:00:00+08:00" content="2015-06-10">
+              2015-06-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/10/class-List/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/10/class-List/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my class List is Iterable does Positional &#123; .. &#125;</div></pre></td></tr></table></figure>
+<p><strong>List</strong> 以序列化的方式存储 items并且潜在是惰性的。</p>
+<p>默认列表和数组的索引从 0 开始。</p>
+<p>你可以给列表中的元素赋值如果它们是容器的话。使用数组以使列表中的每个元素存储在容器中。</p>
+<a id="more"></a>
+<h4 id="Items-Flattening-and-Sigils"><a href="#Items-Flattening-and-Sigils" class="headerlink" title="Items, Flattening and Sigils"></a>Items, Flattening and Sigils</h4><p>在 Perl 6 中, 把 <strong>List</strong> 赋值给一个标量变量不会丢死信息。不同之处在于迭代通常会把标量中的列表(或其它任何像列表的东西, 例如 Parcel 和 数组)当作单个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">my @a = 1, 2, 3;</div><div class="line">for @a &#123; &#125;      # 三次迭代</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">my $s = @a;</div><div class="line">for $s &#123; &#125;      # 一次迭代</div><div class="line">for @a.item &#123; &#125; # 一次迭代</div><div class="line">for $s.list &#123; &#125; # 三次迭代</div></pre></td></tr></table></figure>
+<p><strong>Lists</strong> 通常会插值(展开)除非它们通过一个 item(scalar)容器访问:(GLR 的影响？)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">my @a = 1, 2, 3;</div><div class="line">my @flat   = @a, @a;           # two elements</div><div class="line">my @nested = @a.item, @a.item; # two elements</div></pre></td></tr></table></figure>
+<p><code>.item</code> 通常能被写为 <code>$( ... )</code>, 而在数组变量上甚至写为  <code>$@a</code>。</p>
+<h4 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h4><h5 id="elems"><a href="#elems" class="headerlink" title="elems"></a>elems</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    elems($list)  returns Int:D</div><div class="line">multi method elems(List:D:) returns Int:D</div></pre></td></tr></table></figure>
+<p>返回列表中元素的个数。</p>
+<h5 id="end"><a href="#end" class="headerlink" title="end"></a>end</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    end($list)  returns Int:D</div><div class="line">multi method end(List:D:) returns Int:D</div></pre></td></tr></table></figure>
+<p>返回列表中最后一个元素的索引</p>
+<h5 id="keys"><a href="#keys" class="headerlink" title="keys"></a>keys</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    keys($list)  returns List:D</div><div class="line">multi method keys(List:D:) returns List:D</div></pre></td></tr></table></figure>
+<p>返回一个索引列表( 例如 <code>0..(@list.elems-1)</code> )</p>
+<h5 id="values"><a href="#values" class="headerlink" title="values"></a>values</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    values($list)  returns List:D</div><div class="line">multi method values(List:D:) returns List:D</div></pre></td></tr></table></figure>
+<p>返回列表的一份拷贝。</p>
+<h5 id="kv"><a href="#kv" class="headerlink" title="kv"></a>kv</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    kv($list)  returns List:D</div><div class="line">multi method kv(List:D:) returns List:D</div></pre></td></tr></table></figure>
+<p>返回索引和值的交替的列表。 例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a b c&gt;.kv</div></pre></td></tr></table></figure>
+<p>返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0, &apos;a&apos;, 1, &apos;b&apos;, 2, &apos;c&apos;</div></pre></td></tr></table></figure>
+<h5 id="pairs"><a href="#pairs" class="headerlink" title="pairs"></a>pairs</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    pairs($list)   returns List:D</div><div class="line">multi method pairs(List:D:) returns List:D</div></pre></td></tr></table></figure>
+<p>返回一个 pairs 的列表, 使用索引作为键, 列表值作为键值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a b c&gt;.pairs   # 0 =&gt; &apos;a&apos;, 1 =&gt; &apos;b&apos;, 2 =&gt; &apos;c&apos;</div></pre></td></tr></table></figure>
+<h5 id="join"><a href="#join" class="headerlink" title="join"></a>join</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    join($separator, *@list) returns Str:D</div><div class="line">multi method join(List:D: $separator) returns Str:D</div></pre></td></tr></table></figure>
+<p>把列表中元素当作字符串, 在元素之间插入 <code>$separator</code> 并把所有东西连接成单个字符串。</p>
+<p>例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">join &apos;, &apos;, &lt;a b c&gt;;     # &apos;a, b, c&apos;</div></pre></td></tr></table></figure>
+<h5 id="map"><a href="#map" class="headerlink" title="map"></a>map</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    map(&amp;code, *@elems) returns List:D</div><div class="line">multi method map(List:D: &amp;code) returns List:D</div></pre></td></tr></table></figure>
+<p>对每个元素调用 <code>&amp;code</code> 并且把值收集到另外一个列表中并返回它。这个过程是惰性的。 <code>&amp;code</code>只在返回值被访问的时候调用。</p>
+<p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; (&apos;hello&apos;, 1, 22/7, 42, &apos;world&apos;).map: &#123; .WHAT.perl &#125;</div><div class="line">Str Int Rat Int Str</div><div class="line">&gt; map *.Str.chars, &apos;hello&apos;, 1, 22/7, 42, &apos;world&apos;</div><div class="line">5 1 8 2 5</div></pre></td></tr></table></figure>
+<h5 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    grep(Mu $matcher, *@elems) returns List:D</div><div class="line">multi method grep(List:D:  Mu $matcher) returns List:D</div></pre></td></tr></table></figure>
+<p>返回一个使用 <code>$matcher</code> 智能匹配的惰性列表。元素是以出现在原列表中的顺序返回的。</p>
+<p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; (&apos;hello&apos;, 1, 22/7, 42, &apos;world&apos;).grep: Int</div><div class="line">1 42</div><div class="line">&gt; grep &#123; .Str.chars &gt; 3 &#125;, &apos;hello&apos;, 1, 22/7, 42, &apos;world&apos;</div><div class="line">hello 3.142857 world</div></pre></td></tr></table></figure>
+<h5 id="first"><a href="#first" class="headerlink" title="first"></a>first</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    first(Mu $matcher, *@elems)</div><div class="line">multi method first(List:D:  Mu $matcher)</div></pre></td></tr></table></figure>
+<p>返回列表中第一个匹配 $matcher 的元素, 当没有匹配值时, 失败。</p>
+<p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say (1, 22/7, 42).first: * &gt; 5;     # 42</div><div class="line">say $f = (&apos;hello&apos;, 1, 22/7, 42, &apos;world&apos;).first: Complex;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;  (&apos;hello&apos;, 1, 22/7, 42, &apos;world&apos;,1+2i).first: Complex;</div><div class="line">1+2i</div><div class="line">say $f.perl; #  Failure.new(exception =&gt; X::AdHoc.new(payload =&gt; &quot;No values matched&quot;))</div></pre></td></tr></table></figure>
+<h5 id="classify"><a href="#classify" class="headerlink" title="classify"></a>classify</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    classify(&amp;mapper, *@values) returns Hash:D</div><div class="line">multi method classify(List:D: &amp;mapper)   returns Hash:D</div></pre></td></tr></table></figure>
+<p>根据映射器把一列值转换成代表那些值的类别的散列; 散列的每个键代表着将要归入列表的一个或多个值的类别。比如字符个数， 元素多少， 键值就是根据 mapper 得到的这个类别下的元素， 它来自于原始列表：</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">say classify &#123; $_ %% 2 ?? &apos;even&apos; !! &apos;odd&apos; &#125;, (1, 7, 6, 3, 2);</div><div class="line"># (&quot;odd&quot; =&gt; [1, 7, 3], &quot;even&quot; =&gt; [6, 2]).hash;</div><div class="line"></div><div class="line">say (&apos;hello&apos;, 1, 22/7, 42, &apos;world&apos;).classify: &#123; .Str.chars &#125;;</div><div class="line"># (&quot;5&quot; =&gt; [&quot;hello&quot;, &quot;world&quot;], &quot;1&quot; =&gt; [1], &quot;8&quot; =&gt; [22/7], &quot;2&quot; =&gt; [42]).hash</div></pre></td></tr></table></figure>
+<h5 id="Bool"><a href="#Bool" class="headerlink" title="Bool"></a>Bool</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method Bool(List:D:) returns Bool:D</div></pre></td></tr></table></figure>
+<p>如果列表至少含有一个元素则返回 True, 如果列表为空则返回 False。</p>
+<h5 id="Str"><a href="#Str" class="headerlink" title="Str"></a>Str</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method Str(List:D:) returns Str:D</div></pre></td></tr></table></figure>
+<p>字符串化列表中的元素并使用空格把这些元素连接起来。( 和 <code>.join(&#39; &#39;)</code> 一样)。</p>
+<h5 id="Int"><a href="#Int" class="headerlink" title="Int"></a>Int</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method Int(List:D:) return Int:D</div></pre></td></tr></table></figure>
+<p>返回列表中元素的数量(和 <code>.elems</code> 一样)</p>
+<h5 id="pick"><a href="#pick" class="headerlink" title="pick"></a>pick</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    pick($count, *@list) returns List:D</div><div class="line">multi method pick(List:D: $count = 1)</div></pre></td></tr></table></figure>
+<p>从调用者身上随机返回 $count 个不重复的元素。 如果 * 作为 $count 传递进来或 $count 大于或等于列表的大小, 那么就以随机序列的方式返回列表中的所有元素。</p>
+<p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">say &lt;a b c d e&gt;.pick;           # b</div><div class="line">say &lt;a b c d e&gt;.pick: 3;        # c a e</div><div class="line">say  &lt;a b c d e&gt;.pick: *;       # e d a b c</div></pre></td></tr></table></figure>
+<h5 id="roll"><a href="#roll" class="headerlink" title="roll"></a>roll</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    roll($count, *@list) returns List:D</div><div class="line">multi method roll(List:D: $count = 1)</div></pre></td></tr></table></figure>
+<p>返回一个 $count 个元素的惰性列表, 每个元素都从列表中随机选择。每个随机选择都是独立的.</p>
+<p>如果给 $count 传递了* 号, 则返回一个惰性的, 从原列表中随机选取元素的无限列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">say &lt;a b c d e&gt;.roll;       # b</div><div class="line">say &lt;a b c d e&gt;.roll: 3;    # c c e</div><div class="line">say roll 8, &lt;a b c d e&gt;;    # b a e d a e b c</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $random_digits := (^10).roll(*);1;</div><div class="line">say $random_digits[^15];    # 3 8 7 6 0 1 3 2 0 8 8 5 8 0 5</div></pre></td></tr></table></figure>
+<h5 id="eager"><a href="#eager" class="headerlink" title="eager"></a>eager</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi method eager(List:D:) returns List:D</div></pre></td></tr></table></figure>
+<p>急切地计算列表中的所有元素, 并返回调用者。如果列表标示它是”konw inifinite” 的, 急切求值可以停止在探测到的无限的点上。</p>
+<h5 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    reverse(*@list ) returns List:D</div><div class="line">multi method reverse(List:D:) returns List:D</div></pre></td></tr></table></figure>
+<p>以相反的顺序返回一个含有相同元素的列表。<br>注意 reverse 总是指反转列表中的元素, 如果你想反转字符串中的字符, 那么使用 flip。<br>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say &lt;hello world!&gt;.reverse      #  world! hello</div><div class="line">say reverse ^10                 # 9 8 7 6 5 4 3 2 1 0</div></pre></td></tr></table></figure>
+<h5 id="rotate"><a href="#rotate" class="headerlink" title="rotate"></a>rotate</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    rotate(@list,  Int:D $n = 1) returns List:D</div><div class="line">multi method rotate(List:D: Int:D $n = 1) returns List:D</div></pre></td></tr></table></figure>
+<p>以 $n 个元素旋转列表, 这把原列表分成两部分, 旋转中心就是在这两部分之间:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;a b c d e&gt;.rotate(2);   # &lt;c d e a b&gt;</div><div class="line">&lt;a b c d e&gt;.rotate(-1);  # &lt;e a b c d&gt;</div></pre></td></tr></table></figure>
+<h5 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">multi sub    sort(*@elems)      returns List:D</div><div class="line">multi sub    sort(&amp;by, *@elems) returns List:D</div><div class="line">multi method sort(List:D:)      returns List:D</div><div class="line">multi method sort(List:D:, &amp;by) returns List:D</div></pre></td></tr></table></figure>
+<p>列表排序, 最小的元素首先。默认使用 <code>infix:&lt;cmp&gt;</code> 排序列表中的元素。<br>如果提供了 <code>&amp;by</code>, 那么它接收两个参数, 它由列表元素对儿调用, 并且应该返回 Order::Increase, Order::Same 或 Order::Decrease.<br>如果 <code>&amp;by</code>只接受一个参数, 那么列表元素是通过 <code>by($a)  cmp by($b)</code> 来排序的。<code>&amp;by</code> 的返回值被缓存起来,  以使每个列表元素只调用一次 <code>&amp;by</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">say (3, -4, 7, -1, 2, 0).sort;                  # -4 -1 0 2 3 7</div><div class="line">say (3, -4, 7, -1, 2, 0).sort: *.abs;           # 0 -1 2 3 -4 7</div><div class="line">say (3, -4, 7, -1, 2, 0).sort: &#123; $^b leg $^a &#125;; # 7 3 2 0 -4 -1</div></pre></td></tr></table></figure>
+<h5 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    reduce(&amp;with, *@elems)</div><div class="line">multi method reduce(List:D: &amp;with)</div></pre></td></tr></table></figure>
+<p>把 <code>&amp;with</code> 应用到列表中的第一个和第二个值上, 然后把 <code>&amp;with</code>应用到那个计算的结果值和第三个值上, 以此类推。按照那种方式生成单个项。<br>注意 reduce 是一个隐式的循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say (1, 2, 3).reduce: * - *;    # -4</div></pre></td></tr></table></figure>
+<h5 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    splice(@list,  $start, $elems?, *@replacement) returns List:D</div><div class="line">multi method splice(List:D: $start, $elems?, *@replacement) returns List:D</div></pre></td></tr></table></figure>
+<p>从列表中删除从 $start 索引开始的 $elems 个元素, 返回删除的元素并用 @replacement 来代替它。如果省略了 $elems, 所有从 $index 开始的元素都被删除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @foo = &lt;a b c d e f g&gt;;</div><div class="line">say @foo.splice(2, 3, &lt;M N O P&gt;);       # c d e</div><div class="line">say @foo;                               # a b M N O P f g</div></pre></td></tr></table></figure>
+<h5 id="pop"><a href="#pop" class="headerlink" title="pop"></a>pop</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    pop(List:D )</div><div class="line">multi method pop(List:D:)</div></pre></td></tr></table></figure>
+<p>从列表中移除并返回最后一项。如果列表为空则失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; my @foo = &lt;a b&gt;;</div><div class="line">&gt; @foo.pop;  # b</div><div class="line">&gt; pop @foo   # a</div><div class="line">&gt; pop @foo   # Element popped from empty list</div></pre></td></tr></table></figure>
+<h5 id="push"><a href="#push" class="headerlink" title="push"></a>push</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    push(List:D, *@values) returns List:D</div><div class="line">multi method push(List:D: *@values) returns List:D</div></pre></td></tr></table></figure>
+<p>把 <code>@values</code> 添加到列表的末尾, 并返回修改后的列表。 如果列表是无限列表则失败。<br>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @foo = &lt;a b c&gt;;</div><div class="line">@foo.push: 1, 3 ... 11;</div><div class="line">say @foo;                   # a b c 1 3 5 7 9 11</div></pre></td></tr></table></figure>
+<h5 id="shift"><a href="#shift" class="headerlink" title="shift"></a>shift</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    shift(List:D )</div><div class="line">multi method shift(List:D:)</div></pre></td></tr></table></figure>
+<p>从列表中移除并返回第一项元素。 如果列表为空则失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my @foo = &lt;a b&gt;;</div><div class="line">say @foo.shift;     # a</div><div class="line">say @foo.shift;     # b</div><div class="line">say @foo.shift;     # Element shifted from empty list</div></pre></td></tr></table></figure>
+<h5 id="unshift"><a href="#unshift" class="headerlink" title="unshift"></a>unshift</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub    unshift(List:D, *@values) returns List:D</div><div class="line">multi method unshift(List:D: *@values) returns List:D</div></pre></td></tr></table></figure>
+<p>添加 @values 到列表的开头, 并返回修改后的列表。 如果列表是无限列表则失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @foo = &lt;a b c&gt;;</div><div class="line">@foo.unshift: 1, 3 ... 11;</div><div class="line">say @foo;                   # 1 3 5 7 9 11 a b c</div></pre></td></tr></table></figure>
+<h5 id="combinations"><a href="#combinations" class="headerlink" title="combinations"></a>combinations</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">multi method combinations (List:D: Int:D $of)          returns List:D</div><div class="line">multi method combinations (List:D: Range:D $of = 0..*) returns List:D</div><div class="line">multi sub    combinations ($n, $k)                     returns List:D</div></pre></td></tr></table></figure>
+<p>Int 变体返回调用者列表所有的 $of-combinations 组合。例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say .join(&apos;|&apos;) for &lt;a b c&gt;.combinations(2);</div></pre></td></tr></table></figure>
+<p>打印</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a|b</div><div class="line">a|c</div><div class="line">b|c</div></pre></td></tr></table></figure>
+<p>因为  ‘a’, ‘b’, ‘c’ 的所有 2-combinations 是  [‘a’, ‘b’], [‘a’, ‘c’], [‘b’, ‘c’].</p>
+<p>Range 变体把所有单独的组合组合到单个列表中, 所以:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say .join(&apos;|&apos;) for &lt;a b c&gt;.combinations(2..3);</div></pre></td></tr></table></figure>
+<p>打印</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a|b</div><div class="line">a|c</div><div class="line">b|c</div><div class="line">a|b|c</div></pre></td></tr></table></figure>
+<p>因为那是一个所有 2-和3-combinations 组合的列表。<br>子例程 <code>combinations($n, $k)</code> 等价于 <code>(^$n).combinations($k)</code>, 所以：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.say for combinations(4, 2)</div></pre></td></tr></table></figure>
+<p>打印</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">0 1</div><div class="line">0 2</div><div class="line">0 3</div><div class="line">1 2</div><div class="line">1 3</div><div class="line">2 3</div></pre></td></tr></table></figure>
+<h5 id="permutations"><a href="#permutations" class="headerlink" title="permutations"></a>permutations</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi method permutations(List:D:) returns List:D</div><div class="line">multi sub    permutations($n)      returns List:D</div></pre></td></tr></table></figure>
+<p>返回列表所有可能的组合作为数组的列表。所以:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say .join(&apos;|&apos;) for &lt;a b c&gt;.permutations</div></pre></td></tr></table></figure>
+<p>打印</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">a|b|c</div><div class="line">a|c|b</div><div class="line">b|a|c</div><div class="line">b|c|a</div><div class="line">c|a|b</div><div class="line">c|b|a</div></pre></td></tr></table></figure>
+<p>permutations 把所有列表元素当作可区别的, 所以 (1, 1, 2).permutations 仍旧返回 6 个元素的列表, 即使只有 3 个不同的排列。<br><code>permutations($n)</code> 等价于 <code>(^$n).permutations</code>, 所以:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.say for permutations 3;</div></pre></td></tr></table></figure>
+<p>打印</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1 2 3</div><div class="line">1 3 2</div><div class="line">2 1 3</div><div class="line">2 3 1</div><div class="line">3 1 2</div><div class="line">3 2 1</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/List/" rel="tag">#List</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/19/怎么在Perl6中自定义存取器/" rel="next" title="怎么在 Perl 6 中自定义存取器">
+                <i class="fa fa-chevron-left"></i> 怎么在 Perl 6 中自定义存取器
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/14/正则表达式一例/" rel="prev" title="正则表达式一例">
+                正则表达式一例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/06/10/class-List/"
+     data-title="class-List"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/06/10/class-List/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/06/10/class-List/"
+           data-title="class-List" data-url="https://ohmycloud.github.io/2015/06/10/class-List/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Items-Flattening-and-Sigils"><span class="nav-number">1.</span> <span class="nav-text">Items, Flattening and Sigils</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Methods"><span class="nav-number">2.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#elems"><span class="nav-number">2.1.</span> <span class="nav-text">elems</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#end"><span class="nav-number">2.2.</span> <span class="nav-text">end</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#keys"><span class="nav-number">2.3.</span> <span class="nav-text">keys</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#values"><span class="nav-number">2.4.</span> <span class="nav-text">values</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#kv"><span class="nav-number">2.5.</span> <span class="nav-text">kv</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pairs"><span class="nav-number">2.6.</span> <span class="nav-text">pairs</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#join"><span class="nav-number">2.7.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#map"><span class="nav-number">2.8.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grep"><span class="nav-number">2.9.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#first"><span class="nav-number">2.10.</span> <span class="nav-text">first</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#classify"><span class="nav-number">2.11.</span> <span class="nav-text">classify</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bool"><span class="nav-number">2.12.</span> <span class="nav-text">Bool</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Str"><span class="nav-number">2.13.</span> <span class="nav-text">Str</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Int"><span class="nav-number">2.14.</span> <span class="nav-text">Int</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pick"><span class="nav-number">2.15.</span> <span class="nav-text">pick</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#roll"><span class="nav-number">2.16.</span> <span class="nav-text">roll</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#eager"><span class="nav-number">2.17.</span> <span class="nav-text">eager</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#reverse"><span class="nav-number">2.18.</span> <span class="nav-text">reverse</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rotate"><span class="nav-number">2.19.</span> <span class="nav-text">rotate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sort"><span class="nav-number">2.20.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#reduce"><span class="nav-number">2.21.</span> <span class="nav-text">reduce</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#splice"><span class="nav-number">2.22.</span> <span class="nav-text">splice</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pop"><span class="nav-number">2.23.</span> <span class="nav-text">pop</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#push"><span class="nav-number">2.24.</span> <span class="nav-text">push</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shift"><span class="nav-number">2.25.</span> <span class="nav-text">shift</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#unshift"><span class="nav-number">2.26.</span> <span class="nav-text">unshift</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#combinations"><span class="nav-number">2.27.</span> <span class="nav-text">combinations</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#permutations"><span class="nav-number">2.28.</span> <span class="nav-text">permutations</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

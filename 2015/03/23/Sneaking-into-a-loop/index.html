@@ -1,0 +1,728 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Bag,sort," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Sneaking into a loop[Sneaking into a loop]https://gfldex.wordpress.com/2016/08/10/sneaking-into-a-loop/
+Zoffix 回答了一个关于 Perl 5s &amp;lt;&amp;gt; 操作符的问题。
+1slurp.words.Bag.sort(-*.value).fmt(&amp;quot;%10s3d\n&amp;quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sneaking into a loop">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/03/23/Sneaking-into-a-loop/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Sneaking into a loop[Sneaking into a loop]https://gfldex.wordpress.com/2016/08/10/sneaking-into-a-loop/
+Zoffix 回答了一个关于 Perl 5s &amp;lt;&amp;gt; 操作符的问题。
+1slurp.words.Bag.sort(-*.value).fmt(&amp;quot;%10s3d\n&amp;quot;">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.981Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sneaking into a loop">
+<meta name="twitter:description" content="Sneaking into a loop[Sneaking into a loop]https://gfldex.wordpress.com/2016/08/10/sneaking-into-a-loop/
+Zoffix 回答了一个关于 Perl 5s &amp;lt;&amp;gt; 操作符的问题。
+1slurp.words.Bag.sort(-*.value).fmt(&amp;quot;%10s3d\n&amp;quot;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/03/23/Sneaking-into-a-loop/"/>
+
+  <title> Sneaking into a loop | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Sneaking into a loop
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-23T00:00:00+08:00" content="2015-03-23">
+              2015-03-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/23/Sneaking-into-a-loop/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/23/Sneaking-into-a-loop/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Sneaking-into-a-loop"><a href="#Sneaking-into-a-loop" class="headerlink" title="Sneaking into a loop"></a>Sneaking into a loop</h2><p>[Sneaking into a loop]<a href="https://gfldex.wordpress.com/2016/08/10/sneaking-into-a-loop/" target="_blank" rel="external">https://gfldex.wordpress.com/2016/08/10/sneaking-into-a-loop/</a></p>
+<p>Zoffix 回答了一个关于 Perl 5s &lt;&gt; 操作符的<a href="http://irclog.perlgeek.de/perl6/2016-08-09#i_12993090" target="_blank" rel="external">问题</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">slurp.words.Bag.sort(-*.value).fmt(&quot;%10s3d\n&quot;).say;</div></pre></td></tr></table></figure>
+<p><code>slurp</code> 会从 STDIN 中读取整个 “file” 并返回一个 Str。方法 <code>Str::words</code> 会按照某种 Unicode 意义的单词把该字符串分割成一个列表。把列表强转为 Bag 则创建一个计数 Hash, 它是如下表述的快捷方式。</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my %h;</div><div class="line">%h&#123;$_&#125;++ for &lt;peter paul marry&gt;;</div><div class="line">dd %h;</div><div class="line"></div><div class="line"># # OUTPUT«Hash %h = &#123;:marry(1), :paul(1), :peter(1)&#125;␤»</div></pre></td></tr></table></figure>
+<p>在关联数组上调用 <code>.sort(-*.value)</code> 会按照值的降序排序并返回一个排序后的 Pairs 列表。List::fmt 会调用 Pair::fmt, 它调用 fmt 方法, .key 作为其第二个参数, .value 也作为参数。say 会会使用一个空格连接各个元素并输出到标准输出。最后一步有一点错误因为除了第一行之外的每一行前面都会有一个额外的空格。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">slurp.words.Bag.sort(-*.value).fmt(&quot;%10s =&gt; %3d&quot;).join(&quot;\n&quot;).say;</div></pre></td></tr></table></figure>
+<p>手动连接字符串更好。这对于简短的单行程序来说有点多了。我们需要找到最长的单词并使用 <code>.chars</code> 来获取列宽。</p>
+<p>slurp 会在 <code>$*IN</code> 身上调用 <code>.slurp-rest</code> 方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$*IN = &lt;peter paul marry peter paul paul&gt; but role &#123; method slurp-rest &#123; self.Str &#125; &#125;;</div></pre></td></tr></table></figure>
+<p>这是一种 hack 因为它会在任何形式的类型检测上失败并且它除了 slurp 之外不会对任何东西起作用。还有, 实际上我们从 <code>$*IN</code> 那里解绑 STDIN。不要在工作中使用这个奇淫技巧。</p>
+<p>现在我们能开心地吞噬并开始计数了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my %counted-words = slurp.words.Bag;</div><div class="line">my $word-width = [max] %counted-words.keys».chars;</div></pre></td></tr></table></figure>
+<p>并且继续在链子断开的地方继续。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%counted-words.sort(-*.value).fmt(&quot;%&#123;$word-width&#125;s3d&quot;).join(&quot;\n&quot;).say;</div></pre></td></tr></table></figure>
+<p>问题解决了但是很丑陋。我们把一个单行程序拆开了。我们来修复 fmt 以使它再次完整。</p>
+<p>我们想要的是一个 fmt 方法, 它接收一个位置的(Positional), 一个 printf 风格的格式字符串和一个格式字符串中的 block per <code>%*</code>。还有, 我们可能需要在 self.fmt 前面放上一个分隔符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my multi method fmt(Positional:D: $fmt-str, *@width where *.all ~~ Callable, :$separator = &quot; &quot;)&#123;</div><div class="line">    self.fmt(</div><div class="line">        $fmt-str.subst(:g, &quot;%*&quot;, &#123;</div><div class="line">            my &amp;width = @width[$++] // Failure.new(&quot;missingh block&quot;);</div><div class="line">            &apos;%&apos; ~ (&amp;width.count == 2 ?? width(self, $_) !! width(self))</div><div class="line">        &#125;), $separator);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>表达式 <code>*.all ~~ Callable</code> 检查 <a href="https://docs.perl6.org/type/Signature#Slurpy_(A.K.A._Variadic" target="_blank" rel="external">slurp array</a>_Parameters)中的所有元素是否实现了 CALL-ME(那是实际被执行的方法在你执行 foo()的时候)。</p>
+<p>然后我们在格式字符串上使用了 <code>subst</code> 来替换 <code>%*</code>, 替换是一个(闭包)块儿, 它每次匹配被调用一次。而且这儿我们有不错的惯用法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say &quot;1-a 2-b 3-c&quot;.subst(:g, /\d/, &#123;&lt;one two three&gt;[$++]&#125;);</div><div class="line"># one-a two-b three-c</div></pre></td></tr></table></figure>
+<p>匿名状态变量 <code>$</code> 从 0  开始计数, 每次代码块执行时增 1。实际上我们在这儿做的就是移除一个循环并给 subst 偷偷加入一个额外的计数器和数组下标。或者可以说我们注册了一个迭代器到 subst 里面的循环中。有人可能会质疑 subst 应该接收一个 Seq 作为它的第二个位置参数, 它会让调用变得冗长。无论如何, 我们把洞补上了。</p>
+<p>在第 11 行, 我们从吞噬数组中拿出一个元素或者在没有元素时创建一个 Failure。我们把 block 存储在一个变量中因为我们想在第 12 行中内省。如果那个 block 接收两个位置参数,we feed the topic subst is calling the block with as a 2nd parameter to our stored block. 那碰巧是一个 Match 并且对于影响所匹配的东西可能有用。在我们这个例子中我们对 <code>%*</code> 进行匹配并且当前位置由 <code>$++</code> 计数。做完那个之后我们得到了一个格式字符串, 它带有一个由用户提供的 fmt 版本的列宽参数。</p>
+<p>用户提供的块儿使用一组 Pairs 调用。我们不得不深入一层以得到更大的键。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;[max] .values».keys».chars&#125;</div><div class="line">```  </div><div class="line"></div><div class="line">得到第一列的列宽。</div><div class="line"></div><div class="line"></div><div class="line">```perl6</div><div class="line">print %counted-words.sort(-*.value).&amp;fmt(&quot;%*s3d&quot;, &#123;[max] .values».keys».chars&#125;, separator =&gt; &quot;\n&quot;);</div></pre></td></tr></table></figure>
+<p>那个时髦的 <code>.&amp;fmt</code> 调用是必须的因为我们免费的浮点方法不是 List 的方法。</p>
+<p>– 翻译的好烂。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Bag/" rel="tag">#Bag</a>
+          
+            <a href="/tags/sort/" rel="tag">#sort</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/22/Perl-6-的薛定谔的猫-Junctions/" rel="next" title="Perl 6 的薛定谔的猫--Junctions">
+                <i class="fa fa-chevron-left"></i> Perl 6 的薛定谔的猫--Junctions
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/23/Perl6中的模块/" rel="prev" title="Perl 6 中的模块">
+                Perl 6 中的模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/03/23/Sneaking-into-a-loop/"
+     data-title="Sneaking into a loop"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/03/23/Sneaking-into-a-loop/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/03/23/Sneaking-into-a-loop/"
+           data-title="Sneaking into a loop" data-url="https://ohmycloud.github.io/2015/03/23/Sneaking-into-a-loop/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sneaking-into-a-loop"><span class="nav-number">1.</span> <span class="nav-text">Sneaking into a loop</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

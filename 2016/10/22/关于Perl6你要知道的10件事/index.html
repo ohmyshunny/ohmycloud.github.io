@@ -1,0 +1,742 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Grammar,签名,面向对象,自定义运算符," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Ten Things You Need To Know about Perl 61234Jeffrey Goff, Evozon Systems LLCOSCON London 2016https://github.com/drforrhttp://theperlfisher.blogspot.ro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 Perl 6 你要知道的 10 件事">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/10/22/关于Perl6你要知道的10件事/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Ten Things You Need To Know about Perl 61234Jeffrey Goff, Evozon Systems LLCOSCON London 2016https://github.com/drforrhttp://theperlfisher.blogspot.ro">
+<meta property="og:updated_time" content="2016-10-24T07:10:19.563Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于 Perl 6 你要知道的 10 件事">
+<meta name="twitter:description" content="Ten Things You Need To Know about Perl 61234Jeffrey Goff, Evozon Systems LLCOSCON London 2016https://github.com/drforrhttp://theperlfisher.blogspot.ro">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/10/22/关于Perl6你要知道的10件事/"/>
+
+  <title> 关于 Perl 6 你要知道的 10 件事 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于 Perl 6 你要知道的 10 件事
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-22T00:52:52+08:00" content="2016-10-22">
+              2016-10-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/22/关于Perl6你要知道的10件事/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/22/关于Perl6你要知道的10件事/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Ten-Things-You-Need-To-Know-about-Perl-6"><a href="#Ten-Things-You-Need-To-Know-about-Perl-6" class="headerlink" title="Ten Things You Need To Know about Perl 6"></a>Ten Things You Need To Know about Perl 6</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Jeffrey Goff, Evozon Systems LLC</div><div class="line">OSCON London 2016</div><div class="line">https://github.com/drforr</div><div class="line">http://theperlfisher.blogspot.ro</div></pre></td></tr></table></figure>
+<a id="more"></a> 
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><ul>
+<li>perl6.org (obviously)</li>
+<li>docs.perl6.org - Online documentation</li>
+<li><p>modules.perl6.org - CPAN Lite</p>
+</li>
+<li><p>rakudo.org - Where to get the latest</p>
+</li>
+<li><a href="https://github.com/tadzik/rakudobrew" target="_blank" rel="external">https://github.com/tadzik/rakudobrew</a> - Perlbrew for Perl 6</li>
+<li><a href="https://github.com/tadzik/panda/" target="_blank" rel="external">https://github.com/tadzik/panda/</a> - Module installer</li>
+<li>irc://irc.freenode.org/perl6 - #perl6 on IRC.freenode.org</li>
+<li><a href="http://rosettacode.org/wiki/Category:Perl_6" target="_blank" rel="external">http://rosettacode.org/wiki/Category:Perl_6</a> - Sample source</li>
+</ul>
+<h2 id="要闻"><a href="#要闻" class="headerlink" title="要闻"></a>要闻</h2><ul>
+<li>干净, 一次性的可解析的文法</li>
+<li>对用户友好的错误信息</li>
+<li>友好的 Unicode</li>
+<li>对初学者有帮助的符号</li>
+<li>Math that works</li>
+<li>函数签名</li>
+<li>用正则表达式引导</li>
+<li>OO with a type lattice built on a Metaprogramming model</li>
+<li>自定义运算符</li>
+<li>内置并发</li>
+</ul>
+<h2 id="一次性文法"><a href="#一次性文法" class="headerlink" title="一次性文法"></a>一次性文法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my @doctor = &#123; :first(&apos;Christopher&apos;), :last(&apos;Eccleston&apos;), years =&gt; 1 &#125;,</div><div class="line">             &#123; :first(&apos;David&apos;),       :last(&apos;Tennant&apos;),   years =&gt; 4 &#125;,</div><div class="line">             &#123; :first(&apos;Matt&apos;),        :last(&apos;Smith&apos;),     years =&gt; 4 &#125;,</div><div class="line">             &#123; :first(&apos;Peter&apos;),       :last(&apos;Capaldi&apos;),   years =&gt; 3 &#125;;</div><div class="line"></div><div class="line">say &apos;First New Who Doctor: &apos;, @doctor[0]&#123;&apos;first&apos;&#125;, &apos; &apos;, @doctor[0]&lt;last&gt;;</div><div class="line"></div><div class="line">say &quot;Average run: &quot; ~ @doctor.elems R/ sum map &#123; .&lt;years&gt; &#125;, @doctor;</div></pre></td></tr></table></figure>
+<p><code>R/</code> 运算符会对调两边的表达式再进行计算。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my %hash := &#123;  :name(&apos;Larry Wall&apos;), :sex(&apos;male&apos;)  &#125;; </div><div class="line">                   # &#123;name =&gt; Larry Wall, sex =&gt; male&#125;</div><div class="line">say %hash&#123;&apos;name&apos;&#125;; # Larry Wall</div><div class="line">say %hash.&lt;name&gt;;  # Larry Wall</div></pre></td></tr></table></figure>
+<p>访问散列的键值的另外一种语法是 %hash<code>.&lt;key&gt;</code>, 尖括号自动为 <code>key</code> 添加引号。</p>
+<h2 id="错误信息"><a href="#错误信息" class="headerlink" title="错误信息"></a>错误信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub mean( @a ) &#123;</div><div class="line">  my $sum = sum( @a )</div><div class="line">  ( $sum / @a.elems )</div><div class="line">&#125;</div><div class="line">say mean 1, 2, 4;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ perl6 test.pl6</div><div class="line"></div><div class="line">Two terms in a row across lines (missing semicolon or comma?)</div><div class="line">at /home/jgoff/test.pl6:2</div><div class="line">------&gt;   my $sum = sum( @a )⏏&lt;EOL&gt;</div><div class="line">    expecting any of:</div><div class="line">        infix</div><div class="line">        infix stopper</div><div class="line">        postfix</div><div class="line">        statement end</div><div class="line">        statement modifier</div><div class="line">        statement modifier loop</div></pre></td></tr></table></figure>
+<h2 id="Unicode-Friendly"><a href="#Unicode-Friendly" class="headerlink" title="Unicode Friendly"></a>Unicode Friendly</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $α = 2 + ⅒  ; </div><div class="line"></div><div class="line">say $α ÷ 2;</div><div class="line"></div><div class="line"># 1.05</div></pre></td></tr></table></figure>
+<h2 id="Or-really-old-school"><a href="#Or-really-old-school" class="headerlink" title="Or, really old-school"></a>Or, <em>really</em> old-school</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">use Slang::Roman;</div><div class="line"></div><div class="line">say 0rↀ  + 0rDCLXVI;</div><div class="line"></div><div class="line"># 1666</div><div class="line"></div><div class="line">my $a = 0rIV / 0rM;</div><div class="line"></div><div class="line">say $a;</div><div class="line"></div><div class="line"># 0.004</div></pre></td></tr></table></figure>
+<p>This is really just a teaser to show off how powerful the internals really are.<br>The module itself is a bit too complex to show, but I like to think that the<br>fact that I can go in and muck about with the actual grammar, changing how<br>numbers are read and stored internally speaks volumes.</p>
+<h2 id="有意义的符号"><a href="#有意义的符号" class="headerlink" title="有意义的符号"></a>有意义的符号</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">my @powers = 1, 2, 4, 8;</div><div class="line"></div><div class="line">my %foo = :name(&apos;Jeff&apos;), :division(&apos;Programming&apos;);</div><div class="line"></div><div class="line">say @powers[ 1, 2 ];</div><div class="line"></div><div class="line">say %foo&lt;name&gt;;</div><div class="line"></div><div class="line"># (2 4)</div><div class="line"></div><div class="line"># Jeff</div></pre></td></tr></table></figure>
+<h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$ perl -E &apos;say 0.1 + 0.2 - 0.3&apos;</div><div class="line"></div><div class="line">+5.55111512312578e-17</div><div class="line"></div><div class="line">+$ ruby -e &apos;print 0.1 + 0.2 - 0.3&apos;</div><div class="line"></div><div class="line">+5.55111512312578e-17</div><div class="line"></div><div class="line">+$ python -c &apos;print 0.1 + 0.2 - 0.3&apos;</div><div class="line"></div><div class="line">+5.55111512312578e-17</div><div class="line"></div><div class="line">+$ perl6 -e &apos;say 0.1 + 0.2 - 0.3&apos;</div><div class="line"></div><div class="line">+0</div><div class="line"></div><div class="line">+$ perl6 -e&apos;say (0.1).nude&apos;</div><div class="line"></div><div class="line">+(1 10)</div></pre></td></tr></table></figure>
+<h2 id="函数签名"><a href="#函数签名" class="headerlink" title="函数签名"></a>函数签名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sub plus( Int $a, Int $b ) &#123;</div><div class="line">	$a + $b</div><div class="line">&#125;</div><div class="line"></div><div class="line">say plus 1, 2;</div><div class="line"></div><div class="line"># 3</div><div class="line"></div><div class="line">say plus 1, 2, 3;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">===SORRY!=== Error while compiling -e</div><div class="line">Calling a(Int, Int, Int) will never work with declared signature</div><div class="line">(Int $a, Int $b)</div><div class="line">at -e:1</div><div class="line">------&gt; ub foo( Int $a, Int $b ) &#123; $a + $b &#125;; say ⏏foo 1, 2, 3;</div></pre></td></tr></table></figure>
+<h2 id="不那么正规的表达式"><a href="#不那么正规的表达式" class="headerlink" title="不那么正规的表达式"></a>不那么正规的表达式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">my $id = &apos;[ &#123; &quot;first&quot;: &quot;Christopher&quot;, &quot;last&quot;: &quot;Eccleston&quot;, &quot;id&quot;: 1 &#125; ]&apos;;</div><div class="line"></div><div class="line">my regex Str     &#123; &apos;&quot;&apos; (&lt;-[ &quot; ]&gt;+) &apos;&quot;&apos; &#125;;</div><div class="line">my regex Integer &#123;         \d+         &#125;;</div><div class="line"></div><div class="line">my regex Value &#123;                       &lt;Integer&gt; | &lt;Str&gt;               &#125;;</div><div class="line"></div><div class="line">my regex Pair  &#123;             &lt;Str&gt; &apos;:&apos; \s+ &lt;Value&gt;                     &#125;;</div><div class="line">my regex Pairs &#123;     &apos;&#123;&apos; \s+       &lt;Pair&gt;+    %% (&apos;,&apos; \s+) \s+ &apos;&#125;&apos;     &#125;;</div><div class="line">my regex List  &#123; &apos;[&apos; \s+           &lt;Pairs&gt;+   %% (&apos;,&apos; \s+)     \s+ &apos;]&apos; &#125;;</div><div class="line"></div><div class="line">$id ~~ m&#123; &lt;List&gt; &#125;;</div><div class="line"></div><div class="line">say $/;</div></pre></td></tr></table></figure>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">enum Chirality &lt;left right&gt;;</div><div class="line">enum Effort &lt;minimum average maximum&gt;;</div><div class="line"></div><div class="line">class Hand &#123;</div><div class="line">	has Chirality $.chirality;</div><div class="line">	has $.content; </div><div class="line">&#125;</div><div class="line"></div><div class="line">role Humanoid &#123;</div><div class="line">	has Hand $.left-hand  .= new( :chirality( left ) );</div><div class="line">	has Hand $.right-hand .= new( :chirality( right ) );</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Character does Humanoid &#123;</div><div class="line">	has Str $.name is required;</div><div class="line">	has Int @.Attr where 0 &lt; * &lt;= 18;</div><div class="line"></div><div class="line">	method attack( Character $enemy, Effort $effort ) &#123; ... &#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line">class Sword &#123; has Int $.Dmg &#125;</div><div class="line"></div><div class="line">my $Wade = Character.new(:name(&apos;Wade&apos;));</div><div class="line">$Wade.left-hand.content = Sword.new( Dmg =&gt; 5 );</div><div class="line">$Wade.right-hand.content = Sword.new( Dmg =&gt; 5 );</div><div class="line"></div><div class="line">my $Francis = Character.new(:name(&apos;Francis&apos;));</div><div class="line"></div><div class="line">$Wade.attack($Francis,maximum);</div></pre></td></tr></table></figure>
+<h2 id="看呐-合适的列表"><a href="#看呐-合适的列表" class="headerlink" title="看呐,合适的列表!"></a>看呐,合适的列表!</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">my $fh = open &apos;sample.tsv&apos;, :r;</div><div class="line"></div><div class="line">my @line;</div><div class="line">for $fh.lines -&gt; $line &#123;</div><div class="line">	my ( $id, $last-name, $first-name ) =</div><div class="line">		$line.chomp.split( &quot;\t&quot; );</div><div class="line">	@line[$id - 1] = $last-name, $first-name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">close $fh;</div><div class="line"></div><div class="line">say @line;</div><div class="line"></div><div class="line"># [(&quot;Tyler&quot;, &quot;Rose&quot;), (&quot;Smith&quot;, &quot;Mickey&quot;),</div><div class="line">   (&quot;Jones&quot;, &quot;Martha&quot;), (&quot;Noble&quot;, &quot;Donna&quot;)]</div></pre></td></tr></table></figure>
+<h2 id="自定义运算符"><a href="#自定义运算符" class="headerlink" title="自定义运算符"></a>自定义运算符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;∑&gt;( *@values ) &#123;</div><div class="line">	[+] @values</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $total = ∑ 0 ... ∞;</div><div class="line">	</div><div class="line">multi sub postfix:&lt;⁺&gt;( $x ) &#123; $x.charge( +1 ) &#125;</div><div class="line">multi sub postfix:&lt;⁻&gt;( $x ) &#123; $x.charge( -1 ) &#125;</div><div class="line">multi sub prefix:&lt;√&gt;( $x ) &#123; sqrt( $x ) &#125;</div><div class="line"></div><div class="line">W⁺ = (-W¹ + iW²)/√2 ;</div><div class="line">W⁻ = (-W¹ + iW²)/√2 ;</div></pre></td></tr></table></figure>
+<h2 id="Perl-6-风格"><a href="#Perl-6-风格" class="headerlink" title="Perl 6 风格"></a>Perl 6 风格</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">for &apos;sample.txt&apos;.IO.lines.kv -&gt; $index, $line &#123;</div><div class="line">	my ( $method, $id, $name, timestamp ) = $line.chomp.split( &quot;\t&quot; );</div><div class="line"></div><div class="line">	given $method &#123;</div><div class="line">		when &apos;create&apos;	&#123; %object&#123;$id&#125; = $name, $timestamp &#125;</div><div class="line">		when &apos;delete&apos;	&#123; %object&#123;$id&#125;:delete &#125;</div><div class="line">	&#125;</div><div class="line">	if $method eq &apos;read&apos; | &apos;update&apos; | &apos;delete&apos; &#123;</div><div class="line">		say &quot;missing object on line $index&quot; unless %object&#123;$id&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grammar/" rel="tag">#Grammar</a>
+          
+            <a href="/tags/签名/" rel="tag">#签名</a>
+          
+            <a href="/tags/面向对象/" rel="tag">#面向对象</a>
+          
+            <a href="/tags/自定义运算符/" rel="tag">#自定义运算符</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/20/我在查找文件时所学到的/" rel="next" title="我在查找文件时所学到的">
+                <i class="fa fa-chevron-left"></i> 我在查找文件时所学到的
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/26/Perl6中的require/" rel="prev" title="Perl 6 中的 require">
+                Perl 6 中的 require <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/22/关于Perl6你要知道的10件事/"
+     data-title="关于 Perl 6 你要知道的 10 件事"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/10/22/关于Perl6你要知道的10件事/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/22/关于Perl6你要知道的10件事/"
+           data-title="关于 Perl 6 你要知道的 10 件事" data-url="https://ohmycloud.github.io/2016/10/22/关于Perl6你要知道的10件事/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ten-Things-You-Need-To-Know-about-Perl-6"><span class="nav-number">1.</span> <span class="nav-text">Ten Things You Need To Know about Perl 6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#资源"><span class="nav-number">1.1.</span> <span class="nav-text">资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#要闻"><span class="nav-number">1.2.</span> <span class="nav-text">要闻</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一次性文法"><span class="nav-number">1.3.</span> <span class="nav-text">一次性文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误信息"><span class="nav-number">1.4.</span> <span class="nav-text">错误信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode-Friendly"><span class="nav-number">1.5.</span> <span class="nav-text">Unicode Friendly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Or-really-old-school"><span class="nav-number">1.6.</span> <span class="nav-text">Or, really old-school</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有意义的符号"><span class="nav-number">1.7.</span> <span class="nav-text">有意义的符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点数"><span class="nav-number">1.8.</span> <span class="nav-text">浮点数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数签名"><span class="nav-number">1.9.</span> <span class="nav-text">函数签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不那么正规的表达式"><span class="nav-number">1.10.</span> <span class="nav-text">不那么正规的表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象"><span class="nav-number">1.11.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#看呐-合适的列表"><span class="nav-number">1.12.</span> <span class="nav-text">看呐,合适的列表!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义运算符"><span class="nav-number">1.13.</span> <span class="nav-text">自定义运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6-风格"><span class="nav-number">1.14.</span> <span class="nav-text">Perl 6 风格</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

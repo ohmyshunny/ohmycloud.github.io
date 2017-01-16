@@ -1,0 +1,774 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Grammar," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="doc.perl6.org(http://doc.perl6.org/language/grammars)
+Grammars - 一组具名 regexes 组成正式的 grammar
+Grammars 是一个很强大的工具用于析构文本并通常返回数据结构。
+例如, Perl 6 是使用 Perl 6 风格 grammar 解析并执行的。
+对普通 Perl 6 使用者更实用的一个例子是 JSON::Ti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 Grammars">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/02/05/Perl-6-Grammars/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="doc.perl6.org(http://doc.perl6.org/language/grammars)
+Grammars - 一组具名 regexes 组成正式的 grammar
+Grammars 是一个很强大的工具用于析构文本并通常返回数据结构。
+例如, Perl 6 是使用 Perl 6 风格 grammar 解析并执行的。
+对普通 Perl 6 使用者更实用的一个例子是 JSON::Ti">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 Grammars">
+<meta name="twitter:description" content="doc.perl6.org(http://doc.perl6.org/language/grammars)
+Grammars - 一组具名 regexes 组成正式的 grammar
+Grammars 是一个很强大的工具用于析构文本并通常返回数据结构。
+例如, Perl 6 是使用 Perl 6 风格 grammar 解析并执行的。
+对普通 Perl 6 使用者更实用的一个例子是 JSON::Ti">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/02/05/Perl-6-Grammars/"/>
+
+  <title> Perl 6 Grammars | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 Grammars
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-05T00:00:00+08:00" content="2016-02-05">
+              2016-02-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/05/Perl-6-Grammars/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/05/Perl-6-Grammars/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://doc.perl6.org/language/grammars" target="_blank" rel="external">doc.perl6.org</a>(<a href="http://doc.perl6.org/language/grammars" target="_blank" rel="external">http://doc.perl6.org/language/grammars</a>)</p>
+<p>Grammars - 一组具名 regexes 组成正式的 grammar</p>
+<p>Grammars 是一个很强大的工具用于析构文本并通常返回数据结构。</p>
+<p>例如, Perl 6 是使用 Perl 6 风格 grammar 解析并执行的。</p>
+<p>对普通 Perl 6 使用者更实用的一个例子是 <a href="https://github.com/moritz/json" target="_blank" rel="external">JSON::Tiny</a>模块, 它能反序列化任何合法的 JSON 文件, 而反序列代码只有不到 100 行, 还能扩展。</p>
+<p>Grammars 允许你把 regexes 组织到一块儿, 就像类(class) 中组织方法那样。</p>
+<a id="more"></a>
+<h2 id="具名正则-Named-Regexes"><a href="#具名正则-Named-Regexes" class="headerlink" title="具名正则 (Named Regexes)"></a>具名正则 (Named Regexes)</h2><p>　<br>grammars 的主要组成部分是 <a href="http://doc.perl6.org/language/regexes" target="_blank" rel="external">regexes</a>。 而 Perl 6 的 <a href="http://doc.perl6.org/language/regexes" target="_blank" rel="external">regexes</a>语法不在该文档的讨论范围, 具名正则(named regexes) 有它自己的特殊语法, 这跟子例程(subroutine) 的定义很像:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> regex number &#123; \d+ [ \. \d+ ]?   &#125;   <span class="comment"># 普通 regex 中空格被忽略, [] 是非捕获组</span></div></pre></td></tr></table></figure>
+<p>上面的代码使用 <code>my</code> 关键字指定了本地作用域的 regex, 因为具名正则(named regexes) 通常用在 grammars 里面。</p>
+<p>正则有名字了就方便我们在任何地方重用那个正则了:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">say</span> <span class="string">"32.51"</span> ~~ &amp;number;</div><div class="line"><span class="keyword">say</span> <span class="string">"15 + 4.5"</span> ~~ <span class="regexp">/  \s* '+' \s*  /</span></div><div class="line">&amp;number           <span class="comment"># my regex number &#123; \d+ [ \. \d+ ]?   &#125;</span></div></pre></td></tr></table></figure>
+<p>为什么用 <code>&amp;number</code>, 对比具名子例程你就知道了:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="function"><span class="keyword">sub</span> <span class="title">number</span> </span>&#123; <span class="keyword">say</span> <span class="string">"i am a subroutine"</span> &#125;  <span class="comment"># 具名子例程</span></div><div class="line">&gt; &amp;number                                 <span class="comment"># sub number () &#123; #`(Sub|140651249646256) ... &#125;</span></div></pre></td></tr></table></figure>
+<p><code>&amp;number</code> 就是直接引用了具名的 regex 或 子例程。而在<code>/ /</code> 或 grammars 里面, 引用一个具名正则的语法也很特殊, 就是给名字包裹上 <code>&lt; &gt;</code>。<code>&lt;&gt;</code> 就像引号那样, 当用它引起某个具名正则后, 引用这个 `` 就会把该具名正则插入(带入)到整个正则之中, 就像字符串插值那样：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="comment"># 具名正则的声明</span></div><div class="line"><span class="keyword">my</span> regex number &#123; \d+ [ \. \d+]? &#125;  </div><div class="line"><span class="keyword">my</span> token ident  &#123; \w+            &#125;</div><div class="line"><span class="keyword">my</span> rule  alpha  &#123; &lt;[A..Za..z]&gt;   &#125;</div><div class="line"></div><div class="line"><span class="comment"># 1.0 通过 &amp; 来引用</span></div><div class="line"><span class="keyword">say</span> so <span class="string">"12.34"</span> ~~ &amp;number; <span class="comment"># true</span></div><div class="line"></div><div class="line"><span class="comment"># 2.0 在正则构造 // 里使用</span></div><div class="line"><span class="keyword">say</span> so <span class="string">"12.88 + 0.12"</span> ~~ <span class="regexp">/  \s* '+' \s*  /</span>; <span class="comment"># true</span></div><div class="line"><span class="comment"># say so "12.88 + 0.12" ~~ /  \s* '+' \s*  /;</span></div><div class="line"><span class="comment"># wrong, method 'number' not found for invocant of class 'Cursor'</span></div><div class="line"></div><div class="line"><span class="comment"># 3.0 在 grammar 里面使用</span></div><div class="line">grammar EquationParse &#123;</div><div class="line">    <span class="comment"># 这里也不能给 number 起别名, 除非 number 是在 grammar 内部声明的</span></div><div class="line">     token TOP &#123;  \<span class="keyword">s</span>* <span class="string">'+'</span> \<span class="keyword">s</span>*  \<span class="keyword">s</span>* <span class="string">'='</span> \<span class="keyword">s</span>*  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># 等式解析</span></div><div class="line"><span class="keyword">my</span> $expr = EquationParse.parse(<span class="string">"12.88 + 0.12 = 13.00"</span>);</div><div class="line"><span class="keyword">say</span> $expr;</div></pre></td></tr></table></figure>
+<p>声明具名正则不是只有一个 <code>regex</code> 声明符, 实际上 , regex 声明符用的最少, 大多数时候, 都是使用 <code>token</code> 或 <code>rule</code> 声明符。token 和 rule 这两个都是 <code>ratcheing</code> (棘轮)的, 这意味着如果匹配失败, 那么匹配引擎就不会回并尝试匹配了。这通常会是你想要的, 但不适用于所有情况:</p>
+<blockquote>
+<p>棘轮用于单向驱动, 防止逆转。</p>
+</blockquote>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> regex works-but-slow &#123; .+ <span class="keyword">q</span> &#125; <span class="comment"># 可能会回溯</span></div><div class="line"><span class="keyword">my</span> token fails-but-fast &#123; .+ <span class="keyword">q</span> &#125; <span class="comment"># 不回溯</span></div><div class="line"><span class="keyword">my</span> $s = <span class="string">'Tokens and rules won\'t backtrack, which makes them fail quicker!'</span>;</div><div class="line"><span class="keyword">say</span> so $s ~~ &amp;works-but-slow; <span class="comment"># True</span></div><div class="line"><span class="keyword">say</span> so $s ~~ &amp;fails-but-fast; <span class="comment"># False, .+ 得到了整个字符串但不回溯</span></div></pre></td></tr></table></figure>
+<p> <code>token</code> 和 <code>rule</code> 的唯一区别就是 <code>rule</code> 声明符会让正则中的 <code>:sigspace</code> 修饰符起效:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> token non-space-<span class="keyword">y</span> &#123; <span class="string">'once'</span> <span class="string">'upon'</span> <span class="string">'a'</span> <span class="string">'time'</span> &#125;</div><div class="line"><span class="keyword">my</span> rule space-<span class="keyword">y</span> &#123; <span class="string">'once'</span> <span class="string">'upon'</span> <span class="string">'a'</span> <span class="string">'time'</span> &#125;</div><div class="line"><span class="keyword">say</span> <span class="string">'onceuponatime'</span>    ~~ &amp;non-space-<span class="keyword">y</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">'once upon a time'</span> ~~ &amp;space-<span class="keyword">y</span>;</div></pre></td></tr></table></figure>
+<h2 id="创建-Grammar"><a href="#创建-Grammar" class="headerlink" title="创建 Grammar"></a>创建 Grammar</h2><p>　<br>当使用 grammar 关键字而非 class 关键字声明来声明一个类时, 会自动得到以 <a href="https://docs.perl6.org/type/Grammar" target="_blank" rel="external">Grammar</a> 的父类。Grammars 应该只用于解析文本; 如果你想提取复杂的数据, 推荐 <a href="http://doc.perl6.org/language/grammars#Action_Objects" target="_blank" rel="external">action object</a>和 grammar 一块使用。</p>
+<h3 id="Protoregexes"><a href="#Protoregexes" class="headerlink" title="Protoregexes"></a>Protoregexes</h3><p>如果你有很多备选分支(alternations), 那么生成可读性好的代码或子类化(subclass)你的 grammar 可能会变得很困难。在下面的 <code>Actions</code> 类中, <code>TOP</code> 方法中的三元操作符不是很完美并且当我们添加更多的运算符时它会变得更糟糕:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">grammar Calculator &#123;</div><div class="line">    token TOP &#123; [ &lt;add&gt; | &lt;sub&gt; ] &#125;</div><div class="line">    rule  add &#123; &lt;num&gt; &apos;+&apos; &lt;num&gt; &#125;</div><div class="line">    rule  sub &#123; &lt;num&gt; &apos;-&apos; &lt;num&gt; &#125;</div><div class="line">    token num &#123; \d+ &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Calculations &#123;</div><div class="line">    method TOP ($/) &#123; make $&lt;add&gt; ?? $&lt;add&gt;.made !! $&lt;sub&gt;.made; &#125;</div><div class="line">    method add ($/) &#123; make [+] $&lt;num&gt;; &#125;</div><div class="line">    method sub ($/) &#123; make [-] $&lt;num&gt;; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say Calculator.parse(&apos;2 + 3&apos;, actions =&gt; Calculations).made;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 5</div></pre></td></tr></table></figure>
+<p>为了让世界变得更加美好, 我们可以在 tokens 身上使用看起来像 <code>:sym&lt;...&gt;</code> 那样的副词来使用正则表达式原型(protoregexes):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">grammar Calculator &#123;</div><div class="line">    token TOP &#123; &lt;calc-op&gt; &#125;</div><div class="line"></div><div class="line">    proto rule calc-op          &#123;*&#125;</div><div class="line">          rule calc-op:sym&lt;add&gt; &#123; &lt;num&gt; &apos;+&apos; &lt;num&gt; &#125;</div><div class="line">          rule calc-op:sym&lt;sub&gt; &#123; &lt;num&gt; &apos;-&apos; &lt;num&gt; &#125;</div><div class="line"></div><div class="line">    token num &#123; \d+ &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Calculations &#123;</div><div class="line">    method TOP              ($/) &#123; make $&lt;calc-op&gt;.made; &#125;</div><div class="line">    method calc-op:sym&lt;add&gt; ($/) &#123; make [+] $&lt;num&gt;; &#125;</div><div class="line">    method calc-op:sym&lt;sub&gt; ($/) &#123; make [-] $&lt;num&gt;; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say Calculator.parse(&apos;2 + 3&apos;, actions =&gt; Calculations).made;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 5</div></pre></td></tr></table></figure>
+<p>在这个 grammar 中, 备选分支(alternation)已经被 <code>&lt;calc-op&gt;</code> 替换掉了, 它实质上是我们将要创建的一组值的名字。我们通过使用 <code>proto rule calc-op</code> 定义了一个 rule 原型类型(prototype) 来达成。我们之前的每一个备选分支已经被新的 rule <code>calc-op</code> 替换掉了并且备选分支的名字被附加上了 <code>:sym&lt;&gt;</code> 副词。</p>
+<p>在 actions 类中, 我们现在摆脱了三目操作符, 仅仅只在 <code>$&lt;calc-op&gt;</code> 匹配对象上接收 <code>.made</code> 值。并且单独备选分支的 actions 现在和 grammar 遵守相同的命名模式:  <code>method calc-op:sym&lt;add&gt;</code> 和 <code>method calc-op:sym&lt;sub&gt;</code>。</p>
+<p>当你子类化(subclass)那个 grammar 和 actions 类的时候才能看到这个方法的真正魅力。假设我们想为 calculator 增加一个乘法功能:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">grammar BetterCalculator is Calculator &#123;</div><div class="line">    rule calc-op:sym&lt;mult&gt; &#123; &lt;num&gt; &apos;*&apos; &lt;num&gt; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class BetterCalculations is Calculations &#123;</div><div class="line">    method calc-op:sym&lt;mult&gt; ($/) &#123; make [*] $&lt;num&gt; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say BetterCalculator.parse(&apos;2 * 3&apos;, actions =&gt; BetterCalculations).made;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 6</div></pre></td></tr></table></figure>
+<p>所有我们需要添加的就是为 <code>calc-op</code> 组添加额外的 rule 和 action, 感谢正则表达式原型(protoregexes), 所有的东西都能正常工作。</p>
+<h2 id="特殊的-Tokens"><a href="#特殊的-Tokens" class="headerlink" title="特殊的 Tokens"></a>特殊的 Tokens</h2><h3 id="TOP"><a href="#TOP" class="headerlink" title="TOP"></a>TOP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grammar Foo &#123;</div><div class="line">    token TOP &#123; \d+ &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The TOP token is the default first token attempted to match when parsing with a grammar—the root of the tree. Note that if you’re parsing with .parse method, token TOP is automatically anchored to the start and end of the string (see also: .subparse).</p>
+<p><code>TOP</code> token 是默认的第一个尝试去匹配的 token , 当解析一个 grammar 的时候 - 那颗树的根。注意如果你正使用 <code>.parse</code> 方法进行解析, 那么 token TOP 被自动地锚定到字符串的开头和结尾(再看看 <code>.subparse</code>)。</p>
+<p>使用 <code>rule TOP</code> 或 <code>regex TOP</code> 也是可以接受的。</p>
+<p>在 <code>.parse</code>、<code>.subparse</code> 或 <code>.parsefile</code> Grammar 方法中使用 <code>:rule</code> 命名参数可以选择一个不同的 token 来进行首次匹配。</p>
+<h3 id="ws"><a href="#ws" class="headerlink" title="ws"></a>ws</h3><p>当使用 <code>rule</code> 而非 <code>token</code> 时, 原子(atom)后面的任何空白(whitespace)被转换为一个对 <code>ws</code> 的非捕获调用。即:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rule entry &#123; &lt;key&gt; ’=’ &lt;value&gt; &#125;</div></pre></td></tr></table></figure>
+<p>等价于:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">token entry &#123; &lt;key&gt; &lt;.ws&gt; ’=’ &lt;.ws&gt; &lt;value&gt; &lt;.ws&gt; &#125; # . = non-capturing</div></pre></td></tr></table></figure>
+<p>默认的 <code>ws</code> 匹配”空白”(whitespace), 例如空格序列(不管什么类型)、换行符、unspaces、或 heredocs。</p>
+<p>提供你自己的 <code>ws</code> token 是极好的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">grammar Foo &#123;</div><div class="line">    rule TOP &#123; \d \d &#125;</div><div class="line">&#125;.parse: &quot;4   \n\n 5&quot;; # Succeeds</div><div class="line"></div><div class="line">grammar Bar &#123;</div><div class="line">    rule TOP &#123; \d \d &#125;</div><div class="line">    token ws &#123; \h*   &#125;</div><div class="line">&#125;.parse: &quot;4   \n\n 5&quot;; # Fails</div></pre></td></tr></table></figure>
+<p>上面的例子中, 在 Bar Gramamr 中重写了自己的 <code>ws</code>, 只匹配水平空白符, 所以 <code>\n\n</code> 匹配失败。</p>
+<h3 id="总是成功断言"><a href="#总是成功断言" class="headerlink" title="总是成功断言"></a>总是成功断言</h3><p><code>&lt;?&gt;</code> is the always succeed assertion(总是匹配成功). 当它用作 grammar 中的 token 时, 它可以被用于触发一个 Action 类方法。在下面的 grammar 中, 我们查找阿拉伯数字并且使用 <code>always succeed assertion</code> 定义一个 succ token。</p>
+<p>在 action 类中, 我们使用对 succ 方法的调用来设置(在这个例子中, 我们在 @!numbers 中准备了一个新元素)。在 <code>digit</code> 方法中, 我们把阿拉伯数字转换为梵文数字并且把它添加到 @!numbers 数组的最后一个元素中。多亏了 <code>succ</code>, 最后一个元素总是当前正被解析的 <code>digit</code> 数字的数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">grammar Digifier &#123;</div><div class="line">    rule TOP &#123;</div><div class="line">        [ &lt;.succ&gt; &lt;digit&gt;+ ]+</div><div class="line">    &#125;</div><div class="line">    token succ   &#123; &lt;?&gt; &#125;</div><div class="line">    token digit &#123; &lt;[0..9]&gt; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Devanagari &#123;</div><div class="line">    has @!numbers;</div><div class="line">    method digit ($/) &#123; @!numbers[*-1] ~= $/.ord.&amp;[+](2358).chr &#125;</div><div class="line">    method succ  ($)  &#123; @!numbers.push: &apos;&apos;     &#125;</div><div class="line">    method TOP   ($/) &#123; make @!numbers[^(*-1)] &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say Digifier.parse(&apos;255 435 777&apos;, actions =&gt; Devanagari.new).made;</div><div class="line"># OUTPUT:</div><div class="line"># (२५५ ४३५ ७७७)</div></pre></td></tr></table></figure>
+<h2 id="Grammar-中的方法"><a href="#Grammar-中的方法" class="headerlink" title="Grammar 中的方法"></a>Grammar 中的方法</h2><p>在 grammar 中使用 <code>method</code> 代替 <code>rule</code> 或 <code>token</code> 也是可以的, 只要它们返回一个 <a href="https://docs.perl6.org/type/Cursor" target="_blank" rel="external">Cursor</a> 类型:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">grammar DigitMatcher &#123;</div><div class="line">    method TOP (:$full-unicode) &#123;</div><div class="line">        $full-unicode ?? self.num-full !! self.num-basic;</div><div class="line">    &#125;</div><div class="line">    token num-full  &#123; \d+ &#125;</div><div class="line">    token num-basic &#123; &lt;[0..9]&gt;+ &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的 grammar 会根据 parse 方法提供的参数尝试不同的匹配:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">say +DigitMatcher.subparse: &apos;12७१७९०९&apos;, args =&gt; \(:full-unicode);</div><div class="line"># OUTPUT:</div><div class="line"># 12717909</div><div class="line"></div><div class="line">say +DigitMatcher.subparse: &apos;12७१७९०९&apos;, args =&gt; \(:!full-unicode);</div><div class="line"># OUTPUT:</div><div class="line"># 12</div></pre></td></tr></table></figure>
+<h2 id="Action-Object"><a href="#Action-Object" class="headerlink" title="Action Object"></a>Action Object</h2><p>　<br>一个成功的 grammar 匹配会给你一棵匹配对象(Match objects)的解析树, 匹配树(match tree)到达的越深, 则 grammar 中的分支越多, 那么在匹配树中航行以获取你真正感兴趣的东西就变的越来越困难。</p>
+<p>为了避免你在匹配树(match tree)中迷失, 你可以提供一个 action object。grammar 中每次解析成功一个具名规则(named rule)之后, 它就会尝试调用一个和该 grammar rule 同名的方法, 并传递给这个方法一个<code>Match</code> 对象作为位置参数。如果不存在这样的同名方法, 就跳过。</p>
+<p>这儿有一个例子来说明 grammar 和 action：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">grammar TestGrammar &#123;</div><div class="line">    token TOP &#123; ^ \d+ $ &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class TestActions &#123;</div><div class="line">    method TOP($/) &#123;</div><div class="line">        $/.make(<span class="number">2</span> + $/);  <span class="comment"># 等价于 $/.make: 2 + $/</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">my</span> $actions = TestActions.new; <span class="comment"># 创建 Action 实例</span></div><div class="line"><span class="keyword">my</span> $match   = TestGrammar.parse(<span class="string">'40'</span>, :$actions);</div><div class="line"><span class="keyword">say</span> $match;       <span class="comment"># ｢40｣</span></div><div class="line"><span class="keyword">say</span> $match.made;  <span class="comment"># 42</span></div></pre></td></tr></table></figure>
+<p><code>TestActions</code> 的一个实例变量作为具名参数 <code>actions</code> 被传递给 <code>parse</code> 调用, 然后当 token <code>TOP</code> 匹配成功之后, 就会自动调用方法 <code>TOP</code>, 并传递匹配对象(match object) 作为方法的参数。</p>
+<p>为了让参数是匹配对象更清楚, 上面的例子使用 <code>$/</code> 作为 action 方法的参数名, 尽管那仅仅是一个方便的约定, 跟内在无关。 <code>$match</code> 也可以。(尽管使用 <code>$/</code>可以提供把 <code>$</code>作为<code>$/</code>的缩写的优势。)</p>
+<p>下面是一个更有说服力的例子:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">grammar KeyValuePairs &#123;</div><div class="line">    token TOP &#123;</div><div class="line">        [ \n+]*</div><div class="line">    &#125;</div><div class="line">    token ws &#123; \h* &#125; <span class="comment"># 重写了关于"空白"的定义</span></div><div class="line">    rule pair &#123;</div><div class="line">         <span class="string">'='</span></div><div class="line">    &#125;</div><div class="line">    token identifier &#123;</div><div class="line">        \w+</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class KeyValuePairsActions &#123;</div><div class="line">    method identifier($/)  &#123; $/.make: ~$/                          &#125;</div><div class="line">    method pair      ($/)  &#123; $/.make: $.<span class="string">made =&gt;</span> $.made &#125;</div><div class="line">    method TOP       ($/)  &#123; $/.make: $».made                &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">my</span> $res = KeyValuePairs.parse(<span class="keyword">q</span>:to/EOI/, :actions(KeyValuePairsActions)).made;</div><div class="line">    second=b</div><div class="line">    hits=<span class="number">42</span></div><div class="line">    perl=<span class="number">6</span></div><div class="line">    EOI</div><div class="line"><span class="keyword">for</span> @$res -&gt; $p &#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"Key: $p.key()\tValue: $p.value()"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这会输出:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Key: second     Value: b</div><div class="line">Key: hits       Value: <span class="number">42</span></div><div class="line">Key: perl       Value: <span class="number">6</span></div></pre></td></tr></table></figure>
+<p><code>pair</code> 这个 rule, 解析一对由等号分割的 pair, 并且给 <code>identifier</code> 这个 token 各自起了别名。对应的 action 方法构建了一个 <code>Pair</code> 对象, 并使用子匹配对象(sub match objects)的 <code>.made</code> 属性。这也暴露了一个事实: submatches 的 action 方法在那些调用正则/外部正则之前就被调用。所以 action 方法是按后续调用的。</p>
+<p>名为 <code>TOP</code> 的 action 方法仅仅把由 <code>pair</code> 这个 rule 的多重匹配组成的所有对象收集到一块, 然后以一个列表的方式返回。</p>
+<p>注意 <code>KeyValuePairsActions</code> 是作为一个类型对象(type object)传递给方法 <code>parse</code>的, 这是因为 action 方法中没有一个使用属性(属性只能通过实例来访问)。</p>
+<p>其它情况下, action 方法可能会在属性中保存状态。 那么这当然需要你传递一个实例给 <code>parse</code> 方法。</p>
+<p>注意, <code>token ws</code> 有点特殊: 当 <code>:sigspace</code> 开启的时候(就是我们使用 <code>rule</code>的时候), 我们覆写的 <code>ws</code> 会替换某些空白序列。这就是为什么 <code>rule pair</code> 中等号两边的空格解析没有问题并且闭合 <code>}</code> 之前的空白不会狼吞虎咽地吃下换行符, 因为换行符在 <code>TOP</code> token 已经占位置了, 并且 token 不会回溯。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># ws 的内置定义</span></div><div class="line">/ &lt;.ws&gt; <span class="regexp">/                # match "whitespace":</span></div><div class="line">                         #   \s+ if it's between two \w characters,</div><div class="line">                         #   \s* otherwise</div><div class="line"></div><div class="line">&gt; my token ws &#123; \h* &#125; # 重写 ws 这个内置的 token</div><div class="line">&gt; say so "\n" ~~ &amp;ws # True</div></pre></td></tr></table></figure>
+<p>所以 <code>&lt;.ws&gt;</code> 内置的定义是：如果空白在两个 <code>\w</code> 单词字符之间, 则意思为 <code>\s+</code>, 否则为 <code>\s*</code>。 我们可以重写 <code>ws</code> 关于空白的定义, 重新定义我们需要的空白。比如把 <code>ws</code> 定义为 <code>{ \h* }</code> 就是所有水平空白符, 甚至可以将<code>ws</code> 定义为非空白字符。例如: <code>token ws { &#39;x&#39; }</code></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grammar/" rel="tag">#Grammar</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/03/comb-操作字符串的利器/" rel="next" title="comb - 操作字符串的利器">
+                <i class="fa fa-chevron-left"></i> comb - 操作字符串的利器
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/06/given-when和模式匹配/" rel="prev" title="given when和模式匹配">
+                given when和模式匹配 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/02/05/Perl-6-Grammars/"
+     data-title="Perl 6 Grammars"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/02/05/Perl-6-Grammars/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/05/Perl-6-Grammars/"
+           data-title="Perl 6 Grammars" data-url="https://ohmycloud.github.io/2016/02/05/Perl-6-Grammars/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#具名正则-Named-Regexes"><span class="nav-number">1.</span> <span class="nav-text">具名正则 (Named Regexes)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-Grammar"><span class="nav-number">2.</span> <span class="nav-text">创建 Grammar</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Protoregexes"><span class="nav-number">2.1.</span> <span class="nav-text">Protoregexes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊的-Tokens"><span class="nav-number">3.</span> <span class="nav-text">特殊的 Tokens</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TOP"><span class="nav-number">3.1.</span> <span class="nav-text">TOP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ws"><span class="nav-number">3.2.</span> <span class="nav-text">ws</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总是成功断言"><span class="nav-number">3.3.</span> <span class="nav-text">总是成功断言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grammar-中的方法"><span class="nav-number">4.</span> <span class="nav-text">Grammar 中的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Action-Object"><span class="nav-number">5.</span> <span class="nav-text">Action Object</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

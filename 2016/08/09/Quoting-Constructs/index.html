@@ -1,0 +1,761 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Quoting," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="The Q Lang
+在 Perl 6 中, 字符串通常使用一些引号结构来表示. 这些引号结构中,最简单的就是 Q, 通过便捷方式 ｢…｣ 或 Q 后跟着由任意一对儿分隔符包围着的文本. 大多数时候, 你需要的只是 &amp;#39;…&amp;#39; 或 &amp;quot;…&amp;quot;.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quoting Constructs">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/08/09/Quoting-Constructs/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="The Q Lang
+在 Perl 6 中, 字符串通常使用一些引号结构来表示. 这些引号结构中,最简单的就是 Q, 通过便捷方式 ｢…｣ 或 Q 后跟着由任意一对儿分隔符包围着的文本. 大多数时候, 你需要的只是 &amp;#39;…&amp;#39; 或 &amp;quot;…&amp;quot;.">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.817Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Quoting Constructs">
+<meta name="twitter:description" content="The Q Lang
+在 Perl 6 中, 字符串通常使用一些引号结构来表示. 这些引号结构中,最简单的就是 Q, 通过便捷方式 ｢…｣ 或 Q 后跟着由任意一对儿分隔符包围着的文本. 大多数时候, 你需要的只是 &amp;#39;…&amp;#39; 或 &amp;quot;…&amp;quot;.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/08/09/Quoting-Constructs/"/>
+
+  <title> Quoting Constructs | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Quoting Constructs
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-09T00:00:00+08:00" content="2016-08-09">
+              2016-08-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/09/Quoting-Constructs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/09/Quoting-Constructs/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="The-Q-Lang"><a href="#The-Q-Lang" class="headerlink" title="The Q Lang"></a>The Q Lang</h2><hr>
+<p>在 Perl 6 中, 字符串通常使用一些引号结构来表示. 这些引号结构中,最简单的就是 <code>Q</code>, 通过便捷方式 <code>｢…｣</code> 或 <code>Q</code> 后跟着由任意一对儿分隔符包围着的文本. 大多数时候, 你需要的只是 <code>&#39;…&#39;</code> 或 <code>&quot;…&quot;</code>.</p>
+<a id="more"></a>
+<h3 id="Literal-strings-Q"><a href="#Literal-strings-Q" class="headerlink" title="Literal strings: Q"></a>Literal strings: Q</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Q[A literal string]</div><div class="line">｢More plainly.｣</div><div class="line">Q ^Almost any non-word character can be a delimiter!^</div></pre></td></tr></table></figure>
+<p>分隔符能够嵌套, 但是在普通的 Q 形式中, 反斜线转义是不允许的. 换种说法就是, Q 字符串尽可能被作为字面量.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Q&lt;Make sure you &lt;match&gt; opening and closing delimiters&gt;</div><div class="line">Q&#123;This is still a closing brace → \&#125;</div></pre></td></tr></table></figure>
+<p>这些例子产生:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">A literal string</div><div class="line">More plainly.</div><div class="line">Almost any non-word character can be a delimiter!</div><div class="line">Make sure you &lt;match&gt; opening and closing delimiters</div><div class="line">This is still a closing brace → \</div></pre></td></tr></table></figure>
+<h3 id="Escaping-q"><a href="#Escaping-q" class="headerlink" title="Escaping: q"></a>Escaping: q</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&apos;Very plain&apos;</div><div class="line">q[This back\slash stays]</div><div class="line">q[This back\\slash stays] # Identical output</div><div class="line">q&#123;This is not a closing brace → \&#125;, but this is → &#125;</div><div class="line">Q :q $There are no backslashes here, only lots of \$\$\$!$</div><div class="line">&apos;(Just kidding. There\&apos;s no money in that string)&apos;</div><div class="line">&apos;No $interpolation &#123;here&#125;!&apos;</div><div class="line">Q:q#Just a literal &quot;\n&quot; here#</div></pre></td></tr></table></figure>
+<p><code>q</code> 形式的引号结构允许使用反斜线转义可能会结束字符串的字符. 反斜线自身也能被转义, 就像上面的第三个例子那样. 通常的形式是 <code>&#39;...&#39;</code> 或 <code>q</code> 后跟着分隔符, 但是它也能作为 Q 上的副词使用, 就像上面的第五个和最后一个例子那样.</p>
+<p>这些例子产生:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Very plain</div><div class="line">This back\slash stays</div><div class="line">This back\slash stays</div><div class="line">This is not a closing brace → &#125; but this is →</div><div class="line">There are no backslashes here, only lots of $$$!</div><div class="line">(Just kidding. There&apos;s no money in that string)</div><div class="line">No $interpolation &#123;here&#125;!</div><div class="line">Just a literal &quot;\n&quot; here</div></pre></td></tr></table></figure>
+<h3 id="Interpolation-qq"><a href="#Interpolation-qq" class="headerlink" title="Interpolation: qq"></a>Interpolation: qq</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $color = &apos;blue&apos;;</div><div class="line">say &quot;My favorite color is $color!&quot; # My favorite color is blue!</div></pre></td></tr></table></figure>
+<p><code>qq</code> 形式 – 通常使用双引号写成 – 允许变量的插值, 例如字符串中能写入变量, 以使变量的内容能插入到字符串中. 在 <code>qq</code> 引起字符串中, 也能转义变量.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say &quot;The \$color variable contains the value &apos;$color&apos;&quot;;</div><div class="line"># The $color variable contatins the value &apos;blue&apos;</div></pre></td></tr></table></figure>
+<p><code>qq</code> 的另外一种功能是使用花括号在字符串中插值 Perl 6 代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my ($x, $y, $z) = 4, 3.5, 3;</div><div class="line">say &quot;This room is $x m by $y m by $z m.&quot;</div><div class="line">say &quot;Therefore its volume should be &#123; $x * $y * $z &#125; m³!&quot;</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">This room is 4 m by 3.5 m by 3 m.</div><div class="line">Therefore its volume should be 42 m³!</div></pre></td></tr></table></figure>
+<p>默认情况下, 只有带有 ‘$’ 符号的变量才能正常插值. 这时, <code>&quot;documentation@perl6.org&quot;</code> 不会插值  <code>@perl6</code> 变量. 如果呢确实想那么做, 在变量名后面添加一个 <code>[]</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my @neighbors = &quot;Felix&quot;, &quot;Danielle&quot;, &quot;Lucinda&quot;;</div><div class="line">say &quot;@neighbors[] and I try our best to coexist peacefully.&quot;</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Felix Danielle Lucinda and I try our best to coexist peacefully.</div></pre></td></tr></table></figure>
+<p>通常使用一个方法调用会更合适. 只有在 qq 引号中, 方法调用后面有圆括号, 就能进行插值:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say &quot;@neighbors.join(&apos;, &apos;) and I try our best to coexist peacefully.&quot;</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Felix, Danielle, Lucinda and I try our best to coexist peacefully.</div></pre></td></tr></table></figure>
+<p>而 <code>&quot;@example.com&quot;</code> 产生 <code>@example.com</code>.</p>
+<h3 id="Word-quoting-qw"><a href="#Word-quoting-qw" class="headerlink" title="Word quoting: qw"></a>Word quoting: qw</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;a b c&gt; eqv (&apos;a&apos;, &apos;b&apos;, &apos;c&apos;)</div><div class="line">qw|! @ # $ % ^ &amp; * \| &lt; &gt; | eqv &apos;! @ # $ % ^ &amp; | &lt; &gt;&apos;.words</div><div class="line">Q:w &#123; [ ] \&#123; \&#125; &#125; eqv (&apos;[&apos;, &apos;]&apos;, &apos;&#123;&apos;, &apos;&#125;&apos;)</div></pre></td></tr></table></figure>
+<p><code>:w</code> 通常写作 <code>&lt;...&gt;</code> 或 <code>qw</code>, 把字符串分割为”words” (单词). 在这种情景下, 单词被定义为由空格分割的一串非空白字符. <code>q:w</code> 和 <code>qw</code> 继承了 <code>q</code> 的插值和转义语法, 还有单引号字符串分割符, 而 <code>Qw</code> 和 <code>Q:w</code> 继承了 <code>Q</code> 的非转义语法.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my @directions = &apos;left&apos;, &apos;right,&apos;, &apos;up&apos;, &apos;down&apos;;</div></pre></td></tr></table></figure>
+<p>这样读和写都更容易:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my @directions = &lt;left right up down&gt;;</div></pre></td></tr></table></figure>
+<h3 id="Word-quoting-with-interpolation-qqw"><a href="#Word-quoting-with-interpolation-qqw" class="headerlink" title="Word quoting with interpolation: qqw"></a>Word quoting with interpolation: qqw</h3><hr>
+<p><code>qw</code> 形式的 word quoting 不会进行变量插值:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my $a = 42; say qw&#123;$a b c&#125;;  # $a b c</div></pre></td></tr></table></figure>
+<p>因此, 如果你想在引号字符串中进行变量插值, 你需要使用 <code>qqw</code> 变体:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $a = 42;</div><div class="line">my @list = qqw&#123;$a b c&#125;;</div><div class="line">say @list;                # 42 b c</div></pre></td></tr></table></figure>
+<p>或者同样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $a = 42;</div><div class="line">my @list = «$a b c»;</div><div class="line">say @list;                # 42 b c</div></pre></td></tr></table></figure>
+<h3 id="Shell-quoting-qx"><a href="#Shell-quoting-qx" class="headerlink" title="Shell quoting: qx"></a>Shell quoting: qx</h3><hr>
+<p>把一个字符串作为一个外部程序运行,  在 Perl 6 中反引号不再用于 shell quoting, 并且 qx 不再插值 Perl 变量, 因此:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $world = &quot;there&quot;;</div><div class="line">say qx&#123;echo &quot;hello $world&quot;&#125;</div></pre></td></tr></table></figure>
+<p>仅仅打印 hello. 然而, 如果你在调用 perl6 之前声明了一个环境变量, 这在 qx 里是可用的, 例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">WORLD=&quot;there&quot; perl6</div><div class="line">&gt; say qx&#123;echo &quot;hello $WORLD&quot;&#125;</div></pre></td></tr></table></figure>
+<p>现在会打印 hello there.</p>
+<p>调用 <code>qx</code> 会返回结果, 所以这个结果能被赋值给一个变量以便后来使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $output = qx&#123;echo &quot;hello!&quot;&#125;;</div><div class="line">say $output;    # hello!</div></pre></td></tr></table></figure>
+<h3 id="Shell-quoting-with-interpolation-qqx"><a href="#Shell-quoting-with-interpolation-qqx" class="headerlink" title="Shell quoting with interpolation: qqx"></a>Shell quoting with interpolation: qqx</h3><hr>
+<p>带插值的 Shell quoting:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $world = &quot;there&quot;;</div><div class="line">say qqx&#123;echo &quot;hello $world&quot;&#125;;  # hello there</div></pre></td></tr></table></figure>
+<p>再一次, 外部命令的输出结果可以保存在一个变量中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my $word = &quot;cool&quot;;</div><div class="line">my $option = &quot;-i&quot;;</div><div class="line">my $file = &quot;/usr/share/dict/words&quot;;</div><div class="line">my $output = qqx&#123;grep $option $word $file&#125;;</div><div class="line"># runs the command: grep -i cool /usr/share/dict/words</div><div class="line">say $output;      # Cooley␤Cooley&apos;s␤Coolidge␤Coolidge&apos;s␤cool␤ ...</div></pre></td></tr></table></figure>
+<h3 id="Heredocs-to"><a href="#Heredocs-to" class="headerlink" title="Heredocs: :to"></a>Heredocs: :to</h3><hr>
+<p><code>heredocs</code> 是多行字符串字面量的便捷方式, 你能选择自己的分隔符:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">say q:to/END/;</div><div class="line">Here is</div><div class="line">some multi-line</div><div class="line">string</div><div class="line">END</div></pre></td></tr></table></figure>
+<p> heredoc 的内容从下一行开始.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my $escaped = my-escaping-function(q:to/TERMINATOR/, language =&gt; &apos;html&apos;);</div><div class="line">Here are the contents of the heredoc.</div><div class="line">Potentially multiple lines.</div><div class="line">TERMINATOR</div></pre></td></tr></table></figure>
+<p>如果终止分隔符缩进了, 同等数量的缩进会从字符串字面量上移除. 因此下面这个 heredoc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">say q:to/END/;</div><div class="line">    Here is</div><div class="line">    some multi line</div><div class="line">        string</div><div class="line">    END</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Here is</div><div class="line">some multi line</div><div class="line">    string</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Quoting/" rel="tag">#Quoting</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/03/智能匹配/" rel="next" title="智能匹配">
+                <i class="fa fa-chevron-left"></i> 智能匹配
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/11/Abundant-and-Deficient-Numbers/" rel="prev" title="Abundant and Deficient Numbers">
+                Abundant and Deficient Numbers <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/08/09/Quoting-Constructs/"
+     data-title="Quoting Constructs"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/08/09/Quoting-Constructs/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/09/Quoting-Constructs/"
+           data-title="Quoting Constructs" data-url="https://ohmycloud.github.io/2016/08/09/Quoting-Constructs/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Q-Lang"><span class="nav-number">1.</span> <span class="nav-text">The Q Lang</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Literal-strings-Q"><span class="nav-number">1.1.</span> <span class="nav-text">Literal strings: Q</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Escaping-q"><span class="nav-number">1.2.</span> <span class="nav-text">Escaping: q</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interpolation-qq"><span class="nav-number">1.3.</span> <span class="nav-text">Interpolation: qq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Word-quoting-qw"><span class="nav-number">1.4.</span> <span class="nav-text">Word quoting: qw</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Word-quoting-with-interpolation-qqw"><span class="nav-number">1.5.</span> <span class="nav-text">Word quoting with interpolation: qqw</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell-quoting-qx"><span class="nav-number">1.6.</span> <span class="nav-text">Shell quoting: qx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell-quoting-with-interpolation-qqx"><span class="nav-number">1.7.</span> <span class="nav-text">Shell quoting with interpolation: qqx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Heredocs-to"><span class="nav-number">1.8.</span> <span class="nav-text">Heredocs: :to</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

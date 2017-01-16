@@ -1,0 +1,738 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="副词,Pair,Adverb,colon pair," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="副词的 Pair 形式S02-literals/adverbs.t lines 6–69
+现在有一个普通的副词形式的 Pair 记号，也是人们所熟知的 “colon pair”（冒号对）形式。下面的表格展示了和胖箭头记号相一致的记号：
+12345678910111213141516Fat arrow           Adverbial pair  Paren form=========">
+<meta property="og:type" content="article">
+<meta property="og:title" content="副词的Pair形式">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/07/16/副词的Pair形式/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="副词的 Pair 形式S02-literals/adverbs.t lines 6–69
+现在有一个普通的副词形式的 Pair 记号，也是人们所熟知的 “colon pair”（冒号对）形式。下面的表格展示了和胖箭头记号相一致的记号：
+12345678910111213141516Fat arrow           Adverbial pair  Paren form=========">
+<meta property="og:updated_time" content="2016-10-23T16:07:53.942Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="副词的Pair形式">
+<meta name="twitter:description" content="副词的 Pair 形式S02-literals/adverbs.t lines 6–69
+现在有一个普通的副词形式的 Pair 记号，也是人们所熟知的 “colon pair”（冒号对）形式。下面的表格展示了和胖箭头记号相一致的记号：
+12345678910111213141516Fat arrow           Adverbial pair  Paren form=========">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/07/16/副词的Pair形式/"/>
+
+  <title> 副词的Pair形式 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                副词的Pair形式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-16T00:00:00+08:00" content="2016-07-16">
+              2016-07-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/16/副词的Pair形式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/16/副词的Pair形式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="副词的-Pair-形式"><a href="#副词的-Pair-形式" class="headerlink" title="副词的 Pair 形式"></a>副词的 Pair 形式</h2><p><a href="https://github.com/perl6/roast/blob/master/S02-literals/adverbs.t#L6-L69" target="_blank" rel="external">S02-literals/adverbs.t lines 6–69</a></p>
+<p>现在有一个普通的副词形式的 Pair 记号，也是人们所熟知的 “colon pair”（冒号对）形式。下面的表格展示了和胖箭头记号相一致的记号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Fat arrow           Adverbial pair  Paren form</div><div class="line">=========           ==============  ==========</div><div class="line">a =&gt; True           :a</div><div class="line">a =&gt; False          :!a</div><div class="line">a =&gt; 0              :a(0)</div><div class="line">a =&gt; $x             :a($x)</div><div class="line">a =&gt; &apos;foo&apos;          :a&lt;foo&gt;         :a(&lt;foo&gt;)</div><div class="line">a =&gt; &lt;foo bar&gt;      :a&lt;foo bar&gt;     :a(&lt;foo bar&gt;)</div><div class="line">a =&gt; «$foo @bar»    :a«$foo @bar»   :a(«$foo @bar»)</div><div class="line">a =&gt; &#123;...&#125;          :a&#123;...&#125;         :a(&#123;...&#125;)</div><div class="line">a =&gt; [...]          :a[...]         :a([...])</div><div class="line">a =&gt; $a             :$a</div><div class="line">a =&gt; @a             :@a</div><div class="line">a =&gt; %a             :%a</div><div class="line">a =&gt; &amp;a             :&amp;a</div><div class="line">a =&gt; %foo&lt;a&gt;        %foo&lt;a&gt;:p</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>胖箭头结构应只用于项(term)所在位置因为它被认为是一个独立的表达式，因为胖箭头自身被解析为一个普通的中缀操作符（即使自动引起它左侧的标识符时）。因为左侧是一个普通的表达式，胖箭头形式会使用任何值作为键来创建 Pair。另一方面，当用上面的形式来生成 Pair 对象时，副词形式被约束为使用标识符作为键。在键不是标识符的地方，你必须使用胖箭头形式来生成 Pair。</p>
+<p>尽管有那个约束，但是冒号和括号之间有其它东西也是可能的；然而，所有可能的非标识符形式的副词形式的键都被保留用作特殊的语义形式。Perl 6 当前识别十进制数的键和空(null)键。在下面的表格中，第一列和第二列不是同一个东西：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Simple pair         DIFFERS from    which means</div><div class="line">===========         ============    ===========</div><div class="line">2 =&gt; &lt;101010&gt;       :2&lt;101010&gt;      二进制字面值 0b101010</div><div class="line">8 =&gt; &lt;123&gt;          :8&lt;123&gt;         八进制字面值 0o123</div><div class="line">16 =&gt; &lt;deadbeef&gt;    :16&lt;deadbeef&gt;   十六进制字面值 0xdeadbeef</div><div class="line">16 =&gt; $somevalue    :16($somevalue) 十六进制转换函数，把十六进制的字符串转换为数字</div><div class="line">&apos;&apos; =&gt; $x            :($x)           签名字面值</div><div class="line">&apos;&apos; =&gt; ($x,$y)       :($x,$y)        签名字面值</div><div class="line">&apos;&apos; =&gt; &lt;x&gt;           :&lt;x&gt;            name extension</div><div class="line">&apos;&apos; =&gt; «x»           :«x»            name extension</div><div class="line">&apos;&apos; =&gt; [$x,$y]       :[$x,$y]        name extension</div><div class="line">&apos;&apos; =&gt; &#123; .say &#125;      :&#123; .say &#125;       adverbial block (not allowed on names)</div></pre></td></tr></table></figure>
+<p>所有的副词形式（包括普通的带有标识符键的副词）被认为是特殊的令牌(tokens)并且除了能在项的位置上被识别，也能在各种不同的位置上被识别。特别地，当把它用在中缀的位置上时，它们修改了之前的顶端的优先级比”loose unary”紧凑的操作符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1 == 100 :fuzz(3)   # 调用: infix:&lt;==&gt;(1, 100, fuzz =&gt; 3)</div></pre></td></tr></table></figure>
+<p>在声明内部副词形式用于重命名参数声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub foo ( :externalname($myname) ) &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>副词修改了各种引号形式的意义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">q:x &apos;cat /etc/passwd&apos;</div></pre></td></tr></table></figure>
+<p>当副词被追加到标识符（即，在后缀位置上）后面时，副词形式的语法用于生成那个标识符的唯一变体；该语法用于命名诸如 <code>infix:&lt;+&gt;</code> 这样的操作符和诸如 <code>statement_control:if</code> 这样的多重分发文法规则。当这样用时，副词被认为是名字的一部分，所以 <code>infix:&lt;+&gt;</code> 和 <code>infix:&lt;-&gt;</code> 是两个不同的操作符。同样地, <code>prefix:&lt;+&gt;</code> 不同于 <code>infix&lt;+&gt;</code>。（这种记法的好处有把不同的标识符分组到容易访问的集合中，例如，这就是 Perl 6 标准文法时如何知道当前中缀操作符集合的）。</p>
+<p>只有能产生一列一个或更多值（偏好字符串）的标识符被允许作为名字扩展；特殊地，闭包不能作为值，所以 <code>:{...}</code> 形式的副词不能被允许作为名字扩展。特别地，这把方法名后面的 block 空了出来，所以它允许我们把 block 解析为方法的参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@stuff.sort:&#123; +$_ &#125;</div></pre></td></tr></table></figure>
+<p>这些看起来它们使用的是 pairs，实际上它们等价于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@stuff.sort: &#123; +$_ &#125;</div></pre></td></tr></table></figure>
+<p>所以这儿的冒号真得不是在引入 pairs，而是引入了该方法的参数列表。在其他任何位置，<code>:{...}</code> 会使用两种用法的一种，根据花括号定义的是闭包还是散列。如果被当做闭包， <code>:{...}</code> 会创建把空键(null)映射到闭包的 pair。如果被当做散列构造器，那么空键会被忽略，并且 <code>:{...}</code> 会创建一个以对象为键的散列而非像没有冒号的 <code>{...}</code>那样创建一个以字符串为键的散列。</p>
+<p>胖箭头和副词对儿记法都能用于把具名参数作为项传递给函数或方法。在括号里面带有参数的调用后面，只有副词形式的语法能用于传递额外的参数。这通常用于传递额外的 block:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find($directory) :&#123; when not /^\./ &#125;</div></pre></td></tr></table></figure>
+<p>这正好和前面的规则离经叛道，因为副词形式的 block 处于操作符的位置，所以它修改了 “find operator”。(括号不被认为是操作符)</p>
+<p>注意（和往常一样）<code>{...}</code> 形式（要么基于操作符要么是特殊的）可以根据内容要么标示一个闭包，要么标示一个散列。它没有标示下标，因为 <code>:key{}</code> 实际上等价于 <code>key =&gt; {}</code>, 并且花括号一点儿也没有表现得像后缀一样。（然而，它所传递给的函数也能把那个值用于下标）</p>
+<p>还要注意 <code>&lt;a b&gt;</code> 形式不是下标，因此并不等价于 <code>.{&#39;a&#39;, &#39;b&#39;}</code> 而是等价于 <code>(&#39;a&#39;, &#39;b&#39;)</code>。 裸的 <code>&lt;a&gt;</code> 转换为 <code>(&#39;a&#39;)</code> 而不是 <code>(&#39;a&#39;,)</code>。（然而，对于其它形式的括号，根据上下文，值可能也能用作下标）</p>
+<p>两个更多地副词总是可以捆绑在一块儿。当在参数列表中用作具名参数时，你可能在参数之间放上逗号，因为它们对于函数来说就是普通的具名参数，并且胖箭头形式的参数效果相同。然而，当第一个 pair 出现在项(term)的位置上时，这个逗号才只允许出现。当期望一个中缀操作符时，那个副词总是被看做修改最近的之前的操作符，它没有被隐藏在圆括号中，并且如果你把多个这样的 pairs 作为一个字符串放在一块儿，那么你就不能在它们中间放上逗号，因为那会让之后的 pairs 看起来像项(terms)。（在操作符的位置上一点也不允许胖箭头形式）查看 S06 获取把副词用作具名参数的用法。</p>
+<p>否定形式(:!a) 和符号形式(:$a, :@a, :%a) 绝对不会接收参数也不关心下一个字符是什么。它们被认为是完备的。这些形式需要一个标识符作为键。包含 twigil 的符号形式不会在键中包含那个 twigil。</p>
+<p>对于接收一个非否定整数参数的标识符，它被允许缩写，例如，把 <code>:sweet(16)</code> 缩写为 <code>:16sweet</code>。（这个和 <code>:16&lt;deadbeef&gt;</code> 形式不一样，后者从来没有字母字符跟在数字后面。）只有字面的非负数字可以这样交换使用。请注意这个缩写允许：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s:2nd/foo/bar/  # or 3rd, 4th, 5th etc.</div></pre></td></tr></table></figure>
+<p>其它形式的副词（包括裸的 <code>:a</code> 形式）总是查找紧紧跟随的用括号括起的参数，并且把它吞噬掉。如果那没有达到预期，那么你必须在副词和开括号之间使用空白。在 Perl 6中单独的副词语法在各处都是相同的。基于参数是需要还是不需要，没有例外。（对于引号副词和 regex 副词有一个小例外，它们只接受圆括号作为它们的括号操作符，并且忽略其它括号，如果需要它们必须被放到括号里。查看上表中得” Paren form”）</p>
+<p>除了上面要注意的之外，解析器常常会寻找括号。尽管没有标示一个真的下标，括号被类似地解析为后缀操作符。因为把括号后缀化可以和它们起初的使用 unspace 或点(或两者都) <code>:foo</code> 的区分开。</p>
+<p>不管语法，用作具名参数的副词一般作为我们正谈论的函数的可选具名参数呈现 – 即使那个函数是操作符或宏。那个正被谈论的函数既不知道也不关心原语法是多么的怪异。</p>
+<blockquote>
+<p>翻译的真心大西瓜</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/副词/" rel="tag">#副词</a>
+          
+            <a href="/tags/Pair/" rel="tag">#Pair</a>
+          
+            <a href="/tags/Adverb/" rel="tag">#Adverb</a>
+          
+            <a href="/tags/colon-pair/" rel="tag">#colon pair</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/09/given-when/" rel="next" title="given when">
+                <i class="fa fa-chevron-left"></i> given when
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/18/roundrobin/" rel="prev" title="roundrobin">
+                roundrobin <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/07/16/副词的Pair形式/"
+     data-title="副词的Pair形式"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/07/16/副词的Pair形式/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/16/副词的Pair形式/"
+           data-title="副词的Pair形式" data-url="https://ohmycloud.github.io/2016/07/16/副词的Pair形式/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#副词的-Pair-形式"><span class="nav-number">1.</span> <span class="nav-text">副词的 Pair 形式</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

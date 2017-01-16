@@ -1,0 +1,729 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unicode," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="输入 Unicode 字符Perl 6 允许把 unicode 字符用作变量名. 很多操作符使用 unicode 符号(特别是在 set/bag 操作符中)还有一些引号结构. 因此, 知道如何把这些符号输入编辑器, Perl 6 shell 和 命令行中是极好的, 特别是现实键盘中不存在那个符号的时候.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="输入Unicode字符">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/05/11/输入Unicode字符/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="输入 Unicode 字符Perl 6 允许把 unicode 字符用作变量名. 很多操作符使用 unicode 符号(特别是在 set/bag 操作符中)还有一些引号结构. 因此, 知道如何把这些符号输入编辑器, Perl 6 shell 和 命令行中是极好的, 特别是现实键盘中不存在那个符号的时候.">
+<meta property="og:updated_time" content="2016-10-23T16:13:34.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="输入Unicode字符">
+<meta name="twitter:description" content="输入 Unicode 字符Perl 6 允许把 unicode 字符用作变量名. 很多操作符使用 unicode 符号(特别是在 set/bag 操作符中)还有一些引号结构. 因此, 知道如何把这些符号输入编辑器, Perl 6 shell 和 命令行中是极好的, 特别是现实键盘中不存在那个符号的时候.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/05/11/输入Unicode字符/"/>
+
+  <title> 输入Unicode字符 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                输入Unicode字符
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-11T00:00:00+08:00" content="2016-05-11">
+              2016-05-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/11/输入Unicode字符/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/11/输入Unicode字符/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="输入-Unicode-字符"><a href="#输入-Unicode-字符" class="headerlink" title="输入 Unicode 字符"></a>输入 Unicode 字符</h1><p>Perl 6 允许把 unicode 字符用作变量名. 很多操作符使用 unicode 符号(特别是在 set/bag 操作符中)还有一些引号结构. 因此, 知道如何把这些符号输入编辑器, Perl 6 shell 和 命令行中是极好的, 特别是现实键盘中不存在那个符号的时候.</p>
+<a id="more"></a>
+<p>在各种操作系统和环境下关于输入 unicode 字符的通用信息可以在 Wikipedia <a href="https://en.wikipedia.org/wiki/Unicode_input" target="_blank" rel="external">unicode input page</a> 中找到.</p>
+<h2 id="编辑器和-shell"><a href="#编辑器和-shell" class="headerlink" title="编辑器和 shell"></a>编辑器和 shell</h2><hr>
+<h3 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h3><hr>
+<p>在 Vim 中, unicode 字符是通过先按 <code>Ctrl-V</code>(也表示为 <code>^V</code>), 然后按下 <code>u</code> 和 要输入的 unicode 字符的十六进制值来输入的(在插入模式).  例如, 希腊字母  <code>λ</code> (lambda) 是通过组合键来输入的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">^Vu03BB</div></pre></td></tr></table></figure>
+<p>更多关于在 Vim 中输入特殊字符的信息可以在 Vim Wikia 页 <a href="http://vim.wikia.com/wiki/Entering_special_characters" target="_blank" rel="external"> entering special characters</a> 中找到.</p>
+<h3 id="Emacs"><a href="#Emacs" class="headerlink" title="Emacs"></a>Emacs</h3><hr>
+<p>在 Emacs 中, unicode 字符的输入是首先输入和弦 <code>Ctrl-x 8 Enter</code> , 然后再输入 unicode 代码点的十六进制数字, 然后回车. 因此, 要输入希腊字母 <code>λ (lambda)</code> 使用下面的组合键(命令之间添加了空格以使清晰):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Ctrl-x 8 Enter 3bb Enter</div></pre></td></tr></table></figure>
+<p>更多关于在 Emacs 中输入 unicode 字符的信息可以在 <a href="http://www.emacswiki.org/emacs/UnicodeEncoding" target="_blank" rel="external"> Unicode Encoding Emacs wiki page</a>  中找到.</p>
+<h3 id="Unix-shell"><a href="#Unix-shell" class="headerlink" title="Unix shell"></a>Unix shell</h3><hr>
+<p>在 bash shell 中, 要输入 unicode 字符先键入 <code>Ctrl-Shift-u</code>, 然后键入 unicode 代码点的值后回车. 例如, 要键入属于操作符(<code>∈</code>)这个 unicode 字符, 使用下面的组合键(添加的空白是为了清晰):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Ctrl-Shift-u 2208 Enter</div></pre></td></tr></table></figure>
+<p>如果在 Unix shell 中开启了 REPL, 这也是一种在 perl 6 的 REPL 中输入 unicode 字符的方式之一.</p>
+<h2 id="Perl-6中有用的-Unicode-字符"><a href="#Perl-6中有用的-Unicode-字符" class="headerlink" title="Perl 6中有用的 Unicode 字符"></a>Perl 6中有用的 Unicode 字符</h2><hr>
+<h3 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h3><hr>
+<p>这些字符在法语和德语中是当作引号使用的. 在 Perl 6中, 它们仍然用作引号(在 POD 中是单引号, 在普通代码中是双引号), 还可以标示超运算符. 下面是这些符号和它们的 unicode 十六进制值:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">符号 unicode代码点 ascii equivalent</div><div class="line">«	U+00AB	      &lt;&lt;</div><div class="line">»	U+00BB	      &gt;&gt;</div></pre></td></tr></table></figure>
+<p>因此, 下面这些结构是可用的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">C« fixed-width POD text »</div><div class="line">say (1, 2) »+« (3, 4);     # 4 6 ; element-wise add</div><div class="line">@array »+=» 42;            # add 42 to each element of @array</div><div class="line">say «moo»;                 # moo</div><div class="line">my $baa = 123; say «$baa»; # 123</div></pre></td></tr></table></figure>
+<h3 id="Set-bag-操作符"><a href="#Set-bag-操作符" class="headerlink" title="Set/bag 操作符"></a>Set/bag 操作符</h3><hr>
+<p>下面列出的 <a href="http://doc.perl6.org/language/setbagmix#Set%2FBag_Operators" target="_blank" rel="external">set/bag 操作符</a> 都有与集合理论相关的符号, unicode 代码点, 和它们的 ascii 等价物. 要构成这样的一个字符, 只需键入字符组合键(例如 Vim中的 <code>Ctrl-V u</code>, Bash 中的 <code>Ctrl-Shift-u</code>), 然后输入 unicode 代码点的十六进制数.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">操作符	unicode代码点	ascii equivalent</div><div class="line">∈	  U+2208	    (elem)</div><div class="line">∉	  U+2209	    !(elem)</div><div class="line">∋	  U+220B	    (cont)</div><div class="line">∌	  U+220C	    !(cont)</div><div class="line">⊆	  U+2286	    (&lt;=)</div><div class="line">⊈	  U+2288	    !(&lt;=)</div><div class="line">⊂	  U+2282	    (&lt;)</div><div class="line">⊄	  U+2284	    !(&lt;)</div><div class="line">⊇	  U+2287	    (&gt;=)</div><div class="line">⊉	  U+2289	    !(&gt;=)</div><div class="line">⊃	  U+2283	    (&gt;)</div><div class="line">⊅	  U+2285	    !(&gt;)</div><div class="line">≼	  U+227C	    (&lt;+)</div><div class="line">≽	  U+227D	    (&gt;+)</div><div class="line">∪	  U+222A	    (|)</div><div class="line">∩	  U+2229	    (&amp;)</div><div class="line">∖	  U+2216	    (-)</div><div class="line">⊖	  U+2296	    (^)</div><div class="line">⊍	  U+228D	    (.)</div><div class="line">⊎	  U+228E	    (+)</div></pre></td></tr></table></figure>
+<h3 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h3><hr>
+<p>Wikipedia 包含了一个 <a href="https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode" target="_blank" rel="external">unicode 中数学操作符和符号</a> 的完整列表, 还有它们数学意义的链接.</p>
+<h3 id="希腊字符"><a href="#希腊字符" class="headerlink" title="希腊字符"></a>希腊字符</h3><hr>
+<p>希腊字符可以用作变量名了. 查看 <a href="https://en.wikipedia.org/wiki/Greek_alphabet#Greek_in_Unicode" target="_blank" rel="external">Greek in Unicode Wikipedia article</a> 列表获取希腊和埃及字符还有它们的 unicode 代码点.</p>
+<p>例如, 把数值3赋值给 <code>π</code>, 在 Vim 中输入(添加的空格是为了清晰):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $Ctrl-V u 03C0 = 3;  # same as: my $π = 3;</div><div class="line">say $Ctrl-V u 03C0;     # 3    same as: say $π;</div></pre></td></tr></table></figure>
+<h3 id="上标和下标"><a href="#上标和下标" class="headerlink" title="上标和下标"></a>上标和下标</h3><hr>
+<p>使用 <code>U+207x</code>, <code>U+208x</code> 和 (less often)  <code>U+209x</code> 范围能直接创建一个有限的<a href="http://en.wikipedia.org/wiki/Superscripts_and_Subscripts" target="_blank" rel="external">上标和下标</a>的集合. 然而, 要生成一个值的平方或立方, 你需要使用 <code>U+00B2</code> 和 <code>U+00B3</code> , 因为这些被定义在 <a href="http://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block" target="_blank" rel="external"> Latin1 supplement Unicode block</a>) 中.</p>
+<p>因此, 要书写泰勒级数展开, 你可以在 Vim 中输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">exp(x) = 1 + x + xCtrl-V u 00B2/2! + xCtrl-V u 00B3/3! + ... + xCtrl-V u 207F/n!</div><div class="line"># which would appear as</div><div class="line">exp(x) = 1 + x + x²/2! + x³/3! + ... + xⁿ/n!</div></pre></td></tr></table></figure>
+<p>或者指定列表中从1到k 的元素:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ACtrl-V u 2081, ACtrl-V u 2082, ..., ACtrl-V u 2096</div><div class="line"># which would appear as</div><div class="line">A₁, A₂, ..., Aₖ</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unicode/" rel="tag">#Unicode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/11/列表解析/" rel="next" title="列表解析">
+                <i class="fa fa-chevron-left"></i> 列表解析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/12/Actions和抽象语法树/" rel="prev" title="Actions 和抽象语法树">
+                Actions 和抽象语法树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/11/输入Unicode字符/"
+     data-title="输入Unicode字符"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/05/11/输入Unicode字符/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/11/输入Unicode字符/"
+           data-title="输入Unicode字符" data-url="https://ohmycloud.github.io/2016/05/11/输入Unicode字符/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#输入-Unicode-字符"><span class="nav-number">1.</span> <span class="nav-text">输入 Unicode 字符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑器和-shell"><span class="nav-number">1.1.</span> <span class="nav-text">编辑器和 shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim"><span class="nav-number">1.1.1.</span> <span class="nav-text">Vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Emacs"><span class="nav-number">1.1.2.</span> <span class="nav-text">Emacs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unix-shell"><span class="nav-number">1.1.3.</span> <span class="nav-text">Unix shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6中有用的-Unicode-字符"><span class="nav-number">1.2.</span> <span class="nav-text">Perl 6中有用的 Unicode 字符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引号"><span class="nav-number">1.2.1.</span> <span class="nav-text">引号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-bag-操作符"><span class="nav-number">1.2.2.</span> <span class="nav-text">Set/bag 操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数学符号"><span class="nav-number">1.2.3.</span> <span class="nav-text">数学符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希腊字符"><span class="nav-number">1.2.4.</span> <span class="nav-text">希腊字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上标和下标"><span class="nav-number">1.2.5.</span> <span class="nav-text">上标和下标</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

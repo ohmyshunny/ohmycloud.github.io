@@ -1,0 +1,740 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Slip," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6 List Concatenation without SlipPerl 6 List Concatenation without Slip在 Perl 5 中 , 操作符用来连接列表; 然而在 Perl 6 中需要使用 | 操作符, 即 slip 操作符。
+123my @a = &amp;lt;a b c&amp;gt;;my @b = &amp;lt;d e f&amp;gt;;my @ab = |@a, |@b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stackoverflowWeekly1014">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/10/14/stackoverflowWeekly1014/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6 List Concatenation without SlipPerl 6 List Concatenation without Slip在 Perl 5 中 , 操作符用来连接列表; 然而在 Perl 6 中需要使用 | 操作符, 即 slip 操作符。
+123my @a = &amp;lt;a b c&amp;gt;;my @b = &amp;lt;d e f&amp;gt;;my @ab = |@a, |@b">
+<meta property="og:updated_time" content="2016-10-23T16:07:53.845Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="stackoverflowWeekly1014">
+<meta name="twitter:description" content="Perl 6 List Concatenation without SlipPerl 6 List Concatenation without Slip在 Perl 5 中 , 操作符用来连接列表; 然而在 Perl 6 中需要使用 | 操作符, 即 slip 操作符。
+123my @a = &amp;lt;a b c&amp;gt;;my @b = &amp;lt;d e f&amp;gt;;my @ab = |@a, |@b">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/10/14/stackoverflowWeekly1014/"/>
+
+  <title> stackoverflowWeekly1014 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                stackoverflowWeekly1014
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-14T15:09:54+08:00" content="2016-10-14">
+              2016-10-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/14/stackoverflowWeekly1014/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/14/stackoverflowWeekly1014/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Perl-6-List-Concatenation-without-Slip"><a href="#Perl-6-List-Concatenation-without-Slip" class="headerlink" title="Perl 6 List Concatenation without Slip"></a>Perl 6 List Concatenation without Slip</h2><p><a href="http://stackoverflow.com/questions/34567902/perl-6-list-concatenation-without-slip" target="_blank" rel="external">Perl 6 List Concatenation without Slip</a><br>在 Perl 5 中 <code>,</code> 操作符用来连接列表; 然而在 Perl 6 中需要使用 <code>|</code> 操作符, 即 slip 操作符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @a = &lt;a b c&gt;;</div><div class="line">my @b = &lt;d e f&gt;;</div><div class="line">my @ab = |@a, |@b;</div></pre></td></tr></table></figure>
+<p>有比这短点的写法吗？</p>
+<a id="more"></a>
+<ul>
+<li>答案</li>
+</ul>
+<p>你可以使用 「flat」sub:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my @a  = &lt;a b c&gt;;</div><div class="line">my @b  = &lt;d e f&gt;;</div><div class="line">my @ab = flat @a, @b;</div><div class="line">say @ab.perl; #&gt; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;]</div><div class="line">my @abf = (@a, @b).flat;</div><div class="line">say @abf.perl; #&gt; [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意, flat 可以移除多层嵌套, 如果该层中的值不是标量的话。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 使用无符号变量</div><div class="line">my \list = (1,2,(3,4,(5,6)));</div><div class="line">say flat list; # (1 2 3 4 5 6)</div></pre></td></tr></table></figure>
+<p>但是使用 <code>|()</code> 只能脱去一层：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my \list = (1,2,|( (3,4,(5,6)) ));</div><div class="line">say list;  # (1 2 3 4 (5 6))</div></pre></td></tr></table></figure>
+<h2 id="How-many-ways-are-there-to-describe-the-Fibonacci-sequence-in-Perl-6"><a href="#How-many-ways-are-there-to-describe-the-Fibonacci-sequence-in-Perl-6" class="headerlink" title="How many ways are there to describe the Fibonacci sequence in Perl 6?"></a>How many ways are there to describe the Fibonacci sequence in Perl 6?</h2><p><a href="http://stackoverflow.com/questions/3980842/how-many-ways-are-there-to-describe-the-fibonacci-sequence-in-perl-6" target="_blank" rel="external">How many ways are there to describe the Fibonacci sequence in Perl 6?</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @fibs = (0, 1, -&gt; $a, $b &#123; $a + $b &#125; ... *);</div><div class="line">my @fibs = (0, 1, &#123; $^a + $^b &#125; ... *);  </div><div class="line">my @fibs = (0, 1, *+* ... *);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># 迭代</div><div class="line">sub fib (Int $n --&gt; Int) &#123;</div><div class="line">    $n &gt; 1 or return $n;</div><div class="line">    my ($prev, $this) = 0, 1;</div><div class="line">    ($prev, $this) = $this, $this + $prev for 1 ..^ $n;</div><div class="line">    return $this;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 递归</div><div class="line">use experimental :cached;</div><div class="line">proto fib (Int $n --&gt; Int) is cached &#123;*&#125;</div><div class="line">multi fib (0)  &#123; 0 &#125;</div><div class="line">multi fib (1)  &#123; 1 &#125;</div><div class="line">multi fib ($n) &#123; fib($n - 1) + fib($n - 2) &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># 解析</div><div class="line">sub fib (Int $n --&gt; Int) &#123;</div><div class="line">    constant φ1 = 1 / constant φ = (1 + sqrt 5)/2;</div><div class="line">    constant invsqrt5 = 1 / sqrt 5;</div><div class="line"></div><div class="line">    floor invsqrt5 * (φ**$n + φ1**$n);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="What-performance-increases-can-we-expect-as-the-Perl-6-implementations-mature"><a href="#What-performance-increases-can-we-expect-as-the-Perl-6-implementations-mature" class="headerlink" title="What performance increases can we expect as the Perl 6 implementations mature?"></a>What performance increases can we expect as the Perl 6 implementations mature?</h2><p><a href="http://stackoverflow.com/questions/3135673/what-performance-increases-can-we-expect-as-the-perl-6-implementations-mature" target="_blank" rel="external">What performance increases can we expect as the Perl 6 implementations mature?</a></p>
+<p>现在已经没有那么慢了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ perl6 -e &apos;say [+] 1..10**1000; say now - INIT now&apos;</div><div class="line">5000000000000000000000000000000000000000000000 ...</div><div class="line">0.007447</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ perl6 -e &apos;say [+] (1..100000).list; say now - INIT now&apos;</div><div class="line">5000050000</div><div class="line">0.13052975</div></pre></td></tr></table></figure>
+<h2 id="像-Int-Cool-这样的类型强制有什么用？"><a href="#像-Int-Cool-这样的类型强制有什么用？" class="headerlink" title="像 Int(Cool) 这样的类型强制有什么用？"></a>像 Int(Cool) 这样的类型强制有什么用？</h2><p><a href="http://stackoverflow.com/questions/34874779/what-is-the-point-of-coercions-like-intcool" target="_blank" rel="external">What is the point of coercions like Int(Cool)?</a></p>
+<p>类型强制能让你在子例程中拥有一个特殊的类型, 但是接收更广的输入。当该子例程被调用时, 参数会被自动转换为更窄的类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sub double(Int(Cool) $x) &#123;</div><div class="line">    2 * $x</div><div class="line">&#125;</div><div class="line"></div><div class="line">say double &apos;21&apos;;    # 42</div><div class="line">say double Any;     # Type check failed in binding $x; expected &apos;Cool&apos; but got &apos;Any&apos;</div></pre></td></tr></table></figure>
+<p>这里, <code>Int</code> 是参数将被强制的目标类型， 而 <code>Cool</code> 类型是子例程的输入参数的类型。</p>
+<p>但是这个子例程有什么用呢？ <code>$x</code> 不就是 <code>Int</code> 类型吗？ 为什么你还约束调用者来为参数实现 <code>Cool</code>？</p>
+<p>这个子例程所做的就是接收一个 Cool 的子类型的值, 然后尝试把这个值转换为 Int。那个时候它就是一个 Int 类型的值了, 不管它之前是什么类型的值。</p>
+<p>所以：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub double ( Int(Cool) $n ) &#123; $n * 2 &#125;</div></pre></td></tr></table></figure>
+<p>真的可以被看作（我认为这是它在 Rakudo 中的实现方式）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># Int 是 Cool 的子类型否则它就是 Any 或 Mu 类型</div><div class="line">proto sub double ( Cool $n ) &#123;*&#125; # 定义一个原型</div><div class="line"></div><div class="line"># 这儿有你写的内在部分</div><div class="line">multi sub double (  Int $n ) &#123; $n * 2 &#125;</div><div class="line"></div><div class="line"># 这儿是编译器为你写的部分</div><div class="line">multi sub double ( Cool $n ) &#123;</div><div class="line">    # 调用其它 multi, 因为它现在是 Int 类型</div><div class="line">    samewith Int($n);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以它接受任何 Int, Str, Rat, FatRat, Num, Array, Hash, 等类型. 并在调用  &amp;infix:&lt;*&gt; （带有 $n 和 2）之前尝试把它转换为 Int 类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say double &apos;  5  &apos;; # 10</div><div class="line">say double 2.5;     # 4</div><div class="line">say double [0,0,0]; # 6</div><div class="line">say double &#123; a =&gt; 0, b =&gt; 0 &#125;; # 4</div></pre></td></tr></table></figure>
+<p>你可以把它限制为 Cool 而非 Any 类型, 因为所有的 Cool 值本来要为 Int 提供一个强制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">( :( Int(Any) $ ) can be shortened to just :( Int() $ ) )</div></pre></td></tr></table></figure>
+<p>你这样做的原因可能是因为你需要在子例程中让它是 Int 类型因为你正调用其它含有不同类型的代码来做不同的事情：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sub example ( Int(Cool) $n ) returns Int &#123;</div><div class="line">    other-multi( $n ) * $n;</div><div class="line">&#125;</div><div class="line"></div><div class="line">multi sub other-multi ( Int $ ) &#123; 10 &#125;</div><div class="line">multi sub other-multi ( Any $ ) &#123;  1 &#125;</div><div class="line"></div><div class="line">say example 5;   # 50</div><div class="line">say example 4.5; # 40</div></pre></td></tr></table></figure>
+<p>在这种特殊情况下, 你可以把它写为下面的其中之一。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">sub example ( Cool $n ) returns Int &#123;</div><div class="line">    other-multi( Int($n) ) * Int($n);</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub example ( Cool $n ) returns Int &#123;</div><div class="line">    my $temp = Int($n);</div><div class="line">    other-multi( $temp ) * $temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub example ( Cool $n is copy ) returns Int &#123;</div><div class="line">    $n = Int($n);</div><div class="line">    other-multi( $n ) * $n;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它们中没有一种比使用签名来为你强制类型更清晰。<br>通常对于这样简单的功能你可以使用如下几种方法中的任意一种, 它会很好地满足你想要的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">my &amp;double = * * 2; # WhateverCode</div><div class="line">my &amp;double = * × 2; # 同上</div><div class="line"></div><div class="line">my &amp;double = &#123; $_ * 2 &#125;;       # bare block</div><div class="line">my &amp;double = &#123; $^n * 2 &#125;;      # block with positional placeholder</div><div class="line">my &amp;double = -&gt; $n &#123; $n * 2 &#125;; # pointy block</div><div class="line"></div><div class="line">my &amp;double = sub ( $n ) &#123; $n * 2 &#125; # anon sub</div><div class="line">my &amp;double = anon sub double ( $n ) &#123; $n * 2 &#125; # anon sub with name</div><div class="line"></div><div class="line">my &amp;double = &amp;infix:&lt;*&gt;.assuming(*,2); # 柯里化</div><div class="line">my &amp;double = &amp;infix:&lt;*&gt;.assuming(2);</div><div class="line"></div><div class="line">sub double ( $n ) &#123; $n * 2 &#125; # same as :( Any $n )</div></pre></td></tr></table></figure>
+<p>我不太清楚 proto 是干什么用的。<br>当你调用一个 <code>multi sub</code> 的时候, 实际上你调用的是一个「原型 sub」(proto sub), 然后这个原型 sub 再调用合适的 multi 候选者。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Slip/" rel="tag">#Slip</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/14/在手机中运行Perl6/" rel="next" title="在手机中运行 Perl 6">
+                <i class="fa fa-chevron-left"></i> 在手机中运行 Perl 6
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/17/Perl6FromRuby/" rel="prev" title="Perl 6 From Ruby - Nutshell">
+                Perl 6 From Ruby - Nutshell <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/14/stackoverflowWeekly1014/"
+     data-title="stackoverflowWeekly1014"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/10/14/stackoverflowWeekly1014/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/14/stackoverflowWeekly1014/"
+           data-title="stackoverflowWeekly1014" data-url="https://ohmycloud.github.io/2016/10/14/stackoverflowWeekly1014/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6-List-Concatenation-without-Slip"><span class="nav-number">1.</span> <span class="nav-text">Perl 6 List Concatenation without Slip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-many-ways-are-there-to-describe-the-Fibonacci-sequence-in-Perl-6"><span class="nav-number">2.</span> <span class="nav-text">How many ways are there to describe the Fibonacci sequence in Perl 6?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-performance-increases-can-we-expect-as-the-Perl-6-implementations-mature"><span class="nav-number">3.</span> <span class="nav-text">What performance increases can we expect as the Perl 6 implementations mature?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#像-Int-Cool-这样的类型强制有什么用？"><span class="nav-number">4.</span> <span class="nav-text">像 Int(Cool) 这样的类型强制有什么用？</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

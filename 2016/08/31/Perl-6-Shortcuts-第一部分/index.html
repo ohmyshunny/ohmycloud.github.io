@@ -1,0 +1,753 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="shortcut," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="查看原文
+快捷(Shortcuts)是一个具有争议性的话题。有些人认为它让代码更快更易读。有些人认为它让代码变得更难度如果人们不熟悉那些快捷的话。这篇文章仅仅告诉你 Shortcuts 的东西, 用不用取决于你。让我们开始把。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 Shortcuts(第一部分)">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/08/31/Perl-6-Shortcuts-第一部分/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="查看原文
+快捷(Shortcuts)是一个具有争议性的话题。有些人认为它让代码更快更易读。有些人认为它让代码变得更难度如果人们不熟悉那些快捷的话。这篇文章仅仅告诉你 Shortcuts 的东西, 用不用取决于你。让我们开始把。">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.672Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 Shortcuts(第一部分)">
+<meta name="twitter:description" content="查看原文
+快捷(Shortcuts)是一个具有争议性的话题。有些人认为它让代码更快更易读。有些人认为它让代码变得更难度如果人们不熟悉那些快捷的话。这篇文章仅仅告诉你 Shortcuts 的东西, 用不用取决于你。让我们开始把。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/08/31/Perl-6-Shortcuts-第一部分/"/>
+
+  <title> Perl 6 Shortcuts(第一部分) | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 Shortcuts(第一部分)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-31T00:00:00+08:00" content="2016-08-31">
+              2016-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/31/Perl-6-Shortcuts-第一部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/Perl-6-Shortcuts-第一部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://blogs.perl.org/users/zoffix_znet/2016/02/perl-6-shortcuts-part-1.html" target="_blank" rel="external">查看原文</a></p>
+<p>快捷(Shortcuts)是一个具有争议性的话题。有些人认为它让代码更快更易读。有些人认为它让代码变得更难度如果人们不熟悉那些快捷的话。这篇文章仅仅告诉你 Shortcuts 的东西, 用不用取决于你。让我们开始把。</p>
+<a id="more"></a>
+<h2 id="类属性的公开-Getter-Setter"><a href="#类属性的公开-Getter-Setter" class="headerlink" title="类属性的公开 Getter/Setter"></a>类属性的公开 Getter/Setter</h2><p>“getter” 和 “setter” 的概念在很多语言中是共通的: 在你的类中有一个 “东西”, 并且你写了一个方法来设置或获取那个东西的值。以啰嗦的 Perl 6 方式来写, 这样的一个设置看起来像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Foo &#123;</div><div class="line">    has $!attr = 42;</div><div class="line">    method attr is rw &#123; $!attr &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my  $obj = Foo.new;</div><div class="line">say $obj.attr;</div><div class="line">    $obj.attr = 72;</div><div class="line">say $obj.attr;</div><div class="line"></div><div class="line"># 输出&gt;&gt;</div><div class="line"># 42</div><div class="line"># 72</div></pre></td></tr></table></figure>
+<p>这就像它本来的那样简洁, 但公共属性通常足以使编写这点儿代码变得恼人。这就是为什么 <code>$.</code> twigil 存在的原因。单独使用它会创建一个 “getter”; 如果你还想要一个 “setter”, 需要使用 <code>is rw</code> 特性:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class Foo &#123; has $.attr is rw = 42; &#125;</div><div class="line">my  $obj = Foo.new;</div><div class="line">say $obj.attr;</div><div class="line">    $obj.attr = 72;</div><div class="line">say $obj.attr;</div><div class="line"></div><div class="line"># 输出&gt;&gt;:</div><div class="line"># 42</div><div class="line"># 72</div></pre></td></tr></table></figure>
+<p>我们把属性上的 <code>$!</code> twigil 更改为 <code>$.</code> twigil, 并且它为我们创建了一个公共的方法。继续!</p>
+<h2 id="在方法调用中省略圆括号"><a href="#在方法调用中省略圆括号" class="headerlink" title="在方法调用中省略圆括号"></a>在方法调用中省略圆括号</h2><hr>
+<p>下面这样的代码你不会经常看见, 代码末尾有一整吨的圆括号。确保它们都能匹配!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$foo.log( $obj.nukanate( $foo.grep(*.bar).map(*.ber) ) );</div></pre></td></tr></table></figure>
+<p>对于那些想起  <a href="https://xkcd.com/297/" target="_blank" rel="external">popular webcomic</a> 的人来说, Perl 6 还有一个备选项:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$foo.log: $obj.nukanate: $foo.grep(*.bar).map: *.ber;</div></pre></td></tr></table></figure>
+<p>如果方法在方法调用链的最后, 你可以省略它的圆括号并使用一个冒号 : 代替。除了 <code>.grep</code>, 我们上面所有的调用在链中都是最后的(last in chain), 所以我们避免了很多圆括号。有时我也喜欢在冒号后面换行开始写东西。</p>
+<p>还要注意: 你总是可以省略方法调用中的圆括号, 如果你没有提供任何参数的话; 也不需要分号。</p>
+<h2 id="没有逗号的具名参数"><a href="#没有逗号的具名参数" class="headerlink" title="没有逗号的具名参数"></a>没有逗号的具名参数</h2><hr>
+<p>如果你正调用一个提供只有具名参数的方法或子例程的话, 你可以省略参数之间的逗号。有时候, 我也喜欢把每个参数作为新行叠放在一块儿:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class Foo &#123;</div><div class="line">    method baz (:$foo, :$bar, :$ber) &#123; say &quot;[$foo, $bar, $ber]&quot; &#125;</div><div class="line">&#125;</div><div class="line">    sub    baz (:$foo, :$bar, :$ber) &#123; say &quot;[$foo, $bar, $ber]&quot; &#125;</div><div class="line"></div><div class="line">Foo.baz:</div><div class="line">    :foo(42)</div><div class="line">    :bar(72)</div><div class="line">    :ber(100);</div><div class="line"></div><div class="line">baz :foo(42) :bar(72) :ber(100);</div><div class="line"></div><div class="line"># OUTPUT&gt;&gt;:</div><div class="line"># [42, 72, 100]</div><div class="line"># [42, 72, 100]</div></pre></td></tr></table></figure>
+<p>再次, 这在当你提供只有具名参数的时候才有效。有很多很多其它使用同样形式提供参数或 Pairs 但是你又不能省略逗号的地方。</p>
+<h2 id="具名参数-Pairs-中的整数"><a href="#具名参数-Pairs-中的整数" class="headerlink" title="具名参数/Pairs 中的整数"></a>具名参数/Pairs 中的整数</h2><hr>
+<p>‘如果参数或 Pair 接收一个正整数作为值, 就把数字写在冒号和键的名字之间:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say DateTime.new: :2016year :2month :1day :16hour :32minute;</div><div class="line"></div><div class="line"># 输出&gt;&gt;:</div><div class="line"># 2016-02-01T16:32:00Z</div></pre></td></tr></table></figure>
+<p>这是其中之一当你第一次学习它的时候看起来不和谐的东西, 但是你会很快习惯它。它读起来很像英语:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my %ingredients = :4eggs, :2sticks-of-butter, :4cups-of-suger;</div><div class="line">say %ingredients;</div><div class="line"></div><div class="line"># OUTPUT&gt;&gt;:</div><div class="line"># cups-of-sugar =&gt; 4, eggs =&gt; 4, sticks-of-butter =&gt; 2</div></pre></td></tr></table></figure>
+<h2 id="具名参数-Pairs-中的布尔值"><a href="#具名参数-Pairs-中的布尔值" class="headerlink" title="具名参数/Pairs 中的布尔值"></a>具名参数/Pairs 中的布尔值</h2><hr>
+<p>使用键自身的名字来标示 <strong>True</strong>, 在键名和冒号之间插入一个感叹号来标示 <strong>False</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sub foo (:$bar, :$ber) &#123; say &quot;$bar, $ber&quot; &#125;</div><div class="line">foo :!bar :ber;</div><div class="line"></div><div class="line">my %hash = :!bar, :ber;</div><div class="line">say %hash;</div><div class="line"></div><div class="line"># OUTPUT&gt;&gt;:</div><div class="line"># False, True</div><div class="line"># bar =&gt; False, ber =&gt; True</div></pre></td></tr></table></figure>
+<p>注意: 这也能应用在副词上!</p>
+<h2 id="具名参数-Pairs-中的-Lists"><a href="#具名参数-Pairs-中的-Lists" class="headerlink" title="具名参数/Pairs 中的 Lists"></a>具名参数/Pairs 中的 Lists</h2><hr>
+<p>如果你正提供一个 quote-word 结构给一个期望某种 listy 的具名参数/pair, 那么你可以省略圆括号; 在键和  quote-words 之间不留任何空格就是了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sub foo (:@args) &#123; say @args &#125;</div><div class="line">foo :args&lt;foo bar ber&gt;;</div><div class="line"></div><div class="line">my %hash = :ingredients&lt;milk eggs butter&gt;;</div><div class="line">say %hash;</div><div class="line"></div><div class="line"># OUTPUT&gt;&gt;:</div><div class="line"># (foo bar ber)</div><div class="line"># ingredients =&gt; (milk eggs butter)</div></pre></td></tr></table></figure>
+<h2 id="传递变量给具名参数-Pairs"><a href="#传递变量给具名参数-Pairs" class="headerlink" title="传递变量给具名参数/Pairs"></a>传递变量给具名参数/Pairs</h2><hr>
+<p>你认为具名参数就这样了吗？还有一个更酷的 shortcut: 假设你有一个变量并且它和具名参数拥有相同的名字… 就通过使用变量自身把它传递进来好了, 代替键, 在冒号之后:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">hashify</span> (:$<span class="title">bar</span>, :@<span class="title">ber</span>) </span>&#123;</div><div class="line">    <span class="keyword">my</span> %hash = :$bar, :@ber;</div><div class="line">    <span class="keyword">say</span> %hash;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">my</span> ( $bar, @ber )  = <span class="number">42</span>, (<span class="number">1</span>..<span class="number">3</span>);</div><div class="line">hashify :$bar :@ber;</div><div class="line"></div><div class="line"><span class="comment"># OUTPUT&gt;&gt;:</span></div><div class="line"><span class="comment"># bar =&gt; 42, ber =&gt; [1..3]</span></div></pre></td></tr></table></figure>
+<p>注意我们既没有在 sub 调用中也没有在我们创建的 hash 中重复键的名字。它们是从变量的名字中派生出来的。</p>
+<h2 id="Subs-作为方法调用"><a href="#Subs-作为方法调用" class="headerlink" title="Subs 作为方法调用"></a>Subs 作为方法调用</h2><hr>
+<p>如果你有一个 sub 想在某些东西上作为方法调用, 就在 sub 那儿前置一个 <code>&amp;</code>符号就好。 调用者会是第一个位置参数, 所有其它参数像往常那样传递。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">be</span>-<span class="title">wise</span> ($<span class="title">self</span>, $<span class="title">who</span> = '<span class="title">Anonymous</span>') </span>&#123; <span class="string">"Konw your $self, $who!"</span> &#125;</div><div class="line"></div><div class="line"><span class="string">'ABC'</span>.&amp;be-wise.say;</div><div class="line"><span class="string">'ABC'</span>.&amp;be-wise(<span class="string">'Zoffix'</span>).say;</div><div class="line"></div><div class="line"><span class="comment"># OUTPUT&gt;&gt;:</span></div><div class="line"><span class="comment"># Know your ABC, Anonymous!</span></div><div class="line"><span class="comment"># Know your ABC, Zoffix!</span></div></pre></td></tr></table></figure>
+<p>这实质上是一种不那么难看的在某个实例上调用 <code>.map</code>的方式, 但是多数时候它的可读性更好。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">be</span>-<span class="title">wise</span> ($<span class="title">self</span>, $<span class="title">who</span> = '<span class="title">Anonymous</span>') </span>&#123; <span class="string">"Know your $self, $who!"</span> &#125;</div><div class="line"></div><div class="line"><span class="string">'ABC'</span>.map(&#123;be-wise $_, <span class="string">'Zoffix'</span>&#125;)».say;</div><div class="line"><span class="keyword">say</span> be-wise <span class="string">'ABC'</span>, <span class="string">'Zoffix'</span>;</div><div class="line"></div><div class="line"><span class="comment"># OUTPUT&gt;&gt;:</span></div><div class="line"><span class="comment"># Know your ABC, Zoffix!</span></div><div class="line"><span class="comment"># Know your ABC, Zoffix!</span></div></pre></td></tr></table></figure>
+<p>为了完整性, 但不是过度使用, 你可以内联调用甚至使用一个 pointy block 来设置签名!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&apos;ABC&apos;.&amp;(&apos;Know your &apos; ~ *).say;</div><div class="line">&apos;ABC&apos;.&amp;( -&gt; $self, $who = &apos;Anonymous&apos; &#123;&quot;Know your $self, $who!&quot;&#125; )(&apos;Zoffix&apos;)</div><div class="line">    .say;</div><div class="line"></div><div class="line"># OUTPUT&gt;&gt;:</div><div class="line"># Know your ABC</div><div class="line"># Know your ABC, Zoffix!</div></pre></td></tr></table></figure>
+<h2 id="Hyper-方法调用"><a href="#Hyper-方法调用" class="headerlink" title="Hyper 方法调用"></a>Hyper 方法调用</h2><hr>
+<p>因为我们谈到了 .map 的快捷方式, 记住 » hyper 操作符。在方法调用的点号之前使用它以标示你想在调用者的每个元素身上调用点号后面跟着的方法, 而不是调用者本身。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(1, 2, 3)».is-prime.say;</div><div class="line">(1, 2, 3)&gt;&gt;.is-prime.say;</div><div class="line"></div><div class="line"># OUTPUT&gt;&gt;:</div><div class="line"># (False True True)</div><div class="line"># (False True True)</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><hr>
+<ul>
+<li>使用 <code>$.</code> twigil 来声明公共属性</li>
+<li>使用 <code>:</code>代替圆括号</li>
+<li>只含具名参数的 Methods/sub 调用不需要逗号</li>
+<li>通过把整数值写在键和冒号之间传递 Int 值</li>
+<li>使用键自身来指定一个 True 布尔值</li>
+<li>使用键自身, 并在键名和冒号之间插入一个 ! 号来指定一个 <strong>False</strong> 值</li>
+<li>当值是 quote-word 结构时, 把它写在键后面, 不含任何圆括号</li>
+<li>当变量和键的名字相同时, 把它直接用作键(包括符号), 不用指定任何值</li>
+<li>在 sub 那儿前置一个 <code>&amp;</code>, 当把它作为方法调用时</li>
+<li>使用 » 操作符来对列表中的每个元素调用一个方法</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shortcut/" rel="tag">#shortcut</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/14/哇-Perl6/" rel="next" title="哇, Perl 6!">
+                <i class="fa fa-chevron-left"></i> 哇, Perl 6!
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/10/Data-Dump/" rel="prev" title="Data Dump">
+                Data Dump <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/08/31/Perl-6-Shortcuts-第一部分/"
+     data-title="Perl 6 Shortcuts(第一部分)"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/08/31/Perl-6-Shortcuts-第一部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/31/Perl-6-Shortcuts-第一部分/"
+           data-title="Perl 6 Shortcuts(第一部分)" data-url="https://ohmycloud.github.io/2016/08/31/Perl-6-Shortcuts-第一部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类属性的公开-Getter-Setter"><span class="nav-number">1.</span> <span class="nav-text">类属性的公开 Getter/Setter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在方法调用中省略圆括号"><span class="nav-number">2.</span> <span class="nav-text">在方法调用中省略圆括号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没有逗号的具名参数"><span class="nav-number">3.</span> <span class="nav-text">没有逗号的具名参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具名参数-Pairs-中的整数"><span class="nav-number">4.</span> <span class="nav-text">具名参数/Pairs 中的整数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具名参数-Pairs-中的布尔值"><span class="nav-number">5.</span> <span class="nav-text">具名参数/Pairs 中的布尔值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具名参数-Pairs-中的-Lists"><span class="nav-number">6.</span> <span class="nav-text">具名参数/Pairs 中的 Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传递变量给具名参数-Pairs"><span class="nav-number">7.</span> <span class="nav-text">传递变量给具名参数/Pairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Subs-作为方法调用"><span class="nav-number">8.</span> <span class="nav-text">Subs 作为方法调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyper-方法调用"><span class="nav-number">9.</span> <span class="nav-text">Hyper 方法调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,725 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="正则表达式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最长 token 匹配注意，下面进入糟糕区域，如果看不懂请查看英文原文!
+S05-metasyntax/longest-alternative.t lines 53–460
+因为 “longest-token matching” 是一个很长的短语, 我们会经常将这个概念叫做 LTM.  这个基本的概念就是人们在头脑中倾向于怎么去解析文本, 所以计算机应该像人一样尝试做同样的事情. 而使用 LTM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的正则表达式(四)">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/09/11/Perl6中的正则表达式-四/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="最长 token 匹配注意，下面进入糟糕区域，如果看不懂请查看英文原文!
+S05-metasyntax/longest-alternative.t lines 53–460
+因为 “longest-token matching” 是一个很长的短语, 我们会经常将这个概念叫做 LTM.  这个基本的概念就是人们在头脑中倾向于怎么去解析文本, 所以计算机应该像人一样尝试做同样的事情. 而使用 LTM">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.768Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的正则表达式(四)">
+<meta name="twitter:description" content="最长 token 匹配注意，下面进入糟糕区域，如果看不懂请查看英文原文!
+S05-metasyntax/longest-alternative.t lines 53–460
+因为 “longest-token matching” 是一个很长的短语, 我们会经常将这个概念叫做 LTM.  这个基本的概念就是人们在头脑中倾向于怎么去解析文本, 所以计算机应该像人一样尝试做同样的事情. 而使用 LTM">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/09/11/Perl6中的正则表达式-四/"/>
+
+  <title> Perl 6 中的正则表达式(四) | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的正则表达式(四)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-11T00:00:00+08:00" content="2015-09-11">
+              2015-09-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/11/Perl6中的正则表达式-四/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/11/Perl6中的正则表达式-四/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="最长-token-匹配"><a href="#最长-token-匹配" class="headerlink" title="最长 token 匹配"></a>最长 token 匹配</h1><p>注意，下面进入糟糕区域，如果看不懂请查看英文原文!</p>
+<p><a href="https://github.com/perl6/roast/blob/master/S05-metasyntax/longest-alternative.t#L53-L460" target="_blank" rel="external"><code>S05-metasyntax/longest-alternative.t lines 53–460</code></a></p>
+<p>因为 “longest-token matching” 是一个很长的短语, 我们会经常将这个概念叫做 <code>LTM</code>.  这个基本的概念就是人们在头脑中倾向于怎么去解析文本, 所以计算机应该像人一样尝试做同样的事情. 而使用 <code>LTM</code> 解析文本就是关于计算机怎样决定匹配一组备选分支中的哪一个备选分支的.</p>
+<p>在 Perl 6 中, <code>|</code> 代表使用声明性的 longest-token 语义的逻辑备选分支.(你现在能使用 <code>||</code> 来标示旧的暂存的备选分支. 就是, <code>|</code> 和 <code>||</code> 现在在正则语法内的运作方式和在正则语法外的运作方式很像,  在正则语法外部, <code>|</code> 和 <code>||</code> 代表 junctional 和 短路的 <code>OR</code>. 这也包括事实上 <code>|</code> 的优先级比 <code>||</code> 的优先级高.)</p>
+<a id="more"></a>
+<p>在过去, Perl 中正则表达式是通过一个能回溯的 NFA 算法来处理的. 这很强大, 但是很多解析器通过并行地处理 rules , 而不是一个接着一个地处理, 工作起来更高效, 至少达到某种程度. 如果你看一下像 yacc grammar 这样的东西, 你会发现很多 pattern/action 声明, 其中的 patterns 被认为是并行的,  并且最终由 grammar 决定触发哪个 action. 虽然默认的Perl 解析角度是从上至下的(或许使用一个中间层的从下至上角度来处理操作符优先级), 这对用户理解 token 处理进行确定性很有用。所以, 为了 regex 匹配的意图, 我们把 tokens 模式定义为那些不含潜在副作用或自引用的能被匹配的模式。(因为空格在行转换时经常有副作用, 所以通常被这样的模式排除, 给予或采取一点向前查看。) 基本上, Perl 自动地从 grammar 中派生出一个词法分析程序, 而不需要你自己写一个。</p>
+<p>为此, Perl 6 中的每个 regex 被要求能把它的纯模式和它的 actions 区分开, 并返回它的初始 token 模式的列表(包含由regex 的纯部分调用的 subrule 的 token 模式, 但是不包含多于一次的 subrule, 因为那可能会引起自引用, 这在传统正则表达式中是不被允许的。) 一个使用<code>|</code>的逻辑备选分支接收两个或多个这种列表并分发给匹配最长 token 前缀的备选分支。出现在第一位的可能是也可能不是那个备选分支。</p>
+<p>然而, 如果两个备选分支以同样的长度匹配, 绑定首先由特异性打破。 以最长的固定字符串开头的备选分支胜出; 即一个精确的匹配被看作是比使用字符类更接近. 如果它不起作用, 绑定会由两个方法中的一个破坏. 如果备选分支在不同的 grammars 中, 那么标准的 MRO(方法解析顺序)决定首先尝试哪一个. 如果备选分支在同一个 grammar 文件中, 本文出现的更早的备选分支取得优先权. (如果一个 grammar 的 rules 被定义在不止一个文件中, 那么顺序是未定义的, 则必须使用一个显式的断言用于强制失败, 如果首先尝试错误的那个的话)</p>
+<p>这个长的标记前缀大致相当于“令牌”在其他分析系统使用一个词法分析器的概念，但对于Perl这很大程度上是自动从语法定义一个偶然现象。然而，尽管是自动计算的，这一套标记可以由用户修改；各种内构造正则表达式的语法来告诉引擎，这是完成图案的部分开始的副作用，所以将这种构建用户控件被认为是象征性的，什么是不。被视为终止一个令牌声明并启动“行动”部分的结构的结构包括：<br>这种最长 token 前缀大致相当于在其它解析系统中使用词法解析程序的 “token” 标记, 但对于 Perl 这很大程度上是从 grammar 定义中派生的附带现象。然而，尽管是自动计算的, 这套 tokens 可以由用户修改; regex 中的各种结构声明性的告诉 grammar 引擎, 模式部分结束, 并开始进入副作用, 所以通过插入这样的结构, 用户控制什么是 token, 什么不是。终止 token 声明并开始模式的 “action” 部分的结构包括:</p>
+<ul>
+<li>任何 :: 或 ::: 回溯控制 (而不是e : 肯定修饰符).</li>
+<li>任何带有节俭匹配(使用 <code>?</code>修饰符)量词化的原子。</li>
+<li>任何 <code>{...}</code> action, 但不是含有闭包的断言。(空的闭包 <code>{}</code> 通常用于显式地终止模式的 pure 部分。) 一般的 <code>**{...}</code> 量词形式的闭包也会终止最长 token, 但是无闭包形式的量词不会。</li>
+</ul>
+<ul>
+<li>任何诸如 <code>||</code> 或 <code>&amp;&amp;</code> 按次序的控制流操作符.</li>
+<li>作为前一点的结果，因为标准的 grammar 规则使用 <code>||</code> 定义空格, 最长的token 也由那 <em>可能</em> 使用那个规则匹配空格的 regex 或 rule 的任意部分终止, 包括通过 <code>:sigspace</code>隐式匹配的空格。（然而，token 声明明确允许通过在 token 中使用诸如 <code>\h+</code> 或其它字符类这种低级原语来识别空格）</li>
+<li>Subpatterns（捕获）不终止token模式，但可能需要重新解析 token以找到Subpatterns的位置。同样地，在确定最长token之后断言可能需要被检查。（或者, 如果以任何一种方式模仿了 DFA 语义, 例如, 使用汤普森的NFA，可能可以知道什么时候触发断言而不使用backchecks。）</li>
+</ul>
+<p>贪婪量词和字符类不会终止 token 模式。 诸如单词边界的零宽断言也不会。</p>
+<p>因为这种断言可以是 token 的一部分, 词法分析程序引擎必须能从这种断言的失败中恢复, 并回溯到下一个最佳 token 候选者, 它可能等长或更短, 但是绝对不会当前候选者更长。</p>
+<p>对于含有诸如 <code>&lt;?foo&gt;</code> 或 <code>&lt;?before \s&gt;</code> 这样的正向向前查看的模式, 这种断言会被认为比随后的模式更特殊, 所以向前查看的模式被当作最长 token 的最后一部分; 最长 token 匹配器会足够智能地把额外的 bit 当作是零宽的, 即, 重新匹配任何由向前查看遍历到的文本,当它(如果)继续匹配的时候。(实际上, 如果整个向前查看足够纯粹地参与 LTM, 再匹配可能仅仅优化掉 rematching, 因为向前查看已经在 LTM 引擎中匹配过了)</p>
+<p>然而, 对于包含诸如 <code>&lt;!foo&gt;</code> 或 <code>&lt;!before \s&gt;</code> 这种否定向前查看断言的模式, 反面的才是真: 随后的模式被认为比该断言更特殊。所以 LTM 完全忽略了否定向前查看, 并继续从跟在否定向前查看后面的任何东西中查找纯粹模式。你可能会说, 正向向前查看对 LTM 是不透明的, 否地向前查看对 LTM 是透明的。 结论是,如果你想写一个对 LTM 是透明的正向向前查看, 你可以使用两个感叹号的否定: <code>&lt;!!foo&gt;</code> 来标示它。(优化器能自由地移除双否定, 但是不是透明性)。</p>
+<p>奇怪的是，这 <code>令牌</code> 关键词具体不确定一个令牌的范围，除了一个令牌模式通常不匹配的空白，而空白是终止令牌的典型方式。<br>很奇怪, <code>token</code> 关键字不确定 token 的作用域, 除了作为一个 token 模式通常不做很多的空格匹配情况之外, 空格是终止 tokens 的原型方式。</p>
+<p>初始token匹配器必须把区分大小写考虑在内（或任何其他规范化原语）并做正确的事, 即使传播到不具有相同的规范化的 rules 时。也就是说，它们必须继续代表较低规则能匹配的一组匹配。</p>
+<p><code>||</code> 形式有旧的短路语义，而不会试图匹配其右侧, 除非它的左侧耗尽了所有的可能性（包括所有 <code>|</code> 可能性）。regex 中的第一个 <code>||</code> 让它左侧的 token 模式能从外部的最长 token 匹配器中访问,  但从最长 token 匹配隐藏的任何后续的测试。每一个 <code>||</code>建立了一个新的最长 token匹配器。那就是, 如果你在 <code>||</code> 右侧使用 <code>|</code>，那么右侧为最长 token 处理这子表达式和任何被调用的 subrules建立了一个新的顶级作用域处理这个子表达式和任何所谓的规则。右边的最长 token 自动机是对于左侧的 <code>||</code> 或外部的含有 <code>||</code> 的 regex是不可见的。</p>
+<p>大西瓜啊，翻译的狗屎一样，惨不忍睹！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/正则表达式/" rel="tag">#正则表达式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/11/Perl-6-Weekly-一/" rel="next" title="Perl 6 Weekly(一)">
+                <i class="fa fa-chevron-left"></i> Perl 6 Weekly(一)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/15/日期难题/" rel="prev" title="日期难题">
+                日期难题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/09/11/Perl6中的正则表达式-四/"
+     data-title="Perl 6 中的正则表达式(四)"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/09/11/Perl6中的正则表达式-四/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/09/11/Perl6中的正则表达式-四/"
+           data-title="Perl 6 中的正则表达式(四)" data-url="https://ohmycloud.github.io/2015/09/11/Perl6中的正则表达式-四/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最长-token-匹配"><span class="nav-number">1.</span> <span class="nav-text">最长 token 匹配</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

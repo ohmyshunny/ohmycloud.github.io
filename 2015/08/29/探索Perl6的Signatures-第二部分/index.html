@@ -1,0 +1,719 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="签名,Signature," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="在我们探索 Perl 6 签名的第一部分中, 我们了解了怎么使用 Perl 6 强大而灵活的类型系统来约束具名参数和位置参数是如何被传递给子例程和方法的。我们还涉及了怎么使用 slurp 签名来创建能接收任意具名和位置参数列表的可变函数。
+Perl 6 的签名系统提供了更多。在这篇文章中我们将验证其中更高级的特性, 它们让 Perl 6 的调用语义更强大。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="探索Perl6的Signatures,第二部分">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/08/29/探索Perl6的Signatures-第二部分/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="在我们探索 Perl 6 签名的第一部分中, 我们了解了怎么使用 Perl 6 强大而灵活的类型系统来约束具名参数和位置参数是如何被传递给子例程和方法的。我们还涉及了怎么使用 slurp 签名来创建能接收任意具名和位置参数列表的可变函数。
+Perl 6 的签名系统提供了更多。在这篇文章中我们将验证其中更高级的特性, 它们让 Perl 6 的调用语义更强大。">
+<meta property="og:updated_time" content="2016-10-23T16:13:34.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="探索Perl6的Signatures,第二部分">
+<meta name="twitter:description" content="在我们探索 Perl 6 签名的第一部分中, 我们了解了怎么使用 Perl 6 强大而灵活的类型系统来约束具名参数和位置参数是如何被传递给子例程和方法的。我们还涉及了怎么使用 slurp 签名来创建能接收任意具名和位置参数列表的可变函数。
+Perl 6 的签名系统提供了更多。在这篇文章中我们将验证其中更高级的特性, 它们让 Perl 6 的调用语义更强大。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/08/29/探索Perl6的Signatures-第二部分/"/>
+
+  <title> 探索Perl6的Signatures,第二部分 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                探索Perl6的Signatures,第二部分
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-29T00:00:00+08:00" content="2015-08-29">
+              2015-08-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/29/探索Perl6的Signatures-第二部分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/29/探索Perl6的Signatures-第二部分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在我们探索 Perl 6 签名的<a href="http://friedo.com/blog/2016/01/exploring-perl-6-signatures-part-1" target="_blank" rel="external">第一部分</a>中, 我们了解了怎么使用 Perl 6 强大而灵活的类型系统来约束具名参数和位置参数是如何被传递给子例程和方法的。我们还涉及了怎么使用 <em>slurp</em> 签名来创建能接收任意具名和位置参数列表的可变函数。</p>
+<p>Perl 6 的签名系统提供了更多。在这篇文章中我们将验证其中更高级的特性, 它们让 Perl 6 的调用语义更强大。</p>
+<a id="more"></a>
+<h2 id="Class-约束"><a href="#Class-约束" class="headerlink" title="Class 约束"></a>Class 约束</h2><p>你可以使用签名来指定传递进函数中的参数的类型约束。你使用的类型可以是任意类名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">sub foo( Numeric $foo, Str $bar) &#123;</div><div class="line">    say &quot;my string is $bar and my number is $foo&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个签名要求我们传递 <strong>Numeric</strong> 和 <strong>Str</strong> 类型的参数。但是因为 Perl 6 的内置类型实际上就是类(classes), 并且因为 <strong>Numeric</strong> 拥有几个子类型, 我们可以传递进任何数字类型, 它都能工作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">foo(42, &quot;blah&quot;);</div><div class="line">foo(42.99, &quot;yoohoo&quot;);</div><div class="line">foo(3+9i, &quot;hellooooooo&quot;);</div><div class="line"># etc</div></pre></td></tr></table></figure>
+<p>我们自己定义的类中签名的工作原理也一样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">class Foo &#123;</div><div class="line">    has $.prop is rw;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub inspect-a-foo( Foo $my-foo ) &#123;</div><div class="line">    say &quot;this foo&apos;s property is &quot; ~ $my-foo.prop;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $f = Foo.new( prop =&gt; 42 );</div><div class="line">inspect-a-foo($f);</div><div class="line"># this foo&apos;s property is 42</div></pre></td></tr></table></figure>
+<p>在上面的例子中,  子例程 <em>inspect-a-foo</em> 只会接收 <strong>Foo</strong> 类型的参数, 或者 <strong>Foo</strong> 的子类。</p>
+<h2 id="带有-where-block-的特异性"><a href="#带有-where-block-的特异性" class="headerlink" title="带有 where block 的特异性"></a>带有 <strong>where</strong> block 的特异性</h2><p>通过在签名中使用 <em>where</em> 子句, Perl 6 允许我们更进一步的限制子例程的参数。<em>where</em> 子句接收任何 code block, 这个 <code>code block</code> 必须返回一个 true 值以使类型约束通过。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">sub foo(Int $positive where &#123; $positive &gt; 0 &#125; ) &#123;</div><div class="line">    say &quot;我很确信 $positive 是正的!&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub bar( Foo $foo where &#123; $foo.prop.isa( Int ) and $foo.prop &gt; 40 &#125; ) &#123;</div><div class="line">    say &quot;这个 Foo 的属性是一个大于 40 的整数&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以指定多个 <em>where</em> 子句来约束多个参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">sub quadrant2( Real $x where &#123; $x &lt; 0 &#125;, Real $y where &#123; $y &gt; 0 &#125; ) &#123;</div><div class="line">    say &quot;at the point ($x, $y)&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">quadrant2( 1, 1 );</div><div class="line"># Constraint type check failed for parameter &apos;$x&apos;</div><div class="line">quadrant2( -1, -1 );</div><div class="line"># Constraint type check failed for parameter &apos;$y&apos;</div><div class="line">quadrant2( -1, 1 );</div><div class="line"># at the point (-1, 1)</div></pre></td></tr></table></figure>
+<p>约束块儿(Constraint blocks)甚至不需要是 <em>blocks</em>。事实上, 任何 <strong>Callable</strong> 类都可以。因此, 你可以很容易地获得功能函数的约束检测, 它们能在多个不同的子例程之间循环利用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">sub is-positive( Real $n ) &#123; $n &gt; 0  &#125;</div><div class="line">sub is-negative( Real $n ) &#123; $n &lt; 0  &#125;</div><div class="line">sub is-zero( Real $n )     &#123; $n == 0 &#125;</div><div class="line"></div><div class="line">sub quadrant1( Real $x where is-positive( $x ), Real $y where is-positive( $y ) ) &#123; ... &#125;</div><div class="line">sub quadrant2( Real $x where is-negative( $x ), Real $y where is-positive( $y ) ) &#123; ... &#125;</div><div class="line">sub quadrant3( Real $x where is-negative( $x ), Real $y where is-negative( $y ) ) &#123; ... &#125;</div><div class="line">sub quadrant4( Real $x where is-positive( $x ), Real $y where is-negative( $y ) ) &#123; ... &#125;</div><div class="line">sub x-axis( Real $x, Real $y where is-zero( $y ) ) &#123; ... &#125;</div><div class="line">sub y-axis( Real $x where is-zero( $x ), Real $y ) &#123; ... &#125;</div><div class="line">sub origin( Real $x where is-zero( $x ), Real $y where is-zero( $y ) ) &#123; ... &#125;</div></pre></td></tr></table></figure>
+<h2 id="Return-Types"><a href="#Return-Types" class="headerlink" title="Return Types"></a>Return Types</h2><p>每个 Perl 6 子例程也能指定它自己的返回值类型作为签名的一部分。这可以使用 <em>returns</em> 关键字来显式地指定, 但是我更喜欢用快捷形式的 <code>--&gt;</code> 操作符, 它在签名自身之内。下面声明的两个子例程是等价的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">sub are-they-equal( Str $foo, Str $bar ) returns Bool &#123;</div><div class="line">    $foo eq $bar</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub are-they-equal( Str $foo, Str $bar --&gt; Bool ) &#123;</div><div class="line">    $foo eq $bar</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>毫无疑问地, 如果返回错误的类型 Perl 6 会抛出错误。</p>
+<h2 id="自省"><a href="#自省" class="headerlink" title="自省"></a>自省</h2><p>Perl 6 中子例程是一等对象。但是 Perl 6 带来了一大堆新的内省工具, 包含询问子例程的签名信息的能力。每个子例程的签名实际上就是 <strong>Signature</strong> 类的一个对象。我们能找出子例程的元数和返回值类型。我们甚至能够在签名中抓取一个 <strong>Parameter</strong> 对象的列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">sub are-they-equal( Str $foo, Str $bar ) returns Bool &#123;</div><div class="line">    $foo eq $bar</div><div class="line">&#125;</div><div class="line"></div><div class="line">say &amp;are-they-equal.signature.arity;    # 2</div><div class="line">say &amp;are-they-equal.signature.returns;  # (Bool)</div><div class="line"></div><div class="line">my @params = &amp;are-they-equal.signature.params;</div><div class="line">say @params[0].name;      # $foo</div><div class="line">say @params[0].type;      # (Str)</div><div class="line">say @params[0].sigil;     # $</div></pre></td></tr></table></figure>
+<p>总之, Perl 6 的签名很好很强壮。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/签名/" rel="tag">#签名</a>
+          
+            <a href="/tags/Signature/" rel="tag">#Signature</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/25/Perl6中的变量/" rel="next" title="Perl 6 中的变量">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的变量
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/31/Perl6中的操作符-一/" rel="prev" title="Perl 6 中的操作符(一)">
+                Perl 6 中的操作符(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/08/29/探索Perl6的Signatures-第二部分/"
+     data-title="探索Perl6的Signatures,第二部分"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/08/29/探索Perl6的Signatures-第二部分/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/29/探索Perl6的Signatures-第二部分/"
+           data-title="探索Perl6的Signatures,第二部分" data-url="https://ohmycloud.github.io/2015/08/29/探索Perl6的Signatures-第二部分/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Class-约束"><span class="nav-number">1.</span> <span class="nav-text">Class 约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带有-where-block-的特异性"><span class="nav-number">2.</span> <span class="nav-text">带有 where block 的特异性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Return-Types"><span class="nav-number">3.</span> <span class="nav-text">Return Types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自省"><span class="nav-number">4.</span> <span class="nav-text">自省</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

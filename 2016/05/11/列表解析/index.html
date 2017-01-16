@@ -1,0 +1,738 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="List Comprehensions,列表解析," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="列表解析列表解析即 List Comprehensions。
+生成 1x1, 2x2, 3x3, ..., 10x10 的列表：
+1($_**2 for 1..10);
+for 语句前面还可以添加 if 修饰符，这样我们就可以仅筛选出偶数的平方：
+12($_**2 if !($_ % 2) for 1..10)($_**2 if $_ % 2 == 1 for 1..10) # 同上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="列表解析">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/05/11/列表解析/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="列表解析列表解析即 List Comprehensions。
+生成 1x1, 2x2, 3x3, ..., 10x10 的列表：
+1($_**2 for 1..10);
+for 语句前面还可以添加 if 修饰符，这样我们就可以仅筛选出偶数的平方：
+12($_**2 if !($_ % 2) for 1..10)($_**2 if $_ % 2 == 1 for 1..10) # 同上">
+<meta property="og:updated_time" content="2016-10-23T16:09:50.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="列表解析">
+<meta name="twitter:description" content="列表解析列表解析即 List Comprehensions。
+生成 1x1, 2x2, 3x3, ..., 10x10 的列表：
+1($_**2 for 1..10);
+for 语句前面还可以添加 if 修饰符，这样我们就可以仅筛选出偶数的平方：
+12($_**2 if !($_ % 2) for 1..10)($_**2 if $_ % 2 == 1 for 1..10) # 同上">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/05/11/列表解析/"/>
+
+  <title> 列表解析 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                列表解析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-11T00:00:00+08:00" content="2016-05-11">
+              2016-05-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/11/列表解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/11/列表解析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h2><p>列表解析即 List Comprehensions。</p>
+<p>生成 <code>1x1, 2x2, 3x3, ..., 10x10</code> 的列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">($_**2 for 1..10);</div></pre></td></tr></table></figure>
+<p><code>for</code> 语句前面还可以添加 if 修饰符，这样我们就可以仅筛选出偶数的平方：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">($_**2 if !($_ % 2) for 1..10)</div><div class="line">($_**2 if $_ % 2 == 1 for 1..10) # 同上</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>组合多个 if 条件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my @list = ($_ if $_ %2 == 1 &amp;&amp; $_ &gt; 2 for 1..6 )     # [3 5]</div></pre></td></tr></table></figure>
+<p>还可以生成全排列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">($_ for &quot;ABC&quot;.comb X~ &quot;XYZ&quot;.comb) # (&quot;AX&quot;, &quot;AY&quot;, &quot;AZ&quot;, &quot;BX&quot;, &quot;BY&quot;, &quot;BZ&quot;, &quot;CX&quot;, &quot;CY&quot;, &quot;CZ&quot;)</div><div class="line"></div><div class="line">my @a = (1,3,4)                                                                       </div><div class="line">my @b = (2,4,6)                                                                     </div><div class="line">my @list = (@a X @b)    # 这儿也可以用圆括号, 也可以不用                                                      </div><div class="line"># [(1 2) (1 4) (1 6) (3 2) (3 4) (3 6) (4 2) (4 4) (4 6)]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; ($_ when /7$/ for 1..99)</div><div class="line">(7 17 27 37 47 57 67 77 87 97)</div></pre></td></tr></table></figure>
+<p>大小写转换：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my @a = &lt;Hello World IBM Apple&gt;;</div><div class="line">(.lc for @a)                # hello world ibm apple</div></pre></td></tr></table></figure>
+<p>删除字符串末尾的空白：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my @freshfruit = &apos; banana&apos;, &apos; loganberry &apos;, &apos;passion fruit &apos;;</div><div class="line">(.trim for @freshfruit)     # &quot;banana&quot; &quot;loganberry&quot; &quot;passion fruit&quot;</div></pre></td></tr></table></figure>
+<p>向量运算：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my @vec = 2,4,6;</div><div class="line">(3*$_ for @vec)                     # 6 12 18</div><div class="line">(3*$_ if $_ &gt; 3 for @vec)   # 12 18</div><div class="line">(3*$_ if $_ &lt; 2 for @vec)   # ()</div></pre></td></tr></table></figure>
+<p>嵌套数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @vec = 2,4,6;</div><div class="line">([$_, $_**2].perl for @vec)       # [2, 4] [4, 16] [6, 36]</div><div class="line">([$_, $_**2].WHAT for @vec) # (Array) (Array) (Array)</div></pre></td></tr></table></figure>
+<p>Parcel:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(($_, $_**2).perl for @vec)       # (2, 4) (4, 16) (6, 36)</div><div class="line">(($_, $_**2).WHAT for @vec) # (Parcel) (Parcel) (Parcel)</div></pre></td></tr></table></figure>
+<p>多个列表之间的列表解析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my @vec1 = 2,4,6;</div><div class="line">my @vec2 = 4,3,-9;</div><div class="line">($_ for @vec1 X* @vec2)           # 8 6 -18 16 12 -36 24 18 -54</div><div class="line">($_ for @vec1 X+ @vec2)          # 5 -7 8 7 -5 10 9 -3</div><div class="line">($_ for @vec1 Z* @vec2)           # 8 12 -54</div><div class="line">($_ for @vec1 &gt;&gt;*&lt;&lt; @vec2)  # 8 12 -54</div></pre></td></tr></table></figure>
+<p>使用列表解析处理矩阵:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; my @a = ([1,2,3], [4,5,6], [7,8,9]);</div><div class="line">&gt; @a[0]                                    # 1 2 3</div><div class="line">&gt; @a[0][1]                              # 2</div><div class="line">&gt; @a[0][2]                             # 3</div><div class="line">&gt; ($_[1] for @a)                   # 2 5 8</div><div class="line">&gt; ($_[2] for @a)                  # 3 6 9</div><div class="line">&gt; ($_[2]-1 for @a)               # 2 5 8</div><div class="line">&gt; (@a[$_][$_] for 0..2)     # 1 5 9</div></pre></td></tr></table></figure>
+<p>矩阵转置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">sub transpose (@m) &#123;</div><div class="line">    @m[0].keys.map: &#123;[ @m»[$_] ]&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my @a = [&lt; a b c d e &gt;],</div><div class="line">        [&lt; f g h i j &gt;],</div><div class="line">        [&lt; k l m n o &gt;],</div><div class="line">        [&lt; p q r s t &gt;];</div><div class="line"></div><div class="line">(.say for @a.&amp;transpose);</div></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a f k p</div><div class="line">b g l <span class="keyword">q</span></div><div class="line">c h <span class="keyword">m</span> r</div><div class="line">d i n <span class="keyword">s</span></div><div class="line">e j o t</div></pre></td></tr></table></figure>
+<p>一丢丢解释： <code>@m[0].keys</code> 获取 <code>column index</code> , 根据获取到的列索引, 使用超运算符 <code>»</code> 遍历数组中对应列索引位置的元素。注意 <code>[]</code> 实际上是后缀操作符, 原来使用 <code>».[]</code> 的语法是错误的。</p>
+<p>使用 gather 进行列表解析：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my @s = gather &#123; for ^100 &#123; take 2 * $_ if $_ ** 2 &gt; 3 &#125; &#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 1到20之间哪些数字组成直角？</div><div class="line">my $n = 20;</div><div class="line">my @a = gather for 1..$n -&gt; $x &#123;</div><div class="line">         for $x..$n -&gt; $y &#123;</div><div class="line">           for $y..$n -&gt; $z &#123;</div><div class="line">             take $x,$y,$z if $x*$x + $y*$y == $z*$z;</div><div class="line">           &#125;</div><div class="line">         &#125;</div><div class="line">       &#125;;</div><div class="line">say &quot;@a[]&quot;;</div><div class="line"></div><div class="line"># 3 4 5 5 12 13 6 8 10 8 15 17 9 12 15 12 16 20</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/List-Comprehensions/" rel="tag">#List Comprehensions</a>
+          
+            <a href="/tags/列表解析/" rel="tag">#列表解析</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/02/Perl6中的操作符-二/" rel="next" title="Perl 6 中的操作符(二)">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的操作符(二)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/11/输入Unicode字符/" rel="prev" title="输入Unicode字符">
+                输入Unicode字符 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/11/列表解析/"
+     data-title="列表解析"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/05/11/列表解析/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/11/列表解析/"
+           data-title="列表解析" data-url="https://ohmycloud.github.io/2016/05/11/列表解析/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#列表解析"><span class="nav-number">1.</span> <span class="nav-text">列表解析</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,795 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Lists,S07,Seq,flat," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="push 和 append 的表现不同, push 一次只添加单个参数到列表末端, append 一次可以添加多个参数。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="S07-Lists">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/02/12/S07-Lists/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="push 和 append 的表现不同, push 一次只添加单个参数到列表末端, append 一次可以添加多个参数。">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="S07-Lists">
+<meta name="twitter:description" content="push 和 append 的表现不同, push 一次只添加单个参数到列表末端, append 一次可以添加多个参数。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/02/12/S07-Lists/"/>
+
+  <title> S07-Lists | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                S07-Lists
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-12T00:00:00+08:00" content="2016-02-12">
+              2016-02-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/12/S07-Lists/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/12/S07-Lists/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>push</strong> 和 <strong>append</strong> 的表现不同, <strong>push</strong> 一次只添加单个参数到列表末端, <strong>append</strong> 一次可以添加多个参数。</p>
+<a id="more"></a>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">my</span> @d = ( [ <span class="number">1</span> .. <span class="number">3</span> ] );</div><div class="line">@d.push( [ <span class="number">4</span> .. <span class="number">6</span> ] );</div><div class="line">@d.push( [ <span class="number">7</span> .. <span class="number">9</span> ] );</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">for</span> @d -&gt; $r &#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"$r[]"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment"># 1</span></div><div class="line"><span class="comment"># 2</span></div><div class="line"><span class="comment"># 3</span></div><div class="line"><span class="comment"># 4 5 6</span></div><div class="line"><span class="comment"># 7 8 9</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> @d -&gt; $r &#123; <span class="keyword">say</span> $r.WHAT() &#125;</div><div class="line"><span class="comment"># (Int)</span></div><div class="line"><span class="comment"># (Int)</span></div><div class="line"><span class="comment"># (Int)</span></div><div class="line"><span class="comment"># (Array) 整个数组作为单个参数</span></div><div class="line"><span class="comment"># (Array)</span></div><div class="line"></div><div class="line"><span class="keyword">say</span> @d.perl;</div><div class="line"><span class="comment"># [1, 2, 3, [4, 5, 6], [7, 8, 9]]</span></div></pre></td></tr></table></figure>
+<p>使用 <strong>append</strong> 一次能追加多个元素:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line"><span class="keyword">my</span> @d =  ( [ <span class="number">1</span> .. <span class="number">3</span> ] );</div><div class="line">@d.append( [ <span class="number">4</span> .. <span class="number">6</span> ] );</div><div class="line">@d.append( [ <span class="number">7</span> .. <span class="number">9</span> ] );</div><div class="line"></div><div class="line"><span class="keyword">for</span> @d -&gt; $item &#123;</div><div class="line">    <span class="keyword">say</span> <span class="string">"$item[]"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment"># 打印 1\n2\n3\n4\n5\n6\n7\n8\n9</span></div><div class="line"><span class="comment"># [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></div></pre></td></tr></table></figure>
+<p>这跟<a href="https://design.perl6.org/S07.html#The_single_argument_rule" target="_blank" rel="external">The single argument rule</a>有关。</p>
+<h2 id="设计大纲"><a href="#设计大纲" class="headerlink" title="设计大纲"></a>设计大纲</h2><hr>
+<p>Perl 6 提供了很多跟列表相关的特性, 包括 <code>eager</code>, <code>lazy</code>, <code>并行计算</code>, 还有紧凑型阵列和多维数组存储。</p>
+<h3 id="Sequences-vs-Lists"><a href="#Sequences-vs-Lists" class="headerlink" title="Sequences vs. Lists"></a>Sequences vs. Lists</h3><hr>
+<p>在 Perl 6 中, 我们使用项 <code>sequence</code> 来来指某个东西, 当需要的时候产生一个值的序列。即序列是惰性的。注意, 只能要求生成一次。我们使用项<code>list</code>来指能保存值的东西。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)    <span class="comment"># 列表, 最简单的 list</span></div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]    <span class="comment"># 数组, Scalar 容器的列表</span></div><div class="line">|(<span class="number">1</span>, <span class="number">2</span>)      <span class="comment"># a Slip, 一个展开到周围列表中的列表</span></div><div class="line">$*IN.lines   <span class="comment"># a Seq, 一个可以被连续处理的序列</span></div><div class="line">(^<span class="number">1000</span>).race <span class="comment"># a HyperSeq, 一个可以并行处理的序列</span></div></pre></td></tr></table></figure>
+<h3 id="The-single-argument-rule"><a href="#The-single-argument-rule" class="headerlink" title="The single argument rule"></a><a href="https://design.perl6.org/S07.html#The_single_argument_rule" target="_blank" rel="external">The single argument rule</a></h3><hr>
+<p>在 Perl 中 <strong>@</strong> 符号标示着 “这些”(<strong>these</strong>), 而 <strong>$</strong>符号标示着 “这个”(<strong>the</strong>)。这种<strong>复数</strong>/<strong>单数</strong>的明显差别出现在语言中的各种地方, Perl  中的很多便捷就是来源于这个特点。展平(Flattening)就是 @-like 的东西会在特定上下文中自动把它的值并入周围的列表中。之前这在 Perl 中既功能强大又很有迷惑性。在直截了当的发起知名的”单个参数规则”之前, Perl 6 在发展中通过了几次跟 flattening 有关的模仿。</p>
+<p>对单个参数规则最好的理解是通过 <strong>for</strong>循环迭代的次数。对于 <strong>for</strong>循环, 要迭代的东西总是被当作单个参数。因此有了单个参数规则这个名字。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>   &#123; &#125;   <span class="comment"># 含有 3 个元素的列表, 3 次迭代</span></div><div class="line"><span class="keyword">for</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) &#123; &#125;   <span class="comment"># 含有 3 个元素的列表, 3 次迭代</span></div><div class="line"><span class="keyword">for</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] &#123; &#125;   <span class="comment"># 含有 3 个元素的数组(存放在 Scalar 中),  3次迭代</span></div><div class="line"><span class="keyword">for</span> @a, @b    &#123; &#125;   <span class="comment"># 含有 2 个元素的列表, 2 次迭代</span></div><div class="line"><span class="keyword">for</span> (@a,)     &#123; &#125;   <span class="comment"># 含有 1 个元素的列表, 1 次迭代</span></div><div class="line"><span class="keyword">for</span> (@a)      &#123; &#125;   <span class="comment"># 含有 @a.elems 个元素的列表, @a.elems 次迭代</span></div><div class="line"><span class="keyword">for</span> @a        &#123; &#125;   <span class="comment"># 含有 @a.elems 个元素的列表, @a.elems 次迭代</span></div></pre></td></tr></table></figure>
+<p>前两个是相同的, 因为圆括号事实上不构建列表, 而只是分组。是中缀操作符 <code>infix:&lt;,&gt;</code>组成的列表。第三个也执行了 3 次迭代, 因为在 Perl 6 中 <code>[...]</code> 构建了一个数组但是没有把它包裹进 <code>Scalar</code> 容器中。第四个会执行 2 次迭代, 因为参数是一个含有两个元素的列表, 而那两个元素恰好是数组, 它俩都有 @ 符号, 但是都没有导致展开。第 五 个同样, <code>infix:&lt;,&gt;</code> 很高兴地组成了只含一个元素的列表。</p>
+<p>单个参数规则也考虑了 Scalar 容器。因此:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> $(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) &#123; &#125;  <span class="comment"># Scalar 容器中的一个列表, 1 次迭代  </span></div><div class="line"><span class="keyword">for</span> $[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] &#123; &#125;  <span class="comment"># Scalar 容器中的一个数组, 1 次迭代  </span></div><div class="line"><span class="keyword">for</span> $@a        &#123; &#125;  <span class="comment"># Scalar 容器中的一个数组, 1 次迭代</span></div></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="keyword">for</span> $(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) -&gt; $i &#123; <span class="keyword">say</span> $i.elems &#125;</div><div class="line"><span class="number">3</span></div><div class="line">&gt; <span class="keyword">for</span> $(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) -&gt; $i &#123; <span class="keyword">say</span> $i &#125;</div><div class="line">(<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>)</div><div class="line">&gt; <span class="keyword">for</span> $(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) -&gt; $i &#123; <span class="keyword">say</span> $i.WHAT &#125;</div><div class="line">(List)</div><div class="line">&gt; <span class="keyword">for</span> $(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) -&gt; $i &#123; <span class="keyword">say</span> $i.perl &#125;</div><div class="line">$(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div><div class="line"></div><div class="line">&gt; <span class="keyword">for</span> $[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] -&gt; $i &#123; <span class="keyword">say</span> $i &#125;</div><div class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</div><div class="line">&gt; <span class="keyword">for</span> $[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] -&gt; $i &#123; <span class="keyword">say</span> $i.perl &#125;</div><div class="line">$[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line">&gt; <span class="keyword">for</span> $[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] -&gt; $i &#123; <span class="keyword">say</span> $i.WHAT &#125;</div><div class="line">(Array)</div><div class="line">&gt; <span class="keyword">for</span> $[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] -&gt; $i &#123; <span class="keyword">say</span> $i.elems &#125;</div><div class="line"><span class="number">3</span></div><div class="line"></div><div class="line">&gt; <span class="keyword">my</span>  @a = <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></div><div class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</div><div class="line">&gt; <span class="keyword">for</span> $@a -&gt; $a  &#123; <span class="keyword">say</span> $a.perl &#125;</div><div class="line">$[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div></pre></td></tr></table></figure>
+<p>贯穿 Perl 6 语言, 单个参数规则(<strong>Single argument rule</strong>) 始终如一地被实现了。例如, 我们看 <strong>push</strong> 方法:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@a.push: <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;       <span class="comment"># pushes 3 values to @a</span></div><div class="line">@a.push: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];     <span class="comment"># pushes 1 Array to @a</span></div><div class="line">@a.push: @b;            <span class="comment"># pushes 1 Array to @a</span></div><div class="line">@a.push: @b,;           <span class="comment"># same, trailing comma doesn't make &gt; 1 argument</span></div><div class="line">@a.push: $(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);    <span class="comment"># pushes 1 value (a List) to @a</span></div><div class="line">@a.push: $[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];    <span class="comment"># pushes 1 value (an Array) to @a</span></div></pre></td></tr></table></figure>
+<p>此外, 列表构造器(例如 <code>infix:&lt;,&gt;</code> 操作符) 和数组构造器(<code>[…]</code>环缀)也遵守这个规则:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]               <span class="comment"># Array of 3 elements</span></div><div class="line">[@a, @b]                <span class="comment"># Array of 2 elements</span></div><div class="line">[@a, <span class="number">1</span>..<span class="number">10</span>]             <span class="comment"># Array of 2 elements</span></div><div class="line">[@a]                    <span class="comment"># Array with the elements of @a copied into it</span></div><div class="line">[<span class="number">1</span>..<span class="number">10</span>]                 <span class="comment"># Array with 10 elements</span></div><div class="line">[$@a]                   <span class="comment"># Array with 1 element (@a)</span></div><div class="line">[@a,]                   <span class="comment"># Array with 1 element (@a)</span></div><div class="line">[[<span class="number">1</span>]]                   <span class="comment"># Same as [1]</span></div><div class="line">[[<span class="number">1</span>],]                  <span class="comment"># Array with a single element that is [1]</span></div><div class="line">[$[<span class="number">1</span>]]                  <span class="comment"># Array with a single element that is [1]</span></div></pre></td></tr></table></figure>
+<p>所以, 要让最开始的那个例子工作, 使用:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @d = ( [ <span class="number">1</span> .. <span class="number">3</span> ], );  <span class="comment"># [[1 2 3]]</span></div><div class="line">@d.push: [ <span class="number">4</span> .. <span class="number">6</span> ];</div><div class="line">@d.push: [ <span class="number">7</span> .. <span class="number">9</span> ];</div><div class="line"><span class="comment"># [[1 2 3] [4 5 6] [7 8 9]]</span></div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @d = ( $[ <span class="number">1</span> .. <span class="number">3</span> ]);</div><div class="line">@d.push: [ <span class="number">4</span> ..<span class="number">6</span> ];</div><div class="line">@d.push: [ <span class="number">7</span> ..<span class="number">9</span> ];</div></pre></td></tr></table></figure>
+<h2 id="User-level-Types"><a href="#User-level-Types" class="headerlink" title="User-level Types"></a>User-level Types</h2><hr>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><hr>
+<p><strong>List</strong> 是不可变的, 可能是无限的, 值的列表。组成 List 最简单的一种方法是使用 <code>infix:&lt;,&gt;</code> 操作符:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></div></pre></td></tr></table></figure>
+<p><strong>List</strong> 可以被索引, 并且, 假设它是有限的, 也能询问列表中元素的个数:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">say</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)[<span class="number">1</span>];    <span class="comment"># 2</span></div><div class="line"><span class="keyword">say</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>).elems; <span class="comment"># 3</span></div></pre></td></tr></table></figure>
+<p>因为<strong>List</strong>是不可变的, 对它进行 push、pop、shift、unshift 或 splice 是不可能的。 <strong>reverse</strong> 和 <strong>rotate</strong> 操作会返回新的 <strong>Lists</strong>。</p>
+<p>虽然<strong>List</strong>自身是不可变的, 但是它包含的元素可以是可变的, 包括 <code>Scalar</code> 容器:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> $a = <span class="number">2</span>;</div><div class="line"><span class="keyword">my</span> $b = <span class="number">4</span>;</div><div class="line"></div><div class="line">($a, $b)[<span class="number">0</span>]++;</div><div class="line">($a, $b)[<span class="number">1</span>] *= <span class="number">2</span>;</div><div class="line"><span class="keyword">say</span> $a; <span class="comment"># 3</span></div><div class="line"><span class="keyword">say</span> $b; <span class="comment"># 8</span></div></pre></td></tr></table></figure>
+<p>在 <strong>List</strong> 中尝试给不可变值赋值会导致错误:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)[<span class="number">0</span>]++; <span class="comment"># Dies: 不能给不可变值赋值</span></div></pre></td></tr></table></figure>
+<h3 id="Slip"><a href="#Slip" class="headerlink" title="Slip"></a>Slip</h3><hr>
+<p><strong>Slip</strong> 类型是 <strong>List</strong> 的一个子类。<strong>Slip</strong> 会把它的值并入周围的 <strong>List</strong> 中。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="number">1</span>, (<span class="number">2</span>, <span class="number">3</span>), <span class="number">4</span>).elems      <span class="comment"># 3</span></div><div class="line">(<span class="number">1</span>, slip(<span class="number">2</span>, <span class="number">3</span>), <span class="number">4</span>).elems  <span class="comment"># 4</span></div></pre></td></tr></table></figure>
+<p>把 <strong>List</strong> 强转为 <strong>Slip</strong> 是可能的, 所以上面的也能写为:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="number">1</span>, (<span class="number">2</span>, <span class="number">3</span>).Slip, <span class="number">4</span>).elems <span class="comment"># 4</span></div></pre></td></tr></table></figure>
+<p>在不发生 flattening 的地方使用 <strong>Slip</strong> 是一种常见的获取 flattening 的方式:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @a = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</div><div class="line"><span class="keyword">my</span> @b = <span class="number">4</span>, <span class="number">5</span>;</div><div class="line"></div><div class="line">.say <span class="keyword">for</span> @a.Slip, @b.Slip;  <span class="comment"># 5 次迭代</span></div></pre></td></tr></table></figure>
+<p>这有点啰嗦, 使用 <code>prefix:&lt;|&gt;</code>来做 <strong>Slip</strong> 强转:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @a = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</div><div class="line"><span class="keyword">my</span> @b = <span class="number">4</span>, <span class="number">5</span>;</div><div class="line"></div><div class="line">.say <span class="keyword">for</span> |@a, |@b; <span class="comment"># 5 次迭代</span></div></pre></td></tr></table></figure>
+<p><code>|</code>在如下形式中也很有用:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @prefixed-<span class="keyword">values</span> = <span class="number">0</span>, |@values;</div></pre></td></tr></table></figure>
+<p>这儿, 单个参数规则会使 @prefixed-values 拥有两个元素, 即 0 和 @values。</p>
+<p><strong>Slip</strong> 类型也可以用在 <code>map</code>、<code>gather/take</code>、和 <code>lazy</code>循环中。下面是一种 <code>map</code>能把多个值放进它的结果流里面的方法:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @a = <span class="number">1</span>, <span class="number">2</span>;</div><div class="line"><span class="keyword">say</span> @a.map(&#123; $_ xx <span class="number">2</span> &#125;).elems;      <span class="comment"># 2</span></div><div class="line"><span class="keyword">say</span> @a.map(&#123; |($_ xx <span class="number">2</span>) &#125;).elems;   <span class="comment"># 4</span></div></pre></td></tr></table></figure>
+<p>因为 <code>$_ xx 2</code> 产生一个含有两个元素的列表(<strong>List</strong>)。</p>
+<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><hr>
+<p><strong>Array</strong> 是 <strong>List</strong> 的一个子类, 把赋值给数组的值放进 Scalar 容器中, 这意味着数组中的值可以被改变。<strong>Array</strong> 是 @-sigil 变量得到的默认类型。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @a = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</div><div class="line"><span class="keyword">say</span> @a.WHAT;     <span class="comment"># (Array)</span></div><div class="line">@a[<span class="number">1</span>]++;         <span class="comment"># Scalar 容器中的值可变</span></div><div class="line"><span class="keyword">say</span> @a;          <span class="comment"># 1 3 3</span></div></pre></td></tr></table></figure>
+<p>如果没有 shape 属性, 数组会自动增长:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @a;</div><div class="line">@a[<span class="number">5</span>] = <span class="number">42</span>;</div><div class="line"><span class="keyword">say</span> @a.elems;  <span class="comment"># 6</span></div></pre></td></tr></table></figure>
+<p><strong>Array</strong>支持 <code>push</code>、<code>pop</code>、<code>shift</code>、<code>unshift</code> 和 <code>splice</code>。</p>
+<p>给数组赋值默认是迫切的(<strong>eager</strong>), 并创建一组新的 Scalar 容器:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @a = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</div><div class="line"><span class="keyword">my</span> @b = @a;</div><div class="line"></div><div class="line">@a[<span class="number">1</span>]++;</div><div class="line"><span class="keyword">say</span> @b;  <span class="comment"># 1, 2, 3</span></div></pre></td></tr></table></figure>
+<p>注意, <code>[...]</code> 数组构造器等价于创建然后再赋值给一个匿名数组。</p>
+<h3 id="Seq"><a href="#Seq" class="headerlink" title="Seq"></a>Seq</h3><hr>
+<p><strong>Seq</strong> 是单次值生产者。大部分列表处理操作返回 <strong>Seq</strong>。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">say</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>).map(* + <span class="number">1</span>).^name;  <span class="comment"># Seq</span></div><div class="line"><span class="keyword">say</span> (<span class="number">1</span>, <span class="number">2</span> Z <span class="string">'a'</span>, <span class="string">'b'</span>).^name;     <span class="comment"># Seq</span></div><div class="line"><span class="keyword">say</span> (<span class="number">1</span>, <span class="number">1</span>, * + * ... *).^name;   <span class="comment"># Seq</span></div><div class="line"><span class="keyword">say</span> $*IN.lines.^name;            <span class="comment"># Seq</span></div></pre></td></tr></table></figure>
+<p>因为 <strong>Seq</strong> 默认不会记住它的值(values), 所以 <strong>Seq</strong> 只能被使用一次。例如, 如果存储了一个 <strong>Seq</strong>:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> \seq = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>).map(* + <span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p>只有第一次迭代会有效, 之后再尝试迭代就会死, 因为值已经被用完了:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> se<span class="string">q &#123; .say &#125;</span>    <span class="comment"># 2\n3\n4\n</span></div><div class="line"><span class="keyword">for</span> se<span class="string">q &#123; .say &#125;</span>    <span class="comment"># Dies: This Seq has already been iterated</span></div></pre></td></tr></table></figure>
+<p>这意味着你可以确信 for 循环迭代了文件的行:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> <span class="keyword">open</span>(<span class="string">'data'</span>).lines &#123;</div><div class="line">    .say <span class="keyword">if</span> /beer/;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这不会把文件中的行保持在内存中。此外设立不会把所有行保持在内存中的处理管道也会很容易:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> \lines   = <span class="keyword">open</span>(<span class="string">'products'</span>).lines;</div><div class="line"><span class="keyword">my</span> \beer    = lines.<span class="keyword">grep</span>(<span class="regexp">/beer/</span>);</div><div class="line"><span class="keyword">my</span> \excited = beer.map(&amp;<span class="keyword">uc</span>);</div><div class="line">.say <span class="keyword">for</span> excited;</div></pre></td></tr></table></figure>
+<p>然而, 任何重用 <code>lines</code>、<code>beer</code>、或<code>excited</code> 的尝试都会导致错误。这段程序在性能上等价于:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.say <span class="keyword">for</span> <span class="keyword">open</span>(<span class="string">'products'</span>).lines.<span class="keyword">grep</span>(<span class="regexp">/beer/</span>).map(&amp;<span class="keyword">uc</span>);</div></pre></td></tr></table></figure>
+<p>但是提供了一个给阶段命名的机会。注意使用 Scalar 变量代替也是可以的, 但是单个参数规则需要最终的循环必须为:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.say <span class="keyword">for</span> |$excited;</div></pre></td></tr></table></figure>
+<p>只要序列没有被标记为 <code>lazy</code>, 把 <strong>Seq</strong> 赋值给数组就会迫切的执行操作并把结果存到数组中。因此, 任何人这样写就不惊讶了:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @lines   = <span class="keyword">open</span>(<span class="string">'products'</span>).lines;</div><div class="line"><span class="keyword">my</span> @beer    = @lines.<span class="keyword">grep</span>(<span class="regexp">/beer/</span>);</div><div class="line"><span class="keyword">my</span> @excited = @beer.map(&amp;<span class="keyword">uc</span>);</div><div class="line">.say <span class="keyword">for</span> @excited;</div></pre></td></tr></table></figure>
+<p>重用这些数组中的任何一个都没问题。当然, 该程序的内存表现完全不同, 并且它会较慢, 因为它创建了所有的额外的 Scalar 容器(导致额外的垃圾回收)和糟糕的位置引用。(我们不得不在程序的生命周期中多次谈论同一个字符串)。</p>
+<p>偶尔, 要求 <strong>Seq</strong> 缓存自身也有用。这可以通过在<strong>Seq</strong> 身上调用 <code>cache</code>方法完成, 这从 <strong>Seq</strong> 得到一个惰性列表并返回它。之后再调用 <code>cache</code>方法会返回同样的惰性列表。注意, 第一次调用 <code>cache</code>方法会被算作消费了<strong>Seq</strong>, 所以如果之前已经发生了迭代它就不再有效, 而且之后任何在调用完 <code>cache</code>的迭代尝试都会失败。只有 <code>.cache</code>方法能被调用多于1 次。</p>
+<p><strong>Seq</strong> 不像 <strong>List</strong> 那样遵守 <code>Positional</code> role。 因此, <strong>Seq</strong> 不能被绑定给含有 @ 符号的变量:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @lines := $*IN.lines;  <span class="comment"># Dies</span></div></pre></td></tr></table></figure>
+<p>这样做的一个后果就是, 原生地, 你不能传递 Seq 作为绑定给@符号的参数:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> <span class="title">process</span>(@<span class="title">data</span>) </span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line">process($*IN.lines);</div></pre></td></tr></table></figure>
+<p>这会极不方便。因此, 签名 binder(它实际使用 ::= 赋值语义而非 :=)会 spot 失败来绑定 @符号参数, 并检查参数是否遵守了 Positional role。 如果遵守了, 那么它会在参数上调用 cache 方法并绑定它的结果代替。</p>
+<h3 id="Iterable"><a href="#Iterable" class="headerlink" title="Iterable"></a>Iterable</h3><hr>
+<p><strong>Seq</strong> 和 <strong>List</strong> 这俩, 还有 Perl 6 中的各种其它类型, 遵守 <strong>Iterable</strong> role。这个 role 的主要意图是获得一个 <code>iterator</code>方法。中级 Perl 6 用户很少会关心 <code>iterator</code>方法和它返回什么。</p>
+<p><strong>Iterable</strong> 的第二个目的是为了标记出会被按需展开的东西, 使用 <code>flat</code>方法或用在它们身上的函数。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @a = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</div><div class="line"><span class="keyword">my</span> @b = <span class="number">4</span>, <span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="keyword">for</span> flat @a, @b &#123; &#125;          <span class="comment"># 5 次迭代</span></div><div class="line"><span class="keyword">say</span> [flat @a, @b].elems;     <span class="comment"># 5 次迭代</span></div></pre></td></tr></table></figure>
+<p><strong>flat</strong> 的另一用途是展开嵌套的列表结构。例如, <strong>Z</strong>(zip)操作符产生一个列表的列表:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">say</span> (<span class="number">1</span>, <span class="number">2</span> Z <span class="string">'a'</span>, <span class="string">'b'</span>).perl;  <span class="comment"># ((1, "a"), (2, "b")).Seq</span></div></pre></td></tr></table></figure>
+<p><strong>flat</strong> 能用于展开它们, 这在和使用带有多个参数的尖块 for 循环一块使用时很有用:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> flat <span class="number">1</span>, <span class="number">2</span> Z <span class="string">'a'</span>, <span class="string">'b'</span> -&gt; $num, $letter  &#123; &#125;</div></pre></td></tr></table></figure>
+<p>注意 <strong>flat</strong> 也涉及 Scalar 容器, 所以:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> flat $(<span class="number">1</span>, <span class="number">2</span>) &#123; &#125;</div></pre></td></tr></table></figure>
+<p>将只会迭代一次。记住数组把所有东西都存放在 Scalar 容器中, 在数组身上调用 <em>flat</em> 总是和迭代数组自身相同。实际上, 在数组上调用 <em>flat</em> 返回的同一性。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lists/" rel="tag">#Lists</a>
+          
+            <a href="/tags/S07/" rel="tag">#S07</a>
+          
+            <a href="/tags/Seq/" rel="tag">#Seq</a>
+          
+            <a href="/tags/flat/" rel="tag">#flat</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/11/适当的使用proto/" rel="next" title="适当的使用proto">
+                <i class="fa fa-chevron-left"></i> 适当的使用proto
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/14/Perl-6-Examples/" rel="prev" title="Perl 6 Examples">
+                Perl 6 Examples <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/02/12/S07-Lists/"
+     data-title="S07-Lists"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/02/12/S07-Lists/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/12/S07-Lists/"
+           data-title="S07-Lists" data-url="https://ohmycloud.github.io/2016/02/12/S07-Lists/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计大纲"><span class="nav-number">1.</span> <span class="nav-text">设计大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequences-vs-Lists"><span class="nav-number">1.1.</span> <span class="nav-text">Sequences vs. Lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-single-argument-rule"><span class="nav-number">1.2.</span> <span class="nav-text">The single argument rule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-level-Types"><span class="nav-number">2.</span> <span class="nav-text">User-level Types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">2.1.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slip"><span class="nav-number">2.2.</span> <span class="nav-text">Slip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Array"><span class="nav-number">2.3.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seq"><span class="nav-number">2.4.</span> <span class="nav-text">Seq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterable"><span class="nav-number">2.5.</span> <span class="nav-text">Iterable</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

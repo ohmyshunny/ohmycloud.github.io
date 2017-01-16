@@ -1,0 +1,707 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="IO," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="文件存在、文件的时间戳、文件的修改时间等等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO 操作">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/10/11/IO操作/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="文件存在、文件的时间戳、文件的修改时间等等">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IO 操作">
+<meta name="twitter:description" content="文件存在、文件的时间戳、文件的修改时间等等">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/10/11/IO操作/"/>
+
+  <title> IO 操作 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                IO 操作
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-11T00:00:00+08:00" content="2015-10-11">
+              2015-10-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/11/IO操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/11/IO操作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文件存在、文件的时间戳、文件的修改时间等等</p>
+<a id="more"></a>
+<h3 id="批量插入文本"><a href="#批量插入文本" class="headerlink" title="批量插入文本"></a>批量插入文本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @filenames = dir &apos;.&apos;,  test =&gt; any(/\.md$/, /\.markdown/);</div><div class="line"></div><div class="line">for @filenames -&gt; $filePath &#123;</div><div class="line">    my $path = $filePath.path();</div><div class="line">    $path ~~ s/.md//;</div><div class="line">    $path ~~ s/.markdown//;</div><div class="line"></div><div class="line">    my $date = DateTime.new(now);</div><div class="line">    my $head =</div><div class="line">qq:heredoc &apos;EOT&apos;;</div><div class="line">title:  $path.IO.basename()</div><div class="line">date: $date</div><div class="line">tags: Perl6</div><div class="line">categories: Perl 6</div><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">&lt;blockquote class=&quot;blockquote-center&quot;&gt;这城市有太多风景都在提醒那过去！&lt;/blockquote&gt;</div><div class="line"></div><div class="line">[TOC]</div><div class="line"></div><div class="line">EOT</div><div class="line"></div><div class="line">   my @content   = slurp $filePath;</div><div class="line">   spurt($filePath.path, &quot;$head\n@content[]&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在当前目录中查找所有以 <code>.md</code> (.markdown)结尾的文件（即markdown文件）, 并在文件最前面插入一段文本， 形如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">title:  Perl6</div><div class="line">date: 2015-08-20T23:19:13Z</div><div class="line">tags: Perl6</div><div class="line">categories: Perl 6</div><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">&lt;blockquote class=&quot;blockquote-center&quot;&gt;我站在天桥上念你, 有点狼狈&lt;/blockquote&gt;</div></pre></td></tr></table></figure>
+<p>类 <code>IO::Path</code> 提供了 <code>basename</code>, <code>path</code>, <code>parts</code>, 等方法供使用, 具体用法请看文档:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p6doc IO::Path</div></pre></td></tr></table></figure>
+<p>一些例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">say IO::Path.new(&quot;/etc/passwd&quot;).basename;   # passwd</div><div class="line">say IO::Path.new(&quot;docs/README.pod&quot;).extension;   # pod</div><div class="line">say IO::Path.new(&quot;/etc/passwd&quot;).dirname;    # /etc</div><div class="line">say IO::Path::Win32.new(&quot;C:\\Windows\\registry.ini&quot;).volume;    # C:</div><div class="line">say IO::Path.new(&quot;/etc/passwd&quot;).parts.perl # (&quot;dirname&quot; =&gt; &quot;/etc&quot;, &quot;volume&quot;  =&gt; &quot;&quot;, &quot;basename&quot; =&gt; &quot;passwd&quot;).hash</div></pre></td></tr></table></figure>
+<p>Examples:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">    # To iterate over the contents of the current directory: for dir() -&gt; $file</div><div class="line">    &#123;</div><div class="line">        say $file;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # As before, but include even &apos;.&apos; and &apos;..&apos; which are filtered out by # the</div><div class="line">    default :test matcher: for dir(test =&gt; *) -&gt; $file &#123;</div><div class="line">        say $file;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # To get the names of all .jpg and .jpeg files in ~/Downloads: my @jpegs =</div><div class="line">    &quot;%*ENV&lt;HOME&gt;/Downloads&quot;.IO.dir(test =&gt; /:i &apos;.&apos; jpe?g $/)».Str;</div><div class="line"></div><div class="line"></div><div class="line"># An example program that lists all files and directories recursively:</div><div class="line"></div><div class="line">    sub MAIN($dir = &apos;.&apos;) &#123;</div><div class="line">        my @todo = $dir.IO; while @todo &#123;</div><div class="line">            for @todo.pop.dir -&gt; $path &#123;</div><div class="line">                say $path.Str; @todo.push: $path if $path.d;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="文件测试操作符"><a href="#文件测试操作符" class="headerlink" title="文件测试操作符"></a>文件测试操作符</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># If you have a string - a path to something in the filesystem:</div><div class="line"></div><div class="line">    if &quot;path/to/file&quot;.IO ~~ :e &#123;</div><div class="line">        say &apos;file exists&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    my $file = &quot;path/to/file&quot;; if $file.IO ~~ :e &#123;</div><div class="line">        say &apos;file exists&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"># Instead of the colonpair syntax, you can use method calls too:</div><div class="line"></div><div class="line">    if &apos;path/to/file&apos;.IO.e &#123;</div><div class="line">        say &apos;file exists&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"># If you already have an IO object in $file, either by creating one yourself, or</div><div class="line"># by getting it from another subroutine, such as dir, you can write this:</div><div class="line"></div><div class="line">    my $file = &quot;path/to/file&quot;.IO; if $file ~~ :e &#123;</div><div class="line">        say &apos;file exists&apos;;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="文件时间戳："><a href="#文件时间戳：" class="headerlink" title="文件时间戳："></a>文件时间戳：</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">say &quot;path/to/file&quot;.IO.modified;                # e.g. Instant:1424089165</div><div class="line">say DateTime.new(&quot;path/to/file&quot;.IO.modified);  # e.g. 2015-02-16T12:18:50Z</div><div class="line"></div><div class="line">my $modification_instant = &quot;path/to/file&quot;.IO.modified;</div><div class="line">my $modification_time    = DateTime.new($modification_instant);</div><div class="line">say $modification_time;  # e.g. 2015-02-16T12:18:50Z</div><div class="line"></div><div class="line"></div><div class="line">say &quot;path/to/file&quot;.IO.accessed;                # e.g. Instant:1424353577</div><div class="line">say DateTime.new(&quot;path/to/file&quot;.IO.accessed);  # e.g. 2015-02-19T13:45:42Z</div><div class="line"></div><div class="line">my $access_instant = &quot;path/to/file&quot;.IO.accessed;</div><div class="line">my $access_time    =  DateTime.new($access_instant);</div><div class="line">say $access_time;  # e.g. 2015-02-19T13:45:42Z</div><div class="line"></div><div class="line"></div><div class="line">say &quot;path/to/file&quot;.IO.changed;                # e.g. Instant:1424089165</div><div class="line">say DateTime.new(&quot;path/to/file&quot;.IO.changed);  # e.g. 2015-02-16T12:18:50Z</div><div class="line"></div><div class="line">my $change_instant = &quot;path/to/file&quot;.IO.changed;</div><div class="line">my $change_time    =  DateTime.new($chnge_instant);</div><div class="line">say $change_time;  # e.g. 2015-02-16T12:18:50Z</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IO/" rel="tag">#IO</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/06/proto/" rel="next" title="proto">
+                <i class="fa fa-chevron-left"></i> proto
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/29/从正则表达式到Grammar/" rel="prev" title="从正则表达式到 Grammar">
+                从正则表达式到 Grammar <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/10/11/IO操作/"
+     data-title="IO 操作"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/10/11/IO操作/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/10/11/IO操作/"
+           data-title="IO 操作" data-url="https://ohmycloud.github.io/2015/10/11/IO操作/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#批量插入文本"><span class="nav-number">1.</span> <span class="nav-text">批量插入文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件测试操作符"><span class="nav-number">2.</span> <span class="nav-text">文件测试操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件时间戳："><span class="nav-number">3.</span> <span class="nav-text">文件时间戳：</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

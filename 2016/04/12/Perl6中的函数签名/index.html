@@ -1,0 +1,825 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="签名," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="签名也是对象1class Signature &amp;#123;&amp;#125;
+签名是代码对象参数列表的静态描述。即, 签名描述了你需要什么参数和多少参数传递给代码或函数以调用它们。
+传递参数给签名把包含在 Capture 中的参数绑定到了签名上。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的函数签名">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/04/12/Perl6中的函数签名/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="签名也是对象1class Signature &amp;#123;&amp;#125;
+签名是代码对象参数列表的静态描述。即, 签名描述了你需要什么参数和多少参数传递给代码或函数以调用它们。
+传递参数给签名把包含在 Capture 中的参数绑定到了签名上。">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的函数签名">
+<meta name="twitter:description" content="签名也是对象1class Signature &amp;#123;&amp;#125;
+签名是代码对象参数列表的静态描述。即, 签名描述了你需要什么参数和多少参数传递给代码或函数以调用它们。
+传递参数给签名把包含在 Capture 中的参数绑定到了签名上。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/04/12/Perl6中的函数签名/"/>
+
+  <title> Perl 6 中的函数签名 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的函数签名
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-12T00:00:00+08:00" content="2016-04-12">
+              2016-04-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/12/Perl6中的函数签名/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/12/Perl6中的函数签名/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="签名也是对象"><a href="#签名也是对象" class="headerlink" title="签名也是对象"></a><a href="http://doc.perl6.org/type/Signature" target="_blank" rel="external">签名</a>也是对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class Signature &#123;&#125;</div></pre></td></tr></table></figure>
+<p>签名是代码对象参数列表的静态描述。即, 签名描述了你需要什么参数和多少参数传递给代码或函数以调用它们。</p>
+<p>传递参数给签名把包含在 <strong>Capture</strong> 中的参数绑定到了签名上。</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; sub a($a, $b) &#123;&#125;;</div><div class="line">&gt; &amp;a.signature.perl.say</div><div class="line">:($a, $b)</div><div class="line">&gt; my $b = -&gt; $a, $b &#123;&#125;;</div><div class="line">&gt; $b.signature.perl.say</div><div class="line">:($a, $b)</div></pre></td></tr></table></figure>
+<p>签名是一个对象, 就像 Perl 6 中的任何其它东西一样。 任何 <strong>Callable</strong> 类型中都有签名, 并且它能使用 <code>.signature</code>方法获取到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class Signature &#123; ... &#125;</div></pre></td></tr></table></figure>
+<h2 id="签名字面量"><a href="#签名字面量" class="headerlink" title="签名字面量"></a>签名字面量</h2><p>签名出现在子例程和方法名后面的圆括号中, 还出现在 blocks 里面的 <code>-&gt;</code>或 <code>&lt;-&gt;</code>后面, 或者作为<a href="https://docs.perl6.org/language/variables#Variable_Declarators_and_Scope" target="_blank" rel="external">变量声明符</a>(例如 <code>[my](https://docs.perl6.org/syntax/my)</code> )的输入, 或者以冒号开头作为单独的项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sub f($x) &#123; &#125;</div><div class="line">#    ^^^^ sub f 的签名</div><div class="line">method x() &#123; &#125;</div><div class="line">#       ^^ 方法 x 的签名</div><div class="line">my $s = sub (*@a) &#123; &#125;</div><div class="line">#           ^^^^^ 匿名函数的签名</div><div class="line"></div><div class="line">for &lt;a b c&gt; -&gt; $x &#123; &#125;</div><div class="line">#              ^^    Block 的签名</div><div class="line"></div><div class="line">my ($a, @b) = 5, (6,7,8);</div><div class="line">#  ^^^^^^^^ 变量声明符的签名</div><div class="line"></div><div class="line">my $sig = :($a, $b);</div><div class="line">#          ^^^^^^^^ 独立的签名对象</div></pre></td></tr></table></figure>
+<p>签名字面量可以用于定义回调或闭包的签名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">sub f(&amp;c:(Int))    &#123;&#125;</div><div class="line">sub will-work(Int) &#123;&#125;</div><div class="line">sub won&apos;t-work(Str)&#123;&#125;</div><div class="line">f(&amp;will-work);</div><div class="line"></div><div class="line">f(&amp;won&apos;t-work); # fails at runtime</div><div class="line">CATCH &#123; default &#123; put .^name, &apos;: &apos;, .Str &#125; &#125;;</div><div class="line"># OUTPUT: «X::AdHoc: Constraint type check failed for parameter &apos;&amp;c&apos;␤»</div><div class="line"></div><div class="line">f(-&gt; Int &#123; &apos;this works too&apos; &#125; );</div></pre></td></tr></table></figure>
+<p>对签名的智能匹配支持列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">my $sig = :(Int $i, Str $s);</div><div class="line">say (10, &apos;answer&apos;) ~~ $sig;  # True</div><div class="line"></div><div class="line">given (&apos;answer&apos;, 10) &#123;</div><div class="line">    when :(Str, Int) &#123; say &apos;match&apos;    &#125;</div><div class="line">    when $sig        &#123; say &apos;mismatch&apos; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># OUTPUT</div><div class="line"># match</div></pre></td></tr></table></figure>
+<p>当和散列智能匹配时, 签名被认为由散列的键组成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my %h = left =&gt; 1, right =&gt; 2;</div><div class="line">say %h ~~ :(:$left, :$right);</div><div class="line"># OUTPUT</div><div class="line"># True</div></pre></td></tr></table></figure>
+<h3 id="参数分隔符"><a href="#参数分隔符" class="headerlink" title="参数分隔符"></a>参数分隔符</h3><p>签名由逗号分割的0个或多个<a href="https://docs.perl6.org/type/Parameter" target="_blank" rel="external">形式参数</a>组成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $sig = :($a, @b, %c)</div><div class="line">sub add ($a, $b) &#123; $a + $b &#125;</div></pre></td></tr></table></figure>
+<p>作为一个例外, 签名中的第一个参数后面可以跟着一个冒号而非逗号来标记方法的调用者。调用者是用于调用方法的东西, 它通常通过在签名中指定它来绑定给 <strong>self</strong>, 你可以更改所绑定的变量的名字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">method ($a: @b, %c)&#123;&#125;  # 第一个参数是调用者</div><div class="line"></div><div class="line">class Foo &#123;</div><div class="line">    method whoami ($me:) &#123;</div><div class="line">        &quot;Well I&apos;m class $me.^name(), of course!&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say Foo.whoami; # Well I&apos;m class Foo, of course!</div></pre></td></tr></table></figure>
+<h3 id="类型约束"><a href="#类型约束" class="headerlink" title="类型约束"></a>类型约束</h3><p>参数可以可选地拥有一个类型约束(默认为 <code>[Any](https://docs.perl6.org/type/Any)</code>)。这些能用于限制函数允许的输入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my $sig = :(Int $a, Str $b)</div><div class="line">sub divisors (Int $n) &#123; $_ if $n %% $_ for 1..$n &#125;</div><div class="line">divisors 2.5; # !!! Calling &apos;divisors&apos; will never work with argument types (Rat)</div><div class="line">CATCH &#123; default &#123; put .^name, &apos;: &apos;, .Str &#125; &#125;;</div><div class="line"># OUTPUT«X::TypeCheck::Argument: Calling divisors(Rat) will never work with declared signature (Int $n)␤»</div></pre></td></tr></table></figure>
+<p>匿名的参数也行, 如果参数只需要它的类型约束的话。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my $sig = :($, @, %a)         # 两个匿名参数和一个 &quot;正常的(有名字的)&quot;参数</div><div class="line">$sig = :(Int, Positional)     # 只有类型也行(两个参数)</div><div class="line">sub baz (Str) &#123;&quot;Got a String&quot;&#125;</div><div class="line">baz(&quot;hello&quot;);</div></pre></td></tr></table></figure>
+<p>类型约束也可以是类型捕获(<a href="http://doc.perl6.org/type/Signature#Type_Captures" target="_blank" rel="external">type captures</a>)。</p>
+<p>除了这些名义上的类型之外, 额外的约束可以以代码块的形式加到参数上, 代码块必须返回一个真值以通过类型检测。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub f(Real $x where &#123; $x &gt; 0 &#125;, Real $y where &#123; $y &gt;= $x &#125;) &#123; &#125;</div></pre></td></tr></table></figure>
+<p>事实上, where 后面不需要是一个代码块, <code>where</code>-block右侧的任何东西都会被用于和参数<a href="https://docs.perl6.org/language/operators#infix_~~" target="_blank" rel="external">智能匹配</a>。所以你也可以这样写:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi factorial(Int $ where 0) &#123; 1 &#125;</div><div class="line">multi factorial(Int $x)        &#123; $x * factorial($x - 1) &#125;</div></pre></td></tr></table></figure>
+<p>第一个还能简化为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi factorial(0) &#123; 1 &#125;</div></pre></td></tr></table></figure>
+<p>你可以直接把字面量用作类型而值约束到匿名参数上。</p>
+<p>在<code>签名</code>中不是子签名(sub-signature)的一部分的所有先前的参数都可以在参数后面的 <code>where</code> 从句中访问。 因此，最后一个参数的 where 从句可以访问不是子签名一部分的签名的所有参数。 对于子签名，把 where 从句放在子签名中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub one-of-them(:$a, :$b, :$c where &#123; $a.defined ^^ $b.defined ^^ $c.defined &#125;) &#123;</div><div class="line">    $a // $b // $c</div><div class="line">&#125;;</div><div class="line">say one-of-them(c=&gt;42);</div><div class="line"># OUTPUT«42␤»</div></pre></td></tr></table></figure>
+<h3 id="约束可选参数"><a href="#约束可选参数" class="headerlink" title="约束可选参数"></a>约束可选参数</h3><p><a href="https://docs.perl6.org/type/Signature#Optional_and_Mandatory_Parameters" target="_blank" rel="external">可选参数</a>也可以拥有约束。任何参数 <code>where</code> 从句都将被执行, 即使它是可选的，而且不是由调用者提供。在这种情况下，您可能必须防止 where 从句中的未定义值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub f(Int $a, UInt $i? where &#123; !$i.defined or $i &gt; 5 &#125; ) &#123; ... &#125;</div></pre></td></tr></table></figure>
+<h4 id="约束吞噬参数"><a href="#约束吞噬参数" class="headerlink" title="约束吞噬参数"></a>约束吞噬参数</h4><p><a href="https://docs.perl6.org/type/Slurpy_(A$FULL_STOPK$FULL_STOPA$FULL_STOP_Variadic" target="_blank" rel="external">吞噬参数</a>_Parameters)不能拥有类型约束。一个 where 从句连同一个 <a href="https://docs.perl6.org/type/Junction" target="_blank" rel="external">Junction</a>可以达到同样的那个效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sub f(*@a where &#123; $_.all ~~ Int &#125;) &#123; say @a &#125;;</div><div class="line">f(42);</div><div class="line">f(&lt;a&gt;);</div><div class="line"># OUTPUT«[42] Constraint type check failed for parameter &apos;@a&apos;  in sub f at ...»</div></pre></td></tr></table></figure>
+<h4 id="约束定义值和未定义值"><a href="#约束定义值和未定义值" class="headerlink" title="约束定义值和未定义值"></a>约束定义值和未定义值</h4><p>通常, 类型约束只检查传递的值是否是正确的<strong>类型</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">sub limit-lines (Str $s, Int $limit) &#123;</div><div class="line">    my @lines = $s.lines;</div><div class="line">    @lines[0 ..^ min @lines.elems, $limit].join(&quot;\n&quot;)</div><div class="line">&#125;</div><div class="line">say (limit-lines &quot;a \n b \n c \n d \n&quot;, 3).perl; # &quot;a \n b \n c &quot;</div><div class="line">say limit-lines Str,      3;  # Uh-oh. Dies with &quot;Cannot call &apos;lines&apos;;&quot;</div><div class="line">CATCH &#123; default &#123; put .^name, &apos;: &apos;, .Str &#125; &#125;;</div><div class="line"># OUTPUT: «X::Multi::NoMatch: Cannot resolve caller lines(Str: ); none of these signatures match:</div><div class="line">#     (Cool:D $: |c is raw)</div><div class="line">#     (Str:D $: :$count!, *%_)</div><div class="line">#     (Str:D $: $limit, *%_)</div><div class="line">#     (Str:D $: *%_)»</div><div class="line"></div><div class="line">say limit-lines &quot;a \n b&quot;, Int # Always returns the max number of lines</div></pre></td></tr></table></figure>
+<p>这样的情况, 我们其实只想处理定义了的字符串。要这样做, 我们使用 <code>:D</code>类型约束。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sub limit-lines (Str:D $s, Int $limit) &#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">say limit-lines Str, 3;</div><div class="line">CATCH &#123; default &#123; put .^name, .Str &#125; &#125;;</div><div class="line"># OUTPUT«X::AdHocParameter &apos;$s&apos; requires an instance of type Str, but a</div><div class="line"># type object was passed.  Did you forget a .new?»</div><div class="line"># Dies with &quot;参数 &apos;$s&apos; 需要一个实例, 但是函数 limit-lines 中却传递了一个类型对象。</div></pre></td></tr></table></figure>
+<p>如果传递一个诸如 <strong>Str</strong> 这样的类型对象进去, 那么就会报错。这样的失败方式比以前更好了, 因为失败的原因更清晰了。</p>
+<p>也有可能未定义的类型是子例程唯一有意义的接收值。这可以使用 <code>:U</code>类型约束来约束它。例如, 我们可以把 <code>&amp;limit-lines</code>转换成 multi 函数以使用 <code>:U</code>约束。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">multi  limit-lines (Str $s, Int:D $limit) &#123;</div><div class="line">    my @lines = $s.lines;</div><div class="line">    @lines[0 ..^ min @lines.elems, $limit].join(&quot;\n&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">multi limit-lines (Str $s, Int:U $) &#123;$s&#125; # 如果传递给我一个未定义的类型对象, 就返回整个字符串</div><div class="line"></div><div class="line">say limit-lines &quot;a \n b \n c&quot;, Int;      # &quot;a \n b \n c&quot;</div></pre></td></tr></table></figure>
+<p>为了显式地标示常规的行为,  可以使用<code>:_</code>,  但这不是必须的。 <code>:(Num:_ $)</code> 和 <code>:(Num $)</code>相同。</p>
+<h4 id="约束-Callables-的签名"><a href="#约束-Callables-的签名" class="headerlink" title="约束 Callables 的签名"></a>约束 Callables 的签名</h4><p>要基于 block和子例程的签名约束 block 和子例程引用, 参数名要写在签名的后面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub f(&amp;c:(Int, Str))  &#123; say c(10, &apos;ten&apos;) &#125;;</div><div class="line">sub g(Int $i, Str $s) &#123; $s ~ $i          &#125;;</div><div class="line">f(&amp;g);</div><div class="line"># OUTPUT</div><div class="line">ten10</div></pre></td></tr></table></figure>
+<h4 id="约束返回类型"><a href="#约束返回类型" class="headerlink" title="约束返回类型"></a>约束返回类型</h4><p><code>--&gt;</code>标记后面跟着一个类型会强制在子例程执行成功时进行类型检测。返回类型箭头必须放在参数列表的后面。跟在签名声明后面的 <code>returns</code> 关键字有同样的功能。<code>Nil</code>在类型检测中被认为是定义了的。这允许沿着调用链返回和传递 <a href="https://docs.perl6.org/type/Failure" target="_blank" rel="external">Failure</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sub (--&gt; Int)   &#123; my Int $i; $i&#125;;</div><div class="line">sub (--&gt; Int:D)    &#123; 1 &#125;;</div><div class="line">sub () returns Int &#123; 1 &#125;;</div><div class="line"></div><div class="line">sub foo(--&gt; Int) &#123; 1 &#125;;</div><div class="line">sub foo() returns Int &#123; 1 &#125;;        # 同上</div><div class="line">sub does-not-work(--&gt; Int) &#123; &quot;&quot; &#125;; # throws X::TypeCheck::Return</div></pre></td></tr></table></figure>
+<p>如果类型约束是一个常量表达式, 那么它被用于子例程的<strong>返回值</strong>。那个子例程中的任何<strong>return</strong>语句必须是不含参数的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub foo(--&gt; 123) &#123; return &#125;</div></pre></td></tr></table></figure>
+<p><code>Nil</code>和 <code>Failure</code>总是被允许作为返回<strong>类型</strong>, 不管类型约束是什么。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sub foo(--&gt; Int) &#123; Nil &#125;;</div><div class="line">say foo.perl; # Nil</div></pre></td></tr></table></figure>
+<p>不支持类型捕获和强制类型。</p>
+<h4 id="强制类型"><a href="#强制类型" class="headerlink" title="强制类型"></a>强制类型</h4><p>要接受一个类型但是强制它自动地转为另一种类型, 使用接受的类型作为目标类型的参数。如果接受的类型是 Any, 那么它可以被省略。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sub f(Int(Str) $want-int, Str() $want-str) &#123; say $want-int.WHAT, $want-str.WHAT &#125;</div><div class="line">f &apos;10&apos;, 10;</div><div class="line"># OUTPUT</div><div class="line"># (Int)(Str)</div></pre></td></tr></table></figure>
+<h3 id="吞噬参数-或长度可变参数"><a href="#吞噬参数-或长度可变参数" class="headerlink" title="吞噬参数(或长度可变参数)"></a>吞噬参数(或长度可变参数)</h3><p>数组或散列参数可以通过前置一个星号(s)被标记为吞噬参数, 这意味着它可以被绑定给任意数量的参数(0 个或 多个)。</p>
+<p>它们被叫做吞噬参数, 因为它们吞完函数中的任何剩余参数, 就像有些人吞吃面条那样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ = :($a, @b)  # 正好两个参数, 而第二个参数必须是 Positional 的</div><div class="line">$ = :($a, *@b) # 至少一个参数, @b 吞噬完任何剩余的参数</div><div class="line">$ = :(*%h)     # 没有位置参数, 除了任意数量的具名参数</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">sub one-arg (@)  &#123; &#125;</div><div class="line">sub slurpy  (*@) &#123; &#125;</div><div class="line">one-arg (5, 6, 7);   # ok, same as one-arg((5, 6, 7))</div><div class="line">slurpy  (5, 6, 7);   # ok</div><div class="line">slurpy   5, 6, 7 ;   # ok</div><div class="line"># one-arg(5, 6, 7) ; # X::TypeCheck::Argument</div><div class="line"># one-arg  5, 6, 7 ; # X::TypeCheck::Argument</div><div class="line"></div><div class="line">sub named-names (*%named-args) &#123; %named-args.keys &#125;;</div><div class="line">say named-names :foo(42) :bar&lt;baz&gt;; # foo bar</div></pre></td></tr></table></figure>
+<p>注意位置参数不允许出现在吞噬参数的后面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">:(*@args, $last);</div><div class="line">CATCH &#123; when X::Parameter::WrongOrder &#123; put .^name, &apos;: &apos;, .Str &#125; &#125;</div><div class="line"># OUTPUT«X::Parameter::WrongOrder: 不能把必要参数放在可变长度参数的后面»</div></pre></td></tr></table></figure>
+<p>带有一个星号的吞噬参数会通过消融一层或多层裸的可迭代对象来展平参数。 带有两个星号的吞噬参数不会展平参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub a(*@a)  &#123; @a.join(&quot;|&quot;).say &#125;;</div><div class="line">sub b(**@b) &#123; @b.join(&quot;|&quot;).say &#125;;</div><div class="line"></div><div class="line">a(1,[1,2],([3,4],5));    #  1|1|2|3|4|5</div><div class="line">b(1,[1,2],([3,4],5));    # 1|1 2|3 4 5</div></pre></td></tr></table></figure>
+<p>通常, 吞噬参数会创建一个数组, 为每个 argument 创建一个标量容器, 并且把每个参数的值赋值给那些标量。如果在该过程中原参数也有一个中间的标量分量, 那么它在调用函数中是访问不到的。</p>
+<p>吞噬参数在和某些<a href="http://doc.perl6.org/type/Signature#Parameter_Traits_and_Modifiers" target="_blank" rel="external">traits and modifiers</a>组合使用时会有特殊行为, 像下面描述的那样。</p>
+<h3 id="Single-Argument-Rule-Slurpy"><a href="#Single-Argument-Rule-Slurpy" class="headerlink" title="Single Argument Rule Slurpy"></a>Single Argument Rule Slurpy</h3><p>The single argument rule allows to treat arguments to subroutines, for-loops and list constructors based on context. Many methods on positional types can work with a single arguments the same way as with a list or arguments. Using +@ as a sigil in a Signature provides syntactic sugar to make that task a little easier. Any single argument of a non-positional type will be promoted to a list with a single item.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sub f(+@a)&#123; dd @a &#125;;</div><div class="line">f(1);</div><div class="line"># OUTPUT«[1]␤»</div><div class="line">f(1, 2, 3);</div><div class="line"># OUTPUT«[1, 2, 3]␤»</div><div class="line">my @b = &lt;a b c&gt;;</div><div class="line">f @b;</div><div class="line"># OUTPUT«[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]␤»</div></pre></td></tr></table></figure>
+<h3 id="类型捕获"><a href="#类型捕获" class="headerlink" title="类型捕获"></a>类型捕获</h3><p>类型捕获允许把类型约束的说明推迟到函数被调用时。它们允许签名和函数体中的类型都可以引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">sub f(::T $p1, T $p2, ::C) &#123;</div><div class="line">    # $p1 和 $p2 的类型都为 T, 但是我们还不知道具体类型是什么</div><div class="line">    # C 将会保存一个源于类型对象或值的类型</div><div class="line">    my C $closure = $p1 / $p2;</div><div class="line">    return sub (T $p1) &#123;</div><div class="line">        $closure * $p1;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 第一个参数是 Int 类型, 所以第二个参数也是</div><div class="line"># 我们从调用用于 &amp;f 中的操作符导出第三个类型</div><div class="line">my &amp;s = f(10,2, Int.new / Int.new);</div><div class="line">say s(2);  # 10 / 2 * 2  == 10</div></pre></td></tr></table></figure>
+<h3 id="Positional-vs-Named"><a href="#Positional-vs-Named" class="headerlink" title="Positional vs. Named"></a>Positional vs. Named</h3><p>参数可以是跟位置有关的或者是具名的。所有的参数都是 positional 的, 除了吞噬型散列参数和有前置冒号标记的参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ = :($a)   # 位置参数</div><div class="line">$ = :(:$a)  # 名字为 a 的具名参数</div><div class="line">$ = :(*@a)  # 吞噬型位置参数</div><div class="line">$ = :(*%h)  # 吞噬型具名参数</div></pre></td></tr></table></figure>
+<p>在调用者这边, 位置参数的传递顺序和它们声明顺序相同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sub pos($x, $y) &#123; &quot;x = $x y = $y&quot; &#125;;</div><div class="line">pos(4, 5); #  x = 4 y = 5</div></pre></td></tr></table></figure>
+<p>对于具名实参和具名形参, 只用名字用于将实参映射到形参上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sub named(:$x, :$y) &#123; &quot;x=$x y=$y&quot; &#125;</div><div class="line">named( y =&gt; 5, x =&gt; 4);</div></pre></td></tr></table></figure>
+<p>具名参数也可以和变量的名字不同:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sub named(:official($private)) &#123; &quot;公务&quot; if $private &#125;</div><div class="line">named :official;</div></pre></td></tr></table></figure>
+<p>别名也是那样做的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sub ( :color(:colour($c)) ) &#123; &#125; # &apos;color&apos; 和 &apos;colour&apos; 都可以</div><div class="line">sub ( :color(:$colour) )    &#123; &#125; # same API for the caller</div></pre></td></tr></table></figure>
+<p>带有具名参数的函数可以被动态地调用, 使用 <code>|</code>非关联化一个 Pair 来把它转换为一个具名参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">multi f(:$named) &#123; note &amp;?ROUTINE.signature &#125;;</div><div class="line">multi f(:$also-named) &#123; note &amp;?ROUTINE.signature &#125;;</div><div class="line"></div><div class="line">for &apos;named&apos;, &apos;also-named&apos; -&gt; $n &#123;</div><div class="line">    f(|($n =&gt; rand))      # «(:$named)␤(:$also-named)␤»</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $pair = :named(1);</div><div class="line">f |$pair; # «(:$named)␤»</div></pre></td></tr></table></figure>
+<p>同样的语法也可以用于将散列转换为具名参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my %pairs = also-named =&gt; 4;</div><div class="line">sub f(|c) &#123;&#125;;</div><div class="line">f |%pairs;        # (:$also-named)</div></pre></td></tr></table></figure>
+<h3 id="可选参数和强制参数"><a href="#可选参数和强制参数" class="headerlink" title="可选参数和强制参数"></a>可选参数和强制参数</h3><p>Positional 参数默认是强制的,  也可以用默认值或结尾的问号使参数成为可选的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ = :(Str $id)         # 必要参数 required parameter</div><div class="line">$ = :($base = 10)      # 可选参数, 默认为 10</div><div class="line">$ = :(Int $x?)         # 可选参数, 默认为 Int 类型的对象</div></pre></td></tr></table></figure>
+<p>具名参数默认是可选的, 可以通过在参数末尾加上一个感叹号使它变成强制参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ = :(:%config)        # 可选参数</div><div class="line">$ = :(:$debug = False) # 可选参数, 默认为 False</div><div class="line">$ = :(:$name!)         # 名为 name 的强制具名参数</div></pre></td></tr></table></figure>
+<p>默认值可以依靠之前的参数, 并且每次调用都会被重新计算。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ = :($goal, $accuracy = $goal / 100);</div><div class="line">$ = :(:$excludes = [&apos;.&apos;, &apos;..&apos;]); # a new Array for every call</div></pre></td></tr></table></figure>
+<h3 id="解构参数"><a href="#解构参数" class="headerlink" title="解构参数"></a>解构参数</h3><p>参数后面可以跟着一个由括号括起来的 <code>sub-signature</code>, 子签名会解构给定的参数。解构的列表就是它的元素:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub first (@array ($first, *@rest)) &#123; $first &#125;</div></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub first ([$first, *@]) &#123; $first &#125;</div></pre></td></tr></table></figure>
+<p>而散列的解构是它的键值对儿:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sub all-dimensions (% (:length(:$x), :width(:$y), :depth(:$z))) &#123;</div><div class="line">    sx andthen $y andthen $z andthen True</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>andthen</code> 返回第一个未定义的值, 否则返回最后一个元素。短路操作符。<code>andthen</code> 左侧的结果被绑定给 <code>$_</code> 用于右侧, 或者作为参数传递, 如果右侧是一个 <code>block</code> 或 <code>pointy block</code> 的话。</p>
+<p>一般地, 对象根据它的属性结构。通用的惯用法是在 <em>for</em> 循环中解包一个 <code>Pair</code>的键和值:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for &lt;Peter Paul Merry&gt;.pairs -&gt; (:key($index), :value($guest)) &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然而, 这种把对象解包为它们的属性只是默认行为。为了让对象按照不同的方解构, 改变它们的 <code>Capture</code>方法。</p>
+<h3 id="子签名"><a href="#子签名" class="headerlink" title="子签名"></a>子签名</h3><p>要匹配复合参数，请在圆括号中的参数名后面使用子签名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub foo(|c(Int, Str))&#123;</div><div class="line">   put &quot;called with &#123;c.perl&#125;&quot;</div><div class="line">&#125;;</div><div class="line">foo(42, &quot;answer&quot;);</div><div class="line"># OUTPUT«called with \(42, &quot;answer&quot;)»</div></pre></td></tr></table></figure>
+<h3 id="长名字"><a href="#长名字" class="headerlink" title="长名字"></a>长名字</h3><p>为了在多重分派中排除特定参数, 使用一个双分号来分割它们。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">multi sub f(Int $i, Str $s;; :$b) &#123; dd $i, $s, $b &#125;;</div><div class="line">f(10, &apos;answer&apos;);</div><div class="line"># OUTPUT«10 &quot;answer&quot;Any $b = Any»</div></pre></td></tr></table></figure>
+<h3 id="捕获参数"><a href="#捕获参数" class="headerlink" title="捕获参数"></a>捕获参数</h3><p>在参数前前置一个垂直的 <code>|</code>会让参数变为 <a href="https://docs.perl6.org/type/Capture" target="_blank" rel="external">Capture</a>, 并使用完所有剩下的位置参数和具名参数。</p>
+<p>这常用在 <code>proto</code>定义中( 像 <code>proto foo (|) {*}</code> ) 来标示例程的 <a href="https://docs.perl6.org/routine/multi" target="_blank" rel="external">multi 定义</a>可以拥有任何<a href="https://docs.perl6.org/type/Signature#Type_Constraints" target="_blank" rel="external">类型约束</a>。</p>
+<p>如果绑定到变量参数，则可以使用 slip 运算符 <code>|</code> 作为整体转发。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sub a(Int $i, Str $s) &#123; say $i.WHAT, $s.WHAT &#125;</div><div class="line">sub b(|c) &#123; say c.WHAT; a(|c) &#125;</div><div class="line">b(42, &quot;answer&quot;);</div><div class="line"># OUTPUT«(Capture)␤(Int)(Str)␤»</div></pre></td></tr></table></figure>
+<h3 id="参数特性和修饰符"><a href="#参数特性和修饰符" class="headerlink" title="参数特性和修饰符"></a>参数特性和修饰符</h3><p>默认地, 形式参数被绑定到它们的实参上并且被标记为只读。你可以使用 traits 特性更改参数的只读特性。</p>
+<p><code>is copy</code>特性让参数被复制, 并允许在子例程内部修改参数的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sub count-up ($x is copy) &#123;</div><div class="line">    $x = Inf if $x ~~ Whatever;</div><div class="line">    .say for 1..$x;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>is rw</code>特性让参数只绑定到变量上(或其它可写的容器)。 赋值给参数会改变调用一侧的变量的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sub swap($x is rw, $y is rw) &#123;</div><div class="line">    ($x, $y) = ($y, $x);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于吞噬参数, <code>is rw</code> 由语言设计者保留做将来之用</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="params-方法"><a href="#params-方法" class="headerlink" title="params 方法"></a>params 方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">method params(Signature:D:) returns Positional</div></pre></td></tr></table></figure>
+<p>返回 <code>Parameter</code>对象列表以组成签名。</p>
+<h3 id="arity-方法"><a href="#arity-方法" class="headerlink" title="arity 方法"></a>arity 方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">method arity(Signature:D:) returns Int:D</div></pre></td></tr></table></figure>
+<p>返回所必须的最小数量的满足签名的位置参数</p>
+<h3 id="count-方法"><a href="#count-方法" class="headerlink" title="count 方法"></a>count 方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">method count(Signature:D:) returns Real:D</div></pre></td></tr></table></figure>
+<p>返回能被绑定给签名的最大数量的位置参数。如果有吞噬位置参数则返回 <code>Inf</code>。</p>
+<h3 id="returns-方法"><a href="#returns-方法" class="headerlink" title="returns 方法"></a>returns 方法</h3><p>签名返回的任意约束是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:($a, $b --&gt; Int).returns # Int</div></pre></td></tr></table></figure>
+<h3 id="ACCEPTS-方法"><a href="#ACCEPTS-方法" class="headerlink" title="ACCEPTS 方法"></a>ACCEPTS 方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">multi method ACCEPTS(Signature:D: Capture $topic)</div><div class="line">multi method ACCEPTS(Signature:D: @topic)</div><div class="line">multi method ACCEPTS(Signature:D: %topic)</div><div class="line">multi method ACCEPTS(Signature:D: Signature $topic)</div></pre></td></tr></table></figure>
+<p>前三个方法会看参能否绑定给 capture, 例如, 如果带有那个 Signature 的函数能使用 <code>$topic</code>调用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(1,2, :foo) ~~ :($a, $b, :foo($bar)) # true</div><div class="line">&lt;a b c d&gt; ~~ :(Int $a)               # False</div></pre></td></tr></table></figure>
+<p>最后一个会为真如果 <code>$topic</code>能接收的任何东西也能被 <code>Signature</code>接收。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">:($a, $b) ~~ :($foo, $bar, $baz?)   # True</div><div class="line">:(Int $n) ~~ :(Str)                 # False</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/签名/" rel="tag">#签名</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/12/reddit编程题-詹妮的水果篮/" rel="next" title="reddit编程题-詹妮的水果篮">
+                <i class="fa fa-chevron-left"></i> reddit编程题-詹妮的水果篮
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/22/Perl6中的特性-一/" rel="prev" title="Perl 6 中的特性(一)">
+                Perl 6 中的特性(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/04/12/Perl6中的函数签名/"
+     data-title="Perl 6 中的函数签名"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/04/12/Perl6中的函数签名/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/12/Perl6中的函数签名/"
+           data-title="Perl 6 中的函数签名" data-url="https://ohmycloud.github.io/2016/04/12/Perl6中的函数签名/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#签名也是对象"><span class="nav-number">1.</span> <span class="nav-text">签名也是对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#签名字面量"><span class="nav-number">2.</span> <span class="nav-text">签名字面量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数分隔符"><span class="nav-number">2.1.</span> <span class="nav-text">参数分隔符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型约束"><span class="nav-number">2.2.</span> <span class="nav-text">类型约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#约束可选参数"><span class="nav-number">2.3.</span> <span class="nav-text">约束可选参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#约束吞噬参数"><span class="nav-number">2.3.1.</span> <span class="nav-text">约束吞噬参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#约束定义值和未定义值"><span class="nav-number">2.3.2.</span> <span class="nav-text">约束定义值和未定义值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#约束-Callables-的签名"><span class="nav-number">2.3.3.</span> <span class="nav-text">约束 Callables 的签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#约束返回类型"><span class="nav-number">2.3.4.</span> <span class="nav-text">约束返回类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强制类型"><span class="nav-number">2.3.5.</span> <span class="nav-text">强制类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#吞噬参数-或长度可变参数"><span class="nav-number">2.4.</span> <span class="nav-text">吞噬参数(或长度可变参数)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Single-Argument-Rule-Slurpy"><span class="nav-number">2.5.</span> <span class="nav-text">Single Argument Rule Slurpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型捕获"><span class="nav-number">2.6.</span> <span class="nav-text">类型捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Positional-vs-Named"><span class="nav-number">2.7.</span> <span class="nav-text">Positional vs. Named</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可选参数和强制参数"><span class="nav-number">2.8.</span> <span class="nav-text">可选参数和强制参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解构参数"><span class="nav-number">2.9.</span> <span class="nav-text">解构参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子签名"><span class="nav-number">2.10.</span> <span class="nav-text">子签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#长名字"><span class="nav-number">2.11.</span> <span class="nav-text">长名字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获参数"><span class="nav-number">2.12.</span> <span class="nav-text">捕获参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数特性和修饰符"><span class="nav-number">2.13.</span> <span class="nav-text">参数特性和修饰符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">3.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#params-方法"><span class="nav-number">3.1.</span> <span class="nav-text">params 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arity-方法"><span class="nav-number">3.2.</span> <span class="nav-text">arity 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count-方法"><span class="nav-number">3.3.</span> <span class="nav-text">count 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#returns-方法"><span class="nav-number">3.4.</span> <span class="nav-text">returns 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACCEPTS-方法"><span class="nav-number">3.5.</span> <span class="nav-text">ACCEPTS 方法</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

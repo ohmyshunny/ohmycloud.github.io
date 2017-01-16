@@ -1,0 +1,718 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="token,rule," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="在 grammar 中, 有两个 regex 的变体, rule 和 token。rule 默认不会回溯.  rule 与 token 的一个重要区别就是, rule 这样的正则采取了 :sigspace 修饰符。 rule 实际上是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="token 和 rule 的区别">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/03/11/token和rule的区别/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="在 grammar 中, 有两个 regex 的变体, rule 和 token。rule 默认不会回溯.  rule 与 token 的一个重要区别就是, rule 这样的正则采取了 :sigspace 修饰符。 rule 实际上是">
+<meta property="og:updated_time" content="2016-10-23T16:44:10.016Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="token 和 rule 的区别">
+<meta name="twitter:description" content="在 grammar 中, 有两个 regex 的变体, rule 和 token。rule 默认不会回溯.  rule 与 token 的一个重要区别就是, rule 这样的正则采取了 :sigspace 修饰符。 rule 实际上是">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/03/11/token和rule的区别/"/>
+
+  <title> token 和 rule 的区别 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                token 和 rule 的区别
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-11T00:00:00+08:00" content="2016-03-11">
+              2016-03-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/11/token和rule的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/11/token和rule的区别/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在 grammar 中, 有两个 regex 的变体, <code>rule</code> 和 <code>token</code>。rule 默认不会回溯.  rule 与 token 的一个重要区别就是, <code>rule</code> 这样的正则采取了 <code>:sigspace</code> 修饰符。 <code>rule</code> 实际上是</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">regex :ratchet :sigspace &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>的简写.  ratchet 这个单词的意思是: (防倒转的)棘齿, 意思它是不能回溯的!  而 <code>:sigspace</code> 表明正则中的空白是<code>有意义的</code>, 而 <code>token</code> 实际上是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">regex :ratchet &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>的简写。 所以在 token 中, 若不是显式的写上 <code>\s</code>、<code>\h</code>、<code>\n</code> 等空白符号, 其它情况下就好像空白隐身了一样, 虽然你写了, 但是编译器却视而不见。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"><span class="keyword">use</span> Grammar::Debugger;</div><div class="line">grammar Token::Rule::Difference &#123;</div><div class="line">    <span class="comment"># 下面三者等价</span></div><div class="line">    <span class="comment"># rule TOP &#123; [\w+]+ % ' ' | [\d+]+ % ' '   &#125;  等价于</span></div><div class="line">    <span class="comment"># rule TOP &#123; | [\w+]+ % ' ' | [\d+]+ % ' ' &#125;  等价于</span></div><div class="line">    rule TOP &#123; | [\w+]+ % <span class="string">' '</span></div><div class="line">               | [\d+]+ % <span class="string">' '</span></div><div class="line">             &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># $=finish.lines 中的每一行末尾都没有换行符</span></div><div class="line"><span class="keyword">for</span> $=finish.lines -&gt; $line &#123;</div><div class="line">    <span class="keyword">print</span>($line);</div><div class="line">    <span class="keyword">say</span> Token::Rule::Difference.parse($line)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">=finish</span></div><div class="line">token takes whitespace invisible unless with sigspace</div><div class="line">rule is a token without sigspace</div><div class="line">2015 12 25</div><div class="line">2016 01 07</div></pre></td></tr></table></figure>
+<p>说明在 rule 中, <code>|</code> 左右两边的空格会被忽略, 这通常是为了使格式对齐, 看起来不乱。另外 rule 中, 开头和末尾的空白也会被忽略。</p>
+<p>如果每一行都带有换行符呢？</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"><span class="keyword">use</span> Grammar::Debugger;</div><div class="line">grammar Token::Rule::Difference &#123;</div><div class="line"></div><div class="line">    <span class="comment"># token TOP &#123; ^ [&lt;line&gt;\n]+ $ &#125;</span></div><div class="line">    <span class="comment"># token line &#123;</span></div><div class="line">    <span class="comment">#     | [\w+]+ % ' '</span></div><div class="line">    <span class="comment">#     | [\d+]+ % ' '</span></div><div class="line">    <span class="comment"># &#125;</span></div><div class="line"></div><div class="line"><span class="comment"># 等价于</span></div><div class="line"></div><div class="line">    rule TOP &#123; ^ &lt;wrap&gt;+ $&#125;</div><div class="line">    token wrap &#123; &lt;line&gt; &#125;</div><div class="line">    rule line &#123;</div><div class="line">         [\w+]+ % <span class="string">' '</span> | [\d+]+ % &lt;[-\<span class="keyword">s</span>:]&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">my</span> $str = <span class="keyword">q</span>:to/EOF/;</div><div class="line">token takes whitespace invisible <span class="keyword">unless</span> with sigspace</div><div class="line">rule is a token without sigspace</div><div class="line"><span class="number">2015</span>-<span class="number">12</span>-<span class="number">25</span> <span class="number">12</span>:<span class="number">23</span></div><div class="line"><span class="number">2016</span>-<span class="number">01</span>-<span class="number">07</span> <span class="number">13</span>:<span class="number">45</span></div><div class="line">EOF</div><div class="line"></div><div class="line"><span class="keyword">my</span> $parse = Token::Rule::Difference.parse($str);</div><div class="line"><span class="keyword">say</span> $parse;</div></pre></td></tr></table></figure>
+<h2 id="token-vs-rule"><a href="#token-vs-rule" class="headerlink" title="token vs. rule"></a>token vs. rule</h2><hr>
+<blockquote>
+<p>When we use rule in place of token, any whitespace after anatom is turned into a non-capturing call to ws                                    </p>
+</blockquote>
+<p>这句话是说, 在 <code>rule</code> 中, 任何跟在原子(atom)后面的空白会变成非捕获的<code>ws</code>调用, 即 <code>&lt;.ws&gt;</code>,</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rule entry &#123; &lt;key&gt; <span class="string">'='</span> &lt;value&gt; &#125;</div></pre></td></tr></table></figure>
+<p>等价于:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">token entry &#123; &lt;key&gt; &lt;.ws&gt; <span class="string">'='</span> &lt;.ws&gt; &lt;value&gt; &lt;.ws&gt; &#125; <span class="comment"># .抑制了捕获</span></div></pre></td></tr></table></figure>
+<p>在 grammar 中, 我们继承了默认的 <code>ws</code>, 但是我们也可以提供自己的 ws:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">token ws &#123; \h* &#125; <span class="comment"># 匹配水平空白, 不包括换行</span></div></pre></td></tr></table></figure>
+<p>rule 中空白的使用:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> $str = <span class="string">"Swift          is hard    to  learn"</span>;</div><div class="line"><span class="keyword">my</span> token word &#123; \w+ &#125;</div><div class="line"><span class="keyword">my</span> rule  line &#123; &lt;word&gt;+ % [<span class="string">','</span> ] &#125;</div><div class="line">$str ~~ <span class="keyword">m</span>:g/ &lt;line&gt; <span class="regexp">/;</span></div></pre></td></tr></table></figure>
+<p>逗号附近的方括号保证了 <code>&lt;.ws&gt;</code> 调用产生的空白作为分割符的一部分。这利用了 <code>&lt;.ws&gt;</code> 的一个特点：</p>
+<p>在两个 <code>\w</code> 之间解释为 <code>\s+</code>, 其它地方解释为 <code>\s*</code>。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/token/" rel="tag">#token</a>
+          
+            <a href="/tags/rule/" rel="tag">#rule</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/09/Perl6中的模式匹配/" rel="next" title="Perl 6 中的模式匹配">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的模式匹配
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/11/Perl-6-圣诞月历-2009/" rel="prev" title="Perl 6 圣诞月历-(2009)">
+                Perl 6 圣诞月历-(2009) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/11/token和rule的区别/"
+     data-title="token 和 rule 的区别"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/03/11/token和rule的区别/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/11/token和rule的区别/"
+           data-title="token 和 rule 的区别" data-url="https://ohmycloud.github.io/2016/03/11/token和rule的区别/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#token-vs-rule"><span class="nav-number">1.</span> <span class="nav-text">token vs. rule</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

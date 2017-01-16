@@ -1,0 +1,853 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="圣诞," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="2011
+The Flip-Flop operator
+Perl5有一个二元操作符叫做flip-flop,它为假直到它的第一个参数被计算为真，然后它保持真(反转)，直到第二个参数计算为真，然后在那里它又变成假(flop)。 这真是太有用了，以至于Perl6也有flip-flop,只是它拼写为ff,并有一些变异：
+1234ffff^^ff^ff^
+音调符号^意味着在那个结尾跳过结尾。…或许一些例子更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 圣诞月历-(2011)">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/06/28/Perl-6圣诞月历-2011/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="2011
+The Flip-Flop operator
+Perl5有一个二元操作符叫做flip-flop,它为假直到它的第一个参数被计算为真，然后它保持真(反转)，直到第二个参数计算为真，然后在那里它又变成假(flop)。 这真是太有用了，以至于Perl6也有flip-flop,只是它拼写为ff,并有一些变异：
+1234ffff^^ff^ff^
+音调符号^意味着在那个结尾跳过结尾。…或许一些例子更">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 圣诞月历-(2011)">
+<meta name="twitter:description" content="2011
+The Flip-Flop operator
+Perl5有一个二元操作符叫做flip-flop,它为假直到它的第一个参数被计算为真，然后它保持真(反转)，直到第二个参数计算为真，然后在那里它又变成假(flop)。 这真是太有用了，以至于Perl6也有flip-flop,只是它拼写为ff,并有一些变异：
+1234ffff^^ff^ff^
+音调符号^意味着在那个结尾跳过结尾。…或许一些例子更">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/06/28/Perl-6圣诞月历-2011/"/>
+
+  <title> Perl 6 圣诞月历-(2011) | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 圣诞月历-(2011)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-28T00:00:00+08:00" content="2016-06-28">
+              2016-06-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/28/Perl-6圣诞月历-2011/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/28/Perl-6圣诞月历-2011/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="2011"><a href="#2011" class="headerlink" title="2011"></a>2011</h1><hr>
+<h2 id="The-Flip-Flop-operator"><a href="#The-Flip-Flop-operator" class="headerlink" title="The Flip-Flop operator"></a>The Flip-Flop operator</h2><hr>
+<p>Perl5有一个二元操作符叫做flip-flop,它为假直到它的第一个参数被计算为真，然后它保持真(反转)，直到第二个参数计算为真，然后在那里它又变成假(flop)。 这真是太有用了，以至于Perl6也有flip-flop,只是它拼写为ff,并有一些变异：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ff</div><div class="line">ff^</div><div class="line">^ff</div><div class="line">^ff^</div></pre></td></tr></table></figure>
+<p>音调符号^意味着在那个结尾跳过结尾。<br>…或许一些例子更能说明问题…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for 1..20 &#123; .say if $_ == 9  ff  $_ == 13; &#125;     # 9 10 11 12 13</div><div class="line">for 1..20 &#123; .say if $_ == 9  ff^ $_ == 13; &#125;     # 9 10 11 12</div><div class="line">for 1..20 &#123; .say if $_ == 9 ^ff  $_ == 13; &#125;     # 10 11 12 13</div><div class="line">for 1..20 &#123; .say if $_ == 9 ^ff^ $_ == 13; &#125;     # 10 11 12</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>每个例子中，我们遍历从1到20的数字范围，并且在flip-flop返回真时输出那些数字。每次循环中，flip-flop 操作符的左边(<code>$_ == 9</code>) 和 flip-flop操作符的右边 (<code>$_ == 13</code>)都会被计算。 (这里我已经在 flip-flop操作符的两侧使用了简单的数字比较，但是，一般任何布尔表达式都能使用。</p>
+<p>每个 flip-flop 操作符的实例维护它们的内部状态以决定什么时候返回TRUE或False.所有的flip-flop操作符在它们的内部状态被设置为返回False时出现，直到它们被反转然后开始返回 TRUE.</p>
+<p>在第一个和第二个例子中，当<code>$_ == 9</code> 时，flip-flop 操作符反转它们的内部状态为 TRUE ，然后立即返回 TRUE.在第三个和第四个例子中，当<code>$_== 9</code>时，flip-flop操作符将它们的内部状态设置为 TRUE,但是它们在那次遍历中返回 False ，因为前置的 ^符号。<br>类似地，在上面的第一个和第三个例子中，一旦RHS求值为真时， flip-flop操作符在下一次循环中将它们的内部状态反转回FALSE,然后返回True.在第三个和第四个例子中，flip-flop操作符在RHS返回真时立即反转为FALSE.<br>让flip-flop操作符反转但从不flop,在RHS上使用*：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">for 1..20 &#123; .say if $_ == 15 ff *; &#125;     # 15 16 17 18 19 20</div></pre></td></tr></table></figure>
+<p>Perl6有另外一套 flip-flop操作符，功能与上面提到的差不多，除了，在LHS变成真的时候，RHS不被求值。这很有用，当flip-flop操作符的RHS 和LHS 都同时求值为真的时候，These operators are spelled 这些操作符被拼写为  fff, fff^, ^fff, and ^fff^.</p>
+<h2 id="Idiomatic-Perl-6"><a href="#Idiomatic-Perl-6" class="headerlink" title="Idiomatic Perl 6"></a>Idiomatic Perl 6</h2><hr>
+<p>December 23, 2011</p>
+<p>下面大多数的例子使用 4 种版本展示代码：</p>
+<ul>
+<li>Non-idiomatic Perl 5,</li>
+<li>then made idiomatic.</li>
+<li>Perl 5 idiom, naively translated into Perl 6,</li>
+<li>then made idiomatic.</li>
+</ul>
+<p>从 1 到 4 越来越清晰和简洁</p>
+<ul>
+<li>随机选择数组元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$z = $array[ int(rand scalar(@array)) ];</div><div class="line">$z = $array[ rand @array ];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$z = @array[ rand*@array ];</div><div class="line">$z = @array.pick;</div></pre></td></tr></table></figure>
+<ul>
+<li>循环遍历数组的键（索引）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for ( my $i=0; $i&lt;@array; $i++ ) &#123;...&#125;</div><div class="line">for my $i ( 0 .. $#array )       &#123;...&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for 0 .. @array.end -&gt; $i &#123;...&#125;</div><div class="line">for @array.keys -&gt; $i     &#123;...&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>整除</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">( ($x - ($x % 3) ) / 3 )</div><div class="line">int( $x / 3 )</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Int( $x / 3 )   # 首字母需大写</div><div class="line">$x div 3        # 整除运算符</div></pre></td></tr></table></figure>
+<ul>
+<li>打印数组元素的个数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say scalar @array;</div><div class="line">say 0+@array;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">say 0+@array;          # Identical in Perl 6</div><div class="line">say +@array;           # + 强制新的“数值”上下文</div><div class="line">say @array.elems;      # .elems 方法更清楚.</div></pre></td></tr></table></figure>
+<ul>
+<li>每隔5 次 做些事情</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if ( ($x/5) == int($x/5) ) &#123;...&#125;</div><div class="line">if ( !($x % 5) )           &#123;...&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if !($x % 5) &#123;...&#125;</div><div class="line">if $x %% 5   &#123;...&#125;     # %% means &quot;is evenly divisible by&quot;</div></pre></td></tr></table></figure>
+<ul>
+<li>Do something $n times, 直到 $n-1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for ( $_=0; $_ &lt; $n; $_++ ) &#123;...&#125;</div><div class="line">for ( 0 .. ($n-1) )         &#123;...&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for 0 ..^ $n &#123;...&#125;</div><div class="line">for ^$n      &#123;...&#125;     # ^9 means 0 ..^ 9, or 0..8</div></pre></td></tr></table></figure>
+<p>eg：</p>
+<pre><code>&gt; .say for ^5
+</code></pre><p>0<br>1<br>2<br>3<br>4</p>
+<p>Bare method calls are <em>always</em> methods on $<em>, eliminating Perl 5’s confusion on which functions default to $</em>.</p>
+<ul>
+<li>按空白分割</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@words = split /\s+/, $_;</div><div class="line">@words = split;           # Default is useful, but not intuitive</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@words = .split(/\s+/);  # split() 现在没有默认的模式</div><div class="line">@words = .words;         # split 的旧的行为现在成为了一个单独的方法.words</div></pre></td></tr></table></figure>
+<ul>
+<li>将字符串分割成单独的字符</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@chars = map &#123; substr $word, $_, 1 &#125; 0..length($word);</div><div class="line">@chars = split &apos;&apos;, $word;# Split on nothingness</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@chars = $word.split(&apos;&apos;);</div><div class="line">@chars = $word.comb;     # Default is to &quot;keep everything&quot;</div></pre></td></tr></table></figure>
+<p> eg：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt; my $word=&apos;Perl6&apos;</div><div class="line">Perl6</div><div class="line">&gt; my @chars=$word.split(&apos;&apos;)</div><div class="line">P e r l 6</div><div class="line">&gt; my @chars=$word.split(&apos;&apos;).join(&apos;-&gt;&apos;)</div><div class="line">P-&gt;e-&gt;r-&gt;l-&gt;6</div><div class="line">&gt; my @chars=$word.comb</div><div class="line">P e r l 6</div><div class="line">&gt; my @chars=$word.comb.join(&apos;:&apos;)</div><div class="line">P:e:r:l:6</div></pre></td></tr></table></figure>
+<ul>
+<li>无限循环</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for (;;)  &#123;...&#125;    # Spoken with a &apos;C&apos; accent</div><div class="line">while (1) &#123;...&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">while 1   &#123;...&#125;</div><div class="line">loop      &#123;...&#125;   # 没有给出限定条件，所以默认无止尽</div></pre></td></tr></table></figure>
+<ul>
+<li>按原来的顺序返回列表中的唯一元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my %s, @r; for @a  &#123; push @r, $_ if !$s&#123;$_&#125;; $s&#123;$_&#125;++; &#125; return @r;</div><div class="line">my %s; return grep &#123; !$s&#123;$_&#125;++ &#125; @a;    # or List::MoreUtils::uniq</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my %s; return grep &#123; !%s&#123;$_&#125;++ &#125;, @a;</div><div class="line">return @a.uniq;</div></pre></td></tr></table></figure>
+<ul>
+<li>将列表中的所有元素求和</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $sum = 0; for my $num (@a) &#123; $sum += $num &#125;</div><div class="line">my $sum; $sum += $_ for @a;    # or List::Util::sum</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $sum = @a.reduce(*+*);</div><div class="line">my $sum = [+] @a;              # [op] 将op操作符应用到整个列表</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@alpha = &apos;A&apos; .. &apos;Z&apos;;</div><div class="line">@a = qw&#123; able baker charlie &#125;;</div><div class="line">%meta = ( foo =&gt; &apos;bar&apos;, baz =&gt; &apos;quz&apos; );</div><div class="line">@squares = map &#123; $_ * $_ &#125;, @a;</div><div class="line">@starts_with_number = grep &#123; /^\d/ &#125;, @a;</div></pre></td></tr></table></figure>
+<p>钻石操作符还在：</p>
+<ul>
+<li>Process each line from STDIN or from command-line files.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for my $file (@ARGV) &#123; open FH, $file; while (&lt;FH&gt;) &#123;...&#125; &#125;</div><div class="line">while (&lt;&gt;) &#123;...&#125;               # Null filehandle is magical</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for $*ARGFILES.lines &#123;...&#125;</div><div class="line">for lines()          &#123;...&#125;     # lines() defaults to $fh = $*ARGFILES</div></pre></td></tr></table></figure>
+<ul>
+<li>将散列初始化为一个常量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my %h;   for (@a) &#123; $h&#123;$_&#125; = 1 &#125;</div><div class="line">my %h = map &#123; $_ =&gt; 1 &#125; @a;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my %h = map &#123; $_ =&gt; 1 &#125;, @a;</div><div class="line">my %h = @a X=&gt; 1;</div></pre></td></tr></table></figure>
+<p>eg：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; my @a=&lt;Perl Python Ruby Perl6&gt;</div><div class="line">Perl Python Ruby Perl6</div><div class="line">&gt; my %h= @a X=&gt; 1</div><div class="line">(&quot;Perl&quot; =&gt; 1, &quot;Python&quot; =&gt; 1, &quot;Ruby&quot; =&gt; 1, &quot;Perl6&quot; =&gt; 1).hash</div></pre></td></tr></table></figure>
+<ul>
+<li>Hash initialization for enumeration</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my %h;   for (0..$#a) &#123; $h&#123; $a[$_] &#125; = $_ &#125;</div><div class="line">my $c;   my %h = map  &#123; $_ =&gt; ++$c &#125; @a;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $c;   my %h = map &#123; $_ =&gt; ++$c &#125;, @a;</div><div class="line">(&quot;Perl&quot; =&gt; 1, &quot;Python&quot; =&gt; 2, &quot;Ruby&quot; =&gt; 3, &quot;Perl6&quot; =&gt; 4).hash</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my %h = @a Z=&gt; 1..*;       # (&quot;Perl&quot; =&gt; 1, &quot;Python&quot; =&gt; 2, &quot;Ruby&quot; =&gt; 3, &quot;Perl6&quot; =&gt; 4).hash</div><div class="line">my %h = @a.pairs».invert;  # if zero based , (&quot;Perl&quot; =&gt; 0, &quot;Python&quot; =&gt; 1, &quot;Ruby&quot; =&gt; 2, &quot;Perl6&quot; =&gt; 3).hash</div></pre></td></tr></table></figure>
+<blockquote>
+<p>@a.pairs<br>0 =&gt; “Perl” 1 =&gt; “Python” 2 =&gt; “Ruby” 3 =&gt; “Perl6”</p>
+</blockquote>
+<ul>
+<li>Hash initialization from parallel arrays</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my %h;   for (@a) &#123; $h&#123;$_&#125; = shift @b &#125;</div><div class="line">my %h;   @h&#123;@a&#125; = @b;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my %h;   %h&#123;@a&#125; = @b;</div><div class="line">my %h = @a Z=&gt; @b;</div></pre></td></tr></table></figure>
+<p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; my @b=&lt;Larry Gao Mztiz Larry_Wall&gt;</div><div class="line">Larry Gao Mztiz Larry_Wall</div><div class="line">&gt; my %h= @a Z=&gt; @b</div><div class="line">(&quot;Perl&quot; =&gt; &quot;Larry&quot;, &quot;Python&quot; =&gt; &quot;Gao&quot;, &quot;Ruby&quot; =&gt; &quot;Mztiz&quot;, &quot;Perl6&quot; =&gt; &quot;Larry_Wall&quot;).hash</div></pre></td></tr></table></figure>
+<ul>
+<li>交换两个变量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $temp = $x; $x = $y; $y = $temp;</div><div class="line">( $x, $y ) = ( $y, $x );</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">( $x, $y )  = $y, $x;</div><div class="line">( $x, $y ) .= reverse;   # .= makes reverse into a &quot;mutating&quot; method</div><div class="line"># Tastes great on array swaps, too!   @a[ $j, $k ] .= reverse;</div></pre></td></tr></table></figure>
+<ul>
+<li>Rotate array left by 1 element</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $temp = shift @a; push @a, $temp;</div><div class="line">push @a, shift @a;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@a.push: @a.shift;</div><div class="line">@a .= rotate; # Python Ruby Perl6 Perl</div></pre></td></tr></table></figure>
+<ul>
+<li>创建一个对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $pet = new Dog;</div><div class="line">my $pet = Dog-&gt;new;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $pet = Dog.new;</div><div class="line">my Dog $pet .= new;    # $pet *always* isa Dog; Compiler can optimize!</div></pre></td></tr></table></figure>
+<p>Combining transformation with selection was an advanced idiom in Perl 5. The new return values for if provide a bite-sized idiom.</p>
+<ul>
+<li>Three copies of elements &gt; 5</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@z = map &#123; ($_) x 3 &#125; grep &#123; $_ &gt; 5 &#125; @y;    # map,grep</div><div class="line">@z = map &#123; $_ &gt; 5 ? ($_) x 3 : () &#125; @y;      # map as grep</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@z = map &#123; $_ &gt; 5 ?? ($_) xx 3 !! Nil &#125;, @y;</div><div class="line">@z = @y.map: &#123; $_ xx 3 if $_ &gt; 5 &#125;;          # !if == Empty list</div><div class="line">@z = ($_ xx 3 if $_ &gt; 5 for @y);             # List comprehension</div></pre></td></tr></table></figure>
+<ul>
+<li>3到7之间的随机整数，包含3和7</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">do &#123; $z = int rand 8 &#125; until $z &gt;= 3;</div><div class="line">$z = 3 + int rand 5;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$z = 3 + Int(5.rand);</div><div class="line">$z = (3..7).pick;</div></pre></td></tr></table></figure>
+<ul>
+<li>在无限循环中每次循环加 3</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for ( my $i = 1; ; $i++ ) &#123; my $n = 3 * $i; ... &#125;</div><div class="line">for ( my $n = 3; ; $n += 3 ) &#123;...&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">loop ( my $n = 3; ; $n += 3 ) &#123;...&#125;</div><div class="line">for 3, * + 3 ... * -&gt; $n      &#123;...&#125;      # `...` is the &quot;sequence&quot; operator</div><div class="line">for 3, 6, 9 ... * -&gt; $n       &#123;...&#125;      # `...` can infer from example list</div></pre></td></tr></table></figure>
+<ul>
+<li>遍历区间, 不包含开始点和结束点</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for my $i ( $start .. $limit ) &#123; next if $i == $start or $i == $limit; ... &#125;</div><div class="line">for my $i ( ($start+1) .. ($limit-1) ) &#123;...&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for ($start+1) .. ($limit-1) -&gt; $i &#123;...&#125;</div><div class="line">for $start    ^..^ $limit    -&gt; $i &#123;...&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/圣诞/" rel="tag">#圣诞</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/27/S06-Subroutines/" rel="next" title="S06-Subroutines">
+                <i class="fa fa-chevron-left"></i> S06-Subroutines
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/29/Perl6中的正则表达式-二/" rel="prev" title="Perl 6 中的正则表达式(二)">
+                Perl 6 中的正则表达式(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/06/28/Perl-6圣诞月历-2011/"
+     data-title="Perl 6 圣诞月历-(2011)"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/06/28/Perl-6圣诞月历-2011/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/28/Perl-6圣诞月历-2011/"
+           data-title="Perl 6 圣诞月历-(2011)" data-url="https://ohmycloud.github.io/2016/06/28/Perl-6圣诞月历-2011/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2011"><span class="nav-number">1.</span> <span class="nav-text">2011</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Flip-Flop-operator"><span class="nav-number">1.1.</span> <span class="nav-text">The Flip-Flop operator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Idiomatic-Perl-6"><span class="nav-number">1.2.</span> <span class="nav-text">Idiomatic Perl 6</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

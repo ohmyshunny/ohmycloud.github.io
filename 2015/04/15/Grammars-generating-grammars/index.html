@@ -1,0 +1,715 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Grammar," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="现在你可能已经习惯了 Perl 6 中到处出现的前缀”meta”。Metaclasses, Metaobjects, Metaoperators, 还有迷一般的 Meta-Object 协议。听起来一点也不可怕, 你都见过了不是吗？今天, 在 Perl 6 Advent Calendar 上, 我们将进行完全的 meta 化(full meta)。我们将拥有能解析 grammars 的 gramm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grammars generating grammars">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/04/15/Grammars-generating-grammars/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="现在你可能已经习惯了 Perl 6 中到处出现的前缀”meta”。Metaclasses, Metaobjects, Metaoperators, 还有迷一般的 Meta-Object 协议。听起来一点也不可怕, 你都见过了不是吗？今天, 在 Perl 6 Advent Calendar 上, 我们将进行完全的 meta 化(full meta)。我们将拥有能解析 grammars 的 gramm">
+<meta property="og:updated_time" content="2016-10-23T16:32:15.992Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Grammars generating grammars">
+<meta name="twitter:description" content="现在你可能已经习惯了 Perl 6 中到处出现的前缀”meta”。Metaclasses, Metaobjects, Metaoperators, 还有迷一般的 Meta-Object 协议。听起来一点也不可怕, 你都见过了不是吗？今天, 在 Perl 6 Advent Calendar 上, 我们将进行完全的 meta 化(full meta)。我们将拥有能解析 grammars 的 gramm">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/04/15/Grammars-generating-grammars/"/>
+
+  <title> Grammars generating grammars | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Grammars generating grammars
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-15T00:00:00+08:00" content="2015-04-15">
+              2015-04-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/04/15/Grammars-generating-grammars/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/15/Grammars-generating-grammars/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>现在你可能已经习惯了 Perl 6 中到处出现的前缀”meta”。<strong>Metaclasses</strong>, <strong>Metaobjects</strong>, <strong>Metaoperators</strong>, 还有迷一般的 Meta-Object 协议。听起来一点也不可怕, 你都见过了不是吗？今天, 在 Perl 6 Advent Calendar 上, 我们将进行完全的 <strong>meta</strong> 化(full meta)。我们将拥有能解析 grammars 的 grammars, 然后生成将用于解析 grammars 的 grammars。</p>
+<a id="more"></a>
+<p>Grammars 无疑是 Perl 6 的杀手级功能。我们拥有了正则表达式曾经没有的东西: 可读性、可组合性当然还有解析 Perl 6 自身的能力。— 如果这不能展示它的强大, 那我不知道什么能够!</p>
+<p>为预定义好的 grammars(例如以 <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form" target="_blank" rel="external">Bachus-Naur</a> 形式)写解析器总是有点无趣, 几乎和复制粘贴一样。如果你曾经坐下来重头开始写一个解析器(或者期间温习一遍那本优秀的”让我们构建一个编译器”图书), 你可能会意识到模式是如此相似:从你的 grammar 中拿出单个 rule, 为它写一个子例程, 让它调用(可能是递归的)其它类似的为其它 grmmars rules 定义的子例程, 清洗, 重复。现在我们有了Perl 6 Grammars! 在这个新世界中, 我们不必为每个 token 写上子例程来完成工作了。 现在我们写 <strong>grammar</strong> 类, 里面放上 <em>tokens</em>、<em>rules</em>、<em>regexes</em> 标志。在标志里写正则表达式(或代码)并引用(可能是递归的) Perl 6 gramamr 中的其它标志。如果你曾经使用过这些东西, 你肯定会意识到 Perl 6 中的 gramamrs 是多么的方便。</p>
+<p>但是假如我们已经有了一个 grammar, 例如之前提到过的 BNF? 我们所做的就是小心地把已经存在的 grammar(实际上在我们头脑中解析它)重新键入到一个新的 Perl 6  Grammar 中以代表同样的一个东西, 但是那确实有一个可作为可执行代码的优势。对大多数人来说, 那都不是事儿。我们不是普通人, 我们是程序员。我们拥有资源。它们会让这些 Grammars 变得有意义。</p>
+<p>绝妙的是 Perl 6 gramamrs 和语言的其它元素没什么两样。Grammars 就像类那样也是头等公民, 可以内省, 扩展。实际上, 你可以查看编译器源代码自身, 你会注意到<strong><a href="https://github.com/rakudo/rakudo/blob/nom/src/Perl6/Metamodel/GrammarHOW.nqp" target="_blank" rel="external">Grammars 就是一种特定种类的类</a></strong>。它们遵守和类一样的规则, 允许我们就地创建 gramamrs, 就地给 gramamrs 添加 tokens, 最终完结这个 gramamr 以拥有一个合适的能实例化的类对象。现在既然我们能解析 BNF gramamrs(因为它们就是普通的文本)并从代码中创建 Perl 6 grammars, 让我们把这些片段放在一起并写点能手动把 BNF gramamr 转化为 Perl 6 grammar 的东西。</p>
+<h4 id="解析-BNF-grammar-的-grammar"><a href="#解析-BNF-grammar-的-grammar" class="headerlink" title="解析 BNF grammar 的 grammar"></a>解析 BNF grammar 的 grammar</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">grammar Grammar::BNF &#123;</div><div class="line">    token TOP &#123; \s* &lt;rule&gt;+ \s* &#125;</div><div class="line"></div><div class="line">    token rule &#123;</div><div class="line">        &lt;opt-ws&gt; &apos;&lt;&apos; &lt;rule-name&gt; &apos;&gt;&apos; &lt;opt-ws&gt; &apos;::=&apos; &lt;opt-ws&gt; &lt;expression&gt; &lt;line-end&gt;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    token expression &#123;</div><div class="line">        &lt;list-of-terms&gt; +% [\s* &apos;|&apos; &lt;opt-ws&gt;]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    token term &#123;</div><div class="line">        &lt;literal&gt; | &apos;&lt;&apos; &lt;rule-name&gt; &apos;&gt;&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    token list-of-terms &#123; &lt;term&gt; +% &lt;opt-ws&gt;                &#125;</div><div class="line">    token rule-name     &#123; &lt;-[&gt;]&gt;+                           &#125;</div><div class="line">    token opt-ws        &#123; \h*                               &#125;</div><div class="line">    token line-end      &#123; [ &lt;opt-ws&gt; \n ]+                  &#125;</div><div class="line">    token literal       &#123; &apos;&quot;&apos; &lt;-[&quot;]&gt;* &apos;&quot;&apos; | &quot;&apos;&quot; &lt;-[&apos;]&gt;* &quot;&apos;&quot; &#125;</div><div class="line"></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最上层的 3 个 tokens 发生了有意思的事情。<em>rule</em> 是 BNF grammar 的核心构造块: 一个 <code>&lt;symbol&gt; ::=  &lt;expression&gt;</code> 块儿, 后面跟着一个换行符。整个 grammar 就是一列 rules。每个表达式是一列项、或可能的和它们的备选分支。每个项要么是一个字面值, 或一个由尖括号包围的标志名。足够了! 那涵盖了解析部分。让我们看一下生成自身。我们的确有一种”为 grammar 中的每个 token 做某事”的机制, 以 <strong>Actions</strong>的形式, 让我们继续并使用它:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">my class Actions &#123;</div><div class="line">    has $.name = &apos;BNFGrammar&apos;;</div><div class="line">    method TOP($/) &#123;</div><div class="line">        my $grmr := Metamodel::GrammarHOW.new_type(:$.name);</div><div class="line">        $grmr.^add_method(&apos;TOP&apos;,</div><div class="line">            EVAL &apos;token &#123; &lt;&apos; ~ $&lt;rule&gt;[0].ast.key ~ &apos;&gt; &#125;&apos;);</div><div class="line">        for $&lt;rule&gt;.map(*.ast) -&gt; $rule &#123;</div><div class="line">            $grmr.^add_method($rule.key, $rule.value);</div><div class="line">        &#125;</div><div class="line">        $grmr.^compose;</div><div class="line">        make $grmr;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method expression($/) &#123;</div><div class="line">        make EVAL &apos;token &#123; &apos; ~ ~$/ ~ &apos; &#125;&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method rule($/) &#123;</div><div class="line">        make ~$&lt;rule-name&gt; =&gt; $&lt;expression&gt;.ast;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>TOP</strong>方法毫无疑问是最魔幻和最恐怖的, 所以擒贼先擒王, 其它小喽啰就无关紧要了。基本上, <em>TOP</em>那儿发生了三件事:</p>
+<p>1、我们创建了一个新的 grammar, 作为一个新的 Perl 6 类型<br>2、我们使用 <code>^add_method</code>方法为 grammar 添加 tokens<br>3、我们使用 <code>^compose</code>方法定型该 grammar</p>
+<p>虽然 Perl 6 指定名为 <strong>TOP</strong> 的 token 是解析开始的地方, 在 BNF 中第一个 rule 总是开始点。为了彼此适应,  我们精巧地制作了一个假的 <strong>TOP</strong> token, 它正是调用了 BNF grammar 中指定的第一个 rule。不可避免地, 恐怖又令人失望的 <strong>EVAL</strong> 引起了我们的注意, 就像它说了”这儿发生了可怕的事情” 一样。它那样说并不是完全错误的, 但是因为我们没有其它程序化构建单独正则的方法, 我们不得不接受这点不适。</p>
+<p><strong>TOP</strong>之后我们继续为我们的 grammar 添加 BNF rules 的剩余部分, 这一次保留它们原来的名字, 然后 <code>^compose</code>整个东西, 最后让它(make)成为解析的结果: 一个做好的解析类。</p>
+<p>在 <em>expression</em> 方法中我们把解析过的 BNF 元素粘贴到一块以产生合法的 Perl 6 代码。这变得特别容易, 因为那俩个单独的标志带有空格, 使用管道符号来轮试备选分支, 并使用尖括号包围标志名。目前为止, 一个 rule 看起来像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;foo&gt; ::= &apos;bar&apos; | &lt;baz&gt;</div></pre></td></tr></table></figure>
+<p>我们求值(EVAL)的 Perl 6 代码变为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">token &#123; &apos;bar&apos; | &lt;baz&gt; &#125;</div></pre></td></tr></table></figure>
+<p>因为我们已经在我们代码的 grammar 部分检测我们解析的 BNF 是正确的, 没有什么能够阻止我们传递解析整个表达式字面值到我们的代码中并使用一个 <code>token  { }</code>来包裹它, 所以让我们继续。</p>
+<p>最后, 对于我们解析的每一个 BNF rule, 我们产生了一个很不错的 <em>Pair</em>, 所以我们的 <strong>TOP</strong> 方法很愉快地处理它们中的每个。</p>
+<p>看起来我们好像在这儿结束了, 但是仅仅是为了方便使用者, 让我们写一个更好的方法, 接收一个 BNF grammar, 并为我们生成一个准备好使用的类型对象。我们记得, grammars 就是类, 所以我们没有什么能阻止我们直接为我们的 gramamr 添加它:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">grammar Grammar::BNF &#123;</div><div class="line">    ...</div><div class="line">    method generate($source, :$name = &apos;BNFGrammar&apos;) &#123;</div><div class="line">        my $actions = Actions.new(:$name);</div><div class="line">        my $ret = self.new.parse($source, :$actions).ast;</div><div class="line">        return $ret.WHAT;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这儿看起来很不错! 在你开始往你自己的项目中复制粘贴所有这些之前, 记得  <a href="https://github.com/tadzik/Grammar-BNF/" target="_blank" rel="external">Grammar::BNF</a> 是一个可在  <a href="http://modules.perl6.org/" target="_blank" rel="external">Perl 6 Module Ecosystem</a>获得的 Perl 6 模块, 使用你喜欢的模块管理器安装。</p>
+<p>假设你确实花费时间查看了开头的 post, 你可能会记得我许诺过我们将有 grammars(第一条)来解析 grammars(第二条), 然后生成 grammars(第三条), 使用生成的 grammars 来解析 grammars(第四条)。目前为止， 我们已经看到过 BNF::Grammar  grammar(那是第一条), 并解析一个 BNF grammar(那是第二条), 以类对象的形式来生成 Perl 6 grammar(第三条)。 就这些。我们仍旧缺乏最后一部分, 使用整个东西来解析 grammars。 我们只完成了 75% 的 meta化, 今天足够了。为什么现在停止? 为什么不拿一个 BNF grammar , 使用 Perl 6 grammar 来解析 grammar, 使用 Perl 6 BNF grammar 的结果来解析我们原来的 BNF Grammar? 那不是很好吗？ 是的, 那很好, 我们只是留了一个练习给你。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grammar/" rel="tag">#Grammar</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/04/15/Perl-6圣诞月历-2012/" rel="next" title="Perl 6圣诞月历-(2012)">
+                <i class="fa fa-chevron-left"></i> Perl 6圣诞月历-(2012)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/04/27/从正则表达式到Grammars-Part-1/" rel="prev" title="从正则表达式到Grammars - Part 1">
+                从正则表达式到Grammars - Part 1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/04/15/Grammars-generating-grammars/"
+     data-title="Grammars generating grammars"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/04/15/Grammars-generating-grammars/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/04/15/Grammars-generating-grammars/"
+           data-title="Grammars generating grammars" data-url="https://ohmycloud.github.io/2015/04/15/Grammars-generating-grammars/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#解析-BNF-grammar-的-grammar"><span class="nav-number">1.</span> <span class="nav-text">解析 BNF grammar 的 grammar</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

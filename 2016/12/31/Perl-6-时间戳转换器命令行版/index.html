@@ -1,0 +1,787 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Datetime," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6 By Example: Datetime Conversion for the Command Line我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:
+12345678$ autotim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 时间戳转换器命令行版">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/12/31/Perl-6-时间戳转换器命令行版/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6 By Example: Datetime Conversion for the Command Line我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:
+12345678$ autotim">
+<meta property="og:updated_time" content="2017-01-16T05:05:05.989Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 时间戳转换器命令行版">
+<meta name="twitter:description" content="Perl 6 By Example: Datetime Conversion for the Command Line我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:
+12345678$ autotim">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/12/31/Perl-6-时间戳转换器命令行版/"/>
+
+  <title> Perl 6 时间戳转换器命令行版 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 时间戳转换器命令行版
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-31T23:14:12+08:00" content="2016-12-31">
+              2016-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/31/Perl-6-时间戳转换器命令行版/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/31/Perl-6-时间戳转换器命令行版/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line"><a href="#Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line" class="headerlink" title="Perl 6 By Example: Datetime Conversion for the Command Line"></a>Perl 6 By Example: Datetime Conversion for the Command Line</h1><p>我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ autotime 2015-12-24</div><div class="line">1450915200</div><div class="line">$ autotime 2015-12-24 11:23:00</div><div class="line">1450956180</div><div class="line">$ autotime 1450915200</div><div class="line">2015-12-24</div><div class="line">$ autotime 1450956180</div><div class="line">2015-12-24 11:23:00</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="使用库"><a href="#使用库" class="headerlink" title="使用库"></a>使用库</h2><p>Perl 6 的 <a href="https://docs.perl6.org/type/DateTime" target="_blank" rel="external">DateTime</a> 和 <a href="https://docs.perl6.org/type/Date" target="_blank" rel="external">Date</a> 模块会做实际的转换。<br><code>DateTime.new</code> 构造函数有一个接收单个整数作为 UNIX 时间戳的变体:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ perl6 -e &quot;say DateTime.new(1480915200)&quot;</div><div class="line">2016-12-05T05:20:00Z</div></pre></td></tr></table></figure>
+<p>看起来我们已经完成了一个方向的转换,对吗?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">sub MAIN (Int $timestamp) &#123;</div><div class="line">    say DateTime.new($timestamp)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们来运行它:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ autotime 1450915200</div><div class="line">Invalid DateTime string &apos;1450915200&apos;; use an ISO 8601 timestamp (yyyy-mm-ddThh:mm:ssZ or yyyy-mm-ddThh:mm:ss+01:00) instead</div><div class="line">  in sub MAIN at autotime line 2</div><div class="line">  in block &lt;unit&gt; at autotime line 2</div></pre></td></tr></table></figure>
+<p>发生了什么？看起来 <code>DateTime</code> 构造函数把参数当作了字符串, 尽管 <code>sub MAIN</code> 的参数被声明为 <code>Int</code>。怎么会变成那样呢? 我们添加一些调试输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">sub MAIN(Int $timestamp) &#123;</div><div class="line">    say $timestamp.^name;</div><div class="line">    say DateTime.new($timestamp)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>打印出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IntStr</div></pre></td></tr></table></figure>
+<p><code>$thing.^name</code> 是 $thing 所属类的名字。 <a href="https://docs.perl6.org/type/IntStr" target="_blank" rel="external">IntStr</a> 是 <code>Int</code> 和 <code>Str</code> 类的子类, 这就是为什么 <code>DateTime</code> 构造函数正常地认为 $timestamp 是一个 <code>Str</code> 的原因。</p>
+<p>长话短说, 我们可以在参数前添加一个 <code>+</code> 前缀使参数强制为 “真” 整数, 这也是将字符串转为数值的通用机制:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">sub MAIN(Int $timestamp) &#123;</div><div class="line">    say DateTime.new(+$timestamp)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这一次它真的工作了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./autotime-01.p6 1450915200</div><div class="line">2015-12-24T00:00:00Z</div></pre></td></tr></table></figure>
+<p>输出是 ISO 8601 样式的时间戳格式, 对眼睛不太友好。对于小时,分钟和秒数都为 0 的日期, 我们真正想要的只有日期:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">sub MAIN(Int $timestamp) &#123;</div><div class="line">    my $dt = DateTime.new(+$timestamp);</div><div class="line">    if $dt.hour == 0 &amp;&amp; $dt.minute == 0 &amp;&amp; $dt.second == 0 &#123;</div><div class="line">        say $dt.Date;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        say $dt;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样看起来更好一点:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./autotime 1450915200</div><div class="line">2015-12-24</div></pre></td></tr></table></figure>
+<p>但是上面那种三个比较都为 0 的写法实在太丑了, 如果是 4 个, 5 个, 6 个… 那就是又丑又长。Perl 6 有一个 <code>all</code> Junction:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if all($dt.hour, $dt.minute, $dt.second) == 0 &#123;</div><div class="line">    say $dt.Date;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>all(...)</code> 创建了一个 <a href="https://docs.perl6.org/type/Junction" target="_blank" rel="external">Junction</a>, 它是几个其他值的组合值, 它也存储了一个逻辑模式。当你比较一个 junction 和其他值的时候, 那个比较会自动地应用到该 junction 中的所有值上。<code>if</code> 语句在布尔上下文中对该 junction 进行求值, 在这个例子中, 当所有的比较为 <code>True</code> 时, if 也返回 <code>True</code>。</p>
+<p>其他类型的 junction 还有 <code>any</code>, <code>all</code>, <code>none</code>。考虑到在布尔上下文中, 0 是唯一一个求值为 false 的整数, 我们甚至可以把上面的例子写为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if none($dt.hour, $dt.minute, $dt.second) &#123;</div><div class="line">    say $dt.Date;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是也可能没有必要搞得那么复杂,  如果 <code>$dt</code> 这个 Datetime 对象转换为 <code>Date</code>  然后再转换为 DateTime 而不丢失信息, 那么它肯定是一个 Date:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if $dt.Date.DateTime == $dt &#123;</div><div class="line">    say $dt.Date;</div><div class="line">&#125;</div><div class="line">else &#123;</div><div class="line">    say $dt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="DateTime-格式化"><a href="#DateTime-格式化" class="headerlink" title="DateTime 格式化"></a>DateTime 格式化</h2><p>如果时间戳没有被解析为整天, 那么当前我们的脚本的输出就会像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2015-12-24T00:00:01Z</div></pre></td></tr></table></figure>
+<p>其中的 “Z” 表示 UTC 或 “Zulu” 时区。</p>
+<p><code>DateTime</code> 类支持自定义格式化, 所以我们来写一个:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">sub MAIN(Int $timestamp) &#123;</div><div class="line">    my $dt = DateTime.new(+$timestamp, formatter =&gt; sub ($o) &#123;</div><div class="line">            sprintf &apos;%04d-%02d-%02d %02d:%02d:%02d&apos;,</div><div class="line">                    $o.year, $o.month,  $o.day,</div><div class="line">                    $o.hour, $o.minute, $o.second,</div><div class="line">    &#125;);</div><div class="line">    if $dt.Date.DateTime == $dt &#123;</div><div class="line">        say $dt.Date;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        say $dt.Str;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在输出看起来更好看了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./autotime 1450915201</div><div class="line">2015-12-24 00:00:01</div></pre></td></tr></table></figure>
+<p>语法 <code>formatter =&gt; ...</code> 在参数上下文中表示具名参数。<br>这样的代码我不喜欢, 因为在 <code>DateTime.new</code> 调用中它是内联的, 这并不清晰。</p>
+<p>我们来单独写一个例程:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">sub MAIN(Int $timestamp) &#123;</div><div class="line">    sub formatter($o) &#123;</div><div class="line">        sprintf &apos;%04d-%02d-%02d %02d:%02d:%02d&apos;,</div><div class="line">                $o.year, $o.month,  $o.day,</div><div class="line">                $o.hour, $o.minute, $o.second,</div><div class="line">    &#125;</div><div class="line">    my $dt = DateTime.new(+$timestamp, formatter =&gt; &amp;formatter);</div><div class="line">    if $dt.Date.DateTime == $dt &#123;</div><div class="line">        say $dt.Date;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        say $dt.Str;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是的, 你可以把一个子例程声明放在另一个子例程声明的正文中; 子例程只是一个普通的词法符号,就像一个用 <code>my</code> 声明的变量。</p>
+<p>在行 <code>my $dt = DateTime.new(+$timestamp,formatter =&gt; &amp;formatter);</code> 中, 语法 <code>&amp;formatter</code> 引用子例程作为一个对象,而不调用它。</p>
+<p>这是 Perl 6, <code>formatter =&gt; &amp;formatter</code> 有一个简写: <code>&amp;formatter</code>。<br>作为一般规则,如果要填充一个名称为变量名称并且其值为变量值的命名参数, 可以通过写入 <code>:$variable</code> 创建它。 作为扩展, <code>:thing</code> 是 <code>thing =&gt; True</code> 的缩写。</p>
+<h2 id="寻找其他途径"><a href="#寻找其他途径" class="headerlink" title="寻找其他途径"></a>寻找其他途径</h2><p>现在, 从时间戳到日期和时间的转换工作的很好, 让我们看另一种途径。<br>我们的小工具需要解析输入, 并决定输入的是时间戳还是日期和可选的时间。</p>
+<p>一种无聊的方式是使用条件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sub MAIN($input) &#123;</div><div class="line">    if $input ~~ / ^ \d+ $ / &#123;</div><div class="line">        # convert from timestamp to date/datetime</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        # convert from date to timestamp</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但我讨厌无聊, 所以我想看看一个更令人兴奋的（端可扩展）方法。</p>
+<p>Perl 6 支持多重分派。这意味着您可以有多个具有相同名称但不同签名的子例程。<br>Perl 6 自动决定要调用哪一个。 您必须通过编写 <code>multi sub</code> 而不是 <code>sub</code> 来显式地启用此功能, 以便 Perl 6 可以捕获意外的重新声明。</p>
+<p>让我们看看它在实际中的运用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line"></div><div class="line">multi sub MAIN(Int $timestamp) &#123;</div><div class="line">    sub formatter($o) &#123;</div><div class="line">        sprintf &apos;%04d-%02d-%02d %02d:%02d:%02d&apos;,</div><div class="line">                $o.year, $o.month,  $o.day,</div><div class="line">                $o.hour, $o.minute, $o.second,</div><div class="line">    &#125;</div><div class="line">    my $dt = DateTime.new(+$timestamp, :&amp;formatter);</div><div class="line">    if $dt.Date.DateTime == $dt &#123;</div><div class="line">        say $dt.Date;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        say $dt.Str;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">multi sub MAIN(Str $date) &#123;</div><div class="line">    say Date.new($date).DateTime.posix</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们看一下效果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ./autotime 2015-12-24</div><div class="line">1450915200</div><div class="line">$ ./autotime 1450915200</div><div class="line">Ambiguous call to &apos;MAIN&apos;; these signatures all match:</div><div class="line">:(Int $timestamp)</div><div class="line">:(Str $date)</div><div class="line">  in block &lt;unit&gt; at ./autotime line 17</div></pre></td></tr></table></figure>
+<p>不是我所想象的。问题又是整数参数自动被转换为了 <code>IntStr</code>, Int 和 Str <code>multi</code>（或候选）都接受它作为参数。</p>
+<p>避免这种错误的最简单的方法是缩小 Str 候选者接受的字符串的种类。<br>经典的方法是用一个正则表达式粗略验证传入的参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">multi sub MAIN(Str $date where /^ \d+ \- \d+ \- \d+ $ /) &#123;</div><div class="line">    say Date.new($date).DateTime.posix</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它确实能工作, 但为什么重复 Date.new 已经有用于验证日期字符串的逻辑？<br>如果你传递一个看起来不像日期的字符串参数,你会得到这样的错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Invalid Date string &apos;foobar&apos;; use yyyy-mm-dd instead</div></pre></td></tr></table></figure>
+<p>我们可以使用这种行为约束 <code>MAIN multi</code> 候选者的字符串参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">multi sub MAIN(Str $date where &#123; try Date.new($_) &#125;) &#123;</div><div class="line">    say Date.new($date).DateTime.posix</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这里额外的 <code>try</code> 是因为子类型约束后面的 <code>where</code> 不应该抛出异常, 而只是返回一个假值。</p>
+<p>现在它的工作得像预期的一样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ./autotime 2015-12-24;</div><div class="line">1450915200</div><div class="line">$ ./autotime 1450915200</div><div class="line">2015-12-24</div></pre></td></tr></table></figure>
+<h2 id="处理时间"><a href="#处理时间" class="headerlink" title="处理时间"></a>处理时间</h2><p>剩下要实现的功能是把日期和时间转换为时间戳。换句话说, 我们想这样调用 <code>autotime 2015-12-24 11:23:00</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">multi sub MAIN(Str $date where &#123; try Date.new($_) &#125;, Str $time?) &#123;</div><div class="line">    my $d = Date.new($date);</div><div class="line">    if $time &#123;</div><div class="line">        my ( $hour, $minute, $second ) = $time.split(&apos;:&apos;);</div><div class="line">        say DateTime.new(date =&gt; $d, :$hour, :$minute, :$second).posix;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        say $d.DateTime.posix;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>凭借尾部的?, 新的第二个参数是可选的 。 如果存在第二个参数, 我们用冒号将时间字符串分割成小时,分钟和秒。 我写的第一个本能是使用较短的变量名称, <code>my($h, $m, $s) = $time.split(&#39;:&#39;)</code>, 但然后调用 <code>DateTime</code> 构造函数看起来像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DateTime.new(date =&gt; $d, hour =&gt; $h, minute =&gt; $m, second =&gt; $s);</div></pre></td></tr></table></figure>
+<p>所以构造函数的命名参数使我选择更多的自解释变量名。</p>
+<p>所以, 这个可以工作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./autotime 2015-12-24 11:23:00</div><div class="line">1450956180</div></pre></td></tr></table></figure>
+<p>而且我们还可以检测它的原形:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./autotime 1450956180</div><div class="line">2015-12-24 11:23:00</div></pre></td></tr></table></figure>
+<h2 id="系好你的安全带"><a href="#系好你的安全带" class="headerlink" title="系好你的安全带"></a>系好你的安全带</h2><p>Perl 6 的隐式变量或主题变量:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for 1..3 &#123;</div><div class="line">    .say</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>产生如下输出:</p>
+<p>[source]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td></tr></table></figure></p>
+<p>这个例子中没有显式的迭代变量, 所以 Perl 隐式地把当前循环的值绑定给叫做 <code>$_</code> 的变量。方法调用 <code>.say</code> 是 <code>$_.say</code> 的缩写。由于我们有一个子例程在同一个变量上调用了 6 个方法, 所以使用 <code>$_</code> 会有很好的可视效果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub formatter($_) &#123;</div><div class="line">    sprintf &apos;%04d-%02d-%02d %02d:%02d:%02d&apos;,</div><div class="line">            .year, .month,  .day,</div><div class="line">            .hour, .minute, .second,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果你不想求助于函数定义在词法作用域中设置 <code>$_</code>, 那么你可以使用 <code>given VALUE BLOCK</code> 结构:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">given DateTime.new(+$timestamp, :&amp;formatter) &#123;</div><div class="line">    if .Date.DateTime == $_ &#123;</div><div class="line">        say .Date;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        .say;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Perl 6 还提供了对 <code>$_</code> 变量的条件语句的快捷方式,可以用作一个通用的switch语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">given DateTime.new(+$timestamp, :&amp;formatter) &#123;</div><div class="line">    when .Date.DateTime == $_ &#123; say .Date &#125;</div><div class="line">    default &#123; .say &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果你有一个只读的变量或参数, 那么你可以不使用 <code>$</code> 符号, 虽然你可以在声明时使用反斜线:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">multi sub MAIN(Int \timestamp) &#123;</div><div class="line">    ...</div><div class="line">    given DateTime.new(+timestamp, :&amp;formatter) &#123;</div><div class="line">    ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以现在完整的代码看起来像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line"></div><div class="line">multi sub MAIN(Int \timestamp) &#123;</div><div class="line">    sub formatter($_) &#123;</div><div class="line">        sprintf &apos;%04d-%02d-%02d %02d:%02d:%02d&apos;,</div><div class="line">                .year, .month,  .day,</div><div class="line">                .hour, .minute, .second,</div><div class="line">    &#125;</div><div class="line">    given DateTime.new(+timestamp, :&amp;formatter) &#123;</div><div class="line">        when .Date.DateTime == $_ &#123; say .Date &#125;</div><div class="line">        default &#123; .say &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">multi sub MAIN(Str $date where &#123; try Date.new($_) &#125;, Str $time?) &#123;</div><div class="line">    my $d = Date.new($date);</div><div class="line">    if $time &#123;</div><div class="line">        my ( $hour, $minute, $second ) = $time.split(&apos;:&apos;);</div><div class="line">        say DateTime.new(date =&gt; $d, :$hour, :$minute, :$second).posix;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        say $d.DateTime.posix;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="MAIN-魔法"><a href="#MAIN-魔法" class="headerlink" title="MAIN 魔法"></a>MAIN 魔法</h2><p>为我们调用 <code>sub MAIN</code> 的魔法还为我们提供了一个自动化的用法消息, 如果我们用不匹配任何 <code>multi</code> 的参数调用 MAIN, 例如调用时不提供参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ./autotime</div><div class="line">Usage:</div><div class="line">  ./autotime &lt;timestamp&gt;</div><div class="line">  ./autotime &lt;date&gt; [&lt;time&gt;]</div></pre></td></tr></table></figure>
+<p>我们可以通过在 MAIN subs 之前添加语义注释来为这些用法行添加简短描述:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line"></div><div class="line">#| Convert timestamp to ISO date</div><div class="line">multi sub MAIN(Int \timestamp) &#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line">#| Convert ISO date to timestamp</div><div class="line">multi sub MAIN(Str $date where &#123; try Date.new($_) &#125;, Str $time?) &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在用法信息变为了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ./autotime</div><div class="line">Usage:</div><div class="line">  ./autotime &lt;timestamp&gt; -- Convert timestamp to ISO date</div><div class="line">  ./autotime &lt;date&gt; [&lt;time&gt;] -- Convert ISO date to timestamp</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们已经看到了一些 Date 和 DateTime 算法, 但令人兴奋的部分是 multi dispatch, 命名参数,带有 where 从句的子类型约束, given/ when 和 隐式 $_ 变量, 以及一些魔法, 当涉及到 MAIN subs 时。</p>
+<p>原文请参见 <a href="https://perlgeek.de/blog-en/perl-6/2016-book-timestamp-converter.html" target="_blank" rel="external">Perl 6 By Example: Datetime Conversion for the Command Line</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Datetime/" rel="tag">#Datetime</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/31/2016-年末总结/" rel="next" title="2016 年末总结">
+                <i class="fa fa-chevron-left"></i> 2016 年末总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/31/Perl-6-Tips-创建可重用的数据类型/" rel="prev" title="Perl 6 Tips - 创建可重用的数据类型">
+                Perl 6 Tips - 创建可重用的数据类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/31/Perl-6-时间戳转换器命令行版/"
+     data-title="Perl 6 时间戳转换器命令行版"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/12/31/Perl-6-时间戳转换器命令行版/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/31/Perl-6-时间戳转换器命令行版/"
+           data-title="Perl 6 时间戳转换器命令行版" data-url="https://ohmycloud.github.io/2016/12/31/Perl-6-时间戳转换器命令行版/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line"><span class="nav-number">1.</span> <span class="nav-text">Perl 6 By Example: Datetime Conversion for the Command Line</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用库"><span class="nav-number">1.1.</span> <span class="nav-text">使用库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DateTime-格式化"><span class="nav-number">1.2.</span> <span class="nav-text">DateTime 格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找其他途径"><span class="nav-number">1.3.</span> <span class="nav-text">寻找其他途径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理时间"><span class="nav-number">1.4.</span> <span class="nav-text">处理时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系好你的安全带"><span class="nav-number">1.5.</span> <span class="nav-text">系好你的安全带</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAIN-魔法"><span class="nav-number">1.6.</span> <span class="nav-text">MAIN 魔法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

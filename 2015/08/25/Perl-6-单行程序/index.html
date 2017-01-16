@@ -1,0 +1,1044 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="OneLiners,单行程序," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6 单行程序这本书在进行之中。我希望你能觉得它有趣，甚至可能有用！如果你想贡献反馈的话，那么很欢迎提问题还有新的或有提升的正则表达式。
+作者戴维法瑞尔 PerlTricks.com
+版本版本 0.01
+许可FreeBSD
+贡献者
+Alexander Moquin
+Bruce Gray
+Carl Mäsak
+David H. Adler
+FROGGS
+Helmut Wollmersdorf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 单行程序">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/08/25/Perl-6-单行程序/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6 单行程序这本书在进行之中。我希望你能觉得它有趣，甚至可能有用！如果你想贡献反馈的话，那么很欢迎提问题还有新的或有提升的正则表达式。
+作者戴维法瑞尔 PerlTricks.com
+版本版本 0.01
+许可FreeBSD
+贡献者
+Alexander Moquin
+Bruce Gray
+Carl Mäsak
+David H. Adler
+FROGGS
+Helmut Wollmersdorf">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.617Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 单行程序">
+<meta name="twitter:description" content="Perl 6 单行程序这本书在进行之中。我希望你能觉得它有趣，甚至可能有用！如果你想贡献反馈的话，那么很欢迎提问题还有新的或有提升的正则表达式。
+作者戴维法瑞尔 PerlTricks.com
+版本版本 0.01
+许可FreeBSD
+贡献者
+Alexander Moquin
+Bruce Gray
+Carl Mäsak
+David H. Adler
+FROGGS
+Helmut Wollmersdorf">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/08/25/Perl-6-单行程序/"/>
+
+  <title> Perl 6 单行程序 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 单行程序
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-25T00:00:00+08:00" content="2015-08-25">
+              2015-08-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/25/Perl-6-单行程序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/25/Perl-6-单行程序/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Perl-6-单行程序"><a href="#Perl-6-单行程序" class="headerlink" title="Perl 6 单行程序"></a><a href="https://github.com/dnmfarrell/Perl6-One-Liners" target="_blank" rel="external">Perl 6 单行程序</a></h1><p>这本书在进行之中。我希望你能觉得它有趣，甚至可能有用！如果你想贡献反馈的话，那么很欢迎提问题还有新的或有提升的正则表达式。</p>
+<h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>戴维法瑞尔 <a href="PerlTricks.com">PerlTricks.com</a></p>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>版本 0.01</p>
+<h2 id="许可"><a href="#许可" class="headerlink" title="许可"></a>许可</h2><p>FreeBSD</p>
+<h2 id="贡献者"><a href="#贡献者" class="headerlink" title="贡献者"></a>贡献者</h2><ul>
+<li>Alexander Moquin</li>
+<li>Bruce Gray</li>
+<li>Carl Mäsak</li>
+<li>David H. Adler</li>
+<li>FROGGS</li>
+<li>Helmut Wollmersdorfer</li>
+<li>japhb</li>
+<li>Larry Wall</li>
+<li>Matt Oates</li>
+<li>Moritz Lenz</li>
+<li>Mouq</li>
+<li>Salve J Nilsen</li>
+<li>Sam S</li>
+<li>Skids</li>
+<li>timotimo</li>
+</ul>
+<a id="more"></a>
+<h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><p>启发于 Peteris Krumins 的 Perl 5 example <a href="http://www.catonmat.net/download/perl1line.txt" target="_blank" rel="external">文件</a>。他逐字逐句地写了一本关于 Perl 5 单行 的<a href="http://www.nostarch.com/perloneliners" target="_blank" rel="external">书</a>。</p>
+<p><a href="http://webchat.freenode.net/?channels=perl6&amp;nick=" target="_blank" rel="external">irc</a>上有很好地 folks。</p>
+<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><ol>
+<li>介绍</li>
+<li>教程</li>
+<li>文件间距</li>
+<li>行号</li>
+<li>计算</li>
+<li>创建字符串和创建数组</li>
+<li>文本转换和替换</li>
+<li>文本分析</li>
+<li>选择性的行打印</li>
+<li>使用管道转换数据(进行中)</li>
+<li>WWW(进行中)</li>
+<li>转换到 Windows</li>
+</ol>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>把 Perl 和其它语言区别开的一件事情是在单行代码中写小程序的能力，即人们所熟知的”单行”。在终端里直接键入一个程序比写一个废弃的脚本往往更快。并且单行程序也很强大；它们是羽翼丰满的程序，能够加载外部库，但是也能集成到终端中。你可以在单行程序中输入或输出数据。</p>
+<p>像 Perl 5 一样， Perl 6支持单行程序。还有就像 Perl 6 到处清理着 Perl 5 的毒瘤一样，Perl 6 的单行语法也更好了。它拥有更少的特殊变量和选项因此更容易记忆。这本书提供了很多有用的 Perl 6 单行例子，从找出文件中得重复行到运行一个 web 服务器，它几乎能做所有事情。尽管 Perl 6 拥有更少的特殊变量，但是由于它高级的面向对象的语法，Perl 6 中的大部分单行程序比等价的 Perl 5 单行程序更短。</p>
+<p>这本书可以以多种方式阅读。如果你是单行程序的新手，从教程开始。它带领你掌握单行程序的核心概念；不要担心，一旦你理解了它会很容易。如果你精通 Perl，Bash，或 Sed/Awk，你可以立马开始工作。随意跳过和浏览你所感兴趣的东西。如果有些代码你不理解，那么在终端中试试！这个仓库中包含的无处不在的文件是 example.txt，它会在很多单行程序中用到。</p>
+<p>使用单行编程仅仅是 Perl 6 擅长的一个范例。这样的代码小而美，但是同时你正学习的是一种生产力技能，记住你正在学的是一种新的编程语言。检查 <a href="perl6.org">perl6.org</a>网站获取官方文档。</p>
+<h3 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h3><p>要开始单行程序，所有你要掌握的是 <strong>-e</strong> 选项。这告诉 Perl 把它后面所跟的东西作为一个程序去执行。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -e &apos;say &quot;Hello, World!&quot;&apos;</div></pre></td></tr></table></figure>
+<p>我们来一步步剖析这段代码。 <code>perl6</code> 引用了 Perl 6 程序， <code>-e</code> 告诉 Perl 6 去执行，而 <code>&#39;say &quot;Hello, World!&quot;&#39;</code>是要执行的程序。每个程序都必须被包围在单引号中（除了在 Windows 上，查看 <a href="https://github.com/dnmfarrell/Perl6-One-Liners#converting-for-windows" target="_blank" rel="external">转换到 Windows</a>）。要运行单行程序，就把它键入到终端中好了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; perl6 <span class="_">-e</span> <span class="string">'say "Hello, World!"'</span></div><div class="line">Hello, World!</div></pre></td></tr></table></figure>
+<p>如果你想加载一个文件，就把文件路径添加到程序代码的后面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'for (lines) &#123;say $_&#125;'</span> /path/to/file.txt</div></pre></td></tr></table></figure>
+<p>这个程序打印出了 <code>path/to/file.txt</code> 的每一行。你可能知道 <code>$_</code> 是默认变量，它在这儿是指正被循环的当前行。<code>lines</code> 是一个列表，当你传递一个文件路径给单行程序的时候会自动为你创建这个列表。现在我们来重写那个单行程序，一步一步。它们都是等价的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'for (lines) &#123; say $_ &#125;'</span> /path/to/file.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'for (lines) &#123; $_.say &#125;'</span> /path/to/file.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'for (lines) &#123; .say &#125;'</span> /path/to/file.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'.say for (lines)'</span> /path/to/file.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'.say for lines'</span> /path/to/file.txt</div></pre></td></tr></table></figure>
+<p>就像 <code>$_</code> 是默认变量一样，在默认变量身上调用的方法可以省略掉变量引用。它们变成了默认方法。所以 <code>$_.say</code> 变成 <code>.say</code>。回报给写单行程序的人的东西是 - 更少的键入！</p>
+<p><code>-n</code> 选项改变了程序的行为：它为文件中的每一行执行一次代码。所以，大写并打印 <code>path/to/file.txt</code> 的每一行你会键入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.uc.say'</span> /path/to/file.txt</div></pre></td></tr></table></figure>
+<p><code>-p</code> 选项就像 <code>-n</code>, 除了它会自动打印 <code>$_</code> 之外。所以大写文件中的所有行的另外一种方法是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'$_ = .uc'</span> /path/to/file.txt</div></pre></td></tr></table></figure>
+<p>或者两个做同样事情的更短的版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'.=uc'</span> /path/to/file.txt</div><div class="line">perl6 -pe .=uc   /path/to/file.txt</div></pre></td></tr></table></figure>
+<p>在第二个例子中，我们可以完全移除周围的单引号。这种场景很少遇到，但是如果你的单行程序中没有空格并且没有符号或引号，那么你通常可以移除外部的引号。</p>
+<p><code>-n</code> 和 <code>-p</code> 选项真的很有用。本书中也有很多使用它们的单行例子。</p>
+<p>最后一件你要知道的事情是怎么加载模块。 <code>-M</code> 开关代表着加载模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -M URI::Encode <span class="_">-e</span> <span class="string">'say encode_uri("example.com/10 ways to crush it with Perl 6")'</span></div></pre></td></tr></table></figure>
+<p><code>-M URI::Encode</code> 加载了 <code>URI::Encode</code> 模块，它导入了 <em>encode_uri</em> 子例程。 你可以多次使用 <code>-M</code> 来加载多个模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -M URI::Encode -M URI <span class="_">-e</span> <span class="string">'&lt;your code here&gt;'</span></div></pre></td></tr></table></figure>
+<p>如果你有一个还没有安装的本地模块呢？ 简单， 仅仅传递一个 <code>-I</code> 开关来包含那个目录好了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -I lib -M URI::Encode <span class="_">-e</span> <span class="string">'&lt;your code here&gt;'</span></div></pre></td></tr></table></figure>
+<p>现在 Perl 6 会在 <code>lib</code> 目录中搜索 <code>URI::Encode</code> 模块，和标准的安装位置一样。</p>
+<p>要查看 Perl 6 命令行开关有哪些， 使用 <code>-h</code> 选项查看帮助：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -h</div></pre></td></tr></table></figure>
+<p>这打印可获得的不错的统计。</p>
+<h3 id="文件间距"><a href="#文件间距" class="headerlink" title="文件间距"></a>文件间距</h3><p>Double space a file</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'$_ ~= "\n"'</span> example.txt</div></pre></td></tr></table></figure>
+<p>N-space a file (例如. 4倍空白)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'$_ ~= "\n" x 4'</span> example.txt</div></pre></td></tr></table></figure>
+<p>在每一行前面添加一个空行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'say ""'</span> example.txt</div></pre></td></tr></table></figure>
+<p>移除所有空行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 -ne &apos;.say if /\S/&apos;   example.txt</div><div class="line">perl6 -ne &apos;.say if .chars&apos; example.txt</div></pre></td></tr></table></figure>
+<p>移除所有的连续空白行，只保留一行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'$*ARGFILES.slurp.subst(/\n+/, "\n\n", :g).say'</span> example.txt</div></pre></td></tr></table></figure>
+<h3 id="行号"><a href="#行号" class="headerlink" title="行号"></a>行号</h3><p>给文件中的所有行编号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say "&#123;++$&#125; $_"'</span> example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say $*ARGFILES.ins ~ " $_ "'</span> example.txt</div></pre></td></tr></table></figure>
+<p>只给文件中得非空行编号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'$_ = "&#123;++$&#125; $_" if /\S/'</span> example.txt</div></pre></td></tr></table></figure>
+<p>给所有行编号但是只打印非空行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'$_ = $*ARGFILES.ins ~ " $_ " if /\S/'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印文件中行数的总数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines.elems'</span> example.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines.Int'</span>   example.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'lines.Int.say'</span>   example.txt</div></pre></td></tr></table></figure>
+<p>打印出文件中非空行的总数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'lines.grep(/\S/.elems.say)'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印文件中空行的数量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'lines.grep(/^\s*$/).elems.say'</span> example.txt</div></pre></td></tr></table></figure>
+<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><p>检查一个数是否是质数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say "7 is prime" if 7.is-prime'</span></div></pre></td></tr></table></figure>
+<p>打印一行中所有字段的和：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say [+] .split("\t")'</span></div></pre></td></tr></table></figure>
+<p>打印所有行的所有字段的和：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say [+] lines.split("\t")'</span></div></pre></td></tr></table></figure>
+<p>打乱行中的所有字段：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.split("\t").pick(*).join("\t").say'</span></div></pre></td></tr></table></figure>
+<p>找出一行中最小的元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.split("\t").min.say'</span></div></pre></td></tr></table></figure>
+<p>找出所有行的最小的元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'lines.split("\t").min.say'</span></div></pre></td></tr></table></figure>
+<p>找出一行中最大的元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.split("\t").max.say'</span></div></pre></td></tr></table></figure>
+<p>找出所有行的最大的元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'lines.split("\t").max.say'</span></div></pre></td></tr></table></figure>
+<p>找出一行中得数值化最小元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.split("\t")».Numeric.min.say'</span></div></pre></td></tr></table></figure>
+<p>找出一行中得数值化最大元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.split("\t")».Numeric.max.say'</span></div></pre></td></tr></table></figure>
+<p>使用字段的绝对值替换每个字段：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.split("\t").map(*.abs).join("\t")'</span></div></pre></td></tr></table></figure>
+<p>找出每行中字符的总数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.chars.say'</span> example.txt</div></pre></td></tr></table></figure>
+<p>找出每行中单词的总数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.words.elems.say'</span> example.txt</div></pre></td></tr></table></figure>
+<p>找出每行中由逗号分隔的元素的总数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.split(",").elems.say'</span> example.txt</div></pre></td></tr></table></figure>
+<p>找出所有行的字段（单词）的总数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines.split("\t").elems'</span> example.txt  <span class="comment"># fields</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines.words.elems'</span> example.txt        <span class="comment"># words</span></div></pre></td></tr></table></figure>
+<p>打印匹配某个模式的字段的总数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines.split("\t").comb(/pattern/).elems'</span> example.txt <span class="comment"># fields</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines.words.comb(/pattern/).elems'</span> example.txt       <span class="comment"># words</span></div></pre></td></tr></table></figure>
+<p>打印匹配某个模式的行的总数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines.grep(/in/.elems)'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印数字 PI 到 n 位小数点(例如. 10位)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say pi.fmt("%.10f");'</span></div></pre></td></tr></table></figure>
+<p>打印数字 PI 到 15 位小数点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say π'</span></div></pre></td></tr></table></figure>
+<p>打印数字 E 到 n 位小数点(例如. 10位)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say e.fmt("%.10f");'</span></div></pre></td></tr></table></figure>
+<p>打印数字 E 到 15 位小数点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say e'</span></div></pre></td></tr></table></figure>
+<p>打印 UNIX 时间 (seconds since Jan 1, 1970, 00:00:00 UTC)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say time'</span></div></pre></td></tr></table></figure>
+<p>打印 GMT (格林威治标准时间)和地方计算机时间：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 -MDateTime::TimeZone <span class="_">-e</span> <span class="string">'say to-timezone("GMT",DateTime.now)'</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'say DateTime.now'</span></div></pre></td></tr></table></figure>
+<p>以 H:M:S 格式打印当地计算机时间：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say DateTime.now.map(&#123;$_.hour, $_.minute, $_.second.round&#125;).join(":")'</span></div></pre></td></tr></table></figure>
+<p>打印昨天的日期：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say DateTime.now.earlier(:1day)'</span></div></pre></td></tr></table></figure>
+<p>打印日期： 14 个月, 9 天，和 7 秒之前</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say DateTime.now.earlier(:14months).earlier(:9days).earlier(:7seconds)'</span></div></pre></td></tr></table></figure>
+<p>在标准输出前加上时间戳（GMT，地方时间）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tail <span class="_">-f</span> logfile | perl6 -MDateTime::TimeZone <span class="_">-ne</span> <span class="string">'say to-timezone("GMT",DateTime.now) ~ "\t$_"'</span></div><div class="line">tail <span class="_">-f</span> logfile | perl6 <span class="_">-ne</span> <span class="string">'say DateTime.now ~ "\t$_"'</span></div></pre></td></tr></table></figure>
+<p>计算 5 的阶乘：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say [*] 1..5'</span></div></pre></td></tr></table></figure>
+<p>计算最大公约数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say [gcd] @list_of_numbers'</span></div></pre></td></tr></table></figure>
+<p>使用欧几里得算法计算数字 20 和 35 的最大公约数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say (20, 35, *%* ... 0)[*-2]'</span></div></pre></td></tr></table></figure>
+<p>计算 20 和 35 的最小公倍数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say 20 lcm 35'</span></div></pre></td></tr></table></figure>
+<p>使用欧几里得算法: n*m/gcd(n,m) 计算数字 20 和 35 的最小公倍数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say 20 * 35 / (20 gcd 35)'</span></div></pre></td></tr></table></figure>
+<p>生成 10 个 5 到 15（不包括 15）之间的随机数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'.say for (5..^15).roll(10)'</span></div></pre></td></tr></table></figure>
+<p>找出并打印列表的全排列：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say .join for [1..5].permutations'</span></div></pre></td></tr></table></figure>
+<p>生成幂集</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'.say for &lt;1 2 3&gt;.combinations'</span></div></pre></td></tr></table></figure>
+<p>把 IP 地址转换为无符号整数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say :256["127.0.0.1".comb(/\d+/)]'</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'say +":256[&#123;q/127.0.0.1/.subst(:g,/\./,q/,/)&#125;]"'</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'say Buf.new(+«"127.0.0.1".split(".")).unpack("N")'</span></div></pre></td></tr></table></figure>
+<p>把无符号整数转换为 IP 地址：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say join ".", @(pack "N", 2130706433)'</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'say join ".", map &#123; ((2130706433+&gt;(8*$_))+&amp;0xFF) &#125;, (3...0)'</span></div></pre></td></tr></table></figure>
+<h3 id="创建字符串和创建数组"><a href="#创建字符串和创建数组" class="headerlink" title="创建字符串和创建数组"></a>创建字符串和创建数组</h3><p>生成并打印字母表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'.say for "a".."z"'</span></div></pre></td></tr></table></figure>
+<p>生成并打印所有从 “a” 到 “zz” 的字符串：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'.say for "a".."zz"'</span></div></pre></td></tr></table></figure>
+<p>把整数转换为十六进制：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say 255.base(16)'</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'say sprintf("%x", 255)'</span></div></pre></td></tr></table></figure>
+<p>把整数打印为十六进制转换表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say sprintf("%3i =&gt; %2x", $_, $_) for 0..255'</span></div></pre></td></tr></table></figure>
+<p>把整数编码为百分数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say sprintf("%%%x", 255)'</span></div></pre></td></tr></table></figure>
+<p>生成一个随机的 10 个 a-z 字符长度的字符串：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'print roll 10, "a".."z"'</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'print roll "a".."z": 10'</span></div></pre></td></tr></table></figure>
+<p>生成一个随机的 15 个 ASCII 字符长度的密码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'print roll 15, "0".."z"'</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'print roll "0".."z": 15'</span></div></pre></td></tr></table></figure>
+<p>创建一个指定长度的字符串：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'print "a" x 50'</span></div></pre></td></tr></table></figure>
+<p>生成并打印从 1 到 100 数字为偶数的数组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'(1..100).grep(* %% 2).say'</span></div></pre></td></tr></table></figure>
+<p>找出字符串的长度：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'"storm in a teacup".chars.say'</span></div></pre></td></tr></table></figure>
+<p>找出数组的元素个数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'my @letters = "a".."z"; @letters.Int.say'</span></div></pre></td></tr></table></figure>
+<h3 id="文本转换和替换"><a href="#文本转换和替换" class="headerlink" title="文本转换和替换"></a>文本转换和替换</h3><p>对文件进行 ROT 13 加密：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'tr/A..Za..z/N..ZA..Mn..za..m/'</span> example.txt</div></pre></td></tr></table></figure>
+<p>对字符串进行 Base64 编码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -MMIME::Base64 <span class="_">-ne</span> <span class="string">'print MIME::Base64.encode-str($_)'</span> example.txt</div></pre></td></tr></table></figure>
+<p>对字符串进行 Base64 解码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -MMIME::Base64 <span class="_">-ne</span> <span class="string">'print MIME::Base64.decode-str($_)'</span> base64.txt</div></pre></td></tr></table></figure>
+<p>对字符串进行 URL 转义：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -MURI::Encode -le <span class="string">'say uri_encode($string)'</span></div></pre></td></tr></table></figure>
+<p>URL-unescape a string</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -MURI::Encode -le <span class="string">'say uri_decode($string)'</span></div></pre></td></tr></table></figure>
+<p>HTML-encode a string</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -MHTML::Entity <span class="_">-e</span> <span class="string">'print encode-entities($string)'</span></div></pre></td></tr></table></figure>
+<p>HTML-decode a string</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -MHTML::Entity <span class="_">-e</span> <span class="string">'print decode-entities($string)'</span></div></pre></td></tr></table></figure>
+<p>把所有文本转换为大写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'.=uc'</span>    example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say .uc'</span> example.txt</div></pre></td></tr></table></figure>
+<p>把所有文本转换为小写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'.=lc'</span>    example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say .lc'</span> example.txt</div></pre></td></tr></table></figure>
+<p>只把每行的第一个单词转换为大写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say s/(\w+)&#123;&#125;/&#123;$0.uc&#125;/'</span> example.txt</div></pre></td></tr></table></figure>
+<p>颠倒字母的大小写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'tr/a..zA..Z/A..Za..z/'</span>           example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say tr/a..zA..Z/A..Za..z/.after'</span> example.txt</div></pre></td></tr></table></figure>
+<p>对每行进行驼峰式大小写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say .wordcase'</span> example.txt</div></pre></td></tr></table></figure>
+<p>在每行的开头去掉前置空白（空格、tabs）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say .trim-leading'</span> example.txt</div></pre></td></tr></table></figure>
+<p>从每行的末尾去掉结尾的空白（空格、tabs）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say .trim-trailing'</span> example.txt</div></pre></td></tr></table></figure>
+<p>从每行中去除行首和行尾的空白：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say .trim'</span> example.txt</div></pre></td></tr></table></figure>
+<p>把 UNIX 换行符转换为 DOS/Windows 换行符：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'print .subst(/\n/, "\r\n")'</span> example.txt</div></pre></td></tr></table></figure>
+<p>把 DOS/Windows  换行符转换为 UNIX 换行符：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'print .subst(/\r\n/, "\n")'</span> example.txt</div></pre></td></tr></table></figure>
+<p>把每行中所有的 “ut” 实体用 “foo” 替换掉：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'s:g/ut/foo/'</span> example.txt</div></pre></td></tr></table></figure>
+<p>把包含 “lorem” 的每行中所有的 “ut” 实体用 “foo” 替换掉：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'s:g/ut/foo/ if /Lorem/'</span> example.txt</div></pre></td></tr></table></figure>
+<p>把文件转换为 JSON 格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -M JSON::Tiny <span class="_">-e</span> <span class="string">'say to-json(lines)'</span> example.txt</div></pre></td></tr></table></figure>
+<p>从文件的每一行中随机挑选 5 个单词：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'say .words.pick(5)'</span> example.txt</div></pre></td></tr></table></figure>
+<h3 id="文本分析"><a href="#文本分析" class="headerlink" title="文本分析"></a>文本分析</h3><p>Print n-grams of a string</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'my $n=2; say "banana".comb.rotor($n,$n-1).map(&#123;[~] @$_&#125;)'</span></div><div class="line"></div><div class="line">打印唯一的 n-grams</div><div class="line"></div><div class="line">```Bash</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'my $n=2; say "banana".comb.rotor($n,$n-1).map(&#123;[~] @$_&#125;).Set.sort'</span></div></pre></td></tr></table></figure>
+<p>打印 n-grams 的出现次数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'my $n=2; say "banana".comb.rotor($n,$n-1).map(&#123;[~] @$_&#125;).Bag.sort.join("\n")'</span></div></pre></td></tr></table></figure>
+<p>打印单词的出现次数(1-grams)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines[0].words.map(&#123;[~] @$_&#125;).Bag.sort.join("\n")'</span> example.txt</div></pre></td></tr></table></figure>
+<p>基于一组 1-grams 打印 Dice 相似系数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'my $a="banana".comb;my $b="anna".comb;say ($a (&amp;) $b)/($a.Set + $b.Set)'</span></div></pre></td></tr></table></figure>
+<p>基于 1-grams 打印卡得杰相似系数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'my $a="banana".comb;my $b="anna".comb;say ($a (&amp;) $b) / ($a (|) $b)'</span></div></pre></td></tr></table></figure>
+<p>基于 1-grams 打印重叠系数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'my $a="banana".comb;my $b="anna".comb;say ($a (&amp;) $b)/($a.Set.elems,$b.Set.elems).min'</span></div></pre></td></tr></table></figure>
+<p>基于 1-grams 打印类似的余弦：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'my $a="banana".comb;my $b="anna".comb;say ($a (&amp;) $b)/($a.Set.elems.sqrt*$b.Set.elems.sqrt)'</span></div><div class="line"></div><div class="line"><span class="comment"># 上面的命令提示 Seq 已经被消费</span></div><div class="line">perl6 <span class="_">-e</span> <span class="string">'my $a="banana".comb;my $b="anna".comb;say ($a.cache (&amp;) $b.cache)/($a.cache.Set.elems.sqrt*$b.cache.Set.elems.sqrt)'</span></div></pre></td></tr></table></figure>
+<p>创建字符串中字符的索引并打印出来：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say &#123;&#125;.push: %("banana".comb.pairs).invert'</span></div></pre></td></tr></table></figure>
+<p>创建一行中单词的所以并打印出来：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'(&#123;&#125;.push: %(lines[0].words.pairs).invert).sort.join("\n").say'</span> example.txt</div></pre></td></tr></table></figure>
+<h3 id="选择性的行打印"><a href="#选择性的行打印" class="headerlink" title="选择性的行打印"></a>选择性的行打印</h3><p>打印文件的第一行（模仿 head -1）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.say;exit'</span>      example.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'lines[0].say'</span>    example.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'lines.shift.say'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印文件的前 10 行（模仿 head -10）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'exit if ++$ &gt; 10'</span> example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.say if ++$ &lt; 11'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印文件的最后一行（模仿 tail -1）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'lines.pop.say'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印文件的最后 5 行（模仿 tail -5）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'.say for lines[*-5..*]'</span> example.txt</div></pre></td></tr></table></figure>
+<p>只打印包含元音的行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'/&lt;[aeiou]&gt;/ &amp;&amp; .print'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印包含所有元音的行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.say if .comb (&gt;=) &lt;a e i o u&gt;'</span> example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.say if .comb ⊇ &lt;a e i o u&gt;'</span>    example.txt</div></pre></td></tr></table></figure>
+<p>打印字符数大于或等于 80 的行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.print if .chars &gt;= 80'</span> example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.chars &gt;= 80 &amp;&amp; .print'</span> example.txt</div></pre></td></tr></table></figure>
+<p>只打印第二行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.print if ++$ == 2'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印除了第二行的所有行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'next if ++$ == 2'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印第一行到第三行之间的所有行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.print if (1..3).any == ++$'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印两个正则表达式之间（包含匹配那个正则表达式的行）的所有行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.print if /^Lorem/../laborum\.$/'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印最长的行的长度：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines.max.chars'</span> example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'state $l=0; $l = .chars if .chars &gt; $l;END &#123; $l.say &#125;'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印长度最长的行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say lines.max'</span> example.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'my $l=""; for (lines) &#123;$l = $_ if .chars &gt; $l.chars&#125;;END &#123; $l.say &#125;'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印包含数字的所有行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.say if /\d/'</span>             example.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'.say for lines.grep(/\d/)'</span> example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'/\d/ &amp;&amp; .say'</span>             example.txt</div><div class="line">perl6 -pe <span class="string">'next if ! $_.match(/\d/)'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印只包含数字的所有行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.say if /^\d+$/'</span>             example.txt</div><div class="line">perl6 <span class="_">-e</span> <span class="string">'.say for lines.grep(/^\d+$/)'</span> example.txt</div><div class="line">perl6 <span class="_">-ne</span> <span class="string">'/^\d+$/ &amp;&amp; .say'</span>             example.txt</div><div class="line">perl6 -pe <span class="string">'next if ! $_.match(/^\d+$/)'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印每个奇数行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.say if ++$ % 2'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印每个偶数行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.say if ! (++$ % 2)'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印所有重复的行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'state %l;.say if ++%l&#123;$_&#125;==2'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印唯一的行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'state %l;.say if ++%l&#123;$_&#125;==1'</span> example.txt</div></pre></td></tr></table></figure>
+<p>打印每一行中的第一个字段（单词）（模仿 cut -f 1 -d ‘ ‘）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.words[0].say'</span> example.txt</div></pre></td></tr></table></figure>
+<h3 id="使用管道转换数据"><a href="#使用管道转换数据" class="headerlink" title="使用管道转换数据"></a>使用管道转换数据</h3><p>Perl 6程序直接集成到了命令行中。你可以使用 | 管道符号从单行程序中输出数据和输入数据到单行程序中。为了 从管道中输入数据， Perl 6 自动地把 STDIN 设置为 <code>$*IN</code>。就像对文件那样，从管道输入的数据在单行中也能使用 <code>-n</code> 来进行循环迭代。从单行程序中输出数据就使用 print 或 say 好了。</p>
+<p>在当前目录中对所有文件进行 JSON 编码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls | perl6 -M JSON::Tiny <span class="_">-e</span> <span class="string">'say to-json(lines)'</span></div></pre></td></tr></table></figure>
+<p>打印文件中的大约 5% 的随机样本行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-ne</span> <span class="string">'.say if 1.rand &lt;= 0.05'</span> /usr/share/dict/words</div></pre></td></tr></table></figure>
+<p>颜色转换， 从 HTML 到 RGB</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"#ffff00"</span> | perl6 <span class="_">-ne</span> <span class="string">'.comb(/\w\w/).map(&#123;:16($_)&#125;).say'</span></div></pre></td></tr></table></figure>
+<p>颜色转换， 从 RGB 到 HTML</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"#ffff00"</span> | perl6 <span class="_">-ne</span> <span class="string">'.comb(/\w\w/).map(&#123;:16($_)&#125;).say'</span></div></pre></td></tr></table></figure>
+<h3 id="WWW"><a href="#WWW" class="headerlink" title="WWW"></a>WWW</h3><p>下载一个页面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -M HTTP::UserAgent <span class="_">-e</span> <span class="string">'say HTTP::UserAgent.new.get("google.com").content'</span></div></pre></td></tr></table></figure>
+<p>下载一个页面并剥离 HTML：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O - <span class="string">"http://perl6.org"</span> | perl6 <span class="_">-ne</span> <span class="string">'s:g/\&lt;.+?\&gt;//.say'</span></div></pre></td></tr></table></figure>
+<p>下载一个页面并剥离并解码 HTML：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O - <span class="string">"http://perl6.org"</span> | perl6 -MHTML::Strip <span class="_">-ne</span> <span class="string">'strip_html($_).say'</span></div></pre></td></tr></table></figure>
+<p>开启一个简单地 web 服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -M HTTP::Server::Simple <span class="_">-e</span> <span class="string">'HTTP::Server::Simple.new.run'</span></div></pre></td></tr></table></figure>
+<h3 id="转换到-Windows"><a href="#转换到-Windows" class="headerlink" title="转换到 Windows"></a>转换到 Windows</h3><p>一旦你知道了里面的门道之后那么在 Windows 上运行单行程序就是小草一碟。单行程序既可以在 cmd.exe 中运行，又可以在 Powershell 中运行。主要的规则是：用双引号替换掉外部的单引号，在单行程序的内部使用插值引用操作符 <code>qq//</code> 来把字符串括起来。对于非插值的引起，你可以使用单引号。我们来看几个例子。</p>
+<p>这儿有一个打印时间的单行程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say DateTime.now'</span></div></pre></td></tr></table></figure>
+<p>要在 Windows 上运行，我们仅仅用双引号替换掉单引号好了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">"say DateTime.now"</span></div></pre></td></tr></table></figure>
+<p>这个单行程序给文件中每一行添加了一个换行符，使用了插值字符串：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">'$_ ~= "\n"'</span> example.txt</div></pre></td></tr></table></figure>
+<p>在 Windows 上这应该写为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 -pe <span class="string">"<span class="variable">$_</span> ~= qq/\n/"</span> example.txt</div></pre></td></tr></table></figure>
+<p>这种情况下，我们想对换行符进行插值，并且不为该行字面地添加反斜线和字符”n”，所以我们必须使用 qq。但是你通常也可以像这样在单行程序中使用单引号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">'say "Hello, World!"'</span></div></pre></td></tr></table></figure>
+<p>在 Windows 上这应该写为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">"say 'hello, World!'"</span></div></pre></td></tr></table></figure>
+<p>简单地输出重定向工作起来像基于 Unix 系统那样。 这个单行程序使用 <code>&gt;</code> 把 ASCII 字符索引表打印到一个文件中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">perl6 <span class="_">-e</span> <span class="string">"say .chr ~ ' ' ~ <span class="variable">$_</span> for 0..255"</span> &gt; ascii_codes.txt</div></pre></td></tr></table></figure>
+<p>在使用 <code>&gt;</code> 的时候，如果文件不存在就会创建一个。如果文件确实存在，它会被重写。你可能更想追加到文件，使用 <code>&gt;&gt;</code> 代替。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OneLiners/" rel="tag">#OneLiners</a>
+          
+            <a href="/tags/单行程序/" rel="tag">#单行程序</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/25/cookbook/" rel="next" title="cookbook">
+                <i class="fa fa-chevron-left"></i> cookbook
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/25/Perl6中的变量/" rel="prev" title="Perl 6 中的变量">
+                Perl 6 中的变量 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/08/25/Perl-6-单行程序/"
+     data-title="Perl 6 单行程序"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/08/25/Perl-6-单行程序/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/25/Perl-6-单行程序/"
+           data-title="Perl 6 单行程序" data-url="https://ohmycloud.github.io/2015/08/25/Perl-6-单行程序/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Perl-6-单行程序"><span class="nav-number">1.</span> <span class="nav-text">Perl 6 单行程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作者"><span class="nav-number">1.1.</span> <span class="nav-text">作者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本"><span class="nav-number">1.2.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#许可"><span class="nav-number">1.3.</span> <span class="nav-text">许可</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贡献者"><span class="nav-number">1.4.</span> <span class="nav-text">贡献者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#致谢"><span class="nav-number">1.5.</span> <span class="nav-text">致谢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内容"><span class="nav-number">1.6.</span> <span class="nav-text">内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">1.6.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#教程"><span class="nav-number">1.6.2.</span> <span class="nav-text">教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件间距"><span class="nav-number">1.6.3.</span> <span class="nav-text">文件间距</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行号"><span class="nav-number">1.6.4.</span> <span class="nav-text">行号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算"><span class="nav-number">1.6.5.</span> <span class="nav-text">计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建字符串和创建数组"><span class="nav-number">1.6.6.</span> <span class="nav-text">创建字符串和创建数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本转换和替换"><span class="nav-number">1.6.7.</span> <span class="nav-text">文本转换和替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本分析"><span class="nav-number">1.6.8.</span> <span class="nav-text">文本分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择性的行打印"><span class="nav-number">1.6.9.</span> <span class="nav-text">选择性的行打印</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用管道转换数据"><span class="nav-number">1.6.10.</span> <span class="nav-text">使用管道转换数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WWW"><span class="nav-number">1.6.11.</span> <span class="nav-text">WWW</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换到-Windows"><span class="nav-number">1.6.12.</span> <span class="nav-text">转换到 Windows</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

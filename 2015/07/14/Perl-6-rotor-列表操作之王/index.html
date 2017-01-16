@@ -1,0 +1,739 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content=".rotor,列表操作," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6 .rotor - The King of List Manipulation
+对于 Perl 6 程序员, .rotor是一个强大的列表操作工具。
+分段最简单的, .rotor接收一个整数$number并把列表分成多个子列表, 每个子列表含有 $number 个元素:
+12say &amp;lt;a b c d e f  g h&amp;gt;.rotor: 3# ((a b c) (d e f))">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 rotor--列表操作之王">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/07/14/Perl-6-rotor-列表操作之王/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6 .rotor - The King of List Manipulation
+对于 Perl 6 程序员, .rotor是一个强大的列表操作工具。
+分段最简单的, .rotor接收一个整数$number并把列表分成多个子列表, 每个子列表含有 $number 个元素:
+12say &amp;lt;a b c d e f  g h&amp;gt;.rotor: 3# ((a b c) (d e f))">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.669Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 rotor--列表操作之王">
+<meta name="twitter:description" content="Perl 6 .rotor - The King of List Manipulation
+对于 Perl 6 程序员, .rotor是一个强大的列表操作工具。
+分段最简单的, .rotor接收一个整数$number并把列表分成多个子列表, 每个子列表含有 $number 个元素:
+12say &amp;lt;a b c d e f  g h&amp;gt;.rotor: 3# ((a b c) (d e f))">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/07/14/Perl-6-rotor-列表操作之王/"/>
+
+  <title> Perl 6 rotor--列表操作之王 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 rotor--列表操作之王
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-14T00:00:00+08:00" content="2015-07-14">
+              2015-07-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/14/Perl-6-rotor-列表操作之王/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/14/Perl-6-rotor-列表操作之王/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Perl 6 .rotor - The King of List Manipulation</p>
+<p>对于 Perl 6 程序员, <code>.rotor</code>是一个强大的列表操作工具。</p>
+<h4 id="分段"><a href="#分段" class="headerlink" title="分段"></a>分段</h4><p>最简单的, <code>.rotor</code>接收一个整数<strong>$number</strong>并把列表分成多个子列表, 每个子列表含有 <strong>$number</strong> 个元素:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say &lt;a b c d e f  g h&gt;.rotor: 3</div><div class="line"># ((a b c) (d e f))</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>我们有一个含有 8 个元素的列表, 我们在该列表上调用接收参数 3 的 <code>.rotor</code>方法, 它返回 2 个列表, 每个列表中含有 3 个元素。不包括原列表中的最后 2 个元素, 因为它们没有组成一个完整的3个元素的列表。然而它们可以被包含进来, 使用 <code>:partial</code>具名参数设置为 <strong>True</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">say &lt;a b c  d e f  g h&gt;.rotor: 3, :partial</div><div class="line"># ((a b c) (d e f) (g h))</div><div class="line"></div><div class="line">say &lt;a b c  d e f  g h&gt;.rotor: 3, :partial(True)</div><div class="line"># ((a b c) (d e f) (g h))</div><div class="line"></div><div class="line">say &lt;a b c  d e f  g h&gt;.rotor: 3, :partial(False)</div><div class="line"># ((a b c) (d e f))</div></pre></td></tr></table></figure>
+<p>下面应用一下我们刚刚学到的。把字符串分成列宽相等的几段:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot;foobarberboorboozebazmeow&quot;.comb.rotor(10, :partial)».join».say</div><div class="line"># foobarberb</div><div class="line"># oorboozeba</div><div class="line"># zmeow</div></pre></td></tr></table></figure>
+<p>分行然后每行前面添加 4 个空格:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot;foobarberboorboozebazmeow&quot;.comb.rotor(10, :partial)&gt;&gt;.join&gt;&gt;.indent(4)&gt;&gt;.say</div><div class="line">#    foobarberb</div><div class="line">#    oorboozeba</div><div class="line">#    zmeow</div></pre></td></tr></table></figure>
+<p>但是这最好被写为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;foobarberboorboozebazmeow&quot;.comb(10)».say</div></pre></td></tr></table></figure>
+<h4 id="注意缝隙"><a href="#注意缝隙" class="headerlink" title="注意缝隙"></a>注意缝隙</h4><p>假设你正在接受输入: 你得到一个单词, 它的法语翻译和它的西班牙语翻译, 等一堆单词。你只想输出特定语言, 所以我们需要在我们的列表中跳过某些项。 <code>.rotor</code>来拯救来了!</p>
+<p>指定一对儿(Pair)整数作为 rotor 的参数会让每个列表中含有 <strong>$key</strong> 个元素, 每个列表之间有 <strong>$value</strong> 个空隙。看例子更简单一些:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say ^10 .rotor: 3 =&gt; 1, :partial</div><div class="line">&gt;&gt;&gt;OUTPUT: ((0 1 2) (4 5 6) (8 9))</div><div class="line">say ^10 .rotor: 2 =&gt; 2, :partial</div><div class="line">&gt;&gt;&gt;OUTPUT: ((0 1) (4 5) (8 9))</div></pre></td></tr></table></figure>
+<p>第一个例子我们把缝隙设置为 1, 第二个例子我们把缝隙增加为 2。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">enum &lt;English French Spanish&gt;;</div><div class="line">say join &quot; &quot;, &lt;Good Bon Buenos morning matin días&gt;[French..*].rotor: 1 =&gt; 2;</div><div class="line">&gt;&gt;&gt;OUTPUT: Bon matin</div></pre></td></tr></table></figure>
+<p>其中 <code>[French..*]</code>意思为 <code>[1..*]</code>, 例子中 French 被枚举化为整数 1。</p>
+<h4 id="重叠"><a href="#重叠" class="headerlink" title="重叠"></a>重叠</h4><p>当我们让缝隙变为负数的时候, 分段的列表中就会有元素重叠:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say &lt;a a b c c c d&gt;.rotor: 2 =&gt; -1</div><div class="line">&gt;&gt;&gt;OUTPUT: ((a a) (a b) (b c) (c c) (c c) (c d))</div><div class="line">say &lt;a a b c c c d&gt;.rotor(2 =&gt; -1).map: &#123;$_[0] eq $_[1] ?? &quot;same&quot; !! &quot;different&quot;&#125;</div><div class="line">&gt;&gt;&gt;OUTPUT: (same different different same same different)</div></pre></td></tr></table></figure>
+<h4 id="全力以赴"><a href="#全力以赴" class="headerlink" title="全力以赴"></a>全力以赴</h4><p><code>.rotor</code>不单单只能接受单个 <strong>Int</strong> 值或 <strong>Pair</strong>, 你可以指定额外的 <strong>Int</strong> 或 <strong>Pairs</strong> 位置参数来把列表分成不同尺寸大小的子列表, 列表之间的缝隙也不同。下面以一个日志文件为例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">IP: 198.0.1.22</div><div class="line">Login: suser</div><div class="line">Time: 1454017107</div><div class="line">Resource: /report/accounting/x23gs</div><div class="line">Input: x=42,y=32</div><div class="line">Output: success</div><div class="line">===================================================</div><div class="line">IP: 198.0.1.23</div><div class="line">Login: nanom</div><div class="line">Time: 1454027106</div><div class="line">Resource: /report/systems/boot</div><div class="line">Input: mode=standard</div><div class="line">Output: success</div></pre></td></tr></table></figure>
+<p>每段之间有一行双划线。</p>
+<p>我们想这样输出: <strong>Header</strong> 里包含 IP, Login, Time, Resource; <strong>Operation</strong> 里包含 Resource, Input, Output。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">for &apos;report.txt&apos;.IO.lines».indent(4).rotor( 4 =&gt; -1, 3 =&gt; 1 ) -&gt; $head, $op &#123;</div><div class="line">    .say for &quot;Header:&quot;,    |$head,</div><div class="line">             &quot;Operation:&quot;, |$op, &apos;&apos;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&gt;&gt;&gt;OUTPUT:</div><div class="line">    Header:</div><div class="line">        IP: 198.0.1.22</div><div class="line">        Login: suser</div><div class="line">        Time: 1454017107</div><div class="line">        Resource: /report/accounting/x23gs</div><div class="line">    Operation:</div><div class="line">        Resource: /report/accounting/x23gs</div><div class="line">        Input: x=42,y=32</div><div class="line">        Output: success</div><div class="line"></div><div class="line">    Header:</div><div class="line">        IP: 198.0.1.23</div><div class="line">        Login: nanom</div><div class="line">        Time: 1454027106</div><div class="line">        Resource: /report/systems/boot</div><div class="line">    Operation:</div><div class="line">        Resource: /report/systems/boot</div><div class="line">        Input: mode=standard</div><div class="line">        Output: success</div></pre></td></tr></table></figure>
+<p>先是 4 个元素一块, 缝隙为 -1(有重叠), 然后是 3 个元素一块, 缝隙为 1。这就在每个分段的列表中包含了 Resource 字段。因为 <code>$op</code> 和 <code>$head</code>是列表, 我们使用管道符号 <code>|</code>来展平列表。</p>
+<p>记住, 你提供给 <code>.rotor</code>方法的模式可以动态地生成! 这儿我们使用 sine 函数来生成:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">say ^92 .rotor(</div><div class="line">    (0.2, 0.4 ... 3).map: (10 * *.sin).Int # pattern we supply to .rotor</div><div class="line">).join: &quot;\n&quot;&apos;</div><div class="line">&gt;&gt;&gt;OUTPUT:</div><div class="line">    0</div><div class="line">    1 2 3</div><div class="line">    4 5 6 7 8</div><div class="line">    9 10 11 12 13 14 15</div><div class="line">    16 17 18 19 20 21 22 23</div><div class="line">    24 25 26 27 28 29 30 31 32</div><div class="line">    33 34 35 36 37 38 39 40 41</div><div class="line">    42 43 44 45 46 47 48 49 50</div><div class="line">    51 52 53 54 55 56 57 58 59</div><div class="line">    60 61 62 63 64 65 66 67 68</div><div class="line">    69 70 71 72 73 74 75 76</div><div class="line">    77 78 79 80 81 82</div><div class="line">    83 84 85 86 87</div><div class="line">    88 89 90</div><div class="line">    91</div></pre></td></tr></table></figure>
+<p>再举个例子:</p>
+<p>我现在想要将同类的序列（字符串）进行合并，比如有这样一个文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt;seq-1A</div><div class="line">GACACAGTCACCCGAGCCT</div><div class="line">&gt;seq-1B</div><div class="line">TCAATCAATACTGAAGCGA</div><div class="line">&gt;seq-1C</div><div class="line">AAAACTAGTCGAGAAGAGAG</div><div class="line">&gt;seq-1D</div><div class="line">CGTGGAAAACTCCAG</div><div class="line">&gt;seq-2A</div><div class="line">TAAAAGGCGTTCATTGGATATTTC</div><div class="line">&gt;seq-2B</div><div class="line">ACTGGCAGTGCATCC</div></pre></td></tr></table></figure>
+<p>我想要进行合并 得到这样的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;seq-1</div><div class="line">GACACAGTCACCCGAGCCTTCAATCAATACTGAAGCGAAAAACTAGTCGAGAAGAGAGCGTGGAAAACTCCAG</div><div class="line">&gt;seq-2</div><div class="line">TAAAAGGCGTTCATTGGATATTTCACTGGCAGTGCATCC</div></pre></td></tr></table></figure>
+<p>使用 rotor 来实现:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my %re;</div><div class="line">for &apos;input.txt&apos;.IO.lines».rotor(2, :partial) -&gt; $header, $data &#123;</div><div class="line">    my $key = $header;</div><div class="line">    $key ~~ s/&lt;upper&gt;$//;</div><div class="line">    %re&#123;$key&#125; ~= $data;</div><div class="line">&#125;</div><div class="line"></div><div class="line">for %re.kv -&gt; $key, $value &#123;</div><div class="line">    say &quot;$key\n$value&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rotor/" rel="tag">#.rotor</a>
+          
+            <a href="/tags/列表操作/" rel="tag">#列表操作</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/11/Grammar笔记/" rel="next" title="Grammar 笔记">
+                <i class="fa fa-chevron-left"></i> Grammar 笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/15/Perl6中的Role/" rel="prev" title="Perl 6 中的 Role">
+                Perl 6 中的 Role <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/07/14/Perl-6-rotor-列表操作之王/"
+     data-title="Perl 6 rotor--列表操作之王"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/07/14/Perl-6-rotor-列表操作之王/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/14/Perl-6-rotor-列表操作之王/"
+           data-title="Perl 6 rotor--列表操作之王" data-url="https://ohmycloud.github.io/2015/07/14/Perl-6-rotor-列表操作之王/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#分段"><span class="nav-number">1.</span> <span class="nav-text">分段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意缝隙"><span class="nav-number">2.</span> <span class="nav-text">注意缝隙</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重叠"><span class="nav-number">3.</span> <span class="nav-text">重叠</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全力以赴"><span class="nav-number">4.</span> <span class="nav-text">全力以赴</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

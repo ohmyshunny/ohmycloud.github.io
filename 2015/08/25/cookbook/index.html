@@ -1,0 +1,747 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="cookbook," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="字符串处理
+将每行从第二列到最后一列数值为0的且数目多于6个的行删除
+
+数据：
+1234567OG004240:    1       3     1       1       9     0       4       5       1     1       6    1     2OG004241:    1       2     1       4       7     2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cookbook">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/08/25/cookbook/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="字符串处理
+将每行从第二列到最后一列数值为0的且数目多于6个的行删除
+
+数据：
+1234567OG004240:    1       3     1       1       9     0       4       5       1     1       6    1     2OG004241:    1       2     1       4       7     2">
+<meta property="og:updated_time" content="2016-10-23T16:32:15.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cookbook">
+<meta name="twitter:description" content="字符串处理
+将每行从第二列到最后一列数值为0的且数目多于6个的行删除
+
+数据：
+1234567OG004240:    1       3     1       1       9     0       4       5       1     1       6    1     2OG004241:    1       2     1       4       7     2">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/08/25/cookbook/"/>
+
+  <title> cookbook | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                cookbook
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-25T00:00:00+08:00" content="2015-08-25">
+              2015-08-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/25/cookbook/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/25/cookbook/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h1><blockquote>
+<p>将每行从第二列到最后一列数值为0的且数目多于6个的行删除</p>
+</blockquote>
+<p>数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">OG004240:    1       3     1       1       9     0       4       5       1     1       6    1     2</div><div class="line">OG004241:    1       2     1       4       7     2       1       3       1     2       9    1     1</div><div class="line">OG004242:    1       2     1       2       4     1       3       9       2     2       4    2     2</div><div class="line">OG004243:    0       4     1       2       9     2       4       5       1     2       3    1     1</div><div class="line">OG004244:    0       2     1       3       8     3       3       2       2     3       4    2     2</div><div class="line">OG004245:    0       3     1       2       7     3       3       0       3     2       7    2     2</div><div class="line">OG004246:    0       0     2       0       1     15      0       15      0     0       1    0     1</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @lines = &quot;a.txt&quot;.IO.lines;</div><div class="line">for @lines -&gt; $line &#123;</div><div class="line">    my @words = $line.split(/\s+/);</div><div class="line">    say $line unless @words[1..*].grep(* eq 0).elems &gt; 6;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用 <code>p6doc -f Str.split</code> 查看 split 的帮助文档。</p>
+<p>合并相同行：</p>
+<p>文件一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1###ENSMMUP00000017866###-###27582-27683</div><div class="line">1###ENSMMUP00000017866###-###27508-27576</div><div class="line">1###ENSMMUP00000017866###-###27290-27503</div><div class="line">1###ENSMMUP00000040736###-###199515-200498</div><div class="line">1###ENSMMUP00000040736###-###198582-198818</div><div class="line">1###ENSMMUP00000030409###+###395728-395934</div><div class="line">1###ENSMMUP00000030409###+###403004-403148</div></pre></td></tr></table></figure>
+<p>想合并相同的，生成文件格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1###ENSMMUP00000017866###-###27582-27683  27508-27576  27290-27503  </div><div class="line">1###ENSMMUP00000040736###-###199515-200498  198582-198818</div><div class="line">1###ENSMMUP00000030409###+###395728-395934  403004-403148</div></pre></td></tr></table></figure>
+<p>一种方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @lines = &quot;a.txt&quot;.IO.lines;</div><div class="line">my %hash;</div><div class="line">for @lines -&gt; $line &#123;</div><div class="line">    $line.match(/^(.*?)(\d+&apos;-&apos;\d+)/);</div><div class="line">    %hash&#123;$0&#125; ~= $1 ~ &quot; &quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">for %hash.kv -&gt; $key, $value &#123;</div><div class="line">    say $key, $value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如下数据，想去掉第3列重复的行且保留的行要使第四列最小, 原始数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">326        0.00        0.00        ( 0 )</div><div class="line">63        0.00        2.43        ( 0.0082 )</div><div class="line">64        0.00        2.43        ( 0.0082 )</div><div class="line">120        0.00        2.43        ( 0 )</div><div class="line">340        0.00        4.03        ( 0 )</div><div class="line">99        0.00        9.14        ( 0.0229 )</div><div class="line">441        0.00        9.14        ( 0.0232 )</div><div class="line">142        0.00        10.77        ( 0.0569 )</div><div class="line">292        0.00        10.77        ( 0.0393 )</div><div class="line">266        0.00        10.77        ( 0.0233 )</div></pre></td></tr></table></figure>
+<p>想要的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">326        0.00        0.00        ( 0 )</div><div class="line">120        0.00        2.43        ( 0 )</div><div class="line">340        0.00        4.03        ( 0 )</div><div class="line">99        0.00        9.14        ( 0.0229 )</div><div class="line">266        0.00        10.77        ( 0.0233 )</div></pre></td></tr></table></figure>
+<p>一种方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @lines = &quot;a.txt&quot;.IO.lines;</div><div class="line">my %hash;</div><div class="line">for @lines -&gt; $line &#123;</div><div class="line">    $line.match(/(\d+\.\d+)\s+\(\s+(\S+)/);</div><div class="line">    %hash&#123;$0&#125; ~= $1 ~ &quot; &quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">for @lines -&gt; $line &#123;</div><div class="line">    $line.match(/(\d+\.\d+)\s+\(\s+(\S+)/);</div><div class="line"></div><div class="line">    for %hash.kv -&gt; $key, $value &#123;</div><div class="line">        say $line if $0 ~~ $key &amp;&amp; $1 ~~ $value.words.min;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有 gene.txt 和 in.txt 两个文件, 文件内容如下:</p>
+<p>gene.txt:（2000多行)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">chr1        ABCA4        94458582        94586799</div><div class="line">chr1        ACADM        76190031        76229363</div><div class="line">chr16        BBS2        56518258        56554008</div><div class="line">chr17        G6PC        41052813        41066450</div><div class="line">chr17        GAA        78078244        78093271</div></pre></td></tr></table></figure>
+<p>in.txt:(5万多行)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1        94505603        rs368951547        C        T        NA        NA</div><div class="line">1        94505604        rs61750126         A        C        0.02066    NA</div><div class="line">1        94505611        rs137853898        G        A        NA        not-provided</div><div class="line">1        94505620        rs370967816        T        A        NA        NA</div><div class="line">1        94505621        rs149503495        T        C        NA        NA</div><div class="line">1        94505627        rs374610040        A        G        NA        NA</div><div class="line">22        18901263        rs377148163       C        A        NA        NA</div><div class="line">22        18901290        rs381848          G        A        0.07989   NA</div><div class="line">22        18901322        rs62232347        C        A        NA        NA</div><div class="line">22        18901326        rs201353896       TCC      T        0.05005   NA</div><div class="line">22        18901327        rs10537001        CCT      C        0.0528    NA</div><div class="line">16        18901326        rs201353896       TCC      T        0.05005   NA</div><div class="line">17        18901327        rs10537001        CCT      C        0.0528    NA</div></pre></td></tr></table></figure>
+<p>gene.txt 和 in.txt 的第一列的数字部分相同，并且 In 的第二列在gene 的三四列范围之间，就输出 in.txt 中的那一行。</p>
+<p>解决方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">use v6;</div><div class="line"></div><div class="line">my @lines   = &quot;a.txt&quot;.IO.lines;</div><div class="line">my @inlines = &quot;in.txt&quot;.IO.lines;</div><div class="line">my %hash;</div><div class="line">for @lines -&gt; $line &#123;</div><div class="line">    $line.match(/^chr(\d+)\s+(\w+)\s+(\d+)\s+(\d+)/);</div><div class="line">    %hash&#123;$0~$1~$2~$3&#125; = $0 ~ &quot; &quot; ~ $2 ~ &quot; &quot; ~ $3;</div><div class="line">&#125;</div><div class="line"></div><div class="line">for @inlines -&gt; $line &#123;</div><div class="line">    $line.match(/^(\d+)\s+(\d+)/);</div><div class="line"></div><div class="line">    for %hash.values -&gt; $value &#123;</div><div class="line">        say $line</div><div class="line">        if $0 ~~ $value.words[0]</div><div class="line">        &amp;&amp; $1 &lt;= $value.words[1].Num</div><div class="line">        &amp;&amp; $1 &lt;= $value.words[2].Num;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>例如我现在数组中的值是 <code>@project = (&#39;NX11&#39;,&#39;NX12&#39;,&#39;NX13’)</code></p>
+<p>另外一个数组是 <code>@get = (&#39;ss&#39;,&#39;ssfd&#39;,&#39;NX12&#39;,&#39;sed&#39;,&#39;NX11’)</code></p>
+<p>现在把第一个数组中出现过的值，如果第二个数组中也有的话删除掉，然后保留第二个数组剩下的值。</p>
+<p>使用差集：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@get (-) @project</div></pre></td></tr></table></figure>
+<p>有如下数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">PL -0.00 5.50</div><div class="line">PL -0.25 3.50</div><div class="line">PL -0.50 0.00</div><div class="line">PL -0.75 4.50</div><div class="line">-0.25 -0.00 1.00</div><div class="line">-0.25 -0.25 4.50</div><div class="line">-0.25 -0.50 1.00</div><div class="line">-0.75 -0.75 1.00</div><div class="line">-0.75 -1.00 0.00</div><div class="line">-1.00 -0.25 3.50</div><div class="line">-1.00 -0.50 0.00</div><div class="line">-1.00 -1.25 3.40</div><div class="line">-1.00 -1.75 4.00</div></pre></td></tr></table></figure>
+<p>将第一列值相同的行合并， 分使合并第二列和第三列：</p>
+<p>结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PL -0.00 -0.25 -0.50 -0.75</div><div class="line">PL 5.50 3.50 0.00 4.50</div><div class="line">...</div></pre></td></tr></table></figure>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><hr>
+<p>Fluent interface (流接口)</p>
+<p>在软件工程中，一个流接口（fluent Interface）是指实现一种实现面向对象的能提高代码可读性的API的方法。<br>在 Perl 6 中有很多种方法, 但是最简单的一种是声明属性为可读写并使用 given 关键字。类型注释是可选的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">class Employee &#123;</div><div class="line">    subset Salary         of Real where * &gt; 0;</div><div class="line">    subset NonEmptyString of Str  where * ~~ /\S/; # 至少一个非空白符号</div><div class="line"></div><div class="line">    has NonEmptyString $.name    is rw;</div><div class="line">    has NonEmptyString $.surname is rw;</div><div class="line">    has Salary         $.salary  is rw;</div><div class="line"></div><div class="line">    method gist &#123;</div><div class="line">        return qq:to[END];</div><div class="line">        Name:    $.name</div><div class="line">        Surname: $.surname</div><div class="line">        Salary:  $.salary</div><div class="line">        END</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">my $employee = Employee.new();</div><div class="line"></div><div class="line">given $employee &#123;</div><div class="line">    .name    = &apos;Sally&apos;;</div><div class="line">    .surname = &apos;Ride&apos;;</div><div class="line">    .salary  = 200;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say $employee;</div><div class="line"></div><div class="line"># Output:</div><div class="line"># Name:    Sally</div><div class="line"># Surname: Ride</div><div class="line"># Salary:  200</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cookbook/" rel="tag">#cookbook</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/24/Perl6中的引号/" rel="next" title="Perl 6 中的引号">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的引号
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/25/Perl-6-单行程序/" rel="prev" title="Perl 6 单行程序">
+                Perl 6 单行程序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/08/25/cookbook/"
+     data-title="cookbook"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/08/25/cookbook/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/25/cookbook/"
+           data-title="cookbook" data-url="https://ohmycloud.github.io/2015/08/25/cookbook/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串处理"><span class="nav-number">1.</span> <span class="nav-text">字符串处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象"><span class="nav-number">1.1.</span> <span class="nav-text">面向对象</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="require," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="有时你必须不择手段地得到一个东西。 如果它是一个文件，你可以使用 Jonathan Stowes  的 URI::FetchFile。 所述模块检查四个模块中的任何一个是否可用，并且采用第一个将 URI 保存为磁盘上的文件。 在他的代码中有一个有趣的触发了 ENODOC 的行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 中的 require">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/10/26/Perl6中的require/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="有时你必须不择手段地得到一个东西。 如果它是一个文件，你可以使用 Jonathan Stowes  的 URI::FetchFile。 所述模块检查四个模块中的任何一个是否可用，并且采用第一个将 URI 保存为磁盘上的文件。 在他的代码中有一个有趣的触发了 ENODOC 的行。">
+<meta property="og:updated_time" content="2016-10-28T17:16:31.513Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 中的 require">
+<meta name="twitter:description" content="有时你必须不择手段地得到一个东西。 如果它是一个文件，你可以使用 Jonathan Stowes  的 URI::FetchFile。 所述模块检查四个模块中的任何一个是否可用，并且采用第一个将 URI 保存为磁盘上的文件。 在他的代码中有一个有趣的触发了 ENODOC 的行。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/10/26/Perl6中的require/"/>
+
+  <title> Perl 6 中的 require | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 中的 require
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-26T16:37:31+08:00" content="2016-10-26">
+              2016-10-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/26/Perl6中的require/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/Perl6中的require/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有时你必须不择手段地得到一个东西。 如果它是一个文件，你可以使用 Jonathan Stowes  的 <a href="https://github.com/jonathanstowe/URI-FetchFile" target="_blank" rel="external">URI::FetchFile</a>。 所述模块检查四个模块中的任何一个是否可用，并且采用第一个将 URI 保存为磁盘上的文件。 在他的代码中有一个有趣的触发了 ENODOC 的<a href="https://github.com/jonathanstowe/URI-FetchFile/blob/master/lib/URI/FetchFile.pm#L82" target="_blank" rel="external">行</a>。</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$type = try require :: ($class-name);</div></pre></td></tr></table></figure>
+<p>这里 <code>require</code> 返回一个类型对象，该类型对象由模块声明，并且具有与该模块相同的名字。</p>
+<p>检查 <a href="https://github.com/perl6/roast/blob/master/S11-modules/require.t" target="_blank" rel="external">roast</a> 这个巧妙的花招并把玩整个动态模块的魔法让我意识到，我们没有真正地在文档中覆盖这一点。 当我尝试处理一个 ENODOC 时我喜欢从一个可编译的例子开始。 这一次，我们需要<a href="https://gist.github.com/a04a57109892b31f3f2e14cbd0235714" target="_blank" rel="external">两个文件</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># M.pm6</div><div class="line">unit module M;</div><div class="line">class C is export &#123; method m &#123; &apos;method C::m&apos; &#125; &#125;;</div><div class="line">class D is export &#123; method m &#123; &apos;method D::m&apos; &#125; &#125;;</div><div class="line"></div><div class="line"># dynamic-modules.p6</div><div class="line">use v6;</div><div class="line">use lib &apos;.&apos;;</div><div class="line"></div><div class="line">subset C where ::(&apos;M::C&apos;);</div><div class="line"></div><div class="line">my C $context = try &#123; </div><div class="line">    CATCH &#123; default &#123; .note &#125; &#125;;</div><div class="line">    require ::(&apos;M&apos;);</div><div class="line">    ::(&apos;M::C&apos;)</div><div class="line">&#125;;</div><div class="line"></div><div class="line">dd $context.HOW.^methods.elems; # 246</div><div class="line">dd $context.HOW.WHAT; # Perl6::Metamodel::ClassHOW</div><div class="line">dd $context.WHAT; # M::C</div><div class="line">dd (&apos;M::C&apos;).^methods.elems; # 57;</div><div class="line">dd $context.HOW.shortname($context); # &quot;C&quot;</div></pre></td></tr></table></figure>
+<p>通过 <code>require</code> 加载的任何符号在运行时将不可用。因此，我们不能进行静态类型检查。使用 <code>subset</code> 和动态查找，我们可以得到一个类型对象来检查。 <code>where</code> 从句将与类型对象进行智能匹配。由于动态查找很慢，所以像下面这样缓存类型对象可能是明智的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">subset C where $ //= ::(&apos;M::C&apos;);</div></pre></td></tr></table></figure>
+<p><code>where</code> 会智能匹配给定的表达式，除非你用 <code>*</code> 或 <code>$_</code> 手动匹配。 给定的表达式本身不进行智能匹配，因此它将被求值。 由于 <code>$</code> 是一个状态变量，它的初始化将只被执行一次（对于给定的thunk）。 所以我们最终得到一个状态变量 <code>$</code>，它填充了第一次使用subset时 <code>::(&#39;M::C&#39;)</code> 后面的类型对象。 然后，针对该subset的每个约束检查，完成对该类型对象的智能匹配。</p>
+<p><code>//</code> 是 Defined-or 运算符。它返回第一个<strong>有定义的</strong>的操作数, 否则就返回最后的那个操作数。是短路运算符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">say Any // 0 // 42;   # 0</div><div class="line">say Int // Mu // 42;  # 42</div><div class="line">say Int // Mu // Str; # (Str)</div></pre></td></tr></table></figure>
+<p><code>Any</code> 是类型对象(Type Object)， 类型对象是<code>未定义的</code>（unfined）。如果你在类型对象上调用 <code>.defined</code> 方法, 它会返回 <code>False</code>。<br>你可以用这种方法来找出一个对象到底是不是<strong>类型对象</strong>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">my $obj = Int; # Int 是类型对象</div><div class="line">if $obj.defined &#123;</div><div class="line">    say &quot;普通对象, 有定义的对象&quot;;</div><div class="line">&#125; else &#123;</div><div class="line">    say &quot;类型对象&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而对于普通对象:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">0.defined     # True</div><div class="line">False.defined # True</div><div class="line">True.defined  # True</div><div class="line">&quot;&quot;.defined    # True</div><div class="line">[].defined    # True</div><div class="line">().defined    # True</div></pre></td></tr></table></figure>
+<p><code>//=</code> 是多余的，可以被一个简单的 <code>=</code> 替换，但它告诉读者，我期望 <code>$</code> 是未定义的。 我使用<code>定义或赋值</code>语法，希望读者熟悉它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; $a = Int  # $a 初始值是未定义的类型对象</div><div class="line">(Int)</div><div class="line">&gt; $a //= 3  # 等价于 $a = $a // 3</div><div class="line">3</div><div class="line">&gt; $a        # // 返回第一个有定义的操作数</div><div class="line">3</div></pre></td></tr></table></figure>
+<p>现在我们得到一个类型约束来防止 <code>require</code> 不返回一个匹配我们期望的名称的类型。请注意，我们会检查名称，而不是类型或接口。如果您有机会设计动态加载的模块，您可能需要定义一个角色（甚至可能为空），这些角色必须由动态加载的类实现，以确保您可以真正调用所期望的方法。不只是具有相同名称的方法。</p>
+<p>现在实际上我们可以按名字加载模块，并动态解析其中一个类，并从 <code>try</code> 块返回它。因为 M.pm6 定义了一个模块（如在 <code>Perl6::Metamodel::ModuleHOW</code>中）作为它的顶层包，我们不能简单地接受 <code>require</code> 的返回值，因为 Module 不是我们在 Perl 6 中最内省的东西。请注意，require 所加载的符号可在 try-block 外部通过动态查找获得。我不知道会发生什么如果你 go wild 并加载具有相同完全限定名的符号的模块。可能会有龙。</p>
+<p>加载任何一组可能安装过也可能没有安装过的模块是一种相当普遍的情况，对我有限的知识，我们的<a href="http://modules.perl6.org/" target="_blank" rel="external">生态系统</a>中还没有那样一个模块。因此，我想挑战一下，写一个运行以下接口的模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sub load-any-module(*%module-name-to-adapter);</div><div class="line">load-any-module(&#123;&apos;Module::Name&apos; =&gt; &amp;Callable-adapter&#125;);</div></pre></td></tr></table></figure>
+<p>其中 <code>Callable-adapter</code> 提供了一个通用接口，将模块的 <code>sub</code> 或方法调用转换为用户代码需要的任何内容。有了这样的模块，Jonathan 可以将 URI::FetchFile 减少到 50 行代码。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/require/" rel="tag">#require</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/22/关于Perl6你要知道的10件事/" rel="next" title="关于 Perl 6 你要知道的 10 件事">
+                <i class="fa fa-chevron-left"></i> 关于 Perl 6 你要知道的 10 件事
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/26/第10000个素数/" rel="prev" title="第 10000 个素数">
+                第 10000 个素数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/26/Perl6中的require/"
+     data-title="Perl 6 中的 require"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/10/26/Perl6中的require/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/26/Perl6中的require/"
+           data-title="Perl 6 中的 require" data-url="https://ohmycloud.github.io/2016/10/26/Perl6中的require/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

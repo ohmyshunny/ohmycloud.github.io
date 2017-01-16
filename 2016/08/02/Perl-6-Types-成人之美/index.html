@@ -1,0 +1,733 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Types,Subset," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6 Types: 成人之美
+在我的第一次大学编程语言课中， 我被告知 Pascal 语言在其它类型之外还拥有 Integer、Boolen 和 Stirng 类型。我知道了类型本来就该存在因为计算机很笨。当我在 C语言中涉猎的时候，我学到了更多有关 int、 char 和其它像在暖和的地方里地寄生虫， 还有我课桌底下嗡嗡的金属盒的声音。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl 6 Types--成人之美">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/08/02/Perl-6-Types-成人之美/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6 Types: 成人之美
+在我的第一次大学编程语言课中， 我被告知 Pascal 语言在其它类型之外还拥有 Integer、Boolen 和 Stirng 类型。我知道了类型本来就该存在因为计算机很笨。当我在 C语言中涉猎的时候，我学到了更多有关 int、 char 和其它像在暖和的地方里地寄生虫， 还有我课桌底下嗡嗡的金属盒的声音。">
+<meta property="og:updated_time" content="2016-10-23T16:44:09.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl 6 Types--成人之美">
+<meta name="twitter:description" content="Perl 6 Types: 成人之美
+在我的第一次大学编程语言课中， 我被告知 Pascal 语言在其它类型之外还拥有 Integer、Boolen 和 Stirng 类型。我知道了类型本来就该存在因为计算机很笨。当我在 C语言中涉猎的时候，我学到了更多有关 int、 char 和其它像在暖和的地方里地寄生虫， 还有我课桌底下嗡嗡的金属盒的声音。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/08/02/Perl-6-Types-成人之美/"/>
+
+  <title> Perl 6 Types--成人之美 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Perl 6 Types--成人之美
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-02T00:00:00+08:00" content="2016-08-02">
+              2016-08-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/02/Perl-6-Types-成人之美/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/02/Perl-6-Types-成人之美/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Perl 6 Types: 成人之美</p>
+<p>在我的第一次大学编程语言课中， 我被告知 Pascal 语言在其它类型之外还拥有 <strong>Integer</strong>、<strong>Boolen</strong> 和 <strong>Stirng</strong> 类型。我知道了类型本来就该存在因为计算机很笨。当我在 C语言中涉猎的时候，我学到了更多有关 <em>int</em>、 <em>char</em> 和其它像在暖和的地方里地寄生虫， 还有我课桌底下嗡嗡的金属盒的声音。</p>
+<a id="more"></a>
+<p>Perl 5 没有类型，它给我的感觉就像骑着自行车无拘无束的追风少年，沿着斜坡而下。不久之后我一门心思钻到计算机硬件的缝隙中。我拥有数据并且我能用它做任何我想做的事， 只要我得到的不是错误的数据。当我搞定的时候，我从自行车上掉了下来并刮破了我的膝盖。</p>
+<p>有了 Perl 6，鱼和熊掌可以兼得。你可以使用类型来避免它们。你可以拥有一个广域的类型来接收很多种类的值或窄类型。并且你可以享受代表机器智力的类型的速度， 或者你可以享受你自定义的代表你自己意志的类型的精度，类型为人类而生。</p>
+<h2 id="渐进类型"><a href="#渐进类型" class="headerlink" title="渐进类型"></a>渐进类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my       $a = &quot;whatever&quot;;</div><div class="line">my Str   $b = &quot;strings only&quot;;</div><div class="line">my Str:D $c = &quot;defined strings only&quot;;</div><div class="line">my int   $d = 14; # native int</div><div class="line"></div><div class="line">sub foo ($x) &#123; $x + 2 &#125;</div><div class="line">sub bar (Int:D $x) returns Int &#123; $x + 2 &#125;</div></pre></td></tr></table></figure>
+<p>Perl 6 拥有渐进类型， 这意味着你要么可以使用它们，要么避免使用它们。所以究竟为什么要打扰它们呢？</p>
+<p>首先，类型约束了你的变量中能包含的，你的方法或子例程接受的或返回的值的范围。这个函数即作为数据校验又作为安全网以过滤掉不正确代码所生成的垃圾数据。</p>
+<p>还有，当使用原生的，机器意志的类型的时候，你可以获得更好地性能并减少内存使用，假如它们对于你得数据来说是合适的工具的话。</p>
+<h2 id="内置类型"><a href="#内置类型" class="headerlink" title="内置类型"></a>内置类型</h2><p>有一个名副其实的自助式的<a href="http://docs.perl6.org/type.html" target="_blank" rel="external">Perl 6 中得内置类型</a>。如果你的子例程只对整数有意义，那么为你的参数使用 <strong>Int</strong> 类型。如果负数没有意义，那么使用 <strong>UInt</strong> - 一个无符号的 <strong>Int</strong> 来进一步限制值的范围。另一方面，如果你想处理一个较广的范围，那么 <strong>Numeric</strong> 类型可能更合适。</p>
+<p>如果你想一探究竟，Perl 6 也提供了一系列的映射到你常常见到的，例如 C 语言中的原生类型。使用这些原生类型可能会提供性能提升或内存使用的减少。可用的原生类型有：int，int8，int16，int32，int64，uint，uint8，uint16，uint32，uint64，num，num32，num64。类型名字中的数字表示可得的字节，不含数字的类型是平台无关的。</p>
+<p>诸如 int1，int2 和 int4 的子字节类型也计划在未来实现。</p>
+<h2 id="笑脸符号"><a href="#笑脸符号" class="headerlink" title="笑脸符号"></a>笑脸符号</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">multi foo (Int:U $x) &#123; &apos;Y U NO define $x?&apos;         &#125;</div><div class="line">multi foo (Int:D $x) &#123; &quot;The Square of $x is &#123;$x²&#125;&quot; &#125;</div><div class="line"></div><div class="line">my Int $x;</div><div class="line">say foo $x;</div><div class="line">$x = 42;</div><div class="line">say foo $x;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Y U NO define $x?</div><div class="line"># The square of 42 is 1764</div></pre></td></tr></table></figure>
+<p>笑脸符号是追加在类型名后面的 <em>:U</em>、<em>:D</em> 或 <code>:_</code> 。 在你没有指定笑脸符号的时候，<code>:_</code> 是你获得的默认笑脸符号。<em>:U</em> 只指定未定义(undefined)值，而 <code>:D</code> 只指定定义(defined)值。</p>
+<p>通过在调用者身上使用两个带有 <em>:U</em> 和 <em>:D</em> 的 multis，我们能知道方法是在类上调用的还是在实例上调用的。如果你在核动力装置上工作，确保你的鲁棒插入子例程绝对不会插入任何未定义的量也是一件好事情，我想。</p>
+<h2 id="Subsets：定制的类型"><a href="#Subsets：定制的类型" class="headerlink" title="Subsets：定制的类型"></a>Subsets：定制的类型</h2><p>内置的类型很酷，但是程序员工作的大部分数据没有精确地匹配。这就是 Perl 6 subsets 进场的时候了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">subset Prime of Int where *.is-prime;</div><div class="line">my Prime $x = 3;</div><div class="line">$x = 11; # works</div><div class="line">$x = 4;  # 失败，类型不匹配。</div></pre></td></tr></table></figure>
+<p>使用 <em>subset</em> 关键字，我们就地创建了一个叫做 <strong>Prime</strong> 的类型。它是 <strong>Int</strong> 类型的一个子集(subset)，所以任何非 Int 数不匹配这个类型。我们还使用 <em>where</em> 关键字指定了一个额外的约束；那个约束是在给定值身上调用的 <em>.is-prime</em> 方法必须返回一个 true 值。</p>
+<p>使用那个单行代码， 我们创建了一个特定的类型并可以像内置类型那样使用它！我们不仅可以用它来指定变量的类型、 子例程/方法的参数类型和返回值类型，我们还能使用智能匹配操作符来测试任意值，就像我们在内置类型中做得那样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">subset Prime of Int where *.is-prime;</div><div class="line">say &quot;It is an Int&quot; if &apos;foo&apos; ~~ Int;   # false, it&apos;s a Str</div><div class="line">say &quot;It&apos;s a prime&quot; if 31337 ~~ Prime; # true, it&apos;s a prime number</div></pre></td></tr></table></figure>
+<p>如果你的类型是一次性的东西，你只想把它应用到单个变量上呢？ 你一点也不必单独声明一个 subset！就在变量后面使用 <em>where</em> 关键字好了，你很好的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">multi is-a-prime ( Int $ where *.is-prime --&gt; &apos;Yup&apos; ) &#123;&#125;</div><div class="line">multi is-a-prime ( Any                    --&gt; &apos;Nope&apos;) &#123;&#125;</div><div class="line"></div><div class="line">say is-a-prime 3;     # Yup</div><div class="line">say is-a-prime 4;     # Nope</div><div class="line">say is-a-prime &apos;foo&apos;; # Nope</div></pre></td></tr></table></figure>
+<p>上面的签名中的 <strong>–&gt;</strong> 是表示返回值类型的另外一种方式，或者在这种情况下，是一种具体的返回值。所以我们拥有了两个含有不同签名的 multies。第一个接收一个 <strong>Int</strong> 类型的质数，第二个接受剩下的任何东西。我们的 multies 函数体中没有任何代码，就写了一个子例程告诉你一个数字是否是质数！</p>
+<h2 id="打包重用"><a href="#打包重用" class="headerlink" title="打包重用"></a>打包重用</h2><p>目前为止我们学到的很酷，但是酷不是 awesome！你可能会很频繁地使用某些你自定义的类型。在厂里面工作，产品号至多有20个字符，以某种格式？ 非常好！我们为它创建一个子类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">subset ProductNumber of Str where &#123; .chars &lt;=20 and m/^ \d**3 &lt;[-#]&gt; / &#125;;</div><div class="line">my ProductNumber $num = &apos;333-FOOBAR&apos;;</div></pre></td></tr></table></figure>
+<p>这好极了，但是我们不想在所有的地方都重复这个 subset。 我们来把它推到一个单独的模块中。我会创建 <code>/opt/local/Perl6/Company/Types.pm6</code> 因为 <code>/opt/local/Perl6</code> 是包含在我为这个虚构的厂所写的所有 apps 中的模块搜索路径中的路径。在这个文件中，我会有下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">unit module Company::Types;</div><div class="line">my package EXPORT::DEFAULT &#123;</div><div class="line">    subset ProductNumber of Str where &#123; .chars &lt;=20 and m/^ \d**3 &lt;[-#]&gt; / &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们给我们的模块起了一个名字并默认导出我们可爱的 subsets。我们的代码看起来怎么样了？ 它看起来酷毙了 - 不，等等， AWESOME – 这一次：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">use Company::Types;</div><div class="line">my ProductNumber $num1 = &apos;333-FOOBAR&apos;; # succeeds</div><div class="line">my ProductNumber $num2 = &apos;meow&apos;;       # fails</div></pre></td></tr></table></figure>
+<p>这样， 我们使用单个 use 语句扩展了 Perl 6 以为我们提供定制的类型，它精确地匹配了我们想要的数据成为什么样子。</p>
+<h2 id="Awesome-Error-Messages-for-Subsets"><a href="#Awesome-Error-Messages-for-Subsets" class="headerlink" title="Awesome Error Messages for Subsets"></a>Awesome Error Messages for Subsets</h2><p>如果你尝试过所有这些例子，你可能注意到一点小瑕疵。你得到的错误信息不够给力！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Type check failed in assignment to $num2;</div><div class="line">expected Company::Types::EXPORT::DEFAULT::ProductNumber but got Str (&quot;meow&quot;)</div><div class="line">in block &lt;unit&gt; at test.p6 line 3</div></pre></td></tr></table></figure>
+<p>当给你是你的目标的时候，你肯定有提升那些信息的方法。再次打开我们的 <strong>Company::Types</strong> 文件，并扩展我们的 <strong>ProductNumber</strong> 的 <em>where</em> 从句以包括给力的错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">subset ProductNumber of Str where &#123;</div><div class="line">    .chars &lt;= 20 and m/^ \d**3 &lt;[-#]&gt; /</div><div class="line">        or warn &apos;ProductNumber type expects a string at most 20 chars long&apos;</div><div class="line">            ~ &apos; with the first 4 characters in the format of \d\d\d[-|#]&apos;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p> 现在，在东西不匹配我们的类型的时候，信息会在 <strong>Type</strong> 检查信息和栈追踪之前被包括进来， 为我们提供所期望的东西的更多信息。 如果你想，这儿你也可以调用 <em>fail</em> 代替 <em>warn</em> ，这时 Type check… 信息不会被打印出来，给你更多控制。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p> 结论个大西瓜！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Types/" rel="tag">#Types</a>
+          
+            <a href="/tags/Subset/" rel="tag">#Subset</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/01/unspaces/" rel="next" title="unspaces">
+                <i class="fa fa-chevron-left"></i> unspaces
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/03/智能匹配/" rel="prev" title="智能匹配">
+                智能匹配 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/08/02/Perl-6-Types-成人之美/"
+     data-title="Perl 6 Types--成人之美"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/08/02/Perl-6-Types-成人之美/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/02/Perl-6-Types-成人之美/"
+           data-title="Perl 6 Types--成人之美" data-url="https://ohmycloud.github.io/2016/08/02/Perl-6-Types-成人之美/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#渐进类型"><span class="nav-number">1.</span> <span class="nav-text">渐进类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置类型"><span class="nav-number">2.</span> <span class="nav-text">内置类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笑脸符号"><span class="nav-number">3.</span> <span class="nav-text">笑脸符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Subsets：定制的类型"><span class="nav-number">4.</span> <span class="nav-text">Subsets：定制的类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包重用"><span class="nav-number">5.</span> <span class="nav-text">打包重用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Awesome-Error-Messages-for-Subsets"><span class="nav-number">6.</span> <span class="nav-text">Awesome Error Messages for Subsets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">7.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,742 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Subset,multiple," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="举个例子, 假设 person 有一个 age 属性. 我能写一个 multimethod, 让它接收一个 person 作为参数, 并返回这样的结果吗:
+123return &quot;child&quot;  if age &amp;lt; 16;return &quot;adult&quot;  if 16 &amp;lt;= age &amp;lt; 66;return &quot;senior&quot; if age &amp;gt;= 66;
+1234class Perso">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Perl6的subsets和multiple辨别年龄">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/01/04/使用Perl6的subsets和multiple辨别年龄/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="举个例子, 假设 person 有一个 age 属性. 我能写一个 multimethod, 让它接收一个 person 作为参数, 并返回这样的结果吗:
+123return &quot;child&quot;  if age &amp;lt; 16;return &quot;adult&quot;  if 16 &amp;lt;= age &amp;lt; 66;return &quot;senior&quot; if age &amp;gt;= 66;
+1234class Perso">
+<meta property="og:updated_time" content="2016-10-23T16:13:34.678Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Perl6的subsets和multiple辨别年龄">
+<meta name="twitter:description" content="举个例子, 假设 person 有一个 age 属性. 我能写一个 multimethod, 让它接收一个 person 作为参数, 并返回这样的结果吗:
+123return &quot;child&quot;  if age &amp;lt; 16;return &quot;adult&quot;  if 16 &amp;lt;= age &amp;lt; 66;return &quot;senior&quot; if age &amp;gt;= 66;
+1234class Perso">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/01/04/使用Perl6的subsets和multiple辨别年龄/"/>
+
+  <title> 使用Perl6的subsets和multiple辨别年龄 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用Perl6的subsets和multiple辨别年龄
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-04T00:00:00+08:00" content="2016-01-04">
+              2016-01-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/04/使用Perl6的subsets和multiple辨别年龄/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/使用Perl6的subsets和multiple辨别年龄/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>举个例子, 假设 person 有一个 age 属性. 我能写一个 <code>multimethod</code>, 让它接收一个 person 作为参数, 并返回这样的结果吗:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> <span class="string">"child"</span>  <span class="keyword">if</span> age &lt; <span class="number">16</span>;</div><div class="line"><span class="keyword">return</span> <span class="string">"adult"</span>  <span class="keyword">if</span> <span class="number">16</span> &lt;= age &lt; <span class="number">66</span>;</div><div class="line"><span class="keyword">return</span> <span class="string">"senior"</span> <span class="keyword">if</span> age &gt;= <span class="number">66</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">    has Int $.age;</div><div class="line">    has Str $.name;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这仅仅定义了一个拥有两个属性, 叫做 Person 的类. age 必须是 Int 型, name 必须是 Str 型. <code>.</code> 语法会生成一个只读访问器, 以使我们能从类的外部访问 getter 方法.</p>
+<a id="more"></a>
+<p>现在我们来定义一个 <code>age-group</code> multi 来告诉一个 person 属于哪个 age-group:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">multi age-group ($person where (*.age &lt; <span class="number">16</span>)  ) &#123; <span class="string">"child"</span> &#125;</div><div class="line">multi age-group ($person where (*.age &gt;= <span class="number">66</span>) ) &#123; <span class="string">"senior"</span>&#125;</div><div class="line">multi age-group ($person)                      &#123; <span class="string">"adult"</span> &#125;</div></pre></td></tr></table></figure>
+<p><code>where</code>从句给参数添加了一个<code>约束</code>, 这个约束告诉参数必须匹配这个参数右边的东西.这用于区别将要选取的 multi. <code>where</code>从句可以是一个 regex, 类型, 一个确切的值, 一个断言 block,或者一些其它东西.</p>
+<p><code>*.age &lt; 16</code> 部分可能看起来更让人迷惑. 星号是什么? 星号是一个特殊的值, 叫做 Whatever. 它通常在给定情况下满足你的需求. 在智能匹配中, 它总是匹配, 所以你可以在 <code>given/when</code> block 中将它用作默认值. 但是 Whatever 最有用的地方之一是创建匿名 block. 对于大部分操作符, 如果你在 Whatever 上执行它们, 它会产生一个匿名 block 并使用它们的参数执行操作符. 如果一个表达式中有多个 Whatever, 则生成的匿名 block 会有多个参数对应于相应的 Whatever 位置.</p>
+<p>例如, <code>* + 1</code> 产生一个 block,使参数的值加1. <code>* + *</code> 产生一个 block 使它的两个参数相加. 这个例子中, 我们调用 Whatever 的 <code>age</code>方法, 并询问它是否小于 16. 我们能用其它几种方式达到同样的效果, 但是更啰嗦:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">sub</span> ($<span class="title">person</span>) </span>&#123; $person.age &lt; <span class="number">16</span> &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-&gt; $person    &#123; $person.age &lt; <span class="number">16</span> &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; .age &lt; <span class="number">16</span> &#125;</div></pre></td></tr></table></figure>
+<p>但是对于像这种简单的操作, Whatever 通常比其它方式更易读也更简洁. 不幸的是, 在参数列表的 where 从句中, 你需要使用括号括起很多复杂的表达式, 包括 Whatever block.</p>
+<p>现在让我们在 Rakudo 的 REPL 中试试它吧:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; age-group Person.new(:name&lt;timmy&gt;, :age(<span class="number">10</span>))</div><div class="line">child</div><div class="line">&gt; age-group Person.new(:name&lt;john&gt;, :age(<span class="number">23</span>))</div><div class="line">adult</div><div class="line">&gt; age-group Person.new(:name&lt;ezekiel&gt;, :age(<span class="number">89</span>))</div><div class="line">senior</div></pre></td></tr></table></figure>
+<p>目前为止, 很好. 但是如果我们意外地传递了一个 age 而不是 Person 给 age-group 呢?</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; age-group <span class="number">15</span></div><div class="line">Method <span class="string">'age'</span> <span class="keyword">not</span> found <span class="keyword">for</span> invocant of class <span class="string">'Int'</span></div></pre></td></tr></table></figure>
+<p>我们能指定只有 Person 对于 age-group 是合法的:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">multi age-group (Person $person where (*.age &lt; <span class="number">16</span>)) &#123; <span class="string">"child"</span> &#125;</div><div class="line">multi age-group (Person $person where (*.age &gt;= <span class="number">66</span>)) &#123; <span class="string">"senior"</span> &#125;</div><div class="line">multi age-group (Person $person) &#123; <span class="string">"adult"</span> &#125;</div></pre></td></tr></table></figure>
+<p>这正确地处理了 Person 问题. 调用带有 age 参数的 age-group 会怎样呢?</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; age-group <span class="number">15</span></div><div class="line">No applicable candidates found to dispatch to <span class="keyword">for</span> <span class="string">'age-group'</span>. Available candidates are:</div><div class="line">:(Person $person where (&#123; ... &#125;))</div><div class="line">:(Person $person where (&#123; ... &#125;))</div><div class="line">:(Person $person)</div></pre></td></tr></table></figure>
+<p>看起来更好. 假如我们允许询问 age 所属的 age-group 呢?</p>
+<p>我们能重写 age-group 的 Person 变体, 接收 Int 类型的 age, 并写一个单个的 Person 变体来调用 age-group:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">multi age-group(Int $age where (* &lt; <span class="number">16</span>)  ) &#123; <span class="string">"child"</span>  &#125;</div><div class="line">multi age-group(Int $age where (* &gt;= <span class="number">66</span>) ) &#123; <span class="string">"senior"</span> &#125;</div><div class="line">multi age-group(Int $age)                  &#123; <span class="string">"adult"</span>  &#125;</div><div class="line">multi age-group(Person $person) &#123; age-group $person.age &#125;</div></pre></td></tr></table></figure>
+<p>这对于每个 Person 例子都有效, 还有它们的 ages.</p>
+<p>现在,让我们使用 <code>age-group</code> 定义一个叫做 <code>print-name</code> 的 <code>multi</code> 来分发.<br>根据 <code>age-group</code> 分发最明显的方法是使用 where 从句.</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">multi <span class="keyword">print</span>-name(Person $person where (age-group($person) eq <span class="string">"child"</span>)) &#123; <span class="string">"Little &#123;$person.name&#125;"</span> &#125;</div><div class="line">multi <span class="keyword">print</span>-name(Person $person where (age-group($person) eq <span class="string">"adult"</span>)) &#123; $person.name            &#125;</div><div class="line">multi <span class="keyword">print</span>-name(Person $person where (age-group($person) eq <span class="string">"senior"</span>))&#123; <span class="string">"Old Man &#123;$person.name&#125;"</span>&#125;</div></pre></td></tr></table></figure>
+<p>双引号字符串中的 <code>{$person.name}</code> 将 block 的结果插值到字符串中.</p>
+<p>让我们再试试:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="keyword">print</span>-name Person.new(:name&lt;timmy&gt;, :age(<span class="number">10</span>))</div><div class="line">Little Timmy</div><div class="line">&gt; <span class="keyword">print</span>-name Person.new(:name&lt;john&gt;, :age(<span class="number">23</span>))</div><div class="line">John</div><div class="line">&gt; <span class="keyword">print</span>-name Person.new(:name&lt;ezekiel&gt;, :age(<span class="number">89</span>))</div><div class="line">Old Man Ezekiel</div></pre></td></tr></table></figure>
+<p>那很棒. 但是如果我们有更多的基于 person 的 <code>age-group</code> 的 multis 要分发呢? 难道我们真的每次都要写出 <code>(Person $person where (age-group($person) eq &quot;child&quot;))</code> 这样的代码吗? 不, 我们不需要, 感谢 subset 类型.</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">subset Child  of Person where *.age &lt; <span class="number">16</span>;</div><div class="line">subset Adult  of Person where -&gt; $person &#123; <span class="number">16</span> &lt;= $person.age &lt; <span class="number">66</span> &#125;;</div><div class="line">subset Senior of Person where *.age &gt;= <span class="number">66</span>;</div><div class="line"></div><div class="line">multi <span class="keyword">print</span>-name(Child $person)  &#123; <span class="string">"Little &#123;$person.name&#125;"</span>  &#125;</div><div class="line">multi <span class="keyword">print</span>-name(Adult $person)  &#123; $person.name             &#125;</div><div class="line">multi <span class="keyword">print</span>-name(Senior $person) &#123; <span class="string">"Old Man &#123;$person.name&#125;"</span> &#125;</div></pre></td></tr></table></figure>
+<p>由于 Rakudo 在处理含有组合的链式比较操作符的 Whatever 时有一个 bug, 我们不得不为 Adult 写一个显式的 block.</p>
+<p>这个 bug 现已修复, 所以:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">subset Adult  of Person where -&gt; $person &#123; <span class="number">16</span> &lt;= $person.age &lt; <span class="number">66</span> &#125;;</div></pre></td></tr></table></figure>
+<p>等价于:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">subset Adult  of Person where  <span class="number">16</span> &lt;= *.age &lt; <span class="number">66</span>;</div></pre></td></tr></table></figure>
+<p>这个新版本的 <code>print-name</code> 与之前旧版本产生同样的结果. 现在我们能从 <code>Child/Adult/Senior</code> 的角度重写 <code>age-group</code> :</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">multi age-group(Child)  &#123; <span class="string">"child"</span>  &#125;</div><div class="line">multi age-group(Adult)  &#123; <span class="string">"adult"</span>  &#125;</div><div class="line">multi age-group(Senior) &#123; <span class="string">"senior"</span> &#125;</div><div class="line">multi age-group(Int $age) &#123; age-group Person.new(:$age) &#125;</div></pre></td></tr></table></figure>
+<p><code>:$age</code> 是 <code>:age($age)</code> 的简写方式.</p>
+<p>又一次, 我们有了产生想要的结果的更清晰的代码, 多亏了 multiple 分发和 subset 类型.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Subset/" rel="tag">#Subset</a>
+          
+            <a href="/tags/multiple/" rel="tag">#multiple</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/04/从正则表达式到Grammars-Part-2/" rel="next" title="从正则表达式到Grammars - Part 2">
+                <i class="fa fa-chevron-left"></i> 从正则表达式到Grammars - Part 2
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/12/Fallout-Hacking-Game/" rel="prev" title="Fallout Hacking Game">
+                Fallout Hacking Game <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/01/04/使用Perl6的subsets和multiple辨别年龄/"
+     data-title="使用Perl6的subsets和multiple辨别年龄"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/01/04/使用Perl6的subsets和multiple辨别年龄/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/04/使用Perl6的subsets和multiple辨别年龄/"
+           data-title="使用Perl6的subsets和multiple辨别年龄" data-url="https://ohmycloud.github.io/2016/01/04/使用Perl6的subsets和multiple辨别年龄/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

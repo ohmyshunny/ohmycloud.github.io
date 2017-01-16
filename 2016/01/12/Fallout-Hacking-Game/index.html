@@ -1,0 +1,716 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MAIN," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="流行游戏辐射3: New Vegas 有一台计算机, 玩家必须正确地从同样长度的单词列表中猜出正确的密码。你的挑战是你自己实现这个游戏。
+玩家有只 4 次机会, 每一次不正确的猜测计算机会提示有多少个字母位置是正确的。
+例如, 如果密码是 MIND , 玩家猜测为 MEND, 游戏会提示4个位置中的3个是正确的(M_ND)。如果密码是 COMPUT, 玩家猜测为 PLAYFUL, 游戏会报告 0/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fallout Hacking Game">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/01/12/Fallout-Hacking-Game/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="流行游戏辐射3: New Vegas 有一台计算机, 玩家必须正确地从同样长度的单词列表中猜出正确的密码。你的挑战是你自己实现这个游戏。
+玩家有只 4 次机会, 每一次不正确的猜测计算机会提示有多少个字母位置是正确的。
+例如, 如果密码是 MIND , 玩家猜测为 MEND, 游戏会提示4个位置中的3个是正确的(M_ND)。如果密码是 COMPUT, 玩家猜测为 PLAYFUL, 游戏会报告 0/">
+<meta property="og:updated_time" content="2016-10-23T16:32:15.984Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fallout Hacking Game">
+<meta name="twitter:description" content="流行游戏辐射3: New Vegas 有一台计算机, 玩家必须正确地从同样长度的单词列表中猜出正确的密码。你的挑战是你自己实现这个游戏。
+玩家有只 4 次机会, 每一次不正确的猜测计算机会提示有多少个字母位置是正确的。
+例如, 如果密码是 MIND , 玩家猜测为 MEND, 游戏会提示4个位置中的3个是正确的(M_ND)。如果密码是 COMPUT, 玩家猜测为 PLAYFUL, 游戏会报告 0/">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/01/12/Fallout-Hacking-Game/"/>
+
+  <title> Fallout Hacking Game | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Fallout Hacking Game
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-12T00:00:00+08:00" content="2016-01-12">
+              2016-01-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/12/Fallout-Hacking-Game/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/12/Fallout-Hacking-Game/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>流行游戏辐射3: New Vegas 有一台计算机, 玩家必须正确地从同样长度的单词列表中猜出正确的密码。你的挑战是你自己实现这个游戏。</p>
+<p>玩家有只 4 次机会, 每一次不正确的猜测计算机会提示有多少个字母位置是正确的。</p>
+<p>例如, 如果密码是 <strong>MIND</strong> , 玩家猜测为 <strong>MEND</strong>, 游戏会提示4个位置中的3个是正确的(M_ND)。如果密码是 COMPUT, 玩家猜测为 PLAYFUL, 游戏会报告 0/7。虽然某些字符是匹配的, 但是位置不匹配。</p>
+<p>询问玩家难度设置为几（非常简单, 简单, 中等, 困难, 非常困难）, 然后给玩家展示5到15的同样长度的单词。长度可以是 4到15个字符。</p>
+<a id="more"></a>
+<p>这儿有一个游戏例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Difficulty (1-5)? 3</div><div class="line">SCORPION</div><div class="line">FLOGGING</div><div class="line">CROPPERS</div><div class="line">MIGRAINE</div><div class="line">FOOTNOTE</div><div class="line">REFINERY</div><div class="line">VAULTING</div><div class="line">VICARAGE</div><div class="line">PROTRACT</div><div class="line">DESCENTS</div><div class="line">Guess (4 left)? migraine</div><div class="line">0/8 correct</div><div class="line">Guess (3 left)? protract</div><div class="line">2/8 correct</div><div class="line">Guess (2 left)? croppers</div><div class="line">8/8 correct</div><div class="line">You win!</div></pre></td></tr></table></figure>
+<p>你可以从我们的字典文件中获取单词：<a href="http://code.google.com/p/dotnetperls-controls/downloads/detail?name=enable1.txt" target="_blank" rel="external">enable1.txt</a> 。 你的程序应该在做位置检查时完全忽略大小写。</p>
+<p>能增加游戏的难度, 或许甚至不能保证有解决方法, 根据你特别挑选的单词。例如, 你的程序能提供某些位置重叠的字符以至于暴露给玩家的信息越少越好。</p>
+<h4 id="Perl-6-difficulty-levels-based-on-letter-overlaps"><a href="#Perl-6-difficulty-levels-based-on-letter-overlaps" class="headerlink" title="Perl 6 - difficulty levels based on letter overlaps"></a>Perl 6 - <em>difficulty levels based on letter overlaps</em></h4><hr>
+<p>Rather than simply choosing random words of a certain length, it also requires a minimum number of total letter overlaps between them。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">sub get-words ($difficulty) &#123;</div><div class="line">    my %setting =</div><div class="line">        1 =&gt; (4     , 7),</div><div class="line">        2 =&gt; (5..6  , 5),</div><div class="line">        3 =&gt; (7..8  , 3),</div><div class="line">        4 =&gt; (9..11 , 1),</div><div class="line">        5 =&gt; (12..15, 0),</div><div class="line">    ;</div><div class="line">    my ($length, $similarity) = %setting&#123;$difficulty&#125;».pick;</div><div class="line"></div><div class="line">    my @dict = &apos;enable1.txt&apos;.IO.lines.grep(*.chars == $length);</div><div class="line"></div><div class="line">    my @words = @dict.pick($length + 1)</div><div class="line">        until letter-overlaps(@words) &gt;= $similarity;</div><div class="line">    @words;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub letter-overlaps (*@words) &#123;</div><div class="line">    [+] ([Z] @words».fc».comb).map(&#123; .elems - .Set.elems &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>I used a naive brute-force implementation - it simply keeps choosing random sets of words of the correct length, until it finds a set that fulfils the overlap condition.</p>
+<p>Here’s an example of a set with 6 total letter overlaps (indicated by asterisks) which was found for difficulty 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">GLUGS -&gt; GLUGS</div><div class="line">LOCAL -&gt; LOCAL</div><div class="line">CASKY -&gt; CASKY</div><div class="line">NATTY -&gt; N*TT*</div><div class="line">SAULT -&gt; S*ULT</div><div class="line">SAITH -&gt; **I*H</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">sub get-words ($difficulty) &#123;</div><div class="line">    my %lengths = 1 =&gt; 4..6,   2 =&gt; 7..8,  3 =&gt; 9..11,</div><div class="line">                  4 =&gt; 12..13, 5 =&gt; 14..15;</div><div class="line"></div><div class="line">    my $length = %lengths&#123;$difficulty&#125;.pick;</div><div class="line"></div><div class="line">    &apos;enable1.txt&apos;.IO.lines.grep(*.chars == $length).pick($length + 1);</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub guess ($secret, $i) &#123;</div><div class="line">    my $word = prompt &quot;Guess (&#123;4 - $i&#125; left)? &quot;;</div><div class="line">    ($secret.fc.comb Z $word.fc.comb).flat.grep(* eq *).elems;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub play &#123;</div><div class="line">    my $difficulty = +prompt &apos;Difficulty (1-5)? &apos;;</div><div class="line">    my @words = get-words $difficulty;</div><div class="line"></div><div class="line">    say .uc for @words;</div><div class="line"></div><div class="line">    my $secret = @words.pick;</div><div class="line">    my $l = $secret.chars;</div><div class="line"></div><div class="line">    for ^4 &#123;</div><div class="line">        my $g = guess $secret, $_;</div><div class="line">        if $g == $l &#123; say &apos;You win !&apos;; return &#125;</div><div class="line">        else        &#123; say &quot;$g/$l correct&quot; &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    say &quot;You lose, the word was $secret&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">play;</div></pre></td></tr></table></figure>
+<p>I should steal somebody’s difficulty level determinations. Only thing of interest may be picking N random things from a stream in a single pass:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/env perl6</div><div class="line">use v6;</div><div class="line">constant $DEBUG = %*ENV&lt;DEBUG&gt; // 1;</div><div class="line"></div><div class="line"># most favorite one pass random picker</div><div class="line">class RandomAccumulator &#123;</div><div class="line">  has $.value;</div><div class="line">  has $!count = 0;</div><div class="line">  method accumulate($input) &#123;</div><div class="line">    $!value = $input if rand &lt; 1 / ++$!count;</div><div class="line">    self;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># get count random words with some filtering</div><div class="line">sub random-words(</div><div class="line">  Int :$count = 1,</div><div class="line">  Int :$length = 5,</div><div class="line">  Regex :$match = rx/^&lt;:Letter&gt;+$/,</div><div class="line">) &#123;</div><div class="line">  my @acc = RandomAccumulator.new xx $count;</div><div class="line">  for &quot;/usr/share/dict/words&quot;.IO.lines.grep($match)\</div><div class="line">    .grep(*.chars == $length) -&gt; $word &#123;</div><div class="line">    .accumulate($word) for @acc;</div><div class="line">  &#125;</div><div class="line">  @acc.map: *.value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub count-matching-chars(Str $a, Str $b) &#123;</div><div class="line">  ($a.comb Zeq $b.comb).grep(?*).elems</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub MAIN &#123;</div><div class="line"></div><div class="line">  my $difficulty;</div><div class="line"></div><div class="line">  repeat &#123;</div><div class="line">    $difficulty = prompt(&quot;Difficulty (1-5): &quot;);</div><div class="line">  &#125; until 1 &lt;= $difficulty &lt;= 5;</div><div class="line"></div><div class="line">  # first pass at difficulty levels, tweak as desired</div><div class="line">  # maybe pick count/length as some function of $difficulty</div><div class="line">  my %level =</div><div class="line">    1 =&gt; [ count =&gt; 5, length =&gt; 4 ],</div><div class="line">    2 =&gt; [ count =&gt; 5, length =&gt; 4 ],</div><div class="line">    3 =&gt; [ count =&gt; 5, length =&gt; 4 ],</div><div class="line">    4 =&gt; [ count =&gt; 5, length =&gt; 4 ],</div><div class="line">    5 =&gt; [ count =&gt; 15, length =&gt; 15 ],</div><div class="line">    ;</div><div class="line"></div><div class="line">  my @words = random-words(|%level&#123;$difficulty&#125;.hash).map(*.fc);</div><div class="line">  my $target = @words.pick;</div><div class="line">  say &quot;target: $target&quot; if $DEBUG;</div><div class="line"></div><div class="line">  @words.join(&quot;\n&quot;).say;</div><div class="line"></div><div class="line">  my $won = False;</div><div class="line">  for ^4 &#123;</div><div class="line">    my $guess = prompt(&quot;Guess (&#123;4-$_&#125; left): &quot;).fc;</div><div class="line">    if ($guess eq $target) &#123; $won = True; last &#125;</div><div class="line">    say &quot;You got &amp;count-matching-chars($guess,$target) characters correct.&quot;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if $won &#123;</div><div class="line">    say &quot;You won!&quot;;</div><div class="line">  &#125;</div><div class="line">  else &#123;</div><div class="line">    say &quot;You loose!&quot;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MAIN/" rel="tag">#MAIN</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/04/使用Perl6的subsets和multiple辨别年龄/" rel="next" title="使用Perl6的subsets和multiple辨别年龄">
+                <i class="fa fa-chevron-left"></i> 使用Perl6的subsets和multiple辨别年龄
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/21/Roles/" rel="prev" title="Roles">
+                Roles <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/01/12/Fallout-Hacking-Game/"
+     data-title="Fallout Hacking Game"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/01/12/Fallout-Hacking-Game/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/12/Fallout-Hacking-Game/"
+           data-title="Fallout Hacking Game" data-url="https://ohmycloud.github.io/2016/01/12/Fallout-Hacking-Game/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Perl-6-difficulty-levels-based-on-letter-overlaps"><span class="nav-number">1.</span> <span class="nav-text">Perl 6 - difficulty levels based on letter overlaps</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

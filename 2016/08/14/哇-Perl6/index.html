@@ -1,0 +1,938 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Junctions,惰性列表," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言Slides 地址视频地址
+答案地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哇, Perl 6!">
+<meta property="og:url" content="https://ohmycloud.github.io/2016/08/14/哇-Perl6/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="前言Slides 地址视频地址
+答案地址">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-b8abf1b05dbb2b7e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-be2bf4d1cd691330.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-b310dac691db4f59.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-71e3d5f44f434c2c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-815a894031734d6c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-be2f92ec80152cf1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-0494c5bd718ac532.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-efdc5ad20795b4dd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-4b889b4217fec764.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-9562eb8b97578bd9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-5c9d882e4102b06a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-3dece01d75627a4d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-fc3ec03dfe5240f3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-0c0668c970b6cc1b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-1cb84f014ede918b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-28231953961eec03.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-7f43059cb5b74117.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-e54d22969bf5ef49.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/326727-8a66f7a51366f797.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-10-23T16:13:34.692Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="哇, Perl 6!">
+<meta name="twitter:description" content="前言Slides 地址视频地址
+答案地址">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/326727-b8abf1b05dbb2b7e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2016/08/14/哇-Perl6/"/>
+
+  <title> 哇, Perl 6! | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                哇, Perl 6!
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-14T13:14:00+08:00" content="2016-08-14">
+              2016-08-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/14/哇-Perl6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/14/哇-Perl6/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p><a href="http://tpm2016.zoffix.com/#/1" target="_blank" rel="external">Slides 地址</a><br><a href="https://www.youtube.com/watch?v=paa3niF72Nw" target="_blank" rel="external">视频地址</a></p>
+<p><a href="http://blogs.perl.org/users/zoffix_znet/2016/03/wow-perl-6-talk-slides-recording-and-answers-to-questions.html" target="_blank" rel="external">答案地址</a></p>
+<a id="more"></a>
+<h2 id="注意-Unicode"><a href="#注意-Unicode" class="headerlink" title="注意 Unicode"></a><strong>注意</strong> Unicode</h2><p>Perl 6 允许你使用 Unicode 的项和操作符。<br>这些 Unicode 都有对应的只使用 ASCII 字符的 Texas 变体, 如果你更喜欢使用它们, 到 <a href="http://docs.perl6.org/language/unicode_texas" target="_blank" rel="external">http://docs.perl6.org/language/unicode_texas</a> 找到它们。</p>
+<h2 id="惰性列表和它们的使用"><a href="#惰性列表和它们的使用" class="headerlink" title="惰性列表和它们的使用"></a><strong>惰性列表和它们的使用</strong></h2><p><img src="http://upload-images.jianshu.io/upload_images/326727-b8abf1b05dbb2b7e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<h2 id="惰性列表"><a href="#惰性列表" class="headerlink" title="惰性列表"></a><strong>惰性列表</strong></h2><p>我们来做点儿疯狂的事情吧…例如创建一个无限列表(INIFINITE LIST)!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my @to-infinity-and-beyond = 0, 2 ... ∞;</div><div class="line">say @to-infinity-and-beyond[1008]; # 2016</div></pre></td></tr></table></figure>
+<p>来点更有用的东西: 处理大文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">for &apos;/tmp/4GB-file.txt&apos;.IO.words &#123;</div><div class="line">    .say;</div><div class="line">    last if ++$ == 3;</div><div class="line">&#125;</div><div class="line">say &quot;Code took &#123;now - INIT now&#125; seconds to run&quot;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># foo</div><div class="line"># bar</div><div class="line"># ber</div><div class="line"># Code took 0.01111143 seconds to run</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.say for &apos;/tmp/4GB-file.txt&apos;.IO.words[0..2];</div><div class="line">say &quot;Code took &#123;now - INIT now&#125; seconds to run&quot;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># foo</div><div class="line"># bar</div><div class="line"># ber</div><div class="line"># Code took 0.01111143 seconds to run</div></pre></td></tr></table></figure>
+<h2 id="塑造你自己的-Subsets-自定义操作符-Muti-dispatch"><a href="#塑造你自己的-Subsets-自定义操作符-Muti-dispatch" class="headerlink" title="塑造你自己的 Subsets, 自定义操作符, Muti-dispatch"></a><strong>塑造你自己的</strong> Subsets, <strong>自定义操作符</strong>, Muti-dispatch</h2><p><img src="http://upload-images.jianshu.io/upload_images/326727-be2bf4d1cd691330.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<h3 id="Subsets"><a href="#Subsets" class="headerlink" title="Subsets"></a>Subsets</h3><p>类型的 subset 使你可以约束它能接收的值:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">subset BigPrime of Int where &#123; $_ &gt; 10_000 and .is-prime &#125;</div><div class="line"></div><div class="line">sub MAIN ( BigPrime $num ) &#123;</div><div class="line">    say &quot;That&apos;s a nice-looking prime number you got there!&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ perl6 test.p6 3</div><div class="line">Usage:</div><div class="line">  test.p6 &lt;num&gt;</div><div class="line">$ perl6 test.p6 31337</div><div class="line">That&apos;s a nice-looking prime number you got there!</div><div class="line">$ perl6 test.p6 100000</div><div class="line">Usage:</div><div class="line">  test.p6 &lt;num&gt;</div></pre></td></tr></table></figure>
+<h3 id="Multi-Dispatch"><a href="#Multi-Dispatch" class="headerlink" title="Multi-Dispatch"></a>Multi-Dispatch</h3><p>多个同名的 subs 或 方法, 但是拥有不同的参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">subset Prime      of Int   where *.is-prime;</div><div class="line">subset BigPrime   of Prime where * &gt;  10_000;</div><div class="line">subset SmallPrime of Prime where * &lt;= 10_000;</div><div class="line"></div><div class="line">multi MAIN ( BigPrime   $num ) &#123; say &quot;Prime number! Nice and big&quot;; &#125;</div><div class="line">multi MAIN ( SmallPrime $num ) &#123; say &quot;Puny prime number&quot;;          &#125;</div><div class="line">multi MANI (            $num ) &#123; say &quot;Gimme primes&quot;;               &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ perl6 test.p6 42</div><div class="line">Gimme primes!</div><div class="line">$ perl6 test.p6 7</div><div class="line">Puny prime number</div><div class="line">$ perl6 test.p6 31337</div><div class="line">Prime number! Nice and big</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class Numbers &#123;</div><div class="line">    multi method id ( Numeric $num ) &#123; say &quot;$num is a number&quot;       &#125;</div><div class="line">    multi method id (         $num ) &#123; say &quot;$num is something else&quot; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Numeric.new.id:  π;</div><div class="line">Numbers.new.id: &apos;blah&apos;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 3.14159265358979 is a number</div><div class="line"># blah is something else</div></pre></td></tr></table></figure>
+<p>扩展方法的功能性:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class Numbers &#123;</div><div class="line">    multi method id ( Numeric $num ) &#123; say &quot;$num is a number&quot;       &#125;</div><div class="line">    multi method id (        $num  ) &#123; say &quot;$num is something else&quot; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class SmarterNumbers is Numbers &#123;</div><div class="line">    multi method id (Numeric $num where * ==  π ) &#123; say &quot;Mmmm yummy pie!&quot; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">SmarterNumbers.new.id: 42;</div><div class="line">SmarterNumbers.new.id: π;</div><div class="line">SmarterNumbers.new.id: &apos;blah&apos;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 42 is a number</div><div class="line"># Mmmm yummy pie!</div><div class="line"># blah is something else</div></pre></td></tr></table></figure>
+<h3 id="Custom-Terms-and-Operators"><a href="#Custom-Terms-and-Operators" class="headerlink" title="Custom Terms and Operators"></a>Custom Terms and Operators</h3><p><img src="http://upload-images.jianshu.io/upload_images/326727-b310dac691db4f59.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;¯\(°_o)/¯&gt; &#123;</div><div class="line">     ($^a, $^b).pick</div><div class="line"> &#125;</div><div class="line"></div><div class="line">say &apos;Coke&apos; ¯\(°_o)/¯ &apos;Pepsi&apos;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Pepsi</div></pre></td></tr></table></figure>
+<p>操作符分类: <code>infix</code>, <code>prefix</code>, <code>postfix</code>,<code>circumfix</code>, <code>postcircumfix</code>  并且你还能把  <code>term</code> 用于项中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub prefix:&lt;∑&gt; (*@els) &#123; @els.sum &#125;</div><div class="line">say ∑ 1, 2, 3, 4;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 1234</div></pre></td></tr></table></figure>
+<p>看起来并没有很好地起作用…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub prefix:&lt;∑&gt; (*@els) is looser(&amp;infix:&lt;,&gt;) &#123; @els.sum &#125;</div><div class="line">say ∑ 1, 2, 3, 4;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 10</div></pre></td></tr></table></figure>
+<p>使用 <code>is looser</code> 或 <code>is tighter</code> 来更改优先级。默认的优先级和那个位置上的 <code>+</code>/<code>++</code> 操作符的优先级相同。(查看 <a href="https://doc.perl6.org/language/functions#Associativity" target="_blank" rel="external">docs</a> 以使用 <code>is assoc</code> trait 更改结合性。)</p>
+<p>One More Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"> sub term:&lt;ξ&gt; &#123; (^10 + 1).pick; &#125;</div><div class="line"> sub postcircumfix:&lt;❨  ❩&gt; ($before, $inside) is rw &#123;</div><div class="line">     $before&#123;$inside&#125;;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> my %hash = :foo&lt;bar&gt;, :meow&lt;moo&gt;;</div><div class="line"> %hash❨&apos;foo&apos;❩  = ξ;</div><div class="line"> %hash❨&apos;meow&apos;❩ = ξ;</div><div class="line"></div><div class="line">say %hash;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># foo =&gt; 6, meow =&gt; 8</div></pre></td></tr></table></figure>
+<p>重写已经存在的操作符:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;+&gt; (Int $a, Int $b) &#123; $a - $b &#125;;</div><div class="line">say 2 + 2;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 0</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-71e3d5f44f434c2c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<p>不要担心… 这个效果是本地作用域的(lexically scoped!)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-815a894031734d6c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class Thingamagig &#123; has $.value &#125;;</div><div class="line"></div><div class="line">multi infix:&lt;~&gt; (Thingamagig $a, Str $b) &#123;</div><div class="line">    $a.value ~ $b</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $thing = Thingamagig.new: value =&gt; &apos;thingamagig&apos;;</div><div class="line">say &apos;foo&apos; ~ &apos;bar&apos;;</div><div class="line">say $thing ~ &apos;bar&apos;;</div><div class="line">say &apos;bar&apos; ~ $thing;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># foobar</div><div class="line"># thingamagigbar</div><div class="line"># barThingamagig&lt;139870715547680&gt;</div></pre></td></tr></table></figure>
+<p>查看 <a href="https://github.com/zoffixznet/perl6-Color/blob/master/lib/Color/Operators.pm6" target="_blank" rel="external">Color::Operators</a> 模块获取更多例子。</p>
+<h2 id="Hyperspace"><a href="#Hyperspace" class="headerlink" title="Hyperspace"></a>Hyperspace</h2><h3 id="Multi-core-processing-at-a-touch-of-a-button"><a href="#Multi-core-processing-at-a-touch-of-a-button" class="headerlink" title="Multi-core processing at a touch of a button"></a>Multi-core processing at a touch of a button</h3><p><img src="http://upload-images.jianshu.io/upload_images/326727-be2f92ec80152cf1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<h3 id="超运算符"><a href="#超运算符" class="headerlink" title="超运算符"></a>超运算符</h3><p>它们看起来像 <code>«</code> 和 <code>»</code> 你能在这儿看到它们的 <a href="http://perl6maven.com/tutorial/perl6-hyper-operators" target="_blank" rel="external">解释</a> :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">      (1, 2) «+« (3)</div><div class="line">      (1, 2) »+» 1</div><div class="line">(1, 2, 3, 4) «+» (1, 2)</div></pre></td></tr></table></figure>
+<p>那些操作符暂时还不是多线程的, if at all。相反, 我要谈论的变体是这个:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@foo».bar</div></pre></td></tr></table></figure>
+<p>假设你想把数组中的每个字符串都转为大写然后把那个数组分割为子列表, 每个子列表含有 3 个元素:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my @a = &lt;one two three four five six seven eight nine&gt;;</div><div class="line">say @a.map(&#123; .uc&#125;).rotor: 3;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># ((ONE TWO THREE) (FOUR FIVE SIX) (SEVEN EIGHT NINE))</div></pre></td></tr></table></figure>
+<p>很好很简短, 但是假设你想在上千个元素身上调用耗时更多的方法呢?</p>
+<p>那么就在方法调用前使用一个 hyper 操作符好了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my @a =  &lt;one two three four five six  seven eight nine&gt;;</div><div class="line">say @a».uc.rotor: 3;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># ((ONE TWO THREE) (FOUR FIVE SIX) (SEVEN EIGHT NINE))</div></pre></td></tr></table></figure>
+<p>在点号方法调用前面放上一个 » 那么你所调用的方法会在每个元素身上单独调用。链式调用中更远的那个方法会在数组(列表等)身上调用, 除非它们也是 hypered。</p>
+<h3 id="Hyper-Seqs"><a href="#Hyper-Seqs" class="headerlink" title="Hyper Seqs"></a>Hyper Seqs</h3><p>假如你想在多核上对一堆东西上”做事情”呢?  遍历一个 <code>HyperSeq</code>。你可以调用下面的两者之一得到一个 HyperSeq:</p>
+<ul>
+<li><code>.hyper</code>— 保留元素顺序</li>
+<li><code>.race</code>—   不保留元素顺序</li>
+</ul>
+<p>遍历一个 4-元素的序列, 每个元素睡眠 1 秒钟:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">for (1..4).race( batch =&gt; 1 ) &#123;</div><div class="line">    say &quot;Doing $_&quot;;</div><div class="line">    sleep 1;</div><div class="line">&#125;</div><div class="line">say &quot;Code took &#123;now - INIT now&#125; seconds to run&quot;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Doing 1</div><div class="line"># Doing 3</div><div class="line"># Doing 2</div><div class="line"># Doing 4</div><div class="line"># Code took 1.0090415 seconds to run</div></pre></td></tr></table></figure>
+<p>代码只是运行了 1秒多!</p>
+<p><code>.hyper</code>  同样, 但是它保留了结果序列中元素的顺序。</p>
+<h3 id="Autothreaded-junctions"><a href="#Autothreaded-junctions" class="headerlink" title="Autothreaded junctions"></a>Autothreaded junctions</h3><ul>
+<li>Logical superposition of values</li>
+</ul>
+<p>某些逻辑检查的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my @valid = &lt;foo bar baz&gt;;</div><div class="line">my $what = &apos;ber&apos;;</div><div class="line">say &quot;$what is not valid&quot; if not @valid.grep: &#123; $what eq $_ &#125;;</div><div class="line">say &quot;A ber or a bar&quot;     if $what eq &apos;ber&apos; or $what eq &apos;bar&apos;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># ber is not valid</div><div class="line"># A ber or a bar</div></pre></td></tr></table></figure>
+<ul>
+<li>Autothreaded junctions</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my @valid = &lt;foo bar baz&gt;;</div><div class="line">my $what = &apos;ber&apos;;</div><div class="line">say &quot;$what is not valid&quot; if $what eq none @valid;</div><div class="line">say &quot;A ber or a bar&quot;     if $what eq &apos;ber&apos; | &apos;bar&apos;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># ber is not valid</div><div class="line"># A ber or a bar</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">type</th>
+<th style="text-align:center">constructor</th>
+<th style="text-align:center">operator</th>
+<th style="text-align:center">True if …</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">all</td>
+<td style="text-align:center">all</td>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">没有值为 False</td>
+</tr>
+<tr>
+<td style="text-align:center">any</td>
+<td style="text-align:center">any</td>
+<td style="text-align:center">\</td>
+<td style="text-align:center"></td>
+<td>至少一个值为 True</td>
+</tr>
+<tr>
+<td style="text-align:center">one</td>
+<td style="text-align:center">one</td>
+<td style="text-align:center">^</td>
+<td style="text-align:center">完全只有一个值为 True</td>
+</tr>
+<tr>
+<td style="text-align:center">none</td>
+<td style="text-align:center">none</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">没有值为 True</td>
+</tr>
+</tbody>
+</table>
+<p>最好的部分?  Junctions 是自动线程化的(autothreaded), 这意味着编译器能在多个线程上对它们进行求值!</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-0494c5bd718ac532.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><p>我不经常写并行化的代码, 但是当我写的时候, 它是这样的简单:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> start &#123; sleep 3; say &quot;two&quot; &#125;;</div><div class="line"> say &quot;one&quot;;</div><div class="line"> sleep 5;</div><div class="line"> say &quot;three&quot;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># one</div><div class="line"># two</div><div class="line"># three</div></pre></td></tr></table></figure>
+<p>并发 / 异步 代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">my @promises = ^3 .map: &#123;</div><div class="line">    start &#123;</div><div class="line">        .say; sleep 1;</div><div class="line">        $_ * 4;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">say &quot;Started! &#123;now - INIT now&#125;&quot;;</div><div class="line">say await @promises;</div><div class="line">say &quot;All done! &#123;now - INIT now&#125;&quot;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 0</div><div class="line"># 1</div><div class="line"># 2</div><div class="line"># Started! 0.0196113</div><div class="line"># (0 4 8)</div><div class="line"># All done! 1.0188611</div></pre></td></tr></table></figure>
+<p>Start later:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Promise.in(5).then: -&gt; $v &#123; say &quot;It&apos;s been &#123;now - INIT now&#125; seconds!&quot; &#125;;</div><div class="line">sleep 7;</div><div class="line">say &quot;Ran for &#123;now - INIT now&#125; seconds&quot;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># It&apos;s been 5.031918 seconds!</div><div class="line"># Ran for 7.0160562 seconds</div></pre></td></tr></table></figure>
+<h2 id="Supplies"><a href="#Supplies" class="headerlink" title="Supplies"></a>Supplies</h2><p>异步数据流:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">my $supplier = Supplier.new;</div><div class="line"></div><div class="line">$supplier.Supply              .tap: -&gt; $v &#123; say &quot;Original: $v&quot; &#125;;</div><div class="line">$supplier.Supply.map(  * × 2 ).tap: -&gt; $v &#123; say &quot;  Double: $v&quot; &#125;;</div><div class="line">$supplier.Supply.grep( * % 2 ).tap: -&gt; $v &#123; say &quot;  Odd: $v&quot;    &#125;;</div><div class="line"></div><div class="line">$supplier.emit: $_ for ^3;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Original: 0</div><div class="line">#   Double: 0</div><div class="line"># Original: 1</div><div class="line">#   Double: 2</div><div class="line">#   Odd: 1</div><div class="line"># Original: 2</div><div class="line">#   Double: 4</div></pre></td></tr></table></figure>
+<p>Events at interval inside an event loop (<code>react</code>):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">react &#123;</div><div class="line">    whenever Supply.interval: 2 -&gt; $v &#123;</div><div class="line">        say &quot;$v: &#123;now - INIT now&#125;&quot;;</div><div class="line">        done if $v == 2;</div><div class="line">    &#125;</div><div class="line">    whenever Supply.interval: 1 -&gt; $v &#123; say &quot;  1 sec: &#123;now - INIT now&#125;&quot;; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> # OUTPUT:</div><div class="line"> # 0: 0.026734</div><div class="line"> #   1 sec: 0.0333274</div><div class="line"> #   1 sec: 1.02325708</div><div class="line"> # 1: 2.027192</div><div class="line"> #   1 sec: 2.0276854</div><div class="line"> #   1 sec: 3.0234109</div><div class="line"> # 2: 4.0324349</div></pre></td></tr></table></figure>
+<h2 id="Channels"><a href="#Channels" class="headerlink" title="Channels"></a>Channels</h2><p>一个线程安全的队列:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">my $c = Channel.new;</div><div class="line">start &#123;</div><div class="line">    loop &#123; say &quot;$c.receive() at &#123;now - INIT now&#125;&quot; &#125;</div><div class="line">&#125;</div><div class="line">await ^10 .map: -&gt; $r &#123;</div><div class="line">    start &#123;</div><div class="line">         sleep $r;</div><div class="line">         $c.send: $r;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">$c.close;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 0 at 0.01036314</div><div class="line"># 1 at 1.0152853</div><div class="line"># 2 at 2.0174991</div><div class="line"># 3 at 3.020067105</div></pre></td></tr></table></figure>
+<h2 id="Grammars"><a href="#Grammars" class="headerlink" title="Grammars"></a>Grammars</h2><p>更容易的解析东西的方式。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-efdc5ad20795b4dd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">grammar MyGrammar &#123;</div><div class="line">    token TOP     &#123; &lt;sign&gt; &lt;digits&gt; &lt;decimal&gt;? &#125;</div><div class="line">    token sign    &#123; &lt;[+-]&gt;?                    &#125;</div><div class="line">    token digits  &#123; \d+                        &#125;</div><div class="line">    token decimal &#123; \. &lt;digits&gt;                &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">say MyGrammar.parse: &apos;250.42&apos;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># ｢250.42｣</div><div class="line">#  sign =&gt; ｢｣</div><div class="line">#  digits =&gt; ｢250｣</div><div class="line">#  decimal =&gt; ｢.42｣</div><div class="line">#   digits =&gt; ｢42｣</div></pre></td></tr></table></figure>
+<p>actions:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">grammar MyGrammar &#123;</div><div class="line">    token TOP     &#123; &lt;sign&gt; &lt;digits&gt; &lt;decimal&gt;? &#125;</div><div class="line">    token sign    &#123; &lt;[+-]&gt;?                    &#125;</div><div class="line">    token digits  &#123; \d+                        &#125;</div><div class="line">    token decimal &#123; \. &lt;digits&gt;                &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyActions &#123;</div><div class="line">    method sign ($/) &#123; $/.make: $/.chars ?? ~$/ !! &apos;+&apos;                        &#125;</div><div class="line">    method TOP  ($/) &#123; $/.make: $&lt;sign&gt;.made ~ ($&lt;digits&gt; + 42 ) ~ $&lt;decimal&gt; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say MyGrammar.parse(&apos;250.42&apos;, actions =&gt; MyActions).made;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># +292.42</div></pre></td></tr></table></figure>
+<h3 id="有用的模块"><a href="#有用的模块" class="headerlink" title="有用的模块:"></a>有用的模块:</h3><ul>
+<li><code>Grammar::Debugger</code> 和 <code>Grammar::Tracer</code>—  使用两者之一来调试你的  grammars 的输出。</li>
+<li><code>Grammar::BNF</code>— 自定地把 BNF 转换为 Perl 6 grammars !!</li>
+</ul>
+<h2 id="Whatever-man"><a href="#Whatever-man" class="headerlink" title="Whatever, man!"></a><em>Whatever, man!</em></h2><h3 id="Whatever-Code-Meta-operators-Model6-Object-Model-Sets-bags-and-mixes"><a href="#Whatever-Code-Meta-operators-Model6-Object-Model-Sets-bags-and-mixes" class="headerlink" title="Whatever Code, Meta operators, Model6 Object Model, Sets, bags, and mixes"></a>Whatever Code, Meta operators, Model6 Object Model, Sets, bags, and mixes</h3><p><img src="http://upload-images.jianshu.io/upload_images/326727-4b889b4217fec764.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<h2 id="Whatever-Code"><a href="#Whatever-Code" class="headerlink" title="Whatever Code"></a>Whatever Code</h2><p>使用 WhateverStar 作为一种快速获取一个带有参数的闭包的方式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> say (* + 2)(2);</div><div class="line"> say &lt;1 25 3 100&gt;.grep: * &gt; 5;</div><div class="line"> subset Primes of Int where *.is-prime;</div><div class="line"> </div><div class="line"> # same as</div><div class="line"> </div><div class="line"> say sub &#123; $^a + 2 &#125;(2);</div><div class="line"> say &lt;1 25 3 100&gt;.grep: &#123; $_ &gt; 5 &#125;;</div><div class="line"> subset Primes of Int where &#123; $_.is-prime &#125;;</div></pre></td></tr></table></figure>
+<p>每个 WhateverStar 代表着下一个位置参数。你不能使用 WhateverStar 引用同一个参数多于 1 次:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say ( * + * + * )(2, 3, 4);</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 9</div></pre></td></tr></table></figure>
+<p>n-at-a-time(一次 n 个) <code>.map</code> 从未像这样简单:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say ^12 .map: * + * + *;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># (3 12 21 30)</div></pre></td></tr></table></figure>
+<p>看, 整个 Fibonacci 序列存在于一个惰性列表中!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">my  @fibonacci = 0, 1, * + * … *;</div><div class="line">say @fibonacci[42];</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 267914296</div></pre></td></tr></table></figure>
+<h2 id="喂-还有-HyperWhatever"><a href="#喂-还有-HyperWhatever" class="headerlink" title="喂, 还有 HyperWhatever!"></a><strong>喂</strong>, <strong>还有</strong> HyperWhatever!</h2><p>Just sayin’…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">say ( ** + 2 )(^10);</div><div class="line">say (  * + 2 )(^10);</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># (2 3 4 5 6 7 8 9 10 11)</div><div class="line"># 2..^12</div></pre></td></tr></table></figure>
+<h2 id="Meta-Operators"><a href="#Meta-Operators" class="headerlink" title="Meta Operators"></a>Meta Operators</h2><p>和你把方括号里面的操作符放在列表中的元素之间的效果一样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">say [+] 1, 2, 3;   # 6</div><div class="line">say [*] 1..5;      # 120</div><div class="line"></div><div class="line">my @numbers = (2, 4, 3);</div><div class="line">say [&lt;] @numbers;  # False</div></pre></td></tr></table></figure>
+<p><em>Triangle Reduce</em>: 在两个相继的元素之间使用操作符, 在它的结果和下一个元素之间再次使用操作符:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">say [\+] 1, 2, 3;</div><div class="line">say [\*] 1..5;</div><div class="line"></div><div class="line"> # OUTPUT:</div><div class="line"> # (1 3 6)  ## Breaking it down: 1 (1), 1 + 2 (3), 3 + 3 (6)</div><div class="line"> # (1 2 6 24 120)</div></pre></td></tr></table></figure>
+<h2 id="Perl-6-Object-Model"><a href="#Perl-6-Object-Model" class="headerlink" title="Perl 6 Object Model"></a>Perl 6 Object Model</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Foo &#123;</div><div class="line">    has $.attr;</div><div class="line">    has $.attr-rw is rw;</div><div class="line">    has $.attr-required is required;</div><div class="line">    has $!attr-private = 42;</div><div class="line"></div><div class="line">    method public   &#123; say $!attr + $!attr-private; &#125;</div><div class="line">    method !private &#123; say &apos;secret&apos; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $foo = Foo.new: :attr&lt;public&gt;,</div><div class="line">                   :attr-required&lt;yup-here-it-is&gt;;</div><div class="line"></div><div class="line">say $foo.attr;</div><div class="line">say $foo.public;</div><div class="line">$foo.attr-rw = 42;</div></pre></td></tr></table></figure>
+<p>你也可以指定类型约束和 subset 约束:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class Foo &#123;</div><div class="line">    subset Primes of IntStr where *.is-prime;</div><div class="line"></div><div class="line">    has Int    $.attr;</div><div class="line">    has Str    $.attr-rw is rw where *.chars &lt; 5;</div><div class="line">    has Primes $.attr-required is required;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Roles— 安全地为你的类添加行为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">role Drawable &#123;</div><div class="line">    method draw &#123; say &quot;Line from $.x to $.y&quot; &#125;;</div><div class="line">&#125;</div><div class="line">class Line does Drawable &#123;</div><div class="line">    has $.x;</div><div class="line">    has $.y;</div><div class="line">&#125;</div><div class="line">my $line = Line.new: :42x, :75y;</div><div class="line">$line.draw;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Line from 42 to 75</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">role Drawable &#123;</div><div class="line">    method draw &#123; say &quot;Line from $.x to $.y&quot; &#125;;</div><div class="line">&#125;</div><div class="line">role OtherDrawable &#123;</div><div class="line">    method draw &#123; say &quot;It&apos;s a draw!&quot; &#125;;</div><div class="line">&#125;</div><div class="line">class Line does Drawable does OtherDrawable &#123;</div><div class="line">    has $.x;</div><div class="line">    has $.y;</div><div class="line">&#125;</div><div class="line">my $line = Line.new: :42x, :75y;</div><div class="line">$line.draw;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># ===SORRY!=== Error while compiling /home/zoffix/CPAN/TPM-2016/test.p6</div><div class="line"># Method &apos;draw&apos; must be resolved by class Line because it exists in multiple</div><div class="line"># roles (OtherDrawable, Drawable) at /home/zoffix/CPAN/TPM-2016/test.p6:7</div></pre></td></tr></table></figure>
+<h2 id="MOP-Meta-Object-Protocol"><a href="#MOP-Meta-Object-Protocol" class="headerlink" title="MOP: Meta Object Protocol"></a>MOP: Meta Object Protocol</h2><p>自省和 Perl 6 对象系统</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-9562eb8b97578bd9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#| Just &apos;cause</div><div class="line">class TestStuff &#123;&#125;;</div><div class="line">my $x = TestStuff.new;</div><div class="line">say $x.WHAT;     # (TestStuff)  # The type object of the type</div><div class="line">say $x.WHICH;    # TestStuff|179689128 # The object&apos;s identity value</div><div class="line">say $x.WHO;      # TestStuff # The package supporting the object</div><div class="line">say $x.WHERE;    # -1225903068 # The memory address of the object (not stable)</div><div class="line">say $x.HOW;      # Perl6::Metamodel::ClassHOW.new # The metaclass object</div><div class="line">say $x.WHY;      # Just &apos;cause # The attached Pod value.</div><div class="line">say $x.DEFINITE; # True # Returns True for instances and False for type objects</div></pre></td></tr></table></figure>
+<p>为已存在的类添加方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Int.^add_method(&apos;x&apos;, -&gt; $class, $v &#123; say $v &#125;);</div><div class="line">constant A := Metamodel::ClassHOW.new_type( name =&gt; &apos;A&apos; );</div><div class="line">A.^add_method(&apos;x&apos;, -&gt; $class, $v &#123; say $v &#125;);</div><div class="line">#A.^compose;</div><div class="line"></div><div class="line">A.x: &apos;A class&apos;;</div><div class="line">Int.x: &apos;Int class&apos;;</div></pre></td></tr></table></figure>
+<h2 id="Sets-Bags-and-Mixes"><a href="#Sets-Bags-and-Mixes" class="headerlink" title="Sets, Bags, and Mixes"></a>Sets, Bags, and Mixes</h2><p><strong>Immutable:</strong></p>
+<ul>
+<li><code>Set</code>—不同对象的集合</li>
+<li><code>Bag</code>—带有整数系数(权重)的不同对象的集合</li>
+<li><code>Mix</code>—带有实际系数(权重)的不同对象的集合</li>
+</ul>
+<p><strong>Mutable:</strong></p>
+<ul>
+<li><code>SetHash</code>—不同对象的集合</li>
+<li><code>BagHash</code>—带有整数系数(权重)的不同对象的集合</li>
+<li><code>MixHash</code>—带有实际系数(权重)的不同对象的集合</li>
+</ul>
+<p>对东西进行计数? 一个 <code>Bag</code>  就做到了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">.say for &apos;This is just a sentence&apos;.comb.Bag;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># n =&gt; 2</div><div class="line"># a =&gt; 1</div><div class="line">#   =&gt; 4</div><div class="line"># c =&gt; 1</div><div class="line"># j =&gt; 1</div><div class="line"># s =&gt; 4</div><div class="line"># T =&gt; 1</div><div class="line"># e =&gt; 3</div><div class="line"># t =&gt; 2</div><div class="line"># i =&gt; 2</div><div class="line"># u =&gt; 1</div><div class="line"># h =&gt; 1</div></pre></td></tr></table></figure>
+<p>使用集合操作符写简明代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my $valid = set &lt;foo bar ber boor&gt;;</div><div class="line">my @given = &lt;foo meow bar ber&gt;;</div><div class="line"></div><div class="line">say ‘Something&apos;s wrong’ unless @given ⊆ $valid;</div></pre></td></tr></table></figure>
+<p>并集和差集:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">say &lt;foo bar&gt; ∪ &lt;bar meow&gt;;  # Union operator</div><div class="line">say &lt;foo bar&gt; ⊖ &lt;bar meow&gt;;  # Symmetric set difference operator</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># set(foo, bar, meow)</div><div class="line"># set(foo, meow)</div></pre></td></tr></table></figure>
+<p>查看 <a href="http://docs.perl6.org/language/setbagmix" target="_blank" rel="external">the docs</a> 获取完整的操作符列表。</p>
+<h2 id="Polyglot"><a href="#Polyglot" class="headerlink" title="Polyglot"></a>Polyglot</h2><p>在 Perl 6 使用其它语言!</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-5c9d882e4102b06a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="NativeCall"><a href="#NativeCall" class="headerlink" title="NativeCall"></a>NativeCall</h2><p>不用写任何 C 代码就可以使用  C libraries!!</p>
+<p>(或多或少)</p>
+<p>标准 C library:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">use NativeCall;</div><div class="line">sub fork is native &#123;&#125;;</div><div class="line">fork;</div><div class="line">say $*PID;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># 11274</div><div class="line"># 11275</div></pre></td></tr></table></figure>
+<h2 id="BTW-A-Safety-Tip"><a href="#BTW-A-Safety-Tip" class="headerlink" title="BTW: A Safety Tip"></a>BTW: A Safety Tip</h2><p>在标准 C 库中有一个 <code>system</code> </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-3dece01d75627a4d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>使用 C library:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class STMT is repr(&apos;CPointer&apos;) &#123; &#125;;</div><div class="line">sub sqlite3_column_text(STMT, int32)</div><div class="line">    returns Str</div><div class="line">    is native(&apos;sqlite3&apos;, v0) &#123; &#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int8           (int8_t in C, also used for char)</div><div class="line">int16          (int16_t in C, also used for short)</div><div class="line">int32          (int32_t in C, also used for int)</div><div class="line">int64          (int64_t in C)</div><div class="line">uint8          (uint8_t in C, also used for unsigned char)</div><div class="line">uint16         (uint16_t in C, also used for unsigned short)</div><div class="line">uint32         (uint32_t in C, also used for unsigned int)</div><div class="line">uint64         (uint64_t in C)</div><div class="line">long           (long in C)</div><div class="line">longlong       (long long in C, at least 64-bit)</div><div class="line">num32          (float in C)</div><div class="line">num64          (double in C)</div><div class="line">Str            (C string)</div><div class="line">CArray[int32]  (int* in C, an array of ints)</div><div class="line">Pointer[void]  (void* in C, can point to all other types)</div><div class="line">bool           (bool from C99)</div><div class="line">size_t         (size_t in C)</div></pre></td></tr></table></figure>
+<p>使用 <a href="http://modules.perl6.org/dist/App::GPTrixie" target="_blank" rel="external">App::GPTrixie</a> 把 C 头文件转换为 Perl 6 子例程定义:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ gptrixie --all /usr/local/include/gumbo.h</div><div class="line"></div><div class="line">## Enumerations</div><div class="line">enum GumboNamespaceEnum is export (</div><div class="line">   GUMBO_NAMESPACE_HTML =&gt; 0,</div><div class="line">   GUMBO_NAMESPACE_SVG =&gt; 1,</div><div class="line">   GUMBO_NAMESPACE_MATHML =&gt; 2</div><div class="line">);</div><div class="line">enum GumboParseFlags is export (</div><div class="line">   GUMBO_INSERTION_NORMAL =&gt; 0,</div><div class="line">   GUMBO_INSERTION_BY_PARSER =&gt; 1,</div><div class="line"></div><div class="line">   ...</div></pre></td></tr></table></figure>
+<h2 id="Inline-Perl5"><a href="#Inline-Perl5" class="headerlink" title="Inline::Perl5"></a><a href="http://modules.perl6.org/dist/Inline::Perl5" target="_blank" rel="external">Inline::Perl5</a></h2><p>在 Perl 6中使用任意 Perl 5 模块!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">use Inline::Perl5;</div><div class="line">use Mojo::DOM:from&lt;Perl5&gt;;</div><div class="line"> </div><div class="line">my $dom = Mojo::DOM.new: &apos;&lt;p&gt;&lt;b&gt;This is awesome&lt;/b&gt;, trust me&lt;/p&gt;&apos;;</div><div class="line"> </div><div class="line">say $dom.at(&apos;b&apos;).all_text;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># This is awesome</div></pre></td></tr></table></figure>
+<ul>
+<li>支持 Perl 5 模块, 包括 XS 模块。</li>
+<li>允许在 Perl 5 和 Perl 6 之间传递整数、字符串、数组、散列、代码引用、文件句柄和对象。</li>
+<li>支持从 Perl 6 中在 Perl 5 对象上调用方法并且支持从 Perl 5 中在 Perl 6 对象上调用方法。</li>
+<li>在 Perl 6中子类化 Perl 5 的类。</li>
+</ul>
+<h2 id="使用一堆其它语言…"><a href="#使用一堆其它语言…" class="headerlink" title="使用一堆其它语言…"></a><strong>使用一堆其它语言</strong>…</h2><p>你和我展示的可能有点不同:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-fc3ec03dfe5240f3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+<h2 id="Simple-Things-Hacking-on-the-Perl-6-Compiler"><a href="#Simple-Things-Hacking-on-the-Perl-6-Compiler" class="headerlink" title="Simple Things:Hacking on the Perl 6 Compiler"></a>Simple Things:Hacking on the Perl 6 Compiler</h2><p><img src="http://upload-images.jianshu.io/upload_images/326727-0c0668c970b6cc1b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="听起来很疯狂…"><a href="#听起来很疯狂…" class="headerlink" title="听起来很疯狂…"></a><strong>听起来很疯狂</strong>…</h2><p>Perl 6 大部分是用 Perl 6 写的!</p>
+<h2 id="这意味着…"><a href="#这意味着…" class="headerlink" title="这意味着…"></a><strong>这意味着</strong>…</h2><p>一般的 Perl 6 使用者可以使 Perl 6 变得更好!</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-1cb84f014ede918b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="Perl-6-is-Written-in-Perl-6"><a href="#Perl-6-is-Written-in-Perl-6" class="headerlink" title="Perl 6 is Written in Perl 6"></a>Perl 6 is Written in Perl 6</h2><h3 id="How"><a href="#How" class="headerlink" title="How??"></a>How??</h3><p>基础是用 NQP 写的 (Not Quite Perl):<a href="https://github.com/perl6/nqp" target="_blank" rel="external">https://github.com/perl6/nqp</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-28231953961eec03.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>其它的是用 Perl 6 写的: <a href="https://github.com/rakudo/rakudo" target="_blank" rel="external">https://github.com/rakudo/rakudo</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-7f43059cb5b74117.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="那么解析呢…"><a href="#那么解析呢…" class="headerlink" title="那么解析呢…?"></a>那么解析呢…?</h3><p>是的, 仅仅是一个 Perl 6 Grammar:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-e54d22969bf5ef49.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="Bonus-Slides"><a href="#Bonus-Slides" class="headerlink" title="Bonus Slides"></a>Bonus Slides</h2><h2 id="并发代码中的错误"><a href="#并发代码中的错误" class="headerlink" title="并发代码中的错误"></a><strong>并发代码中的错误</strong></h2><p>错误在哪一行?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">my $promise = start &#123;</div><div class="line">    say 0/0;</div><div class="line">    # A whole</div><div class="line">    # bunch</div><div class="line">    # of other code</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">say await $promise;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Attempt to divide by zero using div</div><div class="line">#   in block &lt;unit&gt; at test.p6 line 8</div></pre></td></tr></table></figure>
+<p>包含一个花括号:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> 1: my $promise = start &#123;</div><div class="line"> 2:     say 0/0;</div><div class="line"> 3:     # A whole</div><div class="line"> 4:     # bunch</div><div class="line"> 5:     # of other code</div><div class="line"> 6:     CATCH &#123; warn .backtrace &#125;;</div><div class="line"> 7: &#125;;</div><div class="line"> 8:</div><div class="line"> 9: say await $promise;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line">#   in block  at test.p6 line 2</div><div class="line">#   in block  at test.p6 line 6</div><div class="line"># Attempt to divide by zero using div</div><div class="line">#   in block &lt;unit&gt; at test.p6 line 9</div></pre></td></tr></table></figure>
+<h2 id="有理数"><a href="#有理数" class="headerlink" title="有理数!"></a><strong>有理数</strong>!</h2><p><code>Rat</code> 是一种 Perl 6 类型, 它由分子和分母表示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my $x = 0/0;</div><div class="line">say &apos;Universe is still unimploded&apos;;</div><div class="line">say sin $x;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Universe is still unimploded</div><div class="line"># NaN</div></pre></td></tr></table></figure>
+<p>实际的数字只在需要时计算:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">my $x = 0/0;</div><div class="line">say &apos;Universe is still unimploded&apos;;</div><div class="line">say $x;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Universe is still unimploded</div><div class="line"># Attempt to divide by zero using div</div><div class="line">#   in block &lt;unit&gt; at test.p6 line 3</div><div class="line">#</div><div class="line"># Actually thrown at:</div><div class="line">#   in block &lt;unit&gt; at test.p6 line 3</div></pre></td></tr></table></figure>
+<h2 id="Proc-Async"><a href="#Proc-Async" class="headerlink" title="Proc::Async"></a><a href="http://docs.perl6.org/language/concurrency#Proc%3A%3AAsync" target="_blank" rel="external">Proc::Async</a></h2><p>Async 和其它程序通信:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">my $proc = Proc::Async.new: :w, &apos;grep&apos;, &apos;foo&apos;;</div><div class="line">$proc.stdout.tap: -&gt; $v &#123; print &quot;Output: $v&quot; &#125;;</div><div class="line"></div><div class="line">say &apos;Starting grep process...&apos;;</div><div class="line">my $promise = $proc.start;</div><div class="line">    $proc.say: &apos;this line has foo&apos;;</div><div class="line">    $proc.say: &quot;this one doesn&apos;t&quot;;</div><div class="line">    $proc.close-stdin;</div><div class="line">await $promise;</div><div class="line">say &apos;Done.&apos;;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Starting grep process...</div><div class="line"># Output: this line has foo</div><div class="line"># Done.</div></pre></td></tr></table></figure>
+<h2 id="不要-say-太多"><a href="#不要-say-太多" class="headerlink" title="不要 say 太多!"></a><strong>不要</strong> <code>say</code> <strong>太多</strong>!</h2><p><code>say</code> 函数/方法用于展示人类可读的简明信息并调用对象的 <code>gist</code> 方法。如果你想输出一大堆东西, 那么使用 <code>put</code> 函数/方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">^101 .say;</div><div class="line">(0..100).list.say;</div><div class="line">say &apos;----------&apos;;</div><div class="line">^101 .put;</div><div class="line">(0..100).put;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># ^101</div><div class="line"># (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 ...)</div><div class="line"># ----------</div><div class="line"># 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100</div><div class="line"># 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100</div></pre></td></tr></table></figure>
+<h2 id="更有用的对象"><a href="#更有用的对象" class="headerlink" title="更有用的对象"></a><strong>更有用的对象</strong></h2><p> 当使用<code>say</code>-ed, <code>put</code>-ed, 或其它任何东西时, 让你的对象更加准确地工作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class Thingamagig &#123;</div><div class="line">    method gist    &#123; &apos;Brief info&apos;        &#125;</div><div class="line">    method Str     &#123; &apos;Not so brief info&apos; &#125;</div><div class="line">    method Numeric &#123; 42                  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $thing = Thingamagig.new;</div><div class="line">say $thing;</div><div class="line">put $thing;</div><div class="line">say $thing + 2;</div><div class="line"></div><div class="line"># OUTPUT:</div><div class="line"># Brief info</div><div class="line"># Not so brief info</div><div class="line"># 44</div></pre></td></tr></table></figure>
+<h2 id="内置的性能分析器"><a href="#内置的性能分析器" class="headerlink" title="内置的性能分析器"></a><strong>内置的性能分析器</strong></h2><p>仅仅在命令行上指定 <code>--profile</code> 标记, 就会为你生成 HTML 格式的结果文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ perl6 --profile test.p6</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-8a66f7a51366f797.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="谢谢"><a href="#谢谢" class="headerlink" title="谢谢!"></a><strong>谢谢</strong>!</h2><p>Any Questions?</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Junctions/" rel="tag">#Junctions</a>
+          
+            <a href="/tags/惰性列表/" rel="tag">#惰性列表</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/12/大列表重构/" rel="next" title="大列表重构">
+                <i class="fa fa-chevron-left"></i> 大列表重构
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/31/Perl-6-Shortcuts-第一部分/" rel="prev" title="Perl 6 Shortcuts(第一部分)">
+                Perl 6 Shortcuts(第一部分) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/08/14/哇-Perl6/"
+     data-title="哇, Perl 6!"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2016/08/14/哇-Perl6/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/14/哇-Perl6/"
+           data-title="哇, Perl 6!" data-url="https://ohmycloud.github.io/2016/08/14/哇-Perl6/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意-Unicode"><span class="nav-number">2.</span> <span class="nav-text">注意 Unicode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#惰性列表和它们的使用"><span class="nav-number">3.</span> <span class="nav-text">惰性列表和它们的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#惰性列表"><span class="nav-number">4.</span> <span class="nav-text">惰性列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#塑造你自己的-Subsets-自定义操作符-Muti-dispatch"><span class="nav-number">5.</span> <span class="nav-text">塑造你自己的 Subsets, 自定义操作符, Muti-dispatch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Subsets"><span class="nav-number">5.1.</span> <span class="nav-text">Subsets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-Dispatch"><span class="nav-number">5.2.</span> <span class="nav-text">Multi-Dispatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Custom-Terms-and-Operators"><span class="nav-number">5.3.</span> <span class="nav-text">Custom Terms and Operators</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyperspace"><span class="nav-number">6.</span> <span class="nav-text">Hyperspace</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-core-processing-at-a-touch-of-a-button"><span class="nav-number">6.1.</span> <span class="nav-text">Multi-core processing at a touch of a button</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超运算符"><span class="nav-number">6.2.</span> <span class="nav-text">超运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hyper-Seqs"><span class="nav-number">6.3.</span> <span class="nav-text">Hyper Seqs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autothreaded-junctions"><span class="nav-number">6.4.</span> <span class="nav-text">Autothreaded junctions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promises"><span class="nav-number">7.</span> <span class="nav-text">Promises</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supplies"><span class="nav-number">8.</span> <span class="nav-text">Supplies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Channels"><span class="nav-number">9.</span> <span class="nav-text">Channels</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grammars"><span class="nav-number">10.</span> <span class="nav-text">Grammars</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有用的模块"><span class="nav-number">10.1.</span> <span class="nav-text">有用的模块:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Whatever-man"><span class="nav-number">11.</span> <span class="nav-text">Whatever, man!</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Whatever-Code-Meta-operators-Model6-Object-Model-Sets-bags-and-mixes"><span class="nav-number">11.1.</span> <span class="nav-text">Whatever Code, Meta operators, Model6 Object Model, Sets, bags, and mixes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Whatever-Code"><span class="nav-number">12.</span> <span class="nav-text">Whatever Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#喂-还有-HyperWhatever"><span class="nav-number">13.</span> <span class="nav-text">喂, 还有 HyperWhatever!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Meta-Operators"><span class="nav-number">14.</span> <span class="nav-text">Meta Operators</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6-Object-Model"><span class="nav-number">15.</span> <span class="nav-text">Perl 6 Object Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MOP-Meta-Object-Protocol"><span class="nav-number">16.</span> <span class="nav-text">MOP: Meta Object Protocol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sets-Bags-and-Mixes"><span class="nav-number">17.</span> <span class="nav-text">Sets, Bags, and Mixes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Polyglot"><span class="nav-number">18.</span> <span class="nav-text">Polyglot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NativeCall"><span class="nav-number">19.</span> <span class="nav-text">NativeCall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BTW-A-Safety-Tip"><span class="nav-number">20.</span> <span class="nav-text">BTW: A Safety Tip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inline-Perl5"><span class="nav-number">21.</span> <span class="nav-text">Inline::Perl5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用一堆其它语言…"><span class="nav-number">22.</span> <span class="nav-text">使用一堆其它语言…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simple-Things-Hacking-on-the-Perl-6-Compiler"><span class="nav-number">23.</span> <span class="nav-text">Simple Things:Hacking on the Perl 6 Compiler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#听起来很疯狂…"><span class="nav-number">24.</span> <span class="nav-text">听起来很疯狂…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这意味着…"><span class="nav-number">25.</span> <span class="nav-text">这意味着…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6-is-Written-in-Perl-6"><span class="nav-number">26.</span> <span class="nav-text">Perl 6 is Written in Perl 6</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How"><span class="nav-number">26.1.</span> <span class="nav-text">How??</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#那么解析呢…"><span class="nav-number">26.2.</span> <span class="nav-text">那么解析呢…?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bonus-Slides"><span class="nav-number">27.</span> <span class="nav-text">Bonus Slides</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发代码中的错误"><span class="nav-number">28.</span> <span class="nav-text">并发代码中的错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有理数"><span class="nav-number">29.</span> <span class="nav-text">有理数!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proc-Async"><span class="nav-number">30.</span> <span class="nav-text">Proc::Async</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要-say-太多"><span class="nav-number">31.</span> <span class="nav-text">不要 say 太多!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更有用的对象"><span class="nav-number">32.</span> <span class="nav-text">更有用的对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置的性能分析器"><span class="nav-number">33.</span> <span class="nav-text">内置的性能分析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谢谢"><span class="nav-number">34.</span> <span class="nav-text">谢谢!</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

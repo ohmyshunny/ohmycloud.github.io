@@ -1,0 +1,780 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Grammar,Actions," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="「原文链接」
+如果你是正则表达式新人(至少当它们用于 Perl 6 中时), 那我建议你从这个系列的第一部分开始。那些掌握了一定正则表达式的人可以跳过上周的文章。现在, 继续演示!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从正则表达式到 Grammar">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/10/29/从正则表达式到Grammar/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="「原文链接」
+如果你是正则表达式新人(至少当它们用于 Perl 6 中时), 那我建议你从这个系列的第一部分开始。那些掌握了一定正则表达式的人可以跳过上周的文章。现在, 继续演示!">
+<meta property="og:updated_time" content="2016-10-23T16:07:53.921Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从正则表达式到 Grammar">
+<meta name="twitter:description" content="「原文链接」
+如果你是正则表达式新人(至少当它们用于 Perl 6 中时), 那我建议你从这个系列的第一部分开始。那些掌握了一定正则表达式的人可以跳过上周的文章。现在, 继续演示!">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/10/29/从正则表达式到Grammar/"/>
+
+  <title> 从正则表达式到 Grammar | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                从正则表达式到 Grammar
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-29T00:00:00+08:00" content="2015-10-29">
+              2015-10-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/29/从正则表达式到Grammar/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/29/从正则表达式到Grammar/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>「<a href="http://theperlfisher.blogspot.fr/2016/02/from-regular-expressions-to-grammars-pt_28.html" target="_blank" rel="external">原文链接</a>」</p>
+<p>如果你是正则表达式新人(至少当它们用于 Perl 6 中时), 那我建议你从这个系列的<a href="http://theperlfisher.blogspot.ro/2016/02/from-regular-expressions-to-grammars-pt.html" target="_blank" rel="external">第一部分</a>开始。那些掌握了一定正则表达式的人可以跳过<a href="http://theperlfisher.blogspot.ro/2016/02/from-regular-expressions-to-grammars-pt_20.html" target="_blank" rel="external">上周</a>的文章。现在, 继续演示!</p>
+<a id="more"></a>
+<h2 id="上周轶事"><a href="#上周轶事" class="headerlink" title="上周轶事"></a>上周轶事</h2><p>我们开始开发一个接收诸如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">3</span>; <span class="built_in">console</span>.log(<span class="string">"Hey, did you konw a = "</span> + a + <span class="string">"?"</span>);</div></pre></td></tr></table></figure>
+<p> Javascript 表达式的 Perl 6 编译器, 并把这段代码转换为 <a href="http://perl6.org/" target="_blank" rel="external">Rakudo Perl</a> 那样的编译器能运行的 Perl 6 代码。在我们开始之前, 想想转换后的 Perl 6 代码看起来是什么样的可能会是个好主意。如果你已经知道了 Perl 5, 那么你应该熟悉这样的代码。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> $a = <span class="number">3</span>;</div><div class="line"><span class="keyword">say</span> <span class="string">"Hey, did you konw a = "</span> ~ $a ~ <span class="string">"?"</span>;</div></pre></td></tr></table></figure>
+<p> 我们将需要确保我们的正则表达式捕获到了 Javascript 的要素。如果你还记得上一次, 我们使用这样一组正则表达式来捕获我们的文本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">my rule Number                &#123; \d+                                                          &#125;;</div><div class="line">my rule Variable              &#123; \w+                                                          &#125;;</div><div class="line">my rule String                &#123; &apos;&quot;&apos; &lt;-[&quot; ]&gt;+ &apos;&quot;&apos;                                             &#125;;</div><div class="line">my rule Assignment-Expression &#123; var &lt;Variable&gt; &apos;=&apos; &lt;Number&gt;                                  &#125;;</div><div class="line">my rule Function-Call         &#123; console &apos;.&apos; log &apos;(&apos; &lt;String&gt; &apos;+&apos; &lt;Variable&gt; &apos;+&apos; &lt;String&gt; &apos;)&apos; &#125;;</div><div class="line"></div><div class="line">say &apos;var a = 3; console.log(&quot;Hey, did you konw a = &quot; + a + &quot;?&quot;);&apos; ~~ rule &#123; &lt;Assignment-Expression&gt; &apos;;&apos;  &lt;Function-Call&gt; &apos;;&apos; &#125;;</div></pre></td></tr></table></figure>
+<p> 如果你把这段代码放到一个 Perl 6 源文件中并运行它, 那么它的输出第一次看起来可能会有点奇怪:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">｢var a = 3; console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; );｣</div><div class="line"> Assignment-Expression =&gt; ｢var a = 3｣</div><div class="line">    Variable =&gt; ｢a ｣</div><div class="line">    Number =&gt; ｢3｣</div><div class="line"> Function-Call =&gt; ｢console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; )｣</div><div class="line">    String =&gt; ｢&quot;Hey, did you know a = &quot; ｣</div><div class="line">    Variable =&gt; ｢a ｣</div><div class="line">    String =&gt; ｢&quot;?&quot; ｣</div></pre></td></tr></table></figure>
+<p>如果你愿意暂时忽略  「」  标记, 你会看到匹配被缩进了, 几乎像资源管理器窗口一样, ‘<assignment-expression>‘ 作为目录, ‘Variable’ 和 ‘Number’ 作为目录里面的文件。实际上, 那离真相不远了。 当我看到这种结构时, 我发现使用一点添加的语法能帮助我们像这样来观察它:</assignment-expression></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$/ =&gt; ｢var a = 3; console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; );｣</div><div class="line"> &lt;Assignment-Expression&gt; =&gt; ｢var a = 3｣</div><div class="line">    &lt;Variable&gt; =&gt; ｢a ｣</div><div class="line">    &lt;Number&gt; =&gt; ｢3｣</div><div class="line"> &lt;Function-Call&gt; =&gt; ｢console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; )｣</div><div class="line">    &lt;String&gt; =&gt; ｢&quot;Hey, did you know a = &quot; ｣</div><div class="line">    &lt;Variable&gt; =&gt; ｢a ｣</div><div class="line">    &lt;String&gt; =&gt; ｢&quot;?&quot; ｣</div></pre></td></tr></table></figure>
+<p>这几乎让怎么打印出文本变得更容易, 并在我们的正则表达式中指出了一个小问题。我们来打印给变量 <em>a</em> 所赋的数字, 从这儿开始。第一行告诉我们目录的根, 或者匹配树是 <code>$/</code>。 如果你在测试文件的末尾添加上 <code>say $/;</code> 并返回它, 那么你会看到整个表达式被打印出了 2 次。 那一定意味着 <code>$/</code> 就是整个匹配。</p>
+<p>每向下推进一层就是把 <code>=&gt;</code> 箭头的左侧的东西添加到 <code>$/</code> 的右边。把之前的 <code>say</code> 语句修改为 <code>say  $/&lt;Assignment-Expression&gt;;</code>, 并看看输出发生了什么改变。它现在看起来应该像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">｢var a = 3｣</div><div class="line">  Variable =&gt; ｢a ｣</div><div class="line">  Number =&gt; ｢3｣</div></pre></td></tr></table></figure>
+<p>让我们把把标记(不可见)添加进来, 所以我们能知道到了哪里…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$/&lt;Assignment-Expression&gt; =&gt; ｢var a = 3｣</div><div class="line">  &lt;Variable&gt; =&gt; ｢a ｣</div><div class="line">  &lt;Number&gt; =&gt; ｢3｣</div></pre></td></tr></table></figure>
+<p>我们现在能看到我们的目标, 数字 3, 仅仅实在更下面的一层。和上次一样, 我们能够添加表达式左侧的东西, 所以我们就动手吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say $/&lt;Assignment-Expression&gt;&lt;Number&gt;;</div><div class="line">  ｢3｣</div></pre></td></tr></table></figure>
+<p>我们几乎得到我们想要的了。 「」  挡道, 所以我们在这儿把值转换回数字。我把转换(cast)用引号扩起来, 因为它不是C/C++ 程序员那样认为的”casting”。我们想做的大约等价于 <code>sscanf(str,&quot;%d&quot;,&amp;num)</code>, 但是在 Perl 6 中, 这个操作符更加简单:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say +$/&lt;Assignment-Expression&gt;&lt;Number&gt;;</div><div class="line">  3</div></pre></td></tr></table></figure>
+<p>如果不深入更多细节, 那么 <code>$/</code> 是一个里面藏着隐式数字、字符串和布尔值的对象。前面添加的 <code>+</code> 把隐藏在 <code>$/</code> 对象中的数字显示出来了。</p>
+<h2 id="从-Javascript-到-Perl"><a href="#从-Javascript-到-Perl" class="headerlink" title="从 Javascript 到 Perl"></a>从 Javascript 到 Perl</h2><p>我们离从 Javascript 生成 Perl 6 代码不远了。让我们使用上面所学的开始我们的第一个语句, 赋值语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say &apos;my $&apos; ~ $/&lt;Assignment-Expression&gt;&lt;Variable&gt; ~ &apos; = &apos; ~</div><div class="line">      $/&lt;Assignment-Expression&gt;&lt;Number&gt; ~ &apos;;&apos;;</div><div class="line"></div><div class="line">my $a = 3;</div></pre></td></tr></table></figure>
+<p>我们仅仅使用了 7 行 Perl 6 就把代码从一种语言转换为另外一种语言。并且大部分的 Perl 6 代码都是可重用的, 因为字符串, 数字, 和 Javascript/C/Java 风格的变量名在大部分语言之间是通用的。</p>
+<p>上次, 我们学习了怎么使用正则表达式来创建匹配。这次我们学会了怎么使用我们说匹配到的东西, 还有怎么在 <em>say</em> 语句中找出我们想要的东西。 不可见的匹配标记相当有用, 我可能会写一个模块来把它们放回到匹配表达式中, 那应该不难。</p>
+<p>那个方案有一个问题, 如果我们看一下 <code>&lt;Function-Call&gt;</code> 匹配, 会很容易发现那个问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$/&lt;Function-Call&gt; =&gt; ｢console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; )｣</div><div class="line">  &lt;String&gt; =&gt; ｢&quot;Hey, did you know a = &quot; ｣</div><div class="line">  &lt;Variable&gt; =&gt; ｢a ｣</div><div class="line">  &lt;String&gt; =&gt; ｢&quot;?&quot; ｣</div></pre></td></tr></table></figure>
+<p>当我们写了 <code>say $/&lt;Function-Call&gt;&lt;String&gt;;</code> 时, 我们会获取哪个 <code>&lt;String&gt;</code>? 在你运行这段代码之前, 先猜测一下。会是第一个吗, 因为一旦匹配对象被创建,  Perl 6 就不会把它替换掉? 会是最后一个吗, 因为最后一个”覆盖”了第一个? 编译器会仅仅”感到困惑”然后什么也不打印吗? 运行一下看看!</p>
+<p>它实际上以一个列表的形式把两个匹配都返回了, 所以你可以引用任何一个。 我们的不可见标记现在看起来长这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$/&lt;Function-Call&gt; =&gt; ｢console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; )｣</div><div class="line">  &lt;String&gt;[0] =&gt; ｢&quot;Hey, did you know a = &quot; ｣</div><div class="line">  &lt;Variable&gt; =&gt; ｢a ｣</div><div class="line">  &lt;String&gt;[1] =&gt; ｢&quot;?&quot; ｣</div></pre></td></tr></table></figure>
+<p>所以, 如果我们想打印第一个字符串, 我们可以写上 <code>say $/&lt;Function-Call&gt;&lt;String&gt;[0];</code> 并得到含有时髦的日语标记的   「”Hey, did you know a = “ 」。幸运的是有一种便捷方式来避免那些日语标记, 就像数字 3 中的那样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say ~$/&lt;Function-Call&gt;&lt;String&gt;[0];</div><div class="line"> &quot;Hey, did you know a = &quot;</div></pre></td></tr></table></figure>
+<p><strong>~</strong> 操作符使匹配字符串化, 就像 <code>+</code> 让返回的匹配数字化一样。所以你可能自己把最后一行写作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">say &apos;say &apos; ~ $/&lt;Function-Call&gt;&lt;String&gt;[0] ~ &apos; ~ &apos;</div><div class="line">  &apos; $&apos; ~ $/&lt;Function-Call&gt;&lt;Variable&gt; ~ &apos; ~ &apos;</div><div class="line">  $&lt;Function-Call&gt;&lt;String&gt;[1] ~ &apos;;&apos;;</div><div class="line"></div><div class="line">say &quot;Hey, did you know a = &quot; ~ $a ~ &quot;?&quot;;</div></pre></td></tr></table></figure>
+<p>我们已经把我们的两行 Javascript 代码编译成 Perl 6 代码了。</p>
+<h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><p>现在已经能工作了, 但是有很多重复。目前我们得到是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">my rule Variable               &#123; \w+                                                          &#125;;</div><div class="line">my rule String                 &#123; &apos;&quot;&apos; &lt;-[ &quot; ]&gt;+ &apos;&quot;&apos;                                            &#125;;</div><div class="line">my rule Assignment-Expression  &#123; var &lt;Variable&gt; &apos;=&apos; &lt;Number&gt;                                  &#125;;</div><div class="line">my rule Function-Call          &#123; console &apos;.&apos; log &apos;(&apos; &lt;String&gt; &apos;+&apos; &lt;Variable&gt; &apos;+&apos; &lt;String&gt; &apos;)&apos; &#125;;</div><div class="line"></div><div class="line">&apos;var a = 3; console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; );&apos; ~~ rule &#123; &lt;Assignment-Expression&gt; &apos;;&apos; &lt;Function-Call&gt; &apos;;&apos; &#125;</div><div class="line"></div><div class="line">say &apos;my $&apos; ~ $/&lt;Assignment-Expression&gt;&lt;Variable&gt; ~ &apos; = &apos; ~ $/&lt;Assignment-Expression&gt;&lt;Number&gt; ~ &apos;;&apos;;</div><div class="line">say &apos;say &apos; ~ $/&lt;Function-Call&gt;&lt;String&gt;[0] ~ &apos; ~ $&apos; ~ $/&lt;Function-Call&gt;&lt;Variable&gt; ~  &apos; ~ &apos; ~ $/&lt;Function-Call&gt;&lt;String&gt;[1] ~  &apos;;&apos;;</div></pre></td></tr></table></figure>
+<p>那些 rules 看起来相当好,  <code>&lt;String&gt;</code> 和 <code>&lt;Variable&gt;</code> 的重复也是不可避免的。 但是看看 <code>say</code> 语句, 你会看到 <code>&lt;Assignment-Expression&gt;</code> 和 <code>&lt;Function-Call&gt;</code> 重复了自身好几次。避免这种重复的一种方法是创建一个临时变量, 但是那可能会变得丑陋。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my $assignment-expression = $/&lt;Assignment-Expression&gt;;</div><div class="line">say &apos;my $&apos; ~ $assignment-expression&lt;Variable&gt; ~ &apos; = &apos; ~  $assignment-expression&lt;Number&gt; ~ &apos;;&apos;</div></pre></td></tr></table></figure>
+<p>相反, 我们利用 Perl 6 的子例程签名, 并且重用 <code>$/</code> 变量名以使我们能重用上面所写的代码, 然后拿掉 <assignment-expression> 部分。 我会把子例程的名字命名为 rule 的名字, 只是为了直接了当。(你会在之后看到为什么这样做。)</assignment-expression></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub  assignment-expression($/) &#123;</div><div class="line">    &apos;my $&apos; ~ $/&lt;Variable&gt; ~ &apos; = &apos; ~ $/&lt;Number&gt; ~ &apos;;&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say assignment-expression( $/&lt;Assignment-Expression&gt; );</div></pre></td></tr></table></figure>
+<p>让我们对 <function-call> 也做同样的事情, 创建一个含有 <code>$/</code> 子例程签名的同名函数。 它现在写在一行里面就很整洁了, 并且只重复 <em><string></string></em> 部分, 因为它不得不重复。</function-call></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sub function-call( $/ ) &#123;</div><div class="line">     &apos;say &apos; ~ $/&lt;String&gt;[0] ~ &apos; ~ &apos; ~ $/&lt;Variable&gt; ~ &apos; ~ &apos; ~ $/&lt;String&gt;[1] ~ &apos;;&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say function-call( $/&lt;Function-Call&gt; );</div></pre></td></tr></table></figure>
+<h2 id="对象化"><a href="#对象化" class="headerlink" title="对象化"></a>对象化</h2><p>一路上我做了相当多的选择,让我们到达这里。这就是我们上次重构的地方:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">my rule Number                &#123; \d+                                                          &#125;;</div><div class="line">my rule Variable              &#123; \w+                                                          &#125;;</div><div class="line">my rule String                &#123; &apos;&quot;&apos; &lt;-[ &quot; ]&gt;+ &apos;&quot;&apos;                                            &#125;;</div><div class="line">my rule Assignment-Expression &#123; var &lt;Variable&gt; &apos;=&apos; &lt;Number&gt;                                  &#125;;</div><div class="line">my rule Function-Call         &#123; console &apos;.&apos; log &apos;(&apos; &lt;String&gt; &apos;+&apos; &lt;Variable&gt; &apos;+&apos; &lt;String&gt; &apos;)&apos; &#125;;</div><div class="line"></div><div class="line">&apos;var a = 3; console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; );&apos; ~~ rule &#123; &lt;Assignment-Expression&gt; &apos;;&apos; &lt;Function-Call&gt; &apos;;&apos; &#125;</div><div class="line"></div><div class="line">sub assignment-expression( $/ ) &#123;</div><div class="line">    &apos;my $&apos; ~ $/&lt;Variable&gt; ~ &apos; = &apos; ~ $/&lt;Number&gt; ~ &apos;;&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sub function-call( $/ ) &#123;</div><div class="line">    &apos;say &apos; ~ $/&lt;String&gt;[0] ~ &apos; ~ $&apos; ~ $/&lt;Variable&gt; ~ &apos; ~ &apos; ~ $/&lt;String&gt;[1] ~ &apos;;&apos;;</div><div class="line">&#125;</div><div class="line">say assignment-expression( $/&lt;Assignment-Expression&gt; );</div><div class="line">say function-call( $/&lt;Function-Call&gt; );</div></pre></td></tr></table></figure>
+<p>这就是我们的回报。我们先捡起最后那两个 <code>say</code> 语句。 我们还没有给顶层 rule 一个名字, 所以我们就叫它… 好吧, 现在还是叫 ‘top’ 吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub top( $/ ) &#123; assignment-expression( $/ ) ~ function-call( $/ ) &#125;</div></pre></td></tr></table></figure>
+<h2 id="收回你的吐槽"><a href="#收回你的吐槽" class="headerlink" title="收回你的吐槽"></a>收回你的吐槽</h2><p>我们暂时还没有对处于文件顶层的 rules 做太多处理, 所以让我们开始工作吧。 在 Perl 6 中, 就一般编程而言, 把你的代码打包复用是不错的注意。而 Perl 6 让我们使用 <code>class</code> 关键字将我们的程序打包, 我们拥有的那些 rules 从任何意义上来说实际上不是 “代码”。而它们能够用于代码中, 并且我们确实使用了它们, 它们自身实际上并没有做出任何决定。</p>
+<p>所以我们不应该使用 <code>class</code> 关键字来把它们打包到一块。相反, 有另外一种便捷的类型用于把一堆正则表达式和 rules 打包到一块儿, 它叫做 <code>grammar</code>。<br>它的语法就像声明一个 「rule」 那样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">grammar Javascript &#123;</div><div class="line">    rule Number                &#123; \d+                                                          &#125;;</div><div class="line">    rule Variable              &#123; \w+                                                          &#125;;</div><div class="line">    rule String                &#123; &apos;&quot;&apos; &lt;-[ &quot; ]&gt;+ &apos;&quot;&apos;                                            &#125;;</div><div class="line">    rule Assignment-Expression &#123; var &lt;Variable&gt; &apos;=&apos; &lt;Number&gt;                                  &#125;;</div><div class="line">    rule Function-Call         &#123; console &apos;.&apos; log &apos;(&apos; &lt;String&gt; &apos;+&apos; &lt;Variable&gt; &apos;+&apos; &lt;String&gt; &apos;)&apos; &#125;;      </div><div class="line"></div><div class="line">    rule TOP                   &#123; &lt;Assignment-Expression&gt; &apos;;&apos; &lt;Function-Call&gt; &apos;;&apos;              &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你会注意到, 我们给我们的顶层 rule 也起了个名字, 并且暂时把它叫做 「TOP」 吧。 如果你正在家独自玩耍, 你可能已经做出更改并想知道 「’var a = 3;…’ ~~ rule { … }」 是怎么起作用的, 因为键入诸如 「’var a = 3;…’ ~~ JavaScript;」这样的东西可能不会那么有作用。</p>
+<p>Grammars 就像类一样, 在里面它们实际上是一块可能的代码。 它们本身不会工作, 它们必须从潜在的转换为动态的代码。我们可以像你在类中做的那样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my $JavaScript = JavaScript.new;</div></pre></td></tr></table></figure>
+<p>现在我们拥有了一个可以工作的变量。 现在, 让我们来使用它。所有的 grammar 类都有一个内置的 「parse()」 方法, 以使我们能得到 grammar 中的正则表达式。 我们来修改我们的匹配语句以利用 parse() 方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$JavaScript.parse(&apos;var a = 3; console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; );&apos;);</div></pre></td></tr></table></figure>
+<p>我们的代码应该又能工作了。</p>
+<h2 id="接收动作"><a href="#接收动作" class="headerlink" title="接收动作"></a>接收动作</h2><p>现在我们已经把我们所有的匹配的东西打包到一个小型的类里面了, 如果我们能对那些子例程做同样的处理将会很棒。 我们在这儿试试, 把我们的子例程放到它们自己的命名空间中, 就像我们对 rule 做的那样。 我们必须从 「sub」 修改为 「method」, 而我们的 「top」 方法将会使用 「self.」 去调用其它方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Actions &#123;</div><div class="line">    method assignment-expression( $/ ) &#123;</div><div class="line">        &apos;my $&apos; ~ $/&lt;Variable&gt; ~ &apos; = &apos; ~ $/&lt;Number&gt; ~ &apos;;&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method function-call( $/ ) &#123;</div><div class="line">        &apos;say &apos; ~ $/&lt;String&gt;[0] ~ &apos; ~ $&apos; ~ $/&lt;Variable&gt; ~ &apos; ~ &apos; ~ $/&lt;String&gt;[1] ~ &apos;;&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method top( $/ ) &#123;</div><div class="line">        self.assignment-expression( $/&lt;Assignment-Expression&gt; ) ~</div><div class="line">        self.function-call( $/&lt;Function-Call&gt; )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就像之前那样, 我们可以在一行里面创建 Actions 对象:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">my $actions = Actions.new;</div></pre></td></tr></table></figure>
+<p>并且调用 top 几乎像我们之前做的那样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say $actions.top( $/ );</div></pre></td></tr></table></figure>
+<p>我们已经修改了很多东西了, 所以我们来看看到哪了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">grammar JavaScript &#123;</div><div class="line">  rule Number                &#123; \d+                                                          &#125;;</div><div class="line">  rule Variable              &#123; \w+                                                          &#125;;</div><div class="line">  rule String                &#123; &apos;&quot;&apos; &lt;-[ &quot; ]&gt;+ &apos;&quot;&apos;                                            &#125;;</div><div class="line">  rule Assignment-Expression &#123; var &lt;Variable&gt; &apos;=&apos; &lt;Number&gt;                                  &#125;;</div><div class="line">  rule Function-Call         &#123; console &apos;.&apos; log &apos;(&apos; &lt;String&gt; &apos;+&apos; &lt;Variable&gt; &apos;+&apos; &lt;String&gt; &apos;)&apos; &#125;;</div><div class="line">  rule TOP                   &#123; &lt;Assignment-Expression&gt; &apos;;&apos; &lt;Function-Call&gt; &apos;;&apos;              &#125;</div><div class="line">&#125;</div><div class="line">my $j = JavaScript.new;</div><div class="line"></div><div class="line">$j.parse(&apos;var a = 3; console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; );&apos;);</div><div class="line"></div><div class="line">class Actions &#123;</div><div class="line">    method assignment-expression( $/ ) &#123;</div><div class="line">      &apos;my $&apos; ~ $/&lt;Variable&gt; ~ &apos; = &apos; ~ $/&lt;Number&gt; ~ &apos;;&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method function-call( $/ ) &#123;</div><div class="line">      &apos;say &apos; ~ $/&lt;String&gt;[0] ~ &apos; ~ $&apos; ~ $/&lt;Variable&gt; ~ &apos; ~ &apos; ~ $/&lt;String&gt;[1] ~ &apos;;&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method top( $/ ) &#123;</div><div class="line">      self.assignment-expression( $/&lt;Assignment-Expression&gt; ) ~</div><div class="line">      self.function-call( $/&lt;Function-Call&gt; )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">my $actions = Actions.new;</div><div class="line">say $actions.top($/);</div></pre></td></tr></table></figure>
+<p>不用担心, 我们快要到了。既然我们有了一个单独的类来处理 Actions, 我们把方法重命名为 grammar 中所匹配的 rule 的名字, 以使我们不会忘记它们是什么。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class Actions &#123;</div><div class="line">    method Assignment-Expression( $/ ) &#123;</div><div class="line">        &apos;my $&apos; ~ $/&lt;Variable&gt; ~ &apos; = &apos; ~ $/&lt;Number&gt; ~ &apos;;&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method Function-Call( $/ ) &#123;</div><div class="line">        &apos;say &apos; ~ $/&lt;String&gt;[0] ~ &apos; ~$&apos; ~ $/&lt;Variable&gt; ~ &apos; ~ &apos; ~ $/&lt;String&gt;[1] ~ &apos;;&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method TOP( $/ ) &#123;</div><div class="line">        self.Assignment-Expression( $/&lt;Assignment-Expression&gt; ) ~</div><div class="line">        self.Function-Call( $/&lt;Function-Call&gt; )</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>更进一步, 我们还有最后一点魔法能够利用。 我们将把 $javascript 和 $actions 对象像这样组合在一块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say $javascript.parse(&apos;...&apos;, :actions($actions) );</div></pre></td></tr></table></figure>
+<p>「:actions(…)」 给 「parse()」方法声明的可选参数。我们正告诉正则表达式引擎, 任何时候, 像 <function-call> 或 <top> 这样的 rule 匹配时, 我们会在我们的类中让它调用对应的同名方法。</top></function-call></p>
+<p>这几乎是按原样工作的, 但是如果你运行修改后的代码,  你会发现解析返回了原来的匹配对象, 带着日语引用标记。所以看起来好像我们又回到了原地。不完全是。</p>
+<p>继续, 我们在其中之一的方法中添加一个临时的 “say ‘Hello’;” 语句, 仅仅是为了确认它们正被调用。这是正则引擎正在工作并且可能正解析它所going over 的一个重要证据。 你甚至可以使用某些我们上面已经学到的技巧然后写上 「say $/<variable>;」 来查看匹配是否正像你想的那样运行。继续运行并玩玩, 做完的时候再回到这儿。</variable></p>
+<h2 id="混合信号-Mixed-Signals"><a href="#混合信号-Mixed-Signals" class="headerlink" title="混合信号(Mixed Signals)"></a>混合信号(Mixed Signals)</h2><p>正发生的是方法正被调用, 但是它们的输出被丢弃。我们来捕获输出然后使用 grammar 的最后一个特性, 抽象语法树。现在,  这可能会勾起坐在教室里看黑板上画出的盒子和线段的场景, 但是也没有那么糟糕了。我们已经看到了一个, 实际上 <strong>say()</strong> 的输出就是一个 AST。</p>
+<p>我们来看下其它语法树, 我们在后台创建的那个。在 “$javascript.parse(…)” 调用的末尾添加上 「.ast」, 这会给我们展示我们自己创建的语法树。</p>
+<p>如果你这样做了, 你会看到它打印了(Any), 这通常等价于「匹配失败」, 单是我们从之前的测试中知道匹配没有失败。所以这儿发生了什么? 当我们的方法运行的时候, 它们返回输出, 但是 Perl  6 不知道怎么处理这些输出, 或者说它不知道把输出安装到它所创建的 AST中的哪个位置。</p>
+<p>关键是一个叫做 「make」的小东西。在方法的开头, 把这个添加到过去我们放置 「say」的地方。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Actions &#123;</div><div class="line">    method Assignment-Expression( $/ ) &#123;</div><div class="line">      make &apos;my $&apos; ~ $/&lt;Variable&gt; ~ &apos; = &apos; ~ $/&lt;Number&gt; ~ &apos;;&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method Function-Call( $/ ) &#123;</div><div class="line">      make &apos;say &apos; ~ $/&lt;String&gt;[0] ~ &apos; ~ $&apos; ~ $/&lt;Variable&gt; ~ &apos; ~ &apos; ~ $/&lt;String&gt;[1] ~ &apos;;&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method TOP( $/ ) &#123;</div><div class="line">      make $/&lt;Assignment-Expression&gt;.ast ~ $/&lt;Function-Call&gt;.ast</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有, 因为 Perl 6 为我们调用方法, 我们不需要自己来调用 self.Function-Call(…), 我们需要做的全部工作就是查看 Function-Call(…)返回给我们的语法树。 最终我们做到了。一个完整, 虽然微小的编译器。为了防止你在编辑时迷失, 这儿有一个最终的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">grammar JavaScript &#123;</div><div class="line">  rule Number                &#123; \d+                                                          &#125;;</div><div class="line">  rule Variable              &#123; \w+                                                          &#125;;</div><div class="line">  rule String                &#123; &apos;&quot;&apos; &lt;-[ &quot; ]&gt;+ &apos;&quot;&apos;                                            &#125;;</div><div class="line">  rule Assignment-Expression &#123; var &lt;Variable&gt; &apos;=&apos; &lt;Number&gt;                                  &#125;;</div><div class="line">  rule Function-Call         &#123; console &apos;.&apos; log &apos;(&apos; &lt;String&gt; &apos;+&apos; &lt;Variable&gt; &apos;+&apos; &lt;String&gt; &apos;)&apos; &#125;;</div><div class="line">  rule TOP                   &#123; &lt;Assignment-Expression&gt; &apos;;&apos; &lt;Function-Call&gt; &apos;;&apos;              &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Actions &#123;</div><div class="line">  method Assignment-Expression( $/ ) &#123;</div><div class="line">    make &apos;my $&apos; ~ $/&lt;Variable&gt; ~ &apos; = &apos; ~ $/&lt;Number&gt; ~ &apos;;&apos;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  method Function-Call( $/ ) &#123;</div><div class="line">    make &apos;say &apos; ~ $/&lt;String&gt;[0] ~ &apos; ~ $&apos; ~ $/&lt;Variable&gt; ~ &apos; ~ &apos; ~ $/&lt;String&gt;[1] ~ &apos;;&apos;;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">  method TOP( $/ ) &#123;</div><div class="line">    make $/&lt;Assignment-Expression&gt;.ast ~ $/&lt;Function-Call&gt;.ast &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">my $j = JavaScript.new;</div><div class="line">my $a = Actions.new;</div><div class="line">say $j.parse(</div><div class="line">   &apos;var a = 3; console.log( &quot;Hey, did you know a = &quot; + a + &quot;?&quot; );&apos;,</div><div class="line">   :actions($a)).ast;</div></pre></td></tr></table></figure>
+<h2 id="到哪里去"><a href="#到哪里去" class="headerlink" title="到哪里去"></a>到哪里去</h2><p>一个简单但整洁的更改是你可以扩展 Assignment-Expression 来既接收数字又接收字符串。上次我们谈论了 rules 中的轮试,所以这个提示应该足够让你开始了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rule Assignment-Expression &#123; var &lt;Variable&gt; &apos;=&apos; (&lt;Number&gt; | &lt;String&gt;) &#125;</div></pre></td></tr></table></figure>
+<p>你必须修改下 Assignment-Expression 方法以使它起作用。或者你可以狡猾一点然后发现( <number> | <string> ) 可以转换为它自己的小的普通的 “Term” rule, “rule Term { <number> | <string> }”, 然后添加一个 action “method Term($/) { make $/<number> or $/<string>}” 而只在 Assignment-Expression 中修改一个东西。</string></number></string></number></string></number></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grammar/" rel="tag">#Grammar</a>
+          
+            <a href="/tags/Actions/" rel="tag">#Actions</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/11/IO操作/" rel="next" title="IO 操作">
+                <i class="fa fa-chevron-left"></i> IO 操作
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/05/D在Perl6中是什么意思/" rel="prev" title="D 在 Perl 6 中是什么意思">
+                D 在 Perl 6 中是什么意思 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/10/29/从正则表达式到Grammar/"
+     data-title="从正则表达式到 Grammar"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/10/29/从正则表达式到Grammar/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/10/29/从正则表达式到Grammar/"
+           data-title="从正则表达式到 Grammar" data-url="https://ohmycloud.github.io/2015/10/29/从正则表达式到Grammar/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#上周轶事"><span class="nav-number">1.</span> <span class="nav-text">上周轶事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从-Javascript-到-Perl"><span class="nav-number">2.</span> <span class="nav-text">从 Javascript 到 Perl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重构"><span class="nav-number">3.</span> <span class="nav-text">重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象化"><span class="nav-number">4.</span> <span class="nav-text">对象化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#收回你的吐槽"><span class="nav-number">5.</span> <span class="nav-text">收回你的吐槽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接收动作"><span class="nav-number">6.</span> <span class="nav-text">接收动作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#混合信号-Mixed-Signals"><span class="nav-number">7.</span> <span class="nav-text">混合信号(Mixed Signals)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#到哪里去"><span class="nav-number">8.</span> <span class="nav-text">到哪里去</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

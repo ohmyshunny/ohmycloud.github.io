@@ -1,0 +1,717 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="twigil," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Perl 6中的 . 和 ! twigil 是什么？. twigil 的意思是”这是类公用的”,  ! twigil 的意思是“这是类私有的”, 只能用在类的内部。
+1234class ScoreKeeper &amp;#123;    has @.options;    has %!player-points;&amp;#125;
+普通的符号表明了词法作用域或包作用域, 但是 twigils 就像是 sigil">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类中的twigils">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/12/11/类中的twigils/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="Perl 6中的 . 和 ! twigil 是什么？. twigil 的意思是”这是类公用的”,  ! twigil 的意思是“这是类私有的”, 只能用在类的内部。
+1234class ScoreKeeper &amp;#123;    has @.options;    has %!player-points;&amp;#125;
+普通的符号表明了词法作用域或包作用域, 但是 twigils 就像是 sigil">
+<meta property="og:updated_time" content="2016-10-23T16:07:53.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类中的twigils">
+<meta name="twitter:description" content="Perl 6中的 . 和 ! twigil 是什么？. twigil 的意思是”这是类公用的”,  ! twigil 的意思是“这是类私有的”, 只能用在类的内部。
+1234class ScoreKeeper &amp;#123;    has @.options;    has %!player-points;&amp;#125;
+普通的符号表明了词法作用域或包作用域, 但是 twigils 就像是 sigil">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/12/11/类中的twigils/"/>
+
+  <title> 类中的twigils | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                类中的twigils
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-11T00:00:00+08:00" content="2015-12-11">
+              2015-12-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/11/类中的twigils/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/11/类中的twigils/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Perl-6中的-和-twigil-是什么？"><a href="#Perl-6中的-和-twigil-是什么？" class="headerlink" title="Perl 6中的 . 和 ! twigil 是什么？"></a>Perl 6中的 <code>.</code> 和 <code>!</code> <strong>twigil</strong> 是什么？</h2><p><code>.</code> <strong>twigil</strong> 的意思是”这是类公用的”,  <code>!</code> <strong>twigil</strong> 的意思是“这是类私有的”, 只能用在类的内部。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class ScoreKeeper &#123;</div><div class="line">    has @.options;</div><div class="line">    has %!player-points;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>普通的符号表明了词法作用域或包作用域, 但是 <strong>twigils</strong> 就像是 <strong>sigils</strong> 的兄弟, 表明了不同的作用域, 它影响了变量的作用域。<code>.</code> 和 <code>!</code> 是二级 <strong>sigils</strong>。</p>
+<a id="more"></a>
+<p>属性存在于每个类的实例中, 在类的内部, 可以直接使用 <code>!</code>访问到实例的属性:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class Point &#123;</div><div class="line">    has $.<span class="keyword">x</span>;</div><div class="line">    has $.<span class="keyword">y</span>;</div><div class="line">    method Str() &#123;</div><div class="line">        <span class="string">"($!x, $!y)"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么 <code>.</code> <strong>twigil</strong> 和 <code>!</code> <strong>twigil</strong> 之间有什么关系呢？下面看一个例子:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">class Point &#123;</div><div class="line">    has $.<span class="keyword">x</span>;</div><div class="line">    has $.<span class="keyword">y</span>;</div><div class="line"></div><div class="line">    method Str() &#123;</div><div class="line">        <span class="comment"># 注意这次我们使用 . 而非 !</span></div><div class="line">        <span class="string">"\$.x 等价于 self.x()"</span>.say  <span class="keyword">if</span> $.<span class="keyword">x</span> == self.x();</div><div class="line">        <span class="string">"\$.y 等价于 self.y()"</span>.say  <span class="keyword">if</span> $.<span class="keyword">y</span> == self.y();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    method <span class="keyword">print</span>() &#123;</div><div class="line">        <span class="keyword">say</span> self.x(); <span class="comment"># 调用实例的名为 x 的方法</span></div><div class="line">        <span class="keyword">say</span> self.y(); <span class="comment"># 调用实例的名为 y 的方法</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">my</span> $point = Point.new(<span class="string">x =&gt;</span> <span class="number">10</span>, <span class="string">y =&gt;</span> <span class="number">20</span>);</div><div class="line">$point.Str;   </div><div class="line">$point.<span class="keyword">print</span>;</div></pre></td></tr></table></figure>
+<p>会输出:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.<span class="keyword">x</span> 等价于 self.x()</div><div class="line">$.<span class="keyword">y</span> 等价于 self.y()</div><div class="line"><span class="number">10</span></div><div class="line"><span class="number">20</span></div></pre></td></tr></table></figure>
+<p>注意到, 属性被声明为 <code>$.x</code> 和 <code>$.y</code>, 但是在类的内部仍旧能通过 <code>$!x</code> 和 <code>$!y</code>来访问属性。这是因为在 Perl 6 中所有的属性都是私有的并且在类中可以通过 <code>$!attribute-name</code>直接访问这些属性。 Perl 6 可以为你自动生成<code>存取方法</code>。</p>
+<p>公共属性拥有 <code>.</code> twigil, 私有属性拥有 <code>!</code> twigil。</p>
+<p><code>has $.x</code> 就是私有属性 <code>has $!x</code> 加上一个<code>getter</code>方法, 即 <code>method x() { ... }</code></p>
+<p><code>has $.x is rw</code> 就是私有属性 <code>has $!x</code> 加上一个<code>getter/setter</code>方法。</p>
+<h2 id="twigil-就是调用了与属性同名的方法"><a href="#twigil-就是调用了与属性同名的方法" class="headerlink" title=". twigil 就是调用了与属性同名的方法"></a>. <strong>twigil</strong> 就是调用了与属性同名的方法</h2><hr>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class SaySomething &#123;</div><div class="line">    method a() &#123; <span class="keyword">say</span> <span class="string">"a"</span>;  &#125;</div><div class="line"></div><div class="line">    method b() &#123; $.a;      &#125;</div><div class="line">    method c() &#123; self.a(); &#125; <span class="comment"># 这证明了 $.a 的 . twigil 做了一次隐式的实例方法调用。</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">SaySomething.b; <span class="comment"># 打印 "a"</span></div><div class="line">SaySomething.c; <span class="comment"># 打印 "a"</span></div></pre></td></tr></table></figure>
+<h2 id="twigil-中自动生成的方法可以被子类重写"><a href="#twigil-中自动生成的方法可以被子类重写" class="headerlink" title=". twigil 中自动生成的方法可以被子类重写"></a>. <strong>twigil</strong> 中自动生成的方法可以被子类重写</h2><hr>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> v6;</div><div class="line"></div><div class="line">class Point &#123;</div><div class="line">    has $.<span class="keyword">x</span>;</div><div class="line">    has $.<span class="keyword">y</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Circle is Point &#123;</div><div class="line">    has $!radius;</div><div class="line"></div><div class="line">    <span class="comment"># 重写父类中的 x() 方法和 y() 方法</span></div><div class="line">    method <span class="keyword">x</span>() &#123;</div><div class="line">        <span class="string">"I am x point in a Circle"</span>;</div><div class="line">    &#125;</div><div class="line">    method <span class="keyword">y</span>() &#123;</div><div class="line">        <span class="string">"I am y point in a Circle"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">my</span> $circle = Circle.new(<span class="string">radius =&gt;</span> <span class="number">10</span>);</div><div class="line">$circle.x().say; <span class="comment"># I am x point in a Circle</span></div><div class="line">$circle.y.say;   <span class="comment"># I am y point in a Circle</span></div></pre></td></tr></table></figure>
+<p>如果不想子类重写父类中的方法, 那么在父类中声明属性的时候, 使用 <code>!</code> <strong>twigil</strong> 替代 <code>.</code> <strong>twigil</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/twigil/" rel="tag">#twigil</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/25/扩展Perl6中的类型/" rel="next" title="扩展 Perl 6 中的类型">
+                <i class="fa fa-chevron-left"></i> 扩展 Perl 6 中的类型
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/14/给数字添加千分位分割符/" rel="prev" title="给数字添加千分位分割符">
+                给数字添加千分位分割符 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/11/类中的twigils/"
+     data-title="类中的twigils"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/12/11/类中的twigils/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/11/类中的twigils/"
+           data-title="类中的twigils" data-url="https://ohmycloud.github.io/2015/12/11/类中的twigils/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Perl-6中的-和-twigil-是什么？"><span class="nav-number">1.</span> <span class="nav-text">Perl 6中的 . 和 ! twigil 是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#twigil-就是调用了与属性同名的方法"><span class="nav-number">2.</span> <span class="nav-text">. twigil 就是调用了与属性同名的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#twigil-中自动生成的方法可以被子类重写"><span class="nav-number">3.</span> <span class="nav-text">. twigil 中自动生成的方法可以被子类重写</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

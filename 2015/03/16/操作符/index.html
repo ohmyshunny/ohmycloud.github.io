@@ -1,0 +1,1230 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="操作符," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="操作符操作符优先级在像 1 + 2 * 3 这样的表达式中， 2 * 3 被首先计算， 因为中缀操作符  * 的优先级比 + 的优先级高。下面的表中总结了 Perl  6 中  的优先级级别， 从最牢固到最松散：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作符">
+<meta property="og:url" content="https://ohmycloud.github.io/2015/03/16/操作符/index.html">
+<meta property="og:site_name" content="Perl 6 青春小站">
+<meta property="og:description" content="操作符操作符优先级在像 1 + 2 * 3 这样的表达式中， 2 * 3 被首先计算， 因为中缀操作符  * 的优先级比 + 的优先级高。下面的表中总结了 Perl  6 中  的优先级级别， 从最牢固到最松散：">
+<meta property="og:updated_time" content="2016-10-23T16:07:53.916Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作符">
+<meta name="twitter:description" content="操作符操作符优先级在像 1 + 2 * 3 这样的表达式中， 2 * 3 被首先计算， 因为中缀操作符  * 的优先级比 + 的优先级高。下面的表中总结了 Perl  6 中  的优先级级别， 从最牢固到最松散：">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ohmycloud.github.io/2015/03/16/操作符/"/>
+
+  <title> 操作符 | Perl 6 青春小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Perl 6 青春小站</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                操作符
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-16T13:16:00+08:00" content="2015-03-16">
+              2015-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/16/操作符/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/16/操作符/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="操作符优先级"><a href="#操作符优先级" class="headerlink" title="操作符优先级"></a>操作符优先级</h3><p>在像 <code>1 + 2 * 3</code> 这样的表达式中， <code>2 * 3</code> 被首先计算， 因为中缀操作符  <code>*</code> 的优先级比 <code>+</code> 的优先级高。下面的表中总结了 Perl  6 中  的优先级级别， 从最牢固到最松散：</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">A	Level	           Examples</div><div class="line">N	Terms	           42 3.14 &quot;eek&quot; qq[&quot;foo&quot;] $x :!verbose @$array</div><div class="line">L	方法后缀	        .meth .+ .? .* .() .[] .&#123;&#125; .&lt;&gt; .«» .:: .= .^ .:</div><div class="line">N	自增	              ++ --</div><div class="line">R	求幂	              **</div><div class="line">L	Symbolic unary	   ! + - ~ ? | || +^ ~^ ?^ ^</div><div class="line">L	乘法	              * / % %% +&amp; +&lt; +&gt; ~&amp; ~&lt; ~&gt; ?&amp; div mod gcd lcm</div><div class="line">L	加法	              + - +| +^ ~| ~^ ?| ?^</div><div class="line">L	重复	              x xx</div><div class="line">X	连结                ~</div><div class="line">X	Junctive and	   &amp;</div><div class="line">X	Junctive or	       | ^</div><div class="line">L	Named unary	       temp let</div><div class="line">N	Structural infix   but does &lt;=&gt; leg cmp .. ..^ ^.. ^..^</div><div class="line">C	Chaining infix	   != == &lt; &lt;= &gt; &gt;= eq ne lt le gt ge ~~ === eqv !eqv</div><div class="line">X	Tight and	       &amp;&amp;</div><div class="line">X	Tight or	       || ^^ // min max</div><div class="line">R	Conditional	       ?? !! ff fff</div><div class="line">R	Item assignment	   = =&gt; += -= **= xx= .=</div><div class="line">L	Loose unary	       so not</div><div class="line">X	Comma operator	   , :</div><div class="line">X	List infix	       Z minmax X X~ X* Xeqv ...</div><div class="line">R	List prefix	       print push say die map substr ... [+] [*] any Z=</div><div class="line">X	Loose and	       and andthen</div><div class="line">X	Loose or	       or xor orelse</div><div class="line">X	Sequencer	       &lt;==, ==&gt;, &lt;&lt;==, ==&gt;&gt;</div><div class="line">N	Terminator	       ; &#123;...&#125;, unless, extra ), ], &#125;</div></pre></td></tr></table></figure>
+<p>下面使用的两处 <code>!</code> 符号一般代表任何一对儿拥有相同优先级的操作符， 上表指定的二元操作符的结合性解释如下(其中 A 代表结合性， associativities )：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">A	Assoc	Meaning of $a ! $b ! $c</div><div class="line">L	left	($a ! $b) ! $c</div><div class="line">R	right	$a ! ($b ! $c)</div><div class="line">N	non	    ILLEGAL</div><div class="line">C	chain	($a ! $b) and ($b ! $c)</div><div class="line">X	list	infix:&lt;!&gt;($a; $b; $)</div></pre></td></tr></table></figure>
+<p>对于一元操作符， 这解释为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">A	Assoc	Meaning of !$a!</div><div class="line">L	left	(!$a)!</div><div class="line">R	right	!($a!)</div><div class="line">N	non	    ILLEGAL</div></pre></td></tr></table></figure>
+<p>下面描述的操作符， 默认假定为 left 结合性。</p>
+<h3 id="操作符种类"><a href="#操作符种类" class="headerlink" title="操作符种类"></a>操作符种类</h3><hr>
+<p>操作符能出现在相对于 term 的几个位置处：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+term	        prefix         (后缀)</div><div class="line">term1 + term2	infix          (中缀)</div><div class="line">term++	        postfix        (后缀)</div><div class="line">(term)	        circumfix      (环缀)</div><div class="line">term1[term2]	postcircumfix  (后环缀)</div></pre></td></tr></table></figure>
+<p>每个操作符也可以用作子例程。 这样的子例程的名字由操作符的种类， 然后后跟一个冒号，再加上一组引号结构， 引号结构中是组成操作符的符号(s):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">infix:&lt;+&gt;(1, 2)                           # same as 1 + 2</div><div class="line">circumfix:«( )»(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;)            # same as (&apos;a&apos;, &apos;b&apos;, &apos;c&apos;), 目前编译错误。</div><div class="line">circumfix:&lt;[ ]&gt;(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;).perl.say   # [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</div></pre></td></tr></table></figure>
+<p>作为一种特殊情况， listop(列表操作符)既能作为 term 又能作为前缀。子例程调用是最常见的列表操作符。其它情况包括元运算中缀操作符 <code>[+]| 1, 2, 3</code> 和 <code>prefix</code> 等 stub 操作符。</p>
+<p>定义自定义操作符在 <a href="http://doc.perl6.org/language/functions#Defining_Operators" target="_blank" rel="external"> /language/functions#Defining_Operators.</a>  中有涉及。</p>
+<h3 id="Term-优先级"><a href="#Term-优先级" class="headerlink" title="Term 优先级"></a>Term 优先级</h3><hr>
+<p>Term 怎么翻译才合适？ 我觉得翻译成 <code>项</code> 更合适， 表明这是一个名词。</p>
+<h4 id="环缀-lt-gt"><a href="#环缀-lt-gt" class="headerlink" title="环缀 &lt; &gt;"></a>环缀 &lt; &gt;</h4><hr>
+<p>引起单词的结构。以空白隔开内容， 并返回一个单词的 <code>Parcel</code>。 如果单词看起来像数字字面量或 <code>Pair</code> 字面量， 那么它会被转为合适的数字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say &lt;a b c&gt;[1]  # b</div></pre></td></tr></table></figure>
+<p>(Rakudo 当前总是返回一块儿字符串)。</p>
+<h3 id="环缀"><a href="#环缀" class="headerlink" title="环缀 ( )"></a>环缀 ( )</h3><hr>
+<p>分组操作符。</p>
+<p>空的分组 <code>()</code> 创建一个空的 <code>Pracel</code>。 非空表达式周围的圆括号只是构建了表达式， 而没有额外的语义。</p>
+<p>在参数列表中，在参数周围放上圆括号防止了参数被解释为具名参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">multi sub p(:$a!) &#123; say &apos;named&apos;      &#125;</div><div class="line">multi sub p($a)   &#123; say &apos;positional&apos; &#125;</div><div class="line">p a =&gt; 1;       # named</div><div class="line">p (a =&gt; 1);     # positional</div></pre></td></tr></table></figure>
+<h3 id="环缀-1"><a href="#环缀-1" class="headerlink" title="环缀 { }"></a>环缀 { }</h3><hr>
+<p>Block 或 散列构造器。</p>
+<p>如果<code>{}</code> 里面的内容看起来像一组 pairs 并且没有 <code>$_</code> 或其它占位符参数，就返回一个散列， 这个散列由逐项逐项的 pair 组成。</p>
+<p>否则就返回一个 Block。</p>
+<p>注意，这个结构没有重新解析内容； 而里面的内容总是被解析为一组句子（例如，像一个 block）， 并且如果后面的分析表明它需要被解析成一个散列， 那么 block 就会被执行并强转为散列。</p>
+<h3 id="环缀-2"><a href="#环缀-2" class="headerlink" title="环缀 [ ]"></a>环缀 [ ]</h3><hr>
+<p>数组构造器。在列表上下文中返回一个不会展平的 item 化的数组。</p>
+<h2 id="方法后缀优先级"><a href="#方法后缀优先级" class="headerlink" title="方法后缀优先级"></a>方法后缀优先级</h2><hr>
+<h3 id="后环缀"><a href="#后环缀" class="headerlink" title="后环缀 [ ]"></a>后环缀 [ ]</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sub postcircumfix:&lt;[ ]&gt;(@container, **@index,</div><div class="line">                        :$k, :$v, :$kv, :$p, :$exists, :$delete)</div></pre></td></tr></table></figure>
+<p><code>:$k</code> 会创建一个 pair， 它是散列中的一个条目。 键是 <code>k</code>， 键值为 <code>$kv</code>。 所以， <code>$k</code> 等价于 <code>k</code> =&gt; <code>$k</code></p>
+<p>访问 <code>@container</code>  中的一个或多个元素，即数组索引操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">my @alphabet = &apos;a&apos; .. &apos;z&apos;;</div><div class="line">say @alphabet[0];                   #-&gt; a</div><div class="line">say @alphabet[1];                   #-&gt; b</div><div class="line">say @alphabet[*-1];                 #-&gt; z</div><div class="line">say @alphabet[100]:exists;          #-&gt; False</div><div class="line">say @alphabet[15, 4, 17, 11].join;  #-&gt; perl</div><div class="line">say @alphabet[23 .. *].perl;        #-&gt; (&quot;x&quot;, &quot;y&quot;, &quot;z&quot;)</div><div class="line"></div><div class="line">@alphabet[1, 2] = &quot;B&quot;, &quot;C&quot;;</div><div class="line">say @alphabet[0..3].perl            #-&gt; (&quot;a&quot;, &quot;B&quot;, &quot;C&quot;, &quot;d&quot;)</div></pre></td></tr></table></figure>
+<p>查看 <a href="http://doc.perl6.org/language/subscripts" target="_blank" rel="external">Subscripts</a> 获取关于该操作符行为的更详细的解释， 还有怎么在自定义类型中实现对它的支持。</p>
+<h3 id="后环缀-1"><a href="#后环缀-1" class="headerlink" title="后环缀 { }"></a>后环缀 { }</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sub postcircumfix:&lt;&#123; &#125;&gt;(%container, **@key,</div><div class="line">                        :$k, :$v, :$kv, :$p, :$exists, :$delete)</div></pre></td></tr></table></figure>
+<p>访问 <code>%container</code> 的一个或多个元素， 即散列索引操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my  %color = kiwi =&gt; &quot;green&quot;, banana =&gt; &quot;yellow&quot;, cherry =&gt; &quot;red&quot;;</div><div class="line">say %color&#123;&quot;banana&quot;&#125;;               #-&gt; yellow</div><div class="line">say %color&#123;&quot;cherry&quot;, &quot;kiwi&quot;&#125;.perl;  #-&gt; (&quot;red&quot;, &quot;green&quot;)</div><div class="line">say %color&#123;&quot;strawberry&quot;&#125;:exists;    #-&gt; False</div><div class="line"></div><div class="line">%color&#123;&quot;banana&quot;, &quot;lime&quot;&#125; = &quot;yellowish&quot;, &quot;green&quot;;</div><div class="line">%color&#123;&quot;cherry&quot;&#125;:delete;</div><div class="line">say %color;  #-&gt; banana =&gt; yellowish, kiwi =&gt; green, lime =&gt; green</div></pre></td></tr></table></figure>
+<p>查看 <code>后环缀 &lt; &gt;</code> 和 <code>后环缀 « »</code> 作为便捷形式， 查看 <code>Subscripts</code> 获取这个操作符行为的更详细解释， 还有怎么在自定义类型中实现对它的支持。</p>
+<h3 id="后环缀-lt-gt"><a href="#后环缀-lt-gt" class="headerlink" title="后环缀 &lt; &gt;"></a>后环缀 &lt; &gt;</h3><hr>
+<p><code>后环缀 { }</code> 的简写形式， 它会引起它的参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my %color = kiwi =&gt; &quot;green&quot;, banana =&gt; &quot;yellow&quot;, cherry =&gt; &quot;red&quot;;</div><div class="line">say %color&lt;banana&gt;;             #-&gt; yellow</div><div class="line">say %color&lt;cherry kiwi&gt;.perl;   #-&gt; (&quot;red&quot;, &quot;green&quot;)</div><div class="line">say %color&lt;strawberry&gt;:exists;  #-&gt; False</div></pre></td></tr></table></figure>
+<p>这不是一个真正的操作符， 它仅仅是一个在编译时把 <code>&lt; &gt;</code> 变成 <code>{}</code> 后环缀操作符的语法糖。</p>
+<h3 id="后环缀-«-»"><a href="#后环缀-«-»" class="headerlink" title="后环缀 « »"></a>后环缀 « »</h3><hr>
+<p><code>后环缀 { }</code> 的简写形式。它会引起它的参数，并且 « » 中能进行变量插值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my %color = kiwi =&gt; &quot;green&quot;, banana =&gt; &quot;yellow&quot;, cherry =&gt; &quot;red&quot;;</div><div class="line">my $fruit = &quot;kiwi&quot;;</div><div class="line">say %color«cherry $fruit».perl;   #-&gt; (&quot;red&quot;, &quot;green&quot;)</div></pre></td></tr></table></figure>
+<p>这不是一个真正的操作符， 它仅仅是一个在编译时把 « » 变成 <code>{}</code> 后环缀操作符的语法糖。</p>
+<h3 id="后环缀-2"><a href="#后环缀-2" class="headerlink" title="后环缀 ( )"></a>后环缀 ( )</h3><hr>
+<p>调用操作符。把调用者当作 <code>Callable</code> 并引用它，它使用圆括号之间的表达式作为参数。</p>
+<p>注意，标识符后面直接跟着一对儿圆括号总是被解析为子例程调用。</p>
+<p>如果你想要你的对象响应该调用操作符， 你需要实现 <code>CALL-ME</code> 方法。</p>
+<h3 id="postfix"><a href="#postfix" class="headerlink" title="postfix ."></a>postfix .</h3><hr>
+<p>该操作符用于调用一个方法， <code>$invocant.method</code>。</p>
+<p>技术上讲， 这不是一个操作符，而是编译器中特殊情况下的语法。</p>
+<h3 id="postfix-1"><a href="#postfix-1" class="headerlink" title="postfix .="></a>postfix .=</h3><hr>
+<p>可变的方法调用。 <code>$invocant.=method</code> ， 脱去语法糖后就是 <code>$invocant = $invocant.method</code> , 这与 <a href="http://doc.perl6.org/routine/op%3D" target="_blank" rel="external">op=.</a> 类似。</p>
+<p>技术上讲， 这不是一个操作符，而是编译器中特殊情况下的语法。</p>
+<h3 id="postfix-2"><a href="#postfix-2" class="headerlink" title="postfix .^"></a>postfix .^</h3><hr>
+<p>元方法调用。 <code>$invocant.^method</code> 在  <code>$invocant</code> 的元类身上调用方法。脱去语法糖后， 它就是 <code>$invocant.HOW.method($invocant, ...)</code> 。 查看 <a href="http://doc.perl6.org/type/HOW" target="_blank" rel="external">HOW</a> 获取更多信息。</p>
+<p>技术上讲， 这不是一个操作符，而是编译器中特殊情况下的语法。</p>
+<h3 id="postfix-3"><a href="#postfix-3" class="headerlink" title="postfix .?"></a>postfix .?</h3><hr>
+<p><code>有可能被调用</code>的方法调用。如果有名为 <code>method</code> 的方法，  <code>$invocant.?method</code> 就在 <code>$invocant</code> 上调用 <code>method</code> 方法。否则它就返回 <code>Nil</code>。</p>
+<p>技术上讲， 这不是一个操作符，而是编译器中特殊情况下的语法。</p>
+<h3 id="postfix-4"><a href="#postfix-4" class="headerlink" title="postfix .+"></a>postfix .+</h3><hr>
+<p><code>$invocant.+method</code> 从 <code>$invocant</code> 身上调用所有叫做     <code>method</code> 的方法， 并返回一个 Parcel 作为结果。 如果没有找到这个名字的方法， 就会死掉。</p>
+<p>技术上讲， 这不是一个操作符，而是编译器中特殊情况下的语法。</p>
+<h3 id="postfix-5"><a href="#postfix-5" class="headerlink" title="postfix .*"></a>postfix .*</h3><hr>
+<p><code>$invocant.*method</code> <code>从</code>$invocant<code>身上调用所有叫做</code>method` 的方法， 并返回一个 Parcel 作为结果。 如果没有找到这个名字的方法，则返回一个空的 Parcel。</p>
+<p>技术上讲， 这不是一个操作符，而是编译器中特殊情况下的语法。</p>
+<h3 id="postfix-postfix"><a href="#postfix-postfix" class="headerlink" title="postfix .postfix"></a>postfix .postfix</h3><hr>
+<p>大多数情况下， 可以在后缀或后环缀前面放上一个点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@a[1, 2, 3];</div><div class="line">@a.[1, 2, 3]; # Same</div></pre></td></tr></table></figure>
+<p>这对于视觉清晰或简洁很有帮助。例如，如果对象的属性是一个函数，在属性名后面放置一对儿圆括号会变成方法调用的一部分。 所以要么使用两对儿圆括号， 要么在圆括号前面放上一个点来阻止方法调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class Operation &#123;</div><div class="line">    has $.symbol;</div><div class="line">    has &amp;.function;</div><div class="line">&#125;</div><div class="line">my $addition = Operation.new(:symbol&lt;+&gt;, :function&#123; $^a + $^b &#125;);</div><div class="line">say $addition.function()(1, 2); # 3</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say $addition.function.(1,2); # 3</div></pre></td></tr></table></figure>
+<p> 然而，如果后缀是一个标识符， 那么它会被解释为一个普通的方法调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1.i # No such method &apos;i&apos; for invocant of type &apos;Int&apos;</div></pre></td></tr></table></figure>
+<p>技术上讲， 这不是一个操作符，而是编译器中特殊情况下的语法。</p>
+<h3 id="postfix-6"><a href="#postfix-6" class="headerlink" title="postfix .:"></a>postfix .:<prefix></prefix></h3><hr>
+<p>前缀能够像方法那样， 使用冒号对儿标记法来调用。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $a = 1;</div><div class="line">say ++$a;     # 2</div><div class="line">say $a.:&lt;++&gt;; # 3</div></pre></td></tr></table></figure>
+<p>技术上讲， 这不是一个操作符，而是编译器中特殊情况下的语法。</p>
+<h3 id="postfix-7"><a href="#postfix-7" class="headerlink" title="postfix .::"></a>postfix .::</h3><hr>
+<p>一个类限定的方法调用， 用于调用一个定义在父类或 role 中的方法， 甚至在子类中重新定义了之后。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Bar &#123;</div><div class="line">    method baz &#123; 42 &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Foo is Bar &#123;</div><div class="line">    method baz &#123; &quot;nope&quot; &#125;</div><div class="line">&#125;</div><div class="line">say Foo.Bar::baz; # 42</div></pre></td></tr></table></figure>
+<h2 id="自增优先级"><a href="#自增优先级" class="headerlink" title="自增优先级"></a>自增优先级</h2><hr>
+<h3 id="prefix"><a href="#prefix" class="headerlink" title="prefix ++"></a>prefix ++</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;++&gt;($x is rw) is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>把它的参数增加 1， 并返回增加后的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $x = 3;</div><div class="line">say ++$x;    # 4</div><div class="line">say $x;      # 4</div></pre></td></tr></table></figure>
+<p>它的工作原理是在它的参数身上调用 <code>succ</code> 方法， 这可以让自定义类型自由地实现它们自己的增量语义。</p>
+<h3 id="prefix-–"><a href="#prefix-–" class="headerlink" title="prefix –"></a>prefix –</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;--&gt;($x is rw) is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>把它的参数减少 1， 并返回减少后的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $x = 3;</div><div class="line">say --$x;       # 2</div><div class="line">say $x;         # 2</div></pre></td></tr></table></figure>
+<p>它的工作原理是在它的参数身上调用 <code>pred</code> 方法， 这可以让自定义类型自由地实现它们自己的减量语义。</p>
+<h3 id="postfix-8"><a href="#postfix-8" class="headerlink" title="postfix ++"></a>postfix ++</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub postfix:&lt;++&gt;($x is rw) is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>把它的参数增加 1， 并返回<code>unincremented</code>的那个值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $x = 3;</div><div class="line">say $x++;       # 3</div><div class="line">say $x;         # 4</div></pre></td></tr></table></figure>
+<p>它的工作原理是在它的参数身上调用 <code>succ</code> 方法， 这可以让自定义类型自由地实现它们自己的增量语义。</p>
+<p>注意这并不一定返回它的参数。 例如，对于未定义的值， 它返回 0:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $x;</div><div class="line">say $x++;       # 0</div><div class="line">say $x;         # 1</div></pre></td></tr></table></figure>
+<h3 id="postfix-–"><a href="#postfix-–" class="headerlink" title="postfix –"></a>postfix –</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub postfix:&lt;--&gt;($x is rw) is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>把它的参数减少 1， 并返回<code>undecremented</code>的那个值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $x = 3;</div><div class="line">say $x--;       # 3</div><div class="line">say $x;         # 2</div></pre></td></tr></table></figure>
+<p>它的工作原理是在它的参数身上调用 <code>pred</code> 方法， 这可以让自定义类型自由地实现它们自己的减量语义。</p>
+<p>注意这并不一定返回它的参数。 例如，对于未定义的值， 它返回 0:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $x;</div><div class="line">say $x--;       # 0</div><div class="line">say $x;         # -1</div></pre></td></tr></table></figure>
+<h2 id="求幂优先级"><a href="#求幂优先级" class="headerlink" title="求幂优先级"></a>求幂优先级</h2><hr>
+<h3 id="infix"><a href="#infix" class="headerlink" title="infix **"></a>infix **</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;**&gt;(Any, Any) returns Numeric:D is assoc&lt;right&gt;</div></pre></td></tr></table></figure>
+<p>求幂操作符把它的两个参数都强制转为 <code>Numeric</code> , 然后计算，右侧为幂。</p>
+<p>如果 <code>**</code> 右边是一个非负整数，并且左侧是任意精度类型(Int, FatRat)，那么计算不会损失精度。</p>
+<h2 id="象形一元操作符的优先级"><a href="#象形一元操作符的优先级" class="headerlink" title="象形一元操作符的优先级"></a>象形一元操作符的优先级</h2><hr>
+<h3 id="prefix-1"><a href="#prefix-1" class="headerlink" title="prefix ?"></a>prefix ?</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;?&gt;(Mu) returns Bool:D</div></pre></td></tr></table></figure>
+<p>布尔上下文操作符。</p>
+<p>通过在参数身上调用 <code>Bool</code> 方法强制它的参数为 Bool。注意， 这会使 Junctions 失效。</p>
+<h3 id="prefix-2"><a href="#prefix-2" class="headerlink" title="prefix !"></a>prefix !</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;!&gt;(Mu) returns Bool:D</div></pre></td></tr></table></figure>
+<p>否定的布尔上下文操作符。</p>
+<p>通过在参数身上调用 <code>Bool</code> 方法强制它的参数为 Bool， 并返回结果的否定值。注意， 这会使 Junctions 失效。</p>
+<h3 id="prefix-3"><a href="#prefix-3" class="headerlink" title="prefix +"></a>prefix +</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;+&gt;(Any) returns Numeric:D</div></pre></td></tr></table></figure>
+<p>Numeric 上下文操作符。</p>
+<p>通过在参数身上调用 Numeric 方法强制将参数转为 Numeric 类型。</p>
+<h3 id="prefix-4"><a href="#prefix-4" class="headerlink" title="prefix -"></a>prefix -</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;-&gt;(Any) returns Numeric:D</div></pre></td></tr></table></figure>
+<p>否定的 Numeric 上下文操作符。</p>
+<p>通过在参数身上调用 Numeric 方法强制将参数转为 Numeric 类型， 并返回结果的否定值。</p>
+<h3 id="prefix-5"><a href="#prefix-5" class="headerlink" title="prefix ~"></a>prefix ~</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;-&gt;(Any) returns Str:D</div></pre></td></tr></table></figure>
+<p>字符串上下文操作符。</p>
+<p>通过在参数身上调用 <code>Str</code> 方法强制把参数转为 <code>Str</code> 类型。</p>
+<h3 id="prefix-6"><a href="#prefix-6" class="headerlink" title="prefix |"></a>prefix |</h3><hr>
+<p>将  Capture, Enum, Pair, List, Parcel, EnumMap 和 Hash 展平到参数列表中。</p>
+<p>（在 Rakudo 中，这不是作为一个合适的操作符来实现的，而是编译器中的一种特殊情况， 这意味着它只对参数列表有效，而非在任意代码中都有效。）</p>
+<h3 id="prefix-7"><a href="#prefix-7" class="headerlink" title="prefix +^"></a>prefix +^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;+^&gt;(Any) returns Int:D</div></pre></td></tr></table></figure>
+<p>Integer bitwise negation</p>
+<p>整数按位取反。</p>
+<p>将参数强转为 Int 类型并对结果按位取反， 假设两者互补。</p>
+<h3 id="prefix-8"><a href="#prefix-8" class="headerlink" title="prefix ?^"></a>prefix ?^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;?^&gt;(Mu) returns Bool:D</div></pre></td></tr></table></figure>
+<p>布尔按位取反。</p>
+<p>将参数强转为 Bool， 然后按位反转，这使它和 prefix:&lt;!&gt;  一样。</p>
+<h3 id="prefix-9"><a href="#prefix-9" class="headerlink" title="prefix ^"></a>prefix ^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;^&gt;(Any) returns Range:D</div></pre></td></tr></table></figure>
+<p>upto 操作符.</p>
+<p>强制把它的参数转为 Numeric， 生成一个从 0 直到（但是排除） 参数为止的范围。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say ^5;         # 0..^5</div><div class="line">for ^5 &#123; &#125;      # 5 iterations</div></pre></td></tr></table></figure>
+<h2 id="乘法优先级"><a href="#乘法优先级" class="headerlink" title="乘法优先级"></a>乘法优先级</h2><hr>
+<h3 id="infix-1"><a href="#infix-1" class="headerlink" title="infix *"></a>infix *</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;*&gt;(Any, Any) returns Numeric:D</div></pre></td></tr></table></figure>
+<p>把两边的参数都强转为 Numeric 并把它们相乘。 结果是一个更宽的类型。 查看 Numeric 获取更详细信息。</p>
+<h3 id="infix-2"><a href="#infix-2" class="headerlink" title="infix /"></a>infix /</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;/&gt;(Any, Any) returns Numeric:D</div></pre></td></tr></table></figure>
+<p>把两边的参数都强制为 Numeric， 并用左边除以右边的数。整数相除返回 Rat， 否则返回”更宽类型” 的结果。</p>
+<h3 id="infix-div"><a href="#infix-div" class="headerlink" title="infix div"></a>infix div</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;div&gt;(Int:D, Int:D) returns Int:D</div></pre></td></tr></table></figure>
+<p>整除。向下取整。</p>
+<h3 id="infix-3"><a href="#infix-3" class="headerlink" title="infix %"></a>infix %</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;%&gt;($x, $y) return Numeric:D</div></pre></td></tr></table></figure>
+<p>模操作符。首先强制为 Numeric。</p>
+<p>通常，下面的等式是成立的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$x % $y == $x - floor($x / $y) * $y</div></pre></td></tr></table></figure>
+<h3 id="infix-4"><a href="#infix-4" class="headerlink" title="infix %%"></a>infix %%</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;%%&gt;($a, $b) returns Bool:D</div></pre></td></tr></table></figure>
+<p>整除操作符， 如果 <code>$a % $b == 0</code> 则返回 True.</p>
+<h3 id="infix-mod"><a href="#infix-mod" class="headerlink" title="infix mod"></a>infix mod</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;mod&gt;(Int:D $a, Int:D $b) returns Int:D</div></pre></td></tr></table></figure>
+<p>整数取模操作符。 返回整数取模操作的剩余部分。</p>
+<h3 id="infix-amp"><a href="#infix-amp" class="headerlink" title="infix +&amp;"></a>infix +&amp;</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;+&amp;&gt;($a, $b) returns Int:D</div></pre></td></tr></table></figure>
+<p>Numeric 按位 <code>AND</code>。 把两个参数都强转为 Int 并执行按位 AND 操作，假定两者是互补的。</p>
+<h3 id="infix-lt"><a href="#infix-lt" class="headerlink" title="infix +&lt;"></a>infix +&lt;</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;&lt; +&lt; &gt;&gt;($a, $b) returns Int:D</div></pre></td></tr></table></figure>
+<p>向左移动整数个位。</p>
+<h3 id="infix-gt"><a href="#infix-gt" class="headerlink" title="infix +&gt;"></a>infix +&gt;</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;&lt; +&gt; &gt;&gt;($a, $b) returns Int:D</div></pre></td></tr></table></figure>
+<p>向右移动整数个位。</p>
+<h3 id="infix-gcd"><a href="#infix-gcd" class="headerlink" title="infix gcd"></a>infix gcd</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;gcd&gt;($a, $b) returns Int:D</div></pre></td></tr></table></figure>
+<p>强制两个参数都为 Int 并返回最大公分母（greatest common denominator）。</p>
+<h3 id="infix-lcm"><a href="#infix-lcm" class="headerlink" title="infix lcm"></a>infix lcm</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;lcm&gt;($a, $b) returns Int:D</div></pre></td></tr></table></figure>
+<p>强制两个参数为 Int 并返回最小公倍数(least common multiple)</p>
+<h2 id="加法优先级"><a href="#加法优先级" class="headerlink" title="加法优先级"></a>加法优先级</h2><hr>
+<h3 id="infix-5"><a href="#infix-5" class="headerlink" title="infix +"></a>infix +</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;+&gt;($a, $b) returns Numeric:D</div></pre></td></tr></table></figure>
+<p>强制两个参数为 Numeric 并把它们相加。</p>
+<h3 id="infix-6"><a href="#infix-6" class="headerlink" title="infix -"></a>infix -</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;-&gt;($a, $b) returns Numeric:D</div></pre></td></tr></table></figure>
+<p>强制两个参数为 Numeric 并用第一个参数减去第二个参数。</p>
+<h3 id="infix-7"><a href="#infix-7" class="headerlink" title="infix +|"></a>infix +|</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;+|&gt;($a, $b) returns Int:D</div></pre></td></tr></table></figure>
+<p>强制两个参数为 Int 并执行按位 OR（包括 OR）</p>
+<h3 id="infix-8"><a href="#infix-8" class="headerlink" title="infix +^"></a>infix +^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;+^&gt;($a, $b) returns Int:D</div></pre></td></tr></table></figure>
+<p>强制两个参数为 Int 并执行按位 XOR（不包括 OR）</p>
+<h3 id="infix-9"><a href="#infix-9" class="headerlink" title="infix ?|"></a>infix ?|</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;?|&gt;($a, $b) returns Bool:D</div></pre></td></tr></table></figure>
+<p>强制两个参数为 Bool 并执行逻辑 OR（不包括 OR）</p>
+<h2 id="重复操作符优先级"><a href="#重复操作符优先级" class="headerlink" title="重复操作符优先级"></a>重复操作符优先级</h2><hr>
+<h3 id="infix-x"><a href="#infix-x" class="headerlink" title="infix x"></a>infix x</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;x&gt;(Any, Any) returns Str:D</div><div class="line">multi sub infix:&lt;x&gt;(Any, Any)</div><div class="line">multi sub infix:&lt;x&gt;(Str:D, Int:D)</div></pre></td></tr></table></figure>
+<p>把 <code>$a</code> 强转为 Str ， 把 <code>$b</code> 强转为 Int， 并重复字符串 <code>$b</code> 次。 如果 <code>$b &lt;= 0</code> 则返回空字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say &apos;ab&apos; x 3;       # ababab</div><div class="line">say 42 x 3;         # 424242</div></pre></td></tr></table></figure>
+<h3 id="infix-xx"><a href="#infix-xx" class="headerlink" title="infix xx"></a>infix xx</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;xx&gt;($a, $b) returns List:D</div></pre></td></tr></table></figure>
+<p>返回一组重复的 <code>$a</code> 并计算 <code>$b</code> 次（<code>$b</code> 被强转为 Int）。 如果 <code>$b &lt;= 0</code> ,则返回一个空列表。</p>
+<p>每次重复都会计算左侧的值， 所以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[1, 2] xx 5</div></pre></td></tr></table></figure>
+<p>返回 5 个不同的数组（但是每次都是相同的内容）并且</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rand xx 3</div></pre></td></tr></table></figure>
+<p>返回 3 个独立的伪随机数。右侧可以是 <code>*</code>, 这时会返回一个惰性的，无限的列表。</p>
+<h2 id="连结"><a href="#连结" class="headerlink" title="连结"></a>连结</h2><hr>
+<h3 id="infix-10"><a href="#infix-10" class="headerlink" title="infix ~"></a>infix ~</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;~&gt;(Any, Any) returns Str:D</div><div class="line">multi sub infix:&lt;~&gt;(Any,   Any)</div><div class="line">multi sub infix:&lt;~&gt;(Str:D, Str:D)</div></pre></td></tr></table></figure>
+<p>强制两个参数为 Str 并连结它们。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say &apos;ab&apos; ~ &apos;c&apos;;     # abc</div></pre></td></tr></table></figure>
+<h2 id="Junctive-AND-all-优先级"><a href="#Junctive-AND-all-优先级" class="headerlink" title="Junctive AND (all) 优先级"></a>Junctive AND (all) 优先级</h2><hr>
+<h3 id="infix-amp-1"><a href="#infix-amp-1" class="headerlink" title="infix &amp;"></a>infix &amp;</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;&amp;&gt;($a, $b) returns Junction:D is assoc&lt;list&gt;</div></pre></td></tr></table></figure>
+<p>用它的参数创建一个 <code>all</code> Junction。查看 Junctions 获取更多详情。</p>
+<h2 id="Junctive-OR-any-Precedence"><a href="#Junctive-OR-any-Precedence" class="headerlink" title="Junctive OR (any) Precedence"></a>Junctive OR (any) Precedence</h2><hr>
+<h3 id="infix-11"><a href="#infix-11" class="headerlink" title="infix |"></a>infix |</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;|&gt;($a, $b) returns Junction:D is assoc&lt;list&gt;</div></pre></td></tr></table></figure>
+<p>用它的参数创建一个 <code>any</code> Junction。查看 Junctions 获取更多详情。</p>
+<h3 id="infix-12"><a href="#infix-12" class="headerlink" title="infix ^"></a>infix ^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;^&gt;($a, $b) returns Junction:D is assoc&lt;list&gt;</div></pre></td></tr></table></figure>
+<p>用它的参数创建一个 <code>one</code> Junction。查看 Junctions 获取更多详情。</p>
+<h2 id="Named-Unary-Precedence"><a href="#Named-Unary-Precedence" class="headerlink" title="Named Unary Precedence"></a>Named Unary Precedence</h2><hr>
+<h3 id="prefix-temp"><a href="#prefix-temp" class="headerlink" title="prefix temp"></a>prefix temp</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub prefix:&lt;temp&gt;(Mu $a is rw)</div></pre></td></tr></table></figure>
+<p>temporizes 传入的变量作为参数， 这意味着退出作用域后它被重置为旧值。（这和 Perl 5 中的 local 操作符类似， 除了 temp 不重置值之外。）</p>
+<h3 id="prefix-let"><a href="#prefix-let" class="headerlink" title="prefix let"></a>prefix let</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub prefix:&lt;let&gt;(Mu $a is rw)</div></pre></td></tr></table></figure>
+<p>假定重置：如果通过异常或 fail()退出当前作用域, 旧值就会被恢复。</p>
+<h2 id="Nonchaining-Binary-Precedence"><a href="#Nonchaining-Binary-Precedence" class="headerlink" title="Nonchaining Binary Precedence"></a>Nonchaining Binary Precedence</h2><hr>
+<h3 id="infix-does"><a href="#infix-does" class="headerlink" title="infix does"></a>infix does</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;does&gt;(Mu $obj, Mu $role) is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>在运行时把 <code>$role</code> 混合进 <code>$obj</code> 中。 要求 <code>$obj</code> 是可变的。</p>
+<p>参数 <code>$role</code> 不一定要求是一个 role， 它可以表现的像是一个 role， 例如枚举值。</p>
+<h3 id="infix-but"><a href="#infix-but" class="headerlink" title="infix but"></a>infix but</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;but&gt;(Mu $obj, Mu $role) is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>把 <code>$role</code> 混合进 <code>$obj</code> 并创建一个 <code>$obj</code> 的副本。因为 <code>$obj</code> 是不能修改的，但是能使用 mixins 用于创建不可变值。</p>
+<p>参数 <code>$role</code> 不一定要求是一个 role， 它可以表现的像是一个 role， 例如枚举值。</p>
+<h3 id="infix-cmp"><a href="#infix-cmp" class="headerlink" title="infix cmp"></a>infix cmp</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;cmp&gt;(Any, Any) returns Order:D is assoc&lt;none&gt;</div><div class="line">multi sub infix:&lt;cmp&gt;(Any,       Any)</div><div class="line">multi sub infix:&lt;cmp&gt;(Real:D,    Real:D)</div><div class="line">multi sub infix:&lt;cmp&gt;(Str:D,     Str:D)</div><div class="line">multi sub infix:&lt;cmp&gt;(Enum:D,    Enum:D)</div><div class="line">multi sub infix:&lt;cmp&gt;(Version:D, Version:D)</div></pre></td></tr></table></figure>
+<p>一般的， “智能的” 三路比较器。</p>
+<p>比较字符串时使用字符串语义， 比较数字时使用数字语义， 比较 Pair 对象时， 先比较键， 再比较值，等等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if $a eqv $b, then $a cmp $b always returns Order::Same.</div><div class="line">say (a =&gt; 3) cmp (a =&gt; 4);      # Less</div><div class="line">say 4        cmp 4.0;           # Same</div><div class="line">say &apos;b&apos;      cmp &apos;a&apos;;           # More</div></pre></td></tr></table></figure>
+<h3 id="infix-leg"><a href="#infix-leg" class="headerlink" title="infix leg"></a>infix leg</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;leg&gt;($a, $b) returns Order:D is assoc&lt;none&gt;</div><div class="line">multi sub infix:&lt;leg&gt;(Any,   Any)</div><div class="line">multi sub infix:&lt;leg&gt;(Str:D, Str:D)</div></pre></td></tr></table></figure>
+<p>字符串三路比较器。 leg 是  less, equal 还有 greater 的简写形式？</p>
+<p>把两个参数都强转为 <code>Str</code> , 然后按照字母次序比较。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">say &apos;a&apos; leg &apos;b&apos;;        Less</div><div class="line">say &apos;a&apos; leg &apos;a&apos;;        Same</div><div class="line">say &apos;b&apos; leg &apos;a&apos;;        More</div></pre></td></tr></table></figure>
+<h3 id="infix-lt-gt"><a href="#infix-lt-gt" class="headerlink" title="infix &lt;=&gt;"></a>infix &lt;=&gt;</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:«&lt;=&gt;»($a, $b) returns Order:D is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>Numeric 三路比较器。</p>
+<p>把两个参数强转为 Real， 并执行数值比较。</p>
+<h3 id="infix-13"><a href="#infix-13" class="headerlink" title="infix .."></a>infix ..</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;..&gt;($a, $b) returns Range:D is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>由参数创建一个  Range。</p>
+<h3 id="infix-14"><a href="#infix-14" class="headerlink" title="infix ..^"></a>infix ..^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;..^&gt;($a, $b) returns Range:D is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>由参数创建一个 Range， 不包含末端。</p>
+<h3 id="infix-15"><a href="#infix-15" class="headerlink" title="infix ^.."></a>infix ^..</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;^..&gt;($a, $b) returns Range:D is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>由参数创建一个 Range， 不包含开始端点。</p>
+<h3 id="infix-16"><a href="#infix-16" class="headerlink" title="infix ^..^"></a>infix ^..^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;^..^&gt;($a, $b) returns Range:D is assoc&lt;none&gt;</div></pre></td></tr></table></figure>
+<p>由参数创建一个 Range， 不包含开端和末端。</p>
+<h2 id="Chaining-Binary-Precedence"><a href="#Chaining-Binary-Precedence" class="headerlink" title="Chaining Binary Precedence"></a>Chaining Binary Precedence</h2><hr>
+<h3 id="infix-17"><a href="#infix-17" class="headerlink" title="infix =="></a>infix ==</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;==&gt;($, $) returns Bool:D is assoc:&lt;chain&gt;</div><div class="line">multi sub infix:&lt;==&gt;(Any, Any)</div><div class="line">multi sub infix:&lt;==&gt;(Int:D, Int:D)</div><div class="line">multi sub infix:&lt;==&gt;(Num:D, Num:D)</div><div class="line">multi sub infix:&lt;==&gt;(Rational:D, Rational:D)</div><div class="line">multi sub infix:&lt;==&gt;(Real:D, Real:D)</div><div class="line">multi sub infix:&lt;==&gt;(Complex:D, Complex:D)</div><div class="line">multi sub infix:&lt;==&gt;(Numeric:D, Numeric:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Numeric（如果必要）， 并返回 True 如果它们相等。</p>
+<h3 id="infix-18"><a href="#infix-18" class="headerlink" title="infix !="></a>infix !=</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;!=&gt;(Mu, Mu) returns Bool:D is assoc&lt;chain&gt;</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Numeric（如果必要）， 并返回 True 如果它们不相等。</p>
+<h3 id="infix-lt-1"><a href="#infix-lt-1" class="headerlink" title="infix &lt;"></a>infix &lt;</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">proto sub infix:«&lt;»(Any, Any) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:«&lt;»(Int:D, Int:D)</div><div class="line">multi sub infix:«&lt;»(Num:D, Num:D)</div><div class="line">multi sub infix:«&lt;»(Real:D, Real:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Real （如果必要）， 并返回 True 如果第一个参数小于第二个参数。</p>
+<h3 id="infix-lt-2"><a href="#infix-lt-2" class="headerlink" title="infix &lt;="></a>infix &lt;=</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">proto sub infix:«&lt;=»(Any, Any) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:«&lt;=»(Int:D, Int:D)</div><div class="line">multi sub infix:«&lt;=»(Num:D, Num:D)</div><div class="line">multi sub infix:«&lt;=»(Real:D, Real:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Real （如果必要）， 并返回 True 如果第一个参数小于第二个参数。</p>
+<h3 id="infix-gt-1"><a href="#infix-gt-1" class="headerlink" title="infix &gt;"></a>infix &gt;</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">proto sub infix:«&gt;»(Any, Any) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:«&gt;»(Int:D, Int:D)</div><div class="line">multi sub infix:«&gt;»(Num:D, Num:D)</div><div class="line">multi sub infix:«&gt;»(Real:D, Real:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Real （如果必要）， 并返回 True 如果第一个参数大于第二个参数。</p>
+<h3 id="infix-gt-2"><a href="#infix-gt-2" class="headerlink" title="infix &gt;="></a>infix &gt;=</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">proto sub infix:«&gt;=»(Any, Any) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:«&gt;=»(Int:D, Int:D)</div><div class="line">multi sub infix:«&gt;=»(Num:D, Num:D)</div><div class="line">multi sub infix:«&gt;=»(Real:D, Real:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Real （如果必要）， 并返回 True 如果第一个参数大于或等于第二个参数。</p>
+<h3 id="infix-eq"><a href="#infix-eq" class="headerlink" title="infix eq"></a>infix eq</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;eq&gt;(Any, Any) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:&lt;eq&gt;(Any,   Any)</div><div class="line">multi sub infix:&lt;eq&gt;(Str:D, Str:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Str（如果必要）， 并返回 True 如果第一个参数等于第二个参数。</p>
+<p>助记法: equal</p>
+<h3 id="infix-ne"><a href="#infix-ne" class="headerlink" title="infix ne"></a>infix ne</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;ne&gt;(Mu, Mu) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:&lt;ne&gt;(Mu,    Mu)</div><div class="line">multi sub infix:&lt;ne&gt;(Str:D, Str:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Str（如果必要）， 并返回 False 如果第一个参数等于第二个参数。</p>
+<p>助记法: not equal</p>
+<h3 id="infix-gt-3"><a href="#infix-gt-3" class="headerlink" title="infix gt"></a>infix gt</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;gt&gt;(Mu, Mu) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:&lt;gt&gt;(Mu,    Mu)</div><div class="line">multi sub infix:&lt;gt&gt;(Str:D, Str:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Str（如果必要）， 并返回 True 如果第一个参数大于第二个参数。</p>
+<p>助记法: greater than</p>
+<h3 id="infix-ge"><a href="#infix-ge" class="headerlink" title="infix ge"></a>infix ge</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;ge&gt;(Mu, Mu) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:&lt;ge&gt;(Mu,    Mu)</div><div class="line">multi sub infix:&lt;ge&gt;(Str:D, Str:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Str（如果必要）， 并返回 True 如果第一个参数大于第二个参数。</p>
+<p>助记法: greater or equal</p>
+<h3 id="infix-lt-3"><a href="#infix-lt-3" class="headerlink" title="infix lt"></a>infix lt</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;lt&gt;(Mu, Mu) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:&lt;lt&gt;(Mu,    Mu)</div><div class="line">multi sub infix:&lt;lt&gt;(Str:D, Str:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Str（如果必要）， 并返回 True 如果第一个参数小于第二个参数。</p>
+<p>助记法: less than</p>
+<h3 id="infix-le"><a href="#infix-le" class="headerlink" title="infix le"></a>infix le</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;le&gt;(Mu, Mu) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:&lt;le&gt;(Mu,    Mu)</div><div class="line">multi sub infix:&lt;le&gt;(Str:D, Str:D)</div></pre></td></tr></table></figure>
+<p>强转两个参数为 Str（如果必要）， 并返回 True 如果第一个参数小于或等于第二个参数。</p>
+<p>助记法: less or equal</p>
+<h3 id="infix-before"><a href="#infix-before" class="headerlink" title="infix before"></a>infix before</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;before&gt;(Any, Any) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:&lt;before&gt;(Any,       Any)</div><div class="line">multi sub infix:&lt;before&gt;(Real:D,    Real:D)</div><div class="line">multi sub infix:&lt;before&gt;(Str:D,     Str:D)</div><div class="line">multi sub infix:&lt;before&gt;(Enum:D,    Enum:D)</div><div class="line">multi sub infix:&lt;before&gt;(Version:D, Version:D)</div></pre></td></tr></table></figure>
+<p>一般的排序， 使用和 cmp 相同的语义。 如果第一个参数小于第二个参数则返回 True。</p>
+<h3 id="infix-after"><a href="#infix-after" class="headerlink" title="infix after"></a>infix after</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;after&gt;(Any, Any) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:&lt;after&gt;(Any,       Any)</div><div class="line">multi sub infix:&lt;after&gt;(Real:D,    Real:D)</div><div class="line">multi sub infix:&lt;after&gt;(Str:D,     Str:D)</div><div class="line">multi sub infix:&lt;after&gt;(Enum:D,    Enum:D)</div><div class="line">multi sub infix:&lt;after&gt;(Version:D, Version:D)</div></pre></td></tr></table></figure>
+<p>一般的排序， 使用和 cmp 相同的语义。 如果第一个参数大于第二个参数则返回 True。</p>
+<h3 id="infix-eqv"><a href="#infix-eqv" class="headerlink" title="infix eqv"></a>infix eqv</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;eqv&gt;(Any, Any) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">proto sub infix:&lt;eqv&gt;(Any, Any)</div></pre></td></tr></table></figure>
+<p>等值操作符。如果两个参数在结构上相同就返回 True。例如， 相同类型（并且递归）包含相同的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say [1, 2, 3] eqv [1, 2, 3];        # True</div><div class="line">say Any eqv Any;                    # True</div><div class="line">say 1 eqv 2;                        # False</div><div class="line">say 1 eqv 1.0;                      # False</div></pre></td></tr></table></figure>
+<p>对于任意对象使用默认的 eqv 操作是不可能的。例如， eqv 不认为同一对象的两个实例在结构上是相等的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class A &#123;</div><div class="line">    has $.a;</div><div class="line">&#125;</div><div class="line"></div><div class="line">say A.new(a =&gt; 5) eqv A.new(a =&gt; 5);  #=&gt; False</div></pre></td></tr></table></figure>
+<p>要得到这个类的对象相等（eqv）语义， 需要实现一个合适的中缀 eqv 操作符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class A &#123;</div><div class="line">    has $.a;</div><div class="line">&#125;</div><div class="line"></div><div class="line">multi infix:&lt;eqv&gt;(A $l, A $r) &#123; $l.a eqv $r.a &#125;</div><div class="line">say A.new(a =&gt; 5) eqv A.new(a =&gt; 5);  #=&gt; True</div></pre></td></tr></table></figure>
+<h3 id="infix-19"><a href="#infix-19" class="headerlink" title="infix ==="></a>infix ===</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;===&gt;(Any, Any) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">proto sub infix:&lt;===&gt;(Any, Any)</div></pre></td></tr></table></figure>
+<p>值相等。如果两个参数都是同一个对象则返回 True。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class A &#123; &#125;;</div><div class="line"></div><div class="line">my $a = A.new;</div><div class="line">say $a === $a;              # True</div><div class="line">say A.new === A.new;        # False</div><div class="line">say A === A;                # True</div></pre></td></tr></table></figure>
+<p>对于值的类型，  <code>===</code> 表现的和 eqv 一样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">say &apos;a&apos; === &apos;a&apos;;            # True</div><div class="line">say &apos;a&apos; === &apos;b&apos;;            # False</div><div class="line"></div><div class="line"># different types</div><div class="line">say 1 === 1.0;              # False</div></pre></td></tr></table></figure>
+<p><code>===</code> 使用 <code>WHICH</code> 方法来获取对象相等， 所以所有的值类型必须重写方法 <code>WHICH</code>。</p>
+<h3 id="infix-20"><a href="#infix-20" class="headerlink" title="infix =:="></a>infix =:=</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">proto sub infix:&lt;=:=&gt;(Mu \a, Mu \b) returns Bool:D is assoc&lt;chain&gt;</div><div class="line">multi sub infix:&lt;=:=&gt;(Mu \a, Mu \b)</div></pre></td></tr></table></figure>
+<p>容器相等。返回 True 如果两个参数都绑定到同一个容器上。 如果它返回 True， 那通常意味着修改一个参数也会同时修改另外一个。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">my ($a, $b) = (1, 3);</div><div class="line">say $a =:= $b;      # False</div><div class="line">$b = 2;</div><div class="line">say $a;             # 1</div><div class="line">$b := $a;</div><div class="line">say $a =:= $b;      # True</div><div class="line">$a = 5;</div><div class="line">say $b;             # 5</div></pre></td></tr></table></figure>
+<h3 id="infix-21"><a href="#infix-21" class="headerlink" title="infix ~~"></a>infix ~~</h3><hr>
+<p>智能匹配操作符。把左侧参数起别名为 <code>$_</code> , 然后计算右侧的值， 并在它身上调用 <code>.ACCEPTS($_)</code> 。 匹配的语义由右侧操作数的类型决定。  </p>
+<p>这儿有一个内建智能匹配函数的摘要：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">右侧      比较语义</div><div class="line">Mu:U	  类型检查</div><div class="line">Str	      字符串相等</div><div class="line">Numeric	  数值相等</div><div class="line">Regex	  正则匹配</div><div class="line">Callable  调用的布尔结果</div><div class="line">Any:D	  对象相等</div></pre></td></tr></table></figure>
+<h2 id="Tight-AND-Precedence"><a href="#Tight-AND-Precedence" class="headerlink" title="Tight AND Precedence"></a>Tight AND Precedence</h2><hr>
+<h3 id="infix-amp-amp"><a href="#infix-amp-amp" class="headerlink" title="infix &amp;&amp;"></a>infix &amp;&amp;</h3><hr>
+<p>在布尔上下文中返回第一个求值为 False 的参数， 否则返回最后一个参数。</p>
+<p>注意这是短路操作符，如果其中的一个参数计算为 false 值， 那么该参数右侧的值绝不会被计算。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sub a &#123; 1 &#125;</div><div class="line">sub b &#123; 0 &#125;</div><div class="line">sub c &#123; die &quot;never called&quot; &#125;;</div><div class="line">say a() &amp;&amp; b() &amp;&amp; c();      # 0</div></pre></td></tr></table></figure>
+<h2 id="Tight-OR-Precedence"><a href="#Tight-OR-Precedence" class="headerlink" title="Tight OR Precedence"></a>Tight OR Precedence</h2><hr>
+<h3 id="infix-22"><a href="#infix-22" class="headerlink" title="infix ||"></a>infix ||</h3><hr>
+<p>在布尔上下文中返回第一个求值为 True 的参数， 否则返回最后一个参数。</p>
+<p>注意这是短路操作符，如果其中的一个参数计算为 true 值， 那么该参数右侧的值绝不会被计算。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sub a &#123; 0 &#125;</div><div class="line">sub b &#123; 1 &#125;</div><div class="line">sub c &#123; die &quot;never called&quot; &#125;;</div><div class="line">say a() || b() || c();      # 1</div></pre></td></tr></table></figure>
+<h3 id="infix-23"><a href="#infix-23" class="headerlink" title="infix ^^"></a>infix ^^</h3><hr>
+<p>返回第一个值为 true 的参数如果只有一个的话， 否则返回 Nil。只要找到两个值为 true 的参数就发生短路。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say 0 ^^ 42;                # 42</div><div class="line">say 0 ^^ 42 ^^ 1 ^^ die 8;  # (empty line)</div></pre></td></tr></table></figure>
+<p>注意， 这个操作符的语义可能不是你假想的那样： infix ^^ 翻到它找到的第一个 true 值， 找到第二个 true 值后永远地反转为 Nil 值， 不管还有多少 true 值。（换句话说，它的语义是”找到一个真值”， 而不是布尔起奇偶校验语义）</p>
+<h3 id="infix-24"><a href="#infix-24" class="headerlink" title="infix //"></a>infix //</h3><hr>
+<p>Defined-or  操作符。返回第一个定义了的操作数， 否则返回最后一个操作数。短路操作符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say Any // 0 // 42;         # 0</div></pre></td></tr></table></figure>
+<h3 id="infix-min"><a href="#infix-min" class="headerlink" title="infix min"></a>infix min</h3><hr>
+<p>返回参数的最小值。语义由 cmp 语义决定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$foo min= 0  # read as: $foo decreases to 0</div></pre></td></tr></table></figure>
+<h3 id="infix-max"><a href="#infix-max" class="headerlink" title="infix max"></a>infix max</h3><hr>
+<p>返回参数的最大值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$foo max= 0  # read as: $foo increases to 0</div></pre></td></tr></table></figure>
+<h2 id="Conditional-Operator-Precedence"><a href="#Conditional-Operator-Precedence" class="headerlink" title="Conditional Operator Precedence"></a>Conditional Operator Precedence</h2><hr>
+<h3 id="infix-25"><a href="#infix-25" class="headerlink" title="infix ?? !!"></a>infix ?? !!</h3><hr>
+<p>三目操作符， 条件操作符。</p>
+<p><code>$condition ?? $true !! $false</code> 计算并返回 <code>$true</code> 表达式，如果 <code>$condition</code> 为真的话。 否则计算并返回 <code>$false</code> 分支。</p>
+<h3 id="infix-ff"><a href="#infix-ff" class="headerlink" title="infix ff"></a>infix ff</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;ff&gt;(Mu $a, Mu $b)</div></pre></td></tr></table></figure>
+<p>Flipflop operator. 触发器操作符。</p>
+<p>把两个参数都跟 <code>$_</code> 进行比较（即，<code>$_ ~~ $a</code> 和 <code>$_ ~~ $b</code>）。求值为 False 直到左侧的智能匹配为真， 这时，它求值为真， 直到右侧的智能匹配为真。</p>
+<p>实际上，左边的参数是”开始”条件， 右侧的参数是”停止” 条件。 这种结构一般用于收集只在特定区域的行。 例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">my $excerpt = q:to/END/;</div><div class="line">Here&apos;s some unimportant text.</div><div class="line">=begin code</div><div class="line">    This code block is what we&apos;re after.</div><div class="line">    We&apos;ll use &apos;ff&apos; to get it.</div><div class="line">=end code</div><div class="line">More unimportant text.</div><div class="line">END</div><div class="line"></div><div class="line">my @codelines = gather for $excerpt.lines &#123;</div><div class="line">    take $_ if &quot;=begin code&quot; ff &quot;=end code&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># this will print four lines,</div><div class="line"># starting with &quot;=begin code&quot; and ending with &quot;=end code&quot;</div><div class="line">say @codelines.join(&quot;\n&quot;);</div></pre></td></tr></table></figure>
+<p>匹配开始条件之后，操作符会继续将停止条件与 <code>$_</code> 进行匹配， 如果成功就做相应地表现。在这个例子中， 只有第一个元素被打印了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for &lt;AB C D B E F&gt; &#123;</div><div class="line">    say $_ if /A/ ff /B/;  # prints only &quot;AB&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果你想测试开始条件， 并且没有结束条件， <code>*</code> 能用作 “停止” 条件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for &lt;A B C D E&gt; &#123;</div><div class="line">    say $_ if /C/ ff *; # prints C, D, and E</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于 sed-like 版本， 在开始条件匹配成功之后，它不会使用停止条件与 <code>$_</code> 进行匹配。</p>
+<p>这个操作符不能被重载， 因为它被编译器特殊处理过。</p>
+<h3 id="infix-ff-1"><a href="#infix-ff-1" class="headerlink" title="infix ^ff"></a>infix ^ff</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;^ff&gt;(Mu $a, Mu $b)</div></pre></td></tr></table></figure>
+<p>像 ff 那样工作，除了它不会在条目匹配开始条件时返回真。（包括匹配停止条件的条目）</p>
+<p>一个比较:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @list = &lt;A B C&gt;;</div><div class="line">say $_ if /A/ ff /C/ for @list;  # prints A, B, and C</div><div class="line">say $_ if /A/ ^ff /C/ for @list; # prints B and C</div></pre></td></tr></table></figure>
+<p>sed-like 版本 可以在 ^fff 中找到.</p>
+<p>这个操作符不能被重载， 因为它被编译器特殊处理过。</p>
+<h3 id="infix-ff-2"><a href="#infix-ff-2" class="headerlink" title="infix ff^"></a>infix ff^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;ff^&gt;(Mu $a, Mu $b)</div></pre></td></tr></table></figure>
+<p>像 ff 那样工作，除了它不会在条目匹配停止条件时返回真。（包括第一次匹配开始条件的条目）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @list = &lt;A B C&gt;;</div><div class="line">say $_ if /A/ ff /C/ for @list;  # prints A, B, and C</div><div class="line">say $_ if /A/ ff^ /C/ for @list; # prints A and B</div></pre></td></tr></table></figure>
+<p>sed-like 版本 可以在 fff^ 中找到.</p>
+<p>这个操作符不能被重载， 因为它被编译器特殊处理过。</p>
+<h3 id="infix-ff-3"><a href="#infix-ff-3" class="headerlink" title="infix ^ff^"></a>infix ^ff^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;^ff^&gt;(Mu $a, Mu $b)</div></pre></td></tr></table></figure>
+<p>像 ff 那样工作，除了它不会在条目匹配停止条件时返回真, 也不会在条目匹配开始时返回真。（或者两者）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @list = &lt;A B C&gt;;</div><div class="line">say $_ if /A/ ff /C/ for @list;  # prints A, B, and C</div><div class="line">say $_ if /A/ ^ff^ /C/ for @list; # prints B</div></pre></td></tr></table></figure>
+<p>sed-like 版本 可以在 ^fff^ 中找到.</p>
+<p>这个操作符不能被重载， 因为它被编译器特殊处理过。</p>
+<h3 id="infix-fff"><a href="#infix-fff" class="headerlink" title="infix fff"></a>infix fff</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;fff&gt;(Mu $a, Mu $b)</div></pre></td></tr></table></figure>
+<p>执行 sed-like 那样的 flipflop 操作，在其中，它返回 False 直到左侧的参数与 <code>$_</code> 智能匹配， 并且在那之后返回 True 直到右侧的参数和 <code>$_</code>  智能匹配。</p>
+<p>像 ff 那样工作， 除了它每次调用只尝试一个参数之外。即， 如果 <code>$_</code> 和左侧的参数智能匹配， fff 随后不会尝试将同一个 <code>$_</code> 和右侧的参数进行匹配。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for &lt;AB C D B E F&gt; &#123;</div><div class="line">    say $_ if /A/ fff /B/;  # Prints &quot;AB&quot;, &quot;C&quot;, &quot;D&quot;, and &quot;B&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于 non-sed-like 版本， 查看 <code>ff</code>.</p>
+<p>这个操作符不能被重载， 因为它被编译器特殊处理过。</p>
+<h3 id="infix-fff-1"><a href="#infix-fff-1" class="headerlink" title="infix ^fff"></a>infix ^fff</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;^fff&gt;(Mu $a, Mu $b)</div></pre></td></tr></table></figure>
+<p>像 fff那样， 除了它对于左侧的匹配不返回真之外。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @list = &lt;A B C&gt;;</div><div class="line">say $_ if /A/ fff /C/ for @list;  # prints A, B, and C</div><div class="line">say $_ if /A/ ^fff /C/ for @list; # prints B and C</div></pre></td></tr></table></figure>
+<p>对于 non-sed 版本， 查看 <code>^ff</code>.</p>
+<p>这个操作符不能被重载， 因为它被编译器特殊处理过。</p>
+<h3 id="infix-fff-2"><a href="#infix-fff-2" class="headerlink" title="infix fff^"></a>infix fff^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;fff^&gt;(Mu $a, Mu $b)</div></pre></td></tr></table></figure>
+<p>像 fff 那样， 除了它对于右侧的匹配不返回真之外。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @list = &lt;A B C&gt;;</div><div class="line">say $_ if /A/ fff /C/ for @list;  # prints A, B, and C</div><div class="line">say $_ if /A/ fff^ /C/ for @list; # prints A and B</div></pre></td></tr></table></figure>
+<p>对于 non-sed 版本， 查看 <code>ff^</code>.</p>
+<p>这个操作符不能被重载， 因为它被编译器特殊处理过。</p>
+<h3 id="infix-fff-3"><a href="#infix-fff-3" class="headerlink" title="infix ^fff^"></a>infix ^fff^</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;^fff^&gt;(Mu $a, Mu $b)</div></pre></td></tr></table></figure>
+<p>像 fff 那样， 除了它对于左侧和右侧的匹配都不返回真之外。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @list = &lt;A B C&gt;;</div><div class="line">say $_ if /A/ fff /C/ for @list;  # prints A, B, and C</div><div class="line">say $_ if /A/ ^fff^ /C/ for @list; # prints B</div></pre></td></tr></table></figure>
+<p>对于 non-sed 版本， 查看 <code>^ff^</code>.</p>
+<p>这个操作符不能被重载， 因为它被编译器特殊处理过。</p>
+<h2 id="Item-Assignment-Precedence"><a href="#Item-Assignment-Precedence" class="headerlink" title="Item Assignment Precedence"></a>Item Assignment Precedence</h2><hr>
+<h3 id="infix-26"><a href="#infix-26" class="headerlink" title="infix ="></a>infix =</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;=&gt;(Mu $a is rw, Mu $b)</div></pre></td></tr></table></figure>
+<p>Item 赋值.</p>
+<p>把 = 号右侧的值放入左侧的容器中。 它真正的语义是由左侧的容器类型决定的。</p>
+<p>（注意 item 赋值和列表赋值的优先级级别不同， 并且等号左侧的语法决定了等号是被解析为 item 赋值还是列表赋值操作符）。</p>
+<h3 id="infix-gt-4"><a href="#infix-gt-4" class="headerlink" title="infix =&gt;"></a>infix =&gt;</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:«=&gt;»($key, Mu $value) returns Pair:D</div></pre></td></tr></table></figure>
+<p>Pair 构造器.</p>
+<p>使用左侧值作为键， 右侧值作为值，构造一个 Pair 对象。</p>
+<p>注意 <code>=&gt;</code> 操作符是语法上的特例，在这个结构中， 它允许左侧是一个未被引起的标识符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $p = a =&gt; 1;</div><div class="line">say $p.key;         # a</div><div class="line">say $p.value;       # 1</div></pre></td></tr></table></figure>
+<p>在参数列表中，在 <code>=&gt;</code> 左侧使用未被引起的标识符构建的 Pair 会被解释为一个具名参数。</p>
+<p>查看 Terms 语言文档了解更多创建 Pair 对象的方式。</p>
+<h2 id="Loose-Unary-Precedence"><a href="#Loose-Unary-Precedence" class="headerlink" title="Loose Unary Precedence"></a>Loose Unary Precedence</h2><hr>
+<h3 id="prefix-not"><a href="#prefix-not" class="headerlink" title="prefix not"></a>prefix not</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;not&gt;(Mu $x) returns Bool:D</div></pre></td></tr></table></figure>
+<p>在布尔上下文中计算它的参数（因此使 Junctions 失效）， 并返回否定的结果。</p>
+<h3 id="prefix-so"><a href="#prefix-so" class="headerlink" title="prefix so"></a>prefix so</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">multi sub prefix:&lt;so&gt;(Mu $x) returns Bool:D</div></pre></td></tr></table></figure>
+<p>在布尔上下文中计算它的参数（因此使 Junctions 失效）， 并返回结果。</p>
+<h2 id="逗号操作符优先级"><a href="#逗号操作符优先级" class="headerlink" title="逗号操作符优先级"></a>逗号操作符优先级</h2><hr>
+<h3 id="infix-27"><a href="#infix-27" class="headerlink" title="infix ,"></a>infix ,</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;,&gt;(*@a) is assoc&lt;list&gt; returns Parcel:D</div></pre></td></tr></table></figure>
+<p>从它的参数宏构建一个 Parcel。也在语法构成上用作函数用的参数的分隔符。</p>
+<h3 id="infix-28"><a href="#infix-28" class="headerlink" title="infix :"></a>infix :</h3><hr>
+<p>就像中缀操作符  <code>,</code> 那样， <code>:</code> 用作参数分隔符， 并把它左侧的参数标记为调用者。</p>
+<p>那会把函数调用转为方法调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">substr(&apos;abc&apos;: 1);       # same as &apos;abc&apos;.substr(1)</div></pre></td></tr></table></figure>
+<p><code>Infix :</code> 只允许出现在非方法调用的第一个参数后面。 在其它位置它会是语法错误。</p>
+<h2 id="List-Infix-Precedence"><a href="#List-Infix-Precedence" class="headerlink" title="List Infix Precedence"></a>List Infix Precedence</h2><hr>
+<h3 id="infix-Z"><a href="#infix-Z" class="headerlink" title="infix Z"></a>infix Z</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;Z&gt;(**@lists) returns List:D is assoc&lt;chain&gt;</div></pre></td></tr></table></figure>
+<p>Zip operator.</p>
+<p>Z 像一个拉链那样把列表插入进来， 只要第一个输入列表耗尽就停止：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say (1, 2 Z &lt;a b c&gt; Z &lt;+ -&gt;).perl;  # ((1, &quot;a&quot;, &quot;+&quot;), (2, &quot;b&quot;, &quot;-&quot;)).list</div></pre></td></tr></table></figure>
+<p><code>Z</code> 操作符也作为元操作符存在， 此时内部的 parcels 被应用了元操作符的列表替换：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say 100, 200 Z+ 42, 23;             # 142, 223</div><div class="line">say 1..3 Z~ &lt;a b c&gt; Z~ &apos;x&apos; xx 3;    # 1ax 2bx 3cx</div></pre></td></tr></table></figure>
+<h3 id="infix-X"><a href="#infix-X" class="headerlink" title="infix X"></a>infix X</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sub infix:&lt;X&gt;(**@lists) returns List:D is assoc&lt;chain&gt;</div></pre></td></tr></table></figure>
+<p>从所有列表创建一个外积。最右边的元素变化得最迅速。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1..3 X &lt;a b c&gt; X 9</div><div class="line"></div><div class="line"># produces   (1, &apos;a&apos;, 9), (1, &apos;b&apos;, 9), (1, &apos;c&apos;, 9),</div><div class="line">         (2, &apos;a&apos;, 9), (2, &apos;b&apos;, 9), (2, &apos;c&apos;, 9),</div><div class="line">         (3, &apos;a&apos;, 9), (3, &apos;b&apos;, 9), (3, &apos;c&apos;, 9)</div></pre></td></tr></table></figure>
+<p>X 操作符也可以作为元操作符， 此时内部的 parcels 被应用了元操作符的列表的值替换：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1..3 X~ &lt;a b c&gt; X~ 9</div><div class="line"></div><div class="line"># produces   &apos;1a9&apos;, &apos;1b9&apos;, &apos;1c9&apos;,</div><div class="line"></div><div class="line">         &apos;2a9&apos;, &apos;2b9&apos;, &apos;2c9&apos;,</div><div class="line">         &apos;3a9&apos;, &apos;3b9&apos;, &apos;3c9&apos;</div></pre></td></tr></table></figure>
+<h3 id="infix-…"><a href="#infix-…" class="headerlink" title="infix …"></a>infix …</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">multi sub infix:&lt;...&gt;(**@) is assoc&lt;list&gt;</div><div class="line">multi sub infix:&lt;...^&gt;(**@) is assoc&lt;list&gt;</div></pre></td></tr></table></figure>
+<p>序列操作符是一个用于产生惰性列表的普通操作符。</p>
+<p>它可以有一个初始元素和一个生成器在 <code>…</code> 的左侧， 在右侧是一个端点。</p>
+<p>序列操作符会使用尽可能多的参数来调用生成器。参数会从初始元素和已生成元素中获取。</p>
+<p>默认的生成器是 <code>*.succ</code> 或 <code>*.pred</code> ， 取决于末端怎么比较：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">say 1 ... 4;        # 1 2 3 4</div><div class="line">say 4 ... 1;        # 4 3 2 1</div><div class="line">say &apos;a&apos; ... &apos;e&apos;;    # a b c d e</div><div class="line">say &apos;e&apos; ... &apos;a&apos;;    # e d c b a</div></pre></td></tr></table></figure>
+<p><code>*</code>  (Whatever) 末端生成一个无限序列，使用的是默认的生成器 <code>*.succ</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say (1 ... *)[^5];  # 1 2 3 4 5</div></pre></td></tr></table></figure>
+<p>自定义生成器是在 <code>…</code> 操作符之前的最后一个参数。下面这个自定义生成器接收两个参数， 生成了斐波纳契数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">say (1, 1, -&gt; $a, $b &#123; $a + $b &#125; ... *)[^8];    # 1 1 2 3 5 8 13 21</div><div class="line"># same but shorter</div><div class="line">say (1, 1, *+* ... *)[^8];                      # 1 1 2 3 5 8 13 21</div></pre></td></tr></table></figure>
+<p>当然自定义生成器也能只接收一个参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say 5, &#123; $_ * 2 &#125; ... 40;                       # 5 10 20 40</div></pre></td></tr></table></figure>
+<p>生成器的参数个数至少要和初始元素的个数一样多。</p>
+<p>如果没有生成器，并且有不止一个初始元素，所有的初始元素都是数值，那么序列操作符会尝试推导出生成器。它知道数学和几何序列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">say 2, 4, 6 ... 12;     # 2 4 6 8 10 12</div><div class="line">say 1, 2, 4 ... 32;     # 1 2 4 8 16 32</div></pre></td></tr></table></figure>
+<p>如果末端不是 <code>*</code>， 它会和每个生成的元素进行智能匹配，当智能匹配成功的时候序列就被终止。对于 <code>...</code>  操作符， 会包含最后一个元素， 对于 <code>...^</code> 操作符，会排除最后的那个元素。</p>
+<p>这允许你这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">say 1, 1, *+* ...^ *&gt;= 100;</div></pre></td></tr></table></figure>
+<p>来生成所有直到 100 但不包括 100 的斐波纳契数。</p>
+<p><code>...</code> 操作符还会把初始值看作”已生成的元素”，所以它们也会对末端进行检查：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my $end = 4;</div><div class="line">say 1, 2, 4, 8, 16 ... $end;</div><div class="line"># outputs 1 2 4</div></pre></td></tr></table></figure>
+<h2 id="List-Prefix-Precedence"><a href="#List-Prefix-Precedence" class="headerlink" title="List Prefix Precedence"></a>List Prefix Precedence</h2><hr>
+<h3 id="infix-29"><a href="#infix-29" class="headerlink" title="infix ="></a>infix =</h3><hr>
+<p>列表赋值。  它真正的语义是由左侧的容器类型决定的。查看 Array 和 Hash 获取普通案例。</p>
+<p> item 赋值和列表赋值的优先级级别不同， 并且等号左侧的语法决定了等号是被解析为 item 赋值还是列表赋值操作符。</p>
+<h3 id="infix-30"><a href="#infix-30" class="headerlink" title="infix :="></a>infix :=</h3><hr>
+<p>绑定。 而 <code>$x = $y</code> 是把 <code>$y</code> 中的值放到 <code>$x</code> 里面， <code>$x := $y</code> 会让 <code>$x</code> 和 <code>$y</code> 引用同一个值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my $a = 42;</div><div class="line">my $b = $a;</div><div class="line">$b++;</div><div class="line">say $a;</div></pre></td></tr></table></figure>
+<p>这会输出 42， 因为 $a 和 $b 都包含了数字 42， 但是容器是不同的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">my $a = 42;</div><div class="line">my $b := $a;</div><div class="line">$b++;</div><div class="line">say $a;</div></pre></td></tr></table></figure>
+<p>这会打印 43， 因为 <code>$b</code> 和 <code>$a</code> 都代表着<code>同一个对象</code>。</p>
+<h3 id="infix-31"><a href="#infix-31" class="headerlink" title="infix ::="></a>infix ::=</h3><hr>
+<p>只读绑定. 查看  infix :=.</p>
+<h3 id="listop-…"><a href="#listop-…" class="headerlink" title="listop …"></a>listop …</h3><hr>
+<p>这是yada, yada, yada 操作符 或 stub 操作符。如果它在子例程或类型中是唯一的语句，它会把子例程或类型标记为 stub（这在预声明类型和组成 roles 上下文中是有意义的）</p>
+<p>如果 <code>...</code> 语句被执行了， 它会调用 <code>&amp;fail</code> , 伴随着默认的消息 stub 代码的执行。</p>
+<h3 id="listop"><a href="#listop" class="headerlink" title="listop !!!"></a>listop !!!</h3><hr>
+<p>如果它在子例程或类型中是唯一的语句，它会把子例程或类型标记为 stub（这在预声明类型和组成 roles 上下文中是有意义的）</p>
+<p>如果 <code>!!!</code> 语句被执行了， 它会调用 <code>&amp;die</code> , 伴随着默认的消息 stub 代码的执行。</p>
+<h3 id="listop-1"><a href="#listop-1" class="headerlink" title="listop ???"></a>listop ???</h3><hr>
+<p>如果它在子例程或类型中是唯一的语句，它会把子例程或类型标记为 stub（这在预声明类型和组成 roles 上下文中是有意义的）</p>
+<p>如果 <code>???</code> 语句被执行了， 它会调用 <code>&amp;warn</code> , 伴随着默认的消息 stub 代码的执行。</p>
+<h2 id="Loose-AND-precedence"><a href="#Loose-AND-precedence" class="headerlink" title="Loose AND precedence"></a>Loose AND precedence</h2><hr>
+<h3 id="infix-and"><a href="#infix-and" class="headerlink" title="infix and"></a>infix and</h3><hr>
+<p>和中缀操作符 <code>&amp;&amp;</code> 一样，除了优先级更宽松。</p>
+<p>在布尔上下文中返回第一个求值为 False 的操作数， 否则返回最后一个操作数。短路操作符。</p>
+<h3 id="infix-andthen"><a href="#infix-andthen" class="headerlink" title="infix andthen"></a>infix andthen</h3><hr>
+<p>返回第一个未定义的参数，否则返回最后一个参数。短路操作符。左侧的结果被绑定到 <code>$_</code> 身上， 在右侧中使用， 或者作为参数被传递，如果右侧是一个 block 或 pointy block.</p>
+<h2 id="Loose-OR-Precedence"><a href="#Loose-OR-Precedence" class="headerlink" title="Loose OR Precedence"></a>Loose OR Precedence</h2><hr>
+<h3 id="infix-or"><a href="#infix-or" class="headerlink" title="infix or"></a>infix or</h3><hr>
+<p>和中缀操作符 <code>||</code> 一样，除了优先级更宽松。</p>
+<p>在布尔上下文中返回第一个求值为 True 的参数， 否则返回最后一个参数。短路操作符。</p>
+<h3 id="infix-orelse"><a href="#infix-orelse" class="headerlink" title="infix orelse"></a>infix orelse</h3><hr>
+<p>和中缀操作符 <code>//</code> 一样，除了优先级更宽松之外。</p>
+<p>返回第一个定义过的参数， 否则返回最后一个参数。短路操作符。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:15px;">
+------ Young For Perl 6! ------</div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作符/" rel="tag">#操作符</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/16/Perl6中的特性-二/" rel="next" title="Perl 6 中的特性(二)">
+                <i class="fa fa-chevron-left"></i> Perl 6 中的特性(二)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/19/Subset/" rel="prev" title="Subset">
+                Subset <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/03/16/操作符/"
+     data-title="操作符"
+     data-content=""
+     data-url="https://ohmycloud.github.io/2015/03/16/操作符/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/03/16/操作符/"
+           data-title="操作符" data-url="https://ohmycloud.github.io/2015/03/16/操作符/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="焉知非鱼" />
+          <p class="site-author-name" itemprop="name">焉知非鱼</p>
+          <p class="site-description motion-element" itemprop="description">Young For Perl 6</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ohmycloud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作符"><span class="nav-number">1.</span> <span class="nav-text">操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符优先级"><span class="nav-number">1.1.</span> <span class="nav-text">操作符优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符种类"><span class="nav-number">1.2.</span> <span class="nav-text">操作符种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Term-优先级"><span class="nav-number">1.3.</span> <span class="nav-text">Term 优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环缀-lt-gt"><span class="nav-number">1.3.1.</span> <span class="nav-text">环缀 < ></span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环缀"><span class="nav-number">1.4.</span> <span class="nav-text">环缀 ( )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环缀-1"><span class="nav-number">1.5.</span> <span class="nav-text">环缀 { }</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环缀-2"><span class="nav-number">1.6.</span> <span class="nav-text">环缀 [ ]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法后缀优先级"><span class="nav-number">2.</span> <span class="nav-text">方法后缀优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#后环缀"><span class="nav-number">2.1.</span> <span class="nav-text">后环缀 [ ]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后环缀-1"><span class="nav-number">2.2.</span> <span class="nav-text">后环缀 { }</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后环缀-lt-gt"><span class="nav-number">2.3.</span> <span class="nav-text">后环缀 < ></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后环缀-«-»"><span class="nav-number">2.4.</span> <span class="nav-text">后环缀 « »</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后环缀-2"><span class="nav-number">2.5.</span> <span class="nav-text">后环缀 ( )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix"><span class="nav-number">2.6.</span> <span class="nav-text">postfix .</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-1"><span class="nav-number">2.7.</span> <span class="nav-text">postfix .=</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-2"><span class="nav-number">2.8.</span> <span class="nav-text">postfix .^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-3"><span class="nav-number">2.9.</span> <span class="nav-text">postfix .?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-4"><span class="nav-number">2.10.</span> <span class="nav-text">postfix .+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-5"><span class="nav-number">2.11.</span> <span class="nav-text">postfix .*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-postfix"><span class="nav-number">2.12.</span> <span class="nav-text">postfix .postfix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-6"><span class="nav-number">2.13.</span> <span class="nav-text">postfix .:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-7"><span class="nav-number">2.14.</span> <span class="nav-text">postfix .::</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自增优先级"><span class="nav-number">3.</span> <span class="nav-text">自增优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix"><span class="nav-number">3.1.</span> <span class="nav-text">prefix ++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-–"><span class="nav-number">3.2.</span> <span class="nav-text">prefix –</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-8"><span class="nav-number">3.3.</span> <span class="nav-text">postfix ++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postfix-–"><span class="nav-number">3.4.</span> <span class="nav-text">postfix –</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求幂优先级"><span class="nav-number">4.</span> <span class="nav-text">求幂优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix"><span class="nav-number">4.1.</span> <span class="nav-text">infix **</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#象形一元操作符的优先级"><span class="nav-number">5.</span> <span class="nav-text">象形一元操作符的优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-1"><span class="nav-number">5.1.</span> <span class="nav-text">prefix ?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-2"><span class="nav-number">5.2.</span> <span class="nav-text">prefix !</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-3"><span class="nav-number">5.3.</span> <span class="nav-text">prefix +</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-4"><span class="nav-number">5.4.</span> <span class="nav-text">prefix -</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-5"><span class="nav-number">5.5.</span> <span class="nav-text">prefix ~</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-6"><span class="nav-number">5.6.</span> <span class="nav-text">prefix |</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-7"><span class="nav-number">5.7.</span> <span class="nav-text">prefix +^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-8"><span class="nav-number">5.8.</span> <span class="nav-text">prefix ?^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-9"><span class="nav-number">5.9.</span> <span class="nav-text">prefix ^</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乘法优先级"><span class="nav-number">6.</span> <span class="nav-text">乘法优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-1"><span class="nav-number">6.1.</span> <span class="nav-text">infix *</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-2"><span class="nav-number">6.2.</span> <span class="nav-text">infix /</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-div"><span class="nav-number">6.3.</span> <span class="nav-text">infix div</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-3"><span class="nav-number">6.4.</span> <span class="nav-text">infix %</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-4"><span class="nav-number">6.5.</span> <span class="nav-text">infix %%</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-mod"><span class="nav-number">6.6.</span> <span class="nav-text">infix mod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-amp"><span class="nav-number">6.7.</span> <span class="nav-text">infix +&</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-lt"><span class="nav-number">6.8.</span> <span class="nav-text">infix +<</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-gt"><span class="nav-number">6.9.</span> <span class="nav-text">infix +></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-gcd"><span class="nav-number">6.10.</span> <span class="nav-text">infix gcd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-lcm"><span class="nav-number">6.11.</span> <span class="nav-text">infix lcm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加法优先级"><span class="nav-number">7.</span> <span class="nav-text">加法优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-5"><span class="nav-number">7.1.</span> <span class="nav-text">infix +</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-6"><span class="nav-number">7.2.</span> <span class="nav-text">infix -</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-7"><span class="nav-number">7.3.</span> <span class="nav-text">infix +|</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-8"><span class="nav-number">7.4.</span> <span class="nav-text">infix +^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-9"><span class="nav-number">7.5.</span> <span class="nav-text">infix ?|</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重复操作符优先级"><span class="nav-number">8.</span> <span class="nav-text">重复操作符优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-x"><span class="nav-number">8.1.</span> <span class="nav-text">infix x</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-xx"><span class="nav-number">8.2.</span> <span class="nav-text">infix xx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连结"><span class="nav-number">9.</span> <span class="nav-text">连结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-10"><span class="nav-number">9.1.</span> <span class="nav-text">infix ~</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Junctive-AND-all-优先级"><span class="nav-number">10.</span> <span class="nav-text">Junctive AND (all) 优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-amp-1"><span class="nav-number">10.1.</span> <span class="nav-text">infix &</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Junctive-OR-any-Precedence"><span class="nav-number">11.</span> <span class="nav-text">Junctive OR (any) Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-11"><span class="nav-number">11.1.</span> <span class="nav-text">infix |</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-12"><span class="nav-number">11.2.</span> <span class="nav-text">infix ^</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Named-Unary-Precedence"><span class="nav-number">12.</span> <span class="nav-text">Named Unary Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-temp"><span class="nav-number">12.1.</span> <span class="nav-text">prefix temp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-let"><span class="nav-number">12.2.</span> <span class="nav-text">prefix let</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nonchaining-Binary-Precedence"><span class="nav-number">13.</span> <span class="nav-text">Nonchaining Binary Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-does"><span class="nav-number">13.1.</span> <span class="nav-text">infix does</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-but"><span class="nav-number">13.2.</span> <span class="nav-text">infix but</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-cmp"><span class="nav-number">13.3.</span> <span class="nav-text">infix cmp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-leg"><span class="nav-number">13.4.</span> <span class="nav-text">infix leg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-lt-gt"><span class="nav-number">13.5.</span> <span class="nav-text">infix <=></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-13"><span class="nav-number">13.6.</span> <span class="nav-text">infix ..</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-14"><span class="nav-number">13.7.</span> <span class="nav-text">infix ..^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-15"><span class="nav-number">13.8.</span> <span class="nav-text">infix ^..</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-16"><span class="nav-number">13.9.</span> <span class="nav-text">infix ^..^</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chaining-Binary-Precedence"><span class="nav-number">14.</span> <span class="nav-text">Chaining Binary Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-17"><span class="nav-number">14.1.</span> <span class="nav-text">infix ==</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-18"><span class="nav-number">14.2.</span> <span class="nav-text">infix !=</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-lt-1"><span class="nav-number">14.3.</span> <span class="nav-text">infix <</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-lt-2"><span class="nav-number">14.4.</span> <span class="nav-text">infix <=</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-gt-1"><span class="nav-number">14.5.</span> <span class="nav-text">infix ></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-gt-2"><span class="nav-number">14.6.</span> <span class="nav-text">infix >=</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-eq"><span class="nav-number">14.7.</span> <span class="nav-text">infix eq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-ne"><span class="nav-number">14.8.</span> <span class="nav-text">infix ne</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-gt-3"><span class="nav-number">14.9.</span> <span class="nav-text">infix gt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-ge"><span class="nav-number">14.10.</span> <span class="nav-text">infix ge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-lt-3"><span class="nav-number">14.11.</span> <span class="nav-text">infix lt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-le"><span class="nav-number">14.12.</span> <span class="nav-text">infix le</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-before"><span class="nav-number">14.13.</span> <span class="nav-text">infix before</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-after"><span class="nav-number">14.14.</span> <span class="nav-text">infix after</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-eqv"><span class="nav-number">14.15.</span> <span class="nav-text">infix eqv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-19"><span class="nav-number">14.16.</span> <span class="nav-text">infix ===</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-20"><span class="nav-number">14.17.</span> <span class="nav-text">infix =:=</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-21"><span class="nav-number">14.18.</span> <span class="nav-text">infix ~~</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tight-AND-Precedence"><span class="nav-number">15.</span> <span class="nav-text">Tight AND Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-amp-amp"><span class="nav-number">15.1.</span> <span class="nav-text">infix &&</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tight-OR-Precedence"><span class="nav-number">16.</span> <span class="nav-text">Tight OR Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-22"><span class="nav-number">16.1.</span> <span class="nav-text">infix ||</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-23"><span class="nav-number">16.2.</span> <span class="nav-text">infix ^^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-24"><span class="nav-number">16.3.</span> <span class="nav-text">infix //</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-min"><span class="nav-number">16.4.</span> <span class="nav-text">infix min</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-max"><span class="nav-number">16.5.</span> <span class="nav-text">infix max</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditional-Operator-Precedence"><span class="nav-number">17.</span> <span class="nav-text">Conditional Operator Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-25"><span class="nav-number">17.1.</span> <span class="nav-text">infix ?? !!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-ff"><span class="nav-number">17.2.</span> <span class="nav-text">infix ff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-ff-1"><span class="nav-number">17.3.</span> <span class="nav-text">infix ^ff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-ff-2"><span class="nav-number">17.4.</span> <span class="nav-text">infix ff^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-ff-3"><span class="nav-number">17.5.</span> <span class="nav-text">infix ^ff^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-fff"><span class="nav-number">17.6.</span> <span class="nav-text">infix fff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-fff-1"><span class="nav-number">17.7.</span> <span class="nav-text">infix ^fff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-fff-2"><span class="nav-number">17.8.</span> <span class="nav-text">infix fff^</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-fff-3"><span class="nav-number">17.9.</span> <span class="nav-text">infix ^fff^</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Item-Assignment-Precedence"><span class="nav-number">18.</span> <span class="nav-text">Item Assignment Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-26"><span class="nav-number">18.1.</span> <span class="nav-text">infix =</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-gt-4"><span class="nav-number">18.2.</span> <span class="nav-text">infix =></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loose-Unary-Precedence"><span class="nav-number">19.</span> <span class="nav-text">Loose Unary Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-not"><span class="nav-number">19.1.</span> <span class="nav-text">prefix not</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-so"><span class="nav-number">19.2.</span> <span class="nav-text">prefix so</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逗号操作符优先级"><span class="nav-number">20.</span> <span class="nav-text">逗号操作符优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-27"><span class="nav-number">20.1.</span> <span class="nav-text">infix ,</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-28"><span class="nav-number">20.2.</span> <span class="nav-text">infix :</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List-Infix-Precedence"><span class="nav-number">21.</span> <span class="nav-text">List Infix Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-Z"><span class="nav-number">21.1.</span> <span class="nav-text">infix Z</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-X"><span class="nav-number">21.2.</span> <span class="nav-text">infix X</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-…"><span class="nav-number">21.3.</span> <span class="nav-text">infix …</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List-Prefix-Precedence"><span class="nav-number">22.</span> <span class="nav-text">List Prefix Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-29"><span class="nav-number">22.1.</span> <span class="nav-text">infix =</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-30"><span class="nav-number">22.2.</span> <span class="nav-text">infix :=</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-31"><span class="nav-number">22.3.</span> <span class="nav-text">infix ::=</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#listop-…"><span class="nav-number">22.4.</span> <span class="nav-text">listop …</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#listop"><span class="nav-number">22.5.</span> <span class="nav-text">listop !!!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#listop-1"><span class="nav-number">22.6.</span> <span class="nav-text">listop ???</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loose-AND-precedence"><span class="nav-number">23.</span> <span class="nav-text">Loose AND precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-and"><span class="nav-number">23.1.</span> <span class="nav-text">infix and</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-andthen"><span class="nav-number">23.2.</span> <span class="nav-text">infix andthen</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loose-OR-Precedence"><span class="nav-number">24.</span> <span class="nav-text">Loose OR Precedence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-or"><span class="nav-number">24.1.</span> <span class="nav-text">infix or</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#infix-orelse"><span class="nav-number">24.2.</span> <span class="nav-text">infix orelse</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">焉知非鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  托管在 -
+  <a class="theme-link" href="https://github.com/ohmycloud/ohmycloud.github.io">
+    Github
+  </a>
+  &nbsp; | &nbsp;
+</div>
+
+<div class="theme-info">
+ <a class="51-img" href="/images/footer.gif" target="_blank"><img alt="统计" src="/images/footer.gif"  align="right" /></a>
+<div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
