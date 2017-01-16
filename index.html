@@ -263,6 +263,139 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/02/stackoverflow/" itemprop="url">
+                  2017 StackOverFlow-sort,deepmap,flat
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-02T22:56:16+08:00" content="2017-01-02">
+              2017-01-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/02/stackoverflow/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/02/stackoverflow/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <ul>
+<li><a href="http://stackoverflow.com/questions/41406004/perl6-what-is-the-best-way-to-match-any-of-a-group-of-words">perl6 What is the best way to match any of a group of words?</a></li>
+</ul>
+<p>我想匹配任意一组单词，但是失败了，请问怎样才能正确地匹配到？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @a=&lt;a b c d e f&gt;;</div><div class="line">my $x=&quot;a1234567&quot;;</div><div class="line">say $x ~~ m/ @a.any /;</div></pre></td></tr></table></figure>
+<p><strong>Answer</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">my @a = &lt;a b c d e f&gt;;</div><div class="line">my $x = &quot;a1234567&quot;;</div><div class="line">say $x ~~ /@a/</div></pre></td></tr></table></figure>
+<p><code>/@a/</code> 和  <code>/| @a/</code> 相同，它是最长的备选分支。对于备选分支，你可以使用 <code>/|| @a/</code>。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/02/stackoverflow/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/01/Perl-6-Rakudo-和-NQP-内部研讨/" itemprop="url">
                   Perl 6 Rakudo 和 NQP 内部研讨
                 </a>
@@ -392,133 +525,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/31/Perl-6-时间戳转换器命令行版/" itemprop="url">
-                  Perl 6 时间戳转换器命令行版
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-31T23:14:12+08:00" content="2016-12-31">
-              2016-12-31
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/31/Perl-6-时间戳转换器命令行版/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/31/Perl-6-时间戳转换器命令行版/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line"><a href="#Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line" class="headerlink" title="Perl 6 By Example: Datetime Conversion for the Command Line"></a>Perl 6 By Example: Datetime Conversion for the Command Line</h1><p>我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ autotime 2015-12-24</div><div class="line">1450915200</div><div class="line">$ autotime 2015-12-24 11:23:00</div><div class="line">1450956180</div><div class="line">$ autotime 1450915200</div><div class="line">2015-12-24</div><div class="line">$ autotime 1450956180</div><div class="line">2015-12-24 11:23:00</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/31/Perl-6-时间戳转换器命令行版/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/12/31/Perl-6-Tips-创建可重用的数据类型/" itemprop="url">
                   Perl 6 Tips - 创建可重用的数据类型
                 </a>
@@ -593,6 +599,133 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">my package EXPORT::DEFAULT &#123;</div><div class="line">    ...</div><div class="line">    subset Pos of Numeric where * &gt; 0;</div><div class="line">    subset Neg of Numeric where * &lt; 0;</div><div class="line">    subset Zero of Numeric where * == 0;</div><div class="line">    subset UNumeric of Numeric where * &gt;= 0;</div><div class="line"></div><div class="line">	subset Even of Int where * % 2 == 0;</div><div class="line">	subset Odd  of Int where * % 2;</div><div class="line"></div><div class="line">	subset Time::Hour12 of PosInt where * ~~ 1 .. 12;</div><div class="line">	subset Time::Hour24 of Int    where * ~~ 0 .. 23;</div><div class="line">	subset Time::Minute of Int    where * ~~ 0 .. 59;</div><div class="line">	subset Time::Second of Int    where * ~~ 0 .. 59;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/31/Perl-6-Tips-创建可重用的数据类型/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/31/Perl-6-时间戳转换器命令行版/" itemprop="url">
+                  Perl 6 时间戳转换器命令行版
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-31T23:14:12+08:00" content="2016-12-31">
+              2016-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/31/Perl-6-时间戳转换器命令行版/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/31/Perl-6-时间戳转换器命令行版/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line"><a href="#Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line" class="headerlink" title="Perl 6 By Example: Datetime Conversion for the Command Line"></a>Perl 6 By Example: Datetime Conversion for the Command Line</h1><p>我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ autotime 2015-12-24</div><div class="line">1450915200</div><div class="line">$ autotime 2015-12-24 11:23:00</div><div class="line">1450956180</div><div class="line">$ autotime 1450915200</div><div class="line">2015-12-24</div><div class="line">$ autotime 1450956180</div><div class="line">2015-12-24 11:23:00</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/31/Perl-6-时间戳转换器命令行版/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1395,136 +1528,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/26/第10000个素数/" itemprop="url">
-                  第 10000 个素数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-26T16:41:13+08:00" content="2016-10-26">
-              2016-10-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/26/第10000个素数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/第10000个素数/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>到目前为止(2016.10.26), Perl 6 的速度相比 Perl 5/Python 的差距还是很大的。以打印从 1 开始计数的第 10000 个素数为例, 使用如下版本的 Rakudo:</p>
-<blockquote>
-<p>This is Rakudo version 2016.07.1 built on MoarVM version 2016.07 implementing Perl 6.c.</p>
-</blockquote>
-<p>从程序执行耗费的时间来看, Perl 6 实在慢的如蜗牛。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/26/第10000个素数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1570,7 +1573,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-count">162</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1587,7 +1590,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-count">178</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1610,11 +1613,11 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                <a href="http://weibo.com/740011611" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-fw fa-globe"></i>
+                    <i class="fa fa-fw fa-weibo"></i>
                   
-                  weibo
+                  Weibo
                 </a>
               </span>
             
@@ -1630,9 +1633,27 @@
               <span class="links-of-author-item">
                 <a href="https://perl6.org/" target="_blank" title="Perl 6">
                   
-                    <i class="fa fa-fw fa-paper-plane"></i>
+                    <i class="fa fa-fw fa-fire"></i>
                   
                   Perl 6
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://pl6anet.org/" target="_blank" title="pl6anet">
+                  
+                    <i class="fa fa-fw fa-umbrella"></i>
+                  
+                  pl6anet
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://docs.perl6.org/" target="_blank" title="perl6doc">
+                  
+                    <i class="fa fa-fw fa-angle-double-right"></i>
+                  
+                  perl6doc
                 </a>
               </span>
             

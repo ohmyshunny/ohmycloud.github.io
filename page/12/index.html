@@ -263,6 +263,134 @@
             
               
                 
+                <a class="post-title-link" href="/2015/11/05/D在Perl6中是什么意思/" itemprop="url">
+                  D 在 Perl 6 中是什么意思
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-05T00:00:00+08:00" content="2015-11-05">
+              2015-11-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/05/D在Perl6中是什么意思/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/05/D在Perl6中是什么意思/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>一个裸的 <strong>:D</strong>、<strong>:U</strong>、<strong>:T</strong> 或 <strong>:_</strong> 是限制默认类型为定义、未定义、类型对象或任何对象的类型约束。所以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class Con &#123;</div><div class="line">    method man(:U: :D $x)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其签名等价于  <code>(Con:U: Any:D $x)</code>。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/05/D在Perl6中是什么意思/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/10/29/从正则表达式到Grammar/" itemprop="url">
                   从正则表达式到 Grammar
                 </a>
@@ -1159,135 +1287,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/09/11/Perl6中的正则表达式-四/" itemprop="url">
-                  Perl 6 中的正则表达式(四)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-11T00:00:00+08:00" content="2015-09-11">
-              2015-09-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/09/11/Perl6中的正则表达式-四/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/11/Perl6中的正则表达式-四/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="最长-token-匹配"><a href="#最长-token-匹配" class="headerlink" title="最长 token 匹配"></a>最长 token 匹配</h1><p>注意，下面进入糟糕区域，如果看不懂请查看英文原文!</p>
-<p><a href="https://github.com/perl6/roast/blob/master/S05-metasyntax/longest-alternative.t#L53-L460"><code>S05-metasyntax/longest-alternative.t lines 53–460</code></a></p>
-<p>因为 “longest-token matching” 是一个很长的短语, 我们会经常将这个概念叫做 <code>LTM</code>.  这个基本的概念就是人们在头脑中倾向于怎么去解析文本, 所以计算机应该像人一样尝试做同样的事情. 而使用 <code>LTM</code> 解析文本就是关于计算机怎样决定匹配一组备选分支中的哪一个备选分支的.</p>
-<p>在 Perl 6 中, <code>|</code> 代表使用声明性的 longest-token 语义的逻辑备选分支.(你现在能使用 <code>||</code> 来标示旧的暂存的备选分支. 就是, <code>|</code> 和 <code>||</code> 现在在正则语法内的运作方式和在正则语法外的运作方式很像,  在正则语法外部, <code>|</code> 和 <code>||</code> 代表 junctional 和 短路的 <code>OR</code>. 这也包括事实上 <code>|</code> 的优先级比 <code>||</code> 的优先级高.)</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/11/Perl6中的正则表达式-四/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/09/11/Perl-6-Weekly-一/" itemprop="url">
                   Perl 6 Weekly(一)
                 </a>
@@ -1415,8 +1414,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/08/31/Perl6中的操作符-一/" itemprop="url">
-                  Perl 6 中的操作符(一)
+                <a class="post-title-link" href="/2015/09/11/Perl6中的正则表达式-四/" itemprop="url">
+                  Perl 6 中的正则表达式(四)
                 </a>
               
             
@@ -1429,8 +1428,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-31T00:00:00+08:00" content="2015-08-31">
-              2015-08-31
+            <time itemprop="dateCreated" datetime="2015-09-11T00:00:00+08:00" content="2015-09-11">
+              2015-09-11
             </time>
           </span>
 
@@ -1459,8 +1458,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/31/Perl6中的操作符-一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/31/Perl6中的操作符-一/" itemprop="commentsCount"></span>
+                <a href="/2015/09/11/Perl6中的正则表达式-四/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/11/Perl6中的正则表达式-四/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1484,13 +1483,12 @@
 
       
         
-          <h1 id="操作符优先级"><a href="#操作符优先级" class="headerlink" title="操作符优先级"></a>操作符优先级</h1><p><a href="https://github.com/perl6/roast/blob/master/S03-operators/arith.t#L46-L342">S03-operators/arith.t lines 46–342</a></p>
-<p><a href="https://github.com/perl6/roast/blob/master/S03-operators/precedence.t#L5-L200">S03-operators/precedence.t  lines 5–200</a></p>
-<p>Perl 6 拥有和 Perl 5 同等数量的优先级级别，但是它们散布在不同的地方。这儿，我们列出了从最紧凑到最松散的级别，每一级别还有几个例子：</p>
-<p>最高优先级到最低优先级：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">A  Level             Examples</div><div class="line">=  =====             ========</div><div class="line">N  Terms             42 3.14 &quot;eek&quot; qq[&quot;foo&quot;] $x :!verbose @$array</div><div class="line">L  Method postfix    .meth .+ .? .* .() .[] .&#123;&#125; .&lt;&gt; .«» .:: .= .^ .:</div><div class="line">N  Autoincrement     ++ --</div><div class="line">R  Exponentiation    **</div><div class="line">L  Symbolic unary    ! + - ~ ? | || +^ ~^ ?^ ^</div><div class="line">L  Multiplicative    * / % %% +&amp; +&lt; +&gt; ~&amp; ~&lt; ~&gt; ?&amp; div mod gcd lcm</div><div class="line">L  Additive          + - +| +^ ~| ~^ ?| ?^</div><div class="line">L  Replication       x xx</div><div class="line">X  Concatenation     ~</div><div class="line">X  Junctive and      &amp; (&amp;) ∩</div><div class="line">X  Junctive or       | ^ (|) (^) ∪ (-)</div><div class="line">L  Named unary       temp let</div><div class="line">N  Structural infix  but does &lt;=&gt; leg cmp .. ..^ ^.. ^..^</div><div class="line">C  Chaining infix    != == &lt; &lt;= &gt; &gt;= eq ne lt le gt ge ~~ === eqv !eqv (&lt;) (elem)</div><div class="line">X  Tight and         &amp;&amp;</div><div class="line">X  Tight or          || ^^ // min max</div><div class="line">R  Conditional       ?? !! ff fff</div><div class="line">R  Item assignment   = =&gt; += -= **= xx= .=</div><div class="line">L  Loose unary       so not</div><div class="line">X  Comma operator    , :</div><div class="line">X  List infix        Z minmax X X~ X* Xeqv ...</div><div class="line">R  List prefix       print push say die map substr ... [+] [*] any Z=</div><div class="line">X  Loose and         and andthen</div><div class="line">X  Loose or          or xor orelse</div><div class="line">X  Sequencer         &lt;== ==&gt; &lt;&lt;== ==&gt;&gt;</div><div class="line">N  Terminator        ; &#123;...&#125; unless extra ) ] &#125;</div></pre></td></tr></table></figure>
+          <h1 id="最长-token-匹配"><a href="#最长-token-匹配" class="headerlink" title="最长 token 匹配"></a>最长 token 匹配</h1><p>注意，下面进入糟糕区域，如果看不懂请查看英文原文!</p>
+<p><a href="https://github.com/perl6/roast/blob/master/S05-metasyntax/longest-alternative.t#L53-L460"><code>S05-metasyntax/longest-alternative.t lines 53–460</code></a></p>
+<p>因为 “longest-token matching” 是一个很长的短语, 我们会经常将这个概念叫做 <code>LTM</code>.  这个基本的概念就是人们在头脑中倾向于怎么去解析文本, 所以计算机应该像人一样尝试做同样的事情. 而使用 <code>LTM</code> 解析文本就是关于计算机怎样决定匹配一组备选分支中的哪一个备选分支的.</p>
+<p>在 Perl 6 中, <code>|</code> 代表使用声明性的 longest-token 语义的逻辑备选分支.(你现在能使用 <code>||</code> 来标示旧的暂存的备选分支. 就是, <code>|</code> 和 <code>||</code> 现在在正则语法内的运作方式和在正则语法外的运作方式很像,  在正则语法外部, <code>|</code> 和 <code>||</code> 代表 junctional 和 短路的 <code>OR</code>. 这也包括事实上 <code>|</code> 的优先级比 <code>||</code> 的优先级高.)</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/31/Perl6中的操作符-一/#more" rel="contents">
+            <a class="btn" href="/2015/09/11/Perl6中的正则表达式-四/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1569,7 +1567,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-count">162</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1586,7 +1584,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-count">178</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1609,11 +1607,11 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                <a href="http://weibo.com/740011611" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-fw fa-globe"></i>
+                    <i class="fa fa-fw fa-weibo"></i>
                   
-                  weibo
+                  Weibo
                 </a>
               </span>
             
@@ -1629,9 +1627,27 @@
               <span class="links-of-author-item">
                 <a href="https://perl6.org/" target="_blank" title="Perl 6">
                   
-                    <i class="fa fa-fw fa-paper-plane"></i>
+                    <i class="fa fa-fw fa-fire"></i>
                   
                   Perl 6
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://pl6anet.org/" target="_blank" title="pl6anet">
+                  
+                    <i class="fa fa-fw fa-umbrella"></i>
+                  
+                  pl6anet
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://docs.perl6.org/" target="_blank" title="perl6doc">
+                  
+                    <i class="fa fa-fw fa-angle-double-right"></i>
+                  
+                  perl6doc
                 </a>
               </span>
             

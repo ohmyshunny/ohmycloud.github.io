@@ -263,6 +263,136 @@
             
               
                 
+                <a class="post-title-link" href="/2015/08/31/Perl6中的操作符-一/" itemprop="url">
+                  Perl 6 中的操作符(一)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-31T00:00:00+08:00" content="2015-08-31">
+              2015-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/31/Perl6中的操作符-一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/31/Perl6中的操作符-一/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="操作符优先级"><a href="#操作符优先级" class="headerlink" title="操作符优先级"></a>操作符优先级</h1><p><a href="https://github.com/perl6/roast/blob/master/S03-operators/arith.t#L46-L342">S03-operators/arith.t lines 46–342</a></p>
+<p><a href="https://github.com/perl6/roast/blob/master/S03-operators/precedence.t#L5-L200">S03-operators/precedence.t  lines 5–200</a></p>
+<p>Perl 6 拥有和 Perl 5 同等数量的优先级级别，但是它们散布在不同的地方。这儿，我们列出了从最紧凑到最松散的级别，每一级别还有几个例子：</p>
+<p>最高优先级到最低优先级：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">A  Level             Examples</div><div class="line">=  =====             ========</div><div class="line">N  Terms             42 3.14 &quot;eek&quot; qq[&quot;foo&quot;] $x :!verbose @$array</div><div class="line">L  Method postfix    .meth .+ .? .* .() .[] .&#123;&#125; .&lt;&gt; .«» .:: .= .^ .:</div><div class="line">N  Autoincrement     ++ --</div><div class="line">R  Exponentiation    **</div><div class="line">L  Symbolic unary    ! + - ~ ? | || +^ ~^ ?^ ^</div><div class="line">L  Multiplicative    * / % %% +&amp; +&lt; +&gt; ~&amp; ~&lt; ~&gt; ?&amp; div mod gcd lcm</div><div class="line">L  Additive          + - +| +^ ~| ~^ ?| ?^</div><div class="line">L  Replication       x xx</div><div class="line">X  Concatenation     ~</div><div class="line">X  Junctive and      &amp; (&amp;) ∩</div><div class="line">X  Junctive or       | ^ (|) (^) ∪ (-)</div><div class="line">L  Named unary       temp let</div><div class="line">N  Structural infix  but does &lt;=&gt; leg cmp .. ..^ ^.. ^..^</div><div class="line">C  Chaining infix    != == &lt; &lt;= &gt; &gt;= eq ne lt le gt ge ~~ === eqv !eqv (&lt;) (elem)</div><div class="line">X  Tight and         &amp;&amp;</div><div class="line">X  Tight or          || ^^ // min max</div><div class="line">R  Conditional       ?? !! ff fff</div><div class="line">R  Item assignment   = =&gt; += -= **= xx= .=</div><div class="line">L  Loose unary       so not</div><div class="line">X  Comma operator    , :</div><div class="line">X  List infix        Z minmax X X~ X* Xeqv ...</div><div class="line">R  List prefix       print push say die map substr ... [+] [*] any Z=</div><div class="line">X  Loose and         and andthen</div><div class="line">X  Loose or          or xor orelse</div><div class="line">X  Sequencer         &lt;== ==&gt; &lt;&lt;== ==&gt;&gt;</div><div class="line">N  Terminator        ; &#123;...&#125; unless extra ) ] &#125;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/31/Perl6中的操作符-一/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/08/29/探索Perl6的Signatures-第二部分/" itemprop="url">
                   探索Perl6的Signatures,第二部分
                 </a>
@@ -336,6 +466,136 @@
 <p>Perl 6 的签名系统提供了更多。在这篇文章中我们将验证其中更高级的特性, 它们让 Perl 6 的调用语义更强大。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/08/29/探索Perl6的Signatures-第二部分/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/25/cookbook/" itemprop="url">
+                  cookbook
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-25T00:00:00+08:00" content="2015-08-25">
+              2015-08-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/25/cookbook/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/25/cookbook/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h1><blockquote>
+<p>将每行从第二列到最后一列数值为0的且数目多于6个的行删除</p>
+</blockquote>
+<p>数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">OG004240:    1       3     1       1       9     0       4       5       1     1       6    1     2</div><div class="line">OG004241:    1       2     1       4       7     2       1       3       1     2       9    1     1</div><div class="line">OG004242:    1       2     1       2       4     1       3       9       2     2       4    2     2</div><div class="line">OG004243:    0       4     1       2       9     2       4       5       1     2       3    1     1</div><div class="line">OG004244:    0       2     1       3       8     3       3       2       2     3       4    2     2</div><div class="line">OG004245:    0       3     1       2       7     3       3       0       3     2       7    2     2</div><div class="line">OG004246:    0       0     2       0       1     15      0       15      0     0       1    0     1</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/25/cookbook/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -504,136 +764,6 @@
 <p>例子:</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/08/25/Perl6中的变量/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/25/cookbook/" itemprop="url">
-                  cookbook
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-25T00:00:00+08:00" content="2015-08-25">
-              2015-08-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/25/cookbook/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/25/cookbook/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h1><blockquote>
-<p>将每行从第二列到最后一列数值为0的且数目多于6个的行删除</p>
-</blockquote>
-<p>数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">OG004240:    1       3     1       1       9     0       4       5       1     1       6    1     2</div><div class="line">OG004241:    1       2     1       4       7     2       1       3       1     2       9    1     1</div><div class="line">OG004242:    1       2     1       2       4     1       3       9       2     2       4    2     2</div><div class="line">OG004243:    0       4     1       2       9     2       4       5       1     2       3    1     1</div><div class="line">OG004244:    0       2     1       3       8     3       3       2       2     3       4    2     2</div><div class="line">OG004245:    0       3     1       2       7     3       3       0       3     2       7    2     2</div><div class="line">OG004246:    0       0     2       0       1     15      0       15      0     0       1    0     1</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/25/cookbook/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1460,132 +1590,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/05/Perl-6圣诞月历-2015/" itemprop="url">
-                  Perl 6 圣诞月历-(2015)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-05T00:00:00+08:00" content="2015-08-05">
-              2015-08-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/05/Perl-6圣诞月历-2015/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/05/Perl-6圣诞月历-2015/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Comming Soon!</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/05/Perl-6圣诞月历-2015/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1631,7 +1635,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-count">162</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1648,7 +1652,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">177</span>
+                <span class="site-state-item-count">178</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1671,11 +1675,11 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/740011611" target="_blank" title="weibo">
+                <a href="http://weibo.com/740011611" target="_blank" title="Weibo">
                   
-                    <i class="fa fa-fw fa-globe"></i>
+                    <i class="fa fa-fw fa-weibo"></i>
                   
-                  weibo
+                  Weibo
                 </a>
               </span>
             
@@ -1691,9 +1695,27 @@
               <span class="links-of-author-item">
                 <a href="https://perl6.org/" target="_blank" title="Perl 6">
                   
-                    <i class="fa fa-fw fa-paper-plane"></i>
+                    <i class="fa fa-fw fa-fire"></i>
                   
                   Perl 6
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://pl6anet.org/" target="_blank" title="pl6anet">
+                  
+                    <i class="fa fa-fw fa-umbrella"></i>
+                  
+                  pl6anet
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://docs.perl6.org/" target="_blank" title="perl6doc">
+                  
+                    <i class="fa fa-fw fa-angle-double-right"></i>
+                  
+                  perl6doc
                 </a>
               </span>
             
