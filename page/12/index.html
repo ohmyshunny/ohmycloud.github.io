@@ -391,6 +391,195 @@
             
               
                 
+                <a class="post-title-link" href="/2015/11/05/Perl6中的正则表达式-三/" itemprop="url">
+                  Perl 6 中的正则表达式(三)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-05T00:00:00+08:00" content="2015-11-05">
+              2015-11-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/05/Perl6中的正则表达式-三/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/05/Perl6中的正则表达式-三/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="预定义-Subrules"><a href="#预定义-Subrules" class="headerlink" title="预定义 Subrules"></a>预定义 Subrules</h1><p>下面这些是为任意 grammar 或 regex 预定义好的 <code>subrules</code>:</p>
+<ul>
+<li><p>ident </p>
+<p>匹配一个标识符.</p>
+</li>
+<li><p>upper </p>
+<p>匹配单个大写字符.</p>
+</li>
+<li><p>lower </p>
+<p>匹配单个小写字符.</p>
+</li>
+<li><p>alpha </p>
+<p>匹配单个字母字符, 或者是一个下划线.</p>
+<p>要匹配不带下划线的 Unicode 字母字符, 使用 <code>&lt;:alpha&gt;</code>.</p>
+</li>
+<li><p>digit </p>
+<p>匹配单个数字.</p>
+</li>
+<li><p>xdigit </p>
+<p>匹配单个十六进制数字.</p>
+</li>
+<li><p>print </p>
+<p>匹配单个可打印字符.</p>
+</li>
+<li><p>graph </p>
+<p>匹配单个图形字符.</p>
+</li>
+<li><p>cntrl </p>
+<p>匹配单个控制字符. (等价于 &lt;:Cc&gt; 属性). 控制字符通常不产生输出, 相反, 它们以某种方式控制末端:例如换行符和退格符都是控制字符. 所有使用 <code>ord()</code> 之后小于 32 的字符通常归类为控制字符. 就像 ord() 的值为 127 的字符是控制字符(DEL) 一样, 128 到 159 之间的也是控制字符.</p>
+</li>
+<li><p>punct </p>
+<p>匹配单个标点符号字符(即, 任何来自于 Unicode General Category “Punctuation” 的字符).</p>
+</li>
+<li><p>alnum </p>
+<p>匹配单个字母数字字符. 那等价于 <code>&lt;+alpha +digit&gt;</code> .</p>
+</li>
+<li><p>wb </p>
+<p>在单词边界匹配成功并返回一个零宽匹配.  一个单词边界是这样一个点, 它的一边是一个 <code>\w</code>, 另一边是一个 <code>\W</code>. (以任一顺序),  字符串的开头和结尾被看作为匹配 <code>\W</code>.</p>
+</li>
+<li><p>ww </p>
+<p>在两个单词字符之间匹配(零宽匹配).</p>
+</li>
+<li><p>ws </p>
+<p>在两个单词字符之间匹配要求的空白, 否则匹配可选的空白. 这等价于 <code>\s*</code> (<code>ws</code> 不要求使用 <code>ww</code> subrule).</p>
+</li>
+<li><p>space </p>
+<p>匹配单个空白字符character (和 <code>\s 相同</code>).</p>
+</li>
+<li><p>blank </p>
+<p>匹配单个 “blank” 字符 – 在大部分区域, 这相当于 <code>space</code> 和 <code>tab</code>.</p>
+</li>
+<li><p>before <code>pattern</code></p>
+<p>执行向前查看– 例如, 检查我们是否在某个能匹配的位置. 如果匹配成功返回一个零宽 Match 对象.</p>
+</li>
+<li><p>after <code>pattern</code></p>
+<p>执行向后查看 –例如,检查当前位置之前的字符串是否匹配 <code>&lt;pattern&gt;</code>(在结尾锚定). 如果匹配成功就返回一个零宽 Match 对象. </p>
+</li>
+<li><p>&lt;?&gt; </p>
+<p>匹配一个 null 字符串,即, 总是返回真. </p>
+</li>
+<li><p>&lt;!&gt; </p>
+<p><code>&lt;?&gt;</code> 的反转, 总是返回假<br><a href="https://github.com/perl6/roast/blob/master/S05-mass/stdrules.t#L310-L326"><code>S05-mass/stdrules.t lines 310–326</code></a></p>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/05/Perl6中的正则表达式-三/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/10/29/从正则表达式到Grammar/" itemprop="url">
                   从正则表达式到 Grammar
                 </a>
@@ -1287,133 +1476,6 @@
             
               
                 
-                <a class="post-title-link" href="/2015/09/11/Perl-6-Weekly-一/" itemprop="url">
-                  Perl 6 Weekly(一)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-11T00:00:00+08:00" content="2015-09-11">
-              2015-09-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/09/11/Perl-6-Weekly-一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/11/Perl-6-Weekly-一/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>1、<a href="http://stackoverflow.com/questions/30264548/how-do-i-check-file-timestamp-attributes-in-perl-6">在 Perl 6 中怎样检查文件的时间戳属性？</a></p>
-<p>在 Perl 6 中怎样检查文件的时间戳属性？ 在 Perl 5 中是使用文件测试操作符  <a href="http://perldoc.perl.org/functions/-X.html">file test operators </a>, 在 Perl 6 中是使用来自于 <a href="http://doc.perl6.org/type/IO::FileTestable"><code>IO::FileTestable</code> role</a> 的方法 (e.g. <code>.modified</code>, <code>.accessed</code> and <code>.changed</code>) 。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/11/Perl-6-Weekly-一/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2015/09/11/Perl6中的正则表达式-四/" itemprop="url">
                   Perl 6 中的正则表达式(四)
                 </a>
@@ -1567,7 +1629,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">162</span>
+              <span class="site-state-item-count">163</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

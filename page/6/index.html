@@ -263,8 +263,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/07/Perl6中的梳子/" itemprop="url">
-                  Perl 6 中的梳子!
+                <a class="post-title-link" href="/2016/07/09/given-when/" itemprop="url">
+                  given when
                 </a>
               
             
@@ -277,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-07T00:00:00+08:00" content="2016-07-07">
-              2016-07-07
+            <time itemprop="dateCreated" datetime="2016-07-09T00:00:00+08:00" content="2016-07-09">
+              2016-07-09
             </time>
           </span>
 
@@ -307,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/07/Perl6中的梳子/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/07/Perl6中的梳子/" itemprop="commentsCount"></span>
+                <a href="/2016/07/09/given-when/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/09/given-when/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -332,12 +332,10 @@
 
       
         
-          <h1 id="Perl-6-中的梳子"><a href="#Perl-6-中的梳子" class="headerlink" title="Perl 6 中的梳子!"></a>Perl 6 中的梳子!</h1><p>在 Perl 5 中, 我很感激有这样两个便利的结构:</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @things = $text =~ <span class="regexp">/thing/g</span>;</div><div class="line"><span class="keyword">my</span> %things = $text =~ <span class="regexp">/(key)...(value)/g</span>;</div></pre></td></tr></table></figure>
-<p>你拿出一小段可以预见的文本，并给它一个正则表达式，吼吼, 你得到了一个列表和散列，像变魔术一般！我们也可以在 Perl  6 中使用正则表达式，但是 <strong><a href="http://docs.perl6.org/routine/comb">comb</a></strong> 更适合做这个工作。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/326727-29a3966bbb8e437f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+          <p>given-when 有两个小的改变, 并且这俩改变都是开启新行为的, 而不是限制已存在的行为。</p>
+<p>第一个小的改变: when 的开关行为不仅仅是用于 given 块儿中的, 而是可以用在任何”主题化”的块儿中的, 例如 for 循环中或接收 <code>$_</code>作为参数的子例程中。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/07/Perl6中的梳子/#more" rel="contents">
+            <a class="btn" href="/2016/07/09/given-when/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -467,6 +465,135 @@
 <p>我想知道递归到目录里面是否还有更好的方法。 IO::Path.dir 会返回一个 IO::Path 对象的 Seq 序列。那就是为什么 <code>&gt;&gt;.</code> 超运算符会有效。它当然不会递归因为没有用来进行递归的子例程, 经过一段时间的冥思苦想我找到了我找了很久的东西。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/07/It-s-blocks-all-the-way-down/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/07/Perl6中的梳子/" itemprop="url">
+                  Perl 6 中的梳子!
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-07T00:00:00+08:00" content="2016-07-07">
+              2016-07-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/07/Perl6中的梳子/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/07/Perl6中的梳子/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Perl-6-中的梳子"><a href="#Perl-6-中的梳子" class="headerlink" title="Perl 6 中的梳子!"></a>Perl 6 中的梳子!</h1><p>在 Perl 5 中, 我很感激有这样两个便利的结构:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">my</span> @things = $text =~ <span class="regexp">/thing/g</span>;</div><div class="line"><span class="keyword">my</span> %things = $text =~ <span class="regexp">/(key)...(value)/g</span>;</div></pre></td></tr></table></figure>
+<p>你拿出一小段可以预见的文本，并给它一个正则表达式，吼吼, 你得到了一个列表和散列，像变魔术一般！我们也可以在 Perl  6 中使用正则表达式，但是 <strong><a href="http://docs.perl6.org/routine/comb">comb</a></strong> 更适合做这个工作。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/326727-29a3966bbb8e437f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="img"></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/07/Perl6中的梳子/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1403,134 +1530,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/12/Actions和抽象语法树/" itemprop="url">
-                  Actions 和抽象语法树
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-12T00:00:00+08:00" content="2016-05-12">
-              2016-05-12
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/12/Actions和抽象语法树/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/12/Actions和抽象语法树/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>有一段结构化的文本, 写一个 Grammar 来解析它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">name = Animal Facts</div><div class="line">author = jnthn</div><div class="line"></div><div class="line">[cat]</div><div class="line">desc = The smartest and cutest</div><div class="line">cuteness = 100000</div><div class="line"></div><div class="line">[dugong]</div><div class="line">desc = The cow of the sea</div><div class="line">cuteness = -10</div><div class="line"></div><div class="line">[magpie]</div><div class="line">desc = crow; raven; rook; jackdaw; chough; magpie; jay</div><div class="line">cuteness = 99</div></pre></td></tr></table></figure>
-<p>每一段都是一个章节, 有的章节没有<code>[cat]</code>这样的标题, 要求 grammar 生成一个散列, 散列的键是方括号中的单词, 如果没有就默认为 <code>_</code> , 散列的值是一个散列的数组, 数组里面的每个散列的键为等号左边的单词, 键值为等号右边的字符。Grammar 如下:</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/12/Actions和抽象语法树/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1576,7 +1575,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">162</span>
+              <span class="site-state-item-count">163</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
