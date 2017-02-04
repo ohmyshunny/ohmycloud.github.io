@@ -264,7 +264,7 @@
               
                 
                 <a class="post-title-link" href="/2017/02/04/Whatever Star vs. $_ vs $/" itemprop="url">
-                  Perl 6 �е� *, $_ �� $
+                  Perl 6 中的 *, $_ 和 $
                 </a>
               
             
@@ -332,11 +332,11 @@
 
       
         
-          <h2 id="cale2-����һ�����ѵ�����"><a href="#cale2-����һ�����ѵ�����" class="headerlink" title="cale2 ����һ�����ѵ�����"></a>cale2 ����һ�����ѵ�����</h2><p>���쿨��2<a href="https://irclog.perlgeek.de/perl6/2017-02-01#i_14028041">�ܾ�</a>�ʼ򵥵����⡣������������������ʲô���⣺</p>
+          <h2 id="cale2-问了一个很难的问题"><a href="#cale2-问了一个很难的问题" class="headerlink" title="cale2 问了一个很难的问题"></a>cale2 问了一个很难的问题</h2><p>今天卡尔2<a href="https://irclog.perlgeek.de/perl6/2017-02-01#i_14028041">拒绝</a>问简单的问题。我们来看它今天问了什么难题：</p>
 <blockquote>
-<p><cale2> ����Ҫһ�ݹ��� * vs $_ vs $ ��ָ�ϡ�</p>
+<p><cale2> 我需要一份关于 * vs $_ vs $ 的指南。</p>
 </blockquote>
-<p>���������ʵö�ô�á������ֶ��������﷨��, ��Ϊ������ת��, �����ܺܺõر������к͸��ٵ� bugs��</p>
+<p>这个问题问得多么好。那三种东西都是语法糖, 因为上下文转换, 它们能很好地避免折行和更少的 bugs。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/02/04/Whatever Star vs. $_ vs $/#more" rel="contents">
               阅读全文 &raquo;
@@ -655,6 +655,133 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/31/Perl-6-时间戳转换器命令行版/" itemprop="url">
+                  Perl 6 时间戳转换器命令行版
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-31T23:14:12+08:00" content="2016-12-31">
+              2016-12-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/31/Perl-6-时间戳转换器命令行版/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/31/Perl-6-时间戳转换器命令行版/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line"><a href="#Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line" class="headerlink" title="Perl 6 By Example: Datetime Conversion for the Command Line"></a>Perl 6 By Example: Datetime Conversion for the Command Line</h1><p>我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ autotime 2015-12-24</div><div class="line">1450915200</div><div class="line">$ autotime 2015-12-24 11:23:00</div><div class="line">1450956180</div><div class="line">$ autotime 1450915200</div><div class="line">2015-12-24</div><div class="line">$ autotime 1450956180</div><div class="line">2015-12-24 11:23:00</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/31/Perl-6-时间戳转换器命令行版/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/31/Perl-6-Tips-创建可重用的数据类型/" itemprop="url">
                   Perl 6 Tips - 创建可重用的数据类型
                 </a>
@@ -729,133 +856,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">my package EXPORT::DEFAULT &#123;</div><div class="line">    ...</div><div class="line">    subset Pos of Numeric where * &gt; 0;</div><div class="line">    subset Neg of Numeric where * &lt; 0;</div><div class="line">    subset Zero of Numeric where * == 0;</div><div class="line">    subset UNumeric of Numeric where * &gt;= 0;</div><div class="line"></div><div class="line">	subset Even of Int where * % 2 == 0;</div><div class="line">	subset Odd  of Int where * % 2;</div><div class="line"></div><div class="line">	subset Time::Hour12 of PosInt where * ~~ 1 .. 12;</div><div class="line">	subset Time::Hour24 of Int    where * ~~ 0 .. 23;</div><div class="line">	subset Time::Minute of Int    where * ~~ 0 .. 59;</div><div class="line">	subset Time::Second of Int    where * ~~ 0 .. 59;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/31/Perl-6-Tips-创建可重用的数据类型/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/31/Perl-6-时间戳转换器命令行版/" itemprop="url">
-                  Perl 6 时间戳转换器命令行版
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-31T23:14:12+08:00" content="2016-12-31">
-              2016-12-31
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/31/Perl-6-时间戳转换器命令行版/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/31/Perl-6-时间戳转换器命令行版/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line"><a href="#Perl-6-By-Example-Datetime-Conversion-for-the-Command-Line" class="headerlink" title="Perl 6 By Example: Datetime Conversion for the Command Line"></a>Perl 6 By Example: Datetime Conversion for the Command Line</h1><p>我偶尔会在数据库中存储 UNIX 时间戳, 即从 1970-01-01 开始的秒数。我在按照日期查询数据库中的数据时, 需要将 UNIX 时间戳转换为人类可读的时间, 所以我写了个很小的工具来帮助我在 UNIX  时间戳和日期/时间之间来回转换:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ autotime 2015-12-24</div><div class="line">1450915200</div><div class="line">$ autotime 2015-12-24 11:23:00</div><div class="line">1450956180</div><div class="line">$ autotime 1450915200</div><div class="line">2015-12-24</div><div class="line">$ autotime 1450956180</div><div class="line">2015-12-24 11:23:00</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/31/Perl-6-时间戳转换器命令行版/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

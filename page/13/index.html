@@ -263,8 +263,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/09/11/Perl-6-Weekly-一/" itemprop="url">
-                  Perl 6 Weekly(一)
+                <a class="post-title-link" href="/2015/09/11/Perl6中的正则表达式-四/" itemprop="url">
+                  Perl 6 中的正则表达式(四)
                 </a>
               
             
@@ -307,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/09/11/Perl-6-Weekly-一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/11/Perl-6-Weekly-一/" itemprop="commentsCount"></span>
+                <a href="/2015/09/11/Perl6中的正则表达式-四/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/11/Perl6中的正则表达式-四/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -332,10 +332,12 @@
 
       
         
-          <p>1、<a href="http://stackoverflow.com/questions/30264548/how-do-i-check-file-timestamp-attributes-in-perl-6">在 Perl 6 中怎样检查文件的时间戳属性？</a></p>
-<p>在 Perl 6 中怎样检查文件的时间戳属性？ 在 Perl 5 中是使用文件测试操作符  <a href="http://perldoc.perl.org/functions/-X.html">file test operators </a>, 在 Perl 6 中是使用来自于 <a href="http://doc.perl6.org/type/IO::FileTestable"><code>IO::FileTestable</code> role</a> 的方法 (e.g. <code>.modified</code>, <code>.accessed</code> and <code>.changed</code>) 。</p>
+          <h1 id="最长-token-匹配"><a href="#最长-token-匹配" class="headerlink" title="最长 token 匹配"></a>最长 token 匹配</h1><p>注意，下面进入糟糕区域，如果看不懂请查看英文原文!</p>
+<p><a href="https://github.com/perl6/roast/blob/master/S05-metasyntax/longest-alternative.t#L53-L460"><code>S05-metasyntax/longest-alternative.t lines 53–460</code></a></p>
+<p>因为 “longest-token matching” 是一个很长的短语, 我们会经常将这个概念叫做 <code>LTM</code>.  这个基本的概念就是人们在头脑中倾向于怎么去解析文本, 所以计算机应该像人一样尝试做同样的事情. 而使用 <code>LTM</code> 解析文本就是关于计算机怎样决定匹配一组备选分支中的哪一个备选分支的.</p>
+<p>在 Perl 6 中, <code>|</code> 代表使用声明性的 longest-token 语义的逻辑备选分支.(你现在能使用 <code>||</code> 来标示旧的暂存的备选分支. 就是, <code>|</code> 和 <code>||</code> 现在在正则语法内的运作方式和在正则语法外的运作方式很像,  在正则语法外部, <code>|</code> 和 <code>||</code> 代表 junctional 和 短路的 <code>OR</code>. 这也包括事实上 <code>|</code> 的优先级比 <code>||</code> 的优先级高.)</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/11/Perl-6-Weekly-一/#more" rel="contents">
+            <a class="btn" href="/2015/09/11/Perl6中的正则表达式-四/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -777,6 +779,152 @@
             
               
                 
+                <a class="post-title-link" href="/2015/08/25/Perl-6-单行程序/" itemprop="url">
+                  Perl 6 单行程序
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-25T00:00:00+08:00" content="2015-08-25">
+              2015-08-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
+                    <span itemprop="name">Perl 6</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/25/Perl-6-单行程序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/25/Perl-6-单行程序/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Perl-6-单行程序"><a href="#Perl-6-单行程序" class="headerlink" title="Perl 6 单行程序"></a><a href="https://github.com/dnmfarrell/Perl6-One-Liners">Perl 6 单行程序</a></h1><p>这本书在进行之中。我希望你能觉得它有趣，甚至可能有用！如果你想贡献反馈的话，那么很欢迎提问题还有新的或有提升的正则表达式。</p>
+<h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>戴维法瑞尔 <a href="PerlTricks.com">PerlTricks.com</a></p>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>版本 0.01</p>
+<h2 id="许可"><a href="#许可" class="headerlink" title="许可"></a>许可</h2><p>FreeBSD</p>
+<h2 id="贡献者"><a href="#贡献者" class="headerlink" title="贡献者"></a>贡献者</h2><ul>
+<li>Alexander Moquin</li>
+<li>Bruce Gray</li>
+<li>Carl Mäsak</li>
+<li>David H. Adler</li>
+<li>FROGGS</li>
+<li>Helmut Wollmersdorfer</li>
+<li>japhb</li>
+<li>Larry Wall</li>
+<li>Matt Oates</li>
+<li>Moritz Lenz</li>
+<li>Mouq</li>
+<li>Salve J Nilsen</li>
+<li>Sam S</li>
+<li>Skids</li>
+<li>timotimo</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/25/Perl-6-单行程序/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/08/25/Perl6中的变量/" itemprop="url">
                   Perl 6 中的变量
                 </a>
@@ -891,152 +1039,6 @@
 <p>例子:</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/08/25/Perl6中的变量/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/25/Perl-6-单行程序/" itemprop="url">
-                  Perl 6 单行程序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-25T00:00:00+08:00" content="2015-08-25">
-              2015-08-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Perl-6/" itemprop="url" rel="index">
-                    <span itemprop="name">Perl 6</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/25/Perl-6-单行程序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/25/Perl-6-单行程序/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Perl-6-单行程序"><a href="#Perl-6-单行程序" class="headerlink" title="Perl 6 单行程序"></a><a href="https://github.com/dnmfarrell/Perl6-One-Liners">Perl 6 单行程序</a></h1><p>这本书在进行之中。我希望你能觉得它有趣，甚至可能有用！如果你想贡献反馈的话，那么很欢迎提问题还有新的或有提升的正则表达式。</p>
-<h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>戴维法瑞尔 <a href="PerlTricks.com">PerlTricks.com</a></p>
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>版本 0.01</p>
-<h2 id="许可"><a href="#许可" class="headerlink" title="许可"></a>许可</h2><p>FreeBSD</p>
-<h2 id="贡献者"><a href="#贡献者" class="headerlink" title="贡献者"></a>贡献者</h2><ul>
-<li>Alexander Moquin</li>
-<li>Bruce Gray</li>
-<li>Carl Mäsak</li>
-<li>David H. Adler</li>
-<li>FROGGS</li>
-<li>Helmut Wollmersdorfer</li>
-<li>japhb</li>
-<li>Larry Wall</li>
-<li>Matt Oates</li>
-<li>Moritz Lenz</li>
-<li>Mouq</li>
-<li>Salve J Nilsen</li>
-<li>Sam S</li>
-<li>Skids</li>
-<li>timotimo</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/25/Perl-6-单行程序/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
